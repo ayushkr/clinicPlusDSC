@@ -1,0 +1,42 @@
+<div id="printableArea"   title="MedicineStock_List" >
+<table cellspacing="1" cellpadding="5" border="0" style="width:85%;">
+    
+            <thead>
+                <tr class="bluestrp">
+            <th>id</th>
+            <th>brandNameId</th>
+            <th>vendor</th>
+            <th>expiry Date</th>
+            <th>batch</th>
+           <th>discount</th>
+           <th>rate</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {{for obj.content}}
+        <tr 
+            onclick="go({{:id}},'medicineStock')"
+            class="firstrow">
+            <td>{{:id}}</td>
+            <td>
+                {{if medicineBrandName!=null}}
+                {{:medicineBrandName.brandName}}
+                {{/if}}
+                </td>
+             <td>
+                {{if vendor!=null}}
+                {{:vendor.name}}
+                {{/if}}
+                </td>
+            <td>{{:expiryDate}}</td>
+            <td>{{:batch}}</td>
+           <td>{{:discount}}</td>
+               <td>{{:rate}}</td>
+        </tr>
+        {{/for}}
+    </tbody>
+
+
+</table>
+</div>

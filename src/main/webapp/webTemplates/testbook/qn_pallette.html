@@ -1,0 +1,1266 @@
+<div class="tp-left-box">
+<div class="test-sections-list">
+<h5 class="sl-title">Sections</h5>
+<div class="sl-inner">
+<button ng-show="test.sections.length > 6" ng-click="scrollSectionLeft()" type="button" class="btn card-scroll-btn course-nav-scroll intentional-outline left test-scroll-btn-left ng-hide" data-scroll="left"><svg width="17" height="17" viewBox="0 0 17 17"><title>Icons / Arrows / Left</title><path fill="#86A1AE" d="M11.896 12.604L7.698 8.396l4.198-4.207-1.292-1.293-5.5 5.5 5.5 5.5z" fill-rule="evenodd"></path></svg></button>
+<ul id="sectionNavTabs" tb-auto-scroll="" class="nav nav-pills sections-list">
+<!-- ngRepeat: section in test.sections track by $index --><li class="dropdown ng-scope disabled" ng-repeat="section in test.sections track by $index" ng-class="{'active' : currentQuestion.sSNo -1 == $index, 'disabled': !isActiveSection($index)}" ng-click="jumpToLastViewedQuestionInSection($index + 1)">
+<a data-target="#section0"><span class="hidden-xs ng-binding">English Language</span> <span class="visible-xs ng-binding">Eng</span></a>
+<ul id="section0Summary" class="dropdown-menu sections-list-details" role="menu" style="width:250px;">
+<li><div class="col-xs-12"><h6 class="ng-binding">English Language</h6></div></li>
+<li><div class="col-xs-12"><h4><span class="label attempted pull-right ng-binding">4</span><small>Answered</small></h4></div></li>
+<li><div class="col-xs-12"><h4><span class="label skipped pull-right ng-binding">2</span><small>Not answered</small></h4></div></li>
+<li><div class="col-xs-12"><h4><span class="label bookmarked pull-right ng-binding">3</span><small>Marked for Review</small></h4></div></li>
+<li><div class="col-xs-12"><h4><span class="label unattempted-que pull-right ng-binding">24</span><small>Not visited</small></h4></div></li>
+</ul>
+</li><!-- end ngRepeat: section in test.sections track by $index --><li class="dropdown ng-scope disabled" ng-repeat="section in test.sections track by $index" ng-class="{'active' : currentQuestion.sSNo -1 == $index, 'disabled': !isActiveSection($index)}" ng-click="jumpToLastViewedQuestionInSection($index + 1)">
+<a data-target="#section1"><span class="hidden-xs ng-binding">Numerical Ability</span> <span class="visible-xs ng-binding">Num</span></a>
+<ul id="section1Summary" class="dropdown-menu sections-list-details" role="menu" style="width:250px;">
+<li><div class="col-xs-12"><h6 class="ng-binding">Numerical Ability</h6></div></li>
+<li><div class="col-xs-12"><h4><span class="label attempted pull-right ng-binding">0</span><small>Answered</small></h4></div></li>
+<li><div class="col-xs-12"><h4><span class="label skipped pull-right ng-binding">4</span><small>Not answered</small></h4></div></li>
+<li><div class="col-xs-12"><h4><span class="label bookmarked pull-right ng-binding">0</span><small>Marked for Review</small></h4></div></li>
+<li><div class="col-xs-12"><h4><span class="label unattempted-que pull-right ng-binding">31</span><small>Not visited</small></h4></div></li>
+</ul>
+</li><!-- end ngRepeat: section in test.sections track by $index --><li class="dropdown ng-scope active" ng-repeat="section in test.sections track by $index" ng-class="{'active' : currentQuestion.sSNo -1 == $index, 'disabled': !isActiveSection($index)}" ng-click="jumpToLastViewedQuestionInSection($index + 1)">
+<a data-target="#section2"><span class="hidden-xs ng-binding">Reasoning Ability</span> <span class="visible-xs ng-binding">Rea</span></a>
+<ul id="section2Summary" class="dropdown-menu sections-list-details" role="menu" style="width:250px;">
+<li><div class="col-xs-12"><h6 class="ng-binding">Reasoning Ability</h6></div></li>
+<li><div class="col-xs-12"><h4><span class="label attempted pull-right ng-binding">0</span><small>Answered</small></h4></div></li>
+<li><div class="col-xs-12"><h4><span class="label skipped pull-right ng-binding">12</span><small>Not answered</small></h4></div></li>
+<li><div class="col-xs-12"><h4><span class="label bookmarked pull-right ng-binding">0</span><small>Marked for Review</small></h4></div></li>
+<li><div class="col-xs-12"><h4><span class="label unattempted-que pull-right ng-binding">23</span><small>Not visited</small></h4></div></li>
+</ul>
+</li><!-- end ngRepeat: section in test.sections track by $index -->
+</ul>
+ <button ng-show="test.sections.length > 6" ng-click="scrollSectionRight()" type="button" class="btn card-scroll-btn course-nav-scroll intentional-outline left test-scroll-btn-right ng-hide" data-scroll="left"><svg width="17" height="17" viewBox="0 0 17 17"><title>Icons / Arrows / Right</title><path fill="#86A1AE" d="M5.104 12.604l4.198-4.208L5.104 4.19l1.292-1.293 5.5 5.5-5.5 5.5z" fill-rule="evenodd"></path></svg></button>
+</div>
+<div class="pull-right tp-language-selector" ng-show="isTranslationPresent()">
+<div class="form-inline">
+<div class="form-group">
+<label for="language" class="control-label hidden-xs">View in</label>
+<select id="language" ng-model="lang" ng-options="lang.prompt for lang in languages" class="ng-pristine ng-untouched ng-valid"><option value="0" selected="selected" label="English">English</option><option value="1" label="Hindi">Hindi</option></select>
+</div>
+</div>
+</div>
+</div>
+<div class="mob-question-holder">
+<div id="mainBox" class="test-qpip-holder">
+<div class="qpip-inner" id="questions" ng-show="isCurTab('question')">
+<div class="header">
+<div class="header-inner">
+<div class="row">
+<div class="col-xs-3 tp-ques-number pad-r0 pad-t16 ng-binding">Que<span class="hidden-xs">stion</span> No. 19</div>
+<div class="col-xs-9 tp-pos-neg-marks pad-l0">
+<div class="d-inline-block align-middle text-left mar-r8 pad-md-r8">
+<div class="font-size-base-1">Marks</div><span class="badge bg-attempted d-inline-block ng-binding" style="min-width:35px;">+1</span> <span class="badge bg-skipped d-inline-block ng-binding" style="min-width:35px;">-0.25</span>
+</div>
+<div class="d-inline-block align-middle text-left mar-r4 pad-md-r8" ng-show="!isSpeedComprehension()" style="min-width: 40px">
+<div class="font-size-base-1">Time</div>
+<span class="badge bg-white text-gray-9 pad-h0"><count-up-timer secs="0" current-section="3" current-question="19" hide-zero="y" stop="false" class="ng-binding ng-isolate-scope"><no-style ng-show="isVisible(TH)" class="ng-binding ng-hide">00:</no-style>01:17</count-up-timer></span>
+</div>
+<div class="d-inline-block align-middle">
+<report-cta qid="5a8fb623e757e310635388fc" chapter-id="" test-id="5cf7ce63fdb8bb181da046e3" course-id="568a751185111b4193101100" lang="en" options="Wrong Question,Formatting Issue,Others" btn-type="" class="report-this-question ng-isolate-scope"><div class="tb-report-component dropdown" ng-class="{'state-reported': hasReported()}">
+
+<button class="ml-0 px-0 btn outline-none d-flex" type="button" data-toggle="dropdown" ng-class="{'report-more-vert' : reportBtnType == 'report-more-vert'}">
+<div class="tb-more-dot">
+</div>
+<span class="tb-report">
+<svg width="15" height="12" viewBox="0 0 17 16"><title>Icons / Basic / Report</title><defs><path id="path-1" d="M0 0h17v16H0z"></path></defs><g id="Brainstorming" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Icons-/-Basic-/-Report"><mask id="mask-2" fill="#fff"><use xlink:href="#path-1"></use></mask><path d="M9.537 11.194c0 .595-.474 1.088-1.046 1.088-.572 0-1.045-.493-1.045-1.088v-.103c0-.595.473-1.088 1.045-1.088s1.046.493 1.046 1.088v.103zm-2.032-7.23c0-.41.316-.74.71-.74h.552c.395 0 .71.33.71.74v3.944c0 .41-.315.739-.71.739h-.552c-.394 0-.71-.329-.71-.74V3.965zm9.172 2.773l-3.038-5.484A2.41 2.41 0 0 0 11.55 0H5.454c-.868 0-1.657.472-2.091 1.253L.325 6.737a2.614 2.614 0 0 0 0 2.526l3.038 5.484A2.41 2.41 0 0 0 5.453 16h6.076c.868 0 1.657-.472 2.09-1.253l3.038-5.484c.454-.78.454-1.746.02-2.526z" id="Fill-1" fill="#86A1AE" mask="url(#mask-2)"></path></g></g></svg>
+</span>
+<span class="help-note report ml-1 tb-text-grey display-6 hidden-xs ng-scope" translate="">Report</span>
+<span class="help-note reported ml-1 tb-text-grey display-6 hidden-xs ng-scope" translate="">Reported</span>
+</button>
+<ul class="dropdown-menu dropdown-menu-right">
+<li class="d-arrow"></li>
+<!-- ngRepeat: reportType in reportTypeArr --><li ng-repeat="reportType in reportTypeArr" class="ng-scope">
+<a class="dropdown-item ng-binding" ng-click="setReportType(reportType, question)">Wrong Question </a>
+</li><!-- end ngRepeat: reportType in reportTypeArr --><li ng-repeat="reportType in reportTypeArr" class="ng-scope">
+<a class="dropdown-item ng-binding" ng-click="setReportType(reportType, question)">Formatting Issue </a>
+</li><!-- end ngRepeat: reportType in reportTypeArr --><li ng-repeat="reportType in reportTypeArr" class="ng-scope">
+<a class="dropdown-item ng-binding" ng-click="setReportType(reportType, question)">Others </a>
+</li><!-- end ngRepeat: reportType in reportTypeArr -->
+</ul>
+</div>
+</report-cta>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden-xs text-size-resize ng-binding">
+Text Size
+<button type="button" class="btn js-font-size fs-decrease"><small>A<sup>-</sup></small></button>
+<button type="button" class="btn js-font-size fs-increase">A<sup>+</sup></button>
+</div>
+</div>
+<div id="question-box" class="body detailed-question js-detailed-question">
+<!-- ngIf: hasComprehension() -->
+<div class="que-ans-box">
+<!-- ngIf: !isSpeedComprehension() && !isFixedComprehension() --><div ng-if="!isSpeedComprehension() &amp;&amp; !isFixedComprehension()" class="ng-scope">
+<b ng-show="hasComprehension()" class="ng-hide"><u><i>Question:</i></u></b>
+<div ng-bind-html="getQuestionDesc(currentQuestion.sSNo, currentQuestion.qSNo, lang.name)" class="ng-binding"><p><strong>Direction: </strong>In each of the following questions assuming the given statements to be true, find which of the following conclusion I and II given below is/are definitely true and given your answer accordingly.</p>
+
+<p><strong>Statements:</strong></p>
+
+<p>X = C, C ≤ G, G &lt; S, S &gt; K</p>
+
+<p><strong>Conclusions:</strong></p>
+
+<p>I. X = G</p>
+
+<p>II. X &lt; G</p>
+</div>
+ <!-- ngIf: injectTranslation(getQuestionDesc(currentQuestion.sSNo, currentQuestion.qSNo, lang.name), getQuestionDesc(currentQuestion.sSNo, currentQuestion.qSNo, getFlippedLanguage(lang.name).name)) -->
+<ul ng-hide="isNumerical() || isNoShowSection()" class="q-multiple-choices">
+<!-- ngRepeat: option in getOptions() track by $index --><li ng-repeat="option in getOptions() track by $index" class="ng-scope">
+<label>
+<input type="radio" name="option" ng-checked="selectedOption.value == option.prompt" ng-click="setOption(option)">
+<div class="mar-l24 ng-binding" ng-bind-html="parseDesc(option.value)">Only I is true</div>
+<!-- ngIf: injectTranslation(parseDesc(option.value), parseDesc(getTranslatedOptionByIndex($index).value)) -->
+</label>
+</li><!-- end ngRepeat: option in getOptions() track by $index --><li ng-repeat="option in getOptions() track by $index" class="ng-scope">
+<label>
+<input type="radio" name="option" ng-checked="selectedOption.value == option.prompt" ng-click="setOption(option)">
+<div class="mar-l24 ng-binding" ng-bind-html="parseDesc(option.value)">Only II is true</div>
+<!-- ngIf: injectTranslation(parseDesc(option.value), parseDesc(getTranslatedOptionByIndex($index).value)) -->
+</label>
+</li><!-- end ngRepeat: option in getOptions() track by $index --><li ng-repeat="option in getOptions() track by $index" class="ng-scope">
+<label>
+<input type="radio" name="option" ng-checked="selectedOption.value == option.prompt" ng-click="setOption(option)">
+<div class="mar-l24 ng-binding" ng-bind-html="parseDesc(option.value)">Either I or II is true</div>
+<!-- ngIf: injectTranslation(parseDesc(option.value), parseDesc(getTranslatedOptionByIndex($index).value)) -->
+</label>
+</li><!-- end ngRepeat: option in getOptions() track by $index --><li ng-repeat="option in getOptions() track by $index" class="ng-scope">
+<label>
+<input type="radio" name="option" ng-checked="selectedOption.value == option.prompt" ng-click="setOption(option)">
+<div class="mar-l24 ng-binding" ng-bind-html="parseDesc(option.value)">Neither I nor II is true</div>
+<!-- ngIf: injectTranslation(parseDesc(option.value), parseDesc(getTranslatedOptionByIndex($index).value)) -->
+</label>
+</li><!-- end ngRepeat: option in getOptions() track by $index --><li ng-repeat="option in getOptions() track by $index" class="ng-scope">
+<label>
+<input type="radio" name="option" ng-checked="selectedOption.value == option.prompt" ng-click="setOption(option)">
+<div class="mar-l24 ng-binding" ng-bind-html="parseDesc(option.value)">Both I and II are true</div>
+<!-- ngIf: injectTranslation(parseDesc(option.value), parseDesc(getTranslatedOptionByIndex($index).value)) -->
+</label>
+</li><!-- end ngRepeat: option in getOptions() track by $index -->
+</ul>
+</div><!-- end ngIf: !isSpeedComprehension() && !isFixedComprehension() -->
+<!-- ngIf: isFixedComprehension() -->
+<!-- ngIf: isSpeedComprehension() -->
+<div ng-show="isNumerical()" class="mar-t16 col-md-3 col-xs-6 ng-scope ng-hide" ng-controller="KeypadController">
+<div class="alert bg-gray-1">
+<span ng-show="getNumInput() === 'None'" class="ng-hide">Enter your answer</span> <span class="font-weight-semibold ng-binding" ng-show="getNumInput() !== 'None'"></span>
+</div>
+<div class="row">
+<!-- ngRepeat: i in range --><div class="col-xs-4 pad-h8 ng-scope" ng-repeat="i in range" ng-click="onKeyPress(i)"><button type="button" class="btn btn-theme ng-binding" style="min-width:60px; margin:3px;">1</button></div><!-- end ngRepeat: i in range --><div class="col-xs-4 pad-h8 ng-scope" ng-repeat="i in range" ng-click="onKeyPress(i)"><button type="button" class="btn btn-theme ng-binding" style="min-width:60px; margin:3px;">2</button></div><!-- end ngRepeat: i in range --><div class="col-xs-4 pad-h8 ng-scope" ng-repeat="i in range" ng-click="onKeyPress(i)"><button type="button" class="btn btn-theme ng-binding" style="min-width:60px; margin:3px;">3</button></div><!-- end ngRepeat: i in range --><div class="col-xs-4 pad-h8 ng-scope" ng-repeat="i in range" ng-click="onKeyPress(i)"><button type="button" class="btn btn-theme ng-binding" style="min-width:60px; margin:3px;">4</button></div><!-- end ngRepeat: i in range --><div class="col-xs-4 pad-h8 ng-scope" ng-repeat="i in range" ng-click="onKeyPress(i)"><button type="button" class="btn btn-theme ng-binding" style="min-width:60px; margin:3px;">5</button></div><!-- end ngRepeat: i in range --><div class="col-xs-4 pad-h8 ng-scope" ng-repeat="i in range" ng-click="onKeyPress(i)"><button type="button" class="btn btn-theme ng-binding" style="min-width:60px; margin:3px;">6</button></div><!-- end ngRepeat: i in range --><div class="col-xs-4 pad-h8 ng-scope" ng-repeat="i in range" ng-click="onKeyPress(i)"><button type="button" class="btn btn-theme ng-binding" style="min-width:60px; margin:3px;">7</button></div><!-- end ngRepeat: i in range --><div class="col-xs-4 pad-h8 ng-scope" ng-repeat="i in range" ng-click="onKeyPress(i)"><button type="button" class="btn btn-theme ng-binding" style="min-width:60px; margin:3px;">8</button></div><!-- end ngRepeat: i in range --><div class="col-xs-4 pad-h8 ng-scope" ng-repeat="i in range" ng-click="onKeyPress(i)"><button type="button" class="btn btn-theme ng-binding" style="min-width:60px; margin:3px;">9</button></div><!-- end ngRepeat: i in range --><div class="col-xs-4 pad-h8 ng-scope" ng-repeat="i in range" ng-click="onKeyPress(i)"><button type="button" class="btn btn-theme ng-binding" style="min-width:60px; margin:3px;">.</button></div><!-- end ngRepeat: i in range --><div class="col-xs-4 pad-h8 ng-scope" ng-repeat="i in range" ng-click="onKeyPress(i)"><button type="button" class="btn btn-theme ng-binding" style="min-width:60px; margin:3px;">0</button></div><!-- end ngRepeat: i in range --><div class="col-xs-4 pad-h8 ng-scope" ng-repeat="i in range" ng-click="onKeyPress(i)"><button type="button" class="btn btn-theme ng-binding" style="min-width:60px; margin:3px;">+/-</button></div><!-- end ngRepeat: i in range --><div class="col-xs-4 pad-h8 ng-scope" ng-repeat="i in range" ng-click="onKeyPress(i)"><button type="button" class="btn btn-theme ng-binding" style="min-width:60px; margin:3px;">CE</button></div><!-- end ngRepeat: i in range --><div class="col-xs-4 pad-h8 ng-scope" ng-repeat="i in range" ng-click="onKeyPress(i)"><button type="button" class="btn btn-theme ng-binding" style="min-width:60px; margin:3px;">DEL</button></div><!-- end ngRepeat: i in range -->
+</div>
+</div>
+</div>
+</div>
+<div class="footer mob-button-footer on-test-page">
+<div class="footer-inner">
+<button type="button" class="btn btn-info-test mar-t0" ng-show="!isNoShowSection()" ng-click="bookmarkAndNextBtnPressed()">Mark for Review <span class="temp-text">&amp; Next</span><span class="icon"></span></button>
+<button type="button" class="btn btn-info-test mar-t0" ng-show="!isNoShowSection()" ng-click="clearResponse()">Clear <span class="temp-text">Response</span></button>
+<button type="button" class="btn btn-theme pull-right mar-t0 ng-binding" ng-show="!isSpeedComprehension() &amp;&amp; !isNoShowSection()" ng-click="saveAndNextBtnPressed(false)">Save <span>&amp; Next</span><span class="icon">→</span></button>
+</div>
+<div class="footer-inner-ssc text-center">
+<button type="button" class="btn btn-gray-dark pull-left" ng-click="saveAndPreviousBtnPressed()"><i class="tb-icon tb-arrow-left-thin"></i> Prev<span class="temp-text">ious</span> Que<span class="temp-text">stion</span></button>
+<button type="button" class="btn btn-gray-dark pull-left" ng-click="saveAndNextBtnPressed(false)">Next Que<span class="temp-text">stion</span> <i class="tb-icon tb-arrow-right-thin"></i></button>
+<button type="button" class="btn btn-danger pull-right" ng-click="clearResponse()">Erase</button>
+<button type="button" class="btn btn-warning toggle-que-tag" ng-click="bookmarkBtnPressed()" ng-class="{'que-tagged':isBookmarked(currentQuestion.sSNo, currentQuestion.qSNo)}">
+<span class="que-tag">Tag</span>
+<span class="que-de-tag">De-Tag</span>
+</button>
+</div>
+</div>
+</div>
+<div class="qpip-inner ng-hide" id="questionPaper" ng-show="isCurTab('qpaper')">
+<div class="header">
+<h4 class="text-center pad-t12">Question Paper</h4>
+</div>
+<div class="body">
+<div class="body-inner">
+<!-- ngRepeat: section in test.sections track by $index --><div ng-repeat="section in test.sections track by $index" ng-show="isActiveSection($index)" class="ng-scope ng-hide">
+<h4 class="ng-binding">Section: English Language</h4>
+<ul class="list-group">
+<!-- ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 1) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p dir="ltr"><strong>Read the sentence to find out whether there is an error in it. The error, if any, will be in one part of the sentence. The number of that part is the answer. If there is no error, the answer is (5). Ignore errors of punctuation, if any.</strong></p>
+
+<div>
+<p dir="ltr">Online test prep companies for banking and management admissions (1) are gaining a great deal of popularity (2) across candidates (3) looking for flexible study schedules and personalized tutoring. (4) No error (5)</p>
+</div>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 2) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p dir="ltr"><strong>Read the sentence to find out whether there is an error in it. The error, if any, will be in one part of the sentence. The number of that part is the answer. If there is no error, the answer is (5). Ignore errors of punctuation, if any.</strong></p>
+
+<div>
+<p dir="ltr">The battle was so fierce (1) that after a few hours, (2) the battlefield was (3) replete by hundreds of corpses. (4) No error (5)</p>
+</div>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 3) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p dir="ltr"><strong>Read the sentence to find out whether there is an error in it. The error, if any, will be in one part of the sentence. The number of that part is the answer. If there is no error, the answer is (5). Ignore errors of punctuation, if any.</strong></p>
+
+<div>
+<p dir="ltr">Knowledge and wisdom have (1)&nbsp;no connection (2) judging from the present state of political discourses (3) in the media. (4) No error (5)</p>
+</div>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 4) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p dir="ltr"><strong>Read the sentence to find out whether there is an error in it. The error, if any, will be in one part of the sentence. The number of that part is the answer. If there is no error, the answer is (5). Ignore errors of punctuation, if any.</strong></p>
+
+<div>
+<p dir="ltr">Multiple surveys have demonstrated that&nbsp;(1) social evils such as dowry and female infanticide (2) are still widely prevalent (3) in our country. (4) No error (5)</p>
+</div>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 5) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>Below a word is given followed by three sentences which consist of the word. Identify the sentence/s which best express the meaning of the word. Choose Option 5 (none of these) if the word is not suitable in any of the sentences. </strong></p>
+
+<p><strong>ENGRAVE</strong></p>
+
+<p>A. Every dancer needs to <strong>engrave </strong>to the beats of the music.</p>
+
+<p>B. Would you like to <strong>engrave</strong> milk at night?</p>
+
+<p>C. Please repeat, I could not <strong>engrave </strong>you.</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 6) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>Below a word is given followed by three sentences which consist of the word. Identify the sentence/s which best express the meaning of the word. Choose Option 5 (none of these) if the word is not suitable in any of the sentences. </strong></p>
+
+<p><strong>FELICITATE</strong></p>
+
+<p>A. Jean asked Rouche to <strong>felicitate </strong>the apples and oranges.</p>
+
+<p>B. Our school will <strong>felicitate</strong> the winners and encourage the rest.</p>
+C. It takes courage to not <strong>felicitate </strong>the door.</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 7) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>Below a word is given followed by three sentences which consist of the word. Identify the sentence/s which best express the meaning of the word. Choose Option 5 (none of these) if the word is not suitable in any of the sentences. </strong></p>
+
+<p><strong>DERIVE</strong></p>
+
+<p>A. I write when I am upset;&nbsp;I <strong>derive</strong> happiness out of it.</p>
+
+<p>B. They went for a long <strong>derive </strong>from Bombay to Goa.</p>
+
+<p>C. You can <strong>derive</strong> the philosophy of this book.</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 8) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>Below a word is given followed by three sentences which consist of the word. Identify the sentence/s which best express the meaning of the word. Choose Option 5 (none of these) if the word is not suitable in any of the sentences. </strong></p>
+
+<p><strong>PARALLEL</strong></p>
+
+<p>A. River Yamuna flows <strong>parallel </strong>to the city of Agra.</p>
+
+<p>B. Jane and Austen dreamt of a <strong>parallel</strong> universe where it all seemed fine.</p>
+
+<p>C. The point where two <strong>parallel</strong> lines meet is the point of intersection.&nbsp;</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 9) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>Below a word is given followed by three sentences which consist of the word. Identify the sentence/s which best express the meaning of the word. Choose Option 5 (none of these) if the word is not suitable in any of the sentences. </strong></p>
+
+<p><strong>AGILE</strong></p>
+
+<p>A. &nbsp;Being <strong>agile </strong>throughout&nbsp;has its own demerits;&nbsp;Rohan suffered them.</p>
+
+<p>B. The mountaineer described Mt. Everest as <strong>agile</strong> and serene.</p>
+
+<p>C. The position of a secretary requires the ability to be&nbsp;<strong>agile </strong>as well as&nbsp;stable.</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 10) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>Below a word is given followed by three sentences which consist of the word. Identify the sentence/s which best express the meaning of the word. Choose Option 5 (none of these) if the word is not suitable in any of the sentences. </strong></p>
+
+<p><strong>SURMOUNTABLE</strong></p>
+
+<p>A. Any obstacle is <strong>surmountable</strong> without proper guidance.</p>
+
+<p>B. Green feathers of the parrot are&nbsp;<strong>surmountable</strong> with the forest.</p>
+
+<p>C. I have been looking for a <strong>surmountable</strong> mat all around the market.</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 11) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>In the following question, two columns are given, containing three phrases each. A phrase from the first column may or may not connect with a phrase from the second column to make a grammatically and contextually correct sentence. There are five options, four of which display the sequence(s) in which the phrases can be joined to form a correct sentence. If none of the phrases make a correct sentence, mark ‘None of these’ as your answer.</strong></p>
+
+<table border="1" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td style="width:320px;height:44px;">
+			<p><strong>Column (1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></p>
+			</td>
+			<td style="width:320px;height:44px;">
+			<p><strong>Column (2)</strong></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:48px;">
+			<p>(A) The Mona Lisa is perhaps</p>
+			</td>
+			<td style="width:320px;height:48px;">
+			<p>(D)&nbsp;the most recognizable piece of art in the world.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:48px;">
+			<p>(B) The Mona Lisa was stolen in 1911,</p>
+			</td>
+			<td style="width:320px;height:48px;">
+			<p>(E)&nbsp;and wasn't recovered for over two years.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:60px;">
+			<p>(C) The Mona Lisa was&nbsp;</p>
+			</td>
+			<td style="width:320px;height:60px;">
+			<p>(F)&nbsp;painted by Leonardo da Vinci.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 12) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>In the following question, two columns are given, containing three phrases each. A phrase from the first column may or may not connect with a phrase from the second column to make a grammatically and contextually correct sentence. There are five options, four of which display the sequence(s) in which the phrases can be joined to form a correct sentence. If none of the phrases make a correct sentence, mark ‘None of these’ as your answer.</strong></p>
+
+<table border="1" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td style="width:320px;height:44px;">
+			<p><strong>Column (1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></p>
+			</td>
+			<td style="width:320px;height:44px;">
+			<p><strong>Column (2)</strong></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:48px;">
+			<p>(A) Japan’s bullet trains debuted</p>
+			</td>
+			<td style="width:320px;height:48px;">
+			<p>(D)&nbsp;service ahead of the Tokyo Olympics 2020.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:48px;">
+			<p>(B) Japan’s bullet trains are famed</p>
+			</td>
+			<td style="width:320px;height:48px;">
+			<p>(E)&nbsp;the same year as the 1964 Tokyo Olympics.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:60px;">
+			<p>(C) A new model of bullet train set to enter</p>
+			</td>
+			<td style="width:320px;height:60px;">
+			<p>(F)&nbsp;for their reliability and safety.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 13) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>In the following question, two columns are given, containing three phrases each. A phrase from the first column may or may not connect with a phrase from the second column to make a grammatically and contextually correct sentence. There are five options, four of which display the sequence(s) in which the phrases can be joined to form a correct sentence. If none of the phrases make a correct sentence, mark ‘None of these’ as your answer.</strong></p>
+
+<table border="1" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td style="width:320px;height:44px;">
+			<p><strong>Column (1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></p>
+			</td>
+			<td style="width:320px;height:44px;">
+			<p><strong>Column (2)</strong></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:48px;">
+			<p>(A) Multiple types/formats of content</p>
+			</td>
+			<td style="width:320px;height:48px;">
+			<p>(D)&nbsp;are being used to reach users.&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:48px;">
+			<p>(B) Interactive content, such as graphics, videos etc.</p>
+			</td>
+			<td style="width:320px;height:48px;">
+			<p>(E)&nbsp;are among popular content formats.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:60px;">
+			<p>(C) Users also prefer content&nbsp;</p>
+			</td>
+			<td style="width:320px;height:60px;">
+			<p>(F) that is in their native language.&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 14) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>In the following question, two columns are given, containing three phrases each. A phrase from the first column may or may not connect with a phrase from the second column to make a grammatically and contextually correct sentence. There are five options, four of which display the sequence(s) in which the phrases can be joined to form a correct sentence. If none of the phrases make a correct sentence, mark ‘None of these’ as your answer.</strong></p>
+
+<table border="1" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td style="width:320px;height:44px;">
+			<p><strong>Column (1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></p>
+			</td>
+			<td style="width:320px;height:44px;">
+			<p><strong>Column (2)</strong></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:48px;">
+			<p>(A) Elections in India</p>
+			</td>
+			<td style="width:320px;height:48px;">
+			<p>(D)&nbsp;have launched their apps and social media pages.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:48px;">
+			<p>(B) Most media organizations today</p>
+			</td>
+			<td style="width:320px;height:48px;">
+			<p>(E)&nbsp;of smartphone penetration in India.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:60px;">
+			<p>(C) We all know about the extent</p>
+			</td>
+			<td style="width:320px;height:60px;">
+			<p>(F) are a grand affair.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 15) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>In the following question, two columns are given, containing three phrases each. A phrase from the first column may or may not connect with a phrase from the second column to make a grammatically and contextually correct sentence. There are five options, four of which display the sequence(s) in which the phrases can be joined to form a correct sentence. If none of the phrases make a correct sentence, mark ‘None of these’ as your answer.</strong></p>
+
+<table border="1" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td style="width:320px;height:44px;">
+			<p><strong>Column (1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></p>
+			</td>
+			<td style="width:320px;height:44px;">
+			<p><strong>Column (2)</strong></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:48px;">
+			<p>(A) Camels have the ability to close</p>
+			</td>
+			<td style="width:320px;height:48px;">
+			<p>(D)&nbsp;their nostrils to prevent sand infiltration.&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:48px;">
+			<p>(B)&nbsp;They also have thick hair that helps to</p>
+			</td>
+			<td style="width:320px;height:48px;">
+			<p>(E)&nbsp;the hot temperatures of the desert floor.&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:320px;height:60px;">
+			<p>(C)Their padded feet help in withstanding</p>
+			</td>
+			<td style="width:320px;height:60px;">
+			<p>(F)&nbsp;protect them from the intense sunshine.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 16) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Which of the following should be the SEVENTH or the last sentence in the correct order?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 17) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>Which of the following should be the SIXTH sentence in the correct order?</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 18) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>Which of the following should be the FIFTH sentence in the correct order?</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 19) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>Which of the following should be the THIRD sentence in the correct order?</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 20) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>Which of the following should be the SECOND sentence in the correct order?</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 21) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>In the following sentence, a part of the sentence is underlined. Below are given alternatives to the underlined part, which may improve the sentence. Choose the correct alternative. In case no improvement is needed, choose the option ‘No improvement’.</strong></p>
+
+<p>Phrased another way then, the question also <u>boiling down to</u> what is considered normal.</p>
+
+<p>A. Boiling down at</p>
+
+<p>B. Boiling down as&nbsp;</p>
+
+<p>C. Boils down to</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 22) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>In the following sentence, a part of the sentence is underlined. Below are given alternatives to the underlined part, which may improve the sentence. Choose the correct alternative. In case no improvement is needed, choose the option ‘No improvement’.</strong></p>
+
+<p>There is enough evidence to suggest that our relationship with games and technology has turned a bit problematic, <u>to say at least</u>.</p>
+
+<p>A. To say the least</p>
+
+<p>B. To saying at least</p>
+
+<p>C. For saying at least</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 23) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>What is the misconception that Donald Trump has about State visits?</p>
+
+<p>(A) State visits must be ego trips.</p>
+
+<p>(B) State visits must be used as a re-election campaign prop.</p>
+
+<p>(C) The head of the state must act like a tour guide with the foreign leader.</p>
+
+<p>(D) State visits must improve the relationship between the two countries.</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 24) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>Why is Trump ‘rated below almost everybody, including Russia’s Vladimir Putin’?</p>
+
+<p>(A) Because Trump has disregarded the national importance of Britain.</p>
+
+<p>(B) Because the behaviour of US is ruining the US-UK alliance.</p>
+
+<p>(C) Because Trump is a very aggressive person.</p>
+
+<p>(D) Because Trump has failed to address major and important global issues.</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 25) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>Why did Trump warn to impose punitive trade tariffs on Mexico?</p>
+
+<p>(A) To take revenge on Mexico for not building the border wall.</p>
+
+<p>(B) Because Trump does not know how to separate personal interests from political interests.</p>
+
+<p>(C) Because Trump wants to prevent drug trafficking</p>
+
+<p>(D) To increase security.</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 26) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>Given below are certain facts. Identify the facts that are true as per the information provided in the passage.</p>
+
+<p>(A) State visits are meant for promoting an obligatory alliance connecting two countries.</p>
+
+<p>(B) Whenever the Queen hosts a foreign leader she confers the honour on him/her.</p>
+
+<p>(C) The people of Britain used to support US-UK alliance in the pre-1945 period.</p>
+
+<p>(D) The reputation of America in the world has plunged since Trump became the President.</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 27) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>Choose a suitable title for the given passage.</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 28) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>Which of the following words is the MOST SIMILAR in meaning to the word DISDAIN &nbsp;as given in the Passage?</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 29) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>Which of the following words is the MOST OPPOSITE in meaning to the word PROFFERED&nbsp; as given in the passage?</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 30) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>Which of the following words is the MOST OPPOSITE in meaning to the word VOLUNTARY&nbsp;as given in the passage?</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index -->
+</ul>
+</div><!-- end ngRepeat: section in test.sections track by $index --><div ng-repeat="section in test.sections track by $index" ng-show="isActiveSection($index)" class="ng-scope ng-hide">
+<h4 class="ng-binding">Section: Numerical Ability</h4>
+<ul class="list-group">
+<!-- ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 1) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>The sum of a certain number and it’s 5 times is 420. Find the difference between the number and it’s half.</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 2) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">In what ratio must the 1 : 4 mixture of whisky and water be mixed with a 1 : 1 mixture to obtain a 2 : 3 mixture?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 3) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>What will come in place of the question mark (?) in the following number series?</p>
+
+<p>77, 85, 69, 101, 37, ?</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 4) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>What will come in place of the question mark (?) in the following number series?</p>
+
+<p>20, 29, 54, 103, 184, ?</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 5) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>What will come in place of the question mark (?) in the following number series?</p>
+
+<p>5, 7, 18, 47, 105, ?</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 6) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>What will come in place of the question mark (?) in the following number series?</p>
+
+<p>7, 8, 18, 57, ?, 1165&nbsp;</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 7) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>What will come in place of the question mark (?) in the following number series?</p>
+
+<p>16, 25, 50, 99, 180, ?</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 8) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">The sum of two numbers is 240% of the smaller number. If the largest number is 35, then the smaller number is</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 9) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">A certain amount was to be distributed among A, B, and C in the ratio 1 ∶ 3 ∶ 5, respectively, but was erroneously distributed in the ratio 7 ∶ 3 ∶ 5, respectively. As a result of this, B got Rs. 44 less. What was the amount?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 10) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">What is the ratio of the income of red bee to that of green bee?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 11) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">What is the ratio of profit of cream bee to that of red bee?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 12) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">What is the percentage of the profit earned by cream bee?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 13) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">What is the sum of the expenditure of the four companies together?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 14) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Find the average income of all four companies combined together.</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 15) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">The price of a bus ticket is calculated on the basis of the distance to be travelled. A man buys a ticket for Rs. 77 to travel a distance of 63 km. How much money should he pay to travel a distance of 153 km?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 16) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>What approximate value should come in place of the question mark (?) in the following question? (You are not expected to calculate the exact value)</p>
+
+<p>(4253.656 - 3242.872 - 2134.456 + 3456.221) = ?</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 17) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>What approximate value should cme in the place of question mark ‘?’ in the following question? (You are not expected to calculate the exact value)</p>
+{(13.999)<sup>3 </sup>+ (24.011)<sup>2</sup> } ÷ 3.99 = ?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 18) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>What approximate value shouldcome in the place of question mark ‘?’ in the following question? (You are not expected to calculate the exact value)</p>
+(3.01)<sup>4</sup> × (2.99)<sup>2</sup> - 23.99 = ? × (46.99 × 2.91)</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 19) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>What approximate value should come in the place of question mark ‘?’ in the following question? (You are not expected to calculate the exact value)</p>
+{(5.999)<sup>4</sup> + (32.01)<sup>2</sup>} ÷ ? = 7.999</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 20) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>Find the slant height of the cone if the volume of the cone is 308 cm<sup>3 </sup>and area of the base of the conical solid is 154 cm<sup>2</sup> (Take π = 22/7)</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 21) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>Rekha can do a piece of work in 40 days. Surekha is 25% more efficient then Rekha. The number of days taken by Surekha to do the same piece of work is</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 22) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>What will come in place of question mark ‘?’ in the following question?</p>
+
+<p>12.5% of 5000 + 25% of 1856 = (?)<sup>2</sup>&nbsp;+ 13% of 500</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 23) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><div>
+<p>What should come at the place of ‘?’ in the following question?</p>
+
+<p>[{(1948 + 652 – 140) ÷ (41 × 8)} + (313 ÷ 2)] = 2<sup>6 </sup>+ 10<sup>?</sup></p>
+</div>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 24) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>What should come at the place of ‘?’ in the following equation?</p>
+36% of 650 + (45% of 320 ÷ 6% of 300 × 24% of 850) = 25% of 480 + 291 × ?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 25) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>What should come at the place of question mark?</p>
+(757 + 876 – 457) ÷ 4 = 356 – 31 × ?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 26) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>The average weight of 12 men is increased by 2.5 kg when a man in the crew whose weight is 40 kg is replaced by a new man. Find the weight of the new man.</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 27) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">A and B are partners in a business. A contributes 1/4 of the capital for 15 months and B received 2/3 of the profit. For how long B's money was used?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 28) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">A sum of money becomes 7 times in 14 years on simple interest, it will become 19 times in -</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 29) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">The speed of a boat in still water in 45 km/hr and the rate of current is 9 km/hr. The distance travelled by the boat downstream in 18 minutes will be:</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 30) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">A 250 meters long train is moving at the speed of 45 kmph. Find the time taken by the train to cross a tunnel of length 750 meters.</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 31) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>If the number of candidates appeared in 2017 was 90,000, what was the number of candidates failed to qualify?</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 32) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">The total number of candidates qualified in 2012 and 2013 together was 25,500 and the number of candidates appeared in 2012 was 15,000. What was the number of candidates in 2013?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 33) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">What is the percentage increase in the passing percentage of the candidates over the given period? (Assuming that the number of students was equal during all these years)</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 34) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">If the number of candidates qualified in 2013 was 15,000, what was the number of candidates appeared in 2013?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 35) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">The difference between the percentages of candidates qualified to appear was maximum in which of the following pairs of years?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index -->
+</ul>
+</div><!-- end ngRepeat: section in test.sections track by $index --><div ng-repeat="section in test.sections track by $index" ng-show="isActiveSection($index)" class="ng-scope">
+<h4 class="ng-binding">Section: Reasoning Ability</h4>
+<ul class="list-group">
+<!-- ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 1) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Who is sitting at the extreme left end?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 2) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">How many people are sitting between Vishal and Anish?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 3) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Which of the following is definitely false?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 4) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Who is third to the right of Vijay?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 5) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Who likes Raina?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 6) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">If the first and third letters of all the words are interchanged, then which word will come second last as per dictionary order?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 7) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">The first letter of all the words is changed to the next letter of the English alphabetical series, then how many words will have more than one vowel? (Same or different Vowel)</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 8) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">If all the letters in each of the words are arranged alphabetically (within the word), then how many words will remain unchanged?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 9) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">The first and third letters of all the words are interchanged, then the new first letter is changed to its next letter if it’s consonant. Which word will come third as per dictionary order?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 10) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">How many pairs of letters are there in the word “PLACEMENT” which have as many letters between them as in the English alphabetical series in both forward and backward direction?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 11) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>Directions:</strong> In each of the questions below are given few statements followed by some conclusions numbered I, II and III and so on. You have to take the given statements to be true even if they seem to be at variance with commonly known facts. Read all the conclusions and then decide which of the given conclusions logically follows from the given statements, disregarding commonly known facts. Give answer</p>
+
+<p><strong>Statements: </strong></p>
+
+<p>All stars are moons.</p>
+
+<p>All moons are planets.</p>
+
+<p>All planets are round.</p>
+
+<p><strong>Conclusions: </strong></p>
+
+<p>I. At least some planets are stars.</p>
+II. All stars which are moon is planet.</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 12) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>Direction:</strong> In the question below are given some statements followed by two conclusions numbered I and II. You have to take the given statements to be true even if they seem to be at variance with commonly known facts. Read all the conclusions and then decide which of the given conclusions logically follows from the given statements disregarding commonly known facts.</p>
+
+<p><strong>Statements:</strong></p>
+
+<p>All Spades are Black.</p>
+
+<p>Some Diamonds are Spades.</p>
+
+<p>Some Red are Diamonds.</p>
+
+<p><strong>Conclusions:</strong></p>
+
+<p>I. Some Spades are Red.</p>
+II. Some Red are Black.</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 13) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>Direction:</strong> In the question below are given some statements followed by two conclusions numbered I and II. You have to take the given statements to be true even if they seem to be at variance with commonly known facts. Read all the conclusions and then decide which of the given conclusions logically follows from the given statements disregarding commonly known facts.</p>
+
+<p><strong>Statements:</strong></p>
+
+<p>Some Bear are Lion.</p>
+
+<p>No Lion is Elephant.</p>
+
+<p>Some Elephant are Deer.</p>
+
+<p><strong>Conclusions:</strong></p>
+
+<p>I. Some Deer are Bear.</p>
+II. No Bear are Deer.</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 14) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Who is second to the left of Pinky?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 15) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Who is to the immediate right of Pinky?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 16) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Which of the following pairs of persons has the first person sitting to the right of the second person?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 17) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Who sits between Gurkamal and Deep?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 18) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p>Which of the following is the correct position of Brijesh with respect to Harsh?</p>
+
+<p>I. Second to the right</p>
+
+<p>II. Fourth to the right</p>
+
+<p>III. Fourth to the left</p>
+
+<p>IV. Second to the left</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 19) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>Direction: </strong>In each of the following questions assuming the given statements to be true, find which of the following conclusion I and II given below is/are definitely true and given your answer accordingly.</p>
+
+<p><strong>Statements:</strong></p>
+
+<p>X = C, C ≤ G, G &lt; S, S &gt; K</p>
+
+<p><strong>Conclusions:</strong></p>
+
+<p>I. X = G</p>
+
+<p>II. X &lt; G</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 20) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>Directions:</strong>&nbsp;In the following question, assuming the given statements to be true, find which conclusion/conclusions among given conclusions is /are definitely follows/follow and then give your answers accordingly.</p>
+
+<p><strong>Statements</strong>:</p>
+
+<p>A &gt; B ≥ C = D ≤ E &lt; F</p>
+
+<p><strong>Conclusions:</strong></p>
+
+<p>I. F &gt; C</p>
+II. E ≥ A</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 21) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>Directions:</strong> In the following question, assuming the given statements to be true, find which conclusion/conclusions among given conclusions is /are definitely follows/follow and then give your answers accordingly.</p>
+
+<p><strong>Statements:</strong></p>
+
+<p>A &lt; B; B &gt; C; Q &gt; B; A &lt; P</p>
+
+<p><strong>Conclusions:</strong></p>
+
+<p>I. P &gt; Q</p>
+
+<p>II. C &lt; Q</p>
+
+<p>III. A = C</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 22) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding"><p><strong>Direction: </strong>In each of the following questions assuming the given statements to be true, find which of the following conclusion I and II given below is/are definitely true and given your answer accordingly.</p>
+
+<p><strong>Statements:</strong></p>
+
+<p>C ≥ L, L &gt; U, U = G, I &lt; G</p>
+
+<p><strong>Conclusions:</strong></p>
+
+<p>I. C &gt; U</p>
+
+<p>II. C &lt; U</p>
+</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 23) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Which of the following is the code for ‘selfish’?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 24) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">‘Those were them’ can be coded as –</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 25) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">‘ra’ may represent _______?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 26) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">What is the distance between E and C?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 27) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">What is the direction of C from F?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 28) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Who owns the Dell Laptop?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 29) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Who owns the Mi smart phone?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 30) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Which laptop is owned by E?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 31) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Which of the following combinations is not owned by 1 person?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 32) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Who owns the Samsung smart phone?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 33) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">Who is the oldest female in the family?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 34) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">How is D related to G?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index --><li class="list-group-item ng-binding ng-scope" ng-repeat="question in section.questions track by $index">Q. 35) <span ng-bind-html="getQuestionDesc($parent.$index + 1, $index + 1, lang.name)" class="ng-binding">How many female members are there in the family?</span><hr></li><!-- end ngRepeat: question in section.questions track by $index -->
+</ul>
+</div><!-- end ngRepeat: section in test.sections track by $index -->
+</div>
+</div>
+<div class="footer text-center">
+<button type="button" class="btn btn-info-test mar-t0" ng-click="setTab('question')">Back</button>
+</div>
+</div>
+<div class="qpip-inner ng-hide" id="instructions" ng-show="isCurTab('instructions')">
+<div class="header">
+<h4 class="text-center pad-t12">Instructions</h4>
+</div>
+<div class="body">
+<div class="body-inner">
+<!-- ngInclude: '/livetest/views/partials/instructions.html' --><div ng-include="'/livetest/views/partials/instructions.html'" class="ng-scope">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="tb-main-header ng-scope">
+<a href="/" class="tb-logo" target="_self">
+<img class="logo-full" src="/assets/img/brand/logo-full.svg" onerror="this.onerror=null; this.src='/assets/img/brand/logo-full-medium.png'" alt="Testbook Logo">
+</a>
+<p class="test-title pull-left hidden-xs mar-t16 mar-l16 mar-b0 max-width-150 text-ellipsis ng-binding"></p>
+</div>
+<!-- ngIf: !isTestInProgress -->
+<div class="container-fluid u-mob-sidebar test-instructions ng-scope">
+<div class="row">
+<!-- ngIf: instructionsJSON.isGateExam -->
+<!-- ngIf: !instructionsJSON.isGateExam --><div class="col-xs-12 c-test-instructions ng-scope" ng-show="showInstTab == 1" id="bank-instructions" ng-if="!instructionsJSON.isGateExam">
+<h4> General Instructions: </h4>
+<ol start="1">
+<li>
+<p> The clock will be set at the server. The countdown timer at the top right corner of screen will display the remaining time available for you to complete the examination. When the timer reaches zero, the examination will end by itself. You need not terminate the examination or submit your paper. </p>
+</li>
+<li>
+<p> The Question Palette displayed on the right side of screen will show the status of each question using one of the following symbols: </p>
+<ul class="que-ans-states">
+<li><span class="label "></span> You have not visited the question yet. </li>
+<li><span class="label skipped"></span> You have not answered the question. </li>
+<li><span class="label attempted"></span> You have answered the question. </li>
+<li><span class="label bookmarked"></span> You have NOT answered the question, but have marked the question for review. </li>
+<li><span class="label attempted bookmarked"></span> You have answered the question, but marked it for review. </li>
+</ul>
+</li>
+</ol>
+<p> The <b>Mark For Review </b> status for a question simply indicates that you would like to look at that question again. If a question is answered, but marked for review, then the answer will be considered for evaluation unless the status is modified by the candidate. </p>
+<b> Navigating to a Question : </b>
+<ol start="3">
+<li>
+<p> To answer a question, do the following: </p>
+<ol>
+<li> Click on the question number in the Question Palette at the right of your screen to go to that numbered question directly. Note that using this option does NOT save your answer to the current question. </li>
+<li> Click on <b> Save &amp; Next </b> to save your answer for the current question and then go to the next question. </li>
+<li> Click on <b> Mark for Review &amp; Next </b> to save your answer for the current question and also mark it for review, and then go to the next question. </li>
+</ol>
+</li>
+</ol>
+<p> Note that your answer for the current question will not be saved, if you navigate to another question directly by clicking on a question number <span> without saving </span> the answer to the previous question.</p>
+<p> You can view all the questions by clicking on the <b> Question Paper </b> button. <span style="color:#ff0000">This feature is provided, so that if you want you can just see the entire question paper at a glance. </span> </p>
+<h4> Answering a Question : </h4>
+<ol start="4">
+<li>
+<p> Procedure for answering a multiple choice (MCQ) type question: </p>
+<ol>
+<li> Choose one answer from the 4 options (A,B,C,D) given below the question, click on the bubble placed before the chosen option. </li>
+<li> To deselect your chosen answer, click on the bubble of the chosen option again or click on the <b> Clear Response </b> button </li>
+<li> To change your chosen answer, click on the bubble of another option. </li>
+<li> To save your answer, you MUST click on the <b> Save &amp; Next </b> </li>
+</ol>
+</li>
+<li>
+<p> Procedure for answering a numerical answer type question : </p>
+<ol>
+<li> To enter a number as your answer, use the virtual numerical keypad. </li>
+<li> A fraction (e.g. -0.3 or -.3) can be entered as an answer with or without "0" before the decimal point. <span style="color: red">As many as four decimal points, e.g. 12.5435 or 0.003 or -932.6711 or 12.82 can be entered. </span> </li>
+<li> To clear your answer, click on the <b> Clear Response </b> button </li>
+<li> To save your answer, you MUST click on the <b> Save &amp; Next </b> </li>
+</ol>
+</li>
+<li>
+<p> To mark a question for review, click on the <b> Mark for Review &amp; Next </b> button.
+If an answer is selected (for MCQ) entered (for numerival answer type) for a question that is <b> Marked for Review </b>
+, that answer will be considered in the evaluation unless the status is modified by the candidate.
+</p>
+</li>
+<li>
+<p> To change your answer to a question that has already been answered, first select that question for answering and then follow the procedure for answering that type of question. </p>
+</li>
+<li>
+<p> Note that ONLY Questions for which answers are <b> saved </b> or <b> marked for review after answering </b> will be considered for evaluation. </p>
+</li>
+<li>
+<p> Sections in this question paper are displayed on the top bar of the screen. Questions in a Section can be viewed by clicking on the name of that Section. The Section you are currently viewing will be highlighted. </p>
+</li>
+<li>
+<p> After clicking the <b> Save &amp; Next </b> button for the last question in a Section, you will automatically be taken to the first question of the next Section in sequence. </p>
+</li>
+<li>
+<p> You can move the mouse cursor over the name of a Section to view the answering status for that Section. </p>
+</li>
+</ol>
+</div><!-- end ngIf: !instructionsJSON.isGateExam -->
+<div class="col-xs-12 c-test-instructions ng-hide" ng-show="showInstTab == 2" id="dynamic-instructions">
+<div class="row">
+<div class="col-xs-12 dynamic-instructions">
+<div class="row">
+<div class="col-xs-12 col-sm-12 di-heading">
+<h3 class="text-center ng-binding">  </h3>
+<h2 class="text-center ng-binding">  </h2>
+</div>
+<div class="col-xs-12 col-sm-6">
+<b translate="TESTINSTRUCTIONDURATION" translate-values="{instructionsJSON: instructionsJSON}" class="ng-scope">Duration:  Mins</b>
+</div>
+<div class="col-xs-12 col-sm-6">
+<b class="pull-right ng-binding"> Maximum Marks:  </b>
+</div>
+<div class="col-xs-12 col-sm-12 di-content">
+<!-- ngIf: instructionsJSON.instructionsArr --><div ng-if="instructionsJSON.instructionsArr" class="ng-scope">
+<p><b translate="" class="ng-scope">Read the following instructions carefully.</b></p>
+<ol start="1" class="for-all-exams">
+<!-- ngRepeat: ins in instructionsJSON.instructionsArr -->
+</ol>
+<div class="for-ssc">
+<u><b>प्रश्&zwj;नपत्र के बारे में</b></u> :
+<br>
+<br> 1) इस प्रश्&zwj;नपत्र में बहु-विकल्पीय वस्तुनिष्ठ प्रश्&zwj;न हैं जिसमें 4 विकल्प दिए गए हैं, जिसमें से केवल 1 विकल्प सही है ।
+<br>
+<br>2) कंप्&zwj;यूटर आधारित परीक्षा द्विभाषी अर्थात अंग्रेजी एवं हिन्&zwj;दी भाषा में होगी । प्रश्&zwj;न और उत्&zwj;तर के विकल्&zwj;प दोनो भाषाओं में दिखाई देंगे ।
+<br>
+<br>3) स्क्रीन के शीर्ष दाएं कोने में टाइमर (घड़ी) उपलब्ध है; आपसे अनुरोध है कि परीक्षा पूरी करने के लिए शेष समय की जानकारी हेतु इसे देखते रहें ।
+<br>
+<br>4) एक बार में कंप्यूटर स्क्रीन पर केवल एक प्रश्&zwj;न प्रदर्शित किया जाएगा । अभ्यर्थियों को अगले प्रश्&zwj;न पर जाने के लिए स्क्रीन के नीचे दिए गए बटन <button type="button" class="btn btn-gray-dark">Next Question <i class="tb-icon tb-arrow-right-thin"></i></button> पर क्लिक करना चाहिए अथवा पिछले प्रश्&zwj;न पर जाने के लिए <button type="button" class="btn btn-gray-dark"><i class="tb-icon tb-arrow-left-thin"></i> Previous Question</button> पर क्लिक करना चाहिए ।
+<br>
+<br>5) प्रश्&zwj;नों को दी गई समय सीमा के भीतर किसी भी क्रम में हल किया जा सकता है । अभ्&zwj;यर्थी को 4 विकल्पों में से सही विकल्प पर माउस से क्लिक करना होगा । यदि अभ्यर्थी प्रश्&zwj;न का उत्तर नही देना चाहता है तो वह उस प्रश्&zwj;न को खाली छोड़ सकता है ।
+<div>
+<br>6) अभ्यर्थी यदि चाहता है तो वह नए विकल्प का चयन कर किसी प्रश्&zwj;न के विकल्प को बदल सकता है । यदि अभ्यर्थी प्रश्&zwj;न का उत्तर नहीं देना चाहता है तो वह प्रश्&zwj;न के सामने दिए गए <button type="button" class="btn btn-danger">Erase</button> को क्लिक कर उत्&zwj;तर को अचयनित कर सकता है ।</div>
+<div>
+<br>7) प्रश्&zwj;नों में आगे और पीछे जाने के लिए, अभ्यर्थियों को <button type="button" class="btn btn-gray-dark">Next Question <i class="tb-icon tb-arrow-right-thin"></i></button> या <button type="button" class="btn btn-gray-dark"><i class="tb-icon tb-arrow-left-thin"></i> Previous Question</button> बटन का इस्तेमाल करना चाहिए अथवा कंप्यूटर स्क्रीन के दाएं हाथ की ओर दी गई प्रश्&zwj;न संख्या पर क्लिक करना चाहिए जहां पर प्रश्&zwj;न संख्याओं को `किए गए` या `न किए गए` की स्थिति के साथ प्रदर्शित किया जाएगा।
+<br>
+<br>8) जब भी अभ्यर्थी <button type="button" class="btn btn-gray-dark">Next Question <i class="tb-icon tb-arrow-right-thin"></i></button> या <button type="button" class="btn btn-gray-dark"><i class="tb-icon tb-arrow-left-thin"></i> Previous Question</button> बटन पर क्लिक करके अगले प्रश्&zwj;न पर जाता है तो उत्तरों को सहेज लिया जाएगा ।
+<br>
+<br>9) अभ्यर्थियों के पास स्क्रीन के निचले हिस्से में उपलब्ध. <button type="button" class="btn btn-warning">Tag</button> बटन पर क्लिक करके किसी प्रश्&zwj;न को बुकमार्क करने का विकल्प है, अगर वे बाद में उसकी समीक्षा करने की इच्छा रखते हैं । एक विशेष प्रश्&zwj;न पर मौजूद बुकमार्क को <button type="button" class="btn btn-warning">De-Tag</button> पर क्लिक करके हटाया जा सकता है ।
+<br>
+<br>10) स्क्रीन के दायीं ओर प्रश्&zwj;न पैलेट में प्रत्येक संख्यांकित प्रश्&zwj;न की निम्नलिखित स्थिति दिखाई देती है ।
+<br>
+<br>
+<ul class="que-ans-states">
+<li><span class="label skipped"></span> आपने प्रश्&zwj;न का उत्तर नहीं दिया है।</li>
+<li><span class="label attempted"></span> आपने प्रश्&zwj;न का उत्तर दिया है। </li>
+<li><span class="label bookmarked"></span> आपने प्रश्&zwj;न का उत्तर नहीं दिया है और समीक्षा के लिए चिन्हित किया है। </li>
+<li><span class="label attempted bookmarked"></span> आपने प्रश्&zwj;न का उत्तर दिया है लेकिन समीक्षा के लिए चिन्हित किया है। </li>
+</ul>
+<br><b>कृपया ध्यान दें: जिन </b><b>प्रश्&zwj;नों का उत्तर दिया गया है और समीक्षा के लिए चिन्हित किया गया है उन </b><b>प्रश्&zwj;नों को केवल तभी तक उत्तर दिया गया </b><b>प्रश्&zwj;न माना जाएगा जब तक अभ्यर्थी चयनित विकल्प को <button type="button" class="btn btn-warning">Erase</button> नहीं करता है।</b>
+<br>
+<br>11) परीक्षा की अवधि पूर्ण होने पर, यदि अभ्&zwj;यर्थी उत्&zwj;तर पर क्लिक नहीं करता है अथवा <button type="button" class="btn btn-yellow-green">Submit Test</button> बटन पर क्लिक नहीं करता है तो कंप्&zwj;यूटर द्वारा स्&zwj;वत: शून्&zwj;य परिणाम सहेज लिया जाएगा ।
+<br>
+<br>12) अभ्&zwj;यर्थी निर्धारित 1 घण्&zwj;टा ( 60 मिनट ) के पूर्ण होने पर ही परीक्षा को submit करने में समर्थ होंगे । यदि अभ्&zwj;यर्थी ने 1 घण्&zwj;टा (60 मिनट) के पूर्ण होने पर अपनी परीक्षा पूर्ण नहीं की तो सिस्&zwj;टम स्&zwj;वत: परीक्षा को submit कर देगा।
+<br>
+<br>
+ <div align="center"><b>"शुभकामनाएँ"</b>
+<br>
+</div>
+<br>
+<br>
+<br><u><b>About Question Paper:</b></u>
+<br>
+<br>1) The Question Paper consists of multiple choice objective type questions with 4 options out of which only 1 is correct.
+<br>
+<br>2) The computer based exam will be in bilingual i.e. English &amp; Hindi Languages. Questions and Answer options will appear in both the languages.
+<br>
+<br>3) There is a TIMER (Clock) available on the TOP RIGHT HAND CORNER of the Screen; you are requested to keep an eye on it for knowing the time remaining for the completion of the exam.
+<br>
+<br>4) Only one question will be displayed on the computer screen at a time. To attempt next question the candidates should click on <button type="button" class="btn btn-gray-dark">Next Question <i class="tb-icon tb-arrow-right-thin"></i></button> or to go back click on <button type="button" class="btn btn-gray-dark"><i class="tb-icon tb-arrow-left-thin"></i> Previous Question</button> button provided at the bottom of the screen
+<br>
+<br>5) The questions can be answered in any order within the given time frame. The candidate should click with the mouse on the correct choice, from 4 options given. In case, the candidate does not wish to attempt any question, it can be left blank.
+<br>
+<br>6) The candidate can change the option of a question later by selecting a new option in case he/she wishes to. In case candidate does not want to answer the question, he/she can deselect the answer by clicking <button type="button" class="btn btn-danger">Erase</button> provided against the question.
+<br>
+<br>7) To move back and forth between questions, candidates should use the <button type="button" class="btn btn-gray-dark">Next Question <i class="tb-icon tb-arrow-right-thin"></i></button> or <button type="button" class="btn btn-gray-dark"><i class="tb-icon tb-arrow-left-thin"></i> Previous Question</button> button or click on the question number on the right hand side of the computer screen where question numbers would be displayed along with the `attempted` and `not attempted` status
+<br>
+<br>8) The answers will be saved whenever the candidate goes for next question, by clicking on <button type="button" class="btn btn-gray-dark">Next Question <i class="tb-icon tb-arrow-right-thin"></i></button> or <button type="button" class="btn btn-gray-dark"><i class="tb-icon tb-arrow-left-thin"></i> Previous Question</button> button.
+<br>
+<br>9) Candidates have the option to bookmark a question in case they want to review it at a later stage by clicking on the <button type="button" class="btn btn-warning">Tag</button> button available at the bottom of the screen. The Bookmark on a particular question can be removed by clicking on <button type="button" class="btn btn-warning">De-Tag</button>
+<br>
+<br>10) The question palette at the right of the screen shows the following status of each of the questions numbered
+<br>
+<br>
+<ul class="que-ans-states">
+<li><span class="label skipped"></span> You have not answered the question. </li>
+<li><span class="label attempted"></span> You have answered the question. </li>
+<li><span class="label bookmarked"></span> You have NOT answered the question, but have marked the question for review. </li>
+<li><span class="label attempted bookmarked"></span> You have answered the question, but marked it for review. </li>
+</ul>
+<br><b>PS: Questions which are attempted and marked for review would be treated as attempted questions only as long as the candidate does not <button type="button" class="btn btn-danger">Erase</button> the option selected.</b>
+<br>
+<br>11) On the completion of the test duration, even if the candidate does not click on an answer or does not click on the <button type="button" class="btn btn-yellow-green">Submit Test</button> button, a NIL result will be saved automatically by the computer.
+<br>
+<br>12) The candidate will only be able to submit the test on completion of the stipulated 1 hour (60 Minutes). In case a candidate not completed his/her test at the completion of stipulated 1 hour (60 Minutes), the system shall automatically submit the test.
+<br>
+<br>
+<div align="center"><b>"ALL THE BEST"</b>
+<br>
+</div>
+<br>
+<br>
+</div>
+</div>
+</div><!-- end ngIf: instructionsJSON.instructionsArr -->
+<!-- ngIf: !isTestInProgress -->
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="ti-control text-center for-all-exams">
+<!-- ngIf: !isInClass --><a ng-if="!isInClass" href="/bank-clerk/mocktest?tab=my" class="btn btn-link pull-left ng-binding ng-scope ng-hide" ng-show="!isTestInProgress &amp;&amp; showInstTab != 2"><i class="tb-icon tb-arrow-left"></i> Go back to My Test</a><!-- end ngIf: !isInClass -->
+<!-- ngIf: isInClass -->
+<button class="btn btn-info-test pull-left ng-binding ng-hide" type="button" ng-hide="showInstTab == 1" ng-click="showInstTab = 1">Previous</button>
+<button class="btn btn-info-test inst-next ng-binding" type="button" ng-hide="showInstTab == 2" ng-click="showInstTab = 2;setStartTestConfirmation()">Next</button>
+<div class="d-inline-block align-middle" data-toggle="tb-tooltip">
+<button class="btn btn-theme ng-binding ng-hide" type="button" ng-show="showInstTab == 2 &amp;&amp; !isTestInProgress" ng-click="startTest()" ng-disabled="!$root.checkboxModel.isAccepted">I am ready to begin</button>
+<!-- ngIf: !$root.checkboxModel.isAccepted -->
+</div>
+</div>
+<div class="ti-control text-center for-ssc">
+<!-- ngIf: !isInClass --><a href="/bank-clerk/mocktest?tab=my" ng-if="!isInClass" class="btn btn-link pull-left ng-scope ng-hide" ng-show="!isTestInProgress &amp;&amp; showInstTab == 2"><i class="tb-icon tb-arrow-left"></i><span class="hidden-xs"> Go back to</span> My Test</a><!-- end ngIf: !isInClass -->
+<!-- ngIf: isInClass -->
+<button class="btn btn-gray-dark inst-next ng-binding" type="button" ng-hide="showInstTab == 2" ng-click="showInstTab = 2;setStartTestConfirmation()">Next <i class="tb-icon tb-arrow-right-thin"></i></button>
+<div class="d-inline-block align-middle" data-toggle="tb-tooltip">
+<button class="btn btn-yellow-green ng-scope ng-hide" type="button" ng-show="showInstTab == 2 &amp;&amp; !isTestInProgress" ng-click="startTest()" ng-disabled="!$root.checkboxModel.isAccepted" translate="">I have read the instructions</button>
+<!-- ngIf: !$root.checkboxModel.isAccepted -->
+</div>
+</div>
+</div>
+</div>
+<set-language current-language="lang.name" class="ng-scope ng-isolate-scope"><div class="modal" id="langChangeModal" tabindex="-1" role="dialog" aria-labelledby="langChangeLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false"><div class="modal-dialog"><div class="modal-content"><div class="modal-body"><h4 class="text-left ng-binding"> Do you want to set your default language to English</h4></div><div class="modal-footer"><button class="btn btn-theme" ng-click="languageUnchanged(studentID)">No</button><button class="btn btn-default" ng-click="changeGlobalLanguage(currentLanguage)">Yes</button></div></div></div></div></set-language>
+</div>
+</div>
+</div>
+<div class="footer text-center">
+<button type="button" class="btn btn-info-test mar-t0" ng-click="setTab('question')">Back</button>
+</div>
+</div>
+<div class="qpip-inner ng-hide" id="profile" ng-show="isCurTab('profile')">
+<div class="header">
+<h4 class="text-center pad-t12">Profile Details</h4>
+</div>
+<div class="body">
+<div class="body-inner">
+<div class="row">
+<div class="col-xs-12 col-md-6 col-md-offset-4">
+<div class="row">
+<div class="col-xs-12 col-sm-4"><b>User ID</b></div>
+<div class="col-xs-12 col-sm-8 ng-binding">ABCXYZ</div>
+</div>
+<div class="row">
+<div class="col-xs-12 col-sm-4"><b>Name</b></div>
+<div class="col-xs-12 col-sm-8 ng-binding">Jon Doe</div>
+</div>
+<div class="row">
+<div class="col-xs-12 col-sm-4"><b>Date of birth</b></div>
+<div class="col-xs-12 col-sm-8 ng-binding">01-01-1990</div>
+</div>
+<div class="row">
+<div class="col-xs-12 col-sm-4"><b>Email ID</b></div>
+<div class="col-xs-12 col-sm-8 ng-binding">jon@doe.com</div>
+</div>
+<div class="row">
+<div class="col-xs-12 col-sm-4"><b>Contact</b></div>
+<div class="col-xs-12 col-sm-8 ng-binding">+91-9999999999</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="footer text-center">
+<button type="button" class="btn btn-info-test mar-t0" ng-click="setTab('question')">Back</button>
+ </div>
+</div>
+</div>
+</div>
+<div class="sidebar-open-bg"></div>
+<button type="button" class="btn btn-theme navbar-toggle js-trigger-toggle-sidebar">
+<span class="tb-icon tb-menu"></span>
+<span class="tb-icon tb-clear"></span>
+</button>
+</div>

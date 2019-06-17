@@ -1,0 +1,55 @@
+<div id="printableArea"   title="Patient_List" >
+    <!--<p class="pageTitle">Patients</p>-->
+  
+   <table cellspacing="1" cellpadding="5" border="0"  style="width:85%;">
+
+        <thead>
+            <tr class="bluestrp">
+                <th>id</th>
+                <th>fixedId</th>
+                <th>bookId</th>
+                <th>dateOfRegistration</th>
+                <th>Name</th>
+                <th>Place</th>
+                <th>age</th>
+                <th>dob</th>
+                <th>sex</th>
+                <th>Phone</th>
+
+
+                
+                <th>Remarks</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            {{for obj.content}}
+
+            <tr class="firstrow"
+                 onclick="go({{:id}},'patient')"
+                >
+
+
+                <td>{{:id}}</td>
+                 <td>{{:fixedId}}</td>
+                 <td>{{:bookId}}</td>
+                <td>{{:dateOfRegistration}}</td>
+                <td>{{:name}}</td>
+                <td>{{:place}}</td>
+                <td>{{:age}}</td>
+                <td>{{:dob}}</td>
+                <td>{{:sex}}</td>
+                <td>{{:contactPhone}}</td>
+                
+                <td>{{:remarks}}</td>
+               
+            </tr>
+            {{else}}
+            No members...
+            {{/for}}
+        </tbody>
+
+
+    </table>
+</div>

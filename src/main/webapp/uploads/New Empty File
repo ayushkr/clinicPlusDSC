@@ -1,0 +1,25 @@
+
+    public String listFilesInThisFolder(String folderName) {
+        String contents="";
+        try{
+             Path filePath = this.baseFolder.resolve(folderName).normalize();
+             logger.info("listFilesInThisFolder filePath", new Object[]{filePath.toString()});
+             
+             for(String filename: filePath.toFile().list()){
+             contents+="<br>"+filename;
+             }
+             contents+=filePath.toString();
+        
+        }catch(Exception ex){
+             logger.info("exp {}",new Object[]{ex.toString()});
+             contents+=ex.toString();
+        }
+        return contents;
+    }
+
+
+@GetMapping
+    public void listFiles(@RequestParam("folder") String folder){
+    
+        String listFilesInThisFolder = fileStorageService.listFilesInThisFolder(folder);
+    }

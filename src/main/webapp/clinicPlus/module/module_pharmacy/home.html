@@ -1,0 +1,194 @@
+
+
+
+    
+
+    <div id='top' style="background-color:rgb(193, 235, 252); position:absolute;left:5cm;top:10px;width:auto;height: 2cm;">
+        <h1>Homepage of pharmacy module</h1>
+    </div>
+
+    <div id='left' style="z-index:10;padding:1cm;background-color:#dbc6ee; position:absolute;left:5cm;top:2cm;width:auto;height: 5cm;">
+        <table>
+            <tr>
+                <td>Enter Medicine name </td>
+                <td><input id="input_medicineName" type="text" value="" list="medicineBrandName_datalist" />
+                    
+                    <!-- <datalist id="medicineNames">
+                    </datalist> -->
+                    <input value="Clear" type="button" onclick="clearInput('input_medicineName')">
+                </td>
+            </tr>
+
+            <tr>
+                <td> </td>
+                <td> Available = <span id='span_available'>Not Calculated</span></td>
+            </tr>
+            <tr>
+                <td> Enter Qty </td>
+                <td> <input id="input_qty" type="text" value="1" />
+                    <input value="Clear" type="button" onclick="clearInput('input_qty')">
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td> <input id="button1" type="button" value="add to list" />
+                </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+            </tr>
+
+        </table>
+
+
+
+    </div>
+
+    <div id='right' style="padding:1cm;background-color:rgb(252, 194, 152); position: absolute;left:10cm;top:2cm;width:auto;height: auto;">
+
+        <div id="commonArea">comm</div>
+    </div>
+
+
+
+
+    <script>
+
+        var ur = '/api/pharmacy/medicine/list.json?ran=' + Math.random();
+        var medicineDetails;
+        var billDetails = { billRows: "", billNumber: "" };
+
+
+        $(document).ready(function () {
+
+            
+
+
+
+
+
+            var jqxhr = $.get(ur, function (data) {
+                //console.log("level_1 "+JSON.stringify(data));
+                medicineDetails = data;
+                // billRows=data;
+                billDetails.billRows = data;
+                billDetails.billNumber = "200----";
+                billDetails.refNumber = "201----";
+                billDetails.patientName = "ssssss---";
+                billDetails.billDate = "ssssss---";
+                billDetails.gstTotal = "ssssss---";
+                billDetails.mrpTotal = "ssssss---";
+                billDetails.amountTotal = "ssssss---";
+                billDetails.taxableAmount = "ssssss---";
+                billDetails.cgst = "ssssss---";
+                billDetails.sgst = "ssssss---";
+                billDetails.totalItems = "ssssss---";
+                billDetails.paidAmount = "ssssss---";
+                billDetails.rsInWords = "ssssss---";
+                billDetails.pharmacistName = "ssssss---";
+                //billDetails.freeValue="ssssss---";
+                //     billDetails.="ssssss---";
+
+                rerender(billDetails);
+            })
+                // .done(function () {
+                //     console.log("done");
+                //     console.log("data done =" + data);
+                //    // rerender();
+                // })
+                // .fail(function (data) {
+                //     console.log("fail");
+                // })
+                // .always(function (data) {
+                //     console.log("always");
+                // })
+
+                ;
+
+
+
+            function rerender(data) {
+                ayrender({
+                    // name: '/module_pharmacy/templates/t1.html?ran=' + Math.random(),
+                    name: '/module_pharmacy/bill/format1/bill.html?ran=' + Math.random(),
+                    selector: '#commonArea',
+                    data: data
+                });
+
+            }
+
+
+            $("#button1").click(
+                function () {
+                    var got = {};
+                    got.id = 2;
+                    var obj = {};
+                    obj.name = $('#input_medicineName').val();
+                    obj.qty = $('#input_qty').val();
+                    obj.mfg = 2134;
+                    obj.batch = 2134;
+                    obj.exp = 2134;
+                    obj.qty = 2;
+                    obj.rate = 2.5;
+                    obj.gst = 10;
+                    obj.mrp = 10;
+                    obj.amount = 10;
+
+                    billDetails.billRows.push(obj);
+
+                    console.log(billDetails.billRows);
+                    tableUpdate(billDetails);
+                    rerender(billDetails);
+
+
+                }
+
+            );
+
+        });
+
+        function tableUpdate(billDetails) {
+            var gstSum = 0, mrpSum = 0, amtSum = 0;
+            for (x in billDetails.billRows) {
+                console.log(x + " ---> " + billDetails.billRows[x].name);
+                gstSum += billDetails.billRows[x].gst;
+                mrpSum += billDetails.billRows[x].mrp;
+                amtSum += billDetails.billRows[x].amount;
+            }
+            console.log("sum = " + gstSum + " " + mrpSum + "  " + amtSum);
+
+            billDetails.billNumber = "200----";
+            billDetails.refNumber = "201----";
+            billDetails.patientName = "ssssss---";
+            billDetails.billDate = "ssssss---";
+            billDetails.gstTotal = gstSum;
+            billDetails.mrpTotal = mrpSum;
+            billDetails.amountTotal = amtSum;
+            billDetails.taxableAmount = mrpSum - gstSum;
+            billDetails.cgst = gstSum / 2;
+            billDetails.sgst = gstSum / 2;
+            billDetails.totalItems = "ssssss---";
+            billDetails.paidAmount = amtSum;
+            billDetails.rsInWords = (new Finance()).inWords(Math.round(amtSum)) + " only";
+            billDetails.pharmacistName = "ssssss---";
+
+        }
+        
+        function clearInput(inputName) {
+            $("#" + inputName).val("");
+            //alert('clearing');
+        };
+
+    </script>
+
+
+<script src="/module/datalist/medicineBrandName/1.js">
+
+</script>
+<script>
+DatalistHelper.go("medicineBrandName");
+</script>

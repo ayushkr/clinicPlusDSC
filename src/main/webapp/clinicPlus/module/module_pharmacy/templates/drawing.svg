@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 210 296.99999"
+   height="297mm"
+   width="210mm"
+   sodipodi:docname="drawing.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1280"
+     inkscape:window-height="738"
+     id="namedview17"
+     showgrid="false"
+     inkscape:zoom="0.48195146"
+     inkscape:cx="396.85039"
+     inkscape:cy="561.25984"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <defs
+     id="defs2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     style="">
+    <rect
+       style="fill:#ff5555;stroke-width:0.26458332"
+       y="242.57143"
+       x="143.63097"
+       height="51.404762"
+       width="62.744045"
+       id="rect3713" />
+    <ellipse
+       style="fill:#00ffff;stroke-width:0.26458332"
+       ry="30.994047"
+       rx="30.238094"
+       cy="43.755951"
+       cx="47.625"
+       id="path3715" />
+    <rect
+       y="5.9583335"
+       x="2.2678571"
+       height="288.01785"
+       width="204.10715"
+       id="rect24"
+       style="opacity:0.02000002;fill:none;stroke-width:0.26458332" />
+    <rect
+       y="5.9583335"
+       x="9.6475153"
+       height="288.17334"
+       width="196.72749"
+       id="rect4537"
+       style="opacity:0.328;fill:none;stroke:#fd5653;stroke-width:0.97731405;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       y="105.4017"
+       x="145.14285"
+       height="12.095239"
+       width="30.994047"
+       id="rect4551"
+       style="opacity:0.328;fill:none;stroke:#fd5653;stroke-width:0.96499997;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+      <title
+         id="title4555">abc</title>
+      <desc
+         id="desc4553">descr</desc>
+    </rect>
+  </g>
+  <text
+     style="fill:#ff0000;-inkscape-font-specification:'Aharoni, Bold';font-family:Aharoni;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;font-size:11.29171075px;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;"
+     id="text13"
+     y="115.92294"
+     x="16.209171">I love SVG!</text>
+  <text
+     id="text3731"
+     y="115.47796"
+     x="90.545815"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:11.29171085px;line-height:1.25;font-family:Aharoni;-inkscape-font-specification:'Aharoni, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+     xml:space="preserve"><tspan
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:11.29171085px;font-family:Aharoni;-inkscape-font-specification:'Aharoni, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332"
+       id="tspan3729"
+       y="115.47796"
+       x="90.545815"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:11.29171085px;font-family:Aharoni;-inkscape-font-specification:'Aharoni, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332"
+         id="tspan3727"
+         y="115.47796"
+         x="90.545815">sssssss</tspan></tspan></text>
+</svg>

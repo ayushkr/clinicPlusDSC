@@ -1,0 +1,191 @@
+<!--patient/CRU_template.html -->
+
+
+<div class="pageTitle">{{if id==0}} New  {{else}} Existing  : {{:name}} {{/if}}  </div>
+
+<form id='form_patient' method="post" action="#/cmd/post">
+    <input type='hidden' name='module_direct' value='patient'>
+    <input type='hidden' name='redirect' value=' #/cmdc?module=patient&action=/all/list'>
+    <input type="hidden" name="id" data-link="id" />
+    <div class="w3-bar-ay">
+        <a class="w3-bar-item w3-button tablink w3-red" onClick="openCity(event, 'Basic')">Basic</a>
+        <a class="w3-bar-item w3-button tablink " onClick="openCity(event, 'Communication')">Communication</a>
+
+        <a class="w3-bar-item w3-button tablink " onClick="openCity(event, 'Notes')">Notes</a>
+        <a class="w3-bar-item w3-button tablink " onClick="openCity(event, 'Admin')">Admin</a>
+        <a class="w3-bar-item w3-button tablink " onClick="openCity(event, 'Files')">Files</a>
+    </div>
+    <br>
+    <div id="printableArea" style="margin-left: 0mm" title="patient_{{:id}}_{{:name}}">
+        <!--basic-->
+        <div id="Basic" class="w3-container w3-border city ">
+            <h2>Basic</h2>
+            <table border="0">
+                <thead></thead>
+                <tbody>
+                    <tr>
+
+                        <td>
+
+                            ID : 
+                            <span class="label label-info "> <b>{{:id}}</b> </span> <br> 
+                            <br>
+                            <div class="inp_outer">
+                                <div class="title1">bookId</div>
+                                <span class="inp2" contenteditable="true" id="bookId"   data-link="bookId" >---</span>
+                                <input type="hidden" name="bookId" data-link="bookId" />
+                            </div>
+
+
+                            <div class="inp_outer"   
+                                 onclick="popup_selection_obj(
+                                     {
+                                     'value' :'{{:dateOfRegistration}}',
+                                             'entity_select': 'dateForOrganisation',
+                                             'input': 'dateOfRegistration'
+                                     }
+                                     )"
+
+                                 >
+
+
+                                <input type="hidden" id="dateOfRegistration" name="dateOfRegistration" data-link="dateOfRegistration" />
+                                <div class="title1">dateOfRegistration</div>
+                                <span id='dateOfRegistration_display' class="inp2">{{:dateOfRegistration}}</span>
+                            </div>
+                            <br>
+                            <div class="inp_outer">
+                                <div class="title1">name</div>
+                                <span class="inp2" contenteditable="true" id="name"   data-link="name" >---</span>
+                                <input type="hidden" name="name" data-link="name" />
+                            </div>
+                            <br>
+                            <div class="inp_outer">
+                                <div class="title1">age</div>
+                                <span class="inp2" contenteditable="true" id="age"   data-link="age" >---</span>
+                                <input type="hidden" name="age" data-link="age" />
+                            </div>
+
+                            <div class="inp_outer">
+                                <div class="title1">sex</div>
+                                <span class="inp2" contenteditable="true" id="sex"   data-link="sex" >---</span>
+                                <input type="hidden" name="sex" data-link="sex" />
+                            </div>
+
+
+
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <!--communication-->
+        <div id="Communication" class="w3-container w3-border city city_hide">
+            <h2>Communication</h2>
+            <div class="inp_outer">
+                <div class="title1">address</div>
+                <span class="inp2" contenteditable="true" id="address"   data-link="address" >---</span>
+                <input type="hidden" name="address" data-link="address" />
+            </div>
+
+            <div class="inp_outer">
+                <div class="title1">place</div>
+                <span class="inp2" contenteditable="true" id="place"   data-link="place" >---</span>
+                <input type="hidden" name="place" data-link="place" />
+            </div>  
+
+            <div class="inp_outer">
+                <div class="title1">contactPhone</div>
+                <span class="inp2" contenteditable="true" id="contactPhone"   data-link="contactPhone" >---</span>
+                <input type="hidden" name="contactPhone" data-link="contactPhone" />
+            </div>
+
+
+
+
+            <div class="inp_outer">
+                <div class="title1">email</div>
+                <span class="inp2" contenteditable="true" id="email"   data-link="email" >---</span>
+                <input type="hidden" name="email" data-link="email" />
+            </div>
+
+            <div class="inp_outer">
+                <div class="title1">contactEmergency</div>
+                <span class="inp2" contenteditable="true" id="contactEmergency"   data-link="contactEmergency" >---</span>
+                <input type="hidden" name="contactEmergency" data-link="contactEmergency" />
+            </div>
+
+
+        </div>
+
+        <!--Notes-->
+        <div id="Notes" class="w3-container w3-border city city_hide">
+            <h2>Notes</h2>
+            <div class="inp_outer">
+                <div class="title1">notes</div>
+                <span class="inp2" contenteditable="true" id="notes"   data-link="notes" >---</span>
+                <input type="hidden" name="notes" data-link="notes" />
+            </div>
+
+
+        </div>
+
+        <!--Admin-->
+        <div id="Admin" class="w3-container w3-border city city_hide">
+            <h2>Admin</h2>
+            <div class="inp_outer">
+                <div class="title1">remarks</div>
+                <span class="inp2" contenteditable="true" id="remarks"   data-link="remarks" >---</span>
+                <input type="hidden" name="remarks" data-link="remarks" />
+            </div>
+
+            <div class="inp_outer">
+                <div class="title1">fixedId</div>
+                <span class="inp2" contenteditable="true" id="fixedId"   data-link="fixedId" >---</span>
+                <input type="hidden" name="fixedId" data-link="fixedId" />
+            </div>
+
+        </div>
+    </div>
+</form>
+<!--file uploads-->
+<div id="Files" class="w3-container w3-border city city_hide">
+    <h2>Files</h2>
+    <form id="form_prescription" 
+          enctype="multipart/form-data" >
+        <input  name='patientId' value="{{:id}}" type="hidden"     >
+        <table>
+            <tbody>
+                <tr>
+                    <td style="padding: 10px">
+                        Show <select name="category" id="category" onchange="listFiles({{:id}}, this.value, 'fileList')"  >
+
+                            <option >prescription</option>
+                            <option >labReport</option>
+                        </select>
+                    </td>
+                    <td style="padding: 10px">
+                        <a onclick="document.getElementById('input_file_prescription').click()" data-toggle="tooltip" title="Add New " class="button button5" style="position: relative;left:13cm"> <i class="fa fa-plus"> </i>
+                        </a>
+
+                        <input id="input_file_prescription" name='file'  type="file" value="add file"
+                               onchange="
+                                   submitFormAKR('form_prescription', '/clinicPlus/api/patient/prescription');
+                                   listFiles({{:id}}, document.getElementById('category').value, 'fileList');
+                               "
+                               style="display: none"
+                               >
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <h3> List of existing files for this patient</h3>
+    <div id="fileList" style=""> {{:~listFiles(id,'prescription','fileList')}}</div>
+</div>
+

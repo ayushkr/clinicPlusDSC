@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- To run the current sample code in your own environment, copy this to an html page. -->
+
+<html>
+<head>
+  <script src="/js_css/jquery.min.js"></script>
+  <script src="/js_css/jsviews.js"></script>
+ 
+</head>
+<body>
+
+<div id="result"></div>
+
+below result {^{>name}}
+
+<script id="theTmpl" type="text/x-jsrender">
+
+span box has <span data-link="name" class="spanbox"></span> <br>
+also below
+{^{>name}}
+
+</script>
+
+<script>
+var data = {
+  "name": "Jeffwww"
+};
+
+var template = $.templates("#theTmpl");
+
+template.link("#result", data);
+
+
+</script>
+
+</body>
+</html>

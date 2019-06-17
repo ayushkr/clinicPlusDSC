@@ -1,0 +1,76 @@
+
+    
+    
+<hr>
+
+
+1. Filter By brandName <input  type="text" onkeyup="filter('brandName')"  ><br>
+
+2. Select a Medicine Brand Name  (Click item in dark rounded rectangle)<br>
+<hr>
+
+
+
+<div class="Table">
+    <div class="Title">
+
+    </div>
+
+    <div class="Heading">
+
+        <div class="Cell"><p>brandName</p></div>
+       <div class="Cell"><p>Company</p></div>
+       <div class="Cell"><p>genericName</p></div>
+       <div class="Cell"><p>usedFor</p></div>
+          <div class="Cell"><p>Actions</p></div>
+    </div>
+
+
+
+    {{for obj}}
+    <div class="Row" id="select_{{:id}}"  >
+        <div class="Cell"
+             entity_select_editButton
+             onclick="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:brandName}}')"  
+
+             > 
+        
+            <input type="button"  
+                   class="entity_select_editButton" 
+                   value="{{:brandName}}"
+                   >
+
+
+        </div>
+       
+        <div class="Cell">  {{:company}} </div>
+         <div class="Cell">  {{:genericName}} </div>
+          <div class="Cell">  {{:usedFor}} </div>
+        
+        
+        
+        <div class="Cell"> 
+            <a 
+                onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, 'main3');"
+
+                ><i class="fa fa-edit"> Edit</i>
+            </a>
+
+        </div>
+
+        <d id='{{:id}}' 
+           brandName="{{:brandName}}" 
+           company="{{:company}}" 
+            genericName="{{:genericName}}" 
+             usedFor="{{:usedFor}}" 
+           >
+        </d>
+
+    </div>
+
+
+
+
+    {{/for}}
+</div>
+

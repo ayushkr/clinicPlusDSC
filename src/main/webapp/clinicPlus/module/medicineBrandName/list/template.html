@@ -1,0 +1,41 @@
+<div id="printableArea"   title="MedicineBrandName_List" >
+<table cellspacing="1" cellpadding="5" border="0" style="width:85%;">
+    
+            <thead>
+                <tr class="bluestrp">
+            <th>id</th>
+            <th>brandName</th>
+            <th>genericName</th>
+            <th>company</th>
+            <th>usedFor</th>
+            <th>type</th>
+            <th>groupid</th>
+            <th>description</th>
+            <th>other</th>
+         
+
+        </tr>
+        </thead>
+        <tbody>
+
+        {{for obj.content}}
+        <tr 
+            onclick="go({{:id}},'medicineBrandName')"
+            class="firstrow">
+            <td><span >{{:id}}</span></td>
+            <td>{{:brandName}}</td>
+            <td>{{:genericName}}</td>
+            <td>{{:company}}</td>
+            <td>{{:usedFor}}</td>
+            <td>{{:type}}</td>
+            <td>{{:groupid}}</td>
+            <td>{{:description}}</td>
+            <td>{{:other}}</td>
+          
+        </tr>
+        {{/for}}
+    </tbody>
+
+
+</table>
+</div>

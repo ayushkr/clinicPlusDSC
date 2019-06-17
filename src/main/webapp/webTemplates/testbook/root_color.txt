@@ -1,0 +1,70 @@
+:root {
+    --blue: #4788f4;
+    --indigo: #6610f2;
+    --purple: #9013fe;
+    --pink: #e83e8c;
+    --red: #e4174f;
+    --orange: #ff724f;
+    --yellow: #ffd13c;
+    --green: #0ece6d;
+    --teal: #20c997;
+    --cyan: #0ad0f4;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #0ad0f4;
+    --secondary: #6c757d;
+    --success: #0ece6d;
+    --info: #4788f4;
+    --warning: #ffd13c;
+    --danger: #e4174f;
+    --light: #f8f9fa;
+    --dark: #000;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: "acumin-pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+
+
+ExampleSection
+:root can be useful for declaring global CSS variables:
+
+:root {
+  --main-color: hotpink;
+  --pane-padding: 5px 42px;
+}
+
+Custom properties (sometimes referred to as CSS variables or cascading variables) are entities defined by CSS authors that contain specific values to be reused throughout a document. They are set using custom property notation (e.g., --main-color: black;) and are accessed using the var() function (e.g., color: var(--main-color);).
+
+Complex websites have very large amounts of CSS, often with a lot of repeated values. For example, the same color might be used in hundreds of different places, requiring global search and replace if that color needs to change. Custom properties allow a value to be stored in one place, then referenced in multiple other places. An additional benefit is semantic identifiers. For example, --main-text-color is easier to understand than #00ff00, especially if this same color is also used in other contexts.
+
+Values in JavaScriptSection
+To use the values of custom properties in JavaScript, it is just like standard properties.
+
+// get variable from inline style
+element.style.getPropertyValue("--my-var");
+
+// get variable from wherever
+getComputedStyle(element).getPropertyValue("--my-var");
+
+// set variable on inline style
+element.style.setProperty("--my-var", jsVar + 4);
+
+
+
+<div class="font-weight-600 text-center px-3">
+<svg width="15" height="15" viewBox="0 0 16 16" class="mb--4 mr-1"><title>Tags &amp; Indicators/Tick</title><g fill="none" fill-rule="evenodd"><circle fill="#25CD71" cx="8" cy="8" r="8"></circle><path stroke="#FFF" stroke-width="1.4" stroke-linecap="square" d="M5 8.97l1.896 1.703L11.556 6"></path></g></svg>
+<span translate="">Select your Pass</span>
+</div>
+
+
+#body[tab] #form-card.drishy .pad {
+    -webkit-animation: .8s spring;
+    animation: .8s spring;
+    -webkit-animation-delay: .2s;
+    animation-delay: .2s
+}

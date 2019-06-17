@@ -1,0 +1,73 @@
+
+    
+    
+<hr>
+
+
+1. Filter By name <input  type="text" onkeyup="filter('name')"  ><br>
+
+2. Select a Vendor  (Click item in dark rounded rectangle)<br>
+<hr>
+
+
+
+<div class="Table">
+    <div class="Title">
+
+    </div>
+
+    <div class="Heading">
+
+        <div class="Cell"><p>name</p></div>
+       <div class="Cell"><p>place</p></div>
+        <div class="Cell"><p>description</p></div>
+          <div class="Cell"><p>Actions</p></div>
+    </div>
+
+
+
+    {{for obj}}
+    <div class="Row" id="select_{{:id}}"  >
+        <div class="Cell"
+             entity_select_editButton
+             onclick="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:name}}')"  
+
+             > 
+        
+            <input type="button"  
+                   class="entity_select_editButton" 
+                   value="{{:name}}"
+                   >
+
+
+        </div>
+       
+        <div class="Cell">  {{:place}} </div>
+          <div class="Cell">  {{:description}} </div>
+        
+        
+        
+        <div class="Cell"> 
+            <a 
+                onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, 'main3');"
+
+                ><i class="fa fa-edit"> Edit</i>
+            </a>
+
+        </div>
+
+        <d id='{{:id}}' 
+           name="{{:name}}" 
+           place="{{:place}}" 
+            description="{{:description}}"   
+           >
+        </d>
+
+    </div>
+
+
+
+
+    {{/for}}
+</div>
+

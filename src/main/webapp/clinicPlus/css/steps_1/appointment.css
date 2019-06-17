@@ -1,0 +1,46 @@
+.steps {
+
+    padding: 1px 0;
+    overflow: hidden;
+}
+.steps ul, .steps li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.steps ul { float: left; }
+.steps li {
+    float: left;
+    width: 220px;
+}
+.steps li a {
+    display: block;
+    padding: 15px 20px;
+    background: #556988;;
+    color: #fff;
+    line-height: 1.5em;
+    text-decoration: none;
+    border: solid midnightblue;
+}
+.steps li a strong { font-size: 1.5em; }
+.steps li a:hover { background: #7caddef7; }
+.steps li.step, .steps li.step a {
+    position: relative;
+    z-index: 3;
+}
+.steps li.step-2, .steps li.step-2 a { z-index: 2; }
+.steps li.step-3, .steps li.step-3 a { z-index: 1; }
+.steps li.step-4, .steps li.step-4 a { z-index: 0   ; }
+.steps li.step-1 a, .steps li.step-2 a, .steps li.step-3 a {
+    background: transparent url(./step_blue.png) center right no-repeat;
+    padding-right: 25px;
+}
+.steps li.step-2, .steps li.step-3 { margin-left: -30px; }
+.steps li.step-2 a { padding-left: 45px; }
+.steps li.step-3 a {
+    padding-left: 45px;
+    padding-right: 10px;
+    background-position: center left;
+}
+.steps li.step a:hover { background: transparent url(./step_darkBlue.png?ran=12) center left  no-repeat; }
+.steps li.step-3 a:hover { background-position: center left; }

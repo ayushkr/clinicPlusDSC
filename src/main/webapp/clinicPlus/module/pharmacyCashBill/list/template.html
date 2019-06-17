@@ -1,0 +1,324 @@
+
+<div id="printableArea"   title="PharmacyBill_List" >
+    <center>
+        <table border="0">
+            <tbody>
+                <tr>
+                    <td colspan="3">
+            <center>
+                <table >
+                    <tbody>
+                        <tr>
+                            <td>
+                    <center>
+
+                        <span style="font-size:30px;text-align:left;font-weight: bold">
+                            DOCTORS SPECIALITY CENTRE <br>
+                        </span>
+
+                        <span style="font-size:14px;text-align:center;">
+                            36/5588, USHUS THIRUVAMBADY,
+                            PATTURAIKKAL JN ,THRISSUR -680022 <br>
+                        </span>
+
+                        <span style="font-size:14px;text-align:center;">
+                            Website: &nbsp; www.doctorsspecialitycentre.com &nbsp;&nbsp;
+                             email : &nbsp; doctorsspecialitycentre@gmail.com &nbsp;&nbsp;
+                             <br>
+                            Phone &nbsp;<i class="fas fa-phone-square"></i> &nbsp;8592918888 
+                           
+                        </span>
+
+                    </center>
+                    
+
+                    </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </center>      
+            </td>
+
+            </tr>
+           
+            <tr>
+                <td class="gstSpacing">
+                    GST#:432423423434              
+                </td>
+                <td class="gstSpacing">
+                    DL No:KL-TSR-117933
+                </td>
+                <td class="gstSpacing">
+                    DL Date: 07/01/2017
+                </td>
+            </tr>
+            </tbody>
+        </table>
+      
+        {{if obj.pharmacyBillRowEntitys[0]}}
+
+        <hr>
+        <table border="0" cellspacing="0" cellpadding="0" class="Table1">
+            <colgroup><col width="248"><col width="248"><col width="248"></colgroup>
+            <tbody>
+                <tr>
+                    <td  class="Table1_A1">
+                        Bill No &nbsp;: 
+
+                        {{:obj.pharmacyBillRowEntitys[0].pharmacyBill.id}} 
+
+
+
+                    </td>
+                    <td  class="Table1_A1">
+                        Ref# No : 
+                        <span class="T1">
+
+                            appt-{{:obj.pharmacyBillRowEntitys[0].pharmacyBill.appointment.id}} on  
+                            {{:obj.pharmacyBillRowEntitys[0].pharmacyBill.appointment.dateOfAppointment}}
+
+                        </span>
+                    </td>
+                    <td  class="Table1_A1">
+
+                        {{if obj.pharmacyBillRowEntitys[0]}}
+                        Bill Date :
+                        {{:obj.pharmacyBillRowEntitys[0].pharmacyBill.dateOfBill}} 
+
+                        {{else}}
+                        <h1>Pharmacy Bill Row not exist</h1> 
+                        {{/if}}
+
+                    </td>
+                </tr>
+                <tr>
+                    <td  class="Table1_A2">
+                        Patient : 
+                        <span class="T1"> {{:obj.pharmacyBillRowEntitys[0].pharmacyBill.appointment.patient.name}} </span>
+
+                    </td>
+                    <td  class="Table1_A2">
+
+                    </td>
+                    <td  class="Table1_A2">
+                        Doctor : 
+                        <span class="T1"> {{:obj.pharmacyBillRowEntitys[0].pharmacyBill.appointment.doctor.name}} </span>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        {{else}}
+        <h1>Pharmacy Bill Row not exist</h1> 
+        {{/if}}
+        <div id="oneRowInEdit"></div>
+              <hr>
+        <div class="Table">
+            <div class="Title">
+                RETAIL BILL
+
+
+            </div>
+
+            <div class="Heading">
+
+                
+                <div class="Cell"><p>item/ BrandName</p></div>
+                <div class="Cell"><p>Mfg</p></div>
+             
+                <div class="Cell"><p>Batch</p></div>
+                <div class="Cell"><p>Exp</p></div>
+                <div class="Cell"><p>Qty</p></div>
+                <div class="Cell"><p>Rate</p></div>
+                <div class="Cell"><p>Dis%</p></div>
+                <div class="Cell"><p>GST</p></div>
+                <div class="Cell"><p>MRP</p></div>
+                <div class="Cell"><p>Amount</p></div>
+            </div>
+            {{for obj.pharmacyBillRowEntitys}}
+
+            <div class="Row"    id="row_{{:id}}" onclick="pharmacyCashBill.onRowSelect({{:id}})">
+
+
+
+
+
+                {{if medicineStock!=null}}
+
+              
+
+                <div class="Cell">
+                    <p>
+
+                        {{:medicineStock.medicineBrandName.brandName}}
+                    </p>        
+                </div>
+                <div class="Cell">            <p>
+                        {{:medicineStock.medicineBrandName.company}}
+                    </p>        </div>
+               
+                <div class="Cell">            <p>
+                        {{:medicineStock.batch}}
+                    </p>        </div>
+                <div class="Cell">            <p>
+
+                        {{:~expiryFormat1(medicineStock.expiryDate)}}
+
+                    </p>        </div>
+                <div class="Cell">            <p>{{:qty}} </p>        </div>
+
+                <div class="Cell">            <p>
+                        {{:medicineStock.rate}}
+                    </p>        </div>
+                <div class="Cell">            <p>
+                        {{:medicineStock.discount}}
+                    </p>        </div>
+                <div class="Cell">            <p>
+                        {{:medicineStock.gst}}
+                    </p>        </div>
+                <div class="Cell">            
+                    <p>
+                        {{:medicineStock.mrp}}
+                    </p>        </div>
+
+                <div class="Cell">            
+                    <p>
+                        {{:amount}}
+                    </p>        
+                </div>
+
+                {{else}}
+                <div class="Cell" style="background-color: red;display: block">
+                    <p>
+                        pbr_{{:id}}
+                    </p>
+                </div>
+
+
+
+
+                {{/if}}
+
+
+
+
+
+
+            </div>
+
+
+
+
+            {{/for}}
+            <div class="Heading">
+               
+                <div class="Cell"></div>
+                <div class="Cell"></div>
+                <div class="Cell"></div>
+                <div class="Cell"></div>
+                <div class="Cell"></div>
+                <div class="Cell"></div>
+              
+                <div class="Cell"></div>
+                <div class="Cell" style="font-size: 14px;">{{:obj.gstTotal}}</div>
+                <div class="Cell"  style="font-size: 14px;">{{:obj.mrpTotal}}</div>
+                <div class="Cell"  style="font-size: 14px;">{{:obj.amountTotal}}</div>
+
+            </div>
+
+
+
+        </div>
+        <br>
+
+        <table border="0">
+            <tbody>
+                <tr>
+                    <td>
+                        Taxable Amount :
+                    </td>
+                    <td style="text-align: right">
+
+                        {{:obj.taxableAmount}}  
+
+
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="text-align: right">
+                        CGST : 
+                    </td>
+                    <td style="text-align: right">
+
+                        {{:obj.gstTotal/2}}
+
+
+                    </td>
+                </tr>
+                <tr>
+                     <td style="text-align: right">
+                        SGST :  
+                    </td>
+                    <td style="text-align: right">
+
+                        {{:obj.gstTotal/2}}
+
+
+                    </td>
+                </tr>
+
+
+
+
+
+            </tbody>
+        </table>
+        <br>
+
+
+
+        <table border="0">
+            <tbody>
+                <tr>
+                    <td style="width: 4cm;">
+                        Total Item(s) : {{:totalItems}}
+                    </td>
+                  
+                    <td>
+                        Paid Amount :  <span style="font-weight: bold;font-size: 18px">{{:obj.amountTotal}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td colspan="2">
+                        {{:obj.amountTotalWords}}
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        {{:pharmacistName}}
+                    </td>
+                    <td colspan="2" style="text-align: right">
+                        <br>
+                        Pharmacist
+                         <br>  <br>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: center">
+                        We provided Rs.{{:obj.freeOfCost}}  value(s) items free of Cost.
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+    </center>
+</div>
+<br>

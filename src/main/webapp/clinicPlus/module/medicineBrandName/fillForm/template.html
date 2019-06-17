@@ -1,0 +1,97 @@
+<!--medicineBrandName--> 
+<input type="button" value="Save" class="btn btn-success btn-sm"
+       data-toggle="tooltip" title="Save"
+       onclick="$('#medicineBrandName_appointment').submit();"
+       >
+<form id='medicineBrandName_appointment' method="post" action="#/cmd/post">
+    <input type='hidden' name='module_direct' value='medicineBrandName'>
+  <input type='hidden' name='redirect' value=' #/cmdc?module=medicineBrandName&action=/all/list'>
+
+    id<span  name="id" data-link="id" > </span>
+    <input type="hidden" name="id" data-link="id" />
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    BrandName
+                </td>
+                <td>
+                    <input type="text" name="brandName" data-link="brandName" />
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td>
+                    generic Name of medicine
+                </td>
+                <td>
+                    <input type="text" name="genericName" data-link="genericName" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    company
+                </td>
+                <td>
+                    <input type="text" name="company" data-link="company" />
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    Used For
+                </td>
+                <td>
+                    <input type="text" data-link="usedFor" name="usedFor" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    type
+                </td>
+                <td>
+                    <input type="text"  data-link="type" name="type" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    groupid
+                </td>
+                <td>
+                    <input type="text" data-link="groupid" name="groupid" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    description
+                </td>
+                <td>
+                    <input type="text" data-link="description" name="description" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    other
+                </td>
+                <td>
+                    <input type="text" data-link="other" name="other" />
+                </td>
+            </tr>
+
+
+
+
+
+
+        </tbody>
+    </table>
+
+</form>

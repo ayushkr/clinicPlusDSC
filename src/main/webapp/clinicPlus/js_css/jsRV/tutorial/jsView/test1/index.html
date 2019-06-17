@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- To run the current sample code in your own environment, copy this to an html page. -->
+
+<html>
+<head>
+  <script src="/js_css/jquery.min.js"></script>
+  <script src="/js_css/jsviews.js"></script>
+ 
+</head>
+<body>
+
+<div id="result"></div>
+
+<script id="theTmpl" type="text/x-jsrender">
+<input data-link="name"/> <i>(Update on keydown)</i><br/>
+<input data-link="name trigger=false"/> <i>(Update on blur)</i><br/>
+span box has <span data-link="name" class="spanbox"></span> <br>
+{^{>name}}
+
+</script>
+
+<script>
+var data = {
+  "name": "Jeffwww"
+};
+
+var template = $.templates("#theTmpl");
+
+template.link("#result", data);
+</script>
+
+</body>
+</html>

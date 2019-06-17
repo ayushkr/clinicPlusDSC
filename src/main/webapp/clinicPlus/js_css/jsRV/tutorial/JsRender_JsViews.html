@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://www.jsviews.com/#jsr-quickstart -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>JsRender/JsViews</title>
+<!--<link href="resources/css/normalize.css" rel="stylesheet" />-->
+	<link rel="apple-touch-icon" sizes="57x57" href="https://www.jsviews.com/icons/apple-touch-icon-57x57.png?v=1">
+	<link rel="apple-touch-icon" sizes="60x60" href="https://www.jsviews.com/icons/apple-touch-icon-60x60.png?v=1">
+	<link rel="apple-touch-icon" sizes="72x72" href="https://www.jsviews.com/icons/apple-touch-icon-72x72.png?v=1">
+	<link rel="apple-touch-icon" sizes="76x76" href="https://www.jsviews.com/icons/apple-touch-icon-76x76.png?v=1">
+	<link rel="icon" type="image/png" href="https://www.jsviews.com/icons/favicon-32x32.png?v=1" sizes="32x32">
+	<link rel="icon" type="image/png" href="https://www.jsviews.com/icons/favicon-16x16.png?v=1" sizes="16x16">
+	<link rel="manifest" href="https://www.jsviews.com/icons/manifest.txt?v=1">
+	<link rel="shortcut icon" href="https://www.jsviews.com/icons/favicon.ico?v=1">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="msapplication-config" content="/icons/browserconfig.xml?v=1">
+	<meta name="theme-color" content="#f2e5e5">
+	<link href="./JsRender_JsViews_files/tree.css" rel="stylesheet">
+	<link href="./JsRender_JsViews_files/tabs.css" rel="stylesheet">
+	<link href="./JsRender_JsViews_files/site.css" rel="stylesheet">
+	<link href="./JsRender_JsViews_files/dataurls.css" rel="stylesheet">
+	<link href="./JsRender_JsViews_files/contents.css" rel="stylesheet">
+	<link href="./JsRender_JsViews_files/highlight.css" rel="stylesheet"> <!--xcode vs brown_paper googlecode magula mono-blue-->
+	<script src="./JsRender_JsViews_files/jquery-3.3.1.min.js"></script>
+	<script src="./JsRender_JsViews_files/remarkable.min.js"></script>
+	<script src="./JsRender_JsViews_files/highlight.min.js"></script>
+	<script src="./JsRender_JsViews_files/jsviews.min.js"></script>
+	<script src="./JsRender_JsViews_files/datatypes.min.js"></script>
+	<script src="./JsRender_JsViews_files/contents-categories.min.js"></script>
+	<script src="./JsRender_JsViews_files/built-in-tags.min.js"></script>
+
+<!--======================= Page Controls =======================-->
+
+<script id="pageTmpl" type="text/x-jsrender">
+	<div data-link="class{:search ? 'search '  + (catName && 'sel' || 'nosel'): topCategory^name === 'home' ? 'home' : ' nothome'}">
+		<div class="topnav page-width">
+			<div class="main-item unselected" id="logo-jsrender">
+				<a class="logo jsr"></a>
+				<div class='main-item-title'><span class="title-bold">Js</span>Render</div>
+				<div class="menupointer"></div>
+			</div>
+			<div class="main-item unselected" id="logo-jsviews">
+				<a class="logo jsv"></a>
+				<div class='main-item-title'	><span class="title-bold">Js</span>Views</div>
+				<div class="menupointer"></div>
+			</div>
+			<div class="main-item unselected" id="logo-jsobservable">
+				<a class="logo jso" ></a>
+				<div class='main-item-title'><span class="title-bold">Js</span>Observable</div>
+				<div class="menupointer"></div>
+			</div>
+		</div>
+		<div class="divider">
+			<span id="id-search">
+				<button id="prev" class="btn" data-link="{on searchTree.prev} class{merge: searchTree.sectionIndex===0 toggle='disabled'}" title="Previous (Ctrl+&#8592;)">&lt;</button>
+				<label class="searchbox">
+					<span style="display:none;">Search jsviews.com</span>
+					<input id="id-searchbox" data-link="{:search onBeforeUpdateVal=searchTree.changing:newsearch} {on 'keydown.jsv' searchTree.onEnter}" placeholder="Search... (Ctrl+/)" title="Search... (Ctrl+/)"/>
+				</label>
+				<button id="next" class="btn" data-link="{on searchTree.next} class{merge: searchTree.sectionIndex>=filterlen-1 toggle='disabled'}" title="Next (Ctrl+&#8594;)">&gt;</button>
+				<button class="close btn" data-link="{on searchTree.close}" title="Quit search (Esc)">X</button>
+				<span class="optiongroups">
+					<span class="optiongroup">
+						<label><input type="checkbox" data-link="include.jsr"/> JsRender</label>
+						<label><input type="checkbox" data-link="include.jsv"/> JsViews</label>
+					</span>
+					<span class="optiongroup">
+						<label><input type="checkbox" data-link="include.smp"/> Samples</label>
+						<label><input type="checkbox" data-link="include.txt"/> Text</label>
+					</span>
+				</span>
+			</span>
+			<span class="about">
+				<span class="caption" data-link="topCategory^heading"></span>
+				{^{if searchTitle}}
+					<span class="sub caption html" data-link="html{:searchTitle}"></span>
+				{{else}}
+					<span class="sub caption" data-link="topCategory^description"></span>
+				{{/if}}
+			</span>
+			<a href="#download" class="buttonbox">Download</a>
+			<a href="#github" class="buttonbox github">View on GitHub</a>
+		</div>
+		<div class="filler">
+				<div id="searchtext" data-link="html{:searchtext}"></div>
+				<div id="hovertext" data-link="html{:hoverText} class{merge: hoverTopicSel toggle='topicsel'} {on searchTree.click}
+						{on 'mouseleave' searchTree.mouseleave} {on 'wheel' searchTree.mousewheel}"></div>
+				<span></span><span></span><span></span><span></span><span></span>
+		</div>
+
+		<div class="content">
+			<div class="gradient"></div>
+			<div class="rightcolor"></div>
+			<div class="sndivider">
+				<span class="caption" data-link="topCategory^heading"></span>
+			</div>
+			<div class="snfiller"><span></span><span></span></div>
+{^{page classnm="sidenav"}}
+	{^{if topCategory^home}}
+		{^{if ~tag.editable ~mode="edit"}}
+			{^{selectList topCategory^home.leftsections left=true}}
+				{{sectionButtons ~root.sectionTypes /}}
+				{^{section _type ~mode ~sectionTypes=~root.sectionTypes[_type].sectionTypes/}}
+			{{/selectList}}
+		{{else ~mode="summary"}}
+			{^{for topCategory^home.leftsections}}
+				{^{section _type "summary"/}}
+			{{/for}}
+		{{/if}}
+	{{else}}
+		{^{tree topCategory /}}
+	{{/if}}
+{{else ~tabTmpl=~templates.tabsContent classnm="topic"}}
+	<div data-link="class{:~tag.editable ? 'currenttopic edit' : 'currenttopic'} {on 'mouseenter' searchTree.mouseleave}">
+		<div class="{{:~tag.editable ? 'edit' : 'summary'}}">
+			{^{if ~tag.editable ~mode="edit" }}
+				{^{for topCategory.home || #data[topCategory^name][catName] }}
+					<h2><label>Title: <input class="title" data-link="title" /></label></h2>
+					{^{selectList sections }}
+						{{sectionButtons ~root.sectionTypes /}}
+						{^{section _type ~mode ~sectionTypes=~root.sectionTypes[_type].sectionTypes /}}
+					{{/selectList}}
+				{{/for}}
+				{{sectionButtons ~root.sectionTypes append=true/}}
+				<button class="savedata cmdbtn">save</button> <a href="dash.html" class="cmdbtn">dashboard</a>
+			{{else (catName || !search) && topCategory^loaded ~mode="summary"}}
+				{^{if topCategory^home}}
+					{^{for topCategory^home}}
+						<span class="hometopic">
+							<h2>{{:title}}</h2>
+							{{for sections}}
+								{{section _type ~mode /}}
+							{{/for}}
+						</span>
+						<span class="nextarrow">
+							<a href="#{{:next}}">More...<span class="{{:prefix}} dataimage"></span></a>
+						</span>
+					{{/for}}
+				{{else}}
+					{^{for #data[topCategory^name][catName]}}
+						<h2>{{:title}}</h2>
+						{{for sections}}
+							{{section _type ~mode /}}
+						{{/for}}
+					{{else}}
+						No topic
+					{{/for}}
+				{{/if}}
+			{{else}}
+				<div class="loading">Loading...</div>
+			{{/if}}
+		</div>
+	</div>
+	{^{if ~tag.editable}}
+		<div class="save-div">
+			<label>Topics<textarea class="savetext" data-link="{getContent:#data[topCategory^name]}"></textarea></label>
+			<label>Categories<textarea class="savetext" data-link="{getContent:categories}"></textarea></label>
+		</div>
+	{{/if}}
+{{else classnm="searchnav"}}
+{{!--
+	{^{if noSearch}}
+		<div class="nosearch" data-link="html{:noSearch}"></div>
+	{{else}}
+		{^{for searched && categories}}
+			{^{if filtered}}{^{searchTree filter=filtered/}}{{/if}}
+		{{/for}}
+	{{/if}}
+--}}
+	<div class="nosearch" data-link="html{:noSearch} visible{:noSearch}"></div>
+	<div data-link="visible{:!noSearch}">
+		{^{for showSearch && searched && categories}}
+			{^{if filtered}}{^{searchTree filter=filtered/}}{{/if}}
+		{{/for}}
+	</div>
+{{/page}}
+			<div class="footers">
+				<div class="footer"><div>JsViews in the industry:
+					<span class="outlook dataimage" ></span>
+					<span class="azure dataimage"></span></div>
+				</div>
+				<div class="menus bottom">
+					<a class="unselected" href="#home">Home</a>
+					<a class="unselected" href="#getstarted">Get Started</a>
+					<a class="unselected" href="#jsrapi">JsRender API</a>
+					<a class="unselected" href="#jsvapi">JsViews API</a>
+					<a class="unselected" href="#jsoapi">JsObservable API</a>
+					<a class="unselected" href="#samples">Samples</a>
+					<a class="unselected" href="#download">Download</a>
+					<a class="unselected" href="#community">Community</a>
+					<!--<a class="unselected" href="#links">Links</a>-->
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script id="pagePanelTmpl" type="text/x-jsrender" data-jsv-tmpl="jsvTmpl">
+	<div class="panel {{attr:~tagCtx.props.classnm}}">
+		{{include tmpl=#content /}}
+	</div>
+</script>
+
+<!--======================= Section Templates =======================-->
+
+<script id="sectionHeaderTmpl" type="text/x-jsrender" data-jsv-tmpl="jsvTmpl">
+	{{if ~tag.parent.selected}}
+		<div class="typeHeader">{{:_type}} <label class="isdetail">detail: <input type="checkbox" data-link="detail" /></label></div>
+		<div>
+			<label>Title: <input class="title" data-link="title" /></label>
+			<label>anchor: <input data-link="anchor" /></label>
+		</div>
+	{{else title}}
+		<div class="title">{{:typeLabel}} <span>{{:title}}</span></div>
+	{{/if}}
+</script>
+
+<script id="sectionTitleTmpl" type="text/x-jsrender" data-jsv-tmpl="jsvTmpl">
+	{{if title}}
+		{{if anchor ~hash="#" + ~root.catName +'@'+anchor}}
+			<a id="{{:~hash}}$" href="{{:~hash}}" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle ">
+				<div class="anchor"></div>
+				<div class="title">{{:typeLabel}} <span>{{:title}}</span></div>
+			</a>
+		{{else}}
+			<div class="title">{{:typeLabel}} <span>{{:title}}</span></div>
+		{{/if}}
+	{{/if}}
+	{^{if searchAnchor}}<span class="searchanchor{{:title ? ' title' : ''}}" data-link="class{merge: ~root.loc===searchAnchor toggle='target'}" id="{{:searchAnchor}}$"></span>{{/if}}
+</script>
+
+<script id="paraTmpl" type="text/x-jsrender" data-jsv-tmpl="jsvTmpl">
+	{{sectionTitle/}}
+	{{if text}}
+		<div class="para">{{md:text}}</div>
+	{{/if}}
+</script>
+
+<script id="apiTmpl" type="text/x-jsrender">
+	<div class="apisignatures">
+		{{sectionTitle/}}
+		<div class="apidesc">{{:description}}</div>
+		{{for signatures ~api=#data}}
+			<div class="signature">
+				<div class="apiheader">
+					<span class="signature">{{:~signature(~api)}}</span> {{if returns || ~api.returns}}<label class="returns">returns: <span>{{:returns || ~api.returns}}</span></label>{{/if}}
+				</div>
+				<div class="title">{{:title}}</div>
+				<div class="descblock">
+					<span class="desc">{{:description}}</span>
+					<pre class="example">{{:example}}</pre>
+				</div>
+				{{if params.length}}
+					<div class="params">
+						<div>Parameters</div>
+						{{for params}}
+							<div>
+								<label>{{:name}} <span class="type">({{:type}}{{if optional}} &ndash; optional{{/if}}):</span></label>
+								<div class="paramdesc">- {{:description}}</div>
+							</div>
+						{{/for}}
+					</div>
+				{{/if}}
+				{{for sections ~root.sectionTypes }}
+					{{if ~mode!=="summary" || !detail}} {^{section _type ~mode /}}{{/if}}
+				{{/for}}
+			</div>
+		{{/for}}
+	</div>
+</script>
+
+<script id="tagTmpl" type="text/x-jsrender">
+	<div class="apisignatures">
+		{{sectionTitle/}}
+		<div class="apidesc">{{:description}}</div>
+		{{for signatures ~api=#data}}
+			<div class="signature">
+				<div class="apiheader">
+					<span class="signature">{{:variant}}</span>
+				</div>
+				<div class="title">{{:title}}</div>
+				<div class="descblock">
+					<span class="desc">{{:description}}</span>
+					<pre class="example">{{:example}}</pre>
+				</div>
+				{{if args.length}}
+					<div class="params">
+						<div>Arguments</div>
+						{{for args}}
+							<div>
+								<label>{{:name}} <span class="type">({{:type}}{{if optional}} &ndash; optional{{/if}})</span></label>
+								<div class="paramdesc">{{:description}}</div>
+							</div>
+						{{/for}}
+					</div>
+				{{/if}}
+				{{if params.length}}
+					<div class="params">
+						<div>Named Parameters</div>
+						{{for params}}
+							<div>
+								<label>{{:propName}}={{:name}} <span class="type">({{:type}}{{if optional}} &ndash; optional{{/if}}):</span></label>
+								<div class="paramdesc">{{:description}}</div>
+							</div>
+						{{/for}}
+					</div>
+				{{/if}}
+				{{for sections ~root.sectionTypes }}
+					{{if ~mode!=="summary" || !detail}} {^{section _type ~mode /}}{{/if}}
+				{{/for}}
+			</div>
+		{{/for}}
+	</div>
+</script>
+
+<script id="dataTmpl" type="text/x-jsrender" data-jsv-tmpl="jsvTmpl">
+	{{sectionTitle/}}
+	<div>{{syntax:~stringify(data) "json"}}</div>
+</script>
+
+<script id="templateTmpl" type="text/x-jsrender">
+	{{sectionTitle/}}
+	<div>{{syntax:markup "jsr"}}</div>
+</script>
+
+<script id="codeTmpl" type="text/x-jsrender" data-jsv-tmpl="jsvTmpl">
+	{{sectionTitle/}}
+	<div>{{syntax:code "js"}}</div>
+</script>
+
+<script id="sampleTmpl" type="text/x-jsrender">
+	<div class="samplesection">
+		{{sectionTitle/}}
+		{{if ~mode !== "edit"}}
+				<button class="tryIt" data-link="~tag.sampleFrame.tryIt ? 'How it works' : 'Try it'"></button><button
+					class="revertSample" data-link="visible{:~tag.sampleFrame.ranIt}">Clear Changes</button>
+			<div class="sample">
+				{^{sampleFrame /}}
+				{{for ~tag.sampleFrame ~sections=sections tmpl=~tabsTmpl()/}}
+			</div>
+		{{else}}
+			<div class="sample">
+				{{for sections ~root.sectionTypes }}
+					{{if ~mode!=="summary" || !detail}}{{section _type ~mode /}}{{/if}}
+				{{/for}}
+			</div>
+		{{/if}}
+	</div>
+</script>
+
+<script id="linksTmpl" type="text/x-jsrender">
+	{{sectionTitle/}}
+	<div class="links">
+		{^{for links}}
+			<div><a href="{{:url}}">{{:label}}</a></div>
+		{{/for}}
+	</div>
+	<div class="topiclinks">
+		{^{for topics}}
+			{{if ~mode === "edit" || !~parentTags.page.hideCategory(hash)}}<div><a href="{{:~url(hash)}}">{{:label}}</a></div>{{/if}}
+		{{/for}}
+	</div>
+</script>
+
+<!--======================= Edit-Mode Section Templates =======================-->
+
+<script id="editParaTmpl" type="text/x-jsrender" data-jsv-tmpl="jsvTmpl">
+	{{sectionHeader /}}
+	<div>
+		<textarea data-link="text" rows="5"></textarea>
+	</div>
+</script>
+
+<script id="editApiTmpl" type="text/x-jsrender" data-jsv-tmpl="jsvTmpl">
+	<div class="api">
+		{{sectionHeader /}}
+		<label>Name: <input data-link="name" /></label>
+		<label>Object: <input data-link="object" /></label>
+		<label>Return type: <input data-link="returns" /></label>
+		<label>Method: <input type="checkbox" data-link="method" /></label><br/>
+		<label>Description: <input class="description" data-link="description" /></label>
+
+		<div class="signatures">
+			<div>Signatures</div>
+			{^{for signatures}}
+				<div class="signature">
+					<label>Title: <input class="description" data-link="title" /></label>
+					<label>Return type: <input data-link="returns" /></label><br/>
+					<label>Example: <textarea data-link="example"></textarea></label>
+					<label>Description: <input class="description" data-link="description" /></label>
+					<span class="removesection signature"></span>
+					<div class="params">
+						<div>Parameters</div>
+						{^{for params}}
+							<div>
+								<label>Name: <input data-link="name" /></label>
+								<label>Type: <input data-link="type" /></label>
+								<label>Optional: <input type="checkbox" data-link="optional" /></label>
+								<label>Description: <input class="description" data-link="description" /></label>
+								<span class="removesection param"></span>
+							</div>
+						{{/for}}
+					</div>
+					<button class="addparam cmdbtn">add parameter</button>
+					{^{selectList sections ~apisections=sections}}
+						{{sectionButtons ~sectionTypes ~sectionType="api" /}}
+						{^{section _type ~mode ~apisections /}}
+					{{/selectList}}
+					{{sectionButtons ~sectionTypes ~sectionType="api" append=true /}}
+				</div>
+			{{/for}}
+		</div>
+		<button class="addsignature cmdbtn">add signature</button>
+	</div>
+</script>
+
+<script id="editTagTmpl" type="text/x-jsrender" data-jsv-tmpl="jsvTmpl">
+	<div class="api">
+		{{sectionHeader /}}
+		<label>Description: <input class="description" data-link="description" /></label>
+
+		<div class="signatures">
+			<div>Signatures</div>
+			{^{for signatures}}
+				<div class="signature">
+					<label>Title: <input class="description" data-link="title" /></label>
+					<label>Variant: <input class="description" data-link="variant" /></label><br/>
+					<label>Example: <textarea data-link="example"></textarea></label>
+					<label>Description: <input class="description" data-link="description" /></label>
+					<span class="removesection signature"></span>
+					<div class="params">
+						<div>Arguments</div>
+						{^{for args}}
+							<div>
+								<label>Name: <input data-link="name" /></label>
+								<label>Type: <input data-link="type" /></label>
+								<label>Optional: <input type="checkbox" data-link="optional" /></label>
+								<label>Description: <input class="description" data-link="description" /></label>
+								<span class="removesection param"></span>
+							</div>
+						{{/for}}
+					</div>
+					<button class="addarg cmdbtn">add argument</button>
+					<div class="params">
+						<div>Parameters</div>
+						{^{for params}}
+							<div>
+								<label>Property Name: <input data-link="propName" /></label>
+								<label>Name: <input data-link="name" /></label>
+								<label>Type: <input data-link="type" /></label>
+								<label>Optional: <input type="checkbox" data-link="optional" /></label>
+								<label>Description: <input class="description" data-link="description" /></label>
+								<span class="removesection param"></span>
+							</div>
+						{{/for}}
+					</div>
+					<button class="addparam cmdbtn">add parameter</button>
+					{^{selectList sections ~apisections=sections}}
+						{{sectionButtons ~sectionTypes ~sectionType="tag" /}}
+						{^{section _type ~mode ~apisections /}}
+					{{/selectList}}
+					{{sectionButtons ~sectionTypes ~sectionType="tag" append=true /}}
+				</div>
+			{{/for}}
+		</div>
+		<button class="addsignature cmdbtn">add signature</button>
+	</div>
+</script>
+
+<script id="editDataTmpl" type="text/x-jsrender" data-jsv-tmpl="jsvTmpl">
+	{{sectionHeader /}}
+	<div>
+		<textarea data-link="{stringify:data:parse}"></textarea>
+	</div>
+</script>
+
+<script id="editTemplateTmpl" type="text/x-jsrender" data-jsv-tmpl="jsvTmpl">
+	{{sectionHeader /}}
+	<div>
+		<textarea data-link="markup" rows="5"></textarea>
+	</div>
+</script>
+
+<script id="editCodeTmpl" type="text/x-jsrender" data-jsv-tmpl="jsvTmpl">
+	{{sectionHeader /}}
+	<div>
+		<textarea data-link="code" rows="5"></textarea>
+	</div>
+</script>
+
+<script id="editSampleTmpl" type="text/x-jsrender" data-jsv-tmpl="jsvTmpl">
+	{{sectionHeader /}}
+	<div>
+		<label>url: <input data-link="url" class="url" type="text"/></label>
+		<label>height: <input data-link="height" class="height" type="text"/></label>
+		{^{radiogroup jsrJsvJqui||""}}
+			<label><input value="jsr" type="radio"/> JsRender</label>
+			<label><input value="" type="radio"/> JsViews</label>
+			<label><input value="jqui" type="radio"/> jQueryUI</label>
+		{{/radiogroup}}
+		&emsp;<label><input data-link="{:nocss:} disabled{:url}" type="checkbox"/>No css</label>
+		<button class="defaultsample cmdbtn">default</button><br/>
+
+		<div class="tabs">
+			<div>Code tabs:</div>
+			{^{for codetabs}}
+				<div>
+					<label>label: <input data-link="label" type="text"/></label>
+					<label>url: <input data-link="url" class="url" type="text"/></label>
+					<span class="removesection codetb"></span>
+				</div>
+			{{/for}}
+		</div>
+		<button class="addcodetab cmdbtn">add tab</button><br/>
+
+		<label>markup<textarea class="low" data-link="markup" rows="5"></textarea></label>
+		<label>data<textarea class="low" data-link="{stringify:data:parse}" rows="5"></textarea></label>
+		<label>header: {^{radiogroup action||""}}
+			<label><input value="prepend" type="radio"/> before</label>
+			<label><input value="append" type="radio"/> after</label>
+			<label><input value="" type="radio"/> replace</label>
+		{{/radiogroup}}
+		<textarea class="low" data-link="header" rows="5"></textarea></label>
+		<label>html<textarea data-link="html" rows="5"></textarea></label>
+		<label>code<textarea data-link="code" rows="5"></textarea></label>
+		<label>How it works:</label>
+		{^{selectList sections}}
+			{{sectionButtons ~sectionTypes ~sectionType="sample" /}}
+			{^{section _type ~mode sections /}}
+		{{/selectList}}
+		{{sectionButtons ~sectionTypes ~sectionType="sample" append=true /}}
+	</div>
+</script>
+
+<script id="editLinksTmpl" type="text/x-jsrender" data-jsv-tmpl="jsvTmpl">
+	{{sectionHeader /}}
+	<div class="links">
+		<div>Links</div>
+		{^{for links}}
+			<div>
+				<label>Title: </label><input data-link="label" />
+				<label>url: </label><input data-link="url" />
+				<span class="removesection link"></span>
+			</div>
+		{{/for}}
+	</div>
+	<button class="addlink cmdbtn">add link</button>
+	<div class="topics">
+		<div>Topics</div>
+		{^{for topics}}
+			<div>
+				<label>Title: </label><input data-link="label" />
+				<label>hash: </label><input data-link="hash" />
+				<span class="removesection topic"></span>
+			</div>
+		{{/for}}
+	</div>
+	<button class="addtopic cmdbtn">add topic</button>
+</script>
+</head>
+
+<body>
+<div id="wrapper">
+	<div class="menus top">
+		<a href="https://www.jsviews.com/#home" id="id-home" class="unselected">Home</a>
+		<a href="https://www.jsviews.com/#getstarted" id="id-getstarted" class="selected">Get Started</a>
+		<a href="https://www.jsviews.com/#jsrapi" id="id-jsrapi" class="unselected">JsRender API</a>
+		<a href="https://www.jsviews.com/#jsvapi" id="id-jsvapi" class="unselected">JsViews API</a>
+		<a href="https://www.jsviews.com/#jsoapi" id="id-jsoapi" class="unselected">JsObservable API</a>
+		<a href="https://www.jsviews.com/#samples" id="id-samples" class="unselected">Samples</a>
+		<a href="https://www.jsviews.com/#download" id="id-download" class="unselected">Download</a>
+		<a href="https://www.jsviews.com/#community" id="id-community" class="unselected">Community</a>
+		<!--<a href="#links" id="id-links" class="unselected">Links</a>-->
+		<div class="gradient2"></div>
+	</div>
+	<div id="id-content" class="container"><script type="jsv#1_"></script>
+	<div data-link="class{:search ? &#39;search &#39;  + (catName &amp;&amp; &#39;sel&#39; || &#39;nosel&#39;): topCategory^name === &#39;home&#39; ? &#39;home&#39; : &#39; nothome&#39;}" class=" nothome">
+		<div class="topnav page-width">
+			<div class="main-item unselected" id="logo-jsrender">
+				<a class="logo jsr"></a>
+				<div class="main-item-title"><span class="title-bold">Js</span>Render</div>
+				<div class="menupointer"></div>
+			</div>
+			<div class="main-item unselected" id="logo-jsviews">
+				<a class="logo jsv"></a>
+				<div class="main-item-title"><span class="title-bold">Js</span>Views</div>
+				<div class="menupointer"></div>
+			</div>
+			<div class="main-item unselected" id="logo-jsobservable">
+				<a class="logo jso"></a>
+				<div class="main-item-title"><span class="title-bold">Js</span>Observable</div>
+				<div class="menupointer"></div>
+			</div>
+		</div>
+		<div class="divider">
+			<span id="id-search">
+				<button id="prev" class="btn" data-link="{on searchTree.prev} class{merge: searchTree.sectionIndex===0 toggle=&#39;disabled&#39;}" title="Previous (Ctrl+←)" data-jsv="#87^/87^">&lt;</button>
+				<label class="searchbox">
+					<span style="display:none;">Search jsviews.com</span>
+					<input id="id-searchbox" data-link="{:search onBeforeUpdateVal=searchTree.changing:newsearch} {on &#39;keydown.jsv&#39; searchTree.onEnter}" placeholder="Search... (Ctrl+/)" title="Search... (Ctrl+/)" data-jsv="#90^/90^">
+				</label>
+				<button id="next" class="btn" data-link="{on searchTree.next} class{merge: searchTree.sectionIndex&gt;=filterlen-1 toggle=&#39;disabled&#39;}" title="Next (Ctrl+→)" data-jsv="#91^/91^">&gt;</button>
+				<button class="close btn" data-link="{on searchTree.close}" title="Quit search (Esc)" data-jsv="#93^/93^">X</button>
+				<span class="optiongroups">
+					<span class="optiongroup">
+						<label><input type="checkbox" data-link="include.jsr"> JsRender</label>
+						<label><input type="checkbox" data-link="include.jsv"> JsViews</label>
+					</span>
+					<span class="optiongroup">
+						<label><input type="checkbox" data-link="include.smp"> Samples</label>
+						<label><input type="checkbox" data-link="include.txt"> Text</label>
+					</span>
+				</span>
+			</span>
+			<span class="about">
+				<span class="caption" data-link="topCategory^heading">Getting Started</span>
+				<script type="jsv#1^"></script><script type="jsv#2_"></script>
+					<span class="sub caption" data-link="topCategory^description">First steps with JsRender, JsViews and JsObservable</span>
+				<script type="jsv/2_"></script><script type="jsv/1^"></script>
+			</span>
+			<a href="https://www.jsviews.com/#download" class="buttonbox">Download</a>
+			<a href="https://www.jsviews.com/#github" class="buttonbox github">View on GitHub</a>
+		</div>
+		<div class="filler">
+				<div id="searchtext" data-link="html{:searchtext}"></div>
+				<div id="hovertext" data-link="html{:hoverText} class{merge: hoverTopicSel toggle=&#39;topicsel&#39;} {on searchTree.click}
+						{on &#39;mouseleave&#39; searchTree.mouseleave} {on &#39;wheel&#39; searchTree.mousewheel}" class="" data-jsv="#103^/103^#104^/104^#105^/105^" style="display: none;"></div>
+				<span></span><span></span><span></span><span></span><span></span>
+		</div>
+
+		<div class="content">
+			<div class="gradient"></div>
+			<div class="rightcolor"></div>
+			<div class="sndivider">
+				<span class="caption" data-link="topCategory^heading">Getting Started</span>
+			</div>
+			<div class="snfiller"><span></span><span></span></div>
+<script type="jsv#85^"></script><script type="jsv#3_"></script>
+	<div class="panel sidenav">
+		<script type="jsv#4_"></script>
+	<script type="jsv#72^"></script><script type="jsv#121_"></script>
+		<script type="jsv#165^"></script><script type="jsv#122_"></script><ul class="tree" data-jsv-df=""><li data-jsv="#164^#123_#163^#124_#162^#125_" data-link="class{:~tree.selected === #data ? &#39;selected&#39; : &#39;unselected&#39;}" class="unselected"><script type="jsv#130^"></script><script type="jsv#126_"></script><span class="toggle"><script type="jsv#129^"></script>-<script type="jsv/129^"></script></span><script type="jsv/126_"></script><script type="jsv/130^"></script><script type="jsv#131^"></script><script type="jsv#127_"></script><span>Getting started</span><script type="jsv/127_"></script><script type="jsv/131^"></script></li><li data-jsv="#161^#128_"><ul data-jsv-df=""><li data-jsv="#160^#129_#130_#136^#131_#135^#132_" data-link="class{:~tree.selected === #data ? &#39;selected&#39; : &#39;unselected&#39;}" class="unselected"><script type="jsv#132^"></script><script type="jsv#133_"></script><span class="spacer">•</span><script type="jsv/133_"></script><script type="jsv/132^"></script><script type="jsv#133^"></script><script type="jsv#134_"></script><span>Playing with JsRender</span><script type="jsv/134_"></script><script type="jsv/133^"></script></li><li data-jsv="#134^/134^/132_/135^/131_/136^/130_#135_#142^#136_#141^#137_" data-link="class{:~tree.selected === #data ? &#39;selected&#39; : &#39;unselected&#39;}" class="selected"><script type="jsv#137^"></script><script type="jsv#138_"></script><span class="spacer">•</span><script type="jsv/138_"></script><script type="jsv/137^"></script><script type="jsv#138^"></script><script type="jsv#139_"></script><span>JsRender Quickstart</span><script type="jsv/139_"></script><script type="jsv/138^"></script></li><li data-jsv="#140^#140_"><ul data-jsv-df=""></ul></li><li data-jsv="/140_/140^/137_/141^/136_/142^/135_#141_#147^#142_#146^#143_" data-link="class{:~tree.selected === #data ? &#39;selected&#39; : &#39;unselected&#39;}" class="unselected"><script type="jsv#143^"></script><script type="jsv#144_"></script><span class="spacer">•</span><script type="jsv/144_"></script><script type="jsv/143^"></script><script type="jsv#144^"></script><script type="jsv#145_"></script><span>JsRender Node.js Quickstart</span><script type="jsv/145_"></script><script type="jsv/144^"></script></li><li data-jsv="#145^/145^/143_/146^/142_/147^/141_#146_#152^#147_#151^#148_" data-link="class{:~tree.selected === #data ? &#39;selected&#39; : &#39;unselected&#39;}" class="unselected"><script type="jsv#148^"></script><script type="jsv#149_"></script><span class="spacer">•</span><script type="jsv/149_"></script><script type="jsv/148^"></script><script type="jsv#149^"></script><script type="jsv#150_"></script><span>Playing with JsViews</span><script type="jsv/150_"></script><script type="jsv/149^"></script></li><li data-jsv="#150^/150^/148_/151^/147_/152^/146_#151_#157^#152_#156^#153_" data-link="class{:~tree.selected === #data ? &#39;selected&#39; : &#39;unselected&#39;}" class="unselected"><script type="jsv#153^"></script><script type="jsv#154_"></script><span class="spacer">•</span><script type="jsv/154_"></script><script type="jsv/153^"></script><script type="jsv#154^"></script><script type="jsv#155_"></script><span>JsViews Quickstart</span><script type="jsv/155_"></script><script type="jsv/154^"></script></li></ul></li></ul><script type="jsv/122_"></script><script type="jsv/165^"></script>
+	<script type="jsv/121_"></script><script type="jsv/72^"></script>
+<script type="jsv/4_"></script>
+	</div>
+<script type="jsv/3_"></script><script type="jsv#75_"></script>
+	<div class="panel topic">
+		<script type="jsv#76_"></script>
+	<div data-link="class{:~tag.editable ? &#39;currenttopic edit&#39; : &#39;currenttopic&#39;} {on &#39;mouseenter&#39; searchTree.mouseleave}" class="currenttopic" data-jsv="#120^/120^">
+		<div class="summary">
+			<script type="jsv#82^"></script><script type="jsv#77_"></script>
+				<script type="jsv#81^"></script><script type="jsv#158_"></script>
+					<script type="jsv#198^"></script><script type="jsv#159_"></script>
+						<h2>JsRender Quickstart</h2>
+						<script type="jsv#160_"></script><script type="jsv#161_"></script>
+							<script type="jsv#162_"></script>
+	<script type="jsv#163_"></script>
+	
+	<script type="jsv#172^"></script><script type="jsv/172^"></script>
+<script type="jsv/163_"></script>
+	<script type="jsv#164_"></script>
+		<div class="para"><p><em>Best-of-breed templating</em><br>
+<em>Simple and intuitive, powerful and extensible, lightning fast</em></p>
+<p><em>For templated content in the browser or on Node.js (with Express 4, Hapi and Browserify integration)</em></p>
+<p><em>JsRender</em> is a light-weight but powerful templating engine, highly extensible, and optimized for high-performance rendering, without DOM dependency. It is designed for use in the browser or on Node.js, with or without jQuery.</p>
+<p><em>JsRender</em> and <em>JsViews</em> together provide the next-generation implementation of the official jQuery plugins <em><a href="https://github.com/BorisMoore/jquery-tmpl">jQuery Templates</a></em>, and <em><a href="https://github.com/BorisMoore/jquery-datalink">jQuery Data Link</a></em> – and supersede those libraries.</p>
+</div>
+	<script type="jsv/164_"></script>
+<script type="jsv/162_"></script>
+						<script type="jsv/161_"></script><script type="jsv#165_"></script>
+							<script type="jsv#166_"></script>
+	<script type="jsv#167_"></script>
+	<script type="jsv#168_"></script>
+		<script type="jsv#169_"></script>
+			<a id="#jsr-quickstart@node$" href="https://www.jsviews.com/#jsr-quickstart@node" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#199^/199^">
+				<div class="anchor"></div>
+				<div class="title"> <span>JsRender on Node.js</span></div>
+			</a>
+		<script type="jsv/169_"></script>
+	<script type="jsv/168_"></script>
+	<script type="jsv#173^"></script><script type="jsv/173^"></script>
+<script type="jsv/167_"></script>
+	<script type="jsv#170_"></script>
+		<div class="para"><p>JsRender can be used to render templates on the server (using Node.js) as well as in the browser. JsRender on Node.js has all the features and APIs of JsRender in the browser, plus some additional ones specific to Node.js.</p>
+<p>It also provides built-in <em>Express</em>, <em>Hapi</em> and <em>Browserify</em> integration – which makes it easy to register templates as simple <code>.html</code> files on the file system, and then load and render them either server-side, client-side or both.</p>
+<p><strong>Learn more:</strong> <em><a href="https://www.jsviews.com/#jsr-node-quickstart">JsRender Node.js Quickstart</a></em> and <em><a href="https://www.jsviews.com/#jsrnode">JsRender APIs for Node.js</a></em>.</p>
+<p><strong>Code samples:</strong> See <em><a href="https://github.com/BorisMoore/jsrender-node-starter">JsRender Node Starter</a></em> for running code examples of Node.js scenarios, including with <em>Express</em>, <em>Hapi</em> and <em>Browserify</em>.</p>
+</div>
+	<script type="jsv/170_"></script>
+<script type="jsv/166_"></script>
+						<script type="jsv/165_"></script><script type="jsv#171_"></script>
+							<script type="jsv#172_"></script>
+	<script type="jsv#173_"></script>
+	<script type="jsv#174_"></script>
+		<script type="jsv#175_"></script>
+			<a id="#jsr-quickstart@jsviews$" href="https://www.jsviews.com/#jsr-quickstart@jsviews" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#200^/200^">
+				<div class="anchor"></div>
+				<div class="title"> <span>JsRender and JsViews</span></div>
+			</a>
+		<script type="jsv/175_"></script>
+	<script type="jsv/174_"></script>
+	<script type="jsv#174^"></script><script type="jsv/174^"></script>
+<script type="jsv/173_"></script>
+	<script type="jsv#176_"></script>
+		<div class="para"><p>JsRender is used for data-driven rendering of templates to strings, ready for insertion in the DOM.</p>
+<p>It is also used by the <a href="https://www.jsviews.com/#jsviews">JsViews</a> platform, which adds data binding to JsRender templates, and provides a fully-fledged MVVM platform for easily creating interactive data-driven single page apps and websites.</p>
+</div>
+	<script type="jsv/176_"></script>
+<script type="jsv/172_"></script>
+						<script type="jsv/171_"></script><script type="jsv#177_"></script>
+							<script type="jsv#178_"></script>
+	<script type="jsv#179_"></script>
+	<script type="jsv#180_"></script>
+		<script type="jsv#181_"></script>
+			<a id="#jsr-quickstart@install$" href="https://www.jsviews.com/#jsr-quickstart@install" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#201^/201^">
+				<div class="anchor"></div>
+				<div class="title"> <span>JsRender installation</span></div>
+			</a>
+		<script type="jsv/181_"></script>
+	<script type="jsv/180_"></script>
+	<script type="jsv#175^"></script><script type="jsv/175^"></script>
+<script type="jsv/179_"></script>
+	<script type="jsv#182_"></script>
+		<div class="para"><p><em>jsrender.js</em> is available from <a href="https://www.jsviews.com/#download">downloads</a> on this site.</p>
+<p><em>CDN delivery</em> is available from the <strong><em><a href="https://cdnjs.com/">cdnjs</a></em></strong> CDN at <a href="https://cdnjs.com/libraries/jsrender">cdnjs.com/libraries/jsrender</a>.</p>
+<p>Alternatively:</p>
+<ul><li>It can be installed with <strong><em><a href="http://bower.io/search/?q=jsrender">Bower</a></em></strong>, using <code>$ bower install jsrender</code></li><li>It can be loaded using an <em>AMD script loader</em>, such as RequireJS</li><li>For installation using <em>Node.js</em> (<em>npm</em>) see <em><a href="https://www.jsviews.com/#jsr-node-quickstart">JsRender Node.js Quickstart</a></em></li><li>(For browser loading using <em>Browserify</em> or <em>webpack</em> – see <em><a href="https://www.jsviews.com/#jsr-node-quickstart">JsRender Node.js Quickstart</a></em>, <em><a href="https://www.jsviews.com/#node/browserify@jsrender">JsRender as a Browserify module</a></em> and <em><a href="https://www.jsviews.com/#node/webpack@jsrender">JsRender as a webpack module</a></em>)</li></ul>
+</div>
+	<script type="jsv/182_"></script>
+<script type="jsv/178_"></script>
+						<script type="jsv/177_"></script><script type="jsv#183_"></script>
+							<script type="jsv#184_"></script>
+	<script type="jsv#185_"></script>
+	<script type="jsv#186_"></script>
+		<script type="jsv#187_"></script>
+			<a id="#jsr-quickstart@jquery$" href="https://www.jsviews.com/#jsr-quickstart@jquery" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#202^/202^">
+				<div class="anchor"></div>
+				<div class="title"> <span>Using JsRender with jQuery</span></div>
+			</a>
+		<script type="jsv/187_"></script>
+	<script type="jsv/186_"></script>
+	<script type="jsv#176^"></script><script type="jsv/176^"></script>
+<script type="jsv/185_"></script>
+	<script type="jsv#188_"></script>
+		<div class="para"><p>When jQuery is present, JsRender loads as a jQuery plugin and adds <code>$.views</code>, <code>$.templates</code> and <code>$.render</code> to the jQuery global namespace object, <code>$</code> (or <code>jQuery</code>).</p>
+<p><em>Example HTML page:</em> <a href="https://www.jsviews.com/#download/pages-jsr-jq">JsRender with jQuery</a></p>
+</div>
+	<script type="jsv/188_"></script>
+<script type="jsv/184_"></script>
+						<script type="jsv/183_"></script><script type="jsv#189_"></script>
+							<script type="jsv#190_"></script>
+	<script type="jsv#191_"></script>
+	<script type="jsv#192_"></script>
+		<script type="jsv#193_"></script>
+			<a id="#jsr-quickstart@nojquery$" href="https://www.jsviews.com/#jsr-quickstart@nojquery" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#203^/203^">
+				<div class="anchor"></div>
+				<div class="title"> <span>JsRender without jQuery</span></div>
+			</a>
+		<script type="jsv/193_"></script>
+	<script type="jsv/192_"></script>
+	<script type="jsv#177^"></script><script type="jsv/177^"></script>
+<script type="jsv/191_"></script>
+	<script type="jsv#194_"></script>
+		<div class="para"><p>When jQuery is not present, JsRender provides its own <code>jsrender</code> global namespace object, <code>jsrender</code> (or <code>window.jsrender</code>)</p>
+<p>The <code>jsrender</code> namespace provides the same methods/APIs as with jQuery, so if jQuery is not present you can still use all the API examples, by simply writing:</p>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> $ = jsrender;
+
+<span class="hljs-comment">// Now use code as in samples/examples, with $.views... $.templates... $.render...</span>
+</code></pre>
+<p><em>Example HTML page:</em> <a href="https://www.jsviews.com/#download/pages-jsr">JsRender without jQuery</a></p>
+<p><strong>Learn more:</strong> <em><a href="https://www.jsviews.com/#nojqueryapi">JsRender without jQuery</a></em></p>
+<p><br></p>
+<h2>JsRender usage</h2>
+</div>
+	<script type="jsv/194_"></script>
+<script type="jsv/190_"></script>
+						<script type="jsv/189_"></script><script type="jsv#195_"></script>
+							<script type="jsv#196_"></script>
+	<script type="jsv#197_"></script>
+	<script type="jsv#198_"></script>
+		<script type="jsv#199_"></script>
+			<a id="#jsr-quickstart@tmpl$" href="https://www.jsviews.com/#jsr-quickstart@tmpl" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#204^/204^">
+				<div class="anchor"></div>
+				<div class="title"> <span>Define a template</span></div>
+			</a>
+		<script type="jsv/199_"></script>
+	<script type="jsv/198_"></script>
+	<script type="jsv#178^"></script><script type="jsv/178^"></script>
+<script type="jsv/197_"></script>
+	<script type="jsv#200_"></script>
+		<div class="para"><p>From a string:</p>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> tmpl = $.templates(<span class="hljs-string">"Name: {{:name}}"</span>);
+</code></pre>
+<p>From a template declared as markup in a script block:</p>
+<pre><code class="language-jsr"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"myTemplate"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/x-jsrender"</span>&gt;</span><span class="undefined">Name: </span></span><span class="hljs-template_tag">{{:<span class="hljs-expression">name</span>}}</span><span class="xml"><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</span></code></pre>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> tmpl = $.templates(<span class="hljs-string">"#myTemplate"</span>);
+</code></pre>
+<p><a href="https://www.jsviews.com/#d.templates">Learn more…</a></p>
+</div>
+	<script type="jsv/200_"></script>
+<script type="jsv/196_"></script>
+						<script type="jsv/195_"></script><script type="jsv#201_"></script>
+							<script type="jsv#202_"></script>
+	<script type="jsv#203_"></script>
+	<script type="jsv#204_"></script>
+		<script type="jsv#205_"></script>
+			<a id="#jsr-quickstart@render$" href="https://www.jsviews.com/#jsr-quickstart@render" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#205^/205^">
+				<div class="anchor"></div>
+				<div class="title"> <span>Render a template</span></div>
+			</a>
+		<script type="jsv/205_"></script>
+	<script type="jsv/204_"></script>
+	<script type="jsv#179^"></script><script type="jsv/179^"></script>
+<script type="jsv/203_"></script>
+	<script type="jsv#206_"></script>
+		<div class="para"><p><code>tmpl.render(object)</code> (or shortcut form: <code>tmpl(object)</code>) renders the template with the object as data context.</p>
+<p><code>tmpl.render(array)</code> (or <code>tmpl(array)</code>) renders the template once for each item in the array.</p>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> tmpl = $.templates(<span class="hljs-string">" Name: {{:name}}&lt;br/&gt; "</span>);
+</code></pre>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> person = {name: <span class="hljs-string">"Jim"</span>};
+
+<span class="hljs-comment">// Render template for person object</span>
+<span class="hljs-keyword">var</span> html = tmpl.render(person); <span class="hljs-comment">// ready for insertion, e.g $("#container").html(html);</span>
+
+<span class="hljs-comment">// result: "Name: Jim&lt;br/&gt; "</span>
+</code></pre>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> people = [{name: <span class="hljs-string">"Jim"</span>}, {name: <span class="hljs-string">"Pedro"</span>}];
+
+<span class="hljs-comment">// Render template for people array</span>
+<span class="hljs-keyword">var</span> html = tmpl.render(people); <span class="hljs-comment">// ready for insertion...</span>
+
+<span class="hljs-comment">// result: "Name: Jim&lt;br/&gt; Name: Pedro&lt;br/&gt; "</span>
+</code></pre>
+<p><a href="https://www.jsviews.com/#rendertmpl">Learn more…</a></p>
+</div>
+	<script type="jsv/206_"></script>
+<script type="jsv/202_"></script>
+						<script type="jsv/201_"></script><script type="jsv#207_"></script>
+							<script type="jsv#208_"></script>
+	<script type="jsv#209_"></script>
+	<script type="jsv#210_"></script>
+		<script type="jsv#211_"></script>
+			<a id="#jsr-quickstart@named$" href="https://www.jsviews.com/#jsr-quickstart@named" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#206^/206^">
+				<div class="anchor"></div>
+				<div class="title"> <span>Register a named template – and render it</span></div>
+			</a>
+		<script type="jsv/211_"></script>
+	<script type="jsv/210_"></script>
+	<script type="jsv#180^"></script><script type="jsv/180^"></script>
+<script type="jsv/209_"></script>
+	<script type="jsv#212_"></script>
+		<div class="para"><pre><code class="language-js"><span class="hljs-comment">// Register named template "myTmpl1", from string </span>
+$.templates(<span class="hljs-string">"myTmpl1"</span>, <span class="hljs-string">"Name: {{:name}}&lt;br/&gt; "</span>);
+<span class="hljs-comment">// (or from script block: $.templates("myTmpl1", "#myTemplate"); ...)</span>
+
+<span class="hljs-keyword">var</span> person = {name: <span class="hljs-string">"Jim"</span>};
+
+<span class="hljs-comment">// Render named template</span>
+<span class="hljs-keyword">var</span> html = $.render.myTmpl1(person);
+
+<span class="hljs-comment">// result: "Name: Jim&lt;br/&gt; "</span>
+</code></pre>
+<p><a href="https://www.jsviews.com/#rendertmpl">Learn more…</a></p>
+</div>
+	<script type="jsv/212_"></script>
+<script type="jsv/208_"></script>
+						<script type="jsv/207_"></script><script type="jsv#213_"></script>
+							<script type="jsv#214_"></script>
+	<script type="jsv#215_"></script>
+	
+	<script type="jsv#181^"></script><script type="jsv/181^"></script>
+<script type="jsv/215_"></script>
+	<script type="jsv#216_"></script>
+		<div class="para"><p><br></p>
+<h2>Template tags</h2>
+</div>
+	<script type="jsv/216_"></script>
+<script type="jsv/214_"></script>
+						<script type="jsv/213_"></script><script type="jsv#217_"></script>
+							<script type="jsv#218_"></script>
+	<script type="jsv#219_"></script>
+	<script type="jsv#220_"></script>
+		<script type="jsv#221_"></script>
+			<a id="#jsr-quickstart@syntax$" href="https://www.jsviews.com/#jsr-quickstart@syntax" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#207^/207^">
+				<div class="anchor"></div>
+				<div class="title"> <span>Template tag syntax</span></div>
+			</a>
+		<script type="jsv/221_"></script>
+	<script type="jsv/220_"></script>
+	<script type="jsv#182^"></script><script type="jsv/182^"></script>
+<script type="jsv/219_"></script>
+	<script type="jsv#222_"></script>
+		<div class="para"><ul><li>All tags other than <a href="https://www.jsviews.com/#assigntag"><code>{{: ...}}</code></a> <a href="https://www.jsviews.com/#htmltag"><code>{{&gt; ...}}</code></a> <a href="https://www.jsviews.com/#allowcodetag"><code>{{* ...}}</code></a> <a href="https://www.jsviews.com/#commenttag"><code>{{!-- --}}</code></a> behave as block tags<br><br></li><li>Block tags can have content, unless they use the self-closing syntax:
+<ul><li>Block tag – with content: <code>{{sometag ...}} content {{/sometag}}</code></li><li>Self-closing tag – no content (empty): <code>{{sometag .../}}</code><br><br></li></ul></li><li>A particular case where self-closing syntax is used is when a block tag uses the named property <code>tmpl=...</code> to reference an external template – which then replaces what would have been the block content:
+<ul><li>Self-closing block  tag referencing an external template: <code>{{sometag ... tmpl=.../}}</code><br>(This lets you do <a href="https://www.jsviews.com/#tagsyntax@composition">template composition</a>. See <a href="https://www.jsviews.com/#samples/jsr/composition/tmpl">example</a>.)<br><br></li></ul></li><li>Tags can take both unnamed arguments and named properties:
+<ul><li><code>{{sometag argument1 param1=...}} content {{/sometag}}</code></li><li>an example of a named property is the <code>tmpl=...</code> property mentioned above</li><li>arguments and named properties can be assigned values from simple data-paths such as <code>address.street</code> or from richer expressions such as <code>product.quantity * 3.1 / 4.5</code>, or <code>name.toUpperCase()</code></li></ul></li></ul>
+<p><a href="https://www.jsviews.com/#tagsyntax">Learn more…</a></p>
+<div class="title">Built-in tags</div></div>
+	<script type="jsv/222_"></script>
+<script type="jsv/218_"></script>
+						<script type="jsv/217_"></script><script type="jsv#223_"></script>
+							<script type="jsv#224_"></script>
+	<script type="jsv#225_"></script>
+	
+	<script type="jsv#183^"></script><script type="jsv/183^"></script>
+<script type="jsv/225_"></script>
+	
+<script type="jsv/224_"></script>
+						<script type="jsv/223_"></script><script type="jsv#226_"></script>
+							<script type="jsv#227_"></script>
+	<script type="jsv#228_"></script>
+	<script type="jsv#229_"></script>
+		<script type="jsv#230_"></script>
+			<a id="#jsr-quickstart@assigntag$" href="https://www.jsviews.com/#jsr-quickstart@assigntag" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#208^/208^">
+				<div class="anchor"></div>
+				<div class="title"> <span><b>{{: ...}}</b> (Evaluate)</span></div>
+			</a>
+		<script type="jsv/230_"></script>
+	<script type="jsv/229_"></script>
+	<script type="jsv#184^"></script><script type="jsv/184^"></script>
+<script type="jsv/228_"></script>
+	<script type="jsv#231_"></script>
+		<div class="para"><p><code>{{: pathOrExpr}}</code> inserts the value of the path or expression.</p>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> data = {address: {street: <span class="hljs-string">"Main Street"</span>} };
+<span class="hljs-keyword">var</span> tmpl = $.templates(<span class="hljs-string">"&lt;b&gt;Street:&lt;/b&gt; {{:address.street}}"</span>);
+<span class="hljs-keyword">var</span> html = tmpl.render(data);
+
+<span class="hljs-comment">// result: "&lt;b&gt;Street:&lt;/b&gt; Main Street"</span>
+</code></pre>
+<p><a href="https://www.jsviews.com/#assigntag">Learn more…</a></p>
+</div>
+	<script type="jsv/231_"></script>
+<script type="jsv/227_"></script>
+						<script type="jsv/226_"></script><script type="jsv#232_"></script>
+							<script type="jsv#233_"></script>
+	<script type="jsv#234_"></script>
+	<script type="jsv#235_"></script>
+		<script type="jsv#236_"></script>
+			<a id="#jsr-quickstart@htmltag$" href="https://www.jsviews.com/#jsr-quickstart@htmltag" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#209^/209^">
+				<div class="anchor"></div>
+				<div class="title"> <span><b>{{&gt; ...}}</b> (HTML-encode)</span></div>
+			</a>
+		<script type="jsv/236_"></script>
+	<script type="jsv/235_"></script>
+	<script type="jsv#185^"></script><script type="jsv/185^"></script>
+<script type="jsv/234_"></script>
+	<script type="jsv#237_"></script>
+		<div class="para"><p><code>{{&gt; pathOrExpr}}</code> inserts the <em>HTML-encoded</em> value of the path or expression.</p>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> data = {condition: <span class="hljs-string">"a &lt; b"</span>};
+<span class="hljs-keyword">var</span> tmpl = $.templates(<span class="hljs-string">"&lt;b&gt;Formula:&lt;/b&gt; {{&gt;condition}}"</span>);
+<span class="hljs-keyword">var</span> html = tmpl.render(data);
+
+<span class="hljs-comment">// result: "&lt;b&gt;Formula:&lt;/b&gt; a &amp;lt; b"</span>
+</code></pre>
+<p><a href="https://www.jsviews.com/#htmltag">Learn more…</a></p>
+</div>
+	<script type="jsv/237_"></script>
+<script type="jsv/233_"></script>
+						<script type="jsv/232_"></script><script type="jsv#238_"></script>
+							<script type="jsv#239_"></script>
+	<script type="jsv#240_"></script>
+	<script type="jsv#241_"></script>
+		<script type="jsv#242_"></script>
+			<a id="#jsr-quickstart@includetag$" href="https://www.jsviews.com/#jsr-quickstart@includetag" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#210^/210^">
+				<div class="anchor"></div>
+				<div class="title"> <span><b>{{include ...}}</b> (Template composition – partials)</span></div>
+			</a>
+		<script type="jsv/242_"></script>
+	<script type="jsv/241_"></script>
+	<script type="jsv#186^"></script><script type="jsv/186^"></script>
+<script type="jsv/240_"></script>
+	<script type="jsv#243_"></script>
+		<div class="para"><p><code>{{include pathOrExpr}}...{{/include}}</code>evaluates the block content against a specified/modified data context.</p>
+<p><code>{{include ... tmpl=.../}}</code> evaluates the specified template against an (optionally modified) context, and inserts the result. (Template composition).</p>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> data = {name: <span class="hljs-string">"Jim"</span>, address: {street: <span class="hljs-string">"Main Street"</span>} };
+
+<span class="hljs-comment">// Register two named templates</span>
+$.templates({
+    streetTmpl: <span class="hljs-string">"&lt;i&gt;{{:street}}&lt;/i&gt;"</span>,
+    addressTmpl: <span class="hljs-string">"{{:name}}'s address is {{include address tmpl='streetTmpl'/}}."</span>
+});
+
+<span class="hljs-comment">// Render outer template</span>
+<span class="hljs-keyword">var</span> html = $.templates.addressTmpl.render(data);
+
+<span class="hljs-comment">// result: "Jim's address is &lt;i&gt;Main Street&lt;/i&gt;"</span>
+</code></pre>
+<p><a href="https://www.jsviews.com/#includetag">Learn more…</a></p>
+</div>
+	<script type="jsv/243_"></script>
+<script type="jsv/239_"></script>
+						<script type="jsv/238_"></script><script type="jsv#244_"></script>
+							<script type="jsv#245_"></script>
+	<script type="jsv#246_"></script>
+	<script type="jsv#247_"></script>
+		<script type="jsv#248_"></script>
+			<a id="#jsr-quickstart@fortag$" href="https://www.jsviews.com/#jsr-quickstart@fortag" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#211^/211^">
+				<div class="anchor"></div>
+				<div class="title"> <span><b>{{for ...}}</b> (Template composition, with iteration over arrays)</span></div>
+			</a>
+		<script type="jsv/248_"></script>
+	<script type="jsv/247_"></script>
+	<script type="jsv#187^"></script><script type="jsv/187^"></script>
+<script type="jsv/246_"></script>
+	<script type="jsv#249_"></script>
+		<div class="para"><p><code>{{for pathOrExpr}}...{{/for}}</code>evaluates the block content against a specified data context. If the new data context is an array, it iterates over the array, renders the block content with each data item as context, and concatenates the result.</p>
+<p><code>{{for pathOrExpr tmpl=.../}}</code> evaluates the specified template against a data context. If the new data context is an array, it iterates over the array, renders the template with each data item as context, and concatenates the result.</p>
+<pre><code class="language-jsr"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"peopleTmpl"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/x-jsrender"</span>&gt;</span><span class="jsrender"><span class="xml">
+  <span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span></span></span></span><span class="hljs-template_tag">{{<span class="hljs-title">for</span> <span class="hljs-expression">people</span>}}</span><span class="xml"><span class="jsrender"><span class="xml">
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>Name: </span></span></span><span class="hljs-template_tag">{{:<span class="hljs-expression">name</span>}}</span><span class="xml"><span class="jsrender"><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  </span></span></span><span class="hljs-template_tag">{{/<span class="hljs-title">for</span>}}</span><span class="xml"><span class="jsrender"><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+</span></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</span></code></pre>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> data = {people: [{name: <span class="hljs-string">"Jim"</span>}, {name: <span class="hljs-string">"Pedro"</span>}] };
+<span class="hljs-keyword">var</span> tmpl = $.templates(<span class="hljs-string">"#peopleTmpl"</span>);
+<span class="hljs-keyword">var</span> html = tmpl.render(data);
+
+<span class="hljs-comment">// result: "&lt;ul&gt; &lt;li&gt;Name: Jim&lt;/li&gt; &lt;li&gt;Name: Pedro&lt;/li&gt; &lt;/ul&gt;"</span>
+</code></pre>
+<p><a href="https://www.jsviews.com/#fortag">Learn more…</a></p>
+</div>
+	<script type="jsv/249_"></script>
+<script type="jsv/245_"></script>
+						<script type="jsv/244_"></script><script type="jsv#250_"></script>
+							<script type="jsv#251_"></script>
+	<script type="jsv#252_"></script>
+	<script type="jsv#253_"></script>
+		<script type="jsv#254_"></script>
+			<a id="#jsr-quickstart@propstag$" href="https://www.jsviews.com/#jsr-quickstart@propstag" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#212^/212^">
+				<div class="anchor"></div>
+				<div class="title"> <span><b>{{props ...}}</b> (Iteration over properties of an object)</span></div>
+			</a>
+		<script type="jsv/254_"></script>
+	<script type="jsv/253_"></script>
+	<script type="jsv#188^"></script><script type="jsv/188^"></script>
+<script type="jsv/252_"></script>
+	<script type="jsv#255_"></script>
+		<div class="para"><p><code>{{props pathOrExpr}}...{{/prop}}</code> or <code>{{props pathOrExpr tmpl=.../}}</code> iterates over the properties of the object returned by the path or expression, and renders the content/template once for each property – using as data context: <code>{key: propertyName, prop: propertyValue}</code>.</p>
+<pre><code class="language-jsr"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"personTmpl"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/x-jsrender"</span>&gt;</span><span class="jsrender"><span class="xml">
+  <span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span></span></span></span><span class="hljs-template_tag">{{<span class="hljs-title">props</span> <span class="hljs-expression">person</span>}}</span><span class="xml"><span class="jsrender"><span class="xml">
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span></span></span></span><span class="hljs-template_tag">{{:<span class="hljs-expression">key</span>}}</span><span class="xml"><span class="undefined">: </span></span><span class="hljs-template_tag">{{:<span class="hljs-expression">prop</span>}}</span><span class="xml"><span class="jsrender"><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  </span></span></span><span class="hljs-template_tag">{{/<span class="hljs-title">props</span>}}</span><span class="xml"><span class="jsrender"><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+</span></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</span></code></pre>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> data = {person: {first: <span class="hljs-string">"Jim"</span>, last: <span class="hljs-string">"Varsov"</span>} };
+<span class="hljs-keyword">var</span> tmpl = $.templates(<span class="hljs-string">"#personTmpl"</span>);
+<span class="hljs-keyword">var</span> html = tmpl.render(data);
+
+<span class="hljs-comment">// result: "&lt;ul&gt; &lt;li&gt;first: Jim&lt;/li&gt; &lt;li&gt;last: Varsov&lt;/li&gt; &lt;/ul&gt;"</span>
+</code></pre>
+<p><a href="https://www.jsviews.com/#propstag">Learn more…</a></p>
+</div>
+	<script type="jsv/255_"></script>
+<script type="jsv/251_"></script>
+						<script type="jsv/250_"></script><script type="jsv#256_"></script>
+							<script type="jsv#257_"></script>
+	<script type="jsv#258_"></script>
+	<script type="jsv#259_"></script>
+		<script type="jsv#260_"></script>
+			<a id="#jsr-quickstart@iftag$" href="https://www.jsviews.com/#jsr-quickstart@iftag" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#213^/213^">
+				<div class="anchor"></div>
+				<div class="title"> <span><b>{{if ...}}</b> (Conditional inclusion)</span></div>
+			</a>
+		<script type="jsv/260_"></script>
+	<script type="jsv/259_"></script>
+	<script type="jsv#189^"></script><script type="jsv/189^"></script>
+<script type="jsv/258_"></script>
+	<script type="jsv#261_"></script>
+		<div class="para"><p><code>{{if pathOrExpr}}...{{/if}}</code> or <code>{{if pathOrExpr tmpl=.../}}</code> renders the content/template only if the evaluated path or expression is 'truthy’.</p>
+<p><code>{{if pathOrExpr}}...{{else pathOrExpr2}}...{{else}}...{{/if}}</code>  behaves as '<em>if – else if – else’</em> and renders each block based on the conditions.</p>
+<pre><code class="language-jsr"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"personTmpl"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/x-jsrender"</span>&gt;</span><span class="undefined">
+  </span></span><span class="hljs-template_tag">{{<span class="hljs-title">if</span> <span class="hljs-expression">nickname</span>}}</span><span class="xml"><span class="undefined">
+    Nickname: </span></span><span class="hljs-template_tag">{{:<span class="hljs-expression">nickname</span>}}</span><span class="xml"><span class="undefined">
+  </span></span><span class="hljs-template_tag">{{<span class="hljs-title">else</span> <span class="hljs-expression">name</span>}}</span><span class="xml"><span class="undefined">
+    Name: </span></span><span class="hljs-template_tag">{{:<span class="hljs-expression">name</span>}}</span><span class="xml"><span class="undefined">
+  </span></span><span class="hljs-template_tag">{{<span class="hljs-title">else</span>}}</span><span class="xml"><span class="undefined">
+    No name provided
+  </span></span><span class="hljs-template_tag">{{/<span class="hljs-title">if</span>}}</span><span class="xml"><span class="undefined">
+</span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</span></code></pre>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> data = {nickname: <span class="hljs-string">"Jim"</span>, name: <span class="hljs-string">"James"</span>};
+<span class="hljs-keyword">var</span> tmpl = $.templates(<span class="hljs-string">"#personTmpl"</span>);
+<span class="hljs-keyword">var</span> html = tmpl.render(data);
+
+<span class="hljs-comment">// result: "Nickname: Jim"</span>
+</code></pre>
+<p><a href="https://www.jsviews.com/#iftag">Learn more…</a></p>
+</div>
+	<script type="jsv/261_"></script>
+<script type="jsv/257_"></script>
+						<script type="jsv/256_"></script><script type="jsv#262_"></script>
+							<script type="jsv#263_"></script>
+	<script type="jsv#264_"></script>
+	<script type="jsv#265_"></script>
+		<script type="jsv#266_"></script>
+			<div class="title"> <span><b>Other built-in tags</b></span></div>
+		<script type="jsv/266_"></script>
+	<script type="jsv/265_"></script>
+	<script type="jsv#190^"></script><script type="jsv/190^"></script>
+<script type="jsv/264_"></script>
+	<script type="jsv#267_"></script>
+		<div class="para"><p>For details on all the above built-in tags, as well as <em><a href="https://www.jsviews.com/#commenttag">comment tags</a></em> <code>{{!-- ... --}}</code> and <em><a href="https://www.jsviews.com/#allowcodetag">allow code tags</a></em>  <code>{{* ...}}</code> and <code>{{*: ...}}</code>, see the <a href="https://www.jsviews.com/#jsrtags">tags documentation</a>.</p>
+</div>
+	<script type="jsv/267_"></script>
+<script type="jsv/263_"></script>
+						<script type="jsv/262_"></script><script type="jsv#268_"></script>
+							<script type="jsv#269_"></script>
+	<script type="jsv#270_"></script>
+	<script type="jsv#271_"></script>
+		<script type="jsv#272_"></script>
+			<a id="#jsr-quickstart@customtags$" href="https://www.jsviews.com/#jsr-quickstart@customtags" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#214^/214^">
+				<div class="anchor"></div>
+				<div class="title"> <span><b>Custom tags</b></span></div>
+			</a>
+		<script type="jsv/272_"></script>
+	<script type="jsv/271_"></script>
+	<script type="jsv#191^"></script><script type="jsv/191^"></script>
+<script type="jsv/270_"></script>
+	<script type="jsv#273_"></script>
+		<div class="para"><p>Creating your own custom tags is easy. Register a custom tag using <code>$.views.tags("mytag" , ...)</code>. The second parameter will generally be a <code>tagOptions</code> object on which you can specify a render method, template, event handlers, etc. (There are many examples in the JsRender and JsViews custom tag samples <a href="https://www.jsviews.com/#samples/jsr/tags">here</a> and <a href="https://www.jsviews.com/#samples/tag-controls">here</a>). But for simple tags, you may only need a simple render function, or a template string.</p>
+<p>For example the two following definitions for a <code>{{fullName/}}</code> tag provide equivalent behavior:</p>
+<p>As a render function:</p>
+<pre><code class="language-js">$.views.tags(<span class="hljs-string">"fullName"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">val</span>) </span>{
+    <span class="hljs-keyword">return</span> val.first + <span class="hljs-string">" "</span> + val.last;
+});
+</code></pre>
+<p>Or as a template string:</p>
+<pre><code class="language-js">$.views.tags(<span class="hljs-string">"fullName"</span>, <span class="hljs-string">"{{:first}} {{:last}}"</span>);
+</code></pre>
+<p>Either way, the result will be as follows:</p>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> tmpl = $.templates(<span class="hljs-string">"{{fullName person/}}"</span>);
+<span class="hljs-keyword">var</span> data = {person: {first: <span class="hljs-string">"Jim"</span>, last: <span class="hljs-string">"Varsov"</span>}};
+<span class="hljs-keyword">var</span> html = tmpl.render(data);
+
+<span class="hljs-comment">// result: "Jim Varsov"</span>
+</code></pre>
+</div>
+	<script type="jsv/273_"></script>
+<script type="jsv/269_"></script>
+						<script type="jsv/268_"></script><script type="jsv#274_"></script>
+							<script type="jsv#275_"></script>
+	<script type="jsv#276_"></script>
+	<script type="jsv#277_"></script>
+		<script type="jsv#278_"></script>
+			<a id="#jsr-quickstart@helpers$" href="https://www.jsviews.com/#jsr-quickstart@helpers" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#215^/215^">
+				<div class="anchor"></div>
+				<div class="title"> <span>Helpers</span></div>
+			</a>
+		<script type="jsv/278_"></script>
+	<script type="jsv/277_"></script>
+	<script type="jsv#192^"></script><script type="jsv/192^"></script>
+<script type="jsv/276_"></script>
+	<script type="jsv#279_"></script>
+		<div class="para"><p>For details see <em><a href="https://www.jsviews.com/#helpers">Helpers</a></em>.</p>
+<p>Here is a simple example. Two helpers – a function, and a string:</p>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> myHelpers = {
+    upper: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">val</span>) </span>{ <span class="hljs-keyword">return</span> val.toUpperCase(); },
+    title: <span class="hljs-string">"Sir"</span>
+};
+</code></pre>
+<p>Access the helpers using the <code>~myhelper</code> syntax:</p>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> tmpl = $.templates(<span class="hljs-string">"{{:~title}} {{:first}} {{:~upper(last)}}"</span>);
+</code></pre>
+<p>We can pass the helpers in with the <code>render()</code> method</p>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> data = {first: <span class="hljs-string">"Jim"</span>, last: <span class="hljs-string">"Varsov"</span>};
+
+<span class="hljs-keyword">var</span> html = tmpl.render(data, myHelpers);
+
+<span class="hljs-comment">// result: "Sir Jim VARSOV"</span>
+</code></pre>
+<p>Or we can register helpers globally:</p>
+<pre><code class="language-js">$.views.helpers(myHelpers);
+
+<span class="hljs-keyword">var</span> data = {first: <span class="hljs-string">"Jim"</span>, last: <span class="hljs-string">"Varsov"</span>};
+<span class="hljs-keyword">var</span> html = tmpl.render(data);
+
+<span class="hljs-comment">// result: "Sir Jim VARSOV"</span>
+</code></pre>
+<p><a href="https://www.jsviews.com/#helpers">Learn more…</a></p>
+</div>
+	<script type="jsv/279_"></script>
+<script type="jsv/275_"></script>
+						<script type="jsv/274_"></script><script type="jsv#280_"></script>
+							<script type="jsv#281_"></script>
+	<script type="jsv#282_"></script>
+	<script type="jsv#283_"></script>
+		<script type="jsv#284_"></script>
+			<a id="#jsr-quickstart@converters$" href="https://www.jsviews.com/#jsr-quickstart@converters" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#216^/216^">
+				<div class="anchor"></div>
+				<div class="title"> <span>Converters</span></div>
+			</a>
+		<script type="jsv/284_"></script>
+	<script type="jsv/283_"></script>
+	<script type="jsv#193^"></script><script type="jsv/193^"></script>
+<script type="jsv/282_"></script>
+	<script type="jsv#285_"></script>
+		<div class="para"><p>Converters are used with the <code>{{: ...}}</code> tag, using the syntax <code>{{mycvtr: ...}}}</code>.</p>
+<p>Example – an <em>upper</em> converter, to convert to upper case:</p>
+<pre><code class="language-js">$.views.converters(<span class="hljs-string">"upper"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">val</span>) </span>{ <span class="hljs-keyword">return</span> val.toUpperCase(); });
+
+<span class="hljs-keyword">var</span> tmpl = $.templates(<span class="hljs-string">"{{:first}} {{upper:last}}"</span>);
+<span class="hljs-keyword">var</span> data = {first: <span class="hljs-string">"Jim"</span>, last: <span class="hljs-string">"Varsov"</span>};
+<span class="hljs-keyword">var</span> html = tmpl.render(data);
+
+<span class="hljs-comment">// result: "Jim VARSOV"</span>
+</code></pre>
+<p><a href="https://www.jsviews.com/#converters">Learn more…</a></p>
+</div>
+	<script type="jsv/285_"></script>
+<script type="jsv/281_"></script>
+						<script type="jsv/280_"></script><script type="jsv#286_"></script>
+							<script type="jsv#287_"></script>
+	<script type="jsv#288_"></script>
+	<script type="jsv#289_"></script>
+		<script type="jsv#290_"></script>
+			<a id="#jsr-quickstart@logic$" href="https://www.jsviews.com/#jsr-quickstart@logic" data-link="{on ~parentTags.page.scrollTo ~hash}" class="anchortitle " data-jsv="#217^/217^">
+				<div class="anchor"></div>
+				<div class="title"> <span>Logic and expressions</span></div>
+			</a>
+		<script type="jsv/290_"></script>
+	<script type="jsv/289_"></script>
+	<script type="jsv#194^"></script><script type="jsv/194^"></script>
+<script type="jsv/288_"></script>
+	<script type="jsv#291_"></script>
+		<div class="para"><p>JsRender supports rich expressions and logic, but at the same time encapsulates templates to prevent random access to globals. If you want to provide access to global variables within a template, you have to pass them in as data or as helpers.</p>
+<p>You can assign rich expressions to any template arguments or properties, as in:</p>
+<p><code>{{:person.nickname ? "Nickname: " + person.nickname : "(has no nickname)"}}</code></p>
+<p>or</p>
+<pre><code class="language-jsr"><span class="xml"></span><span class="hljs-template_tag">{{<span class="hljs-title">if</span> ~<span class="hljs-expression">limits.maxVal</span> &gt; (<span class="hljs-expression">product.price</span>*<span class="hljs-expression">100</span> - <span class="hljs-expression">discount</span>)/<span class="hljs-expression">rate</span>}}</span><span class="xml">
+  ...
+</span><span class="hljs-template_tag">{{<span class="hljs-title">else</span> ~<span class="hljs-expression">limits.minVal</span> &lt; <span class="hljs-expression">product.price</span>}}</span><span class="xml">
+  ... 
+</span><span class="hljs-template_tag">{{<span class="hljs-title">else</span>}}</span><span class="xml">
+  ... 
+</span><span class="hljs-template_tag">{{/<span class="hljs-title">if</span>}}</span><span class="xml">
+</span></code></pre>
+</div>
+	<script type="jsv/291_"></script>
+<script type="jsv/287_"></script>
+						<script type="jsv/286_"></script><script type="jsv#292_"></script>
+							<script type="jsv#293_"></script>
+	<script type="jsv#294_"></script>
+	<script type="jsv#295_"></script>
+		<script type="jsv#296_"></script>
+			<div class="title"> <span>Links:</span></div>
+		<script type="jsv/296_"></script>
+	<script type="jsv/295_"></script>
+	<script type="jsv#195^"></script><script type="jsv/195^"></script>
+<script type="jsv/294_"></script>
+	<div class="links">
+		<script type="jsv#196^"></script><script type="jsv#297_"></script><script type="jsv/297_"></script><script type="jsv/196^"></script>
+	</div>
+	<div class="topiclinks">
+		<script type="jsv#197^"></script><script type="jsv#298_"></script><script type="jsv#299_"></script>
+			<script type="jsv#300_"></script><div><a href="https://www.jsviews.com/#jsrapi">JsRender API</a></div><script type="jsv/300_"></script>
+		<script type="jsv/299_"></script><script type="jsv#301_"></script>
+			<script type="jsv#302_"></script><div><a href="https://www.jsviews.com/#jsr-node-quickstart">JsRender Node.js Quickstart</a></div><script type="jsv/302_"></script>
+		<script type="jsv/301_"></script><script type="jsv#303_"></script>
+			<script type="jsv#304_"></script><div><a href="https://www.jsviews.com/#samples/jsr">JsRender samples</a></div><script type="jsv/304_"></script>
+		<script type="jsv/303_"></script><script type="jsv/298_"></script><script type="jsv/197^"></script>
+	</div>
+<script type="jsv/293_"></script>
+						<script type="jsv/292_"></script><script type="jsv/160_"></script>
+					<script type="jsv/159_"></script><script type="jsv/198^"></script>
+				<script type="jsv/158_"></script><script type="jsv/81^"></script>
+			<script type="jsv/77_"></script><script type="jsv/82^"></script>
+		</div>
+	</div>
+	<script type="jsv#83^"></script><script type="jsv/83^"></script>
+<script type="jsv/76_"></script>
+	</div>
+<script type="jsv/75_"></script><script type="jsv#119_"></script>
+	<div class="panel searchnav">
+		<script type="jsv#120_"></script>
+
+	<div class="nosearch" data-link="html{:noSearch} visible{:noSearch}" style="display: block;">Loading...</div>
+	<div data-link="visible{:!noSearch}" style="display: none;">
+		<script type="jsv#84^"></script><script type="jsv/84^"></script>
+	</div>
+<script type="jsv/120_"></script>
+	</div>
+<script type="jsv/119_"></script><script type="jsv/85^"></script>
+			<div class="footers">
+				<div class="footer"><div>JsViews in the industry:
+					<span class="outlook dataimage"></span>
+					<span class="azure dataimage"></span></div>
+				</div>
+				<div class="menus bottom">
+					<a class="unselected" href="https://www.jsviews.com/#home">Home</a>
+					<a class="unselected" href="https://www.jsviews.com/#getstarted">Get Started</a>
+					<a class="unselected" href="https://www.jsviews.com/#jsrapi">JsRender API</a>
+					<a class="unselected" href="https://www.jsviews.com/#jsvapi">JsViews API</a>
+					<a class="unselected" href="https://www.jsviews.com/#jsoapi">JsObservable API</a>
+					<a class="unselected" href="https://www.jsviews.com/#samples">Samples</a>
+					<a class="unselected" href="https://www.jsviews.com/#download">Download</a>
+					<a class="unselected" href="https://www.jsviews.com/#community">Community</a>
+					<!--<a class="unselected" href="#links">Links</a>-->
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="jsv/1_"></script></div>
+</div>
+
+<script src="./JsRender_JsViews_files/index.min.js"></script>
+
+
+<iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;" src="./JsRender_JsViews_files/saved_resource.html"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}" style="display: none;"></div></body></html>
