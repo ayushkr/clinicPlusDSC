@@ -175,7 +175,7 @@ public class MedicineStockResource {
     public ResponseEntity<?> updateFromExcel() {
         ResponseEntity<?> responseEntity = null;
         try {
-            File file = new File("/home/akr2/Documents/dsc/medicineStock.xlsx");
+            File file = new File("/common/common/dsc/medicineStock.xlsx");
             FileInputStream excelFile
                     = new FileInputStream(file);
             System.out.println("excel file name=" + file.getAbsolutePath());
