@@ -4,8 +4,28 @@
             <thead>
                 <tr class="bluestrp">
             <th>id</th>
-            <th>brandName</th>
+            <th>brandName
+                  <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=brandName&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='brandName'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=brandName&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='brandName'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+            
+            
+            </th>
             <th>genericName</th>
+            <th>HSN
+            
+            
+            </th>
             <th>company</th>
             <th>usedFor</th>
             <th>type</th>
@@ -18,13 +38,14 @@
         </thead>
         <tbody>
 
-        {{for obj.content}}
+        {{for obj.pageList.content}}
         <tr 
             onclick="go({{:id}},'medicineBrandName')"
             class="firstrow">
             <td><span >{{:id}}</span></td>
             <td>{{:brandName}}</td>
             <td>{{:genericName}}</td>
+              <td>{{:hsn}}</td>
             <td>{{:company}}</td>
             <td>{{:usedFor}}</td>
             <td>{{:type}}</td>
