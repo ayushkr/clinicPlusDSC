@@ -15,7 +15,7 @@
 
         <div class="inp_outer">
             <div class="title1">medicineBrandName</div>
-            {{if medicineBrandName!=null}}
+            {{if medicineBrandName}}
             <input  type="hidden" id="medicineBrandName" name="medicineBrandName" data-link="medicineBrandName.id"  />
             {{else}}
             <br> Not set
@@ -28,7 +28,7 @@
                         }
                 )">
                 <span id="medicineBrandName_display" class="inp2" >     
-                    {{if medicineBrandName!=null}}
+                    {{if medicineBrandName}}
                     {{:medicineBrandName.brandName}} 
                     {{else}}
                     ----
@@ -40,6 +40,93 @@
 
 
 
+
+
+      
+
+        <div class="inp_outer">
+
+            <div class="title1">expiryDate</div>
+            {{if expiryDate!=null}}
+            <input  type="hidden" id="expiryDate" name="expiryDate" data-link="expiryDate" />
+            {{else}}
+            <br> Not set
+            {{/if}}
+
+
+            <div style='border: 1px;' 
+                 onclick="popup_selection_obj(
+                             {
+                                 'value': '{{:expiryDate}}',
+                                 'entity_select': 'dateForOrganisation',
+                                 'input': 'expiryDate'
+                             })"
+                 >
+                <span id="expiryDate_display" class="inp2" >     
+                    {{if expiryDate!=null}}
+                    {{:expiryDate}}
+                    {{else}}
+                    ----
+                    {{/if}}
+                </span>
+            </div>       
+        </div>
+
+
+
+        <div class="inp_outer">
+            <div class="title1">Mfg</div>
+            {{if medicineBrandName!=null}}
+            <span class="inp2" contenteditable="true" id="medicineBrandName.company"   data-link="medicineBrandName.company" >---</span>
+
+            {{else}}
+            Not set
+            {{/if}}
+        </div>
+
+        <div class="inp_outer">
+            <div class="title1">batch</div>
+            <span class="inp2" contenteditable="true" id="batch"   data-link="batch" >---</span>
+            <input type="hidden" name="batch" data-link="batch" />
+        </div>
+
+
+       
+        <hr>
+        <div class="inp_outer">
+            <div class="title1">MRP</div>
+            Rs.<span class="inp2" contenteditable="true"   data-link="mrp" >---</span>
+            <input type="hidden"  id="mrp" name="mrp" data-link="mrp" />
+        </div>
+        <div class="inp_outer">
+            <div class="title1">discount (Use 0.06 instead of 6%)</div>
+            <span class="inp2" contenteditable="true"    data-link="discount" >---</span>
+            <input type="hidden" id="discount" name="discount" data-link="discount" />
+        </div>
+        
+        
+<!--        <div class="inp_outer" >
+            <div class="title1">rate</div>
+            Rs. <span class="inp2" contenteditable="true"  id="rate_disp"  data-link="rate" >---</span>
+            <input type="hidden" id="rate" name="rate" data-link="rate" />
+        </div>-->
+        
+        
+        
+        <div class="inp_outer">
+            <div class="title1">cgst (Use 0.06 instead of 6%)</div>
+            <span class="inp2" contenteditable="true" id="cgst"   data-link="cgst" >---</span>
+            
+            <input type="hidden" name="cgst" data-link="cgst" />
+        </div>
+        
+         <div class="inp_outer">
+            <div class="title1">sgst (Use 0.06 instead of 6%)</div>
+            <span class="inp2" contenteditable="true" id="sgst"   data-link="sgst" >---</span>
+            <input type="hidden" name="sgst" data-link="sgst" />
+        </div>
+        <hr>
+        
         <div class="inp_outer">
             <div class="title1">
                 vendor
@@ -73,69 +160,7 @@
             <span class="inp2" contenteditable="true" id="billNo"   data-link="billNo" >---</span>
             <input type="hidden" name="billNo" data-link="billNo" />
         </div>
-
-
-        <div class="inp_outer">
-            <div class="title1">subCount</div>
-            <span class="inp2" contenteditable="true"   data-link="subCount" >---</span>
-            <input type="hidden" id="subCount"  name="subCount" data-link="subCount" />
-        </div>
-
-        <div class="inp_outer">
-
-            <div class="title1">expiryDate</div>
-            {{if expiryDate!=null}}
-            <input  type="hidden" id="expiryDate" name="expiryDate" data-link="expiryDate" />
-            {{else}}
-            <br> Not set
-            {{/if}}
-
-
-            <div style='border: 1px;' 
-                 onclick="popup_selection_obj(
-                             {
-                                 'value': '{{:expiryDate}}',
-                                 'entity_select': 'dateForOrganisation',
-                                 'input': 'expiryDate'
-                             })"
-                 >
-                <span id="expiryDate_display" class="inp2" >     
-                    {{if expiryDate!=null}}
-                    {{:expiryDate}}
-                    {{else}}
-                    ----
-                    {{/if}}
-                </span>
-            </div>       
-        </div>
-
-
-        <div class="inp_outer">
-            <div class="title1">qtyRemaining</div>
-            <span class="inp2" contenteditable="true" id="qtyRemaining"   data-link="qtyRemaining" >---</span>
-            <input type="hidden" name="qtyRemaining" data-link="qtyRemaining" />
-        </div>
-        <br>
-
-
-        <div class="inp_outer">
-            <div class="title1">Mfg</div>
-            {{if medicineBrandName!=null}}
-            <span class="inp2" contenteditable="true" id="medicineBrandName.company"   data-link="medicineBrandName.company" >---</span>
-
-            {{else}}
-            Not set
-            {{/if}}
-        </div>
-
-        <div class="inp_outer">
-            <div class="title1">batch</div>
-            <span class="inp2" contenteditable="true" id="batch"   data-link="batch" >---</span>
-            <input type="hidden" name="batch" data-link="batch" />
-        </div>
-
-
-        <div class="inp_outer">
+         <div class="inp_outer">
             <div class="title1">dateOfPurchase</div>
 
             {{if dateOfPurchase!=null}}
@@ -161,35 +186,26 @@
             </div>
 
         </div>
-        <div class="inp_outer">
+       
+          <hr> 
+          <div class="inp_outer">
+            <div class="title1">subCount</div>
+            <span class="inp2" contenteditable="true"   data-link="subCount" >---</span>
+            <input type="hidden" id="subCount"  name="subCount" data-link="subCount" />
+        </div>
+       <div class="inp_outer">
             <div class="title1">qtyPurchased</div>
             <span class="inp2" contenteditable="true" id="qtyPurchased"   data-link="qtyPurchased" >---</span>
             <input type="hidden" name="qtyPurchased" data-link="qtyPurchased" />
         </div>
-        <hr>
-        <div class="inp_outer">
-            <div class="title1">MRP</div>
-            Rs.<span class="inp2" contenteditable="true"   data-link="mrp" >---</span>
-            <input type="hidden"  id="mrp" name="mrp" data-link="mrp" />
+         <div class="inp_outer2">
+            <div class="title1">qtyRemaining</div>
+            <span class="inp2" contenteditable="false" id="qtyRemaining"   data-link="qtyRemaining" >---</span>
+<!--            <input type="hidden" name="qtyRemaining" data-link="qtyRemaining" />-->
         </div>
-        <div class="inp_outer">
-            <div class="title1">discount</div>
-            <span class="inp2" contenteditable="true"    data-link="discount" >---</span>%
-            <input type="hidden" id="discount" name="discount" data-link="discount" />
-        </div>
-        <div class="inp_outer" onclick="calculateRate()">
-            <div class="title1">rate</div>
-            Rs. <span class="inp2" contenteditable="true"  id="rate_disp"  data-link="rate" >---</span>
-            <input type="hidden" id="rate" name="rate" data-link="rate" />
-        </div>
-        <div class="inp_outer">
-            <div class="title1">gst</div>
-            <span class="inp2" contenteditable="true" id="gst"   data-link="gst" >---</span>%
-            <input type="hidden" name="gst" data-link="gst" />
-        </div>
-
+        
         <hr>
         Full details
-        <pre>{{:json}}</pre>
+       {{:~jsonise(~root)}}
     </div>
 </form>

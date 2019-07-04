@@ -50,45 +50,21 @@ function dummy(context) {
     console.log("dummy-----------");
 
 }
-
+var ayu;
 function cmd(context) {
-    console.log("cmd-----------");
-    module = this.params['module'];
-    action = this.params['action'];
-    directUrl = this.params['directUrl'];
+       console.log("cmd-----------");
+    ayu=context;
+    
+    
+ var params_=  Object.getOwnPropertyNames ( this.params);
+   for(var i=0;i<params_.length;i++){
+        console.log("param_ ----------"+params_[i]+":"+this.params[params_[i]]);
+   }
+     listAsPages( this.params['module'],
+     'api/'+this.params['module']+'/pageable?pageNumber='+this.params['pageNumber']+'&sortColumn='+this.params['sortColumn']+'&sortOrder='+this.params['sortOrder'], 'main1');
+ 
 
-    if (this.params['pageNumber'] !== undefined) {
-        pageNumber = this.params['pageNumber'];
-    }
-    if (pageNumber === undefined) {
-        pageNumber = 1;
-    }
-
-    id = this.params['id'];
-    console.log("___id=" + id);
-    console.log("___module=" + module);
-    console.log("___action=" + action);
-    console.log("___directUrl=" + directUrl);
-
-    mn.module[module] = {"id": id};
-    mn.id = id;
-    mn.module.current = module;
-    mn.module.pageNumber = pageNumber;
-
-    if (directUrl === undefined)
-    {
-
-//        var partial_path = '/clinicPlus/module/entity' + action + '/view.html?id=' + id + pageNewAy(1);
-//        console.log("___partial of cmd (attempt)=" + partial_path);
-//        
-        listAsPages(module, pageNumber, 'main1');
-    } else
-    {
-//        mn.direct_id = id;
-//        var partial_path = directUrl + '?id=' + id + pageNewAy(1);
-//        console.log("___partial of cmd direct (attempt)=" + partial_path);
-    }
-
+    
     // this.partial(partial_path);
 }
 
@@ -223,7 +199,8 @@ function cmd_post(context, data) {
 
             "qtyPurchased": this.params['qtyPurchased'],
             "qtyRemaining": this.params['qtyRemaining'],
-            "gst": this.params['gst'],
+            "cgst": this.params['cgst'],
+              "sgst": this.params['sgst'],
             "rate": this.params['rate'],
             "mrp": this.params['mrp'],
             "subCount": this.params['subCount'],

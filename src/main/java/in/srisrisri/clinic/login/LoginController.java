@@ -32,10 +32,18 @@ public class LoginController {
         this.userService=userService;
     }
     
+     @GetMapping("/error")
+    public String getError(){
+        System.out.println("test");
+        String body="error";
+        return body;
+    }
+    
+    
     @GetMapping("")
     public String get1(){
         System.out.println("test");
-        String body="<h1><a href=\"clinicPlus/index.html\" >ClinicPlus</a></h1>";
+        String body="<script> window.location.href='clinicPlus/index.html'</script>";
         return body;
     }
 

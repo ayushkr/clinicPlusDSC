@@ -78,14 +78,37 @@ int വി=0;
     }
     
     
-        @GetMapping("pageNumber/{id}")
+@GetMapping("pageable")
     @ResponseBody
-    public Page<AppointmentEntity> allPageNumber(@PathVariable("id") int id) {    
+    public PageCover<AppointmentEntity> allPageNumber(
+            @RequestParam("pageNumber") String pageNumber,
+            @RequestParam("sortColumn") String sortColumn,
+            @RequestParam("sortOrder") String sortOrder
+    ) {
+        Sort sort;
         logger.warn("REST getItems() , {} ", new Object[]{label});
-        Pageable  pageable=PageRequest.of(id-1,8,Sort.by("dateOfAppointment").ascending().and(Sort.by("bookId").ascending()));
-        Page<AppointmentEntity> list = appointmentRepo.findAll(pageable);
-        
-        return list;
+
+        if (!sortColumn.equals("undefined")) {
+            if (sortOrder.equals("d")) {
+                sort = Sort.by(sortColumn).descending();
+            } else {
+                sort = Sort.by(sortColumn).ascending();
+            }
+
+        } else {
+            sort = Sort.by("id").ascending();
+        }
+        if ("undefined".equals(pageNumber)) {
+            pageNumber = "1";
+        }
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1,10, sort);
+        Page<AppointmentEntity> pageList = appointmentRepo.findAll(pageable);
+        PageCover<AppointmentEntity> pageCover = new PageCover<>(pageList);
+        pageCover.setSortColumn(sortColumn);
+        pageCover.setSortOrder(sortOrder);
+        pageCover.setModule(label);
+
+        return pageCover;
     }
 
     @GetMapping("{id}")

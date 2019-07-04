@@ -15,18 +15,17 @@ Filter By remediesFor <input  type="text" onkeyup="filter('remediesFor')"  ><br>
 
     <div class="Heading">
 
-        <div class="Cell"><p>name</p></div>
-        <div class="Cell"><p>dept</p></div>
-        <div class="Cell"><p>remedies</p></div>
-        <div class="Cell"><p>actions</p></div>
+        <div class="CellNoBorder"><p>name</p></div>
+        <div class="CellNoBorder"><p>dept</p></div>
+        <div class="CellNoBorder"><p>remedies</p></div>
+        <div class="CellNoBorder"><p>actions</p></div>
     </div>
 
 
 
     {{for obj}}
     <div class="Row" id="select_{{:id}}"  >
-        <div class="Cell"
-             entity_select_editButton
+        <div class="CellNoBorder"
              onclick="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:name}}<br>Fees({{:feesList}})')"  
 
              > 
@@ -40,13 +39,13 @@ Filter By remediesFor <input  type="text" onkeyup="filter('remediesFor')"  ><br>
 
 
         </div>
-        <div class="Cell">  {{:department}} </div>
-        <div class="Cell">  {{:remediesFor}} </div>
-        <div class="Cell"> 
-            <a 
+        <div class="CellNoBorder">  {{:department}} </div>
+        <div class="CellNoBorder">  {{:remediesFor}} </div>
+        <div class="CellNoBorder"> 
+            <a class="w3-btn" data-toggle="tooltip" title="Edit"
                 onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, 'main3');"
 
-                ><i class="fa fa-edit"> Edit</i>
+                ><i class="fa fa-edit"></i>
             </a>
 
         </div>

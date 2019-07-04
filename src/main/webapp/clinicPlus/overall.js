@@ -134,22 +134,18 @@ function populateCreate2(module, id, divName) {
     $.getScript("/clinicPlus/module/" + module + "/1.js");
 }
 
-function listAsPages(module, pageNumber, divName) {
-
-    var path;
-    if (mn.module.pageNumber !== undefined) {
-        path = "/clinicPlus/api/" + module + "/pageNumber/" + pageNumber;
-    } else {
-        path = "/clinicPlus/api/" + module;
-    }
+function listAsPages(module, path, divName) {
+console.log('listAsPages path='+path);
     $.get(path
             , function (result) {
 
                 if (module !== undefined) {
                     var paging_data = {
                         'moduleName': module,
-                        'totalPages': result.totalPages,
-                        'pageable': {'pageNumber': result.pageable.pageNumber}
+                        'totalPages': result.pageList.totalPages,
+                        'pageable': {'pageNumber': result.pageList.pageable.pageNumber},
+                        'sortOrder':result.sortOrder,
+                        'sortColumn':result.sortColumn
                     };
                     aylinker({
                         // urlOfTemplate: "/clinicPlus/module/" +mn.module.current+ "/all/list/template1.html?ran=" + Math.random(),
@@ -452,7 +448,7 @@ function goto_update() {
 }
 
 function goto_list(moduleName) {
-    save(moduleName);
+//    save(moduleName);
     var path = '#/cmd?module=' + moduleName + '&action=/all/list' + pageNewAy(1);
     console.log("goto_list path=" + path);
     window.location.href = path;
@@ -462,9 +458,9 @@ function goto_list(moduleName) {
 function goto_delete(module, id) {
     console.log('goto_delete , module=' + module + '  id=' + id + '   ' + option);
 
-    var option = prompt("text", "value");
+    var option = prompt("Enter y or Y to confirm ", "");
     console.log(option);
-    if (option === 'sure') {
+    if (option === 'y' || option === 'Y') {
 
         $.get("/clinicPlus/api/" + module + "/delete/id/" + id,
                 function (result) {
@@ -674,7 +670,8 @@ function  PharmacyCashBill() {
                     // row.className+="pharmacyCashBill_selectedRow";
                 }
 
-                document.getElementById('row_' + id).style = 'background: #6873d0 ';
+                document.getElementById('row_' + id).style =
+                        'background-color: var(--color_d4);color: var(--color_l4); ';
                 document.getElementById('oneRowInEdit').style = 'display:block';
 
                 $.get("/clinicPlus/api/pharmacyBillRow/" + id, function (result) {
@@ -762,7 +759,7 @@ function  PharmacyCashBill() {
                 .done(
                         function (data)
                         {
-                            console.log("postToPharmacyBillRowAPI, created pharmacyBillRow (local)");
+                            console.log("func postToPharmacyBillRowAPI  .done(, created pharmacyBillRow (local)");
 
                             $.get("/clinicPlus/api/pharmacyBillRow/ByBillId/" + d.pharmacyBill, function (result) {
                                 console.log("postToPharmacyBillRowAPI  get ");
@@ -777,7 +774,7 @@ function  PharmacyCashBill() {
                 );
 
 
-        document.getElementById("pharmacyBillRowByBillId_fillForm").innerHTML = "";
+//        document.getElementById("pharmacyBillRowByBillId_fillForm").innerHTML = "";
     };
 
     this.postToPharmacyBill = function (d) {

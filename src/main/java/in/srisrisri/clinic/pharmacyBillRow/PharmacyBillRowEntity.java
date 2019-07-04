@@ -4,6 +4,7 @@ import in.srisrisri.clinic.appointment.AppointmentEntity;
 import in.srisrisri.clinic.medicineStock.MedicineStockEntity;
 import in.srisrisri.clinic.pharmacyBill.PharmacyBillEntity;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,8 +24,8 @@ public class PharmacyBillRowEntity implements Serializable {
     @OneToOne
     PharmacyBillEntity pharmacyBill;
     Integer qty;//	
-    Float discount;
-    Float amount;//
+    BigDecimal discount;
+    BigDecimal amount;//
     public long getId() {
         return id;
     }
@@ -65,26 +66,23 @@ public class PharmacyBillRowEntity implements Serializable {
         this.qty = qty;
     }
 
-   
-
-    public Float getDiscount() {
+    public BigDecimal getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Float discount) {
+    public void setDiscount(BigDecimal discount) {
         this.discount = discount;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
    
 
-    
-
-    public Float getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Float amount) {
-        this.amount = amount;
-    }
-
+   
 }

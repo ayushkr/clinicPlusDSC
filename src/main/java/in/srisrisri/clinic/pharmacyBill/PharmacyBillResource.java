@@ -3,6 +3,7 @@ package in.srisrisri.clinic.pharmacyBill;
 import in.srisrisri.clinic.appointment.AppointmentEntity;
 import in.srisrisri.clinic.responses.DeleteResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
+import in.srisrisri.clinic.utils.PageCover;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Date;
@@ -47,14 +48,40 @@ String label="PharmacyBill";
 //      Optional<PharmacyBillEntity> item=Optional.of(new PharmacyBillEntity());
 //        return new ResponseEntity<>(item, HttpStatus.OK);
 //    }
-      @GetMapping("pageNumber/{id}")
-    @ResponseBody
-    public Page<PharmacyBillEntity> allPageNumber(@PathVariable("id") int id) {    
-        logger.warn("REST getItems() , {} ", new Object[]{label});
-        Pageable  pageable=PageRequest.of(id-1, 5,Sort.by("id").ascending());
-        Page<PharmacyBillEntity> list = repo.findAll(pageable);
+  
+    
         
-        return list;
+@GetMapping("pageable")
+    @ResponseBody
+    public PageCover<PharmacyBillEntity> allPageNumber(
+            @RequestParam("pageNumber") String pageNumber,
+            @RequestParam("sortColumn") String sortColumn,
+            @RequestParam("sortOrder") String sortOrder
+    ) {
+        Sort sort;
+        logger.warn("REST getItems() , {} ", new Object[]{label});
+
+        if (!sortColumn.equals("undefined")) {
+            if (sortOrder.equals("d")) {
+                sort = Sort.by(sortColumn).descending();
+            } else {
+                sort = Sort.by(sortColumn).ascending();
+            }
+
+        } else {
+            sort = Sort.by("id").ascending();
+        }
+        if ("undefined".equals(pageNumber)) {
+            pageNumber = "1";
+        }
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1,10, sort);
+        Page<PharmacyBillEntity> pageList = repo.findAll(pageable);
+        PageCover<PharmacyBillEntity> pageCover = new PageCover<>(pageList);
+        pageCover.setSortColumn(sortColumn);
+        pageCover.setSortOrder(sortOrder);
+        pageCover.setModule(label);
+
+        return pageCover;
     }
 
     @GetMapping("{id}")

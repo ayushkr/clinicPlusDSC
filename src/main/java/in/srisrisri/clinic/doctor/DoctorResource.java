@@ -32,27 +32,27 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController
 @RequestMapping("/clinicPlus/api/doctor")
 public class DoctorResource {
-
+    
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private FileStorageService fileStorageService;
     @Autowired
     private DoctorRepo doctorRepo;
-
+    
     DoctorResource(DoctorRepo doctorRepo, FileStorageService fileStorageService_) {
         this.doctorRepo = doctorRepo;
         this.fileStorageService = fileStorageService_;
     }
-
+    
     private static final String ENTITY_NAME = "Doctor";
-
-    String label = "Doctor";
-
+    
+    String label = "doctor";
+    
     @GetMapping("port")
     @ResponseBody
     public List<DoctorEntity> port() {
         logger.warn("REST getItems() , {} ", new Object[]{label});
-
+        
         List<DoctorEntity> list = doctorRepo.findAll();
         for (DoctorEntity entity : list) {
             if (entity.getFixedId() != 0) {
@@ -62,27 +62,52 @@ public class DoctorResource {
         }
         return list;
     }
-
+    
     @GetMapping("")
     @ResponseBody
     public List<DoctorEntity> all() {
         logger.warn("REST getItems() , {} ", new Object[]{label});
-
+        
         List<DoctorEntity> list = doctorRepo.findAll();
-
+        
         return list;
     }
-
-    @GetMapping("pageNumber/{id}")
+    
+    @GetMapping("pageable")
     @ResponseBody
-    public Page<DoctorEntity> allPageNumber(@PathVariable("id") int id) {
+    public PageCover<DoctorEntity> allPageNumber(
+            @RequestParam("pageNumber") String pageNumber,
+            @RequestParam("sortColumn") String sortColumn,
+            @RequestParam("sortOrder") String sortOrder
+    ) {
+        Sort sort;
         logger.warn("REST getItems() , {} ", new Object[]{ENTITY_NAME});
-        Pageable pageable = PageRequest.of(id - 1, 20, Sort.by("id").ascending());
-        Page<DoctorEntity> list = doctorRepo.findAll(pageable);
-
-        return list;
+        
+        if (!sortColumn.equals("undefined")) {
+            if (sortOrder.equals("d")) {
+                sort = Sort.by(sortColumn).descending();
+            }
+            
+          else{
+                sort = Sort.by(sortColumn).ascending();
+            }
+            
+        } else {
+            sort = Sort.by("id").ascending();
+        }
+        if (pageNumber == "undefined") {
+            pageNumber = "1";
+        }
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 20, sort);
+        Page<DoctorEntity> pageList = doctorRepo.findAll(pageable);
+        PageCover<DoctorEntity> pageCover = new PageCover<>(pageList);
+        pageCover.setSortColumn(sortColumn);
+        pageCover.setSortOrder(sortOrder);
+        pageCover.setModule(label);
+        
+        return pageCover;
     }
-
+    
     @GetMapping("{id}")
     @ResponseBody
     public Optional<DoctorEntity> id(@PathVariable("id") Long id) {
@@ -103,16 +128,16 @@ public class DoctorResource {
             if (entityBefore.getId() == 0) {
                 entityAfter = new DoctorEntity();
                 entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
-
+                
             } else {
-
+                
                 entityAfter = doctorRepo.findById(entityBefore.getId()).get();
                 entityAfter.setUpdationTime(Date.valueOf(LocalDate.now()));
             }
-
+            
             BeanUtils.copyProperties(entityBefore, entityAfter);
             entityAfter = doctorRepo.save(entityAfter);
-
+            
             body = ResponseEntity
                     .created(new URI("/api/doctors/" + entityAfter.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME,
@@ -133,29 +158,29 @@ public class DoctorResource {
         deleteResponse.setMessage("Deleted Doctor with id " + id);
         return deleteResponse;
     }
-
+    
     @PostMapping("profileImage")
     public UploadFileResponse profileImage(@RequestParam("file") MultipartFile file, @RequestParam("fileLabel") String fileLabel) {
         String fileName = fileStorageService.storeFile(file, fileLabel, "doctor");
-
+        
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/uploads/doctor/" + fileLabel+ ".jpeg")
+                .path("/uploads/doctor/" + fileLabel + ".jpeg")
                 .toUriString();
         logger.warn("fileUploaded to : {} ", new Object[]{fileDownloadUri});
         return new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
-
+    
     @PostMapping("fileUpload")
     public UploadFileResponse fileUpload_(@RequestParam("profileImage_file") MultipartFile file, @RequestParam("profileImage") String fileNameStrInForm) {
         String fileNameStrAfterStoring = fileStorageService.storeFile(file, fileNameStrInForm, "");
-
+        
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/clinicPlus/uploads/" + fileNameStrInForm )
+                .path("/clinicPlus/uploads/" + fileNameStrInForm)
                 .toUriString();
         logger.warn("fileUploaded to : {} ", new Object[]{fileDownloadUri});
         return new UploadFileResponse(fileNameStrAfterStoring, fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
-
+    
 }

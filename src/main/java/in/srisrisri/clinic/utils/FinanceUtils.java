@@ -13,9 +13,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
- 
+
 public class FinanceUtils {
- 
+
     public static String RsToWords(String num) {
         BigDecimal bd = new BigDecimal(num);
         long number = bd.longValue();
@@ -62,29 +62,32 @@ public class FinanceUtils {
             if (number > 0) {
                 int counter = str.size();
                 String plural = (counter > 0 && number > 9) ? "s" : "";
-                String tmp = (number < 21) ? words.get(Integer.valueOf((int) number)) + " " + digits[counter] + plural : words.get(Integer.valueOf((int) Math.floor(number / 10) * 10)) + " " + words.get(Integer.valueOf((int) (number % 10))) + " " + digits[counter] + plural;                
+                String tmp = (number < 21) ? words.get(Integer.valueOf((int) number)) + " " + digits[counter] + plural : words.get(Integer.valueOf((int) Math.floor(number / 10) * 10)) + " " + words.get(Integer.valueOf((int) (number % 10))) + " " + digits[counter] + plural;
                 str.add(tmp);
             } else {
                 str.add("");
             }
         }
- 
+
         Collections.reverse(str);
         String Rupees = String.join(" ", str).trim();
- 
+
         String paise = (decimal) > 0 ? " And Paise " + words.get(Integer.valueOf((int) (decimal - decimal % 10))) + " " + words.get(Integer.valueOf((int) (decimal % 10))) : "";
         return "Rupees " + Rupees + paise + " Only";
     }
- public static float round(float number, int decimalPlace) {
-		BigDecimal bd = new BigDecimal(number);
-		bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
-		return bd.floatValue();
-	}
+
+    public static BigDecimal round(BigDecimal bd, int decimalPlace) {
+
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+//		return bd.floatValue();
+        return bd;
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      //  System.out.println("56721351.61 = " + IndianCurrency.RsToWords("56721351.61"));
+        //  System.out.println("56721351.61 = " + IndianCurrency.RsToWords("56721351.61"));
     }
- 
+
 }

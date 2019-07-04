@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MedicineBrandNameRepo extends JpaRepository<MedicineBrandNameEntity,Long>{
 
+    public MedicineBrandNameEntity findAllByBrandName(String value);
+
 
 
 }

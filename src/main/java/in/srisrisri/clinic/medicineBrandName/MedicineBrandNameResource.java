@@ -1,8 +1,8 @@
 package in.srisrisri.clinic.medicineBrandName;
 
-import in.srisrisri.clinic.patient.PatientEntity;
 import in.srisrisri.clinic.responses.DeleteResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
+import in.srisrisri.clinic.utils.PageCover;
 import java.net.URI;
 import java.net.URISyntaxException;
 import org.slf4j.Logger;
@@ -21,95 +21,111 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-
 @RestController
 @RequestMapping("/clinicPlus/api/medicineBrandName")
 public class MedicineBrandNameResource {
-String label="medicineBrandName";
+
+    String label = "medicineBrandName";
     private final Logger logger = LoggerFactory.getLogger(MedicineBrandNameResource.class);
 
     @Autowired
-    MedicineBrandNameRepo repo;
-
+    MedicineBrandNameRepo medicineBrandNameRepo;
 
     @GetMapping("")
     @ResponseBody
-    public ResponseEntity<List<MedicineBrandNameEntity>> getMedicineNames(){
-       logger.debug("getMedicineNames", new Object (){ });
-        List<MedicineBrandNameEntity> list=repo.findAll();
+    public ResponseEntity<List<MedicineBrandNameEntity>> getMedicineNames() {
+        logger.debug("getMedicineNames", new Object() {
+        });
+        List<MedicineBrandNameEntity> list = medicineBrandNameRepo.findAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("pageNumber/{id}")
+    @GetMapping("pageable")
     @ResponseBody
-    public Page<MedicineBrandNameEntity> allPageNumber(@PathVariable("id") int id) {
+    public PageCover<MedicineBrandNameEntity> allPageNumber(
+            @RequestParam("pageNumber") String pageNumber,
+            @RequestParam("sortColumn") String sortColumn,
+            @RequestParam("sortOrder") String sortOrder
+    ) {
+        Sort sort;
         logger.warn("REST getItems() , {} ", new Object[]{label});
-        Pageable pageable = PageRequest.of(id - 1, 5, Sort.by("id").ascending());
-        Page<MedicineBrandNameEntity> list = repo.findAll(pageable);
 
-        return list;
+        if (!sortColumn.equals("undefined")) {
+            if (sortOrder.equals("d")) {
+                sort = Sort.by(sortColumn).descending();
+            } else {
+                sort = Sort.by(sortColumn).ascending();
+            }
+
+        } else {
+            sort = Sort.by("id").ascending();
+        }
+        if ("undefined".equals(pageNumber)) {
+            pageNumber = "1";
+        }
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
+        Page<MedicineBrandNameEntity> pageList = medicineBrandNameRepo.findAll(pageable);
+        PageCover<MedicineBrandNameEntity> pageCover = new PageCover<>(pageList);
+        pageCover.setSortColumn(sortColumn);
+        pageCover.setSortOrder(sortOrder);
+        pageCover.setModule(label);
+        return pageCover;
     }
 
     @GetMapping("{id}")
     @ResponseBody
-    public ResponseEntity<Optional<MedicineBrandNameEntity>> getMedicineNames(@PathVariable("id") Long id){
-      Optional<MedicineBrandNameEntity> item=repo.findById(id);
+    public ResponseEntity<Optional<MedicineBrandNameEntity>> getMedicineNames(@PathVariable("id") Long id) {
+        Optional<MedicineBrandNameEntity> item = medicineBrandNameRepo.findById(id);
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
-    
-    
-       // create
+
+    // create
     @PostMapping("")
     public ResponseEntity<MedicineBrandNameEntity> PostMapping_one(MedicineBrandNameEntity entityBefore) {
-         ResponseEntity<MedicineBrandNameEntity> body = null;
+        ResponseEntity<MedicineBrandNameEntity> body = null;
         try {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
-            logger.warn("---- id ={}", entityBefore.getId());
+            logger.warn("entityBefore---- id ={}", entityBefore.getId());
             MedicineBrandNameEntity entityAfter = null;
-            if(entityBefore.getId()!=0){
-            
-            entityAfter=repo.findById(entityBefore.getId()).get();
-             //entityAfter.setUpdationTime(new Date());
-            }else{
-            entityAfter=new MedicineBrandNameEntity();
-            // entityAfter.setCreationTime(new Date());
-            }
-           
-            BeanUtils.copyProperties(entityBefore, entityAfter);
-            entityAfter = repo.save(entityAfter);
+            if (entityBefore.getId() != 0) {
 
-           body = ResponseEntity
+                entityAfter = medicineBrandNameRepo.findById(entityBefore.getId()).get();
+                //entityAfter.setUpdationTime(new Date());
+            } else {
+                entityAfter = new MedicineBrandNameEntity();
+                // entityAfter.setCreationTime(new Date());
+            }
+
+            BeanUtils.copyProperties(entityBefore, entityAfter);
+            entityAfter = medicineBrandNameRepo.save(entityAfter);
+
+            body = ResponseEntity
                     .created(new URI("/api/MedicineBrandNameEntity/" + entityAfter.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(label,
                             entityAfter.getId() + ""))
                     .body(entityAfter);
         } catch (URISyntaxException ex) {
-            java.util.logging.Logger.getLogger("patient").log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(label).log(Level.SEVERE, null, ex);
         }
         return body;
     }
-   
-       // delete
+
+    // delete
     @GetMapping("delete/id/{id}")
     public DeleteResponse DeleteMapping_id(@PathVariable("id") Long id) {
-         DeleteResponse deleteResponse = new DeleteResponse();
+        DeleteResponse deleteResponse = new DeleteResponse();
         logger.warn("DeleteMapping_id obj={},id= {}", new Object[]{label, id});
-        try{
-       repo.deleteById(id);
-       deleteResponse.setMessage("Deleted Jote with id " + id);
+        try {
+            medicineBrandNameRepo.deleteById(id);
+            deleteResponse.setMessage("Deleted Jote with id " + id);
+        } catch (Exception e) {
+            deleteResponse.setMessage(e.toString());
+            deleteResponse.setStatus("fail");
         }
-        catch(Exception e){
-                deleteResponse.setMessage(e.toString()); 
-                deleteResponse.setStatus("fail");
-                }
-       
-        
+
         return deleteResponse;
     }
 
-  
-  
-
-   
+    
 
 }

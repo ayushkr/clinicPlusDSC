@@ -5,24 +5,27 @@
 
 <!--nav menu-->
 <div  id="navbar" class="akr-sidebar w3-bar-block  w3-card " style="width:160px;">
-    <a onclick=" populateCreate2('appointment', 0, 'main1')" 
+<!--    <a onclick=" populateCreate2('appointment', 0, 'main1')" 
+       class="w3-bar-item ">Appointments </a> -->
+    <a href="#/cmd?module=appointment&action=/all/list&pageNumber=1"  
        class="w3-bar-item ">Appointments </a> 
+
     <a href="#/cmd?module=doctor&action=/all/list&pageNumber=1" 
-       class="w3-bar-item w3-button"> Doctors</a>
+       class="w3-bar-item "> Doctors</a>
 
     <a href="#/cmd?module=patient&action=/all/list&pageNumber=1" 
-       class="w3-bar-item w3-button"> Patients</a>
+       class="w3-bar-item "> Patients</a>
        <hr>
     <a href="#/cmd?module=pharmacyBill&action=/all/list&pageNumber=1" 
        class="w3-bar-item ">pharmacy Bills </a>
     <a href="#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1" 
-       class="w3-bar-item w3-button">MediBrandNames</a>
+       class="w3-bar-item ">MediBrandNames</a>
     <a href="#/cmd?module=medicineStock&action=/all/list&pageNumber=1" 
-       class="w3-bar-item w3-button">MediStocks</a>
+       class="w3-bar-item ">MediStocks</a>
 
 
 
-    <a href="#/cmd?module=vendor&action=/all/list&pageNumber=1" class="w3-bar-item w3-button"> Vendors</a>
+    <a href="#/cmd?module=vendor&action=/all/list&pageNumber=1" class="w3-bar-item"> Vendors</a>
 
     <a href="#/file?path=help/1.html" 
        class="w3-bar-item ">Help </a> 
@@ -30,7 +33,7 @@
        class="w3-bar-item  ">Search </a> 
 
 
-    <a href="#/file?path=module/reports/patientsByDoctor/list.html" class="w3-bar-item w3-button"> 
+    <a href="#/file?path=module/reports/patientsByDoctor/list.html" class="w3-bar-item"> 
         Report patientsByDoctor </a>
 
 
@@ -48,7 +51,8 @@
 
     <a href="#/cmd?module=jote&action=/all/list&pageNumber=1" class="w3-bar-item"> Jote List</a>
 
-
+ <a href="#/cmd?module=pharmacyBillRow&action=/all/list&pageNumber=1" 
+       class="w3-bar-item ">pharmacyBillRow</a>
 
 
 
@@ -67,15 +71,16 @@
     </center>
     <div id="main1">
         <div id="main1_menu" >
-            main1_menu
+            <!--main1_menu-->
         </div>
 
 
         <div id="main1_inner">
-            main1_inner
+            <!--main1_inner-->
+            Welcome
         </div>
         <div id="main1_paging" >
-            main1_paging
+            <!--main1_paging-->
         </div>
         <br>
 

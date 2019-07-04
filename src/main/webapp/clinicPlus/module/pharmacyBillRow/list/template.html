@@ -1,12 +1,9 @@
 <div id="printableArea"   title="PharmacyBill_List" >
     <h3 >Pharmacy Bill Row</h3>
-       Page {{:obj.pageable.pageNumber+1}} of {{:obj.totalPages}}
-   {{for start=1 end=obj.totalPages+1}}
-   <a class="pageNumberButton" href="#/cmd?module=pharmacyBillRow&action=/all/list&pageNumber={{:}}"> {{:}}</a>
-    {{/for}}
+ 
     <table >
         <thead>
-            <tr>
+            <tr class="bluestrp">
                 <th>Bill</th>
                 <th>id</th>
             
@@ -26,8 +23,15 @@
         </thead>
         <tbody>
 
-            {{for obj.content}}
-            <tr onclick="go({{:id}})">
+           {{for obj.pageList.content}}
+         
+                
+                <tr 
+            onclick="go({{:id}},'pharmacyBillRow')"
+            class="firstrow">
+                
+                
+                
                  <td>bill_{{:pharmacyBill.id}}</td>
                 <td>pbr_{{:id}}</td>
                 
@@ -36,7 +40,7 @@
                                     medicineStock_{{:medicineStock.id}}
                                 </td>-->
                 <td>
-                    {{:medicineStock.medicineBrandName.brandName}}
+                    {{:medicineStock.medicineBrandName.brandName}} (ID : {{:medicineStock.id}})
                 </td>
                 <td>
                     {{:medicineStock.medicineBrandName.company}}

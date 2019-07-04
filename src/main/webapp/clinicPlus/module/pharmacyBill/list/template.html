@@ -1,47 +1,51 @@
-<div id="printableArea"   title="PharmacyBill_List" >
-   <table cellspacing="1" cellpadding="5" border="0" style="width:85%;">
+<div id="printableArea"   title="PharmacyBill_Profile" >
+    <table cellspacing="1" cellpadding="5" border="0" >
         <thead>
             <tr class="bluestrp">
                 <td>id</td>
-                 <td>Bill Date</td>
-                <td>appointment</td>
+                <td>Bill Date</td>
+                <td colspan="4">appointment</td>
+
                 <td>remarks</td>
-                <td>pharmacyBillRow</td>
+                <td>actions</td>
             </tr>
         </thead>
         <tbody>
 
-            {{for obj.content}}
+            {{for obj.pageList.content}}
             <tr 
-               
+
                 class="firstrow">
-                <td>bill_{{:id}}</td>
-                 <td>{{:dateOfBill}}</td>
-                 <td 
-                      onclick="pharmacyCashBill.render_list({{:id}})"
-                    
-                     >
-                        No: {{:appointment.id}}<br> 
-                        {{:appointment.dateOfAppointment}}<br>
-                        <b>{{:appointment.patient.name}}</b>
-                        <br>({{:appointment.doctor.name}} )
-        
-                </td>
+                <td
+                    onclick="pharmacyCashBill.render_list({{:id}})"
+                    >bill_{{:id}}</td>
+                <td style="min-width: 100px">{{:dateOfBill}}</td>
+                
+                    {{if appointment}}
+                <td style="min-width: 50px">No: {{:appointment.id}}</td> 
+                <td style="min-width: 100px"> {{:appointment.dateOfAppointment}}</td> 
+                <td>{{:appointment.patient.name}}</td> 
+                <td>{{:appointment.doctor.name}} </td> 
+
+                {{else}}
+                <td colspan="4"></td>
+                {{/if}}
+
                 <td>{{:remarks}}</td>
                 <td>
-                    
-                    
-                    
-                    
-                    <a class="ay-btn dsc_blue" 
-                       onclick="go({{:id}},'pharmacyBill')"
-                      > 
-                      Edit this Bill
+
+
+
+
+                    <a class="w3-button " 
+                       onclick="go({{:id}}, 'pharmacyBill')"
+                       > 
+                        <i class="fa fa-edit" ></i>
                     </a>
                 </td>
             </tr>       
             {{else}}
-    No members...
+            No members...
             {{/for}}
         </tbody>
     </table>

@@ -45,7 +45,7 @@ public class PatientResource {
         this.repo = repo;
     }
 
-    private static final String ENTITY_NAME = "patient";
+    private static final String label = "patient";
 
     @PostMapping("prescription")
     public UploadFileResponse fileUploadPrescription(
@@ -71,21 +71,45 @@ public class PatientResource {
     @GetMapping("")
     @ResponseBody
     public List<PatientEntity> all() {
-        logger.warn("REST getItems() , {} ", new Object[]{ENTITY_NAME});
+        logger.warn("REST getItems() , {} ", new Object[]{label});
 
         List<PatientEntity> list = repo.findAll();
 
         return list;
     }
 
-    @GetMapping("pageNumber/{id}")
+   @GetMapping("pageable")
     @ResponseBody
-    public Page<PatientEntity> allPageNumber(@PathVariable("id") int id) {
-        logger.warn("REST getItems() , {} ", new Object[]{ENTITY_NAME});
-        Pageable pageable = PageRequest.of(id - 1, 10, Sort.by("dateOfRegistration").ascending().and(Sort.by("bookId").ascending()));
-        Page<PatientEntity> list = repo.findAll(pageable);
-
-        return list;
+    public PageCover<PatientEntity> allPageNumber(
+            @RequestParam("pageNumber") String pageNumber,
+            @RequestParam("sortColumn") String sortColumn,
+            @RequestParam("sortOrder") String sortOrder
+    ) {
+        Sort sort;
+        logger.warn("REST getItems() , {} ", new Object[]{label});
+        
+        if (!sortColumn.equals("undefined")) {
+            if (sortOrder.equals("d")) {
+                sort = Sort.by(sortColumn).descending();
+            }
+            
+          else{
+                sort = Sort.by(sortColumn).ascending();
+            }
+            
+        } else {
+            sort = Sort.by("dateOfRegistration").ascending();
+        }
+        if ("undefined".equals(pageNumber)) {
+            pageNumber = "1";
+        }
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
+        Page<PatientEntity> pageList = repo.findAll(pageable);
+        PageCover<PatientEntity> pageCover = new PageCover<>(pageList);
+        pageCover.setSortColumn(sortColumn);
+        pageCover.setSortOrder(sortOrder);
+        pageCover.setModule(label);
+        return pageCover;
     }
 
     @GetMapping("{id}")
@@ -142,7 +166,7 @@ public class PatientResource {
 
             body = ResponseEntity
                     .created(new URI("/api/patient/" + entityAfter.getId()))
-                    .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME,
+                    .headers(HeaderUtil.createEntityCreationAlert(label,
                             entityAfter.getId() + ""))
                     .body(entityAfter);
         } catch (URISyntaxException ex) {
@@ -154,7 +178,7 @@ public class PatientResource {
     // delete
     @GetMapping("/delete/id/{id}")
     public DeleteResponse DeleteMapping_id(@PathVariable("id") Long id) {
-        logger.warn("REST request to delete {} {}", new Object[]{ENTITY_NAME, id});
+        logger.warn("REST request to delete {} {}", new Object[]{label, id});
         repo.deleteById(id);
         DeleteResponse deleteResponse = new DeleteResponse();
         deleteResponse.setMessage("Deleted patient with id " + id);

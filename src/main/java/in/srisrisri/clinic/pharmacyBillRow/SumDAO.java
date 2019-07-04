@@ -10,66 +10,87 @@ import in.srisrisri.clinic.utils.FinanceUtils;
 import java.math.BigDecimal;
 
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author akr
  */
 public class SumDAO {
+   private final Logger logger = LoggerFactory.getLogger(SumDAO.class);
 
     List<PharmacyBillRowEntity> pharmacyBillRowEntitys;
 
-    float mrpTotal = 0.0f;
-    float gstTotal = 0.0f;
-    float amountTotal = 0.0f;
-    String amountTotalWords="";
-    BigDecimal bd=new BigDecimal(1.75);
-    float taxableAmount;
-    float freeOfCost;
+    BigDecimal mrpTotal = new BigDecimal(0);
+    BigDecimal gstTotal = new BigDecimal(0);
+    BigDecimal amountTotal = new BigDecimal(0);
+    String amountTotalWords = "";
+    BigDecimal bd = new BigDecimal(1.75);
+    BigDecimal bd100 = new BigDecimal(100);
+     BigDecimal bd1 = new BigDecimal(1);
+    BigDecimal bd2 = new BigDecimal(2);
+    BigDecimal taxableAmount;
+    BigDecimal freeOfCost;
+     BigDecimal qty;
+     BigDecimal mrpPerItem ;
+      BigDecimal discount ;
 
-    public void findTotals() {
+    public boolean calculateTotals() throws Exception{
 
         for (PharmacyBillRowEntity pharmacyBillRowEntity : pharmacyBillRowEntitys) {
             MedicineStockEntity medicineStock = pharmacyBillRowEntity.getMedicineStock();
-            if(medicineStock!=null){
-            float mrpPerItem=medicineStock.getMrp()/medicineStock.getSubCount();
-            float amtWithoutDiscount=mrpPerItem*pharmacyBillRowEntity.getQty();
-            medicineStock.setMrp(amtWithoutDiscount);
-              float amtWithDiscount=medicineStock.getRate()*pharmacyBillRowEntity.getQty();
-               pharmacyBillRowEntity.setAmount(amtWithDiscount);
-            float gstAmt=(amtWithoutDiscount*medicineStock.getGst()/100);
-            medicineStock.setGst(gstAmt);
-            System.out.println("id " + pharmacyBillRowEntity.getId());
-
-            mrpTotal += medicineStock.getMrp();
-            gstTotal += medicineStock.getGst();
-            amountTotal += pharmacyBillRowEntity.getAmount();
-            amountTotalWords=FinanceUtils.RsToWords(amountTotal+"");
             
-            medicineStock.setRate(FinanceUtils.round(medicineStock.getRate(),2));
-             medicineStock.setGst(FinanceUtils.round(medicineStock.getGst(),2));
-              pharmacyBillRowEntity.setAmount(FinanceUtils.round(pharmacyBillRowEntity.getAmount(), 2));
-      
+            
+           logger.warn("findTotals,medicineStock={}", medicineStock);
+         
+            if (medicineStock != null) {
+               
+                try{
+                mrpPerItem = medicineStock.getMrp();
+                discount=medicineStock.getDiscount();
+                  logger.warn("findTotals, mrpPerItem ={}", mrpPerItem);
+                }catch(Exception e){
+                    break;
+               
+                }
+                 
+               
+                qty = new BigDecimal(pharmacyBillRowEntity.getQty() + "");
+                logger.warn("qty, mrpPerItem ={}", qty);
+              
+                BigDecimal amtWithoutDiscount = mrpPerItem.multiply(qty);
+                medicineStock.setMrp(amtWithoutDiscount);
+                 logger.warn("findTotals, amtWithoutDiscount ={}", amtWithoutDiscount);
+                BigDecimal amtWithDiscount = mrpPerItem.multiply(bd1.subtract(discount)).multiply(qty);
+                pharmacyBillRowEntity.setAmount(amtWithDiscount);
+                  logger.warn("findTotals, amtWithDiscount ={}", amtWithDiscount);
+                BigDecimal gstAmt = (amtWithoutDiscount.multiply(medicineStock.getCgst().add(medicineStock.getSgst())));
+                 logger.warn("findTotals, gstAmt ={}", gstAmt);
+                
+                medicineStock.setGst(gstAmt);
+                
+                
+                
+                logger.warn("findTotals,pharmacyBillRowEntity id={}", pharmacyBillRowEntity.getId());
+                
+                mrpTotal = mrpTotal.add(medicineStock.getMrp());
+                gstTotal = gstTotal.add(medicineStock.getGst());
+                amountTotal = amountTotal.add(pharmacyBillRowEntity.getAmount());
+
+                amountTotalWords = FinanceUtils.RsToWords(amountTotal + "");
+
+                medicineStock.setRate(FinanceUtils.round(medicineStock.getRate(), 2));
+                medicineStock.setGst(FinanceUtils.round(medicineStock.getGst(), 2));
+                pharmacyBillRowEntity.setAmount(FinanceUtils.round(pharmacyBillRowEntity.getAmount(), 2));
+
             }
-               }
-            taxableAmount=FinanceUtils.round(amountTotal-gstTotal/2, 2);
-            freeOfCost=FinanceUtils.round(mrpTotal-amountTotal, 2);
-    }
-
-    public float getFreeOfCost() {
-        return freeOfCost;
-    }
-
-    public void setFreeOfCost(float freeOfCost) {
-        this.freeOfCost = freeOfCost;
-    }
-
-    public float getTaxableAmount() {
-        return taxableAmount;
-    }
-
-    public void setTaxableAmount(float taxableAmount) {
-        this.taxableAmount = taxableAmount;
+           
+        }
+        taxableAmount = FinanceUtils.round(amountTotal.subtract(gstTotal).divide(bd2), 2);
+        freeOfCost = FinanceUtils.round(mrpTotal.subtract(amountTotal), 2);
+        
+        return true;
     }
 
     public BigDecimal getBd() {
@@ -88,23 +109,23 @@ public class SumDAO {
         this.amountTotalWords = amountTotalWords;
     }
 
-    public float getMrpTotal() {
+    public BigDecimal getMrpTotal() {
         return FinanceUtils.round(mrpTotal, 2);
     }
 
-    public float getGstTotal() {
+    public BigDecimal getGstTotal() {
         return FinanceUtils.round(gstTotal, 2);
-      
+
     }
 
-    public float getAmountTotal() {
-        
-           return FinanceUtils.round(amountTotal, 2);
+    public BigDecimal getAmountTotal() {
+
+        return FinanceUtils.round(amountTotal, 2);
     }
 
     public SumDAO(List<PharmacyBillRowEntity> pharmacyBillRowEntitys) {
         this.pharmacyBillRowEntitys = pharmacyBillRowEntitys;
-        findTotals();
+          logger.warn("SumDAO created ");
     }
 
     public List<PharmacyBillRowEntity> getPharmacyBillRowEntitys() {

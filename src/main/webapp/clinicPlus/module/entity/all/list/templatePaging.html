@@ -1,28 +1,38 @@
 
-
-<div id="pagingBar">
+<div id="pagingBar" style="align-content: center">
     
-{{if obj.pageable.pageNumber>0}}
-        <a class="pageNumberButton" style="position: absolute;right: 3cm;" href="#/cmd?module={{:~root.obj.moduleName}}&action=/all/list&pageNumber={{:obj.pageable.pageNumber+0}}">
-           << Prev</a>
+    {{if obj.pageable.pageNumber>0}}
+    <a class="pageNumberButton" style="position: absolute;right: 3cm;" 
+
+       href="#/cmd?module={{:~root.obj.moduleName}}&pageNumber={{:obj.pageable.pageNumber+0}}&sortOrder={{:obj.sortOrder}}&sortColumn={{:obj.sortColumn}}">
+        << Prev</a>
     {{else}}
-  
+
     {{/if}}
-     {{if obj.pageable.pageNumber< obj.totalPages-1}}
-     <a class="pageNumberButton" style="position: absolute;right: 1cm;" href="#/cmd?module={{:~root.obj.moduleName}}&action=/all/list&pageNumber={{:obj.pageable.pageNumber+2}}">
-         Next >></a>
-      {{/if}}
-<br>
-Page
-{{for start=1 end=obj.totalPages+1  itemVar='~page' }}
+    {{if obj.pageable.pageNumber< obj.totalPages-1}}
+    <a class="pageNumberButton" style="position: absolute;right: 1cm;" 
+       href="#/cmd?module={{:~root.obj.moduleName}}&pageNumber={{:obj.pageable.pageNumber+2}}&sortOrder={{:obj.sortOrder}}&sortColumn={{:obj.sortColumn}}">
+        Next >></a>
+    {{/if}}
+    <br>   <br>
+    <center>
+    <div style="align: center">
+    Page
+    {{for start=1 end=obj.totalPages+1  itemVar='~page' }}
     <a 
-         {{if (~root.obj.pageable.pageNumber+1)==#data}}  
+        {{if (~root.obj.pageable.pageNumber+1)==#data}}  
         class="pageNumberButton pageNumberButtonSelected"
         {{else}}
-         class="pageNumberButton"
-        
+        class="pageNumberButton"
         {{/if}}
-        href="#/cmd?module={{:~root.obj.moduleName}}&action=/all/list&pageNumber={{:~page}}"> {{:~page}}</a>
+        href="#/cmd?module={{:~root.obj.moduleName}}&pageNumber={{:~page}}&sortOrder={{:~root.obj.sortOrder}}&sortColumn={{:~root.obj.sortColumn}}"> {{:~page}} </a>
     {{/for}}
+    </div>
+        </center>
     <br>
-  </div> 
+    
+    
+     {{:~jsonise(~root)}}
+</div> 
+
+

@@ -1,8 +1,9 @@
 package in.srisrisri.clinic.Vendor;
 
-import in.srisrisri.clinic.pharmacyBill.PharmacyBillEntity;
+import in.srisrisri.clinic.medicineBrandName.MedicineBrandNameEntity;
 import in.srisrisri.clinic.responses.DeleteResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
+import in.srisrisri.clinic.utils.PageCover;
 import java.net.URI;
 import java.net.URISyntaxException;
 import org.slf4j.Logger;
@@ -40,14 +41,39 @@ String label="vendor";
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-  @GetMapping("pageNumber/{id}")
+
+  @GetMapping("pageable")
     @ResponseBody
-    public Page<VendorEntity> allPageNumber(@PathVariable("id") int id) {    
+    public PageCover<VendorEntity> allPageNumber(
+            @RequestParam("pageNumber") String pageNumber,
+            @RequestParam("sortColumn") String sortColumn,
+            @RequestParam("sortOrder") String sortOrder
+    ) {
+        Sort sort;
         logger.warn("REST getItems() , {} ", new Object[]{label});
-        Pageable  pageable=PageRequest.of(id-1, 5,Sort.by("id").ascending());
-        Page<VendorEntity> list = repo.findAll(pageable);
         
-        return list;
+        if (!sortColumn.equals("undefined")) {
+            if (sortOrder.equals("d")) {
+                sort = Sort.by(sortColumn).descending();
+            }
+            
+          else{
+                sort = Sort.by(sortColumn).ascending();
+            }
+            
+        } else {
+            sort = Sort.by("id").ascending();
+        }
+        if ("undefined".equals(pageNumber)) {
+            pageNumber = "1";
+        }
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
+        Page<VendorEntity> pageList = repo.findAll(pageable);
+        PageCover<VendorEntity> pageCover = new PageCover<>(pageList);
+        pageCover.setSortColumn(sortColumn);
+        pageCover.setSortOrder(sortOrder);
+        pageCover.setModule(label);
+        return pageCover;
     }
 
     @GetMapping("{id}")

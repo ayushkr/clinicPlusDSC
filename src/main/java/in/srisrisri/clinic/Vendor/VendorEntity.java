@@ -29,9 +29,12 @@ public class VendorEntity implements Serializable  {
    String email;
      String dlNo;
     String ssid;
+    
    
     @Column(name="lastTouched", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date lastTouched; 
+
+   
 
     public long getId() {
         return id;
@@ -132,6 +135,11 @@ public class VendorEntity implements Serializable  {
 
     public void setLastTouched(Date lastTouched) {
         this.lastTouched = lastTouched;
+    }
+
+    @Override
+    public String toString() {
+        return "VendorEntity{" + "id=" + id + ", name=" + name + ", place=" + place + ", description=" + description + ", address=" + address + ", gstin=" + gstin + ", contactPhone=" + contactPhone + ", pinCode=" + pinCode + ", email=" + email + ", dlNo=" + dlNo + ", ssid=" + ssid + ", lastTouched=" + lastTouched + '}';
     }
 
    

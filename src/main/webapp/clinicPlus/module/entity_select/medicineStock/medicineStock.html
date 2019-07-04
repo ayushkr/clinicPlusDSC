@@ -1,6 +1,5 @@
 
-
-Select a medicine stock
+Select a medicine stock <br>
 Filter By medicineBrandName.brandName 
 <input  type="text" onkeyup="filter('medicineBrandName.brandName')"  >
 <br>
@@ -11,38 +10,41 @@ Filter By medicineBrandName.brandName
 
     </div>
 
-    <div class="Heading">
-        <div class="Cell"><p>id</p></div>
-        <div class="Cell"><p>brandNameId</p></div>
-        <div class="Cell"><p>vendor</p></div>
-        <div class="Cell"><p>expiryDate</p></div>
-        <div class="Cell"><p>batch</p></div>
+    <div class="HeadingBackgroundDark">
+        <div class="CellNoBorder"><p>id</p></div>
+        <div class="CellNoBorder"><p>brandNameId</p></div>
+        <div class="CellNoBorder"><p>vendor</p></div>
+        <div class="CellNoBorder"><p>expiryDate</p></div>
+        <div class="CellNoBorder"><p>batch</p></div>
+        <div class="CellNoBorder"><p>Actions</p></div>
     </div>
 
 
     {{for obj}}
-    <div class="Row" id="select_{{:id}}"  >
-   <div class="Cell"> {{:id}} </div>
-        <div class="Cell">    {{if medicineBrandName!=null}}
+     <div class="Row" id="select_{{:id}}"  >
+        <div class="CellNoBorder" style="color: var(--color_l1)"> {{:id}} </div>
+        <div class="CellNoBorder entity_select_selectButton" 
+             onclick="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:medicineBrandName.brandName}}')"  
+
+             >    {{if medicineBrandName!=null}}
             {{:medicineBrandName.brandName}}
             {{/if}} </div>
-        
-         <div class="Cell"> {{:vendor.name}} </div>
-        <div class="Cell">  {{:expiryDate}} </div>
-        <div class="Cell">  {{:batch}} </div>
+
+        <div class="CellNoBorder"> {{:vendor.name}} </div>
+        <div class="CellNoBorder">  {{:expiryDate}} </div>
+        <div class="CellNoBorder">  {{:batch}} </div>
 
 
+        <div class="CellNoBorder"> 
+            <a class="w3-btn" data-toggle="tooltip" title="Edit"
+               onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, 'main3');"
 
-        <div class="Cell"> 
-            <input type="button" class="entity_select_selectButton" 
-                   onclick="selectThis('{{:~root.moduleName}}', {{:id}}, ' {{:medicineBrandName.brandName}}')"  
-                   value="Select">
-            <input type="button"  
-                   class="entity_select_editButton" 
-                   onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, 'main3');"
-                   value="Edit"
-                   >
+               ><i class="fa fa-edit"></i>
+            </a>
+
         </div>
+
+
 
         <d id='{{:id}}' 
            medicineBrandName.brandName="{{:medicineBrandName.brandName}}"

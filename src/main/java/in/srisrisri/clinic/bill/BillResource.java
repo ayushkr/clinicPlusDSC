@@ -2,9 +2,6 @@ package in.srisrisri.clinic.bill;
 
 import java.util.List;
 
-import in.srisrisri.clinic.bill.BillRepo;
-import in.srisrisri.clinic.pharmacyBill.PharmacyBillEntity;
-import in.srisrisri.clinic.pharmacyBill.PharmacyBillResource;
 import in.srisrisri.clinic.responses.DeleteResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
 import java.net.URI;

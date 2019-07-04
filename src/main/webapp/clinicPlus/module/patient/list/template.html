@@ -1,14 +1,40 @@
 <div id="printableArea"   title="Patient_List" >
     <!--<p class="pageTitle">Patients</p>-->
   
-   <table cellspacing="1" cellpadding="5" border="0"  style="width:85%;">
+   <table class="table_greyBorder"  cellspacing="0" cellpadding="5" border="1"  >
 
         <thead>
             <tr class="bluestrp">
                 <th>id</th>
                 <th>fixedId</th>
-                <th>bookId</th>
-                <th>dateOfRegistration</th>
+                 <th class="headerSort_{{:obj.sortOrder}}">
+                    
+                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=bookId&sortOrder=a"
+                       >
+                      +
+                    </a>
+                    
+                   bookId
+                   
+                      <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=bookId&sortOrder=d"
+                       >
+                      -
+                    </a>
+                </th>
+                <th class="headerSort_{{:obj.sortOrder}}">
+                    
+                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfRegistration&sortOrder=a"
+                       >
+                      +
+                    </a>
+                    
+                    dateOf registration
+                   
+                      <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfRegistration&sortOrder=d"
+                       >
+                      -
+                    </a>
+                </th>
                 <th>Name</th>
                 <th>Place</th>
                 <th>age</th>
@@ -24,7 +50,7 @@
         </thead>
         <tbody>
 
-            {{for obj.content}}
+            {{for obj.pageList.content}}
 
             <tr class="firstrow"
                  onclick="go({{:id}},'patient')"

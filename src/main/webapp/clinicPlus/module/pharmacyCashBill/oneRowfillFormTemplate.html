@@ -2,14 +2,22 @@
 
    
 <div id="formDiv" class="pharmacyCashBill_oneRowTemplate" >
+    OneRowfillFormTemplate
+    <br>
     <center>
+       
+        <a  onclick="pharmacyCashBill.saveEdit()"  title="save/add"
+        class=" w3-button  w3-green">
+        <i class="fa fa-save"></i>
+    </a>
     
-     
-             
-    <input type="button"  value="save" onclick="pharmacyCashBill.saveEdit()" class="w3-button w3-green">
-    <input type="button" onclick="pharmacyCashBill.deleteRow()"  value="delete" class="w3-button w3-red">
-     <div onclick="hideDivAy('formDiv')" 
-             class=" w3-btn w3-blue">Close <i class="fa fa-times"> </i></div>
+    <a onclick="pharmacyCashBill.deleteRow()"   title="remove"
+        class=" w3-button  w3-red">
+        <i class="fa fa-trash"></i>
+    </a>
+     <a onclick="hideDivAy('formDiv');pharmacyCashBill.onRowSelect(0)"   title="close"
+             class=" w3-button  w3-theme-d2">
+         <i class="fa fa-times"> </i></a>
     
     
     <!--row form-->
@@ -22,11 +30,11 @@
         <input type="hidden" id="id" name="id" data-link="id" />
         <input  type="hidden" id="pharmacyBill" name="pharmacyBill" 
                                     value="{{:pharmacyBill.id}}"  />
-        <table border="1">
+        <table border="0" cellspacing="5px">
             <tbody>
                 <tr>
                    
-                    <td>
+                    <td class="td_1">
                         <div class="inp1" onclick="popup_selection_obj(
                                         {
                                             'entity_select': 'medicineStock',
@@ -38,31 +46,36 @@
                             {{if medicineStock!=null}}
                             <input  type="hidden" id="medicineStock" name="medicineStock" 
                                     value=" {{:medicineStock.id}}"/>
-                            <span id="medicineStock_display" class="inp2">     
+                            <span id="medicineStock_display"  class="w3-button w3-theme-d1" >     
                                 {{:medicineStock.id}}_ {{:medicineStock.medicineBrandName.brandName}}
                             </span>
 
                             {{else}}
                             <input  type="hidden" id="medicineStock" name="medicineStock" 
                                     />
-                            <span id="medicineStock_display">     
-                                Not set 
+                            <span id="medicineStock_display">    
+                                <a  class="w3-button w3-theme-d1"  >Click me 
+                                    <i class="fa fa-plus-circle">3</i>
+                                </a>
+                           
                             </span>
                             {{/if}}
 
 
                         </div>
                     </td>
-                    <td>
+                    <td class="td_1">
                         <div class="inp1">
                             <div class="title1">qty</div>
                             <span class="inp2" contenteditable="true" id="qty_span"   data-link="qty" 
                                   style="display: none"   
                                   >---</span>
-                            <input type="text" name="qty" id="qty"  data-link="qty" onkeydown="pharmacyCashBill.calculateAmount(1)" />
+                            <input type="text" name="qty" id="qty"  data-link="qty" onkeydown="pharmacyCashBill.calculateAmount(1)" 
+                                   onclick="pharmacyCashBill.calculateAmount(1)"
+                                   />
                         </div>
                     </td>
-                    <td>
+                    <td class="td_1">
                         <div class="inp1" onclick="pharmacyCashBill.calculateAmount(1)">
                             <div class="title1">amount</div>
                             <span class="inp2" contenteditable="false" id="amount_disp"   data-link="amount" 

@@ -23,12 +23,26 @@ public class MedicineBrandNameEntity  {
     private String type;
     private long groupid;
     private String description;
+    String HSN;
     private String other;
   
    
     @Column(name="lastTouched", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date lastTouched; 
 
+    public String getHSN() {
+        return HSN;
+    }
+
+    public void setHSN(String HSN) {
+        this.HSN = HSN;
+    }
+
+   
+    
+    
+    
+    
     public long getId() {
         return this.id;
     }
@@ -141,6 +155,11 @@ public class MedicineBrandNameEntity  {
 
     public void setGenericName(String genericName) {
         this.genericName = genericName;
+    }
+
+    @Override
+    public String toString() {
+        return "MedicineBrandNameEntity{" + "id=" + id + ", brandName=" + brandName + ", company=" + company + ", genericName=" + genericName + ", usedFor=" + usedFor + ", type=" + type + ", groupid=" + groupid + ", description=" + description + ", HSN=" + HSN + ", other=" + other + ", lastTouched=" + lastTouched + '}';
     }
 
     

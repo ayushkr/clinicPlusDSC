@@ -4,7 +4,9 @@
     <input type='hidden' name='redirect' value=' #/cmdc?module=pharmacyBill&action=/all/list'>
 
     <input type='hidden' name='module_direct' value='pharmacyBill'>
-    id {{:id}} <br>
+    <br>
+    ID: <span class="rounded">{{:id}} </span>
+    <br>
     <input type="hidden" name="id" data-link="id" />
 
 
@@ -23,7 +25,7 @@
         <span id="dateOfBill_display" class="inp2">{{:dateOfBill}}</span>
         <input id="dateOfBill" type="hidden" name="dateOfBill" data-link="dateOfBill" />
     </div>
-
+ <br>
 
     <div class="inp_outer"
 
@@ -34,13 +36,14 @@
                          }
                  )"
          >
+       
         <div class="title1"   > appointment</div>
         {{if appointment!=null }}
         <input  type="hidden" id="appointment" name="appointment" 
                 value="{{:appointment.id}}"  />
         <span id="appointment_display" class="inp2">     
 
-            No: {{:appointment.id}}<br> {{:appointment.dateOfAppointment}}<br><b>{{:appointment.patient.name}}</b><br>{{:appointment.doctor.name}}
+            No: {{:appointment.id}}, {{:appointment.dateOfAppointment}}, <b style="font-size: 24px;background-color: var(--color_l4);padding:10px">{{:appointment.patient.name}}</b>, {{:appointment.doctor.name}}
         </span>   
         {{else}}
         <input  type="hidden" id="appointment" name="appointment" />
@@ -49,7 +52,7 @@
         </span>
         {{/if}}    
     </div>
-
+ <br>
     <div class="inp_outer">
         <div class="title1"   >  Remarks</div>
           <span class="inp2" contenteditable="true" id="remarks"   data-link="remarks" >---</span>

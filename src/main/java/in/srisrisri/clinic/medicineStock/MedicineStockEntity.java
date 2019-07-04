@@ -3,12 +3,14 @@ package in.srisrisri.clinic.medicineStock;
 import in.srisrisri.clinic.Vendor.VendorEntity;
 import in.srisrisri.clinic.medicineBrandName.MedicineBrandNameEntity;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity(name = "MedicineStock")
 @Table(name = "MedicineStock")
@@ -23,46 +25,55 @@ public class MedicineStockEntity implements Serializable {
     @OneToOne
     VendorEntity vendor;
     private String expiryDate;
-    Float gst;
-    Float costPrice;
-    Float costPricePerSubCount;
-    Float sellingPrice;
-    Float rate;
-    Float mrp;
+    BigDecimal cgst;
+    BigDecimal sgst;
+    BigDecimal gst;
+    BigDecimal costPrice;
+    BigDecimal sellingPrice;
+    
+    @Transient
+    BigDecimal rate;
+    BigDecimal mrp;
     String batch;
     String billNo;
     
     @Column(name = "discount", nullable = false)
-    float discount=0;
+      BigDecimal discount;
 
     private String dateOfPurchase;
     private long qtyPurchased;
+    @Transient
     private long qtyRemaining;
     @Column(name = "sub_count", nullable = false)
     long subCount;
 
+    ////////////////////////////////////////////////////////////////
+    // special
+     public BigDecimal getRate() {
+        return getMrp();
+    }
+
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
+    }
+    
+    public long getQtyRemaining() {
+        return qtyRemaining;
+    }
+
+    public void setQtyRemaining(long qtyRemaining) {
+        this.qtyRemaining = qtyRemaining;
+    }
+    
+    // end of specials
+    /////////////////////////////////////////////////////////////////
+    
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getBillNo() {
-        return billNo;
-    }
-
-    public void setBillNo(String billNo) {
-        this.billNo = billNo;
-    }
-
-    public float getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(float discount) {
-        this.discount = discount;
     }
 
     public MedicineBrandNameEntity getMedicineBrandName() {
@@ -73,7 +84,13 @@ public class MedicineStockEntity implements Serializable {
         this.medicineBrandName = medicineBrandName;
     }
 
+    public VendorEntity getVendor() {
+        return vendor;
+    }
 
+    public void setVendor(VendorEntity vendor) {
+        this.vendor = vendor;
+    }
 
     public String getExpiryDate() {
         return expiryDate;
@@ -83,51 +100,55 @@ public class MedicineStockEntity implements Serializable {
         this.expiryDate = expiryDate;
     }
 
-    public Float getCostPricePerSubCount() {
-        return costPricePerSubCount;
+    public BigDecimal getCgst() {
+        return cgst;
     }
 
-    public void setCostPricePerSubCount(Float costPricePerSubCount) {
-        this.costPricePerSubCount = costPricePerSubCount;
+    public void setCgst(BigDecimal cgst) {
+        this.cgst = cgst;
     }
 
-    public long getSubCount() {
-        return subCount;
+    public BigDecimal getSgst() {
+        return sgst;
     }
 
-    public void setSubCount(long subCount) {
-        this.subCount = subCount;
+    public void setSgst(BigDecimal sgst) {
+        this.sgst = sgst;
     }
 
-    public Float getGst() {
+    public BigDecimal getGst() {
         return gst;
     }
 
-    public void setGst(Float gst) {
+    public void setGst(BigDecimal gst) {
         this.gst = gst;
     }
 
-    public Float getCostPrice() {
+    public BigDecimal getCostPrice() {
         return costPrice;
     }
 
-    public void setCostPrice(Float costPrice) {
+    public void setCostPrice(BigDecimal costPrice) {
         this.costPrice = costPrice;
     }
 
-    public Float getSellingPrice() {
+    
+
+    public BigDecimal getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(Float sellingPrice) {
+    public void setSellingPrice(BigDecimal sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
 
-    public Float getMrp() {
+   
+
+    public BigDecimal getMrp() {
         return mrp;
     }
 
-    public void setMrp(Float mrp) {
+    public void setMrp(BigDecimal mrp) {
         this.mrp = mrp;
     }
 
@@ -138,6 +159,24 @@ public class MedicineStockEntity implements Serializable {
     public void setBatch(String batch) {
         this.batch = batch;
     }
+
+    public String getBillNo() {
+        return billNo;
+    }
+
+    public void setBillNo(String billNo) {
+        this.billNo = billNo;
+    }
+
+    public BigDecimal getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(BigDecimal discount) {
+        this.discount = discount;
+    }
+
+  
 
     public String getDateOfPurchase() {
         return dateOfPurchase;
@@ -155,33 +194,25 @@ public class MedicineStockEntity implements Serializable {
         this.qtyPurchased = qtyPurchased;
     }
 
-    public long getQtyRemaining() {
-        return qtyRemaining;
+    
+
+    public long getSubCount() {
+        return subCount;
     }
 
-    public void setQtyRemaining(long qtyRemaining) {
-        this.qtyRemaining = qtyRemaining;
-    }
-
-    public VendorEntity getVendor() {
-        return vendor;
-    }
-
-    public void setVendor(VendorEntity vendor) {
-        this.vendor = vendor;
-    }
-
-    public Float getRate() {
-        return rate;
-    }
-
-    public void setRate(Float rate) {
-        this.rate = rate;
+    public void setSubCount(long subCount) {
+        this.subCount = subCount;
     }
 
     @Override
     public String toString() {
-        return "MedicineStockEntity{" + "id=" + id + ", medicineBrandName=" + medicineBrandName + ", vendor=" + vendor + ", expiryDate=" + expiryDate + ", gst=" + gst + ", costPrice=" + costPrice + ", costPricePerSubCount=" + costPricePerSubCount + ", sellingPrice=" + sellingPrice + ", mrp=" + mrp + ", batch=" + batch + ", discount=" + discount + ", dateOfPurchase=" + dateOfPurchase + ", qtyPurchased=" + qtyPurchased + ", qtyRemaining=" + qtyRemaining + ", subCount=" + subCount + '}';
+        return "MedicineStockEntity{" + "id=" + id + ", medicineBrandName=" + medicineBrandName + ", vendor=" + vendor + ", expiryDate=" + expiryDate + ", cgst=" + cgst + ", sgst=" + sgst + ", gst=" + gst + ", costPrice=" + costPrice + ", sellingPrice=" + sellingPrice + ", rate=" + rate + ", mrp=" + mrp + ", batch=" + batch + ", billNo=" + billNo + ", discount=" + discount + ", dateOfPurchase=" + dateOfPurchase + ", qtyPurchased=" + qtyPurchased + ", qtyRemaining=" + qtyRemaining + ", subCount=" + subCount + '}';
     }
 
-}
+  
+
+ }
+
+ 
+
+   

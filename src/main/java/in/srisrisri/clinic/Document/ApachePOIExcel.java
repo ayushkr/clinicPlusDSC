@@ -16,6 +16,7 @@ import in.srisrisri.clinic.appointmentStatus.AppointmentStatusEntity;
 import in.srisrisri.clinic.appointmentType.AppointmentTypeEntity;
 import in.srisrisri.clinic.doctor.DoctorEntity;
 import in.srisrisri.clinic.doctor.DoctorResource;
+import in.srisrisri.clinic.medicineStock.MedicineStockEntity;
 import in.srisrisri.clinic.patient.PatientEntity;
 import in.srisrisri.clinic.patient.PatientRepo;
 import in.srisrisri.clinic.patient.PatientResource;
@@ -40,7 +41,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/clinicPlus/api/xlsx")
+@RequestMapping("/api")
 public class ApachePOIExcel {
 
     @Autowired
@@ -55,6 +56,7 @@ public class ApachePOIExcel {
 
     private static final String READ_FILE_NAME = "/home/akr/xlsx/doctors.xlsx";
     private static final String WRITE_FILE_NAME = "/home/akr/Desktop/MyFirstExcelWrite.xlsx";
+    String body = "<html>";
 
     public ApachePOIExcel(DoctorResource doctorResource, PatientResource patientResource, AppointmentResource appointmentResource,
     PatientRepo patientRepo) {
@@ -106,6 +108,102 @@ public class ApachePOIExcel {
 
         System.out.println("Done");
     }
+    
+    
+     @GetMapping("readMedicineStock")
+    public void readMedicineStock(String[] args) {
+
+        try {
+            File file = new File("/home/akr2/Documents/dsc/medicineStock.xlsx");
+            FileInputStream excelFile = 
+                    new FileInputStream(file);
+            System.out.println("excel file name="+file.getAbsolutePath());
+            Workbook workbook = new XSSFWorkbook(excelFile);
+            
+            Sheet sheet = workbook.getSheetAt(0);
+
+            Row row0 = sheet.getRow(0);
+              short lastCellNum = row0.getLastCellNum();
+            for (int colNum = 0; colNum < lastCellNum; colNum++) {
+                Cell cell0 = row0.getCell(colNum);
+                String stringCellValue = cell0.getStringCellValue();
+                System.out.println("value [" + colNum + "] =" + stringCellValue);
+            }
+
+            System.out.println("--------------------------" + sheet.getLastRowNum());
+//           
+//            for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+//                MedicineStockEntity medicineStockEntity = new MedicineStockEntity();
+//                Row row = sheet.getRow(rowNum);
+//                for (int colNum = 0; colNum < lastCellNum; colNum++) {
+//                    Cell cell0 = row.getCell(colNum);
+//
+//                    switch (colNum) {
+//                        case 15: {
+//                            String value = cell0.getStringCellValue();
+//                            medicineStockEntity.setName(value);
+//                            break;
+//                        }
+//                        case 10: {
+//                            double value = cell0.getNumericCellValue();
+//                            medicineStockEntity.setFees((int) value);
+//                            break;
+//                        }
+//                        case 5: {
+//                            String value = cell0.getStringCellValue();
+//                            medicineStockEntity.setDepartment(value);
+//                            break;
+//                        }
+//                        case 1: {
+//                            String value = cell0.getStringCellValue();
+//                            medicineStockEntity.setAddress(value);
+//                            break;
+//                        }
+//                        case 6: {
+//                            String value = cell0.getStringCellValue();
+//                            medicineStockEntity.setDescription(value);
+//                            break;
+//                        }
+//                        case 20: {
+//                            String value = cell0.getStringCellValue();
+//                            medicineStockEntity.setVisitDay(value);
+//                            break;
+//                        }
+//                        case 21: {
+//                            String value = cell0.getStringCellValue();
+//                            medicineStockEntity.setVisitTime(value);
+//                            break;
+//                        }
+//
+//                        case 12: {
+//                            double value = cell0.getNumericCellValue();
+//                            medicineStockEntity.setFixedId((long) value);
+//                            break;
+//                        }
+//                        case 2: {
+//                            String value = cell0.getStringCellValue();
+//                            medicineStockEntity.setContactPhone(value);
+//                            break;
+//                        }
+//                          
+//
+//                    }
+//
+//                }
+//                // end of row 
+//                System.out.println("row " + rowNum + "    " + medicineStockEntity.toString());
+////                doctorResource.PostMapping_one(doctorEntity);
+//            }
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+   
 
     @GetMapping("readDoctors")
     public void readDoctors(String[] args) {
@@ -219,7 +317,7 @@ public class ApachePOIExcel {
         }
 
     }
-    String body = "<html>";
+    
 
     @GetMapping("readPatients")
     public String readPatients(String[] args) {
