@@ -50,6 +50,21 @@
     font-style: normal;
 
 }
+
+@font-face {
+    font-family: 'Prototype';
+    src: url('./fonts/prototype-webfont.woff2') format('woff2');  
+     /*src: url('./fonts/milea_demo.woff2') format('woff2');*/
+       /*src: url('./fonts/justAnotherHandRegular.woff2') format('woff2');*/
+         /*src: url('./fonts/manjari/Manjari-Regular.woff2') format('woff2');*/
+          /*src: url('./fonts/Verdana.woff2') format('woff2');*/
+         
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
 a{ text-decoration: none}
 
 .headerSortSymbol{
