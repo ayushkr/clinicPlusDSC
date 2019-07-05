@@ -298,6 +298,7 @@ public class MedicineStockResource {
                             }
 
                         }
+                          medicineStockEntity.setDiscount(new BigDecimal(0 + ""));
                     } catch (Exception e) {
                         System.out.println("exception at  column " + sheet.getRow(0).getCell(colNum).getStringCellValue());
                         System.out.println("exception =" + e.toString());
