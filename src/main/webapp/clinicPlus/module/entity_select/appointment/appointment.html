@@ -48,8 +48,8 @@ Filter By patient.name <input  type="text" onkeyup="filter('patient.name')"  ><b
         
         <d id='{{:id}}' 
            bookId='{{:bookId}}' 
-           doctor.name=" {{:doctor.name}}" 
-           patient.name=" {{:patient.name}}"
+           doctor.name="{{if doctor }} {{:doctor.name}} {{/if}}" 
+           patient.name="{{if patient }} {{:patient.name}} {{/if}} "
            dateOfAppointment="{{:dateOfAppointment}}"
            >
         </d>
