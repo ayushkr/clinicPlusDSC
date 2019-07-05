@@ -5,16 +5,22 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 
 @Entity(name = "MedicineBrandName")
 @Table(name="MedicineBrandName")
+@TableGenerator(name="tab1", initialValue=1, allocationSize=50)
 public class MedicineBrandNameEntity  {
 
     @Id
-    @GeneratedValue
+   @GeneratedValue(strategy=GenerationType.TABLE, generator="tab1")
     private long id;
     private String brandName;
     private String company;
