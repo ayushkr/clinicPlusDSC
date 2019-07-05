@@ -67,7 +67,7 @@
                             </tr>
                             <tr >
                                 <td class='td_header'>
-                                    <i class="far fa-envelope"></i>&nbsp;
+                                    <i class="fa fa-envelope"></i>&nbsp;
                                 </td>
                                 <td class='td_header'>
                                     doctorsspecialitycentre@gmail.com
@@ -75,7 +75,7 @@
                             </tr>
                             <tr>
                                 <td class='td_header'>
-                                    <i class="fab fa-facebook-square"></i> &nbsp;
+                                    <i class="fa fa-facebook-official"></i> &nbsp;
                                 </td>
                                 <td class='td_header'>
                                     facebook@doctorsspecialitycentre
@@ -128,7 +128,7 @@
                         <tr>
                             <td colspan=2> 
                     <center> 
-                        Clinic Working Time <i class="far fa-clock"></i> :  2:00 PM  - 8:00 PM  <br>Sunday Holiday  
+                        Clinic Working Time <i class="fa fa-clock-o"></i> :  2:00 PM  - 8:00 PM  <br>Sunday Holiday  
                     </center> 
                     </td> 
                     </tr> 
@@ -150,7 +150,7 @@
                 <br>
                 <div class='borderReceipt'>  <br>
                     <!--                <br><br><br><br><br><br><br><br><br>-->
-                    <center style="font-size:14">RECEIPT<br>
+                    <center style="font-size:14">RECEIPT<br><br>
                         <table border='0' style="border: red;"> 
                             <tbody>
                                 <tr> 
@@ -168,14 +168,14 @@
                                         <br></td> 
                                 </tr> 
 
-                                <tr ><td colspan='3' style="padding: 0px"><hr></td></tr>
+                                <tr ><td colspan='3' style="padding: 20px"></td></tr>
                                 <tr> <td class='td_billReceipt' >Patient ID </td>
                                     <td style="text-align:center">:</td>
                                     <td class='td_billReceipt' >   {{:patient.id}}</td> 
                                 </tr> 
                                 <tr> <td class='td_billReceipt' > Patient Name </td>
                                     <td style="text-align:center">:</td>
-                                    <td class='td_billReceipt' >   {{:patient.name}}</td> 
+                                    <td class='td_billReceipt' > <span style="font-size: 1.5em">  {{:patient.name}}</span></td> 
                                 </tr> 
                                 <tr><td class='td_billReceipt' >Age, Sex  </td>
                                     <td style="text-align:center">:</td>
@@ -189,25 +189,49 @@
                                     <td class='td_billReceipt' >Specialist In </td><td style="text-align:center">:</td>
                                     <td class='td_billReceipt' >   {{:doctor.department}} </td> 
                                 </tr> 
-                                <tr> 
-                                    <td class='td_billReceipt' >Consultation Fee ( &#8377;) 
+                               
+<!--                                <tr> 
+                                    <td class='td_billReceipt' >Consultation Fee 
+                                       
+                                       
                                     </td><td style="text-align:center">:</td>
-                                    <td class='td_billReceipt' >   {{:consultFee}}</td> 
+                                    <td class='td_billReceipt' > 
+                                         <i class="fa fa-inr" style="font-size: 12px"></i>
+                                        {{:consultFee}}</td> 
                                 </tr> 
                                 <tr> 
-                                    <td class='td_billReceipt' >Registration Fee ( &#8377;)</td><td style="text-align:center">:</td>
-                                    <td class='td_billReceipt' >   {{:feeForClinic}}</td> 
-                                </tr> 
+                                    <td class='td_billReceipt' >Registration Fee
+                                       
+                                    
+                                    </td><td style="text-align:center">:</td>
+                                    <td class='td_billReceipt' > 
+                                          <i class="fa fa-inr" style="font-size: 12px"></i>
+                                        {{:feeForClinic}}</td> 
+                                </tr> -->
+                                
                                 <tr> 
-                                    <td class='td_billReceipt' >Total Fee (&#8377;)</td><td style="text-align:center">:</td>
-                                    <td class='td_billReceipt' >   {{: consultFee+feeForClinic}}</td> 
+                                    <td class='td_billReceipt' >Total Fee 
+                                          
+                                    
+                                    </td><td style="text-align:center">:</td>
+                                    <td class='td_billReceipt' > 
+                                        <i class="fa fa-inr" style="font-size: 12px"></i>
+                                        {{: consultFee+feeForClinic}}</td> 
                                 </tr> 
                                 <tr> 
                                     <td class='td_billReceipt' >Total Fee in words </td><td style="text-align:center">:</td>
                                     <td class='td_billReceipt' >
                                         {{:totalInWords}}
                                     </td> 
-                                </tr> 
+                                </tr>
+                                <tr>
+                                     <td class='td_billReceipt' > </td> 
+                                    <td class='td_billReceipt' > </td> 
+                                </tr>
+                                  <tr>
+                                     <td class='td_billReceipt' > </td> 
+                                    <td class='td_billReceipt' > </td> 
+                                </tr>
                                 <tr> 
                                     <td class='td_billReceipt' > </td> 
                                     <td class='td_billReceipt' > </td> 
@@ -215,6 +239,7 @@
                                 </tr> 
                             </tbody>
                         </table> 
+                        <br>
                         Get Well Soon.....
                     </center> 
                 </div>
@@ -223,7 +248,9 @@
 
 
     </div> 
-    <div class='a5FoldingSpace'  > <br><br></div>
+    <div class='a5FoldingSpace'  >
+       
+    </div>
     <!--a5 2nd-->
     <div id='a5_2nd' class='a5 a5_2nd'  > 
 
@@ -285,6 +312,10 @@
     } 
     .a5_2nd{
         /*top:149mm;*/
+    }
+    
+    .a5FoldingSpace{
+        height: 10px;
     }
     .a6 { 
         width: 102mm; 
@@ -426,7 +457,7 @@
 
                                 <tr>
                                     <td class='td_header' style="text-align:right"> Phone 
-                                        <i class="fas fa-phone-square"></i> &nbsp;
+                                        <i class="fa fa-phone-square"></i> &nbsp;
                                     </td>
                                     <td class='td_header'>
                                         8592918888  
