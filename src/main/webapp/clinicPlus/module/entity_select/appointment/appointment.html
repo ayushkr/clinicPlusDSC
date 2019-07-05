@@ -32,8 +32,8 @@ Filter By patient.name <input  type="text" onkeyup="filter('patient.name')"  ><b
         <div class="Cell">  {{:id}} </div>
          <div class="Cell">  {{:bookId}} </div>
         <div class="Cell">  {{:dateOfAppointment}} </div>
-        <div class="Cell">  {{:doctor.name}} </div>
-        <div class="Cell"> {{:patient.name}} </div>
+        <div class="Cell"> {{if doctor }} {{:doctor.name}} {{/if}}</div>
+        <div class="Cell"> {{if patient }} {{:patient.name}} {{/if}}  </div>
        <div class="Cell"> 
             <input type="button" class="entity_select_selectButton" 
                    onclick="selectThis('{{:~root.moduleName}}', {{:id}}, 'No: {{:id}}<br> {{:dateOfAppointment}}<br><b>{{:patient.name}}</b><br>{{:doctor.name}}')"  
