@@ -4,7 +4,11 @@
             <tr class="bluestrp">
                 <td>id</td>
                 <td>Bill Date</td>
-                <td colspan="4">appointment</td>
+                <td >appt No</td>
+ <td >appt Date</td>
+ <td >appt Patient</td>
+
+  <td >appt Doctor</td>
 
                 <td>remarks</td>
                 <td>actions</td>
@@ -16,8 +20,7 @@
             <tr 
 
                 class="firstrow">
-                <td
-                    onclick="pharmacyCashBill.render_list({{:id}})"
+                <td 
                     >bill_{{:id}}</td>
                 <td style="min-width: 100px">{{:dateOfBill}}</td>
                 
@@ -37,12 +40,19 @@
 
 
 
-                    <a class="w3-button " 
+                    <a class="w3-button w3-blue" 
                        onclick="go({{:id}}, 'pharmacyBill')"
                        > 
-                        <i class="fa fa-edit" ></i>
+                        <i class="fa fa-edit" ></i>Edit Bill
                     </a>
+                    
+                     <span class='w3-btn w3-green'
+                    title="Open "
+                    onclick="pharmacyCashBill.render_list({{:id}})"
+                    >Edit Medicine</span>
+                    
                 </td>
+                 
             </tr>       
             {{else}}
             No members...

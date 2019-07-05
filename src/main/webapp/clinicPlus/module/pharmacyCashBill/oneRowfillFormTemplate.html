@@ -19,7 +19,7 @@
              class=" w3-button  w3-theme-d2">
          <i class="fa fa-times"> </i></a>
     
-    
+         <br><br>
     <!--row form-->
     <form name="f1" id="f1" action="#/cmd/post" method="POST">
         <input type="hidden" name="addOrDeleteFlag" value="edit"> 
@@ -30,11 +30,8 @@
         <input type="hidden" id="id" name="id" data-link="id" />
         <input  type="hidden" id="pharmacyBill" name="pharmacyBill" 
                                     value="{{:pharmacyBill.id}}"  />
-        <table border="0" cellspacing="5px">
-            <tbody>
-                <tr>
-                   
-                    <td class="td_1">
+        
+        <div class="inp_outer">
                         <div class="inp1" onclick="popup_selection_obj(
                                         {
                                             'entity_select': 'medicineStock',
@@ -54,8 +51,8 @@
                             <input  type="hidden" id="medicineStock" name="medicineStock" 
                                     />
                             <span id="medicineStock_display">    
-                                <a  class="w3-button w3-theme-d1"  >Click me 
-                                    <i class="fa fa-plus-circle">3</i>
+                                <a  class="w3-button w3-theme-d1"  > 
+                                    <i class="fa fa-plus-circle">3. Add/Change Medicine</i>
                                 </a>
                            
                             </span>
@@ -63,8 +60,10 @@
 
 
                         </div>
-                    </td>
-                    <td class="td_1">
+        </div>
+        <br>
+        
+        <div class='inp_outer'>
                         <div class="inp1">
                             <div class="title1">qty</div>
                             <span class="inp2" contenteditable="true" id="qty_span"   data-link="qty" 
@@ -74,19 +73,18 @@
                                    onclick="pharmacyCashBill.calculateAmount(1)"
                                    />
                         </div>
-                    </td>
-                    <td class="td_1">
+        </div>
+        <br>
+        <div class="inp_outer">
                         <div class="inp1" onclick="pharmacyCashBill.calculateAmount(1)">
                             <div class="title1">amount</div>
                             <span class="inp2" contenteditable="false" id="amount_disp"   data-link="amount" 
                                   >---</span>
                             <input type="hidden" id="amount" name="amount" data-link="amount" />
                         </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
+            
+        </div>
+            
     </form>
   </center>
 </div>

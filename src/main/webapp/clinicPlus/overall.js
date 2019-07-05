@@ -759,9 +759,9 @@ function  PharmacyCashBill() {
                 .done(
                         function (data)
                         {
-                            console.log("func postToPharmacyBillRowAPI  .done(, created pharmacyBillRow (local)");
+                            console.log("func postToPharmacyBillRowAPI  .done(, create/delete pharmacyBillRow (local) data="+JSON.stringify(data));
 
-                            $.get("/clinicPlus/api/pharmacyBillRow/ByBillId/" + d.pharmacyBill, function (result) {
+                            $.get("/clinicPlus/api/pharmacyBillRow/ByBillId/" + data.pharmacyBill.id, function (result) {
                                 console.log("postToPharmacyBillRowAPI  get ");
                                 aylinker({
                                     urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/list/template.html?ran=" + Math.random(),

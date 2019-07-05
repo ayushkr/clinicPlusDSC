@@ -530,6 +530,8 @@ input{
 
 .title1{
     font-style: oblique;
+    color: steelblue;
+    font-size: 0.8em;
 }
 
 .select_5{
@@ -666,7 +668,7 @@ a:hover{
 
 
 .widgetBar2{
-      position: fixed;
+      /*position: fixed;*/
     left: 143px;
     z-index: 10;
     top: 197px;

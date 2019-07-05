@@ -14,11 +14,14 @@ Filter By patient.name <input  type="text" onkeyup="filter('patient.name')"  ><b
     </div>
 
     <div class="Heading">
-        <div class="Cell"><p>id</p></div>
-         <div class="Cell"><p>book id</p></div>
-        <div class="Cell"><p>date Of Appointment</p></div>
-        <div class="Cell"><p>doctor</p></div>
+       
+       
+        
         <div class="Cell"><p>patient</p></div>
+        <div class="Cell"><p>doctor</p></div>
+         <div class="Cell"><p>date Of Appointment</p></div>
+          <div class="Cell"><p>id</p></div>
+         <div class="Cell"><p>book id</p></div>
          <div class="Cell"><p>action</p></div>
     </div>
 
@@ -29,27 +32,60 @@ Filter By patient.name <input  type="text" onkeyup="filter('patient.name')"  ><b
     <div class="Row" id="select_{{:id}}" >
          
        
-        <div class="Cell">  {{:id}} </div>
-         <div class="Cell">  {{:bookId}} </div>
+      
+        {{if patient || doctor}}  
+     
+        <div class="Cell">
+              <input 
+                type="button" 
+                   class="entity_select_selectButton" 
+                   onclick='selectThis("{{:~root.moduleName}}",{{:id}},"No: {{:id}}<br> {{:dateOfAppointment}}<br><b> {{:patient.name}}</b><br>{{:doctor.name}}")'
+                              
+                   value="{{:patient.name}}">
+            
+        
+        
+        </div>
+           <div class="Cell"> {{:doctor.name}}</div>
         <div class="Cell">  {{:dateOfAppointment}} </div>
-        <div class="Cell"> {{if doctor }} {{:doctor.name}} {{/if}}</div>
-        <div class="Cell"> {{if patient }} {{:patient.name}} {{/if}}  </div>
+          <div class="Cell">  {{:id}} </div>
+         <div class="Cell">  {{:bookId}} </div>
        <div class="Cell"> 
-            <input type="button" class="entity_select_selectButton" 
-                   onclick="selectThis('{{:~root.moduleName}}', {{:id}}, 'No: {{:id}}<br> {{:dateOfAppointment}}<br><b>{{:patient.name}}</b><br>{{:doctor.name}}')"  
+           
+         
+           
+           <input 
+                type="button" 
+                   class="entity_select_selectButton" 
+                   onclick='selectThis("{{:~root.moduleName}}",{{:id}},"No: {{:id}}<br> {{:dateOfAppointment}}<br><b> {{:patient.name}}</b><br>{{:doctor.name}}")'
+                              
                    value="Select">
+           
+        
+                   
+                   
             <input type="button"  
                    class="entity_select_editButton" 
                    onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, 'main3');"
                    value="Edit"
                    >
+            
+             
         </div>
-        
+         
+         {{else}}
+         error in appointment {{:id}}
+          <input type="button"  
+                   class="entity_select_editButton" 
+                   onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, 'main3');"
+                   value="Edit"
+                   >
+         {{/if}}
         
         <d id='{{:id}}' 
            bookId='{{:bookId}}' 
-           doctor.name="{{if doctor }} {{:doctor.name}} {{/if}}" 
-           patient.name="{{if patient }} {{:patient.name}} {{/if}} "
+           doctor.name="{{if doctor }} {{:doctor.name}} {{else}} null{{/if}}" 
+           patient.name="{{if patient }} {{:patient.name}}{{else}} null {{/if}}"
            dateOfAppointment="{{:dateOfAppointment}}"
            >
         </d>

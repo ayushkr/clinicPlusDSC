@@ -194,13 +194,13 @@
 <!--file uploads-->
 <div id="Files" class="w3-container w3-border city city_hide">
 
-
+    {{if patient}}
 
     <form id="form_prescription" 
           enctype="multipart/form-data" >
         <div style="position: relative; */
-    top: 0px;
-    background-color: #252020;">   p <input  name='patientId' value="{{:patient.id}}" type="text"     ><br>
+             top: 0px;
+             background-color: #252020;">   p <input  name='patientId' value="{{:patient.id}}" type="text"     ><br>
             d <input  name='doctorId' value="{{:doctor.id}}" type="text"     ><br>
             name  <input  name='name' value="ssss" type="text"     ><br>
         </div>
@@ -240,5 +240,12 @@
 
     <h3> List of existing files for this patient</h3>
     <div id="fileList" style=""> {{:~listFiles(patient.id,'prescription','fileList')}}</div>
+
+    {{else}}
+    Patient is not set
+
+    {{/if}}
+
 </div>
+
 {{/if}}

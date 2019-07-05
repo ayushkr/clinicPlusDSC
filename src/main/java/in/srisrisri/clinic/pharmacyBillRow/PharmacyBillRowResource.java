@@ -132,9 +132,11 @@ public class PharmacyBillRowResource {
                 BeanUtils.copyProperties(entityBefore, entityAfter);
                 entityAfter = repo.save(entityAfter);
             }else{
+                
+                entityAfter = repo.findById(entityBefore.getId()).get();
             repo.deleteById(entityBefore.getId());
              logger.warn("deleteById ={}", entityBefore.getId());
-            entityAfter=entityBefore;
+           
             }
 
             body = ResponseEntity
