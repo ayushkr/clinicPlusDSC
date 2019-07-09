@@ -1,6 +1,7 @@
 package in.srisrisri.clinic.appointment;
 
 import in.srisrisri.clinic.doctor.DoctorEntity;
+import in.srisrisri.clinic.patient.PatientEntity;
 
 import in.srisrisri.clinic.responses.DeleteResponse;
 import in.srisrisri.clinic.utils.*;
@@ -81,6 +82,8 @@ int വി=0;
 @GetMapping("pageable")
     @ResponseBody
     public PageCover<AppointmentEntity> allPageNumber(
+            @RequestParam("filterColumn") String filterColumn,
+            @RequestParam("filter") String filter,
             @RequestParam("pageNumber") String pageNumber,
             @RequestParam("sortColumn") String sortColumn,
             @RequestParam("sortOrder") String sortOrder
@@ -102,7 +105,20 @@ int വി=0;
             pageNumber = "1";
         }
         Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1,10, sort);
-        Page<AppointmentEntity> pageList = appointmentRepo.findAll(pageable);
+        
+        
+        Page<AppointmentEntity> pageList =null;
+        
+        if(filterColumn.equals("undefined")){
+        pageList=appointmentRepo.findAll(pageable);
+        }else{
+            PatientEntity patientEntity = new PatientEntity();
+            patientEntity.setId(Long.parseLong(filter));
+         pageList=appointmentRepo.findAllByPatient(patientEntity,pageable);
+        
+        }
+        
+        
         PageCover<AppointmentEntity> pageCover = new PageCover<>(pageList);
         pageCover.setSortColumn(sortColumn);
         pageCover.setSortOrder(sortOrder);

@@ -20,11 +20,29 @@ import org.springframework.data.domain.Page;
 public final class PageCover<T>  {
     String sortColumn;
     String sortOrder;
+    String filterColumn;
+        String filter;
     String module;
     Page<T> pageList;
 
     public PageCover(Page<T> pageList) {
         setPageList(pageList);
+    }
+
+    public String getFilterColumn() {
+        return filterColumn;
+    }
+
+    public void setFilterColumn(String filterColumn) {
+        this.filterColumn = filterColumn;
+    }
+
+    public String getFilter() {
+        return filter;
+    }
+
+    public void setFilter(String filter) {
+        this.filter = filter;
     }
 
     public String getModule() {

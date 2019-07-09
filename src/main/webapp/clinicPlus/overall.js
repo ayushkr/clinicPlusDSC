@@ -1,5 +1,41 @@
 //overall.js
 
+var localClipBoardVariable="";
+function copyToClipBoard(input) {
+  /* Get the text field */
+  var copyText = document.getElementById(input);
+
+  /* Select the text field */
+  copyText.select();
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText.value);
+}
+var dummy;
+function copyToClipBoardValue(val){
+    localClipBoardVariable=val;
+     dummy = document.createElement("textarea");
+//    dummy.style.display = 'none';
+    document.body.appendChild(dummy);
+
+    dummy.setAttribute("id", "dummy_id");
+    document.getElementById("dummy_id").value=val;
+    dummy.select();
+    document.execCommand("copy");
+//    alert("Copied the text: " +dummy.value);
+   document.body.removeChild(dummy);
+}
+
+
+function pasteFromClipBoardTo(id){
+     document.getElementById(id).value=localClipBoardVariable;
+    
+}
+
+
 function  patientCard_show(id) {
     aylinker({
         urlOfTemplate: "/clinicPlus/module/appointment/patientCard/patientCardMenuTemplate.html?ran=" + Math.random(),

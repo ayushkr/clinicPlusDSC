@@ -61,7 +61,14 @@ function cmd(context) {
         console.log("param_ ----------"+params_[i]+":"+this.params[params_[i]]);
    }
      listAsPages( this.params['module'],
-     'api/'+this.params['module']+'/pageable?pageNumber='+this.params['pageNumber']+'&sortColumn='+this.params['sortColumn']+'&sortOrder='+this.params['sortOrder'], 'main1');
+     'api/'+this.params['module']+
+             '/pageable?pageNumber='+this.params['pageNumber']+
+             '&filterColumn='+this.params['filterColumn']+
+             '&filter='+this.params['filter']+
+             '&sortColumn='+this.params['sortColumn']+
+             '&sortOrder='+this.params['sortOrder']
+     
+    , 'main1');
  
 
     

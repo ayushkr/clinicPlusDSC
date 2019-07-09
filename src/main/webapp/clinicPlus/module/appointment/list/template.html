@@ -1,4 +1,13 @@
 <!--select_patient/list.html-->
+
+<input type="text" id="patientId" > 
+<input type="button" value="Filter by Patient "
+       onclick="window.location.href='#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=name&filter='+document.getElementById('patientId').value+''"
+       >
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" value="Paste" onclick="pasteFromClipBoardTo('patientId')">
+
+<input type="button" value="No Filter">
 <div id="printableArea"   title="Appointment_List" >
     List of Appointments in DSC
      <table cellspacing="1" cellpadding="5" border="0"  style="width:85%;">

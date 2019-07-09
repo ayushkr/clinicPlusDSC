@@ -1,3 +1,10 @@
+<input type="text" id="patientName" > 
+<input type="button" value="Filter by Patient "
+       onclick="window.location.href='#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=name&filter='+document.getElementById('patientName').value+''"
+       >
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
 <div id="printableArea"   title="Patient_List" >
     <!--<p class="pageTitle">Patients</p>-->
   
@@ -180,6 +187,7 @@
                 
                 
                 </th>
+                <th>Actions</th>
 
             </tr>
         </thead>
@@ -188,15 +196,24 @@
             {{for obj.pageList.content}}
 
             <tr class="firstrow"
-                 onclick="go({{:id}},'patient')"
+                 
                 >
 
 
-                <td>{{:id}}</td>
+                <td>
+                    
+                    {{:id}}
+                </td>
                  <td>{{:fixedId}}</td>
                  <td>{{:bookId}}</td>
                 <td>{{:dateOfRegistration}}</td>
-                <td>{{:name}}</td>
+                <td 
+                    onclick="copyToClipBoardValue('{{:id}}')" 
+                    >
+                    <span class="w3-button w3-green" >     
+                    {{:name}}
+                    </span>
+                    </td>
                 <td>{{:place}}</td>
                 <td>{{:age}}</td>
                 <td>{{:dob}}</td>
@@ -204,7 +221,12 @@
                 <td>{{:contactPhone}}</td>
                 
                 <td>{{:remarks}}</td>
-               
+                <td><i class="fa fa-edit"
+                       onclick="go({{:id}},'patient')"
+                       > </i>
+                
+                
+                </td>
             </tr>
             {{else}}
             No members...

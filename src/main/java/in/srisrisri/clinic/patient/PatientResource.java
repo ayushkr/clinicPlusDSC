@@ -53,10 +53,10 @@ public class PatientResource {
             @RequestParam("category") String category,
             @RequestParam("patientId") Long patientId,
             @RequestParam("name") String name,
-             @RequestParam("doctorId") Long doctorId
+            @RequestParam("doctorId") Long doctorId
     ) {
-        
-        System.out.println("pat id="+patientId +" doc Id="+doctorId+" name="+name);
+
+        System.out.println("pat id=" + patientId + " doc Id=" + doctorId + " name=" + name);
         String parentPath = "patient/" + patientId + "/" + category;
         String fileNameSaved = fileStorageService.storeFile(multipartFile, new java.util.Date().getTime() + "", parentPath);
 
@@ -78,25 +78,25 @@ public class PatientResource {
         return list;
     }
 
-   @GetMapping("pageable")
+    @GetMapping("pageable")
     @ResponseBody
     public PageCover<PatientEntity> allPageNumber(
             @RequestParam("pageNumber") String pageNumber,
+            @RequestParam("filterColumn") String filterColumn,
+            @RequestParam("filter") String filter,
             @RequestParam("sortColumn") String sortColumn,
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
         logger.warn("REST getItems() , {} ", new Object[]{label});
-        
+
         if (!sortColumn.equals("undefined")) {
             if (sortOrder.equals("d")) {
                 sort = Sort.by(sortColumn).descending();
-            }
-            
-          else{
+            } else {
                 sort = Sort.by(sortColumn).ascending();
             }
-            
+
         } else {
             sort = Sort.by("dateOfRegistration").ascending();
         }
@@ -104,10 +104,22 @@ public class PatientResource {
             pageNumber = "1";
         }
         Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
-        Page<PatientEntity> pageList = repo.findAll(pageable);
-        PageCover<PatientEntity> pageCover = new PageCover<>(pageList);
+        Page<PatientEntity> page = null;
+        if (filterColumn.equals("undefined")) {
+            page = repo.findAll(pageable);
+
+        } else {
+            if (filterColumn.equals("name")) {
+                page = repo.findAllByNameLike(filter, pageable);
+
+            }
+        }
+
+        PageCover<PatientEntity> pageCover = new PageCover<>(page);
         pageCover.setSortColumn(sortColumn);
         pageCover.setSortOrder(sortOrder);
+        pageCover.setFilter(filter);
+        pageCover.setFilterColumn(filterColumn);
         pageCover.setModule(label);
         return pageCover;
     }
