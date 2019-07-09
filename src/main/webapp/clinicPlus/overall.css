@@ -369,7 +369,7 @@ a{ text-decoration: none}
 
 #main2{
     width: 100%;
-    position: fixed;
+    position: absolute;
     top: 0cm;
     left: 0cm;
     z-index: 13;
@@ -377,8 +377,19 @@ a{ text-decoration: none}
       background-color: var(--color_l4);
     display: none;
         padding: 0mm 11mm;
-    height: 100%;
+    min-height: 100%;
 }
+
+#main2::after{
+ content: ' ';
+    padding: 10px;
+    height: 34px;
+    background-color: steelblue;
+    display: block;
+    margin: 10px 0px 0px 0px;
+}
+
+
 #main3{
     width: 100%;
     position: absolute;
