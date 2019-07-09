@@ -201,14 +201,17 @@
 
 
                 <td>
-                    
-                    {{:id}}
+                    <span onclick="copyToClipBoardValue('{{:id}}')" class="w3-btn" >
+                        
+                         {{:id}}
+                    </span>
+                   
                 </td>
                  <td>{{:fixedId}}</td>
                  <td>{{:bookId}}</td>
                 <td>{{:dateOfRegistration}}</td>
                 <td 
-                    onclick="copyToClipBoardValue('{{:id}}')" 
+                    onclick="go({{:id}},'patient')"
                     >
                     <span class="w3-button w3-green" >     
                     {{:name}}
@@ -222,7 +225,7 @@
                 
                 <td>{{:remarks}}</td>
                 <td><i class="fa fa-edit"
-                       onclick="go({{:id}},'patient')"
+                       
                        > </i>
                 
                 
