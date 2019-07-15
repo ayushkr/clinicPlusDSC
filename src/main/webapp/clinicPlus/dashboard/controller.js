@@ -11,7 +11,7 @@ function  routeFunctions() {
     this.get('#/cmd', cmd);
     this.get('#/dummy', dummy);
     this.post('#/cmd/post', cmd_post);
-       this.post('#/postFile', postFile);
+    this.post('#/postFile', postFile);
 
 
 }
@@ -47,31 +47,31 @@ function postFile(context, data) {
 }
 
 function dummy(context) {
-    console.log("dummy-----------");
+    console.log("dummy(context)-----------");
 
 }
 var ayu;
 function cmd(context) {
-       console.log("cmd-----------");
-    ayu=context;
-    
-    
- var params_=  Object.getOwnPropertyNames ( this.params);
-   for(var i=0;i<params_.length;i++){
-        console.log("param_ ----------"+params_[i]+":"+this.params[params_[i]]);
-   }
-     listAsPages( this.params['module'],
-     'api/'+this.params['module']+
-             '/pageable?pageNumber='+this.params['pageNumber']+
-             '&filterColumn='+this.params['filterColumn']+
-             '&filter='+this.params['filter']+
-             '&sortColumn='+this.params['sortColumn']+
-             '&sortOrder='+this.params['sortOrder']
-     
-    , 'main1');
- 
+    console.log("cmd-----------");
+    ayu = context;
 
-    
+
+    var params_ = Object.getOwnPropertyNames(this.params);
+    for (var i = 0; i < params_.length; i++) {
+        console.log("param_ ----------" + params_[i] + ":" + this.params[params_[i]]);
+    }
+    listAsPages(this.params['module'],
+            'api/' + this.params['module'] +
+            '/pageable?pageNumber=' + this.params['pageNumber'] +
+            '&filterColumn=' + this.params['filterColumn'] +
+            '&filter=' + this.params['filter'] +
+            '&sortColumn=' + this.params['sortColumn'] +
+            '&sortOrder=' + this.params['sortOrder']
+
+            , 'main1');
+
+
+
     // this.partial(partial_path);
 }
 
@@ -164,6 +164,7 @@ function cmd_post(context, data) {
             "genericName": this.params['genericName'],
             "usedFor": this.params['usedFor'],
             "type": this.params['type'],
+            "hsn": this.params['hsn'],
             "groupid": 0,
             "description": this.params['description'],
             "other": this.params['other'],
@@ -182,10 +183,10 @@ function cmd_post(context, data) {
             "place": this.params['place'],
             "pinCode": this.params['pinCode'],
             "contactPhone": this.params['contactPhone'],
-"email": this.params['email'],
+            "email": this.params['email'],
             "dlNo": this.params['dlNo'],
             "ssid": this.params['ssid'],
-           
+
             "id": this.params['id']
         };
         console.log("akr d: " + JSON.stringify(d));
@@ -196,7 +197,7 @@ function cmd_post(context, data) {
 
             "medicineBrandName": (this.params['medicineBrandName']),
             "vendor": this.params['vendor'],
-             "billNo": this.params['billNo'],
+            "billNo": this.params['billNo'],
             "expiryDate": this.params['expiryDate'],
             "costPrice": this.params['costPrice'],
             "discount": this.params['discount'],
@@ -207,8 +208,9 @@ function cmd_post(context, data) {
             "qtyPurchased": this.params['qtyPurchased'],
             "qtyRemaining": this.params['qtyRemaining'],
             "cgst": this.params['cgst'],
-              "sgst": this.params['sgst'],
+            "sgst": this.params['sgst'],
             "rate": this.params['rate'],
+            "rateAvailable": this.params['rateAvailable'],
             "mrp": this.params['mrp'],
             "subCount": this.params['subCount'],
 
@@ -307,24 +309,31 @@ function cmd_post(context, data) {
         //  alert_1("edit",d);
     }
     console.log("akr api_Posting : " + JSON.stringify(d));
+
+
     $.post('/clinicPlus/api/' + module + '', d)
             .fail(
                     function (data)
                     {
-                        console.log("error ay " + JSON.stringify(data));
-                        alert_1('ERROR ', JSON.stringify(data), 'error');
+                        alert_1('ERROR', JSON.stringify(data), 'error');
                     }
             )
             .done(
-                    function (data)
+                    function (data, textStatus, jqXHR)
                     {
-                        alert_1('OK', JSON.stringify(data), 'success');
-                        mn.module[module] = data;
-                        console.log("post.done module=" + module + ", data=" + JSON.stringify(data));
 
-                        var path = "#/cmd?module=" + module + "&action=/all/list" + pageNewAy(1);
-                        console.log('redirect to ' + path);
-                        // window.location.href = path;
+
+                        if (jqXHR.getResponseHeader('ok') === 'no') {
+                            alert_1( jqXHR.getResponseHeader('problem'), JSON.stringify(data), 'error');
+
+                        } else {
+                            alert_1('OK', jqXHR.getResponseHeader('ok'), 'success');
+                            mn.module[module] = data;
+                            console.log("post.done module=" + module + ", data=" + JSON.stringify(data));
+
+                            var path = "#/cmd?module=" + module + "&action=/all/list" + pageNewAy(1);
+                            console.log('redirect to ' + path);
+                            // window.location.href = path;
 //                        if (redirect === undefined) {
 //                           // window.location.href = path;
 //                        } else {
@@ -332,7 +341,10 @@ function cmd_post(context, data) {
 //
 //                        }
 
+                        }
+
                     }
+
             )
             ;
 }

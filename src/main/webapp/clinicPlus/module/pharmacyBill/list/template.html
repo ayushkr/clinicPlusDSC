@@ -1,45 +1,109 @@
 <div id="printableArea"   title="PharmacyBill_Profile" >
-    <table cellspacing="1" cellpadding="5" border="0" >
+    <table  cellpadding="5" class="table_greyBorder" >
         <thead>
             <tr class="bluestrp">
-                <td>id</td>
-                <td>Bill Date</td>
-                <td >appt No</td>
-                <td >appt Date</td>
-                <td >appt Patient</td>
+                <td>Bill</td>
+                <!--                <td>Bill Date</td>-->
 
-                <td >appt Doctor</td>
+                <td >appointment</td>
 
+                <!--                <td >appt No</td>
+                                <td >appt Date</td>
+                                <td >appt Patient</td>
+                
+                                <td >appt Doctor</td>-->
+ <td>actions</td>
                 <td>remarks</td>
-                <td>actions</td>
+               
             </tr>
         </thead>
         <tbody>
 
             {{for obj.pageList.content}}
             <tr 
-                onclick="go({{:id}}, 'pharmacyBill')"
+
                 class="firstrow">
-                <td 
-                    >bill_{{:id}}</td>
-                <td style="min-width: 100px">{{:dateOfBill}}</td>
-
-                {{if appointment}}
-                <td style="min-width: 50px">No: {{:appointment.id}}</td> 
-                <td style="min-width: 100px"> {{:appointment.dateOfAppointment}}</td> 
-                <td>{{:appointment.patient.name}}</td> 
-                <td>{{:appointment.doctor.name}} </td> 
-
-                {{else}}
-                <td colspan="4"></td>
-                {{/if}}
-
-                <td>{{:remarks}}</td>
-                <td>
-
-
+                <td >
+                    <span class="w3-btn"
+                        onclick="go({{:id}}, 'pharmacyBill')"
+                        > No {{:id}} <hr> {{:dateOfBill}}
+                    </span> <br>
+                    
 
                 </td>
+                <!--<td style="min-width: 85px">{{:dateOfBill}}</td>-->
+
+                {{if appointment}}
+                <td style="min-width: 150px">
+                     <button class="w3-btn"
+                        onclick="go({{:id}}, 'pharmacyBill')">
+                         <table border="0" cellspacing="1px" style="border:none">
+                        <tbody>
+                            <tr>
+                                <td class="td3">
+                                    Appt ID :
+                                </td>
+                                <td>
+                                    <span style="min-width: 50px" > {{:appointment.id}}</span> 
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="td3">
+                                    Appt Date :
+                                </td>
+                                <td>
+                                    <span style="min-width: 100px"> {{:appointment.dateOfAppointment}}</span> 
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="td3">
+                                    Patient :
+                                </td>
+                                <td>
+                                    <span>{{:appointment.patient.name}}</span>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="td3">
+                                    Doctor :
+                                </td>
+                                <td>
+                                    <span style="font-size: 0.8em;font-style: italic">{{:appointment.doctor.name}} </span> 
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                     </button>
+                </td>
+                {{else}}
+                <!--<td colspan="4"></td>-->
+                <td style="min-width: 100px">
+                    <button class="w3-btn" style="width: 100%;height: 100%"
+                        onclick="go({{:id}}, 'pharmacyBill')">
+                    Not Filled
+                     </button>
+                </td>
+                {{/if}}
+
+                
+                <td>
+
+                    <button class='w3-btn w3-green'
+                          title="Open "
+                          onclick="pharmacyCashBill.render_list({{:id}})"
+                          > Medicines <br> (മരുന്നുകൾ )
+                        </button>
+
+                </td>
+                <td style="min-width: 150px">{{:remarks}}</td>
 
             </tr>       
             {{else}}
@@ -48,3 +112,12 @@
         </tbody>
     </table>
 </div>
+
+<style>
+    .td3{
+        font-size: 10px;
+        text-align: right;
+        padding-right: 12px;
+    }
+
+</style>

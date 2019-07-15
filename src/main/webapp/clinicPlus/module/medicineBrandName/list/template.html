@@ -1,10 +1,53 @@
+
+<div class="inp_outer" style="min-width: 200px">
+ ID   <input id="medicineBrandName" name='medicineBrandName' type="text"  value="" >  Or
+    <div class="inp1" 
+         onclick="popup_selection_obj(
+             {
+             'entity_select': 'medicineBrandName',
+                     'input': 'medicineBrandName'
+             }
+             )"
+         >
+
+        <div class="title1">medicineBrandName </div>
+        <span id='patient_display' class="inp2">
+Click Here
+        </span>
+       
+    </div>
+  <input type="button" value="Go "
+       onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=medicineBrandName&filter=' + document.getElementById('medicineBrandName').value + ''"
+       >
+</div>
+
+<hr>
+
+
+
 <div id="printableArea"   title="MedicineBrandName_List" >
-<table cellspacing="1" cellpadding="5" border="0" style="width:85%;">
+<table  cellpadding="5" class="table_greyBorder" >
     
             <thead>
                 <tr class="bluestrp">
-            <th>id</th>
-            <th>brandName
+            <th style="min-width: 150px;">Id
+                  <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+            
+            
+            </th>
+            <th style="min-width: 150px;">brandName
                   <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=brandName&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='brandName'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">

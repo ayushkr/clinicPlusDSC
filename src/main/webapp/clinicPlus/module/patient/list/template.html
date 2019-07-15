@@ -1,9 +1,11 @@
-<input type="text" id="patientName" > 
+
+<div data-akr-printable="false">
+    <input type="text" id="patientName" > 
 <input type="button" value="Filter by Patient "
        onclick="window.location.href='#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=name&filter='+document.getElementById('patientName').value+''"
        >
-
-&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+<br>
 
 <div id="printableArea"   title="Patient_List" >
     <!--<p class="pageTitle">Patients</p>-->
@@ -65,7 +67,7 @@
                 
                     
                 </th>
-                <th >
+                <th style="min-width: 100px">
                     dateOf registration
                      <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfRegistration&sortOrder=a"
                        >
@@ -201,7 +203,7 @@
 
 
                 <td>
-                    <span onclick="copyToClipBoardValue('{{:id}}')" class="w3-btn" >
+                    <span onclick="copyToClipBoardValue('{{:id}}')" class="w3-btn w3-blue-gray" >
                         
                          {{:id}}
                     </span>
@@ -213,7 +215,7 @@
                 <td 
                     onclick="go({{:id}},'patient')"
                     >
-                    <span class="w3-button w3-green" >     
+                    <span class="w3-button w3-blue-gray" >     
                     {{:name}}
                     </span>
                     </td>

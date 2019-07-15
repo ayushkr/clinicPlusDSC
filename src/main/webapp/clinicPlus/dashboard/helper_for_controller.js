@@ -170,6 +170,7 @@ mn.module['doctor_new'] = {
     "visitTime": "",
     "email": "",
     "displayId": "",
+    "dateOfJoining":getToday().full,
     "remarks": ""
             //  "": this.params[''],
 
@@ -180,6 +181,7 @@ mn.module['patient_new'] = {
     "name": '',
     "age": '',
     "bookId": 0,
+   'dateOfRegistration': getToday().full,
     "s": 0
 };
 mn.module['appointment_new'] = {
@@ -188,7 +190,7 @@ mn.module['appointment_new'] = {
     "id": 0,
     "doctor": {id: 0},
     "patient": {id: 0},
-    "dateOfAppointment": "" + updateCurrentDate('dateCurrent'),
+    "dateOfAppointment": getToday().full,
     "creationTime": null,
     "updationTime": null
 };
@@ -208,37 +210,23 @@ mn.module['medicineStock_new'] =
         {
             "id": 0,
             "medicineBrandName": {
-                "id": 0,
-                "brandName": "",
-                "company": "",
-                "genericName": "",
-                "usedFor": "1",
-                "type": "1",
-                "groupid": 0,
-                "description": "1",
-                "other": "1"
+                "id": 0
+             
             },
             "vendor": {
-                "id": 0,
-                "name": "",
-                "place": "",
-                "description": null,
-                "address": "",
-                "gstin": null,
-                "contactPhone": "",
-                "email": null,
-                "lastTouched": null
+                "id": 0
             },
-            "expiryDate": "12/2009",
+            "expiryDate": "12/2000",
             "gst": 0,
             "costPrice": null,
             "costPricePerSubCount": null,
             "sellingPrice": null,
             "rate": 0,
+            "rateAvailable": true,
             "mrp": 0,
-            "batch": "we223",
+            "batch": "",
             "discount": 0,
-            "dateOfPurchase": "12/12/2009",
+            "dateOfPurchase":  getToday().full,
             "qtyPurchased": 0,
             "qtyRemaining": 0,
             "subCount": 0
@@ -254,7 +242,7 @@ mn.module['vendor_new'] = {
     "place": "",
     "description": "",
 
-    "id": 0
+    "id": 1
 };
 
 
@@ -359,7 +347,7 @@ mn.module['pharmacyBillRow_new'] =
 
 mn.module['pharmacyBill_new'] =
         {
-            "dateOfBill": "",
+            "dateOfBill": getToday().full,
             "remarks": "---",
             "id": 0
         };

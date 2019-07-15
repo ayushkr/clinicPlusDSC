@@ -2,6 +2,8 @@ package in.srisrisri.clinic.pharmacyBillRow;
 
 import in.srisrisri.clinic.Exceptions.BadDataInputException;
 import in.srisrisri.clinic.medicineBrandName.MedicineBrandNameEntity;
+import in.srisrisri.clinic.medicineStock.MedicineStockEntity;
+import in.srisrisri.clinic.medicineStock.MedicineStockRepo;
 import in.srisrisri.clinic.pharmacyBill.PharmacyBillEntity;
 import in.srisrisri.clinic.responses.DeleteResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
@@ -32,14 +34,17 @@ public class PharmacyBillRowResource {
     private final Logger logger = LoggerFactory.getLogger(PharmacyBillRowResource.class);
 
     @Autowired
-    PharmacyBillRowRepo repo;
+    PharmacyBillRowRepo pharmacyBillRowRepo;
+
+    @Autowired
+    MedicineStockRepo medicineStockRepo;
 
     @GetMapping("")
     @ResponseBody
     public ResponseEntity<List<PharmacyBillRowEntity>> getList() {
         logger.debug("getList", new Object() {
         });
-        List<PharmacyBillRowEntity> list = repo.findAll();
+        List<PharmacyBillRowEntity> list = pharmacyBillRowRepo.findAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
@@ -53,7 +58,7 @@ public class PharmacyBillRowResource {
     @GetMapping("{id}")
     @ResponseBody
     public ResponseEntity<Optional<PharmacyBillRowEntity>> getById(@PathVariable("id") Long id) {
-        Optional<PharmacyBillRowEntity> item = repo.findById(id);
+        Optional<PharmacyBillRowEntity> item = pharmacyBillRowRepo.findById(id);
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
 
@@ -81,14 +86,13 @@ public class PharmacyBillRowResource {
             pageNumber = "1";
         }
         Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
-        Page<PharmacyBillRowEntity> pageList = repo.findAll(pageable);
+        Page<PharmacyBillRowEntity> pageList = pharmacyBillRowRepo.findAll(pageable);
         PageCover<PharmacyBillRowEntity> pageCover = new PageCover<>(pageList);
         pageCover.setSortColumn(sortColumn);
         pageCover.setSortOrder(sortOrder);
         pageCover.setModule(label);
         return pageCover;
     }
-
 
     @GetMapping("ByBillId/{id}")
     @ResponseBody
@@ -98,21 +102,21 @@ public class PharmacyBillRowResource {
         PharmacyBillEntity pharmacyBillEntity = new PharmacyBillEntity();
         pharmacyBillEntity.setId(id);
 
-        List<PharmacyBillRowEntity> list = repo.findByPharmacyBill(pharmacyBillEntity);
+        List<PharmacyBillRowEntity> list = pharmacyBillRowRepo.findByPharmacyBill(pharmacyBillEntity);
         SumDAO sumDAO = new SumDAO(list);
-        try{
-        boolean calculateTotals = sumDAO.calculateTotals();
-         return new ResponseEntity<>(sumDAO, HttpStatus.OK);
-        }catch(Exception e){
-        return new ResponseEntity<>(e.toString(), HttpStatus.OK);
+        sumDAO.setBillId(id);
+        try {
+            boolean calculateTotals = sumDAO.calculateTotals();
+            return new ResponseEntity<>(sumDAO, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.toString(), HttpStatus.OK);
         }
-         
 
     }
 
     // create
     @PostMapping("")
-    public ResponseEntity<PharmacyBillRowEntity> PostMapping_one(PharmacyBillRowEntity entityBefore) {
+    public ResponseEntity<?> PostMapping_one(PharmacyBillRowEntity entityBefore) {
         ResponseEntity<PharmacyBillRowEntity> body = null;
         try {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
@@ -120,41 +124,73 @@ public class PharmacyBillRowResource {
 
             PharmacyBillRowEntity entityAfter = null;
 
+            Integer qty = entityBefore.getQty();
+            long qtyRemaining = 0;
+            try {
+                if (entityBefore.getMedicineStock() != null) {
+                    qtyRemaining = entityBefore.getMedicineStock().getQtyRemaining();
+                }
+            } catch (Exception e) {
+                logger.warn("Exception PostMapping_one obj={} ,  error={}", new Object[]{entityBefore.toString(), e});
+            }
+
             if (entityBefore.getQty() != -1) {
                 if (entityBefore.getId() != 0) {
-                    entityAfter = repo.findById(entityBefore.getId()).get();
+                    entityAfter = pharmacyBillRowRepo.findById(entityBefore.getId()).get();
                     //entityAfter.setUpdationTime(new Date());
                 } else {
                     entityAfter = new PharmacyBillRowEntity();
                     // entityAfter.setCreationTime(new Date());
                 }
 
+//                try {
+//                    if (entityBefore.getMedicineStock() != null) {
+//                        MedicineStockEntity medicineStockEntity = medicineStockRepo.findById(entityBefore.getMedicineStock().getId()).get();
+//                        medicineStockEntity.setQtyRemaining(qtyRemaining - qty);
+//                        logger.info("before updating medicineStockEntity={} qtyRemain={} qty={}", new Object[]{medicineStockEntity.getId(),qtyRemaining, qty});
+//                        MedicineStockEntity saved = medicineStockRepo.save(medicineStockEntity);
+//                        logger.info("after updating medicineStockEntity={} qtyRemain={}", new Object[]{saved.getId(),saved.getQtyRemaining()});
+//                    }
+//
+//                } catch (Exception e) {
+//                    logger.error("entityBefore.getMedicineStock().setQtyRemaining(qtyRemaining-qty);  ->" + e.toString());
+//                }
+
                 BeanUtils.copyProperties(entityBefore, entityAfter);
-                entityAfter = repo.save(entityAfter);
-            }else{
-                
-                entityAfter = repo.findById(entityBefore.getId()).get();
-            repo.deleteById(entityBefore.getId());
-             logger.warn("deleteById ={}", entityBefore.getId());
-           
+                entityAfter = pharmacyBillRowRepo.save(entityAfter);
+
+            } else {
+                if (entityBefore.getQty() == -1) {
+                    entityAfter = pharmacyBillRowRepo.findById(entityBefore.getId()).get();
+//
+                    pharmacyBillRowRepo.deleteById(entityBefore.getId());
+                    logger.warn("deleteById ={}", entityBefore.getId());
+                }
+
             }
 
             body = ResponseEntity
-                    .created(new URI("/api/" + label + entityAfter.getId()))
-                    .headers(HeaderUtil.createEntityCreationAlert(label,
-                            entityAfter.getId() + ""))
+                    .status(HttpStatus.OK)
+                    .header("ok", "yes")
+                    .header("problem", "")
                     .body(entityAfter);
-        } catch (URISyntaxException ex) {
+        } catch (Exception ex) {
+
             java.util.logging.Logger.getLogger(label).log(Level.SEVERE, null, ex);
+            body = ResponseEntity
+                    .status(HttpStatus.OK)
+                    .header("ok", "no")
+                    .header("problem", "" + ex.toString())
+                    .body(entityBefore);
         }
         return body;
     }
 
-    // delete
+// delete
     @GetMapping("delete/id/{id}")
     public DeleteResponse DeleteMapping_id(@PathVariable("id") Long id) {
         logger.warn("DeleteMapping_id obj={},id= {}", new Object[]{label, id});
-        repo.deleteById(id);
+        pharmacyBillRowRepo.deleteById(id);
         DeleteResponse deleteResponse = new DeleteResponse();
         deleteResponse.setMessage("Deleted " + label + " with id " + id);
         return deleteResponse;

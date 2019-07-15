@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name = "PharmacyBillRow")
 @Table(name = "PharmacyBillRow")
 public class PharmacyBillRowEntity implements Serializable {
 
@@ -80,6 +80,11 @@ public class PharmacyBillRowEntity implements Serializable {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return "PharmacyBillRowEntity{" + "id=" + id + ", medicineStock=" + medicineStock + ", pharmacyBill=" + pharmacyBill + ", qty=" + qty + ", discount=" + discount + ", amount=" + amount + '}';
     }
 
    

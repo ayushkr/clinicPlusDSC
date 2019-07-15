@@ -2,27 +2,21 @@
 
 
 <div id="formDiv" class="pharmacyCashBill_oneRowTemplate" >
-    OneRowfillFormTemplate
-    <br>
+    <!--    OneRowfillFormTemplate-->
     <center>
-
-         <a onclick="pharmacyCashBill.deleteRow()"   title="remove"
-           class=" w3-button  w3-red">
-            <i class="fa fa-trash"> Remove </i>
-        </a>
-
-        <br><br>
         <!--row form-->
         <form name="f1" id="f1" action="#/cmd/post" method="POST">
             <input type="hidden" name="addOrDeleteFlag" value="edit"> 
             <input type="hidden" name="module_direct" value="pharmacyBillRow"> 
             <input type="hidden" name="redirect" value='#/cmd?directUrl=/clinicPlus/module/pharmacyBillRowByBillId/list.html&id={{:pharmacyBill.id}}'> 
-
-
             <input type="hidden" id="id" name="id" data-link="id" />
             <input  type="hidden" id="pharmacyBill" name="pharmacyBill" 
                     value="{{:pharmacyBill.id}}"  />
-
+            <button onclick="pharmacyCashBill.deleteRow()"   title="remove"
+                    class="">
+                <i class="fa fa-trash">  </i>
+            </button>
+            <!--{{:id}}-->
             <div class="inp_outer">
                 <div class="inp1" onclick="popup_selection_obj(
                                 {
@@ -35,20 +29,23 @@
                     {{if medicineStock!=null}}
                     <input  type="hidden" id="medicineStock" name="medicineStock" 
                             value=" {{:medicineStock.id}}"/>
-                    <span id="medicineStock_display"  class="w3-button w3-theme-d1" >     
+                    <button id="medicineStock_display"   >     
                         {{:medicineStock.id}}_ {{:medicineStock.medicineBrandName.brandName}}
-                    </span>
+                    </button>
 
                     {{else}}
                     <input  type="hidden" id="medicineStock" name="medicineStock" 
                             />
                     <span id="medicineStock_display">    
-                        <a  class="w3-button w3-theme-d1"  > 
+                        <button  class="w3-button w3-theme-d1"  
+                                 accesskey="m"
+                                 title="Add/Change Medicine ? (Alt m)"
+                                 > 
                             <i class="fa fa-plus-circle">
-                                3. Add/Change Medicine
-                                (    മരുന്നിന്റെ പേര് മാറ്റാം )
+                                Medicine Name
+                                ( മരുന്നിന്റെ പേര്  )
                             </i>
-                        </a>
+                        </button>
 
                     </span>
                     {{/if}}
@@ -66,6 +63,8 @@
                           >---</span>
                     <input type="text" name="qty" id="qty"  data-link="qty" onkeydown="pharmacyCashBill.calculateAmount(1)" 
                            onclick="pharmacyCashBill.calculateAmount(1)"
+                           accesskey="q"
+                           title="How many? (Alt q)"
                            />
                 </div>
             </div>
@@ -79,23 +78,27 @@
                 </div>
 
             </div>
+            <br>
+            <button  onclick="pharmacyCashBill.saveEdit()"  title="OK"
+                     class=" ">
+                <i class="fa fa-save"> OK </i>
+            </button>
 
+
+            <!--pharmacyCashBill.onRowSelect(0)-->
+            <button onclick="hideDivAy('oneRowInEdit_{{:id}}');"   title="Cancel"
+                    class=" ">
+                <i class="fa fa-times"> Cancel </i>
+            </button>
         </form>
-    </center>
-    <br><br>
-    <a  onclick="pharmacyCashBill.saveEdit()"  title="OK"
-            class=" w3-button  w3-green">
-            <i class="fa fa-save"> OK </i>
-        </a>
 
-      
-        
-        <a onclick="hideDivAy('formDiv');pharmacyCashBill.onRowSelect(0)"   title="Cancel"
-           class=" w3-button  w3-theme-d2">
-            <i class="fa fa-times"> Cancel </i>
-        </a>
-    
-    
+
+
+
+    </center>
+
+    <br>
+
 </div>
 
- 
+

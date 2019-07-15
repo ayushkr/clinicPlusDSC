@@ -77,6 +77,8 @@ public class DoctorResource {
     @ResponseBody
     public PageCover<DoctorEntity> allPageNumber(
             @RequestParam("pageNumber") String pageNumber,
+            @RequestParam("filterColumn") String filterColumn,
+            @RequestParam("filter") String filter,
             @RequestParam("sortColumn") String sortColumn,
             @RequestParam("sortOrder") String sortOrder
     ) {
@@ -95,7 +97,7 @@ public class DoctorResource {
         } else {
             sort = Sort.by("id").ascending();
         }
-        if (pageNumber == "undefined") {
+        if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
         }
         Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 20, sort);

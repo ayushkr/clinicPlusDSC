@@ -1,10 +1,10 @@
 <div id="printableArea"   title="MedicineStock_List" >
-<table cellspacing="1" cellpadding="5" border="0" style="width:85%;">
-    
-            <thead>
-                <tr class="bluestrp">
-            <th>id
-                  <br>
+    <table class="table_greyBorder" cellspacing="0" cellpadding="5"  style="width:85%;">
+
+        <thead>
+            <tr class="bluestrp">
+                <th>id
+                    <br>
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -15,13 +15,13 @@
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-            </th>
-            <th>brandName
-            
-             <br>
+                </th>
+                <th style="min-width: 150px;">brandName
+
+                    <br>
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=brandName&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='brandName'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -32,16 +32,16 @@
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=brandName&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='brandName'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-            
-            
-            
-            </th>
-            <th>company</th>
-            <th>qty Remai ning
-                     <br>
+
+
+
+                </th>
+                <th>company</th>
+                <th>qty Remai ning
+                    <br>
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=qtyRemaining&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='qtyRemaining'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -52,17 +52,17 @@
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=qtyRemaining&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='qtyRemaining'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-                    
-               
-               </th>
-             <th style="min-width: 50px;">
+
+
+                </th>
+                <th style="min-width: 75px;">
                     expiry Date
-                    
-                    
-                      <br>
+
+
+                    <br>
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=expiryDate&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='expiryDate'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -73,18 +73,18 @@
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=expiryDate&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='expiryDate'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-                    
 
-                 
+
+
                 </th>
-            <th>batch</th>
-           <th>dis count</th>
-           <th>mrp
-           
-                   <br>
+                <th>batch</th>
+               
+                <th>mrp
+
+                    <br>
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=mrp&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='mrp'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -95,21 +95,24 @@
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=mrp&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='mrp'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-                    
 
-           
-           </th>
-            
-           <th>cgst</th>
-           <th>sgst</th>
-             <th>sub Count</th>
-             <th>rate</th>
-             <th>dateOf Purchase</th>
-              <th>qty Purch ased
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=qtyPurchased&sortOrder=a"
+
+
+                </th>
+
+
+                <th>sub Count</th>
+                <th>rate</th>
+                <th>rate Decided</th>
+                <th>cgst</th>
+                <th>sgst</th>
+
+                <th>dateOf Purchase</th>
+                <th>qty Purch ased
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=qtyPurchased&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='qtyPurchased'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                             <i class="fa fa-caret-up headerSortSymbol "></i>
@@ -119,57 +122,67 @@
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=qtyPurchased&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='qtyPurchased'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-              
-              
-              </th>
-              
-              <th>vendor</th>
-           
-             
-        </tr>
+
+
+                </th>
+
+                <th>vendor</th>
+
+
+            </tr>
         </thead>
         <tbody>
 
-        {{for obj.pageList.content}}
-        <tr 
-            onclick="go({{:id}},'medicineStock')"
-            class="firstrow">
-            <td>{{:id}}</td>
-            <td>
-                {{if medicineBrandName!=null}}
-                {{:medicineBrandName.brandName}}
-                {{/if}}
+            {{for obj.pageList.content}}
+            <tr 
+                onclick="go({{:id}}, 'medicineStock')"
+                class="firstrow">
+                <td>{{:id}}</td>
+                <td>
+                    {{if medicineBrandName!=null}}
+                    {{:medicineBrandName.brandName}}
+                    {{/if}}
                 </td>
                 <td>
-                {{if medicineBrandName!=null}}
-                {{:medicineBrandName.company}}
-                {{/if}}
+                    {{if medicineBrandName!=null}}
+                    {{:medicineBrandName.company}}
+                    {{/if}}
                 </td> 
+
+
+                <td>{{:qtyRemaining}}</td>
+                <td>{{:expiryDate}}</td>
+                <td>{{:batch}}</td>
                
-            
-                    <td>{{:qtyRemaining}}</td>
-            <td>{{:expiryDate}}</td>
-            <td>{{:batch}}</td>
-           <td>{{:discount}}</td>
-               <td>{{:mrp}}</td>
-                <td>{{:cgst}}</td>
-                 <td>{{:sgst}}</td>
-                 <td>{{:subCount}}</td>
+                <td>{{:mrp}}</td>
+
+                <td>{{:subCount}}</td>
                  <td>{{:rate}}</td>
-                 <td>{{:dateOfPurchase}}</td>
-                  <td>{{:qtyPurchased}}</td>
-                <td>
-                {{if vendor!=null}}
-                {{:vendor.name}}
-                {{/if}}
+                <td  >
+
+                    {{:rateDecided}}
+                {{if rateAvailable==true}}
+                <span style="float: right">&#10004;</span>
+                 {{/if}}
                 </td>
-        </tr>
-        {{/for}}
-    </tbody>
+                <td>{{:cgst}}</td>
+                <td>{{:sgst}}</td>
 
 
-</table>
+                <td>{{:dateOfPurchase}}</td>
+                <td>{{:qtyPurchased}}</td>
+                <td>
+                    {{if vendor!=null}}
+                    {{:vendor.name}}
+                    {{/if}}
+                </td>
+            </tr>
+            {{/for}}
+        </tbody>
+
+
+    </table>
 </div>

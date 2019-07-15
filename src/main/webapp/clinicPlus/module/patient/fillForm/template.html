@@ -68,8 +68,9 @@
 
                             <div class="inp_outer">
                                 <div class="title1">sex</div>
-                                <span class="inp2" contenteditable="true" id="sex"   data-link="sex" >---</span>
-                                <input type="hidden" name="sex" data-link="sex" />
+                                
+                                <label>  Male <input type="radio" name="sex" value='M' {{if sex=="M"}} checked="checked"  {{/if}}/></label>
+                                <label>  FeMale <input type="radio" name="sex" value='F' {{if sex=="F"}} checked="checked"  {{/if}}/></label>
                             </div>
 
 

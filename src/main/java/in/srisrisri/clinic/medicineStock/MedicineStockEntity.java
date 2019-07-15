@@ -12,14 +12,18 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity(name = "MedicineStock")
 @Table(name = "MedicineStock")
 
 public class MedicineStockEntity implements Serializable {
 
+ 
+ 
     @Id
-   @GeneratedValue(strategy=GenerationType.TABLE, generator="tab1")
+    @GeneratedValue
     private long id;
 
     @OneToOne
@@ -32,33 +36,49 @@ public class MedicineStockEntity implements Serializable {
     BigDecimal gst;
     BigDecimal costPrice;
     BigDecimal sellingPrice;
-    
-    @Transient
+    @ColumnDefault(value = "true")
+    @Column(name = "rate_available", nullable = false)
+    Boolean rateAvailable;
     BigDecimal rate;
+    @Transient
+    BigDecimal rateDecided;
     BigDecimal mrp;
     String batch;
     String billNo;
-    
+
     @Column(name = "discount", nullable = false)
-      BigDecimal discount;
+    BigDecimal discount;
 
     private String dateOfPurchase;
     private long qtyPurchased;
-    @Transient
+//    @Transient
     private long qtyRemaining;
     @Column(name = "sub_count", nullable = false)
     long subCount;
 
     ////////////////////////////////////////////////////////////////
     // special
-     public BigDecimal getRate() {
-        return getMrp();
+    public BigDecimal getRateDecided() {
+        if (getRateAvailable() == true) {
+            return getRate();
+        } else {
+            return mrp.divide(new BigDecimal(subCount));
+        }
+    }
+
+    public void setRateDecided(BigDecimal rateDecided) {
+        this.rateDecided = rateDecided;
+    }
+
+    public BigDecimal getRate() {
+        return rate;
+
     }
 
     public void setRate(BigDecimal rate) {
         this.rate = rate;
     }
-    
+
     public long getQtyRemaining() {
         return qtyRemaining;
     }
@@ -66,10 +86,19 @@ public class MedicineStockEntity implements Serializable {
     public void setQtyRemaining(long qtyRemaining) {
         this.qtyRemaining = qtyRemaining;
     }
-    
+
+   
+
     // end of specials
     /////////////////////////////////////////////////////////////////
-    
+    public Boolean getRateAvailable() {
+        return rateAvailable;
+    }
+
+    public void setRateAvailable(Boolean rateAvailable) {
+        this.rateAvailable = rateAvailable;
+    }
+
     public long getId() {
         return id;
     }
@@ -134,8 +163,6 @@ public class MedicineStockEntity implements Serializable {
         this.costPrice = costPrice;
     }
 
-    
-
     public BigDecimal getSellingPrice() {
         return sellingPrice;
     }
@@ -143,8 +170,6 @@ public class MedicineStockEntity implements Serializable {
     public void setSellingPrice(BigDecimal sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
-
-   
 
     public BigDecimal getMrp() {
         return mrp;
@@ -178,8 +203,6 @@ public class MedicineStockEntity implements Serializable {
         this.discount = discount;
     }
 
-  
-
     public String getDateOfPurchase() {
         return dateOfPurchase;
     }
@@ -196,8 +219,6 @@ public class MedicineStockEntity implements Serializable {
         this.qtyPurchased = qtyPurchased;
     }
 
-    
-
     public long getSubCount() {
         return subCount;
     }
@@ -211,10 +232,4 @@ public class MedicineStockEntity implements Serializable {
         return "MedicineStockEntity{" + "id=" + id + ", medicineBrandName=" + medicineBrandName + ", vendor=" + vendor + ", expiryDate=" + expiryDate + ", cgst=" + cgst + ", sgst=" + sgst + ", gst=" + gst + ", costPrice=" + costPrice + ", sellingPrice=" + sellingPrice + ", rate=" + rate + ", mrp=" + mrp + ", batch=" + batch + ", billNo=" + billNo + ", discount=" + discount + ", dateOfPurchase=" + dateOfPurchase + ", qtyPurchased=" + qtyPurchased + ", qtyRemaining=" + qtyRemaining + ", subCount=" + subCount + '}';
     }
 
-  
-
- }
-
- 
-
-   
+}

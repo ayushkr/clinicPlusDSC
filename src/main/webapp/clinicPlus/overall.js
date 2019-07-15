@@ -1,38 +1,38 @@
 //overall.js
 
-var localClipBoardVariable="";
+var localClipBoardVariable = "";
 function copyToClipBoard(input) {
-  /* Get the text field */
-  var copyText = document.getElementById(input);
+    /* Get the text field */
+    var copyText = document.getElementById(input);
 
-  /* Select the text field */
-  copyText.select();
+    /* Select the text field */
+    copyText.select();
 
-  /* Copy the text inside the text field */
-  document.execCommand("copy");
+    /* Copy the text inside the text field */
+    document.execCommand("copy");
 
-  /* Alert the copied text */
-  alert("Copied the text: " + copyText.value);
+    /* Alert the copied text */
+    alert("Copied the text: " + copyText.value);
 }
 var dummy;
-function copyToClipBoardValue(val){
-    localClipBoardVariable=val;
-     dummy = document.createElement("textarea");
+function copyToClipBoardValue(val) {
+    localClipBoardVariable = val;
+    dummy = document.createElement("textarea");
 //    dummy.style.display = 'none';
     document.body.appendChild(dummy);
 
     dummy.setAttribute("id", "dummy_id");
-    document.getElementById("dummy_id").value=val;
+    document.getElementById("dummy_id").value = val;
     dummy.select();
     document.execCommand("copy");
 //    alert("Copied the text: " +dummy.value);
-   document.body.removeChild(dummy);
+    document.body.removeChild(dummy);
 }
 
 
-function pasteFromClipBoardTo(id){
-     document.getElementById(id).value=localClipBoardVariable;
-    
+function pasteFromClipBoardTo(id) {
+    document.getElementById(id).value = localClipBoardVariable;
+
 }
 
 
@@ -88,8 +88,15 @@ function  patientCard_show(id) {
 
 }
 
+function getTodayAsExpiryDate() {
+    var date = new Date();
 
-function updateCurrentDate(divName) {
+    var reqDateStr = date.getFullYear() + "-" + twoDigitise(date.getMonth() + 1);
+    return reqDateStr;
+
+}
+
+function getToday() {
     var date = new Date();
     var weekday = new Array(7);
     weekday[0] = "Sunday";
@@ -102,9 +109,14 @@ function updateCurrentDate(divName) {
 
     var day = weekday[date.getDay()];
     var reqDateStr = date.getFullYear() + "-" + twoDigitise(date.getMonth() + 1) + '-' + twoDigitise(date.getDate());
+    return {'full': reqDateStr, 'day': day};
 
-    console.log(' updateCurrentDate(divName), divName=' + divName + ', reqDate=' + reqDateStr);
-    document.getElementById(divName).innerHTML = day + "---" + reqDateStr;
+}
+
+function updateCurrentDate(divName) {
+    var reqDateStr = getToday();
+    console.log(' updateCurrentDate(divName), divName=' + divName + ', reqDate=' + reqDateStr.full);
+    document.getElementById(divName).innerHTML = reqDateStr.day + "---" + reqDateStr.full;
 
     return reqDateStr;
 }
@@ -171,7 +183,8 @@ function populateCreate2(module, id, divName) {
 }
 
 function listAsPages(module, path, divName) {
-console.log('listAsPages path='+path);
+    console.log('listAsPages path=' + path);
+     $.getScript("/clinicPlus/module/" + module + "/"+module+".js");
     $.get(path
             , function (result) {
 
@@ -180,8 +193,8 @@ console.log('listAsPages path='+path);
                         'moduleName': module,
                         'totalPages': result.pageList.totalPages,
                         'pageable': {'pageNumber': result.pageList.pageable.pageNumber},
-                        'sortOrder':result.sortOrder,
-                        'sortColumn':result.sortColumn
+                        'sortOrder': result.sortOrder,
+                        'sortColumn': result.sortColumn
                     };
                     aylinker({
                         // urlOfTemplate: "/clinicPlus/module/" +mn.module.current+ "/all/list/template1.html?ran=" + Math.random(),
@@ -217,19 +230,24 @@ console.log('listAsPages path='+path);
 //////////
 
 function alert_1(head, body, typ) {
-    var element = document.getElementById("alert_akr");
-    if (typ === 'error') {
-        element.style = "display:block;background-color: red;";
-    } else {
-        element.style = "display:block;background-color: green;";
 
-    }
-
-
-    // element.style = "background-color:'red';";
-    document.getElementById("alert_akr_head").innerHTML = head;
-    document.getElementById("alert_akr_body").innerHTML = body;
-
+    
+     var element = document.getElementById("alert_akr");
+     if (typ !== 'success') {
+     element.style = "display:block;background-color: red;";
+     } else {
+     element.style = "display:block;background-color: green;";
+     
+     }
+     
+     
+     // element.style = "background-color:'red';";
+     document.getElementById("alert_akr_head").innerHTML = head;
+     document.getElementById("alert_akr_body").innerHTML = body;
+      if (typ === 'success') {
+     setTimeout(function (){hideDivAy('alert_akr'); },500);
+ }
+//    alert(head + "--" + body);
 }
 
 function alert_11(head, body) {
@@ -373,16 +391,16 @@ function loadTemplate_entity_select_into(obj, divname) {
         );
 
 
-    aylinker({
-        urlOfTemplate: '/clinicPlus/module/entity_select/template_menu.html',
-        selector: divname + "_menu",
-        data: {
-            'moduleName': module,
-            'a': 2
-        }
-    });
-    
-    document.getElementById(divname + "_paging").innerHTML="";
+        aylinker({
+            urlOfTemplate: '/clinicPlus/module/entity_select/template_menu.html',
+            selector: divname + "_menu",
+            data: {
+                'moduleName': module,
+                'a': 2
+            }
+        });
+
+        document.getElementById(divname + "_paging").innerHTML = "";
 
         //   $.getScript("/clinicPlus/module/entity_select/" + entity + "/" + entity + ".js?" + pageNewAy(1));
 
@@ -582,6 +600,12 @@ function  PrintUtils() {
 
         var originalTitle = document.title;
         document.title = title;
+        var elems=$("[data-printable='false']");
+        for(var el in elems ){
+            console.log("print false="+el);
+            
+        }
+        
         window.print();
         document.title = originalTitle;
 
@@ -650,209 +674,31 @@ function printDiv_navOff(divName) {
     console.log(printableAreaDiv);
     //alert("title ="+title);
     printableAreaDiv.style = 'margin-left:-30mm';
-    var widgets = document.getElementById("widgets");
-    widgets.style = "display:none";
+//    var widgets = document.getElementById("widgets");
+//    widgets.style = "display:none";
 
     var originalTitle = document.title;
     document.title = title;
+    
+     var elems=document.querySelectorAll("[data-akr-printable='false']");
+        for( i=0;i<elems.length;i++){
+            
+            elems[i].style = "display:none";
+        }
+    
     window.print();
+     for( i=0;i<elems.length;i++){
+          
+            elems[i].style = "display:block";
+        }
     document.title = originalTitle;
 
-
-    widgets.style.display = 'block';
+//
+//    widgets.style.display = 'block';
     navbarDiv.style.display = 'block';
     printableAreaDiv.style = 'margin-left:0mm';
 
 }
 
 
-
-var pharmacyCashBill = new PharmacyCashBill();
-function  PharmacyCashBill() {
-    this.moduleName = 'pharmacyCashBill';
-    this.id = 0;
-
-    this.render_list = function (id) {
-        console.log('PharmacyCashBill --> render_list -->menu-->' + id);
-        window.location.href = "#/dummy?a=PharmacyCashBill/" + id;
-        aylinker({
-            urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/menuTop.html?ran=" + Math.random(),
-            selector: "main1_menu",
-            data: {id: id}
-        }
-        );
-
-
-
-        $.get("/clinicPlus/api/pharmacyBillRow/ByBillId/" + id, function (result) {
-            console.log('PharmacyCashBill --> render_list -->inner-->start-->' + id);
-            aylinker({
-                urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/list/template.html?ran=" + Math.random(),
-                selector: "main1_inner",
-                data: {obj: result}
-            }
-            );
-        });
-        document.getElementById('main1_paging').innerHTML = "";
-    };
-
-    this.onRowSelect =
-            function (id) {
-
-                console.log('onRowSelect id=' + id);
-                var rows = document.getElementsByClassName('Row');
-                for (let row of rows) {
-                    row.style = "background:'#ecf6fd';color:'white';";
-                    // row.className+="pharmacyCashBill_selectedRow";
-                }
-
-                document.getElementById('row_' + id).style =
-                        'background-color: var(--color_d4);color: var(--color_l4); ';
-                document.getElementById('oneRowInEdit').style = 'display:block';
-
-                $.get("/clinicPlus/api/pharmacyBillRow/" + id, function (result) {
-                    // console.log('onRowSelect result=' + JSON.stringify(result));
-                    aylinker({
-                        urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/oneRowfillFormTemplate.html?ran=" + Math.random(),
-                        selector: 'oneRowInEdit',
-                        data: result
-                    }
-                    );
-                });
-            };
-
-    this.fillParamsFromGUI =
-            function () {
-                console.log('setValues');
-                var name = [
-                    'pharmacyBill',
-                    "medicineStock",
-                    "qty",
-                    "amount",
-                    "id"
-                ];
-
-                for (i = 0; i < name.length; i++) {
-                    console.log('name [i]---------' + name[i]);
-                    this.params[name[i]] = document.getElementById(name[i]).value;
-                    console.log(name[i] + '---->' + this.params[name[i]]);
-                }
-            };
-
-
-    this.deleteRow = function () {
-        this.params = ["a"];
-        console.log("deleteRow() ");
-        this.fillParamsFromGUI();
-        var d = {
-            "qty": -1,
-            "id": this.params['id']
-        };
-        console.log("deleteRow() d= " + JSON.stringify(d));
-        this.postToPharmacyBillRowAPI(d);
-    };
-
-    this.saveNew = function (id) {
-        console.log('saveNew id_pharmacyBill = ' + id);
-        var d = {
-            "qty": 0,
-            "pharmacyBill": id,
-            "id": 0
-        };
-        this.postToPharmacyBillRowAPI(d);
-    };
-    this.saveEdit = function () {
-        this.params = ["a", "b"];
-        this.fillParamsFromGUI();
-        var d = {
-            "action": "save",
-            "pharmacyBill": this.params['pharmacyBill'],
-            "appointment": this.params['appointment'],
-            "medicineBrandName": this.params['medicineBrandName'],
-            "medicineStock": this.params['medicineStock'],
-            "qty": this.params['qty'],
-            "amount": this.params['amount'],
-            "bill": this.params['bill'],
-            "remaining": this.params['remaining'],
-            "id": this.params['id']
-        };
-        console.log("saveEdit() d= " + JSON.stringify(d));
-        this.postToPharmacyBillRowAPI(d);
-    };
-
-    this.postToPharmacyBillRowAPI = function (d) {
-        console.log("postAkr() d= " + JSON.stringify(d));
-        var apiUrl = '/clinicPlus/api/pharmacyBillRow';
-
-        $.post(apiUrl, d)
-                .fail(
-                        function (data)
-                        {
-                            console.log("postToPharmacyBillRowAPI error ay " + data.responseJSON.message);
-                            alert_1('ERROR ', data.responseJSON.message);
-                        }
-                )
-                .done(
-                        function (data)
-                        {
-                            console.log("func postToPharmacyBillRowAPI  .done(, create/delete pharmacyBillRow (local) data="+JSON.stringify(data));
-
-                            $.get("/clinicPlus/api/pharmacyBillRow/ByBillId/" + data.pharmacyBill.id, function (result) {
-                                console.log("postToPharmacyBillRowAPI  get ");
-                                aylinker({
-                                    urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/list/template.html?ran=" + Math.random(),
-                                    selector: "main1_inner",
-                                    data: {obj: result}
-                                }
-                                );
-                            });
-                        }
-                );
-
-
-//        document.getElementById("pharmacyBillRowByBillId_fillForm").innerHTML = "";
-    };
-
-    this.postToPharmacyBill = function (d) {
-        console.log("postAkr() d= " + JSON.stringify(d));
-        $.post('/clinicPlus/api/pharmacyBill', d)
-                .fail(
-                        function (data)
-                        {
-                            console.log("error ay " + data.responseJSON.message);
-                            alert_1('ERROR ', data.responseJSON.message);
-                        }
-                )
-
-                .done(
-                        function (data)
-                        {
-                            console.log("created pharmacyBillRow (local)  with data=" + JSON.stringify(data));
-                            //alert_1('Success ', "OK");
-                        }
-                );
-    };
-    this.calculateAmount =
-            function (j) {
-                var medicineStock;
-                var medicineStock_id = document.getElementById('medicineStock').value;
-                $.get("/clinicPlus/api/medicineStock/" + medicineStock_id, function (medicineStock) {
-                    console.log('calculateAmount' + medicineStock.id);
-                    var rate = medicineStock.rate;
-
-                    var qty = document.getElementById('qty_span').innerHTML;
-
-                    var amt = rate * qty;
-                    console.log('rate =' + rate + ' qty=' + qty + ' amt=' + amt);
-                    console.log('rate qty amt' + rate + '---' + qty + '------amt' + amt);
-                    document.getElementById('amount').value = amt;
-                    document.getElementById('amount_disp').innerHTML = amt;
-
-                });
-
-            }
-
-
-
-}
 

@@ -44,10 +44,14 @@ public class MedicineBrandNameResource {
     @ResponseBody
     public PageCover<MedicineBrandNameEntity> allPageNumber(
             @RequestParam("pageNumber") String pageNumber,
+            @RequestParam("filterColumn") String filterColumn,
+            @RequestParam("filter") String filter,
             @RequestParam("sortColumn") String sortColumn,
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
+        int pageSize = 30;
+        Pageable pageable;
         logger.warn("REST getItems() , {} ", new Object[]{label});
 
         if (!sortColumn.equals("undefined")) {
@@ -58,14 +62,31 @@ public class MedicineBrandNameResource {
             }
 
         } else {
-            sort = Sort.by("id").ascending();
+            sort = Sort.by("brandName").ascending();
         }
         if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
         }
-        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
-        Page<MedicineBrandNameEntity> pageList = medicineBrandNameRepo.findAll(pageable);
-        PageCover<MedicineBrandNameEntity> pageCover = new PageCover<>(pageList);
+
+        pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, pageSize, sort);
+        Page<MedicineBrandNameEntity> page = null;
+
+        if (filterColumn.equals("undefined")) {
+          
+            page = medicineBrandNameRepo.findAll(pageable);
+        } else {
+
+            if (filterColumn.equals("brandName")) {
+               
+                page = medicineBrandNameRepo.findAllByBrandName(filter, pageable);
+
+            } else {
+
+            }
+
+        }
+
+        PageCover<MedicineBrandNameEntity> pageCover = new PageCover<>(page);
         pageCover.setSortColumn(sortColumn);
         pageCover.setSortOrder(sortOrder);
         pageCover.setModule(label);
@@ -125,7 +146,5 @@ public class MedicineBrandNameResource {
 
         return deleteResponse;
     }
-
-    
 
 }

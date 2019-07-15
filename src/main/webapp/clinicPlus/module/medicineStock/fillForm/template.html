@@ -5,14 +5,15 @@
     <input type='hidden' name='module_direct' value='medicineStock'>
     <input type='hidden' name='redirect' value=' #/cmdc?module=medicineStock&action=/all/list'>
 
-    medicineBrandName
+    medicineStock
     <div id="printableArea"   title="MedicineStock_{{:id}}_{{:medicineBrandName.brandName}}" >
 
         id <span class="inp2" contenteditable="false" id="id"   data-link="id" >---</span>   <br>
         <input type="hidden" name="id" data-link="id" />
 
 
-
+        <fieldset>
+            <legend>Basic</legend>
         <div class="inp_outer">
             <div class="title1">medicineBrandName</div>
             {{if medicineBrandName}}
@@ -22,11 +23,11 @@
             {{/if}}
 
             <div style='border: 1px;' onclick="popup_selection_obj(
-                        {
-                            'entity_select': 'medicineBrandName',
-                            'input': 'medicineBrandName'
-                        }
-                )">
+                            {
+                                'entity_select': 'medicineBrandName',
+                                'input': 'medicineBrandName'
+                            }
+                    )">
                 <span id="medicineBrandName_display" class="inp2" >     
                     {{if medicineBrandName}}
                     {{:medicineBrandName.brandName}} 
@@ -42,11 +43,11 @@
 
 
 
-      
+
 
         <div class="inp_outer">
 
-            <div class="title1">expiryDate</div>
+            <div class="title1">expiryDate (MM/yyyy)</div>
             {{if expiryDate!=null}}
             <input  type="hidden" id="expiryDate" name="expiryDate" data-link="expiryDate" />
             {{else}}
@@ -56,11 +57,11 @@
 
             <div style='border: 1px;' 
                  onclick="popup_selection_obj(
-                             {
-                                 'value': '{{:expiryDate}}',
-                                 'entity_select': 'dateForOrganisation',
-                                 'input': 'expiryDate'
-                             })"
+                                 {
+                                     'value': '{{:expiryDate}}',
+                                     'entity_select': 'dateForOrganisation',
+                                     'input': 'expiryDate'
+                                 })"
                  >
                 <span id="expiryDate_display" class="inp2" >     
                     {{if expiryDate!=null}}
@@ -89,123 +90,148 @@
             <span class="inp2" contenteditable="true" id="batch"   data-link="batch" >---</span>
             <input type="hidden" name="batch" data-link="batch" />
         </div>
-
-
-       
-        <hr>
-        <div class="inp_outer">
-            <div class="title1">MRP</div>
-            Rs.<span class="inp2" contenteditable="true"   data-link="mrp" >---</span>
-            <input type="hidden"  id="mrp" name="mrp" data-link="mrp" />
-        </div>
-        <div class="inp_outer">
-            <div class="title1">discount (Use 0.06 instead of 6%)</div>
-            <span class="inp2" contenteditable="true"    data-link="discount" >---</span>
-            <input type="hidden" id="discount" name="discount" data-link="discount" />
-        </div>
-        
-        
-<!--        <div class="inp_outer" >
-            <div class="title1">rate</div>
-            Rs. <span class="inp2" contenteditable="true"  id="rate_disp"  data-link="rate" >---</span>
-            <input type="hidden" id="rate" name="rate" data-link="rate" />
-        </div>-->
-        
-        
-        
-        <div class="inp_outer">
-            <div class="title1">cgst (Use 0.06 instead of 6%)</div>
-            <span class="inp2" contenteditable="true" id="cgst"   data-link="cgst" >---</span>
+        </fieldset>
             
-            <input type="hidden" name="cgst" data-link="cgst" />
-        </div>
-        
-         <div class="inp_outer">
-            <div class="title1">sgst (Use 0.06 instead of 6%)</div>
-            <span class="inp2" contenteditable="true" id="sgst"   data-link="sgst" >---</span>
-            <input type="hidden" name="sgst" data-link="sgst" />
-        </div>
-        <hr>
-        
-        <div class="inp_outer">
-            <div class="title1">
-                vendor
+            
+        <fieldset id="group2">
+            <legend>MRP or Rate</legend>
+            <div class="inp_outer">
+                <div class="title1">MRP</div>
+                Rs.<span class="inp2" contenteditable="true"   data-link="mrp" >---</span>
+                <input type="hidden"  id="mrp" name="mrp" data-link="mrp" />
             </div>
-            {{if vendor!=null}}
-            <input  type="hidden" id="vendor" name="vendor" data-link="vendor.id" />
-            {{else}}
-            <br> Not set
-            {{/if}}
-
-
-            <div style='border: 1px;' 
-                 onclick="popup_selection_obj(
-                             {
-                                 'entity_select': 'vendor',
-                                 'input': 'vendor'
-                             })"
-                 >
-                <span id="vendor_display" class="inp2" >     
-                    {{if vendor!=null}}
-                    {{:vendor.name}}
-                    {{else}}
-                    ----
-                    {{/if}}
-                </span>
-            </div>       
-        </div> 
-
-        <div class="inp_outer">
-            <div class="title1">billNo</div>
-            <span class="inp2" contenteditable="true" id="billNo"   data-link="billNo" >---</span>
-            <input type="hidden" name="billNo" data-link="billNo" />
-        </div>
-         <div class="inp_outer">
-            <div class="title1">dateOfPurchase</div>
-
-            {{if dateOfPurchase!=null}}
-            <input  type="hidden" id="dateOfPurchase" name="dateOfPurchase" data-link="dateOfPurchase" />
-            {{else}}
-            <br> Not set
-            {{/if}}
-
-            <div style='border: 1px;' 
-                 onclick="popup_selection_obj(
-                             {
-                                 'entity_select': 'dateForOrganisation',
-                                 'input': 'dateOfPurchase'
-                             })"
-                 >
-                <span id="dateOfPurchase_view" class="inp2" >     
-                    {{if dateOfPurchase!=null}}
-                    {{:dateOfPurchase}}
-                    {{else}}
-                    ----
-                    {{/if}}
-                </span>
+            <div class="inp_outer">
+                <div class="title1">subCount</div>
+                <span class="inp2" contenteditable="true"   data-link="subCount" >---</span>
+                <input type="hidden" id="subCount"  name="subCount" data-link="subCount" />
             </div>
 
-        </div>
-       
-          <hr> 
-          <div class="inp_outer">
-            <div class="title1">subCount</div>
-            <span class="inp2" contenteditable="true"   data-link="subCount" >---</span>
-            <input type="hidden" id="subCount"  name="subCount" data-link="subCount" />
-        </div>
-       <div class="inp_outer">
+            <div class="inp_outer" >
+                <div class="title1">rate</div>
+                Rs. <span class="inp2" contenteditable="true"  id="rate_disp"  data-link="rate" >---</span>
+                <input type="hidden" id="rate" name="rate" data-link="rate" />
+                <!--<input type="checkbox" name="rateAvailable" data-link="rateAvailable">-->
+            </div>
+<div class="inp_outer" >
+            <label>
+                Use Rate  <input type="radio" value="true" name="rateAvailable" {{if rateAvailable==true}}' checked="checked"  {{/if}}>
+            </label><br>
+<!--            &nbsp;&nbsp;&nbsp;-->
+            <label>
+                Use MRP  <input type="radio" value="false" name="rateAvailable" {{if rateAvailable==false}}' checked="checked"  {{/if}}>
+            </label>
+</div>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Discount & Tax</legend>
+            * Use 0.06 instead of 6% <br>
+            <div class="inp_outer">
+                <div class="title1">discount* </div>
+                <span class="inp2" contenteditable="true"    data-link="discount" >---</span>
+                <input type="hidden" id="discount" name="discount" data-link="discount" />
+            </div>
+
+
+            <div class="inp_outer">
+                <div class="title1">cgst* </div>
+                <span class="inp2" contenteditable="true" id="cgst"   data-link="cgst" >---</span>
+
+                <input type="hidden" name="cgst" data-link="cgst" />
+            </div>
+
+            <div class="inp_outer">
+                <div class="title1">sgst *</div>
+                <span class="inp2" contenteditable="true" id="sgst"   data-link="sgst" >---</span>
+                <input type="hidden" name="sgst" data-link="sgst" />
+            </div>
+
+        </fieldset>
+
+
+        <fieldset>
+            <legend>Vendor Related</legend>
+            <div class="inp_outer">
+                <div class="title1">
+                    vendor
+                </div>
+                {{if vendor}}
+                <input  type="hidden" id="vendor" name="vendor" data-link="vendor.id" />
+                {{else}}
+               
+                <br> Not set
+                {{/if}}
+
+
+                <div style='border: 1px;' 
+                     onclick="popup_selection_obj(
+                                 {
+                                     'entity_select': 'vendor',
+                                     'input': 'vendor'
+                                 })"
+                     >
+                    <span id="vendor_display" class="inp2" >     
+                        {{if vendor!=null}}
+                        {{:vendor.name}}
+                        {{else}}
+                        ----
+                        {{/if}}
+                    </span>
+                </div>       
+            </div> 
+
+            <div class="inp_outer">
+                <div class="title1">bill/Invoice Number</div>
+                <span class="inp2" contenteditable="true" id="billNo"   data-link="billNo" >---</span>
+                <input type="hidden" name="billNo" data-link="billNo" />
+            </div>
+            <div class="inp_outer">
+                <div class="title1">dateOfPurchase</div>
+
+                {{if dateOfPurchase!=null}}
+                <input  type="hidden" id="dateOfPurchase" name="dateOfPurchase" data-link="dateOfPurchase" />
+                {{else}}
+                <br> Not set
+                {{/if}}
+
+                <div style='border: 1px;' 
+                     onclick="popup_selection_obj(
+                                 {
+                                     'entity_select': 'dateForOrganisation',
+                                     'input': 'dateOfPurchase'
+                                 })"
+                     >
+                    <span id="dateOfPurchase_view" class="inp2" >     
+                        {{if dateOfPurchase!=null}}
+                        {{:dateOfPurchase}}
+                        {{else}}
+                        ----
+                        {{/if}}
+                    </span>
+                </div>
+
+            </div>
+            
+             <div class="inp_outer">
             <div class="title1">qtyPurchased</div>
             <span class="inp2" contenteditable="true" id="qtyPurchased"   data-link="qtyPurchased" >---</span>
             <input type="hidden" name="qtyPurchased" data-link="qtyPurchased" />
         </div>
-         <div class="inp_outer2">
+        </fieldset>
+        <hr> 
+
+       
+        <div class="inp_outer2">
             <div class="title1">qtyRemaining</div>
             <span class="inp2" contenteditable="false" id="qtyRemaining"   data-link="qtyRemaining" >---</span>
-<!--            <input type="hidden" name="qtyRemaining" data-link="qtyRemaining" />-->
+            <!--            <input type="hidden" name="qtyRemaining" data-link="qtyRemaining" />-->
         </div>
+
+        <fieldset>
+            <legend> Full details in JSON</legend>
+            <span style=" width: 100px;display: inherit;">{{:~jsonise(~root)}}</span>
         
-        <hr>
-        Full details
-       {{:~jsonise(~root)}}
+        </fieldset>
     </div>
 </form>

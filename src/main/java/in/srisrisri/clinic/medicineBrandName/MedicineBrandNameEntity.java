@@ -20,7 +20,8 @@ import org.hibernate.annotations.Parameter;
 public class MedicineBrandNameEntity  {
 
     @Id
-   @GeneratedValue(strategy=GenerationType.TABLE, generator="tab1")
+//   @GeneratedValue(strategy=GenerationType.TABLE, generator="tab1")
+     @GeneratedValue
     private long id;
     private String brandName;
     private String company;

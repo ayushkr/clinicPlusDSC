@@ -98,12 +98,12 @@ public class PatientResource {
             }
 
         } else {
-            sort = Sort.by("dateOfRegistration").ascending();
+            sort = Sort.by("dateOfRegistration").descending();
         }
         if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
         }
-        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1,20, sort);
         Page<PatientEntity> page = null;
         if (filterColumn.equals("undefined")) {
             page = repo.findAll(pageable);

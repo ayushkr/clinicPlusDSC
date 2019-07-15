@@ -1,7 +1,9 @@
 
 Select a medicine stock <br>
 Filter By medicineBrandName (മരുന്നിന്റെ പേര് അടിക്കാം )
-<input  type="text" onkeyup="filter('medicineBrandName.brandName')"  >
+<input  type="text" onkeyup="filter('medicineBrandName.brandName')" 
+        accesskey="l" title="Enter name to search"
+        >
 <br>
 
 
@@ -16,24 +18,36 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
         <div class="CellNoBorder"><p>vendor</p></div>
         <div class="CellNoBorder"><p>expiryDate</p></div>
         <div class="CellNoBorder"><p>batch</p></div>
+        <div class="CellNoBorder"><p>Rate</p></div>
         <div class="CellNoBorder"><p>Actions</p></div>
     </div>
 
 
     {{for obj}}
-     <div class="Row" id="select_{{:id}}"  >
-        <div class="CellNoBorder" style="color: var(--color_l1)"> {{:id}} </div>
-        <div class="CellNoBorder entity_select_selectButton" 
-             onclick="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:medicineBrandName.brandName}}')"  
+    <div class="Row" id="select_{{:id}}"  >
+        <div class="CellNoBorder" style="color:var(--color_l1)"> {{:id}} </div>
+        <div class="CellNoBorder " 
 
-             >    {{if medicineBrandName!=null}}
-            {{:medicineBrandName.brandName}}
-            {{/if}} </div>
+             > 
+
+            <button class="entity_select_selectButton"
+                    onclick="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:medicineBrandName.brandName}}')"  
+
+                    >
+                {{if medicineBrandName!=null}}
+                {{:medicineBrandName.brandName}}
+                {{/if}} 
+
+            </button>
+
+
+
+        </div>
 
         <div class="CellNoBorder"> {{:vendor.name}} </div>
         <div class="CellNoBorder">  {{:expiryDate}} </div>
         <div class="CellNoBorder">  {{:batch}} </div>
-
+        <div class="CellNoBorder">  {{:rateDecided}} </div>
 
         <div class="CellNoBorder"> 
             <a class="w3-btn" data-toggle="tooltip" title="Edit"

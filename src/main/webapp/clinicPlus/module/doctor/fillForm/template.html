@@ -7,41 +7,41 @@
     <form id='form_doctor' method="post" action="#/cmd/post">   
         <input type='hidden' name='module_direct' value='doctor'>
         <input type='hidden' name='redirect' value=' #/cmdc?module=doctor&action=/all/list'>
-
+ <input type="hidden" name="id" data-link="id" />
         <table border="0">
             <tbody>
                 <tr>
                     <td>
-                        ID <span class="inp2" contenteditable="false" id="id"   data-link="id" >---</span>   <br>
-                        <input type="hidden" name="id" data-link="id" />
-                        <div class="inp_outer" style="width:400px;">
+                        ID {{:id}} <br>
+                       
+                        <div class="inp_outer" style="min-width:400px;">
                             <div class="title1">Name</div>
                             <span class="inp2" contenteditable="true" id="name"   data-link="name" >---</span>
                             <input type="hidden" name="name" data-link="name" />
                         </div>
                         <br>
-                        <div class="inp_outer" style="width:400px;">
+                        <div class="inp_outer" style="min-width:400px;">
                             <div class="title1">Department</div>
                             <span class="inp2" contenteditable="true" id="department"   data-link="department" >---</span>
                             <input type="hidden" name="department" data-link="department" />
                         </div>
                         <br>
-                        <div class="inp_outer" style="width:400px;" >
+                        <div class="inp_outer" style="min-width:400px;" >
                             <div class="title1" >Description</div>
-                            <span class="inp2" contenteditable="true" id="description"   data-link="description" style="width:400px;">---</span>
+                            <span class="inp2" contenteditable="true" id="description"   data-link="description">---</span>
                             <input type="hidden" name="description" data-link="description" />
                         </div>
                         <br>
-                        <div class="inp_outer" style="width:400px;" >
+                        <div class="inp_outer" style="min-width:400px;" >
                             <div class="title1" >remediesFor</div>
-                            <span class="inp2" contenteditable="true" id="remediesFor"   data-link="remediesFor" style="width:400px;">---</span>
+                            <span class="inp2" contenteditable="true" id="remediesFor"   data-link="remediesFor" >---</span>
                             <input type="hidden" name="remediesFor" data-link="remediesFor" />
                         </div>
                     </td>
 
 
                     <td>
-                        <div class="inp_outer" style="height:300px;"
+                        <div class="inp_outer" style="min-height:300px;"
                               onclick="document.getElementById('input_file_profileImage').click();"
                              >
                         <img  id="form_profileImage_img" 
@@ -89,7 +89,7 @@
             <input type="hidden" name="feeForClinic" data-link="feeForClinic" />
         </div>
         <br>
-        <div class="inp_outer">
+         <div class="inp_outer" style="min-width:200px;" >
             <div class="title1">contactPhone</div>
             <span class="inp2" contenteditable="true" id="contactPhone"   data-link="contactPhone" >---</span>
             <input type="hidden" name="contactPhone" data-link="contactPhone" />
@@ -100,7 +100,7 @@
             <span class="inp2" contenteditable="true" id="address"   data-link="address" >---</span>
             <input type="hidden" name="address" data-link="address" />
         </div>
-        <div class="inp_outer">
+         <div class="inp_outer" style="min-width:200px;" >
             <div class="title1">email</div>
             <span class="inp2" contenteditable="true" id="email"   data-link="email" >---</span>
             <input type="hidden" name="email" data-link="email" />

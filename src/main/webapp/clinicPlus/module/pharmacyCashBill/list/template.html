@@ -37,21 +37,21 @@
                     </tbody>
                 </table>
             </center>  
-           
+
             </td>
- <hr>
+            <hr>
             </tr>
 
             <tr>
+
                 <td class="gstSpacing">
-                    GST#:432423423434              
-                </td>
-                <td class="gstSpacing">
-                    DL No:KL-TSR-117933
-                </td>
-                <td class="gstSpacing">
-                    DL Date: 07/01/2017
-                </td>
+            <center>
+                &nbsp;  DL No:KL-TSR-137508, KL-TSR-137509
+                &nbsp; 
+                DL Date: 14/10/2018
+            </center>
+            </td>
+
             </tr>
             </tbody>
         </table>
@@ -66,13 +66,13 @@
                     <td  class="Table1_A1">
                         Bill No &nbsp;: 
 
-                        {{:obj.pharmacyBillRowEntitys[0].pharmacyBill.id}} 
+                        {{:obj.billId}} 
 
 
 
                     </td>
                     <td  class="Table1_A1">
-<!--                        Ref# No : -->
+                        <!--                        Ref# No : -->
                         <span class="T1">
 
 
@@ -121,9 +121,15 @@
             </div>
 
             <div class="Heading">
+                <div class="Cell"><ayu1>
 
+                        SlNo
+                    </ayu1></div>
 
-                <div class="Cell"><ayu1>item/ BrandName</ayu1></div>
+                <div class="Cell"><ayu1>
+
+                        item/ BrandName
+                    </ayu1></div>
                 <div class="Cell"><ayu1>Mfg</ayu1></div>
 
                 <div class="Cell"><ayu1>Batch</ayu1></div>
@@ -131,27 +137,26 @@
                 <div class="Cell"><ayu1>Qty</ayu1></div>
                 <!--<div class="Cell"><ayu1>Rate</ayu1></div>-->
                 <!--<div class="Cell"><ayu1>Dis%</ayu1></div>-->
-                <div class="Cell"><ayu1>GST</ayu1></div>
-                <div class="Cell"><ayu1>MRP</ayu1></div>
+                <!--<div class="Cell"><ayu1>GST</ayu1></div>-->
+                <div class="Cell"><ayu1>Rate</ayu1></div>
                 <div class="Cell"><ayu1>Amount</ayu1></div>
             </div>
             {{for obj.pharmacyBillRowEntitys}}
+            {{if medicineStock}}
+            {{if  (medicineStock.medicineBrandName.brandName!='roundOff')}}
+            <div class="Row"    id="row_{{:id}}" >
+                <div class="Cell">            <ayu1>
+                        {{:#getIndex()+1}}
+                    </ayu1>        </div>
 
-            <div class="Row"    id="row_{{:id}}" onclick="pharmacyCashBill.onRowSelect({{:id}})">
-
-
-
-
-
-                {{if medicineStock}}
-
-
-
-                <div class="Cell">
+                <div class="CellNoPadding">
                     <ayu1>
-
-                        {{:medicineStock.medicineBrandName.brandName}}
-                    </ayu1>        
+                        <button class="button_none" title="{{:id}}"
+                                onclick="pharmacyCashBill.onRowSelect({{:id}})"
+                                >{{:medicineStock.medicineBrandName.brandName}}
+                        </button>
+                    </ayu1>    
+                    <div id="oneRowInEdit_{{:id}}"></div>
                 </div>
                 <div class="Cell">            <ayu1>
                         {{:medicineStock.medicineBrandName.company}}
@@ -167,23 +172,25 @@
                     </ayu1>        </div>
                 <div class="Cell">            <ayu1>{{:qty}} </ayu1>        </div>
 
-<!--                <div class="Cell">            <ayu1>
-                        {{:medicineStock.rate}}
-                    </ayu1>
-                </div>-->
-                
-                
-<!--                <div class="Cell">            <ayu1>
-                        {{:medicineStock.discount}}
-                    </ayu1>        </div>-->
+                <!--                <div class="Cell">            <ayu1>
+                                        {{:medicineStock.rate}}
+                                    </ayu1>
+                                </div>-->
 
 
-                <div class="Cell">            <ayu1>
-                        {{:medicineStock.gst}}
-                    </ayu1>        </div>
+                <!--                <div class="Cell">            <ayu1>
+                                        {{:medicineStock.discount}}
+                                    </ayu1>        </div>-->
+
+
+                <!--                <div class="Cell">            <ayu1>
+                                        {{:medicineStock.gst}}
+                                    </ayu1>        </div>-->
+
+
                 <div class="Cell">            
                     <ayu1>
-                        {{:medicineStock.mrp}}
+                        {{:medicineStock.rateDecided}}
                     </ayu1>        </div>
 
                 <div class="Cell">            
@@ -192,87 +199,104 @@
                     </ayu1>        
                 </div>
 
-                {{else}}
-                <div class="Cell" >
-                    <ayu1>
-                        <a  class=" w3-theme-d1" >
-                            <i class="fa fa-plus-circle w3-btn"> 2.Edit Row (കാലി  വരിയെ  മരുന്നാക്കാം )</i>
-                            
-                        </a>
-                             
-                    </ayu1>
-                </div>
 
 
+            </div>
+            {{else}}
+            <div class="Row"    id="row_{{:id}}" >
 
-
-                {{/if}}
-
-
-
-
+                <div id="oneRowInEdit_{{:id}}"></div>
+                <span id='round'  title='{{:id}}'></span>
 
 
             </div>
 
+            {{/if}}
+            {{else}}
+            <div class="Row"    id="row_{{:id}}" >
+                <div class="Cell" >
+                    <div id="oneRowInEdit_{{:id}}"></div>
+                    <ayu1>
+                        <button  class=" w3-red" accesskey="i"
+                                 onclick="pharmacyCashBill.onRowSelect({{:id}})"      
+                                 >
+                            select medicine
+
+                        </button>
+
+                    </ayu1>
+                </div>
+            </div>
+            {{/if}}
 
 
 
             {{/for}}
             <div class="Heading">
 
-                <div class="Cell"></div>
+                <div class="Cell"  title="add new"
+                     onclick="pharmacyCashBill.saveNew({{:obj.billId}})" 
+
+                     ></div>
+ <div class="Cell"></div>
                 <div class="Cell"></div>
                 <div class="Cell"></div>
                 <div class="Cell"></div>
                 <!--<div class="Cell"></div>-->
-<!--                <div class="Cell"></div>-->
+                <div class="Cell"></div>
 
                 <div class="Cell"></div>
-                <div class="Cell" style="font-size: 14px;">{{:obj.gstTotal}}</div>
-                <div class="Cell"  style="font-size: 14px;">{{:obj.mrpTotal}}</div>
+                <!--<div class="Cell" style="font-size: 14px;">{{:obj.gstTotal}}</div>-->
+                <!--<div class="Cell"  style="font-size: 14px;">{{:obj.mrpTotal}}</div>-->
                 <div class="Cell"  style="font-size: 14px;">{{:obj.amountTotal}}</div>
 
             </div>
         </div>
 
-
-        <table >
-            <tbody>
-                <tr>
-                    <td>
-                        Taxable Amount :
-                    </td>
-                    <td style="text-align: right">
-                        {{:obj.taxableAmount}}  ,
-                    </td>
-                    <td style="text-align: right">
-                        CGST : 
-                    </td>
-                    <td style="text-align: right">
-                        {{:obj.gstTotal/2}},
-                    </td>
-
-                    <td style="text-align: right">
-                        SGST :  
-                    </td>
-                    <td style="text-align: right">
-                        {{:obj.gstTotal/2}}
-                    </td>
-                </tr>
-
-
-            </tbody>
-        </table>
+        <!--
+                <table >
+                    <tbody>
+                        <tr>
+                            <td>
+                                Taxable Amount :
+                            </td>
+                            <td style="text-align: right">
+                                {{:obj.taxableAmount}}  ,
+                            </td>
+                            <td style="text-align: right">
+                                CGST : 
+                            </td>
+                            <td style="text-align: right">
+                                {{:obj.gstTotal/2}},
+                            </td>
         
+                            <td style="text-align: right">
+                                SGST :  
+                            </td>
+                            <td style="text-align: right">
+                                {{:obj.gstTotal/2}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>-->
+
+
+        <div 
+            onclick="pharmacyCashBill.onRowSelect(document.getElementById('round').title)" 
+            > 
+
+            Rs.{{:~root.obj.rounded}} (RoundOff) 
+        </div>
+        <br/>
+
         Total Item(s) : {{:totalItems}} ,
-        Paid Amount :  <span style="font-weight: bold;font-size: 18px">{{:obj.amountTotal}}</span>
-(
+        Paid Amount :  <span style="font-weight: bold;font-size: 18px">{{:obj.amountTotalRounded}}</span>
+        (
         {{:obj.amountTotalWords}}  )
         <br>
         <span style="right: 100px;
-    position: absolute;">{{:pharmacistName}}  (Pharmacist)</span>
-        
+              position: absolute;">{{:pharmacistName}}  (Pharmacist)</span>
+
         <br>
         <span colspan="3" style="text-align: center">
             <!--We provided Rs.{{:obj.freeOfCost}}  value(s) items free of Cost.-->
@@ -282,3 +306,4 @@
     </center>
 </div>
 <br>
+<!--{{:~jsonise(~root)}}-->

@@ -2,6 +2,8 @@ package in.srisrisri.clinic;
 
 import in.srisrisri.clinic.FileStorage.FileStorageProperties;
 import in.srisrisri.clinic.FileStorage.FileStorageService;
+import java.awt.Desktop;
+import java.io.IOException;
 import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
@@ -25,7 +27,13 @@ public class Starter {
 //           derbyServerUtil.start();
         SpringApplication.run(Starter.class, args);
        
-        logger.info("-------------started- ----------------");
+        logger.info("-------------started--------------- -");
+        try {
+            Runtime.getRuntime().exec("clear");
+            Runtime.getRuntime().exec("aplay /usr/share/sounds/alsa/serverStarted.wav");
+        } catch (IOException ex) {
+             logger.info("------------aplay issue- --------------- -"+ex.toString());
+        }
 
     }
 

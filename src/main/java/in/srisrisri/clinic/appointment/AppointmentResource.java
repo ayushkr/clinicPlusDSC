@@ -99,7 +99,7 @@ int വി=0;
             }
 
         } else {
-            sort = Sort.by("id").ascending();
+            sort = Sort.by("dateOfAppointment").descending();
         }
         if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
@@ -107,21 +107,28 @@ int വി=0;
         Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1,10, sort);
         
         
-        Page<AppointmentEntity> pageList =null;
+        Page<AppointmentEntity> page =null;
         
         if(filterColumn.equals("undefined")){
-        pageList=appointmentRepo.findAll(pageable);
+        page=appointmentRepo.findAll(pageable);
         }else{
-            PatientEntity patientEntity = new PatientEntity();
+            
+            if(filterColumn.equals("patientName")){
+             PatientEntity patientEntity = new PatientEntity();
             patientEntity.setId(Long.parseLong(filter));
-         pageList=appointmentRepo.findAllByPatient(patientEntity,pageable);
+         page=appointmentRepo.findAllByPatient(patientEntity,pageable);
         
+            }
+            
+           
         }
         
         
-        PageCover<AppointmentEntity> pageCover = new PageCover<>(pageList);
+        PageCover<AppointmentEntity> pageCover = new PageCover<>(page);
         pageCover.setSortColumn(sortColumn);
         pageCover.setSortOrder(sortOrder);
+        pageCover.setFilterColumn(filterColumn);
+        pageCover.setFilter(filter);
         pageCover.setModule(label);
 
         return pageCover;

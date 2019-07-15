@@ -25,6 +25,8 @@ public class SumDAO {
     BigDecimal mrpTotal = new BigDecimal(0);
     BigDecimal gstTotal = new BigDecimal(0);
     BigDecimal amountTotal = new BigDecimal(0);
+     BigDecimal rounded = new BigDecimal(0);
+      BigDecimal amountTotalRounded = new BigDecimal(0);
     String amountTotalWords = "";
     BigDecimal bd = new BigDecimal(1.75);
     BigDecimal bd100 = new BigDecimal(100);
@@ -33,11 +35,13 @@ public class SumDAO {
     BigDecimal taxableAmount;
     BigDecimal freeOfCost;
      BigDecimal qty;
-     BigDecimal mrpPerItem ;
+     BigDecimal rate ;
       BigDecimal discount ;
 
+      Long billId;
+      
     public boolean calculateTotals() throws Exception{
-
+String error="";
         for (PharmacyBillRowEntity pharmacyBillRowEntity : pharmacyBillRowEntitys) {
             MedicineStockEntity medicineStock = pharmacyBillRowEntity.getMedicineStock();
             
@@ -47,38 +51,43 @@ public class SumDAO {
             if (medicineStock != null) {
                
                 try{
-                mrpPerItem = medicineStock.getMrp();
+                rate = medicineStock.getRate();
                 discount=medicineStock.getDiscount();
-                  logger.warn("findTotals, mrpPerItem ={}", mrpPerItem);
+                  logger.warn("findTotals, rate ={}", rate);
                 }catch(Exception e){
+                    error="exception in mrp or discount";
+                    logger.warn("exception in mrp or discount{}", e);
                     break;
                
                 }
                  
                
                 qty = new BigDecimal(pharmacyBillRowEntity.getQty() + "");
-                logger.warn("qty, mrpPerItem ={}", qty);
+              //  logger.warn("qty, mrpPerItem ={}", qty);
               
-                BigDecimal amtWithoutDiscount = mrpPerItem.multiply(qty);
+                BigDecimal amtWithoutDiscount = rate.multiply(qty);
                 medicineStock.setMrp(amtWithoutDiscount);
-                 logger.warn("findTotals, amtWithoutDiscount ={}", amtWithoutDiscount);
-                BigDecimal amtWithDiscount = mrpPerItem.multiply(bd1.subtract(discount)).multiply(qty);
+            //     logger.warn("findTotals, amtWithoutDiscount ={}", amtWithoutDiscount);
+                BigDecimal amtWithDiscount = rate.multiply(bd1.subtract(discount)).multiply(qty);
                 pharmacyBillRowEntity.setAmount(amtWithDiscount);
-                  logger.warn("findTotals, amtWithDiscount ={}", amtWithDiscount);
+            //      logger.warn("findTotals, amtWithDiscount ={}", amtWithDiscount);
                 BigDecimal gstAmt = (amtWithoutDiscount.multiply(medicineStock.getCgst().add(medicineStock.getSgst())));
-                 logger.warn("findTotals, gstAmt ={}", gstAmt);
+            //     logger.warn("findTotals, gstAmt ={}", gstAmt);
                 
                 medicineStock.setGst(gstAmt);
                 
                 
                 
-                logger.warn("findTotals,pharmacyBillRowEntity id={}", pharmacyBillRowEntity.getId());
-                
+            //    logger.warn("findTotals,pharmacyBillRowEntity id={}", pharmacyBillRowEntity.getId());
+                if(medicineStock.getMedicineBrandName().getBrandName().equals("roundOff")){
+                rounded=pharmacyBillRowEntity.getAmount();
+                }else{
                 mrpTotal = mrpTotal.add(medicineStock.getMrp());
                 gstTotal = gstTotal.add(medicineStock.getGst());
                 amountTotal = amountTotal.add(pharmacyBillRowEntity.getAmount());
+                }
 
-                amountTotalWords = FinanceUtils.RsToWords(amountTotal + "");
+               
 
                 medicineStock.setRate(FinanceUtils.round(medicineStock.getRate(), 2));
                 medicineStock.setGst(FinanceUtils.round(medicineStock.getGst(), 2));
@@ -87,10 +96,37 @@ public class SumDAO {
             }
            
         }
+        
         taxableAmount = FinanceUtils.round(amountTotal.subtract(gstTotal).divide(bd2), 2);
         freeOfCost = FinanceUtils.round(mrpTotal.subtract(amountTotal), 2);
-        
+        amountTotalRounded=amountTotal.add(rounded);
+         amountTotalWords = FinanceUtils.RsToWords(amountTotalRounded + "");
         return true;
+    }
+
+    public BigDecimal getRounded() {
+        return rounded;
+    }
+
+    public void setRounded(BigDecimal rounded) {
+        this.rounded = rounded;
+    }
+
+    public BigDecimal getAmountTotalRounded() {
+        return amountTotalRounded;
+    }
+
+    public void setAmountTotalRounded(BigDecimal amountTotalRounded) {
+        this.amountTotalRounded = amountTotalRounded;
+    }
+
+    
+    public Long getBillId() {
+        return billId;
+    }
+
+    public void setBillId(Long billId) {
+        this.billId = billId;
     }
 
     public BigDecimal getBd() {
