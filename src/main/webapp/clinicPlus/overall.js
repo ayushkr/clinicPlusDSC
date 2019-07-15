@@ -179,7 +179,7 @@ function populateCreate2(module, id, divName) {
 
     document.getElementById(divName + "_paging").innerHTML = '';
     document.getElementById(divName).style = 'display:block';
-    $.getScript("/clinicPlus/module/" + module + "/1.js");
+    $.getScript("/clinicPlus/module/" + module + "/"+module+".js");
 }
 
 function listAsPages(module, path, divName) {

@@ -19,6 +19,7 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
         <div class="CellNoBorder"><p>expiryDate</p></div>
         <div class="CellNoBorder"><p>batch</p></div>
         <div class="CellNoBorder"><p>Rate</p></div>
+         <div class="CellNoBorder"><p>remain</p></div>
         <div class="CellNoBorder"><p>Actions</p></div>
     </div>
 
@@ -48,7 +49,7 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
         <div class="CellNoBorder">  {{:expiryDate}} </div>
         <div class="CellNoBorder">  {{:batch}} </div>
         <div class="CellNoBorder">  {{:rateDecided}} </div>
-
+        <div class="CellNoBorder {{if qtyRemaining<90}} w3-red {{/if}}"  >  {{:qtyRemaining}} </div>
         <div class="CellNoBorder"> 
             <a class="w3-btn" data-toggle="tooltip" title="Edit"
                onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, 'main3');"
@@ -73,6 +74,8 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
 
     {{/for}}
 </div>
+<br>
+<br>
 
 
 
