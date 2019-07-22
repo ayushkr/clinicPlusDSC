@@ -1,5 +1,8 @@
 
-<div id="printableArea"   title="PharmacyBill_List" >
+<div id="printableArea"   title="PharmacyBill_List" 
+     
+     >
+    <!--style="font-family: Calibri"-->
     <center>
         <table border="0">
             <tbody>
@@ -121,12 +124,12 @@
             </div>
 
             <div class="Heading">
-                <div class="Cell"><ayu1>
+                <div class="Cell"  tabindex="0" accesskey="q"><ayu1>
 
                         SlNo
                     </ayu1></div>
 
-                <div class="Cell"><ayu1>
+                <div class="Cell" style="width:250px;"><ayu1>
 
                         item/ BrandName
                     </ayu1></div>
@@ -144,7 +147,10 @@
             {{for obj.pharmacyBillRowEntitys}}
             {{if medicineStock}}
             {{if  (medicineStock.medicineBrandName.brandName!='roundOff')}}
-            <div class="Row"    id="row_{{:id}}" >
+            <div class="Row"    id="row_{{:id}}" 
+                  onclick2="pharmacyCashBill.onRowSelect({{:id}})"
+                 
+                 >
                 <div class="Cell">            <ayu1>
                         {{:#getIndex()+1}}
                     </ayu1>        </div>
@@ -152,7 +158,9 @@
                 <div class="CellNoPadding">
                     <ayu1>
                         <button class="button_none" title="{{:id}}"
+                                accesskey="q"
                                 onclick="pharmacyCashBill.onRowSelect({{:id}})"
+                                style="text-align: left;"
                                 >{{:medicineStock.medicineBrandName.brandName}}
                         </button>
                     </ayu1>    
@@ -170,7 +178,7 @@
                         {{:~expiryFormat1(medicineStock.expiryDate)}}
 
                     </ayu1>        </div>
-                <div class="Cell">            <ayu1>{{:qty}} </ayu1>        </div>
+                <div class="Cell">            <ayu1 style="float: right">{{:qty}} </ayu1>        </div>
 
                 <!--                <div class="Cell">            <ayu1>
                                         {{:medicineStock.rate}}
@@ -189,12 +197,13 @@
 
 
                 <div class="Cell">            
-                    <ayu1>
+                    <ayu1 style="float: right">
                         {{:medicineStock.rateDecided}}
                     </ayu1>        </div>
 
-                <div class="Cell">            
-                    <ayu1>
+                <div class="Cell" >            
+                    <ayu1 style="float: right">
+                        
                         {{:amount}}
                     </ayu1>        
                 </div>
@@ -234,7 +243,7 @@
             {{/for}}
             <div class="Heading">
 
-                <div class="Cell"  title="add new"
+                <div class="Cell"  title="add new" tabindex="0" 
                      onclick="pharmacyCashBill.saveNew({{:obj.billId}})" 
 
                      ></div>
@@ -248,7 +257,10 @@
                 <div class="Cell"></div>
                 <!--<div class="Cell" style="font-size: 14px;">{{:obj.gstTotal}}</div>-->
                 <!--<div class="Cell"  style="font-size: 14px;">{{:obj.mrpTotal}}</div>-->
-                <div class="Cell"  style="font-size: 14px;">{{:obj.amountTotal}}</div>
+                <div class="Cell"  style="font-size: 14px;">
+                    <span style="float: right">{{:obj.amountTotal}}
+                    </span>
+                </div>
 
             </div>
         </div>

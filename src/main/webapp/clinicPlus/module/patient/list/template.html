@@ -1,21 +1,42 @@
 
 <div data-akr-printable="false">
-    <input type="text" id="patientName" > 
-<input type="button" value="Filter by Patient "
-       onclick="window.location.href='#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=name&filter='+document.getElementById('patientName').value+''"
-       >
+
+    <div class="inp_outer" style="min-width: 200px">
+        <div class="inp1" >
+            <div class="title1">name </div>
+        </div>
+        <input id="name" name='name' type="text"  value=""
+               accesskey="q"
+               > 
+        <input type="button" value="Go " id="button_name_go"
+               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=name&filter=' + document.getElementById('name').value + ''"
+               >
+    </div>
+
+    <div class="inp_outer" style="min-width: 200px">
+        <div class="inp1" >
+            <div class="title1">contactPhone </div>
+        </div>
+        <input id="contactPhone" contactPhone='contactPhone' type="text"  value=""
+               accesskey="q"
+               > 
+        <input type="button" value="Go " id="button_contactPhone_go"
+               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=contactPhone&filter=' + document.getElementById('contactPhone').value + ''"
+               >
+    </div>
+
 </div>
 <br>
 
 <div id="printableArea"   title="Patient_List" >
     <!--<p class="pageTitle">Patients</p>-->
-  
-   <table class="table_greyBorder"  cellspacing="0" cellpadding="5" border="1"  >
+
+    <table class="table_greyBorder"  cellspacing="0" cellpadding="5" border="1"  >
 
         <thead>
             <tr class="bluestrp">
                 <th>id
-                 <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                             <i class="fa fa-caret-up headerSortSymbol "></i>
@@ -25,15 +46,15 @@
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-                
-                
-                
+
+
+
                 </th>
                 <th>fixedId
-                 <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=fixedId&sortOrder=a"
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=fixedId&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='fixedId'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                             <i class="fa fa-caret-up headerSortSymbol "></i>
@@ -43,13 +64,13 @@
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=fixedId&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='fixedId'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-                
-                
                 </th>
-                 <th >
+
+
+                <th >
                     bookId
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=bookId&sortOrder=a"
                        >
@@ -61,15 +82,15 @@
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=bookId&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='bookId'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-                
-                    
+
+
                 </th>
                 <th style="min-width: 100px">
                     dateOf registration
-                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfRegistration&sortOrder=a"
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfRegistration&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='dateOfRegistration'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                             <i class="fa fa-caret-up headerSortSymbol "></i>
@@ -79,45 +100,13 @@
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfRegistration&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='dateOfRegistration'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
-                
-                </th>
-                <th>Name
-                  <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=name&sortOrder=a"
-                       >
-                        <span class=" {{if obj.sortColumn=='name'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
 
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=name&sortOrder=d"
-                       >
-                        <span class=" {{if obj.sortColumn=='name'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
-                
-                </th>
-                <th>Place
-                  <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=place&sortOrder=a"
-                       >
-                        <span class=" {{if obj.sortColumn=='place'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-up headerSortSymbol "></i>
-                        </span>
-                    </a>
-
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=place&sortOrder=d"
-                       >
-                        <span class=" {{if obj.sortColumn=='place'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
-                
                 </th>
                 <th>age
-                  <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=age&sortOrder=a"
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=age&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='age'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                             <i class="fa fa-caret-up headerSortSymbol "></i>
@@ -127,16 +116,14 @@
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=age&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='age'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-                
+
                 </th>
-                <th>dob
-                
-                </th>
+
                 <th>sex
-                  <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=sex&sortOrder=a"
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=sex&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='sex'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                             <i class="fa fa-caret-up headerSortSymbol "></i>
@@ -146,15 +133,52 @@
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=sex&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='sex'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-                
-                
+
+
                 </th>
+                <th>Name
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=name&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='name'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=name&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='name'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+
+                </th>
+                <th>Place
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=place&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='place'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=place&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='place'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+
+                </th>
+
+                <th>dob
+
+                </th>
+
                 <th>Phone
-                
-                  <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=contactPhone&sortOrder=a"
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=contactPhone&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='contactPhone'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                             <i class="fa fa-caret-up headerSortSymbol "></i>
@@ -164,16 +188,16 @@
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=contactPhone&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='contactPhone'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-                
+
                 </th>
 
 
-                
+
                 <th>Remarks
-                  <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remarks&sortOrder=a"
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remarks&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='remarks'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                             <i class="fa fa-caret-up headerSortSymbol "></i>
@@ -183,11 +207,11 @@
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remarks&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='remarks'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-                
-                
+
+
                 </th>
                 <th>Actions</th>
 
@@ -198,39 +222,67 @@
             {{for obj.pageList.content}}
 
             <tr class="firstrow"
-                 
+ 
                 >
 
 
-                <td>
-                    <span onclick="copyToClipBoardValue('{{:id}}')" class="w3-btn w3-blue-gray" >
-                        
-                         {{:id}}
+                <td onclick="copyToClipBoardValue('{{:id}}')">
+                    <span  
+                         
+                        >
+
+                        {{:id}}
                     </span>
-                   
+
                 </td>
-                 <td>{{:fixedId}}</td>
-                 <td>{{:bookId}}</td>
-                <td>{{:dateOfRegistration}}</td>
-                <td 
-                    onclick="go({{:id}},'patient')"
+                <td
+                    onclick="go({{:id}}, 'patient')"
+                    >{{:fixedId}}</td>
+                <td
+                   onclick="go({{:id}}, 'patient')" 
+                    >{{:bookId}}</td>
+                <td
+                    onclick="go({{:id}}, 'patient')"
+                    >{{:dateOfRegistration}}</td>
+                <td
+                   onclick="go({{:id}}, 'patient')" 
+                    >{{:age}}</td>
+                <td
+                    onclick="go({{:id}}, 'patient')"
                     >
-                    <span class="w3-button w3-blue-gray" >     
-                    {{:name}}
+                    {{if sex=='M' }} <i class="fa fa-mars"></i> {{/if}}
+                    {{if sex=='F' }} <i class="fa fa-venus"></i> {{/if}}
+                    {{if sex=='T' }} <i class="fa fa-transgender"></i> {{/if}}
+                </td>
+                <td 
+                    onclick="go({{:id}}, 'patient')"
+                    >
+                    <span  >     
+                        {{:name}}
                     </span>
-                    </td>
-                <td>{{:place}}</td>
-                <td>{{:age}}</td>
-                <td>{{:dob}}</td>
-                <td>{{:sex}}</td>
-                <td>{{:contactPhone}}</td>
-                
-                <td>{{:remarks}}</td>
-                <td><i class="fa fa-edit"
-                       
+                </td>
+                <td
+                    onclick="go({{:id}}, 'patient')"
+                    >{{:place}}</td>
+
+                <td
+                    onclick="go({{:id}}, 'patient')"
+                    >{{:dob}}</td>
+
+                <td
+                    onclick="go({{:id}}, 'patient')"
+                    >{{:contactPhone}}</td>
+
+                <td
+                    onclick="go({{:id}}, 'patient')"
+                    >{{:remarks}}</td>
+                <td>
+                    <i class="fa fa-edit"
+
                        > </i>
-                
-                
+                    
+
+
                 </td>
             </tr>
             {{else}}

@@ -88,7 +88,7 @@ public class PatientResource {
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
-        logger.warn("REST getItems() , {} ", new Object[]{label});
+        logger.warn("pageable={},filter= ", new Object[]{label,filter});
 
         if (!sortColumn.equals("undefined")) {
             if (sortOrder.equals("d")) {
@@ -113,6 +113,11 @@ public class PatientResource {
                 page = repo.findAllByNameLike(filter, pageable);
 
             }
+            if (filterColumn.equals("contactPhone")) {
+                page = repo.findAllByContactPhoneLike(filter, pageable);
+
+            }
+            
         }
 
         PageCover<PatientEntity> pageCover = new PageCover<>(page);

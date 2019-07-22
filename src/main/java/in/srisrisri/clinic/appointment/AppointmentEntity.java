@@ -66,8 +66,9 @@ public class AppointmentEntity implements Serializable {
         return id;
     }
 
-    public void setId(long id) {
+    public AppointmentEntity setId(long id) {
         this.id = id;
+        return this;
     }
 
     public long getBookId() {

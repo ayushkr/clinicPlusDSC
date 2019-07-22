@@ -26,6 +26,7 @@ public class MedicineBrandNameEntity  {
     private String brandName;
     private String company;
     private String genericName;
+      private String composition;
     private String usedFor;
     private String type;
     private long groupid;
@@ -36,6 +37,22 @@ public class MedicineBrandNameEntity  {
    
     @Column(name="lastTouched", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date lastTouched; 
+
+    public String getComposition() {
+        return composition;
+    }
+
+    public void setComposition(String composition) {
+        this.composition = composition;
+    }
+
+    public Date getLastTouched() {
+        return lastTouched;
+    }
+
+    public void setLastTouched(Date lastTouched) {
+        this.lastTouched = lastTouched;
+    }
 
     public String getHSN() {
         return HSN;

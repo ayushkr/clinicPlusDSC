@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -28,7 +30,8 @@ import org.springframework.data.domain.Sort;
 @RestController
 @RequestMapping("/clinicPlus/api/appointment")
 public class AppointmentResource {
-int വി=0;
+
+    int വി = 0;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -38,48 +41,57 @@ int വി=0;
         this.appointmentRepo = appointmentRepo;
     }
 
- 
-   
-
-   
-
     private static final String label = "appointment";
 
     @GetMapping("")
     @ResponseBody
-    public List<AppointmentEntity> all() {
-        logger.warn("REST getItems() , {} ", new Object[]{label});
-        List<AppointmentEntity> list = appointmentRepo.findAll();
-        return list;
+    public List<AppointmentEntity> local_all() {
+        return local_allByDateOfAppointmentDesc();
     }
 
-    
-@GetMapping("dateOfAppointment")
+    @GetMapping("dateOfAppointment")
     @ResponseBody
-    public List<AppointmentEntity> all2() {
-        logger.warn("REST getItems() , {} ", new Object[]{label});
-        Sort sort=new Sort(new Sort.Order(Sort.Direction.DESC, "dateOfAppointment"));
+    public List<AppointmentEntity> local_allByDateOfAppointmentDesc() {
+        logger.warn("local_allByDateOfAppointmentDesc, {} ", new Object[]{label});
+        Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "dateOfAppointment"));
         List<AppointmentEntity> list = appointmentRepo.findAll(sort);
         return list;
     }
-    
+
     @GetMapping("doctor/{id}")
     @ResponseBody
-    public ReportIncomeFromDoctorsDTO all_ByDoctor(@PathVariable("id") int id) {
+    public ReportIncomeFromDoctorsDTO all_ByDoctor(@PathVariable("id") int id,
+            @RequestParam("dateFrom") String dateFrom,
+            @RequestParam("dateTo") String dateTo
+    ) {
         logger.warn("REST getItems() , {} ", new Object[]{label});
-        Sort sort=new Sort(new Sort.Order(Sort.Direction.DESC, "dateOfAppointment"));
-        DoctorEntity doctorEntity = new DoctorEntity();doctorEntity.setId(id);
-        
-        List<AppointmentEntity> list = appointmentRepo.findByDoctor(doctorEntity,sort);
-        
-        ReportIncomeFromDoctorsDTO reportIncomeFromDoctorsDTO=new ReportIncomeFromDoctorsDTO(list);
+        Sort sort = Sort.by(Sort.Direction.DESC, "dateOfAppointment");
+        DoctorEntity doctorEntity = new DoctorEntity();
+        doctorEntity.setId(id);
+        Date dateToDate ;
+
+        if ("".equals(dateTo)) {
+            dateToDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+                    
+                    
+        } else {
+            dateToDate = Date.valueOf(dateTo);
+        }
+
+        if ("".equals(dateFrom)) {
+            dateFrom = "2018-01-01";
+        }
+
+        List<AppointmentEntity> list = appointmentRepo.findByDoctorDateBetween(
+                Date.valueOf(dateFrom) ,dateToDate, doctorEntity);
+
+        ReportIncomeFromDoctorsDTO reportIncomeFromDoctorsDTO = new ReportIncomeFromDoctorsDTO(list);
         reportIncomeFromDoctorsDTO.calculateTotal();
-        
+
         return reportIncomeFromDoctorsDTO;
     }
-    
-    
-@GetMapping("pageable")
+
+    @GetMapping("pageable")
     @ResponseBody
     public PageCover<AppointmentEntity> allPageNumber(
             @RequestParam("filterColumn") String filterColumn,
@@ -104,26 +116,28 @@ int വി=0;
         if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
         }
-        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1,10, sort);
-        
-        
-        Page<AppointmentEntity> page =null;
-        
-        if(filterColumn.equals("undefined")){
-        page=appointmentRepo.findAll(pageable);
-        }else{
-            
-            if(filterColumn.equals("patientName")){
-             PatientEntity patientEntity = new PatientEntity();
-            patientEntity.setId(Long.parseLong(filter));
-         page=appointmentRepo.findAllByPatient(patientEntity,pageable);
-        
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
+
+        Page<AppointmentEntity> page = null;
+
+        if (filterColumn.equals("undefined")) {
+            page = appointmentRepo.findAll(pageable);
+        } else {
+
+            if (filterColumn.equals("patient")) {
+                PatientEntity patientEntity = new PatientEntity();
+                patientEntity.setId(Long.parseLong(filter));
+                page = appointmentRepo.findAllByPatient(patientEntity, pageable);
+
+            } else if (filterColumn.equals("doctor")) {
+                DoctorEntity doctorEntity = new DoctorEntity();
+                doctorEntity.setId(Long.parseLong(filter));
+                page = appointmentRepo.findAllByDoctor(doctorEntity, pageable);
+
             }
-            
-           
+
         }
-        
-        
+
         PageCover<AppointmentEntity> pageCover = new PageCover<>(page);
         pageCover.setSortColumn(sortColumn);
         pageCover.setSortOrder(sortOrder);
@@ -152,7 +166,7 @@ int വി=0;
         ResponseEntity<AppointmentEntity> body = null;
         try {
             logger.warn("PostMapping_one , entityBefore={} ", entityBefore.toString());
-          
+
             AppointmentEntity entityAfter = null;
             if (entityBefore.getId() != 0) {
 
@@ -164,10 +178,9 @@ int വി=0;
                 //entityAfter.setCreationTime(new Date());
             }
 
-            
             BeanUtils.copyProperties(entityBefore, entityAfter);
             entityAfter = appointmentRepo.save(entityAfter);
-logger.warn("PostMapping_one, entityAfter ={}", entityAfter);
+            logger.warn("PostMapping_one, entityAfter ={}", entityAfter);
             body = ResponseEntity
                     .created(new URI("/api/appointment/" + entityAfter.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(label,

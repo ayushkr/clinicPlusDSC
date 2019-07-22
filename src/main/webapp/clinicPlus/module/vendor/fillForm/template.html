@@ -1,6 +1,6 @@
 <!--vendor-->
 
-   
+<br>
     <div class="pageTitle">{{if id==0}} New  {{else}} Existing  id {{:id}} : {{:name}} {{/if}}  </div>
 
 <form id='form_vendor' method="post" action="#/cmd/post">
@@ -9,19 +9,14 @@
 
     <input type="hidden" name="id" data-link="id" />
 
-    <div class="inp_outer">
+    <div class="inp_outer" style="min-width: 300px">
         <div class="title1">supplier name</div>
         <span class="inp2" contenteditable="true" id="name"   data-link="name" >---</span>
         <input type="hidden" name="name" data-link="name" />
     </div>
-
-    <div class="inp_outer">
-        <div class="title1">description</div>
-        <span class="inp2" contenteditable="true" id="description"   data-link="description" >---</span>
-        <input type="hidden" name="description" data-link="description" />
-    </div>
+    <br>
     
-    <div class="inp_outer">
+    <div class="inp_outer" style="min-width: 200px">
         <div class="title1">address</div>
         <span class="inp2" contenteditable="true" id="address"   data-link="address" >---</span>
         <input type="hidden" name="address" data-link="address" />
@@ -36,32 +31,37 @@
         <span class="inp2" contenteditable="true" id="pinCode"   data-link="pinCode" >---</span>
         <input type="hidden" name="pinCode" data-link="pinCode" />
     </div>
-
-    <div class="inp_outer">
+    <br>
+    <div class="inp_outer" style="min-width: 200px">
         <div class="title1">contactPhone</div>
         <span class="inp2" contenteditable="true" id="contactPhone"   data-link="contactPhone" >---</span>
         <input type="hidden" name="contactPhone" data-link="contactPhone" />
     </div>
     
-      <div class="inp_outer">
+      <div class="inp_outer" style="min-width: 200px">
         <div class="title1">email</div>
         <span class="inp2" contenteditable="true" id="email"   data-link="email" >---</span>
         <input type="hidden" name="email" data-link="email" />
     </div>
-    
-       <div class="inp_outer">
-        <div class="title1">dlNo</div>
+    <br>
+       <div class="inp_outer" style="min-width: 200px">
+        <div class="title1">DL No</div>
         <span class="inp2" contenteditable="true" id="dlNo"   data-link="dlNo" >---</span>
         <input type="hidden" name="dlNo" data-link="dlNo" />
     </div>
     
-      <div class="inp_outer">
+      <div class="inp_outer" style="min-width: 100px">
         <div class="title1">ssid</div>
         <span class="inp2" contenteditable="true" id="ssid"   data-link="ssid" >---</span>
         <input type="hidden" name="ssid" data-link="ssid" />
     </div>
-    
-   
+    <br>
+   <div class="inp_outer" style="min-width: 300px">
+        <div class="title1">description</div>
+        <span class="inp2" contenteditable="true" id="description"   data-link="description" >---</span>
+        <input type="hidden" name="description" data-link="description" />
+    </div>
+    <br>
     
 
 </form>

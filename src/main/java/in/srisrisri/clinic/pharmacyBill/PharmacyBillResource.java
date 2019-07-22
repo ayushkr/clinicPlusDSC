@@ -23,22 +23,22 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-
 @RestController
 @RequestMapping("/clinicPlus/api/pharmacyBill")
 public class PharmacyBillResource {
-String label="PharmacyBill";
+
+    String label = "pharmacyBill";
     private final Logger logger = LoggerFactory.getLogger(PharmacyBillResource.class);
 
     @Autowired
     PharmacyBillRepo repo;
 
-
     @GetMapping("")
     @ResponseBody
-    public ResponseEntity<List<PharmacyBillEntity>> getList(){
-       logger.debug("getList", new Object (){ });
-        List<PharmacyBillEntity> list=repo.findAll();
+    public ResponseEntity<List<PharmacyBillEntity>> getList() {
+        logger.debug("getList", new Object() {
+        });
+        List<PharmacyBillEntity> list = repo.findAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 //   @GetMapping("undefined")
@@ -48,18 +48,18 @@ String label="PharmacyBill";
 //      Optional<PharmacyBillEntity> item=Optional.of(new PharmacyBillEntity());
 //        return new ResponseEntity<>(item, HttpStatus.OK);
 //    }
-  
-    
-        
-@GetMapping("pageable")
+
+    @GetMapping("pageable")
     @ResponseBody
     public PageCover<PharmacyBillEntity> allPageNumber(
             @RequestParam("pageNumber") String pageNumber,
+            @RequestParam("filterColumn") String filterColumn,
+            @RequestParam("filter") String filter,
             @RequestParam("sortColumn") String sortColumn,
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
-        logger.warn("REST getItems() , {} ", new Object[]{label});
+        logger.warn("pageable , {} ", new Object[]{label});
 
         if (!sortColumn.equals("undefined")) {
             if (sortOrder.equals("d")) {
@@ -69,16 +69,41 @@ String label="PharmacyBill";
             }
 
         } else {
-            sort = Sort.by("id").ascending();
+            sort = Sort.by("dateOfBill").descending();
         }
         if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
         }
-        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1,10, sort);
-        Page<PharmacyBillEntity> pageList = repo.findAll(pageable);
-        PageCover<PharmacyBillEntity> pageCover = new PageCover<>(pageList);
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
+        Page<PharmacyBillEntity> page=null;
+
+        if ("undefined".equals(filterColumn)) {
+            page = repo.findAll(pageable);
+        } else {
+
+            if (filterColumn.equals("appointment")) {
+
+                AppointmentEntity appointmentEntity = new AppointmentEntity();
+                appointmentEntity.setId(Long.parseLong(filter));
+                page =repo.findAllByAppointment(appointmentEntity, pageable);
+
+            }
+             if (filterColumn.equals("patientName")) {
+
+                page =repo.findAllByPatientNameLike(filter, pageable);
+
+            }
+
+           
+
+        }
+
+        PageCover<PharmacyBillEntity> pageCover = new PageCover<>(page);
+
         pageCover.setSortColumn(sortColumn);
+
         pageCover.setSortOrder(sortOrder);
+
         pageCover.setModule(label);
 
         return pageCover;
@@ -86,48 +111,44 @@ String label="PharmacyBill";
 
     @GetMapping("{id}")
     @ResponseBody
-    public ResponseEntity<Optional<PharmacyBillEntity>> getMedicineNames(@PathVariable("id") Long id){
-      Optional<PharmacyBillEntity> item=repo.findById(id);
+    public ResponseEntity<Optional<PharmacyBillEntity>> getMedicineNames(@PathVariable("id") Long id) {
+        Optional<PharmacyBillEntity> item = repo.findById(id);
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
-    
-    
-     @GetMapping("betweenDates/{dateStart}/{dateEnd}")
+
+    @GetMapping("betweenDates/{dateStart}/{dateEnd}")
     @ResponseBody
-    public ResponseEntity<List<PharmacyBillEntity>> getdd(@PathVariable("dateStart") Date dateStart,@PathVariable("dateEnd") Date dateEnd){
-        
-        List<PharmacyBillEntity> item=null;
-         System.out.println("dateStart"+dateStart.toString());
-  item=repo.findByDateOfBillBetween(dateStart, dateEnd);
-   
+    public ResponseEntity<List<PharmacyBillEntity>> getdd(@PathVariable("dateStart") Date dateStart, @PathVariable("dateEnd") Date dateEnd) {
+
+        List<PharmacyBillEntity> item = null;
+        System.out.println("dateStart" + dateStart.toString());
+        item = repo.findByDateOfBillBetween(dateStart, dateEnd);
+
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
-    
-    
-   
-    
-       // create
+
+    // create
     @PostMapping("")
     public ResponseEntity<PharmacyBillEntity> PostMapping_one(PharmacyBillEntity entityBefore) {
-         ResponseEntity<PharmacyBillEntity> body = null;
+        ResponseEntity<PharmacyBillEntity> body = null;
         try {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
             logger.warn("---- id ={}", entityBefore.getId());
             PharmacyBillEntity entityAfter = null;
-            if(entityBefore.getId()!=0){
-            
-            entityAfter=repo.findById(entityBefore.getId()).get();
-             //entityAfter.setUpdationTime(new Date());
-            }else{
-            entityAfter=new PharmacyBillEntity();
-            // entityAfter.setCreationTime(new Date());
+            if (entityBefore.getId() != 0) {
+
+                entityAfter = repo.findById(entityBefore.getId()).get();
+                //entityAfter.setUpdationTime(new Date());
+            } else {
+                entityAfter = new PharmacyBillEntity();
+                // entityAfter.setCreationTime(new Date());
             }
-           
+
             BeanUtils.copyProperties(entityBefore, entityAfter);
             entityAfter = repo.save(entityAfter);
 
-           body = ResponseEntity
-                    .created(new URI("/api/"+label + entityAfter.getId()))
+            body = ResponseEntity
+                    .created(new URI("/api/" + label + entityAfter.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(label,
                             entityAfter.getId() + ""))
                     .body(entityAfter);
@@ -136,20 +157,15 @@ String label="PharmacyBill";
         }
         return body;
     }
-   
-       // delete
+
+    // delete
     @GetMapping("delete/id/{id}")
     public DeleteResponse DeleteMapping_id(@PathVariable("id") Long id) {
         logger.warn("DeleteMapping_id obj={},id= {}", new Object[]{label, id});
-       repo.deleteById(id);
+        repo.deleteById(id);
         DeleteResponse deleteResponse = new DeleteResponse();
-        deleteResponse.setMessage("Deleted "+label+" with id " + id);
+        deleteResponse.setMessage("Deleted " + label + " with id " + id);
         return deleteResponse;
     }
-
-  
-  
-
-   
 
 }

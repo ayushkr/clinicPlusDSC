@@ -43,8 +43,9 @@ public class PatientEntity implements Serializable {
         return id;
     }
 
-    public void setId(long id) {
+    public PatientEntity setId(long id) {
         this.id = id;
+        return this;
     }
 
     public long getBookId() {

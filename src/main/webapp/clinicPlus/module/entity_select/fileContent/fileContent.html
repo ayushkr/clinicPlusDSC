@@ -1,0 +1,84 @@
+
+{{for obj}}
+<div>
+    <div class="header">
+        
+        <span style="float: right">ID:  {{:id}}</span>
+       
+        <span > {{:description}}</span>
+       
+        <br>
+         <i style="float:right"
+                       class="fa fa-edit"  
+                       onclick="go({{:id}}, 'fileContent');hideDivAy('main2')"
+                       
+                       title="Edit">
+
+                    </i>
+        &nbsp;
+      Doc:  {{if doctor}} {{:doctor.name}} {{/if}}
+        &nbsp;
+      Pat:  {{if patient}} {{:patient.name}} {{/if}}
+
+    </div>
+    <div class="body">
+        
+            {{if contentType=='image'}}
+
+            <img src="/clinicPlus/api/fileContent/content/{{:id}}?upt={{:updationTime}}" 
+                 style="width: 100%" alt="img"><br>
+            {{/if}}
+
+            {{if contentType=='video'}}
+            <video style="width: 100%" controls>
+                <source src="/clinicPlus/api/fileContent/content/{{:id}}?upt={{:updationTime}}" type="video/mp4">
+
+                Your browser does not support the video tag.
+            </video>
+            <br>
+            {{/if}}
+
+            {{if contentType=='text' || contentType=='application'}}
+            <embed style="width: 100%;height: 100%"
+                   id="plugin" 
+                   src="/clinicPlus/api/fileContent/content/{{:id}}?upt={{:updationTime}}"
+                   type="{{:mimeType}}" 
+                   internalinstanceid="15">
+
+
+            {{/if}}
+        
+
+
+    </div>
+    <div class="footer">
+        
+        <a href="/clinicPlus/api/fileContent/content/{{:id}}?upt={{:updationTime}}" target="_blank"
+
+                       >
+                        <i class="fa fa-file" ></i> Open in new tab
+                    </a>
+                    
+    </div>
+</div>
+{{/for}}
+
+<style>
+    .header{
+        width: 100%;
+        background-color: #0000ff2e;
+    }
+
+    .body{
+        width: 100%;
+        background-color: #9999ffff2e;
+        height: 458px;
+    }
+
+    .footer{
+        width: 100%;
+        background-color: #0000ff2e;
+    }
+
+
+</style>

@@ -163,8 +163,7 @@ function displayCalendar(dateJSON) {
 
 
 // building the calendar html body.
-    var calendarBody = "<table class='calendar'> <tr class='monthNow'><th colspan='7'>"
-            + monthNames[month] + " " + year + "</th></tr>";
+    var calendarBody = "<table class='calendar'> ";
     calendarBody += "<tr class='dayNames'>  <td class='dayDiv td' style='background-color: #820606;'>Sun</td>  <td class='dayDiv td'>Mon</td> \n\
 <td class='dayDiv td'>Tue</td>" +
             "<td class='dayDiv td'>Wed</td> <td class='dayDiv td'>Thu</td> <td class='dayDiv td'>Fri</td> <td class='dayDiv td'>Sat</td> </tr>";

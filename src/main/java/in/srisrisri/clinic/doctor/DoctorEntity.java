@@ -47,7 +47,74 @@ public class DoctorEntity implements Serializable {
     long id_display;
     String remarks;
     String profileImage;
+    
+   String sun;
+   String mon;
+   String tue;
+   String wed;
+   String thu;
+   String fri;
+   String sat;
 
+    public String getSun() {
+        return sun;
+    }
+
+    public void setSun(String sun) {
+        this.sun = sun;
+    }
+
+    public String getMon() {
+        return mon;
+    }
+
+    public void setMon(String mon) {
+        this.mon = mon;
+    }
+
+    public String getTue() {
+        return tue;
+    }
+
+    public void setTue(String tue) {
+        this.tue = tue;
+    }
+
+    public String getWed() {
+        return wed;
+    }
+
+    public void setWed(String wed) {
+        this.wed = wed;
+    }
+
+    public String getThu() {
+        return thu;
+    }
+
+    public void setThu(String thu) {
+        this.thu = thu;
+    }
+
+    public String getFri() {
+        return fri;
+    }
+
+    public void setFri(String fri) {
+        this.fri = fri;
+    }
+
+    public String getSat() {
+        return sat;
+    }
+
+    public void setSat(String sat) {
+        this.sat = sat;
+    }
+
+   
+   
+   
     public long getId_of_editor() {
         return id_of_editor;
     }
@@ -60,8 +127,9 @@ public class DoctorEntity implements Serializable {
         return id;
     }
 
-    public void setId(long id) {
+    public DoctorEntity setId(long id) {
         this.id = id;
+        return this;
     }
 
     public long getFixedId() {

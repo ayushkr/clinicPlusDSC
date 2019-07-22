@@ -32,12 +32,12 @@ public class LoginController {
         this.userService=userService;
     }
     
-     @GetMapping("/error")
-    public String getError(){
-        System.out.println("test");
-        String body="error";
-        return body;
-    }
+//     @GetMapping("/error")
+//    public String getError(){
+//        System.out.println("test");
+//        String body="error";
+//        return body;
+//    }
     
     
     @GetMapping("")

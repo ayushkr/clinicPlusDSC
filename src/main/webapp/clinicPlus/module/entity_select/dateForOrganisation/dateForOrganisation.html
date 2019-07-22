@@ -2,16 +2,10 @@
 <div id="calendarDiv" class="calendarOuter">
     <center>
         <div class="outer">
- 
-
-            <input class="w3-btn w3-theme-l1" onclick="getTodayJSON()" type="button" value="Show Today" > 
-            <span style="min-width: 3cm;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <input type="button" class="w3-btn w3-theme-l1"  value="OK" onclick="dateFinalised()">  
-            
-            <br>
 
             Year
-            <input type="text" value="2019" id="combo_year" size="10px"  onkeyup="inputChangedByUser()">
+            <input type="text" value="2019" id="combo_year" style="min-width: 10px"
+                   onkeyup="inputChangedByUser()">
 
             Month
             <SELECT id="combo_month" onchange="inputChangedByUser()">
@@ -28,32 +22,15 @@
                 <OPTION VALUE="11">Nov</option> 
                 <OPTION VALUE="12">Dec</option>
             </SELECT>
-            <!--     <input type="text" value="1" id="combo_month"  onkeyup="inputChangedByUser()">-->
+            
 
-
-            <!--    <SELECT id="combo_year" onchange="inputChangedByUser()">
-                    <OPTION VALUE="2017" selected>2017</option>
-                    <OPTION VALUE="2018" >2018</option>
-                    <OPTION VALUE="2019">2019</option>
-                    <OPTION VALUE="2020">2020</option>
-                    <OPTION VALUE="2020">2021</option>
-                    <OPTION VALUE="2020">2022</option>
-                    <OPTION VALUE="2020">2023</option>
-                    <OPTION VALUE="2020">2024</option>
-                    <OPTION VALUE="2020">2025</option>
-                    <OPTION VALUE="2020">2026</option>
-                    <OPTION VALUE="2020">2027</option>
-                    <OPTION VALUE="2020">2028</option>
-                    <OPTION VALUE="2020">2029</option>
-                    <OPTION VALUE="2020">2030</option>
-                </SELECT>-->
-
-
-
-            <!--<span class='monthStyle1'>December</span><span class='yearStyle1'>2018</span>-->
             <div id="calendar">calendr body appear here</div>
             <br>
-          
+            <input class="w3-btn w3-theme-l1" onclick="getTodayJSON()" type="button" value="Show Today" > 
+            <span style="min-width: 3cm;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <input type="button" class="w3-btn w3-theme-l1"  value="OK" onclick="dateFinalised()">  
+
+            <br>
         </div>
     </center>
 </div>
@@ -63,11 +40,11 @@
 
     #combo_year,#combo_month{
         font-size: 20px; */
-    padding: 10px;
-    margin: 10px;
-    position: relative;
-    background-color: inherit;
-    color: white;
+        padding: 10px;
+        margin: 10px;
+        position: relative;
+        background-color: inherit;
+        color: white;
         text-align: center;
     }
 
@@ -79,11 +56,11 @@
     }
 
     .monthNow {
-     color: #fdfdfd;
-    text-align: center;
-    /* background-color: white; */
-    font-size: 20px;
-    padding: 10px;
+        color: #fdfdfd;
+        text-align: center;
+        /* background-color: white; */
+        font-size: 20px;
+        padding: 10px;
     }
 
     .dayNow {
@@ -100,8 +77,8 @@
     }
 
     .td{
-            padding: 10px;
-    width: 69px;
+        padding: 10px;
+        width: 69px;
     }
 
     .monthNow th {
@@ -139,7 +116,7 @@
     .outer{
         position: relative;
         padding:1cm;
-           background-color: var(--color_l2);
+        background-color: var(--color_l2);
         /*width:fit-content;*/
         height: -webkit-fill-available;
     }

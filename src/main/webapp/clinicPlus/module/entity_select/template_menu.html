@@ -1,11 +1,17 @@
 
- <input  class="w3-btn w3-blue"
-            value='Add New ' type='button' 
-            onclick="populateCreate2('{{:moduleName}}', 0,'main3');"
-            >
+ 
+ <button
+     class="paddingButton"
+     title="Add New"
+     onclick="populateCreate2('{{:moduleName}}', 0,'main3');"
+     >
+     <i class="fa fa-plus"></i>
+ </button>
  
  
-  <input  class="w3-btn w3-blue"
-            value='Refresh ' type='button' 
+  <button class="paddingButton"
+          title="Refresh"
             onclick="refresh_entitySelectList('{{:moduleName}}', 'name');"
             >
+      <i class="fa fa-refresh"></i>
+  </button>

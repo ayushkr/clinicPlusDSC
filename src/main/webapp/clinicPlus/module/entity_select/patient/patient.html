@@ -1,4 +1,4 @@
-
+<div style="padding: 40px;">
 <p class="pageTitle">
     Select a Patient
 </p>
@@ -71,12 +71,12 @@
         <div class="Cell" >{{:age}} y</div>
         <div class="Cell" >{{:contactPhone}}</div>
         
-         <div class="Cell"> 
-             <a 
+        <div class="Cell" style="border:none"> 
+             <button  class="w3-btn"
                 onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, 'main3');"
 
-                ><i class="fa fa-edit"> Edit</i>
-            </a>
+                ><i class="fa fa-pencil"></i>
+            </button>
            
         </div>
         
@@ -92,7 +92,7 @@
     {{/for}}
 </div>
 
-
+</div>
 
 
 

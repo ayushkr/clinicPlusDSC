@@ -3,6 +3,7 @@ package in.srisrisri.clinic;
 import in.srisrisri.clinic.FileStorage.FileStorageProperties;
 import in.srisrisri.clinic.FileStorage.FileStorageService;
 import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import org.apache.log4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.content.fs.io.FileSystemResourceLoader;
 
 @SpringBootApplication
 @EnableConfigurationProperties({
@@ -45,6 +47,21 @@ public class Starter {
     
     
     
+    
+      @Bean
+    File filesystemRoot() {
+        try {
+            return new File("/home/akr2/NetBeansProjects/persisted/fileRepo/clinicPlus");
+        } catch (Exception ioe) {
+        
+        }
+        return null;
+    }
+
+    @Bean
+    FileSystemResourceLoader fileSystemResourceLoader() {
+        return new FileSystemResourceLoader(filesystemRoot().getAbsolutePath());
+    }
     
     
     

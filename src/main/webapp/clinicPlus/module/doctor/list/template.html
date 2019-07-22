@@ -5,8 +5,8 @@
 
         <thead>
             <tr class="bluestrp">
-                <th></th>
-                <th style="min-width: 50px;">
+                <th style="width: fit-content"></th>
+                <th style="min-width: 30px;">
                     Id
                     
                     
@@ -28,7 +28,7 @@
 
                  
                 </th>
-               <th style="min-width: 50px;">
+               <th style="min-width: 30px;">
                     fid
                
                   <br>
@@ -49,7 +49,7 @@
                 
                 </th>
                 
-                <th 
+                <th style="width: 100px" 
                     >
                     
                     Name
@@ -69,7 +69,7 @@
                     </a>
                     
                 </th>
-                <th 
+                <th  style="width: 90px"
                     class="headerSort_{{if obj.sortColumn=='department'}}{{if obj.sortOrder=='a' }}a{{else}}d{{/if}}{{/if}}">
                     
                     Department
@@ -89,23 +89,19 @@
                     </a>
                 
                 </th>
-                <th> 
-                    visitDay
-                <br>
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=visitDay&sortOrder=a"
-                       >
-                        <span class=" {{if obj.sortColumn=='visitDay'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-up headerSortSymbol"></i>
-                        </span>
-                    </a>
-
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=visitDay&sortOrder=d"
-                       >
-                        <span class=" {{if obj.sortColumn=='visitDay'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
+                <th style="width: 50px"> 
+                    visit Day
+               
                 </th>
+                
+                <th style="width: 10px">Sun</th>
+                 <th style="width: 10px">Mon</th>
+                  <th style="width: 10px">Tue</th>
+                   <th style="width: 10px">Wed</th>
+                    <th style="width: 10px">Thu</th>
+                     <th style="width: 10px">Fri</th>
+                      <th style="width: 10px">Sat</th>
+                      
                 <th>
                     visitTime
                <br>
@@ -124,8 +120,8 @@
                     </a>
                 
                 </th>
-                <th>
-                    remediesFor
+                <th style="width: 60px">
+                    remedies For
                 <br>
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remediesFor&sortOrder=a"
                        >
@@ -184,6 +180,13 @@
                 <td style="min-width: 40mm;">{{:name}}</td>
                 <td>{{:department}}</td>
                 <td>{{:visitDay}}</td>
+                <td>{{if sun}}{{:sun}}{{/if}}</td>
+                <td>{{if mon}}{{:mon}}{{/if}}</td>
+                <td>{{if tue}}{{:tue}}{{/if}}</td>
+                <td>{{if wed}}{{:wed}}{{/if}}</td>
+                <td>{{if thu}}{{:thu}}{{/if}}</td>
+                <td>{{if fri}}{{:fri}}{{/if}}</td>
+                <td>{{if sat}}{{:sat}}{{/if}}</td>
                 <td>{{:visitTime}}</td>
                 <td>{{:remediesFor}}</td>
                 <td>{{:remarks}}</td>

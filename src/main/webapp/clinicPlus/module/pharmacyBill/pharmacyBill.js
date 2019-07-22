@@ -183,7 +183,8 @@ function  PharmacyCashBill() {
 
                     var qty = document.getElementById('qty_span').innerHTML;
 
-                    var amt = rate * qty;
+                    var amt = (rate * qty);
+                    amt=amt.toFixed(2);
                     console.log('rate =' + rate + ' qty=' + qty + ' amt=' + amt);
                     console.log('rate qty amt' + rate + '---' + qty + '------amt' + amt);
                     document.getElementById('amount').value = amt;

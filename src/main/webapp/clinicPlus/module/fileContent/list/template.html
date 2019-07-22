@@ -1,0 +1,169 @@
+
+
+<div 
+    data-akr-printable="false"
+    >
+    <div class="inp_outer" style="min-width: 200px">
+
+        <div class="inp1" 
+             onclick="popup_selection_obj(
+                             {
+                                 'entity_select': 'patient',
+                                 'input': 'patient'
+                             }
+                     )"
+             >
+
+            <div class="title1"> 
+                <i class="fa fa-filter"></i>
+                Patient Name </div>
+            <span id='patient_display' class="inp2 w3-btn w3-blue-gray" >
+                Select
+            </span>
+
+        </div>
+        or enter ID   <input id="patient" name='patient' type="text"  value="" 
+                             style="height: 50px;height: 25px;width: 89px;"> 
+        <input type="button" value="Go "
+               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=patient&filter=' + document.getElementById('patient').value + ''"
+               >
+    </div>
+
+    <div class="inp_outer" style="min-width: 200px">
+
+        <div class="inp1" 
+             onclick="popup_selection_obj(
+                             {
+                                 'entity_select': 'doctor',
+                                 'input': 'doctor'
+                             }
+                     )"
+             >
+
+            <div class="title1">
+                <i class="fa fa-filter"></i>
+                doctor Name </div>
+            <span id='doctor_display' class="inp2 w3-btn w3-blue-gray">
+                Select
+            </span>
+
+        </div>
+        or enter ID   <input id="doctor" name='doctor' type="text"  value="" 
+                             style="height: 50px;height: 25px;width: 89px;"> 
+        <input type="button" value="Go "
+               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=doctor&filter=' + document.getElementById('doctor').value + ''"
+               >
+    </div>
+
+    <a href="#/cmd?module=fileContent&amp;action=/all/list&amp;pageNumber=1" class="w3-btn w3-blue-grey"> 
+        All </a>
+
+
+</div>
+
+<hr>
+
+
+<div id="printableArea"   title="fileContent_List" >
+
+
+    <table  class="table_greyBorder" cellspacing="0" cellpadding="5" border="1"  >
+
+        <thead>
+            <tr class="bluestrp">
+
+                <th style="min-width: 50px;">
+                    Id
+
+
+                    <br>
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+
+
+
+                </th>
+
+
+                <th 
+                    >
+
+                    description
+                    <br>
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=description&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='description'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol"></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=description&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='description'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+
+                </th>
+                <th>doctor</th>
+
+                <th>patient</th>
+                <th>appt</th>
+                <th>content</th>
+                <th> 
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {{for obj.pageList.content}}
+
+
+            <tr class="firstrow"
+                onclick="popup_selection_obj(
+                 {
+                     'value': '{{:id}}',
+                     'entity_select': 'fileContent',
+                     'input': 'fileContent',
+                     'apiUrl': 'fileContent/{{:id}}'
+                 }
+         )"
+                >
+
+
+                <td
+
+                    >{{:id}}</td>
+
+                <td style="min-width: 40mm;">{{:description}}</td>
+                <td>{{if doctor}}{{:doctor.name}}{{/if}}</td>
+                <td>{{if patient}}{{:patient.name}}{{/if}}</td>
+                <td>{{if appointment}}{{:appointment.dateOfAppointment}}{{/if}}</td>
+                <td>{{:mimeType}}</td>
+                <td >
+
+                </td>
+
+
+
+            </tr>
+            {{else}}
+            No members...
+            {{/for}}
+        </tbody>
+
+
+    </table>
+</div>

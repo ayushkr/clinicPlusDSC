@@ -53,7 +53,9 @@
 
         <!--doctor-->
         <div class="inp_outer" style="min-width: 200px">
-            <input id="doctor" name='doctor' type="hidden" data-link="doctor.id" value="1"> 
+            <input id="doctor" name='doctor' type="hidden" 
+                   value="{{if doctor}}{{doctor.id}}{{else}}0{{/if}}"
+                   > 
             <div class="inp1" 
                  onclick="popup_selection_obj(
                      {
@@ -77,7 +79,10 @@
 
         <!--patient-->
         <div class="inp_outer" style="min-width: 200px">
-            <input id="patient" name='patient' type="hidden" data-link="patient.id" value="1" > 
+            <input id="patient" name='patient' type="hidden" 
+                
+                   value="{{if patient}}{{patient.id}}{{else}}0{{/if}}"
+                   > 
             <div class="inp1" 
                  onclick="popup_selection_obj(
                      {
@@ -128,14 +133,18 @@
         <div class="inp_outer">
             <div class="inp1" >
                 <div class="title1">consultFee</div>
-                <input  type="text" id="consultFee" name="consultFee" data-link="consultFee"  /> 
+                <input  type="text" id="consultFee" name="consultFee" data-link="consultFee"
+                        class="akr_input_text" required=""
+                        /> 
             </div>
         </div>
 
         <div class="inp_outer"> 
             <div class="inp1" >
                 <div class="title1">feeForClinic</div>
-                <input  type="text" id="feeForClinic" name="feeForClinic" data-link="feeForClinic"  /> 
+                <input  type="text" id="feeForClinic" name="feeForClinic" data-link="feeForClinic"
+                        class="akr_input_text" required=""
+                        /> 
             </div>
         </div>
 

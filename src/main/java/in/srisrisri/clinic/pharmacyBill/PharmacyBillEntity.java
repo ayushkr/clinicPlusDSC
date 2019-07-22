@@ -2,6 +2,7 @@ package in.srisrisri.clinic.pharmacyBill;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import in.srisrisri.clinic.appointment.AppointmentEntity;
+import java.io.Serializable;
 import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name = "PharmacyBill")
 @Table(name = "PharmacyBill")
-public class PharmacyBillEntity {
+public class PharmacyBillEntity implements Serializable {
 
     @Id
     @GeneratedValue

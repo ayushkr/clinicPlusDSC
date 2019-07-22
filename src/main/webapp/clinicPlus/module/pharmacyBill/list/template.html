@@ -1,20 +1,185 @@
+<div 
+    data-akr-printable="false"
+    >
+    <div class="inp_outer" style="min-width: 200px">
+
+        <div class="inp1" 
+             onclick="popup_selection_obj(
+                 {
+                 'entity_select': 'appointment',
+                         'input': 'appointment'
+                 }
+                 )"
+             >
+
+            <div class="title1"> 
+                <i class="fa fa-filter"></i>
+                appointment</div>
+            <span id='appointment_display' class="inp2 w3-btn w3-blue-gray" >
+                Select
+            </span>
+
+        </div>
+        or enter ID   <input id="appointment" name='appointment' type="text"  value="" 
+                             style="height: 50px;height: 25px;width: 89px;"> 
+        <input type="button" value="Go "
+               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=appointment&filter=' + document.getElementById('appointment').value + ''"
+               >
+    </div>
+
+    <div class="inp_outer" style="min-width: 200px">
+        <div class="inp1" >
+            <div class="title1">patientName </div>
+        </div>
+        <input id="patientName" patientName='patientName' type="text"  value=""
+               accesskey="q"
+               > 
+        <input type="button" value="Go " id="button_patientName_go"
+               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=patientName&filter=' + document.getElementById('patientName').value + ''"
+               >
+    </div>
+
+
+    <a href="#/cmd?module={{:obj.module}}&action=/all/list&amp;pageNumber=1" class="w3-btn w3-blue-grey"> 
+        All </a>
+
+
+</div>
+
+<hr>
+
+
 <div id="printableArea"   title="PharmacyBill_Profile" >
     <table  cellpadding="5" class="table_greyBorder" >
         <thead>
             <tr class="bluestrp">
-                <td>Bill</td>
-                <!--                <td>Bill Date</td>-->
 
-                <td >appointment</td>
 
-                <!--                <td >appt No</td>
-                                <td >appt Date</td>
-                                <td >appt Patient</td>
-                
-                                <td >appt Doctor</td>-->
- <td>actions</td>
-                <td>remarks</td>
-               
+                <th>
+                    Bill No
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+                </th>
+
+
+                <th style="min-width: 80px;font-size: 0.8em">
+                    Bill Date
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfBill&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='dateOfBill'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfBill&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='dateOfBill'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+
+                </th>
+
+
+
+                <th >appt No
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_id&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='appointment_id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_id&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='appointment_id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+
+                </th>
+
+
+                <th style="min-width: 90px" >appt Date
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_dateOfAppointment&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='appointment_dateOfAppointment'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_dateOfAppointment&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='appointment_dateOfAppointment'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+
+                </th>
+
+
+                <th >appt Patient
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_patient_name&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='appointment_patient_name'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_patient_name&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='appointment_patient_name'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+
+                </th>
+                <th >appt Doctor
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_doctor_name&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='appointment_doctor_name'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_doctor_name&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='appointment_doctor_name'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+
+
+                </th>
+                <th style="min-width: 100px">actions</th>
+                <th>remarks
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remarks&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='remarks'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remarks&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='remarks'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+
+                </th>
+
             </tr>
         </thead>
         <tbody>
@@ -23,84 +188,51 @@
             <tr 
 
                 class="firstrow">
-                <td >
-                    <span class="w3-btn"
-                        onclick="go({{:id}}, 'pharmacyBill')"
-                        > No {{:id}} <hr> {{:dateOfBill}}
-                    </span> <br>
-                    
+                <td
 
+                    >
+                    {{:id}}
+                </td>
+                <td  style="font-size: 0.8em">
+                    {{:dateOfBill}}
                 </td>
                 <!--<td style="min-width: 85px">{{:dateOfBill}}</td>-->
 
                 {{if appointment}}
-                <td style="min-width: 150px">
-                     <button class="w3-btn"
-                        onclick="go({{:id}}, 'pharmacyBill')">
-                         <table border="0" cellspacing="1px" style="border:none">
-                        <tbody>
-                            <tr>
-                                <td class="td3">
-                                    Appt ID :
-                                </td>
-                                <td>
-                                    <span style="min-width: 50px" > {{:appointment.id}}</span> 
+                <td>{{:appointment.id}}</td>
+                <td>{{:appointment.dateOfAppointment}}</td>
+                <td 
+                    onclick="go({{:id}}, 'pharmacyBill')"
+                    >{{:appointment.patient.name}}</td>
+                <td>{{:appointment.doctor.name}}</td>
 
-                                </td>
-                            </tr>
 
-                            <tr>
-                                <td class="td3">
-                                    Appt Date :
-                                </td>
-                                <td>
-                                    <span style="min-width: 100px"> {{:appointment.dateOfAppointment}}</span> 
-
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="td3">
-                                    Patient :
-                                </td>
-                                <td>
-                                    <span>{{:appointment.patient.name}}</span>
-
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="td3">
-                                    Doctor :
-                                </td>
-                                <td>
-                                    <span style="font-size: 0.8em;font-style: italic">{{:appointment.doctor.name}} </span> 
-
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                     </button>
-                </td>
                 {{else}}
                 <!--<td colspan="4"></td>-->
                 <td style="min-width: 100px">
                     <button class="w3-btn" style="width: 100%;height: 100%"
-                        onclick="go({{:id}}, 'pharmacyBill')">
-                    Not Filled
-                     </button>
+                            onclick="go({{:id}}, 'pharmacyBill')">
+                        nil
+                    </button>
                 </td>
+                <td></td>
+                <td></td>
+                <td></td>
                 {{/if}}
 
-                
-                <td>
 
-                    <button class='w3-btn w3-green'
-                          title="Open "
-                          onclick="pharmacyCashBill.render_list({{:id}})"
-                          > Medicines <br> (മരുന്നുകൾ )
-                        </button>
+                <td>
+                    <i class="fa fa-edit" title="edit bill"
+                       onclick="go({{:id}}, 'pharmacyBill')"
+                       ></i>
+                    &nbsp; &nbsp;
+                    <button class="w3-btn"
+                            style="float: right"
+                            title="medicines "
+                            onclick="pharmacyCashBill.render_list({{:id}})"
+                            > 
+                        <i class="fa590akr fa-capsules" ></i>
+                    </button>
 
                 </td>
                 <td style="min-width: 150px">{{:remarks}}</td>

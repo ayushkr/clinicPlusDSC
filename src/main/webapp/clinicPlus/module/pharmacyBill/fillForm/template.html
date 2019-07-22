@@ -39,22 +39,16 @@ title="ഒരു അപ്പോയ്ന്റ്മെന്റ്   സെല
              }
              )"
          >
-
         <div class="title1"   > appointment</div>
         {{if appointment!=null }}
         <input  type="hidden" id="appointment" name="appointment" 
                 value="{{:appointment.id}}"  />
         <span id="appointment_display" class="inp2">     
-
             No: {{:appointment.id}}<br> 
             {{:appointment.dateOfAppointment}} <br>
-            <b style="font-size: 24px;background-color: var(--color_l4);padding:10px;margin:10px">{{:appointment.patient.name}}</b> <br>
+            <b style="font-size: 20px;background-color: var(--color_l4);padding:5px;margin:10px">{{:appointment.patient.name}}</b> <br>
             {{:appointment.doctor.name}}
-        
-        
         </span>
-        
-        
         {{else}}
         <input  type="hidden" id="appointment" name="appointment" />
         <span id="appointment_display">     

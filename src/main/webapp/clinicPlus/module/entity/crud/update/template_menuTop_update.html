@@ -1,43 +1,39 @@
 <!-- entity /update/template_menuTop_update-->
-<br>
-<div id="widgets" class="widgetBar">
+
+<div id="widgets" class="widgetBar" data-akr-printable="false" >
 
     {{if edit}}
-    <a onclick="goto_delete('{{:moduleName}}', '{{:id}}')"  data-toggle="tooltip" title="Delete" 
-       class="w3-btn w3-red"
-       >
+    <button onclick="goto_delete('{{:moduleName}}', '{{:id}}')"  data-toggle="tooltip" title="Delete" 
+            class="w3-btn "
+            >
         <i class="fa fa-trash"  ><span style="margin-left: 2mm;"> </span> </i>
-    </a> 
+    </button> 
 
-    <a onclick="printDiv_navOff('navbar')" data-toggle="tooltip" title="Print this page" 
-       class="w3-btn"
-       > <i class="fa fa-print"> </i>
-    </a> 
+    <button onclick="printDiv_navOff('navbar')" data-toggle="tooltip" title="Print this page" 
+            class="w3-btn"
+            > <i class="fa fa-print"> </i>
+    </button> 
     {{/if}}
     {{if divName!='main3'}} 
 
-    <a onclick="goto_list('{{:moduleName}}')"
-       data-toggle="tooltip" title="List"
-       class="w3-btn "
-       >
+    <button onclick="goto_list('{{:moduleName}}')"
+            data-toggle="tooltip" title="List"
+            class="w3-btn "
+            >
         <i class="fa fa-list"  ><span style="margin-left: 2mm;"></span> </i>
-    </a> 
+    </button> 
 
 
     {{/if}}
 
-    <a class="w3-btn " data-toggle="tooltip" title="Save" 
-           onclick="save('{{:moduleName}}');goto_list('{{:moduleName}}');">
+    <button class="w3-btn " data-toggle="tooltip" title="Save" 
+            onclick="save('{{:moduleName}}');
+            ">
         <i class="fa fa-save"  > </i>
-    </a>
-    
+    </button>
+
     <span style="width:2cm;"></span>
-
    
-
-
-
-
 </div>
 
 

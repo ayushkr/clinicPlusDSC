@@ -1,37 +1,51 @@
-
-<div class="inp_outer" style="min-width: 200px">
- ID   <input id="medicineBrandName" name='medicineBrandName' type="text"  value="" >  Or
-    <div class="inp1" 
-         onclick="popup_selection_obj(
-             {
-             'entity_select': 'medicineBrandName',
-                     'input': 'medicineBrandName'
-             }
-             )"
-         >
-
-        <div class="title1">medicineBrandName </div>
-        <span id='patient_display' class="inp2">
-Click Here
-        </span>
-       
+<div data-akr-printable="false">
+    <div class="inp_outer" style="min-width: 200px">
+        <div class="inp1" >
+            <div class="title1">medicineBrandName </div>
+        </div>
+        <input id="medicineBrandName" name='medicineBrandName' type="text"  value=""
+               accesskey="q"
+               > 
+        <input type="button" value="Go " id="button_medicineBrandName_go"
+               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=brandName&filter=' + document.getElementById('medicineBrandName').value + ''"
+               >
     </div>
-  <input type="button" value="Go "
-       onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=medicineBrandName&filter=' + document.getElementById('medicineBrandName').value + ''"
-       >
+
+    <div class="inp_outer" style="min-width: 200px">
+        <div class="inp1" >
+            <div class="title1">generic Name </div>
+        </div>
+        <input id="genericName" name='genericName' type="text"  value=""
+               accesskey="q"
+               > 
+        <input type="button" value="Go " id="button_genericName_go"
+               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=genericName&filter=' + document.getElementById('genericName').value + ''"
+               >
+    </div>
+
+    <div class="inp_outer" style="min-width: 200px">
+        <div class="inp1" >
+            <div class="title1">composition </div>
+        </div>
+        <input id="composition" name='composition' type="text"  value=""
+               accesskey="q"
+               > 
+        <input type="button" value="Go " id="button_composition_go"
+               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=composition&filter=' + document.getElementById('composition').value + ''"
+               >
+    </div>
 </div>
 
-<hr>
 
 
 
-<div id="printableArea"   title="MedicineBrandName_List" >
-<table  cellpadding="5" class="table_greyBorder" >
-    
-            <thead>
-                <tr class="bluestrp">
-            <th style="min-width: 150px;">Id
-                  <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
+<div id="printableArea"   title="MedicineBrandName_List"  >
+    <table  cellpadding="5" class="table_greyBorder" >
+
+        <thead>
+            <tr class="bluestrp">
+                <th style="min-width: 50px;">Id
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                             <i class="fa fa-caret-up headerSortSymbol "></i>
@@ -41,14 +55,14 @@ Click Here
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-            
-            
-            </th>
-            <th style="min-width: 150px;">brandName
-                  <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=brandName&sortOrder=a"
+
+
+                </th>
+                <th style="min-width: 150px;">brandName
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=brandName&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='brandName'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                             <i class="fa fa-caret-up headerSortSymbol "></i>
@@ -58,48 +72,60 @@ Click Here
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=brandName&sortOrder=d"
                        >
                         <span class=" {{if obj.sortColumn=='brandName'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-            
-            
-            </th>
-            <th>genericName</th>
-            <th>HSN
-            
-            
-            </th>
-            <th>company</th>
-            <th>usedFor</th>
-            <th>type</th>
-            <th>groupid</th>
-            <th>description</th>
-            <th>other</th>
-         
 
-        </tr>
+
+                </th>
+                <th>genericName
+
+                </th>
+                <th>composition
+
+                </th>
+
+                <th>HSN
+
+
+                </th>
+                <th>company</th>
+                <th>usedFor</th>
+                <th>type</th>
+                <th>groupid</th>
+                <th>description</th>
+                <th>other</th>
+
+
+            </tr>
         </thead>
         <tbody>
 
-        {{for obj.pageList.content}}
-        <tr 
-            onclick="go({{:id}},'medicineBrandName')"
-            class="firstrow">
-            <td><span >{{:id}}</span></td>
-            <td>{{:brandName}}</td>
-            <td>{{:genericName}}</td>
-              <td>{{:hsn}}</td>
-            <td>{{:company}}</td>
-            <td>{{:usedFor}}</td>
-            <td>{{:type}}</td>
-            <td>{{:groupid}}</td>
-            <td>{{:description}}</td>
-            <td>{{:other}}</td>
-          
-        </tr>
-        {{/for}}
-    </tbody>
+            {{for obj.pageList.content}}
+            <tr 
+                onclick="go({{:id}}, 'medicineBrandName')"
+                class="firstrow">
+                <td><span >{{:id}}</span></td>
+                <td >
+                    <button class="w3-button"> {{:brandName}}</button>
 
 
-</table>
+                </td>
+                <td>{{:genericName}}</td>
+                <td>{{:composition}}</td>
+
+                <td>{{:hsn}}</td>
+                <td>{{:company}}</td>
+                <td>{{:usedFor}}</td>
+                <td>{{:type}}</td>
+                <td>{{:groupid}}</td>
+                <td>{{:description}}</td>
+                <td>{{:other}}</td>
+
+            </tr>
+            {{/for}}
+        </tbody>
+
+
+    </table>
 </div>

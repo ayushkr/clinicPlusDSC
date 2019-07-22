@@ -29,7 +29,7 @@ var ayrender = function (item) {
 var link_ay = function (templateBody, item) {
     // console.log("templateBody---->  \n"+templateBody);
     // console.log("item.data ---> \n " + JSON.stringify(item.data));
-    console.log("item.selector --->  " + item.selector);
+    console.log("link_ay , item.selector --->  " + item.selector);
 
     var templateObj = $.templates(templateBody);
     //    console.log("templateObj=",templateObj);
@@ -61,16 +61,5 @@ var aylinker = function (item) {
                         }
             }
     );
-
-
-
-//    $.get(item.urlOfTemplate,
-//            function (templateBody, status) {
-//                //console.log("item.urlOfTemplate ---> \n" + item.urlOfTemplate);
-//                templateBodyG = templateBody;
-//                link_ay(templateBodyG, item);
-//            }
-//    );
-//    console.log('aylinker end');
 
 };

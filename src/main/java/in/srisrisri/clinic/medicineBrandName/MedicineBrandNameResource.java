@@ -52,7 +52,7 @@ public class MedicineBrandNameResource {
         Sort sort;
         int pageSize = 30;
         Pageable pageable;
-        logger.warn("REST getItems() , {} ", new Object[]{label});
+        logger.warn("pageable={} filter={}", new Object[]{label,filterColumn});
 
         if (!sortColumn.equals("undefined")) {
             if (sortOrder.equals("d")) {
@@ -77,12 +77,14 @@ public class MedicineBrandNameResource {
         } else {
 
             if (filterColumn.equals("brandName")) {
-               
-                page = medicineBrandNameRepo.findAllByBrandName(filter, pageable);
-
-            } else {
-
-            }
+                page = medicineBrandNameRepo.findAllByBrandNameLike(filter, pageable);
+            } 
+             if (filterColumn.equals("genericName")) {
+                page = medicineBrandNameRepo.findAllByGenericNameLike(filter, pageable);
+            } 
+              if (filterColumn.equals("composition")) {
+                page = medicineBrandNameRepo.findAllByCompositionLike(filter, pageable);
+            } 
 
         }
 

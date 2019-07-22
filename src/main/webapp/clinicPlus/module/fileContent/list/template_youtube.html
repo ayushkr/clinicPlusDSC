@@ -1,0 +1,116 @@
+<div id="printableArea"   title="filesList" >
+    <!--{{:~jsonise(obj)}}-->
+    <div id="playing"  class="playing">  pppp</div>
+    <div id="list"  class="list">
+
+
+        {{for obj.pageList.content}}
+        <div class="OneItem"
+             onclick="go({{:id}}, 'fileContent',
+                         '#/cmd?module=files&pageNumber={{:~root.obj.pageList.pageable.pageNumber+1}}&sortOrder=a&sortColumn={{:~root.obj.sortColumn}}')"
+
+             >
+
+
+            <div  class="oneItemHeading"> 
+ 
+                    {{:description}}
+
+            </div>
+            <div>
+                {{if doctor}} {{:doctor.name}} {{/if}}
+                <span style="float: right;font-style: italic">  {{if patient}} {{:patient.name}} {{/if}} </span>
+
+            </div>
+            <div style="border:dashed green 1px;height: 100px;text-align: center">
+
+                {{if contentType=='image'}}
+
+                <img src="/clinicPlus/api/fileContent/content/{{:id}}?upt={{:updationTime}}" 
+                     class="imgStyle" alt="Not found"
+
+                     >
+
+                {{/if}}
+
+                {{if contentType=='video'}}
+                {{:contentType}}
+
+                {{/if}}
+
+                {{if contentType=='text'}}
+                {{:contentType}}
+
+                {{/if}}
+
+                {{if contentType=='application'}}
+                {{:contentType}}
+
+                {{/if}}
+
+            </div>
+            <div>
+                <span style="font-size: 9px;">{{:created}}</span> 
+                <span style="float: right;font-size: 9px">
+                    {{:contentLength}} &nbsp;{{:mimeType}}
+
+                </span>
+                {{:id}}
+            </div>
+        </div>
+        {{else}}
+        No members...
+        {{/for}}
+
+
+
+
+
+    </div>
+
+</div>
+
+<style>
+
+    .imgStyle{
+        max-width: 100px;
+    }
+
+    .playing{
+        position: absolute;
+        top: 100px;
+        /*display: inline-block;*/
+        border: solid purple 2px;
+        width:60%;
+        height: 100%;
+
+    }
+
+    .list{
+        position: absolute;
+        top: 100px;
+
+        left:65%;
+        /*display: inline-block;*/ 
+        border: solid lightblue 2px;
+        width:35%;
+        /*height: 100%;*/
+
+    }
+
+    .oneItemHeading{
+        font-size: 13px; font-weight: bold;display: block;
+         background-color: var(--color_l3);
+         padding: 0px 0px 0px 13px;
+    }
+    
+    .OneItem{
+        display: inline-block;
+        background-color: var(--color_l3p5);
+        margin: 10px;
+        padding: 10px;
+        width:90%;
+
+    }
+
+</style>
