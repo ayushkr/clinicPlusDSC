@@ -65,22 +65,22 @@
                      )"
                  >
                 <div class="title1"> Doctor </div>
-                {{if doctor}}
+
                 <span id="doctor_display" class="inp2" >
-                    {{:doctor.name}} 
+                    {{if doctor}} {{:doctor.name}} 
                     <br>
                     <span style="font-size: 0.6em;text-align: right;"> Fees ({{:doctor.feesList}} )</span>
-
+                    {{else}} --- {{/if}}
 
                 </span>
-                {{else}} --- {{/if}}
+
             </div>
         </div>
 
         <!--patient-->
         <div class="inp_outer" style="min-width: 200px">
             <input id="patient" name='patient' type="hidden" 
-                
+
                    value="{{if patient}}{{:patient.id}}{{else}}0{{/if}}"
                    > 
             <div class="inp1" 
