@@ -749,7 +749,7 @@ function printDiv_navOff(divName) {
     title = printableAreaDiv.getAttribute("title");
     console.log(printableAreaDiv);
     //alert("title ="+title);
-    printableAreaDiv.style = 'margin-left:-30mm';
+    printableAreaDiv.style = 'margin-left:0mm';
 //    var widgets = document.getElementById("widgets");
 //    widgets.style = "display:none";
 
