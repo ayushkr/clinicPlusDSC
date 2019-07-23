@@ -5,7 +5,6 @@ import in.srisrisri.clinic.FileStorage.FileStorageService;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
