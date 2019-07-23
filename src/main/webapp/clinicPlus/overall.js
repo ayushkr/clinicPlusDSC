@@ -716,7 +716,7 @@ function  PrintUtils() {
 
         title = printableAreaDiv.getAttribute("title");
         console.log(printableAreaDiv);
-        printableAreaDiv.style = 'margin-left:-46mm;margin-top:0mm;';
+        printableAreaDiv.style = 'margin-left:-20mm;margin-top:0mm;';
 
         var originalTitle = document.title;
         document.title = title;
