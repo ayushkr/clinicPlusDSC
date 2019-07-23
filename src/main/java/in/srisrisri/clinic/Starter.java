@@ -33,8 +33,10 @@ public class Starter {
 //                (new LaunchFrameServer()).setVisible(true);
 //            }
 //            /*     */        });
-            run.main(new String[]{"server", "start"});
-        } catch (IOException ex) {
+//            run.main(new String[]{"server", "start"});
+        
+            spring_start(args);
+        } catch (Exception ex) {
             java.util.logging.Logger.getLogger(Starter.class.getName()).log(Level.SEVERE, null, ex);
         }
         
