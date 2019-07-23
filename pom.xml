@@ -45,13 +45,6 @@
             <scope>runtime</scope>
         </dependency>
         
-        <!-- https://mvnrepository.com/artifact/org.apache.derby/derbynet -->
-<dependency>
-    <groupId>org.apache.derby</groupId>
-    <artifactId>derbynet</artifactId>
-    <version>10.6.2.1</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.apache.derby/derby -->
 
 
         <dependency>
@@ -75,12 +68,39 @@
     <version>3.15</version>
   </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.derby/derbyclient -->
-        <dependency>
+<!--        <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derbyclient</artifactId>
             <version>10.14.2.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.derby/derbynet -->
+        </dependency>-->
+        
+        
+<!--        <dependency>
+	<groupId>org.apache.derby</groupId>
+    <artifactId>derbynet</artifactId>
+	<version>1.0</version>
+	<scope>system</scope>
+	<systemPath>${basedir}/lib/derbynet.jar</systemPath>
+</dependency>-->
+        <dependency>
+    <groupId>org.apache.derby</groupId>
+    <artifactId>derbynet</artifactId>
+    <version>10.6.1.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.derby/derbytools -->
+<dependency>
+    <groupId>org.apache.derby</groupId>
+    <artifactId>derbytools</artifactId>
+    <version>10.6.2.1</version>
+</dependency>
+
+       <!-- https://mvnrepository.com/artifact/org.apache.derby/derby -->
+<!--<dependency>
+    <groupId>org.apache.derby</groupId>
+    <artifactId>derby</artifactId>
+   
+</dependency>-->
+
 
 
         <dependency>
