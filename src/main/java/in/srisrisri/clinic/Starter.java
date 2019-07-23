@@ -2,7 +2,6 @@ package in.srisrisri.clinic;
 
 import in.srisrisri.clinic.FileStorage.FileStorageProperties;
 import in.srisrisri.clinic.FileStorage.FileStorageService;
-import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import org.apache.log4j.Logger;
