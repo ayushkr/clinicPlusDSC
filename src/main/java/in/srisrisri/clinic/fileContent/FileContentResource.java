@@ -1,5 +1,6 @@
 package in.srisrisri.clinic.fileContent;
 
+import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 import in.srisrisri.clinic.appointment.AppointmentEntity;
 import in.srisrisri.clinic.doctor.DoctorEntity;
 import in.srisrisri.clinic.patient.PatientEntity;
@@ -81,8 +82,8 @@ public class FileContentResource {
                 patientEntity.setId(Long.parseLong(filter));
                 page = fileContentRepo.findAllByPatient(patientEntity, pageable);
 
-            } 
-            
+            }
+
             if (filterColumn.equals("doctor")) {
                 DoctorEntity doctorEntity = new DoctorEntity();
                 doctorEntity.setId(Long.parseLong(filter));
@@ -100,16 +101,43 @@ public class FileContentResource {
         return pageCover;
     }
 
+    public ResponseEntity<FileContent> postMapping_oneEntityWise(
+            int updateFile,
+            FileContent fileContent,
+            MultipartFile multipartFile
+    ) {
+        logger.warn("postMapping_oneEntityWise  ");
+               
+
+       return postMapping_one(
+               
+                updateFile,
+                 fileContent.getId(),
+                (fileContent.getDoctor()!=null ?
+                        fileContent.getDoctor().getId():null),
+                (fileContent.getPatient()!=null?
+                        fileContent.getPatient().getId():null),
+                (fileContent.getAppointment()!=null?
+                        fileContent.getAppointment().getId():null),
+                fileContent.getDescription(),
+                multipartFile);
+
+        
+    }
+
     @PostMapping("")
-    public ResponseEntity<FileContent> one(@RequestParam("id") Long id,
+    public ResponseEntity<FileContent> postMapping_one(
+           
             @RequestParam("updateFile") int updateFile,
+             @RequestParam("id") Long id,
             @RequestParam("doctor") Long doctorId,
             @RequestParam("patient") Long patientId,
             @RequestParam("appointment") Long appointmentId,
             @RequestParam("description") String description,
             @RequestParam("file") MultipartFile multipartFile) {
-        logger.warn("post one  id={}, \ndescription={},\nfilename={} , updateFile={}",
-                new Object[]{id, description, multipartFile.getOriginalFilename(), updateFile});
+        logger.warn("postMapping_one id={}",new Object[]{id});
+               
+
         FileContent fileContentBefore = null;
         FileContent fileContentAfter = null;
         if (id == 0) {
@@ -172,22 +200,36 @@ public class FileContentResource {
 
         Optional<FileContent> fileContent = fileContentRepo.findById(id);
         if (fileContent.isPresent()) {
+            try{
             InputStreamResource inputStreamResource = new InputStreamResource(fileContentStore.getContent(fileContent.get()));
             HttpHeaders headers = new HttpHeaders();
             headers.setContentLength(fileContent.get().getContentLength());
             headers.set("Content-Type", fileContent.get().getMimeType());
-            return new ResponseEntity<Object>(inputStreamResource, headers, HttpStatus.OK);
+            return new ResponseEntity<>(inputStreamResource, headers, HttpStatus.OK);
+            }catch(Exception e){
+             return new ResponseEntity<>("No file set yet", HttpStatus.OK);
+            }
+        }else{
+        return new ResponseEntity<>("fileContent is not present", HttpStatus.OK);
         }
-        return null;
+    
     }
 
     @GetMapping("{id}")
     @ResponseBody
     public Optional<FileContent> id(@PathVariable("id") Long id) {
         logger.warn("id {} No {}", new Object[]{label, id});
-        Optional<FileContent> item = fileContentRepo.findById(id);
+        FileContent fileContent;
+        if (id > 0) {
+            fileContent = fileContentRepo.findById(id).get();
+        } else {
+           FileContent fileContentTemp= new FileContent();
+            fileContentTemp.setId(0L);
+            ResponseEntity<FileContent> postMapping_oneEntityWise = postMapping_oneEntityWise(0, fileContentTemp, null);
+            fileContent= postMapping_oneEntityWise.getBody();
 
-        return item;
+        }
+        return Optional.of(fileContent);
     }
 
     // delete

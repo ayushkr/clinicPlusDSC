@@ -77,7 +77,7 @@ function cmd(context) {
 
 
 function cmd_post(context, data) {
-    console.log("akr #/cmd/post=" + this);
+//    console.log("akr #/cmd/post=" + this);
 //                    alert('a data' + data);
     var module_direct = this.params['module_direct'];
     var redirect = this.params['redirect'];

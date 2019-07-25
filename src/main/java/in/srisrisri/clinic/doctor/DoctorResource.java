@@ -114,7 +114,13 @@ public class DoctorResource {
     @ResponseBody
     public Optional<DoctorEntity> id(@PathVariable("id") Long id) {
         logger.warn("id {} No {}", new Object[]{label, id});
-        Optional<DoctorEntity> item = doctorRepo.findById(id);
+         Optional<DoctorEntity> item ;
+        if(id>0){
+         item = doctorRepo.findById(id);}
+        else{
+          item= Optional.of(PostMapping_one(new DoctorEntity()).getBody());
+       
+        }
         //  item.get().setCreationTime(new Date());
         return item;
     }

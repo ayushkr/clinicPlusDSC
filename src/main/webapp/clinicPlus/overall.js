@@ -18,7 +18,7 @@ var dummy;
 function copyToClipBoardValue(val) {
     localClipBoardVariable = val;
     dummy = document.createElement("textarea");
-//    dummy.style.display = 'none';
+//    dummy.style.visibility='hidden';
     document.body.appendChild(dummy);
 
     dummy.setAttribute("id", "dummy_id");
@@ -133,7 +133,7 @@ function twoDigitise(num) {
 
 
 function populateCreate2(module, id, divName) {
-    var data_;
+//    var data_;
 
     window.location.href = '#/dummy?a=populateCreate2/' + module + '/' + divName + '/' + id;
     var paging_data = {
@@ -145,7 +145,10 @@ function populateCreate2(module, id, divName) {
 
     if (id === 0) {
 //        data_ = mn.module[module + "_new"];
-        data_ = {'id': 0, 'fixedId': 0, 'newId': 0, 'bookId': 0};
+ $.get("/clinicPlus/api/" + module + "/" + id, function (data_) {
+console.log('new data_'+JSON.stringify(data_));
+
+//        data_.'id': 0, 'fixedId': 0, 'newId': 0, 'bookId': 0};
         if (module === 'doctor') {
             data_.dateOfJoining = getToday().full;
         }
@@ -185,7 +188,7 @@ function populateCreate2(module, id, divName) {
         }
         );
 
-
+ });
 
     } else {
         $.get("/clinicPlus/api/" + module + "/" + id, function (result) {
@@ -318,8 +321,8 @@ function popup_selection_obj(obj) {
         loadTemplate_entity_select_into(obj, 'modalDate');
 
     } else
-    
-    
+
+
     {
         if (obj.div === undefined) {
             obj.div = 'main2';
@@ -421,9 +424,9 @@ function loadTemplate_entity_select_into(obj, divname) {
 
 
     if (obj.apiUrl === undefined) {
-        obj.apiUrl  =  module;
-    } 
-    $.get("/clinicPlus/api/" +obj.apiUrl, function (result) {
+        obj.apiUrl = module;
+    }
+    $.get("/clinicPlus/api/" + obj.apiUrl, function (result) {
         aylinker({
             urlOfTemplate: urlOfTemplate,
             selector: divname + '_inner',
@@ -649,7 +652,7 @@ function  PrintUtils() {
 
         var navbarDiv, printableAreaDiv, menuDiv, pagerDiv, dateDiv;
         navbarDiv = document.getElementById('navbar');
-        navbarDiv.style.display = 'none';
+        navbarDiv.style.visibility = 'hidden';
 
 
 
@@ -699,37 +702,40 @@ function  PrintUtils() {
         var divName = 'main1';
         var navbarDiv, printableAreaDiv, menuDiv, pagerDiv, dateDiv;
         navbarDiv = document.getElementById('navbar');
-        navbarDiv.style.display = 'none';
+        navbarDiv.style.visibility = 'hidden';
 
         printableAreaDiv = document.getElementById(divName + "_inner");
 
         menuDiv = document.getElementById(divName + "_menu");
-        menuDiv.style = "display:none";
+        menuDiv.style.visibility = 'hidden';
 
         pagerDiv = document.getElementById(divName + "_paging");
-        pagerDiv.style = "display:none";
+        pagerDiv.style.visibility = 'hidden';
 
         dateDiv = document.getElementById('dateCurrent');
-        dateDiv.style = "display:none";
+        dateDiv.style.visibility = 'hidden';
 
         this.hideBorder();
 
         title = printableAreaDiv.getAttribute("title");
         console.log(printableAreaDiv);
-        printableAreaDiv.style = 'margin-left:-20mm;margin-top:0mm;';
+        printableAreaDiv.style.left = '0px';
+        printableAreaDiv.style.top = '0px';
+
 
         var originalTitle = document.title;
         document.title = title;
+//        alert();
         window.print();
         document.title = originalTitle;
 
-        navbarDiv.style.display = 'block';
-        printableAreaDiv.style = 'left:0mm';
+        navbarDiv.style.visibility = 'visible';
+        printableAreaDiv.style.left = '0px';
 
 
-        menuDiv.style.display = 'block';
-        pagerDiv.style.display = 'block';
-        dateDiv.style.display = 'block';
+        menuDiv.style.visibility = 'visible';
+        pagerDiv.style.visibility = 'visible';
+        dateDiv.style.visibility = 'visible';
 
     };
 
@@ -743,36 +749,33 @@ function  PrintUtils() {
 
 function printDiv_navOff(divName) {
     var navbarDiv = document.getElementById('navbar');
-    navbarDiv.style.display = 'none';
+    navbarDiv.style.visibility = 'hidden';
     var printableAreaDiv = document.getElementById("printableArea");
     //title = pri.getAttribute("pageTitle");
     title = printableAreaDiv.getAttribute("title");
     console.log(printableAreaDiv);
-    //alert("title ="+title);
-    printableAreaDiv.style = 'margin-left:0mm';
-//    var widgets = document.getElementById("widgets");
-//    widgets.style = "display:none";
+
 
     var originalTitle = document.title;
     document.title = title;
 
     var elems = document.querySelectorAll("[data-akr-printable='false']");
     for (i = 0; i < elems.length; i++) {
+        elems[i].style.displayPrev = elems[i].style.display;
+        elems[i].style.display = 'none';
 
-        elems[i].style = "display:none";
+
     }
 
     window.print();
     for (i = 0; i < elems.length; i++) {
 
-        elems[i].style = "display:block";
+        elems[i].style.display = elems[i].style.displayPrev;
     }
     document.title = originalTitle;
 
-//
-//    widgets.style.display = 'block';
-    navbarDiv.style.display = 'block';
-    printableAreaDiv.style = 'margin-left:0mm';
+    navbarDiv.style.visibility = 'visible';
+//    printableAreaDiv.style = 'margin-left:0mm';
 
 }
 

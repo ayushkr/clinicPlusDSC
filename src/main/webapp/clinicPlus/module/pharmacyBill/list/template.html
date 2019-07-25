@@ -50,12 +50,12 @@
 
 
 <div id="printableArea"   title="PharmacyBill_Profile" >
-    <table  cellpadding="5" class="table_greyBorder" >
-        <thead>
-            <tr class="bluestrp">
+    <div class="Table"  class="table_greyBorder" >
+       
+            <div  class="Heading">
 
 
-                <th>
+                <div class="Cell">
                     Bill No
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
                        >
@@ -70,10 +70,10 @@
                             <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-                </th>
+                </div>
 
 
-                <th style="min-width: 80px;font-size: 0.8em">
+                <div class="Cell" style="min-width: 80px;font-size: 0.8em">
                     Bill Date
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfBill&sortOrder=a"
                        >
@@ -89,11 +89,11 @@
                         </span>
                     </a>
 
-                </th>
+                </div>
 
 
 
-                <th >appt No
+                <div class="Cell" >appt No
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_id&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='appointment_id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -108,10 +108,10 @@
                         </span>
                     </a>
 
-                </th>
+                </div>
 
 
-                <th style="min-width: 90px" >appt Date
+                <div class="Cell" style="min-width: 90px" >appt Date
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_dateOfAppointment&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='appointment_dateOfAppointment'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -126,10 +126,10 @@
                         </span>
                     </a>
 
-                </th>
+                </div>
 
 
-                <th >appt Patient
+                <div class="Cell" >appt Patient
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_patient_name&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='appointment_patient_name'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -144,8 +144,8 @@
                         </span>
                     </a>
 
-                </th>
-                <th >appt Doctor
+                </div>
+                <div class="Cell" >appt Doctor
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_doctor_name&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='appointment_doctor_name'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -161,9 +161,9 @@
                     </a>
 
 
-                </th>
-                <th style="min-width: 100px">actions</th>
-                <th>remarks
+                </div>
+                <div class="Cell" style="min-width: 100px">actions</div>
+                <div class="Cell">remarks
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remarks&sortOrder=a"
                        >
                         <span class=" {{if obj.sortColumn=='remarks'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -178,72 +178,65 @@
                         </span>
                     </a>
 
-                </th>
+                </div>
 
-            </tr>
-        </thead>
-        <tbody>
+            </div>
+        
 
             {{for obj.pageList.content}}
-            <tr 
-
+            <div class="Row"
+onclick="go({{:id}}, 'pharmacyBill')"
                 class="firstrow">
-                <td
+                <div class="Cell"
 
                     >
                     {{:id}}
-                </td>
-                <td  style="font-size: 0.8em">
+                </div>
+                <div class="Cell"  style="font-size: 0.8em">
                     {{:dateOfBill}}
-                </td>
-                <!--<td style="min-width: 85px">{{:dateOfBill}}</td>-->
+                </div>
+                <!--<div class="Cell" style="min-width: 85px">{{:dateOfBill}}</div>-->
 
                 {{if appointment}}
-                <td>{{:appointment.id}}</td>
-                <td>{{:appointment.dateOfAppointment}}</td>
-                <td 
-                    onclick="go({{:id}}, 'pharmacyBill')"
-                    >{{:appointment.patient.name}}</td>
-                <td>{{:appointment.doctor.name}}</td>
+                <div class="Cell">{{:appointment.id}}</div>
+                <div class="Cell">{{:appointment.dateOfAppointment}}</div>
+                <div class="Cell" >{{:appointment.patient.name}}</div>
+                <div class="Cell">{{:appointment.doctor.name}}</div>
 
 
                 {{else}}
-                <!--<td colspan="4"></td>-->
-                <td style="min-width: 100px">
+                <!--<div class="Cell" colspan="4"></div>-->
+                <div class="Cell" style="min-width: 100px">
                     <button class="w3-btn" style="width: 100%;height: 100%"
                             onclick="go({{:id}}, 'pharmacyBill')">
                         nil
                     </button>
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
+                </div>
+                <div class="Cell"></div>
+                <div class="Cell"></div>
+                <div class="Cell"></div>
                 {{/if}}
 
 
-                <td>
-                    <i class="fa fa-edit" title="edit bill"
-                       onclick="go({{:id}}, 'pharmacyBill')"
-                       ></i>
-                    &nbsp; &nbsp;
-                    <button class="w3-btn"
-                            style="float: right"
-                            title="medicines "
-                            onclick="pharmacyCashBill.render_list({{:id}})"
-                            > 
-                        <i class="fa590akr fa-capsules" ></i>
-                    </button>
+                <div class="Cell">
+                   
+                  
 
-                </td>
-                <td style="min-width: 150px">{{:remarks}}</td>
+                </div>
+                <div class="Cell" style="min-width: 150px">{{:remarks}}</div>
+               
+              
 
-            </tr>       
+            </div>  
+              
             {{else}}
             No members...
             {{/for}}
-        </tbody>
-    </table>
+        
+    </div>
 </div>
+
+
 
 <style>
     .td3{

@@ -52,7 +52,7 @@ public class MedicineBrandNameResource {
         Sort sort;
         int pageSize = 30;
         Pageable pageable;
-        logger.warn("pageable={} filter={}", new Object[]{label,filterColumn});
+        logger.warn("pageable={} filter={}", new Object[]{label, filterColumn});
 
         if (!sortColumn.equals("undefined")) {
             if (sortOrder.equals("d")) {
@@ -66,25 +66,30 @@ public class MedicineBrandNameResource {
         }
         if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
+        } else {
+            if (Integer.parseInt(pageNumber) == 0) {
+                pageSize = 10000;
+                pageNumber="1";
+            }
         }
 
         pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, pageSize, sort);
         Page<MedicineBrandNameEntity> page = null;
 
         if (filterColumn.equals("undefined")) {
-          
+
             page = medicineBrandNameRepo.findAll(pageable);
         } else {
 
             if (filterColumn.equals("brandName")) {
                 page = medicineBrandNameRepo.findAllByBrandNameLike(filter, pageable);
-            } 
-             if (filterColumn.equals("genericName")) {
+            }
+            if (filterColumn.equals("genericName")) {
                 page = medicineBrandNameRepo.findAllByGenericNameLike(filter, pageable);
-            } 
-              if (filterColumn.equals("composition")) {
+            }
+            if (filterColumn.equals("composition")) {
                 page = medicineBrandNameRepo.findAllByCompositionLike(filter, pageable);
-            } 
+            }
 
         }
 
@@ -98,7 +103,15 @@ public class MedicineBrandNameResource {
     @GetMapping("{id}")
     @ResponseBody
     public ResponseEntity<Optional<MedicineBrandNameEntity>> getMedicineNames(@PathVariable("id") Long id) {
-        Optional<MedicineBrandNameEntity> item = medicineBrandNameRepo.findById(id);
+        
+          Optional<MedicineBrandNameEntity> item ;
+        if(id>0){
+         item = medicineBrandNameRepo.findById(id);}
+        else{
+          item= Optional.of(PostMapping_one(new MedicineBrandNameEntity()).getBody());
+       
+        }
+        
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
 

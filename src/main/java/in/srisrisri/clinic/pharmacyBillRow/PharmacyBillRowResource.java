@@ -58,8 +58,16 @@ public class PharmacyBillRowResource {
     @GetMapping("{id}")
     @ResponseBody
     public ResponseEntity<Optional<PharmacyBillRowEntity>> getById(@PathVariable("id") Long id) {
-        Optional<PharmacyBillRowEntity> item = pharmacyBillRowRepo.findById(id);
+        Optional<PharmacyBillRowEntity> item;
+        if (id > 0) {
+            item = pharmacyBillRowRepo.findById(id);
+        } else {
+
+            item = Optional.of(PostMapping_one(new PharmacyBillRowEntity()).getBody());
+
+        }
         return new ResponseEntity<>(item, HttpStatus.OK);
+
     }
 
     @GetMapping("pageable")
@@ -116,8 +124,8 @@ public class PharmacyBillRowResource {
 
     // create
     @PostMapping("")
-    public ResponseEntity<?> PostMapping_one(PharmacyBillRowEntity entityBefore) {
-        ResponseEntity<PharmacyBillRowEntity> body = null;
+    public ResponseEntity<PharmacyBillRowEntity> PostMapping_one(PharmacyBillRowEntity entityBefore) {
+        ResponseEntity<PharmacyBillRowEntity> response = null;
         try {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
             logger.warn("---- id ={}", entityBefore.getId());
@@ -134,42 +142,27 @@ public class PharmacyBillRowResource {
                 logger.warn("Exception PostMapping_one obj={} ,  error={}", new Object[]{entityBefore.toString(), e});
             }
 
-            if (entityBefore.getQty() != -1) {
-                if (entityBefore.getId() != 0) {
-                    entityAfter = pharmacyBillRowRepo.findById(entityBefore.getId()).get();
-                    //entityAfter.setUpdationTime(new Date());
-                } else {
+            if (entityBefore.getQty() == -1) {
+
+                entityAfter = pharmacyBillRowRepo.findById(entityBefore.getId()).get();
+                pharmacyBillRowRepo.deleteById(entityBefore.getId());
+                logger.warn("deleteById ={}", entityBefore.getId());
+
+            } else {
+                if (entityBefore.getId() == 0) {
                     entityAfter = new PharmacyBillRowEntity();
                     // entityAfter.setCreationTime(new Date());
+                } else {
+                    entityAfter = pharmacyBillRowRepo.findById(entityBefore.getId()).get();
+                    //entityAfter.setUpdationTime(new Date());
                 }
-
-//                try {
-//                    if (entityBefore.getMedicineStock() != null) {
-//                        MedicineStockEntity medicineStockEntity = medicineStockRepo.findById(entityBefore.getMedicineStock().getId()).get();
-//                        medicineStockEntity.setQtyRemaining(qtyRemaining - qty);
-//                        logger.info("before updating medicineStockEntity={} qtyRemain={} qty={}", new Object[]{medicineStockEntity.getId(),qtyRemaining, qty});
-//                        MedicineStockEntity saved = medicineStockRepo.save(medicineStockEntity);
-//                        logger.info("after updating medicineStockEntity={} qtyRemain={}", new Object[]{saved.getId(),saved.getQtyRemaining()});
-//                    }
-//
-//                } catch (Exception e) {
-//                    logger.error("entityBefore.getMedicineStock().setQtyRemaining(qtyRemaining-qty);  ->" + e.toString());
-//                }
 
                 BeanUtils.copyProperties(entityBefore, entityAfter);
                 entityAfter = pharmacyBillRowRepo.save(entityAfter);
 
-            } else {
-                if (entityBefore.getQty() == -1) {
-                    entityAfter = pharmacyBillRowRepo.findById(entityBefore.getId()).get();
-//
-                    pharmacyBillRowRepo.deleteById(entityBefore.getId());
-                    logger.warn("deleteById ={}", entityBefore.getId());
-                }
-
             }
 
-            body = ResponseEntity
+            response = ResponseEntity
                     .status(HttpStatus.OK)
                     .header("ok", "yes")
                     .header("problem", "")
@@ -177,13 +170,13 @@ public class PharmacyBillRowResource {
         } catch (Exception ex) {
 
             java.util.logging.Logger.getLogger(label).log(Level.SEVERE, null, ex);
-            body = ResponseEntity
+            response = ResponseEntity
                     .status(HttpStatus.OK)
                     .header("ok", "no")
                     .header("problem", "" + ex.toString())
                     .body(entityBefore);
         }
-        return body;
+        return response;
     }
 
 // delete

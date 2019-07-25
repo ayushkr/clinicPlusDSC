@@ -17,6 +17,7 @@ import java.net.URISyntaxException;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 
 import org.slf4j.Logger;
@@ -68,12 +69,11 @@ public class AppointmentResource {
         Sort sort = Sort.by(Sort.Direction.DESC, "dateOfAppointment");
         DoctorEntity doctorEntity = new DoctorEntity();
         doctorEntity.setId(id);
-        Date dateToDate ;
+        Date dateToDate;
 
         if ("".equals(dateTo)) {
             dateToDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
-                    
-                    
+
         } else {
             dateToDate = Date.valueOf(dateTo);
         }
@@ -83,7 +83,7 @@ public class AppointmentResource {
         }
 
         List<AppointmentEntity> list = appointmentRepo.findByDoctorDateBetween(
-                Date.valueOf(dateFrom) ,dateToDate, doctorEntity);
+                Date.valueOf(dateFrom), dateToDate, doctorEntity);
 
         ReportIncomeFromDoctorsDTO reportIncomeFromDoctorsDTO = new ReportIncomeFromDoctorsDTO(list);
         reportIncomeFromDoctorsDTO.calculateTotal();
@@ -150,14 +150,16 @@ public class AppointmentResource {
 
     @GetMapping("{id}")
     @ResponseBody
-    public AppointmentEntity id(@PathVariable("id") Long id) {
+    public Optional<AppointmentEntity> id(@PathVariable("id") Long id) {
         logger.warn("id {} No {}", new Object[]{label, id});
-        AppointmentEntity appointmentEntity = appointmentRepo.findById(id).get();
-//       appointmentEntity.setDoctorId(3L);
-//       appointmentEntity.setPatientId(3L);
+        Optional<AppointmentEntity> item;
+        if (id > 0) {
+            item = appointmentRepo.findById(id);
+        } else {
+            item = Optional.of(PostMapping_one(new AppointmentEntity()).getBody());
 
-        //  item.get().setCreationTime(new Date());
-        return appointmentEntity;
+        }
+        return item;
     }
 
     // create

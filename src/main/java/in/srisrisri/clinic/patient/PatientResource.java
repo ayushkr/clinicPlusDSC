@@ -133,8 +133,14 @@ public class PatientResource {
     @ResponseBody
     public Optional<PatientEntity> id(@PathVariable("id") Long id) {
         logger.warn("id  No {}", new Object[]{id});
-        Optional<PatientEntity> item = repo.findById(id);
-        //  item.get().setCreationTime(new Date());
+      
+          Optional<PatientEntity> item ;
+        if(id>0){
+         item = repo.findById(id);}
+        else{
+          item= Optional.of(PostMapping_one(new PatientEntity()).getBody());
+       
+        }
         return item;
     }
 

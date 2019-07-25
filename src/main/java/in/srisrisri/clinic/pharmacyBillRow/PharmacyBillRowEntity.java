@@ -25,6 +25,7 @@ public class PharmacyBillRowEntity implements Serializable {
     PharmacyBillEntity pharmacyBill;
     Integer qty;//	
     BigDecimal discount;
+//     BigDecimal amount;//
     BigDecimal amount;//
     public long getId() {
         return id;

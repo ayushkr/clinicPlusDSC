@@ -147,4 +147,11 @@ public class FileContent implements Serializable {
     public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
     }
+
+    @Override
+    public String toString() {
+        return "FileContent{" + "id=" + id + ", creationTime=" + creationTime + ", updationTime=" + updationTime + ", description=" + description + ", contentType=" + contentType + ", doctor=" + doctor + ", patient=" + patient + ", appointment=" + appointment + ", contentId=" + contentId + ", contentLength=" + contentLength + ", mimeType=" + mimeType + ", type=" + type + '}';
+    }
+    
+    
 }

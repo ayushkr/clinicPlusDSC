@@ -7,21 +7,17 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity(name = "MedicineStock")
 @Table(name = "MedicineStock")
 
 public class MedicineStockEntity implements Serializable {
 
- 
- 
     @Id
     @GeneratedValue
     private long id;
@@ -34,19 +30,21 @@ public class MedicineStockEntity implements Serializable {
     BigDecimal cgst;
     BigDecimal sgst;
     BigDecimal gst;
+    @ColumnDefault(value = "0")
     BigDecimal costPrice;
+    @ColumnDefault(value = "0")
     BigDecimal sellingPrice;
-    @ColumnDefault(value = "true")
-    @Column(name = "rate_available", nullable = false)
-    Boolean rateAvailable;
-    BigDecimal rate;
-    @Transient
-    BigDecimal rateDecided;
+    @ColumnDefault(value = "0")
     BigDecimal mrp;
+   
     String batch;
     String billNo;
+    String cash;
+    
+    
 
     @Column(name = "discount", nullable = false)
+            @ColumnDefault(value = "0")
     BigDecimal discount;
 
     private String dateOfPurchase;
@@ -58,26 +56,7 @@ public class MedicineStockEntity implements Serializable {
 
     ////////////////////////////////////////////////////////////////
     // special
-    public BigDecimal getRateDecided() {
-        if (getRateAvailable() == true) {
-            return getRate();
-        } else {
-            return mrp.divide(new BigDecimal(subCount));
-        }
-    }
-
-    public void setRateDecided(BigDecimal rateDecided) {
-        this.rateDecided = rateDecided;
-    }
-
-    public BigDecimal getRate() {
-        return rate;
-
-    }
-
-    public void setRate(BigDecimal rate) {
-        this.rate = rate;
-    }
+    
 
     public long getQtyRemaining() {
         return qtyRemaining;
@@ -87,17 +66,30 @@ public class MedicineStockEntity implements Serializable {
         this.qtyRemaining = qtyRemaining;
     }
 
-   
-
     // end of specials
     /////////////////////////////////////////////////////////////////
-    public Boolean getRateAvailable() {
-        return rateAvailable;
+
+    public BigDecimal getMrp() {
+        return mrp;
     }
 
-    public void setRateAvailable(Boolean rateAvailable) {
-        this.rateAvailable = rateAvailable;
+    public void setMrp(BigDecimal mrp) {
+        this.mrp = mrp;
     }
+
+   
+   
+    
+    
+    public String getCash() {
+        return cash;
+    }
+
+    public void setCash(String cash) {
+        this.cash = cash;
+    }
+
+   
 
     public long getId() {
         return id;
@@ -171,13 +163,7 @@ public class MedicineStockEntity implements Serializable {
         this.sellingPrice = sellingPrice;
     }
 
-    public BigDecimal getMrp() {
-        return mrp;
-    }
-
-    public void setMrp(BigDecimal mrp) {
-        this.mrp = mrp;
-    }
+   
 
     public String getBatch() {
         return batch;
@@ -229,7 +215,9 @@ public class MedicineStockEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "MedicineStockEntity{" + "id=" + id + ", medicineBrandName=" + medicineBrandName + ", vendor=" + vendor + ", expiryDate=" + expiryDate + ", cgst=" + cgst + ", sgst=" + sgst + ", gst=" + gst + ", costPrice=" + costPrice + ", sellingPrice=" + sellingPrice + ", rate=" + rate + ", mrp=" + mrp + ", batch=" + batch + ", billNo=" + billNo + ", discount=" + discount + ", dateOfPurchase=" + dateOfPurchase + ", qtyPurchased=" + qtyPurchased + ", qtyRemaining=" + qtyRemaining + ", subCount=" + subCount + '}';
+        return "MedicineStockEntity{" + "id=" + id + ", medicineBrandName=" + medicineBrandName + ", vendor=" + vendor + ", expiryDate=" + expiryDate + ", cgst=" + cgst + ", sgst=" + sgst + ", gst=" + gst + ", costPrice=" + costPrice + ", sellingPrice=" + sellingPrice + ", batch=" + batch + ", billNo=" + billNo + ", cash=" + cash + ", discount=" + discount + ", dateOfPurchase=" + dateOfPurchase + ", qtyPurchased=" + qtyPurchased + ", qtyRemaining=" + qtyRemaining + ", subCount=" + subCount + '}';
     }
+
+   
 
 }

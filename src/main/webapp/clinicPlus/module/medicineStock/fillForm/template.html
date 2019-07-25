@@ -163,39 +163,29 @@
 
 
         <fieldset id="group2">
-            <legend>MRP or Rate</legend>
-            <div class="inp_outer">
-                <div class="title1">MRP</div>
-                Rs.
-                
-                <input type="text"  id="mrp" name="mrp" data-link="mrp"  style="width: 80px"
-                        class="akr_input_text" required=""
-                       />
-            </div>
-            <div class="inp_outer">
-                <div class="title1">subCount</div>
-              
-                <input type="text" id="subCount"  name="subCount"
-                        class="akr_input_text" required="" style="width:50px"
-                       data-link="subCount" />
-            </div>
+            <legend> Rate</legend>
+            
+            
 
             <div class="inp_outer" >
-                <div class="title1">rate</div>
-                Rs.<input type="text" id="rate" name="rate" data-link="rate"
+                <div class="title1">mrp</div>
+                Rs.<input type="text" id="mrp" name="mrp" data-link="mrp"
                           class="akr_input_text" required="" style="width:90px"
                        />
-                <!--<input type="checkbox" name="rateAvailable" data-link="rateAvailable">-->
             </div>
             <div class="inp_outer" >
-                <label>
-                    Use Rate  <input type="radio" value="true" name="rateAvailable" {{if rateAvailable==true}}' checked="checked"  {{/if}}>
-                </label><br>
-                <!--            &nbsp;&nbsp;&nbsp;-->
-                <label>
-                    Use MRP  <input type="radio" value="false" name="rateAvailable" {{if rateAvailable==false}}' checked="checked"  {{/if}}>
-                </label>
+                <div class="title1">sellingPrice</div>
+                Rs.<input type="text" id="sellingPrice" name="sellingPrice" data-link="sellingPrice"
+                          class="akr_input_text" required="" style="width:90px"
+                       />
             </div>
+            <div class="inp_outer" >
+                <div class="title1">costPrice</div>
+                Rs.<input type="text" id="costPrice" name="costPrice" data-link="costPrice"
+                          class="akr_input_text" required="" style="width:90px"
+                       />
+            </div>
+           
 
         </fieldset>
 

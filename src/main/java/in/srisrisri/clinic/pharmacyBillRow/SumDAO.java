@@ -35,7 +35,7 @@ public class SumDAO {
     BigDecimal taxableAmount;
     BigDecimal freeOfCost;
      BigDecimal qty;
-     BigDecimal rate ;
+     BigDecimal sp ;
       BigDecimal discount ;
 
       Long billId;
@@ -43,17 +43,17 @@ public class SumDAO {
     public boolean calculateTotals() throws Exception{
 String error="";
         for (PharmacyBillRowEntity pharmacyBillRowEntity : pharmacyBillRowEntitys) {
-            MedicineStockEntity medicineStock = pharmacyBillRowEntity.getMedicineStock();
+            MedicineStockEntity mediStockInOneRowInPharmacyBill = pharmacyBillRowEntity.getMedicineStock();
             
             
-           logger.warn("findTotals,medicineStock={}", medicineStock);
+           logger.warn("findTotals,medicineStock={}", mediStockInOneRowInPharmacyBill);
          
-            if (medicineStock != null) {
+            if (mediStockInOneRowInPharmacyBill != null) {
                
                 try{
-                rate = medicineStock.getRate();
-                discount=medicineStock.getDiscount();
-                  logger.warn("findTotals, rate ={}", rate);
+                sp = mediStockInOneRowInPharmacyBill.getSellingPrice();
+                discount=mediStockInOneRowInPharmacyBill.getDiscount();
+                  logger.warn("findTotals, sp ={}", sp);
                 }catch(Exception e){
                     error="exception in mrp or discount";
                     logger.warn("exception in mrp or discount{}", e);
@@ -65,32 +65,31 @@ String error="";
                 qty = new BigDecimal(pharmacyBillRowEntity.getQty() + "");
               //  logger.warn("qty, mrpPerItem ={}", qty);
               
-                BigDecimal amtWithoutDiscount = rate.multiply(qty);
-                medicineStock.setMrp(amtWithoutDiscount);
-            //     logger.warn("findTotals, amtWithoutDiscount ={}", amtWithoutDiscount);
-                BigDecimal amtWithDiscount = rate.multiply(bd1.subtract(discount)).multiply(qty);
+                BigDecimal amtWithoutDiscount = sp.multiply(qty);
+          //     logger.warn("findTotals, amtWithoutDiscount ={}", amtWithoutDiscount);
+                BigDecimal amtWithDiscount = sp.multiply(bd1.subtract(discount)).multiply(qty);
                 pharmacyBillRowEntity.setAmount(amtWithDiscount);
             //      logger.warn("findTotals, amtWithDiscount ={}", amtWithDiscount);
-                BigDecimal gstAmt = (amtWithoutDiscount.multiply(medicineStock.getCgst().add(medicineStock.getSgst())));
+                BigDecimal gstAmt = (amtWithoutDiscount.multiply(mediStockInOneRowInPharmacyBill.getCgst().add(mediStockInOneRowInPharmacyBill.getSgst())));
             //     logger.warn("findTotals, gstAmt ={}", gstAmt);
                 
-                medicineStock.setGst(gstAmt);
+                mediStockInOneRowInPharmacyBill.setGst(gstAmt);
                 
                 
                 
             //    logger.warn("findTotals,pharmacyBillRowEntity id={}", pharmacyBillRowEntity.getId());
-                if(medicineStock.getMedicineBrandName().getBrandName().equals("roundOff")){
+                if(mediStockInOneRowInPharmacyBill.getMedicineBrandName().getBrandName().equals("roundOff")){
                 rounded=pharmacyBillRowEntity.getAmount();
                 }else{
-                mrpTotal = mrpTotal.add(medicineStock.getMrp());
-                gstTotal = gstTotal.add(medicineStock.getGst());
+                mrpTotal = mrpTotal.add(mediStockInOneRowInPharmacyBill.getMrp());
+                gstTotal = gstTotal.add(mediStockInOneRowInPharmacyBill.getGst());
                 amountTotal = amountTotal.add(pharmacyBillRowEntity.getAmount());
                 }
 
                
 
-                medicineStock.setRate(FinanceUtils.round(medicineStock.getRate(), 2));
-                medicineStock.setGst(FinanceUtils.round(medicineStock.getGst(), 2));
+                mediStockInOneRowInPharmacyBill.setSellingPrice(FinanceUtils.round(mediStockInOneRowInPharmacyBill.getSellingPrice(), 2));
+                mediStockInOneRowInPharmacyBill.setGst(FinanceUtils.round(mediStockInOneRowInPharmacyBill.getGst(), 2));
                 pharmacyBillRowEntity.setAmount(FinanceUtils.round(pharmacyBillRowEntity.getAmount(), 2));
 
             }

@@ -35,6 +35,12 @@ $.views.helpers(
                 return dparts[0] + "-" + dparts[1];
             }
             ,
+            expiryDate_mmyyyy: function expiryFormat1(yyyy_mm_dd) {
+                var dparts = yyyy_mm_dd.split("-");
+                console.log(dparts);
+                return dparts[1] + "-" + dparts[0];
+            }
+            ,
 
             listFiles: listFiles
             ,
@@ -44,6 +50,8 @@ $.views.helpers(
 
             ayLoad: ayLoad
             ,
+            ddmmyyyyDashed:ddmmyyyyDashed,
+          ddyyyDashed:ddyyyyDashed,
 
             utilities: {
                 maxCount: 23,
@@ -125,10 +133,19 @@ function pageNewAy(status) {
 
 }
 
+function ddmmyyyyDashed(yyyymmddValue){
+    var parts=yyyymmddValue.split("-");
+    var ddmmyyyyValue=parts[2]+"-"+parts[1]+"-"+parts[0];
+    return ddmmyyyyValue;
+    
+}
 
-
-
-
+function ddyyyyDashed(yyyymmddValue){
+    var parts=yyyymmddValue.split("-");
+    var ddmmyyyyValue=parts[1]+"-"+parts[0];
+    return ddmmyyyyValue;
+    
+}
 
 
 mn.module['select'] = {
@@ -138,175 +155,6 @@ mn.module['select'] = {
     'extra': {},
     "s": 0
 };
-//mn.module['jote_new'] = {
-//
-//    "id": 0,
-//    "title": "",
-//    "category": "",
-//    "body": "",
-//    "status": "",
-//    "dateOfCreation": ""
-//};
-//
-//mn.module['fileStore_new'] = {
-//    "title": '--',
-//    "id": 0
-//};
-////mn.module['doctor_new'] = {
-////   
-////    "dateOfJoining":getToday().full,
-////     "id": 0
-////    
-////            //  "": this.params[''],
-////
-////};
-//
-//
-//
-//mn.module['patient_new'] = {
-//    "fixedId": 0,
-//    "id": 0,
-//    "name": '',
-//    "age": '',
-//    "bookId": 0,
-//   'dateOfRegistration': getToday().full,
-//    "s": 0
-//};
-//mn.module['appointment_new'] = {
-//    "bookId": 0,
-//    "fixedId": 0,
-//    "id": 0,
-//    "doctor": {id: 0},
-//    "patient": {id: 0},
-//    "dateOfAppointment": getToday().full,
-//    "creationTime": null,
-//    "updationTime": null
-//};
-//mn.module['medicineBrandName_new'] = {
-//    "brandName": "",
-//    "company": "",
-//    "genericName": "",
-//    "usedFor": "",
-//    "type": "",
-//    "groupid": 0,
-//    "description": "",
-//    "other": "",
-//    "id": 0
-//};
-//
-//mn.module['medicineStock_new'] =
-//        {
-//            "id": 0,
-//            "medicineBrandName": {
-//                "id": 0
-//             
-//            },
-//            "vendor": {
-//                "id": 0
-//            },
-//            "expiryDate": "12/2000",
-//            "gst": 0,
-//            "costPrice": null,
-//            "costPricePerSubCount": null,
-//            "sellingPrice": null,
-//            "rate": 0,
-//            "rateAvailable": true,
-//            "mrp": 0,
-//            "batch": "",
-//            "discount": 0,
-//            "dateOfPurchase":  getToday().full,
-//            "qtyPurchased": 0,
-//            "qtyRemaining": 0,
-//            "subCount": 0
-//        };
-//
-//
-//
-//
-//mn.module['vendor_new'] = {
-//    "name": "",
-//    "address": "",
-//    "contactPhone": "",
-//    "place": "",
-//    "description": "",
-//
-//    "id": 0
-//};
-//
-//mn.module['fileContent_new'] = {
-//    
-//
-//    "id": 0
-//};
-//
-//
-//
-//mn.module['pharmacyBillRow_new'] =
-//        {
-//            "id": 0,
-//            "appointment": {
-//                "rid": 0,
-//                "id": 1,
-//                "doctor": {
-//                  
-//                    "id": 1
-//                    
-//                },
-//                "patient": {
-//                    
-//                    "id": 1
-//                    
-//                },
-//                "dateOfAppointment": "10-04-2019",
-//                "creationTime": null,
-//                "updationTime": null
-//            },
-//            "medicineStock": {
-//                "id": 1262,
-//                "medicineBrandName": {
-//                    "id": 429
-//                   
-//                },
-//                "vendor": {
-//                    "id": 1266
-//                    
-//                },
-//                "expiryDate": "12/2009",
-//                "gst": 9,
-//                "costPrice": null,
-//                "costPricePerSubCount": null,
-//                "sellingPrice": null,
-//                "rate": 10.75,
-//                "mrp": 150,
-//                "batch": "we223",
-//                "discount": 14,
-//                "dateOfPurchase": "12/12/2009",
-//                "qtyPurchased": 100,
-//                "qtyRemaining": 5,
-//                "subCount": 12
-//            },
-//            "bill": null,
-//            "qty": 2,
-//            "discount": null,
-//            "amount": 21.5
-//        };
-//
-//mn.module['pharmacyBill_new'] =
-//        {
-//            "dateOfBill": getToday().full,
-//            "remarks": "---",
-//            "id": 0
-//        };
-//
-//
-//
-//
-//mn.module['bill_new'] = {
-//    "remarks": 'not set',
-//    "id": 0
-//};
-
-
 
 
 

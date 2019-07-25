@@ -1,6 +1,6 @@
 
 <div id="printableArea"   title="PharmacyBill_List" 
-     
+
      >
     <!--style="font-family: Calibri"-->
     <center>
@@ -51,7 +51,7 @@
             <center>
                 &nbsp;  DL No:KL-TSR-137508, KL-TSR-137509
                 &nbsp; 
-                DL Date: 14/10/2018
+                <!--DL Date: 14/10/2018-->
             </center>
             </td>
 
@@ -85,7 +85,7 @@
 
                         {{if obj.pharmacyBillRowEntitys[0]}}
                         Bill Date :
-                        {{:obj.pharmacyBillRowEntitys[0].pharmacyBill.dateOfBill}} 
+                        {{:~ddmmyyyyDashed(obj.pharmacyBillRowEntitys[0].pharmacyBill.dateOfBill)}} 
 
                         {{else}}
                         <h1>Pharmacy Bill Row not exist</h1> 
@@ -148,8 +148,8 @@
             {{if medicineStock}}
             {{if  (medicineStock.medicineBrandName.brandName!='roundOff')}}
             <div class="Row"    id="row_{{:id}}" 
-                  onclick2="pharmacyCashBill.onRowSelect({{:id}})"
-                 
+                 onclick2="pharmacyCashBill.onRowSelect({{:id}})"
+
                  >
                 <div class="Cell">            <ayu1>
                         {{:#getIndex()+1}}
@@ -173,9 +173,9 @@
                 <div class="Cell">            <ayu1>
                         {{:medicineStock.batch}}
                     </ayu1>        </div>
-                <div class="Cell">            <ayu1>
+                <div class="Cell" style="min-width: 66px">            <ayu1>
 
-                        {{:~expiryFormat1(medicineStock.expiryDate)}}
+                        {{:~expiryDate_mmyyyy(medicineStock.expiryDate)}}
 
                     </ayu1>        </div>
                 <div class="Cell">            <ayu1 style="float: right">{{:qty}} </ayu1>        </div>
@@ -198,12 +198,12 @@
 
                 <div class="Cell">            
                     <ayu1 style="float: right">
-                        {{:medicineStock.rateDecided}}
+                        {{:medicineStock.mrp}}
                     </ayu1>        </div>
 
                 <div class="Cell" >            
                     <ayu1 style="float: right">
-                        
+
                         {{:amount}}
                     </ayu1>        
                 </div>
@@ -222,7 +222,8 @@
 
             {{/if}}
             {{else}}
-            <div class="Row"    id="row_{{:id}}" >
+            <div class="Row"    id="row_{{:id}}" data-akr-printable="false" >
+                <div class="Cell" ></div>
                 <div class="Cell" >
                     <div id="oneRowInEdit_{{:id}}"></div>
                     <ayu1>
@@ -235,6 +236,13 @@
 
                     </ayu1>
                 </div>
+                <div class="Cell" ></div>
+                <div class="Cell" ></div>
+                <div class="Cell" ></div>
+                <div class="Cell" ></div>
+                <div class="Cell" ></div>
+                <div class="Cell" ></div>
+
             </div>
             {{/if}}
 
@@ -243,11 +251,21 @@
             {{/for}}
             <div class="Heading">
 
-                <div class="Cell"  title="add new" tabindex="0" 
-                     onclick="pharmacyCashBill.saveNew({{:obj.billId}})" 
+                <div class="Cell"   ></div>
+                <div class="Cell"
+                     title="add new" tabindex="0"
+                     >
+                    <div  data-akr-printable="false"
+                          style="color:green"
+                          onclick="pharmacyCashBill.saveNew({{:obj.billId}})" 
 
-                     ></div>
- <div class="Cell"></div>
+                          >
+
+                        + 
+                        Add New 
+                    </div>
+
+                </div>
                 <div class="Cell"></div>
                 <div class="Cell"></div>
                 <div class="Cell"></div>

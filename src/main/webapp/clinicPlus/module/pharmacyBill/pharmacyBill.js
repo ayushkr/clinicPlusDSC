@@ -4,9 +4,10 @@ function  PharmacyCashBill() {
     this.moduleName = 'pharmacyCashBill';
     this.id = 0;
 
-    this.render_list = function (id) {
+    this.render_list = function (id, divName) {
+
         console.log('GT PharmacyCashBill.render_list() id=' + id);
-        window.location.href = "#/dummy?a=PharmacyCashBill/" + id;
+//        window.location.href = "#/dummy?a=PharmacyCashBill/" + id;
         aylinker({
             urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/menuTop.html?ran=" + Math.random(),
             selector: "main1_menu",
@@ -20,11 +21,15 @@ function  PharmacyCashBill() {
             console.log('PharmacyCashBill.render_list()  get("/clinicPlus/api/pharmacyBillRow/ByBillId/' + id);
             aylinker({
                 urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/list/template.html?ran=" + Math.random(),
-                selector: "main1_inner",
+//                selector: "main1_inner",
+                selector: divName,
+
                 data: {obj: result}
             }
             );
         });
+
+        document.getElementById('cashBill_inbuilt').innerHTML = "kitti";
         document.getElementById('main1_paging').innerHTML = "";
     };
 
@@ -184,7 +189,7 @@ function  PharmacyCashBill() {
                     var qty = document.getElementById('qty_span').innerHTML;
 
                     var amt = (rate * qty);
-                    amt=amt.toFixed(2);
+                    amt = amt.toFixed(2);
                     console.log('rate =' + rate + ' qty=' + qty + ' amt=' + amt);
                     console.log('rate qty amt' + rate + '---' + qty + '------amt' + amt);
                     document.getElementById('amount').value = amt;

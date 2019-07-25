@@ -10,9 +10,11 @@ import in.srisrisri.clinic.utils.PageExtendedByAyush;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import org.slf4j.Logger;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -67,12 +70,14 @@ public class MedicineStockResource {
     @ResponseBody
     public PageCover<MedicineStockEntity> getPage(
             @RequestParam("pageNumber") String pageNumber,
+            @RequestParam("filterColumn") String filterColumn,
+            @RequestParam("filter") String filter,
             @RequestParam("sortColumn") String sortColumn,
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
         int noOfItemsInAPage = 30;
-        logger.warn("REST getItems() , {} ", new Object[]{label});
+        logger.warn("pageable={} , filter={}by {} ", new Object[]{label, filterColumn, filter});
 
         if (!sortColumn.equals("undefined")) {
 
@@ -89,37 +94,38 @@ public class MedicineStockResource {
             pageNumber = "1";
         }
         Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, noOfItemsInAPage, sort);
-        Page<MedicineStockEntity> medicineStockPage;
+        Page<MedicineStockEntity> page = null;
 
-        if (sortColumn.equals("brandName")) {
-
-            List<MedicineBrandNameEntity> listOfMedicineBrandNameEntitysSortedByBrandName = medicineBrandNameRepo.findAll(Sort.by("brandName"));
-            List<MedicineStockEntity> listOfMedicineStockEntitysNew = new ArrayList<>();
-
-            listOfMedicineBrandNameEntitysSortedByBrandName.forEach((brandNameEntity) -> {
-                MedicineStockEntity medicineStockEntityFoundById;
-                medicineStockEntityFoundById = medicineStockRepo.findAllByMedicineBrandName(brandNameEntity);
-                listOfMedicineStockEntitysNew.add(medicineStockEntityFoundById);
-            });
-            medicineStockPage = new PageExtendedByAyush(listOfMedicineStockEntitysNew, pageable);
-
+        if (filterColumn.equals("undefined")) {
+            page = medicineStockRepo.findAll(pageable);
         } else {
+            if (filterColumn.equals("brandName")) {
 
-            medicineStockPage = medicineStockRepo.findAll(pageable);
-
-        }
-
-        List<MedicineStockEntity> list = medicineStockPage.getContent();
-        for (MedicineStockEntity medicineStockEntity : list) {
-            Long qtyUsed = medicineStockRepo.findQtyUsedById(medicineStockEntity);
-            if(qtyUsed!=null){
-            medicineStockEntity.setQtyRemaining(medicineStockEntity.getQtyPurchased() - qtyUsed);
-             medicineStockRepo.save(medicineStockEntity);
-           
+                page = medicineStockRepo.findAllByBrandNameLike(filter, pageable);
             }
-            
+
+            if (filterColumn.equals("genericName")) {
+
+                page = medicineStockRepo.findAllByGenericNameLike(filter, pageable);
+            }
+
+            if (filterColumn.equals("composition")) {
+
+                page = medicineStockRepo.findAllByCompositionLike(filter, pageable);
+            }
         }
-        PageCover<MedicineStockEntity> medicineStockpageCover = new PageCover<>(medicineStockPage);
+
+        List<MedicineStockEntity> medicineStockEntitysList = page.getContent();
+        for (MedicineStockEntity medicineStockEntity : medicineStockEntitysList) {
+            Long qtyUsed = medicineStockRepo.findQtyUsedById(medicineStockEntity);
+            if (qtyUsed != null) {
+                medicineStockEntity.setQtyRemaining(medicineStockEntity.getQtyPurchased() - qtyUsed);
+                medicineStockRepo.save(medicineStockEntity);
+
+            }
+
+        }
+        PageCover<MedicineStockEntity> medicineStockpageCover = new PageCover<>(page);
         medicineStockpageCover.setSortColumn(sortColumn);
         medicineStockpageCover.setSortOrder(sortOrder);
         medicineStockpageCover.setModule(label);
@@ -128,9 +134,17 @@ public class MedicineStockResource {
 
     @GetMapping("{id}")
     @ResponseBody
-    public ResponseEntity<MedicineStockEntity> findById(@PathVariable("id") Long id) {
-        MedicineStockEntity item = medicineStockRepo.findById(id).get();
+    public ResponseEntity<Optional<MedicineStockEntity>> findById(@PathVariable("id") Long id) {
 
+        Optional<MedicineStockEntity> item;
+        if (id > 0) {
+            item = medicineStockRepo.findById(id);
+        } else {
+            MedicineStockEntity entityNew = new MedicineStockEntity();
+           entityNew.setDiscount(BigDecimal.ZERO);
+            item = Optional.of(PostMapping_one(entityNew).getBody());
+
+        }
 //        long used = medicineStockRepo.findQtyRemainById(item);
 //        item.setQtyRemaining(item.getQtyPurchased() - used);
         return new ResponseEntity<>(item, HttpStatus.OK);
@@ -138,8 +152,8 @@ public class MedicineStockResource {
 
     // create
     @PostMapping("")
-    public ResponseEntity<MedicineStockEntity> postOne(MedicineStockEntity entityBefore) {
-        ResponseEntity<MedicineStockEntity> body = null;
+    public ResponseEntity<MedicineStockEntity> PostMapping_one(MedicineStockEntity entityBefore) {
+        ResponseEntity<MedicineStockEntity> repsonse = null;
         try {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
             logger.warn("---- id ={}", entityBefore.getId());
@@ -159,7 +173,7 @@ public class MedicineStockResource {
 
             entityAfter = medicineStockRepo.save(entityAfter);
 
-            body = ResponseEntity
+            repsonse = ResponseEntity
                     .created(new URI("/api/MedicineStockEntity/" + entityAfter.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(label,
                             entityAfter.getId() + ""))
@@ -167,7 +181,7 @@ public class MedicineStockResource {
         } catch (URISyntaxException ex) {
             java.util.logging.Logger.getLogger("MedicineStockEntity").log(Level.SEVERE, null, ex);
         }
-        return body;
+        return repsonse;
     }
 
     // delete
@@ -180,11 +194,26 @@ public class MedicineStockResource {
         return deleteResponse;
     }
 
-    @GetMapping("updateFromExcel")
-    public ResponseEntity<?> updateFromExcel() {
+    @GetMapping("import/{id}/{test}")
+    public ResponseEntity<?> updateFromExcel(@PathVariable("id") String id, @PathVariable("test") String test) {
         ResponseEntity<?> responseEntity = null;
+        File file = new File("/tmp/a");
+        URL url = null;
         try {
-            File file = new File("/common/common/dsc/medicineStock.xlsx");
+
+            try {
+                url = new URL("http://localhost:8081/clinicPlus/api/fileContent/content/" + id + "");
+                System.out.println("url =" + url.toString());
+            } catch (Exception e) {
+                System.out.println("url = new URL(\"htt  e= " + e.toString());
+            }
+
+            try {
+                FileUtils.copyURLToFile(url, file);
+            } catch (IOException e) {
+                System.out.println(" FileUtils.copyURLToFile  e= " + e.toString());
+            }
+
             FileInputStream excelFile
                     = new FileInputStream(file);
             System.out.println("excel file name=" + file.getAbsolutePath());
@@ -281,6 +310,7 @@ public class MedicineStockResource {
                                 double value = cell0.getNumericCellValue();
                                 System.out.println("value mrp=" + value);
                                 medicineStockEntity.setMrp(new BigDecimal(value + ""));
+                                medicineStockEntity.setSellingPrice(new BigDecimal(value + ""));
                                 break;
                             }
 
@@ -321,7 +351,9 @@ public class MedicineStockResource {
                 }
                 try {
                     if (medicineBrandNameEntityFound == null) {
-                        medicineBrandNameResource.PostMapping_one(medicineBrandName);
+                        if (test.equals("post")) {
+                            // medicineBrandNameResource.PostMapping_one(medicineBrandName);
+                        }
                     }
                 } catch (Exception e) {
                     System.out.println("Some prob in PostMapping_one  medicineBrandName" + e.toString());
@@ -329,7 +361,9 @@ public class MedicineStockResource {
                 // end of row 
                 try {
                     System.out.println("row " + rowNum + "    " + medicineStockEntity.toString());
-                    medicineStockResource.postOne(medicineStockEntity);
+                    if (test.equals("post")) {
+                        // medicineStockResource.postOne(medicineStockEntity);
+                    }
 
                 } catch (Exception e) {
                     System.out.println("Some prob in PostMapping_one medicineStockEntity  " + e.toString());
@@ -339,6 +373,7 @@ public class MedicineStockResource {
             }
 
         } catch (FileNotFoundException e) {
+            System.out.println("exception FileNotFoundException= " + e.toString());
         } catch (Exception e) {
             System.out.println("exception at " + e.toString());
         }

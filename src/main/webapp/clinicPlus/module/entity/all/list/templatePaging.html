@@ -18,14 +18,14 @@
     <center>
     <div style="align: center">
     Page
-    {{for start=1 end=obj.totalPages+1  itemVar='~page' }}
+    {{for start=0 end=obj.totalPages+1  itemVar='~page' }}
     <a 
         {{if (~root.obj.pageable.pageNumber+1)==#data}}  
         class="pageNumberButton pageNumberButtonSelected"
         {{else}}
         class="pageNumberButton"
         {{/if}}
-        href="#/cmd?module={{:~root.obj.moduleName}}&pageNumber={{:~page}}&sortOrder={{:~root.obj.sortOrder}}&sortColumn={{:~root.obj.sortColumn}}"> {{:~page}} </a>
+        href="#/cmd?module={{:~root.obj.moduleName}}&pageNumber={{:~page}}&sortOrder={{:~root.obj.sortOrder}}&sortColumn={{:~root.obj.sortColumn}}"> {{if ~page==0}}All {{else}} {{:~page}}{{/if}} </a>
     {{/for}}
     </div>
         </center>

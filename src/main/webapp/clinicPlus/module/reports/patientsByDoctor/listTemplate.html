@@ -2,14 +2,21 @@
 
     <hr>
     <br>
-    Total Consultation Fee :  <span style="font-weight: bold;float: right">{{:obj.totalConsultFee}}</span>  <br>
-    Total Fee For Clinic : <span style="font-weight: bold;float: right" >{{:obj.totalFeeForClinic}}</span>  <br>
+     <span style="font-weight: bold;float: right">
+         Total Consultation Fee :
+         &nbsp;
+         {{:obj.totalConsultFee}}</span>  <br>
+   <span style="font-weight: bold;float: right" >
+       Total Fee For Clinic : 
+       &nbsp;
+       {{:obj.totalFeeForClinic}}</span>  <br>
     <br>
     <hr>
     <br>
     <table  class="w3-table w3-striped w3-bordered" border="1">
         <thead>
             <tr>
+                <th>SlNo</th>
                 <th style="width:200px">Patient</th>
                 <th>Date Of Appointment</th>
                 <th>Status</th>
@@ -26,14 +33,19 @@
 
             {{for obj.appointmentEntitys}}
             <tr onclick="go({{:id}})">
+                <td> {{:#getIndex()+1}}</td>
                 <td>
                     {{if patient!=null}}
-                    {{:patient.name}} ({{:patient.age}})
+                    {{:patient.name}}
+                    <span style="float: right;font-size: 
+                          0.7em;font-style:italic ">
+                        {{:patient.age}}Yr</span>
+                    
                     {{else}}
                     Not Set
                     {{/if}}
                 </td>
-                <td>{{:dateOfAppointment}}</td>
+                <td>{{:~ddmmyyyyDashed(dateOfAppointment)}}</td>
                 <td >
                     {{if appointmentStatusEntity!=null}}
                     <span class="marker_{{:appointmentStatusEntity.id}} rounded">{{:appointmentStatusEntity.name}}</span>

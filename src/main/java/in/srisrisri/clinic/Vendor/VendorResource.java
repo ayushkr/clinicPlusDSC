@@ -79,7 +79,18 @@ String label="vendor";
     @GetMapping("{id}")
     @ResponseBody
     public ResponseEntity<Optional<VendorEntity>> gets(@PathVariable("id") Long id){
-      Optional<VendorEntity> item=repo.findById(id);
+     
+       Optional<VendorEntity> item;
+        if (id > 0) {
+            item = repo.findById(id);
+        } else {
+            VendorEntity entityNew = new VendorEntity();
+//           entityNew.setDiscount(BigDecimal.ZERO);
+            item = Optional.of(PostMapping_one(entityNew).getBody());
+
+        }
+      
+      
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
     

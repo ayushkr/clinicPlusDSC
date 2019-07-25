@@ -1,6 +1,7 @@
 package in.srisrisri.clinic.pharmacyBill;
 
 import in.srisrisri.clinic.appointment.AppointmentEntity;
+import in.srisrisri.clinic.patient.PatientEntity;
 import in.srisrisri.clinic.responses.DeleteResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
 import in.srisrisri.clinic.utils.PageCover;
@@ -111,9 +112,16 @@ public class PharmacyBillResource {
 
     @GetMapping("{id}")
     @ResponseBody
-    public ResponseEntity<Optional<PharmacyBillEntity>> getMedicineNames(@PathVariable("id") Long id) {
-        Optional<PharmacyBillEntity> item = repo.findById(id);
-        return new ResponseEntity<>(item, HttpStatus.OK);
+    public Optional<PharmacyBillEntity> getMedicineNames(@PathVariable("id") Long id) {
+        Optional<PharmacyBillEntity> item ;
+        
+        if(id>0){
+         item = repo.findById(id);}
+        else{
+          item= Optional.of(PostMapping_one(new PharmacyBillEntity()).getBody());
+       
+        }
+        return item;
     }
 
     @GetMapping("betweenDates/{dateStart}/{dateEnd}")

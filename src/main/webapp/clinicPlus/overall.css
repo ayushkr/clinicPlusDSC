@@ -30,7 +30,25 @@
     --color_d5:#172531 ;
 }
 
+.navBar_visible{
+      height: 100%;
+    position: fixed;
+    right: 0px;
+    background-color: var(--color_l3);
+    z-index: 100;
+}
 
+#mainCover{
+       /* width: 90%; */
+    border: dashed green 1px;
+    position: absolute;
+    right: 60px;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    /*overflow: scroll ;*/
+   
+}
 
 @font-face{
     font-family: 'fay';
@@ -198,7 +216,7 @@ a{ text-decoration: none}
 
 
 .dateCurrent{
-    color: var(--color_l3);
+    /*color: var(--color_l3);*/
     font-size: 10px;
     text-align: center;
     line-height: 8px;
@@ -232,9 +250,10 @@ a{ text-decoration: none}
 }
 
 .widgets2{
-    position: absolute;
+       position: fixed;
     /* background-color: red; */
-    right: 17px;
+    right: 143px;
+    z-index: 1005;
 }
 
 .table_greyBorder{
@@ -407,10 +426,26 @@ a{ text-decoration: none}
     left: 0px;
     z-index: 15;
 }
+#main1_menu{
+        /*position: fixed;*/
+    width: 92%;
+    z-index: 1000;
+   /*background-color: var(--color_l3);*/
+}
+.menu_spacing{
+     width: 92%;
+     height: 50px;
+     border:solid violet 1px;
+}
+#main1_inner,#main2_inner,#main3_inner{
+    position: relative;
+    top: 42px;
+}
+
 
 #main1_paging{
-    /*    position: absolute;
-        bottom: 1cm;*/
+        position: relative;
+        top: 1cm;
 }
 
 
@@ -459,11 +494,12 @@ a{ text-decoration: none}
 }
 
 #main2_menu{
-    position: fixed;
-    position: fixed;
+   
+    /*position: fixed;*/
     width: 100%;
-    background-color: steelblue;
+    /*background-color: steelblue;*/
     z-index: 14;
+    border:dashed red 1px;
 }
 #main2_inner{
     position: relative;
@@ -497,12 +533,13 @@ a{ text-decoration: none}
 }
 
 .entity_select_closeButton{
-    z-index: 100;
+       z-index: 100;
     /* background-color: var(--color_d3); */
     top: 0px;
     right: 14px;
-    position: fixed;
+    position: relative;
     padding: 10px;
+    float: right;
 
 }
 .closeButton{
@@ -787,9 +824,11 @@ a:hover{
 
 .widgetBar{
     position: fixed;
-    right: 42px;
+    /*right: 42px;*/
     z-index: 10;
-    top: 4px;
+    /*top: 4px;*/
+    background-color: var(--color_l3);
+    width: 100%;
 }
 .w3-button2{
     padding: 8px;
