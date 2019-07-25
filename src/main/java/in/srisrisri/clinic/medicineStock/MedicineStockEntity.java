@@ -36,15 +36,13 @@ public class MedicineStockEntity implements Serializable {
     BigDecimal sellingPrice;
     @ColumnDefault(value = "0")
     BigDecimal mrp;
-   
+
     String batch;
     String billNo;
     String cash;
-    
-    
 
     @Column(name = "discount", nullable = false)
-            @ColumnDefault(value = "0")
+    @ColumnDefault(value = "0")
     BigDecimal discount;
 
     private String dateOfPurchase;
@@ -56,7 +54,13 @@ public class MedicineStockEntity implements Serializable {
 
     ////////////////////////////////////////////////////////////////
     // special
-    
+    public BigDecimal getSellingPrice() {
+        if (sellingPrice == null) {
+            return getMrp();
+        } else {
+            return sellingPrice;
+        }
+    }
 
     public long getQtyRemaining() {
         return qtyRemaining;
@@ -68,7 +72,6 @@ public class MedicineStockEntity implements Serializable {
 
     // end of specials
     /////////////////////////////////////////////////////////////////
-
     public BigDecimal getMrp() {
         return mrp;
     }
@@ -77,10 +80,6 @@ public class MedicineStockEntity implements Serializable {
         this.mrp = mrp;
     }
 
-   
-   
-    
-    
     public String getCash() {
         return cash;
     }
@@ -88,8 +87,6 @@ public class MedicineStockEntity implements Serializable {
     public void setCash(String cash) {
         this.cash = cash;
     }
-
-   
 
     public long getId() {
         return id;
@@ -155,15 +152,9 @@ public class MedicineStockEntity implements Serializable {
         this.costPrice = costPrice;
     }
 
-    public BigDecimal getSellingPrice() {
-        return sellingPrice;
-    }
-
     public void setSellingPrice(BigDecimal sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
-
-   
 
     public String getBatch() {
         return batch;
@@ -217,7 +208,5 @@ public class MedicineStockEntity implements Serializable {
     public String toString() {
         return "MedicineStockEntity{" + "id=" + id + ", medicineBrandName=" + medicineBrandName + ", vendor=" + vendor + ", expiryDate=" + expiryDate + ", cgst=" + cgst + ", sgst=" + sgst + ", gst=" + gst + ", costPrice=" + costPrice + ", sellingPrice=" + sellingPrice + ", batch=" + batch + ", billNo=" + billNo + ", cash=" + cash + ", discount=" + discount + ", dateOfPurchase=" + dateOfPurchase + ", qtyPurchased=" + qtyPurchased + ", qtyRemaining=" + qtyRemaining + ", subCount=" + subCount + '}';
     }
-
-   
 
 }

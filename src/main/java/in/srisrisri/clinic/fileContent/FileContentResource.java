@@ -204,6 +204,8 @@ public class FileContentResource {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentLength(fileContent.get().getContentLength());
             headers.set("Content-Type", fileContent.get().getMimeType());
+             headers.set("Content-Disposition", fileContent.get().getDescription()+"."+
+                     fileContent.get().getMimeType().split("/")[1]);
             return new ResponseEntity<>(inputStreamResource, headers, HttpStatus.OK);
             }catch(Exception e){
              return new ResponseEntity<>("No file set yet", HttpStatus.OK);

@@ -53,6 +53,18 @@ public class AppointmentEntity implements Serializable {
     long bookId;
     @Transient
     String totalInWords="not set";
+    
+    String remarks;
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+    
+    
 
     public long getRid() {
         return rid;

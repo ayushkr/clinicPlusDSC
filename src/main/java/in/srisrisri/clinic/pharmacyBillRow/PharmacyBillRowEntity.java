@@ -1,6 +1,5 @@
 package in.srisrisri.clinic.pharmacyBillRow;
 
-import in.srisrisri.clinic.appointment.AppointmentEntity;
 import in.srisrisri.clinic.medicineStock.MedicineStockEntity;
 import in.srisrisri.clinic.pharmacyBill.PharmacyBillEntity;
 import java.io.Serializable;
