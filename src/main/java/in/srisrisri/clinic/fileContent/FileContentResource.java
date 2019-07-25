@@ -1,6 +1,5 @@
 package in.srisrisri.clinic.fileContent;
 
-import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 import in.srisrisri.clinic.appointment.AppointmentEntity;
 import in.srisrisri.clinic.doctor.DoctorEntity;
 import in.srisrisri.clinic.patient.PatientEntity;
