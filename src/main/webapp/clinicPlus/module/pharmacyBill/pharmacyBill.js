@@ -33,6 +33,17 @@ function  PharmacyCashBill() {
         document.getElementById('main1_paging').innerHTML = "";
     };
 
+
+    this.onRowSelectByKey =
+            function (id) {
+               // alert(event.keyCode);
+                if(event.keyCode===13){
+                    this.onRowSelect(id);
+                }
+                
+            };
+
+
     this.onRowSelect =
             function (id) {
 
@@ -48,7 +59,7 @@ function  PharmacyCashBill() {
 //                            'background-color: var(--color_d4);color: var(--color_l4); ';
 //                }
 
-                document.getElementById('oneRowInEdit_' + id).style = 'display:block';
+                document.getElementById('oneRowInEdit_' + id).style.display = 'table-row';
 
                 $.get("/clinicPlus/api/pharmacyBillRow/" + id, function (result) {
                     // console.log('onRowSelect result=' + JSON.stringify(result));
@@ -62,7 +73,7 @@ function  PharmacyCashBill() {
                 });
 
                 setTimeout(function () {
-                    document.getElementById('qty').focus();
+                    document.getElementById('qty').select();
                 }, 100);
 
             };
@@ -183,10 +194,12 @@ function  PharmacyCashBill() {
                 var medicineStock;
                 var medicineStock_id = document.getElementById('medicineStock').value;
                 $.get("/clinicPlus/api/medicineStock/" + medicineStock_id, function (medicineStock) {
-                    console.log('calculateAmount' + medicineStock.id);
-                    var rate = medicineStock.rate;
+//                    console.log('calculateAmount' + JSON.stringify(medicineStock));
+                     console.log('calculateAmount--->' +medicineStock.id);
+                    
+                    var rate = medicineStock.sellingPrice;
 
-                    var qty = document.getElementById('qty_span').innerHTML;
+                    var qty = document.getElementById('qty').value;
 
                     var amt = (rate * qty);
                     amt = amt.toFixed(2);
@@ -196,6 +209,12 @@ function  PharmacyCashBill() {
                     document.getElementById('amount_disp').innerHTML = amt;
 
                 });
+
+ {
+       if (event.keyCode === 13){
+                        this.saveEdit();
+       }
+    }
 
             };
 

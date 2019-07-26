@@ -1,121 +1,133 @@
 
+<!--class="pharmacyCashBill_oneRowTemplate"-->
+<!--
+<div id="formDiv" 
+     
+
+     >-->
+<!--    onmouseout2="hideDivAy('oneRowInEdit_{{:id}}');"-->
+<!--    OneRowfillFormTemplate-->
+
+<!--pharmacyCashBill.onRowSelect(0)-->
 
 
-<div id="formDiv" class="pharmacyCashBill_oneRowTemplate"
-     onmouseout2="hideDivAy('oneRowInEdit_{{:id}}');"
 
-     >
-    <!--    OneRowfillFormTemplate-->
 
-    <!--pharmacyCashBill.onRowSelect(0)-->
-    
+<!--row form-->
+<!--<form name="f1" id="f1" action="#/cmd/post" method="POST">-->
+
+<input type="hidden" name="addOrDeleteFlag" value="edit"> 
+<input type="hidden" name="module_direct" value="pharmacyBillRow"> 
+<input type="hidden" name="redirect" value='#/cmd?directUrl=/clinicPlus/module/pharmacyBillRowByBillId/list.html&id={{:pharmacyBill.id}}'> 
+<input type="hidden" id="id" name="id" data-link="id" />
+<input  type="hidden" id="pharmacyBill" name="pharmacyBill" 
+        value="{{:pharmacyBill.id}}"  />
+
+
+<!--{{:id}}-->
+<div class="Cell">
      <button onclick="pharmacyCashBill.deleteRow()"   title="remove"
-                    style="float: left"
-                    class="paddingButton">
-                <i class="fa fa-trash">  </i>
-            </button>
-    
-    <button onclick="hideDivAy('oneRowInEdit_{{:id}}');"   title="Cancel"
-            class="paddingButton"  style="float: right">
-        <i class="fa fa-times">  </i>
+            style="float: left"
+            class="paddingButton">
+        <i class="fa fa-minus-circle">  </i>
     </button>
-    
-    <center>
-        <!--row form-->
-        <form name="f1" id="f1" action="#/cmd/post" method="POST">
+</div>
+<!--medicineStock-->
+<div class="Cell">   
+    <div class="inp_outer">
+        <div class="inp1" onclick="popup_selection_obj(
+                        {
+                            'entity_select': 'medicineStock',
+                            'input': 'medicineStock'
+                        }
 
-            <input type="hidden" name="addOrDeleteFlag" value="edit"> 
-            <input type="hidden" name="module_direct" value="pharmacyBillRow"> 
-            <input type="hidden" name="redirect" value='#/cmd?directUrl=/clinicPlus/module/pharmacyBillRowByBillId/list.html&id={{:pharmacyBill.id}}'> 
-            <input type="hidden" id="id" name="id" data-link="id" />
-            <input  type="hidden" id="pharmacyBill" name="pharmacyBill" 
-                    value="{{:pharmacyBill.id}}"  />
-           
-           
-            <!--{{:id}}-->
-            <div class="inp_outer">
-                <div class="inp1" onclick="popup_selection_obj(
-                                {
-                                    'entity_select': 'medicineStock',
-                                    'input': 'medicineStock'
-                                }
-
-                        )" >
-                    <div class="title1"    >medicineStock</div>
-                    {{if medicineStock!=null}}
-                    <input  type="hidden" id="medicineStock" name="medicineStock" 
-                            value=" {{:medicineStock.id}}"/>
-                    <button id="medicineStock_display"  
-                            class="w3-button w3-theme-d1"
-                            >     
-                        <!--{{:medicineStock.id}}_--> 
-                        {{:medicineStock.medicineBrandName.brandName}}
-                    </button>
-
-                    {{else}}
-                    <input  type="hidden" id="medicineStock" name="medicineStock" 
-                            />
-                    <span id="medicineStock_display">    
-                        <button  class="w3-button w3-theme-d1"  
-                                 accesskey="m"
-                                 title="Add/Change Medicine ? (Alt m)"
-                                 > 
-                            <i class="fa fa-plus-circle">
-                                Medicine Name
-                                ( മരുന്നിന്റെ പേര്  )
-                            </i>
-                        </button>
-
-                    </span>
-                    {{/if}}
-
-
-                </div>
+                )" >
+            <div class="title1"    >
+              Now selected
             </div>
-           
-
-            <div class='inp_outer'>
-                <div class="inp1">
-                    <div class="title1">quantity (എണ്ണം )</div>
-                    <span class="inp2" contenteditable="true" id="qty_span"   data-link="qty" 
-                          style="display: none"   
-                          >---</span>
-                    <input type="text" name="qty" id="qty"  data-link="qty" 
-                           onkeydown="pharmacyCashBill.calculateAmount(1)" 
-                           onclick="pharmacyCashBill.calculateAmount(1)"
-                           accesskey="q"
-                           title="How many? (Alt q)"
-                           style="width: 80px;"
-                           />
-                </div>
-            </div>
-          
-            <div class="inp_outer">
-                <div class="inp1" onclick="pharmacyCashBill.calculateAmount(1)">
-                    <div class="title1">amount</div>
-                    <span class="inp2" contenteditable="false" id="amount_disp"   data-link="amount" 
-                          >---</span>
-                    <input type="hidden" id="amount" name="amount" data-link="amount" />
-                </div>
-
-            </div>
-           
-            <button  onclick="pharmacyCashBill.saveEdit()"  title="OK"
-                     class="paddingButton">
-                <i class="fa fa-save">  </i>
+            {{if medicineStock!=null}}
+            <input  type="hidden" id="medicineStock" name="medicineStock" 
+                    value=" {{:medicineStock.id}}"/>
+            <button id="medicineStock_display"  
+                    class="w3-button w3-theme-d1"
+                    >     
+                <!--{{:medicineStock.id}}_--> 
+                {{:medicineStock.medicineBrandName.brandName}}
             </button>
 
+            {{else}}
+            <input  type="hidden" id="medicineStock" 
+                    name="medicineStock" 
+                    />
+            <span id="medicineStock_display">    
+                <button  class="w3-button w3-theme-d1"  
+                         accesskey="m"
+                         title="Add/Change Medicine ? (Alt m)"
+                         > 
+                    <i class="fa fa-plus-circle">
+                        Medicine Name <br>
+                        ( മരുന്നിന്റെ പേര്  )
+                    </i>
+                </button>
+
+            </span>
+            {{/if}}
 
 
-        </form>
-
-
-
-
-    </center>
-
-    <br>
-
+        </div>
+    </div>
 </div>
+<div class="Cell"> 
+</div>
+<div class="Cell"> 
+</div>
+<div class="Cell"> 
+</div>
+<!--quantity-->
+<div class="Cell">
+
+            <input type="text" name="qty" id="qty"  data-link="qty" 
+                   onkeydown="pharmacyCashBill.calculateAmount(1)" 
+                   onclick="pharmacyCashBill.calculateAmount(1)"
+                   accesskey="q"
+                   title="How many? (Alt q)"
+                   style="width: 80px;"
+                   />
+        
+</div>
+<div class="Cell"> 
+</div>
+<!--amount-->
+<div class="Cell">
+    
+            <span class="inp2" 
+                  contenteditable="false" 
+                  id="amount_disp"   
+                  data-link="amount" 
+                  onclick="pharmacyCashBill.calculateAmount(1)"
+                  >---</span>
+            <input type="hidden" id="amount" name="amount" data-link="amount" />
+      
+</div>
+
+<div class="Cell">
+    <button  onclick="pharmacyCashBill.saveEdit()"  title="OK"
+             class="paddingButton">
+        OK
+<!--        <i class="fa fa-save">  </i>-->
+    </button>
+
+   
+
+   
+</div>
+<!--        </form>-->
+
+
+
+
+<br>
+
+<!--</div>-->
 
 

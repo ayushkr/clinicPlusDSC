@@ -124,7 +124,9 @@
             </div>
 
             <div class="Heading">
-                <div class="Cell"  tabindex="0" accesskey="q"><ayu1>
+                <div class="Cell" 
+                    
+                     ><ayu1>
 
                         SlNo
                     </ayu1></div>
@@ -148,37 +150,51 @@
             {{if medicineStock}}
             {{if  (medicineStock.medicineBrandName.brandName!='roundOff')}}
             <div class="Row"    id="row_{{:id}}" 
-                 onclick2="pharmacyCashBill.onRowSelect({{:id}})"
+                 onclick="pharmacyCashBill.onRowSelect({{:id}})"
+                 onkeydown="pharmacyCashBill.onRowSelectByKey({{:id}})"
 
+                 title="{{:id}}"
+                
+                 tabindex="0"
+                  {{if #getIndex()==1 }}  accesskey="q" {{/if}}
+                 
                  >
-                <div class="Cell">            <ayu1>
+                <div class="Cell"  >  
+   
+                    <ayu1>
                         {{:#getIndex()+1}}
-                    </ayu1>        </div>
+                    </ayu1>      
+                </div>
 
                 <div class="CellNoPadding">
                     <ayu1>
-                        <button class="button_none" title="{{:id}}"
-                                accesskey="q"
-                                onclick="pharmacyCashBill.onRowSelect({{:id}})"
-                                style="text-align: left;"
-                                >{{:medicineStock.medicineBrandName.brandName}}
-                        </button>
+                        <span class="button_none" 
+
+                              onclick="pharmacyCashBill.onRowSelect({{:id}})"
+                              style="text-align: left;"
+                              >{{:medicineStock.medicineBrandName.brandName}}
+                        </span>
                     </ayu1>    
-                    <div id="oneRowInEdit_{{:id}}"></div>
+                    <div id="_oneRowInEdit_{{:id}}"></div>
                 </div>
                 <div class="Cell">            <ayu1>
                         {{:medicineStock.medicineBrandName.company}}
-                    </ayu1>        </div>
+                    </ayu1>      
+                </div>
 
                 <div class="Cell">            <ayu1>
                         {{:medicineStock.batch}}
-                    </ayu1>        </div>
+                    </ayu1>    
+                </div>
                 <div class="Cell" style="min-width: 66px">            <ayu1>
 
                         {{:~expiryDate_mmyyyy(medicineStock.expiryDate)}}
 
-                    </ayu1>        </div>
-                <div class="Cell">            <ayu1 style="float: right">{{:qty}} </ayu1>        </div>
+                    </ayu1>      
+                </div>
+                <div class="Cell">         
+                    <ayu1 style="float: right">{{:qty}} </ayu1>  
+                </div>
 
                 <!--                <div class="Cell">            <ayu1>
                                         {{:medicineStock.rate}}
@@ -198,8 +214,9 @@
 
                 <div class="Cell">            
                     <ayu1 style="float: right">
-                        {{:medicineStock.mrp}}
-                    </ayu1>        </div>
+                        {{:medicineStock.sellingPrice}}
+                    </ayu1>      
+                </div>
 
                 <div class="Cell" >            
                     <ayu1 style="float: right">
@@ -211,27 +228,43 @@
 
 
             </div>
+
+
+
             {{else}}
             <div class="Row"    id="row_{{:id}}" >
 
-                <div id="oneRowInEdit_{{:id}}"></div>
                 <span id='round'  title='{{:id}}'></span>
 
 
             </div>
 
             {{/if}}
+            <div class="Row" 
+                 style="background-color: pink"
+                 data-akr-printable="false"
+                 id="oneRowInEdit_{{:id}}">
+
+            </div>
+
             {{else}}
-            <div class="Row"    id="row_{{:id}}" data-akr-printable="false" >
-                <div class="Cell" ></div>
+            <div class="Row"  
+                 id="row_{{:id}}" 
+                 onclick="pharmacyCashBill.onRowSelect({{:id}})"      
+
+                 data-akr-printable="false" 
+
+                 >
+                <div class="Cell">            <ayu1>
+                        {{:#getIndex()+1}}
+                    </ayu1>      
+                </div>
                 <div class="Cell" >
-                    <div id="oneRowInEdit_{{:id}}"></div>
+                    
                     <ayu1>
                         <button  class=" w3-red" accesskey="i"
-                                 onclick="pharmacyCashBill.onRowSelect({{:id}})"      
                                  >
-                            select medicine
-
+                          medicine Name not selected
                         </button>
 
                     </ayu1>
@@ -244,6 +277,7 @@
                 <div class="Cell" ></div>
 
             </div>
+            <div id="oneRowInEdit_{{:id}}"></div>
             {{/if}}
 
 

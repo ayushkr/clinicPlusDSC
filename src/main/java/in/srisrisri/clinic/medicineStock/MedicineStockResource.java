@@ -352,7 +352,7 @@ public class MedicineStockResource {
                 try {
                     if (medicineBrandNameEntityFound == null) {
                         if (test.equals("post")) {
-                            // medicineBrandNameResource.PostMapping_one(medicineBrandName);
+                           medicineBrandNameResource.PostMapping_one(medicineBrandName);
                         }
                     }
                 } catch (Exception e) {
@@ -362,7 +362,7 @@ public class MedicineStockResource {
                 try {
                     System.out.println("row " + rowNum + "    " + medicineStockEntity.toString());
                     if (test.equals("post")) {
-                        // medicineStockResource.postOne(medicineStockEntity);
+                       medicineStockResource.PostMapping_one(medicineStockEntity);
                     }
 
                 } catch (Exception e) {

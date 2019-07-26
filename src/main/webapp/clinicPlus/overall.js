@@ -726,7 +726,20 @@ function  PrintUtils() {
         var originalTitle = document.title;
         document.title = title;
 //        alert();
-        window.print();
+        var elems = document.querySelectorAll("[data-akr-printable='false']");
+    for (i = 0; i < elems.length; i++) {
+        elems[i].style.displayPrev = elems[i].style.display;
+        elems[i].style.display = 'none';
+
+
+    }
+
+    window.print();
+    for (i = 0; i < elems.length; i++) {
+        elems[i].style.display = elems[i].style.displayPrev;
+    }
+    document.title = originalTitle;
+
         document.title = originalTitle;
 
         navbarDiv.style.visibility = 'visible';
@@ -754,8 +767,6 @@ function printDiv_navOff(divName) {
     //title = pri.getAttribute("pageTitle");
     title = printableAreaDiv.getAttribute("title");
     console.log(printableAreaDiv);
-
-
     var originalTitle = document.title;
     document.title = title;
 
@@ -769,7 +780,6 @@ function printDiv_navOff(divName) {
 
     window.print();
     for (i = 0; i < elems.length; i++) {
-
         elems[i].style.display = elems[i].style.displayPrev;
     }
     document.title = originalTitle;

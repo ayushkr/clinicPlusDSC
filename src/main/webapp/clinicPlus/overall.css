@@ -28,6 +28,9 @@
     --color_d3:#203344 ;
     --color_d4:#1b2c3a ;
     --color_d5:#172531 ;
+     --color_green:#33bdac;
+     --color_blue:#33bdac;
+     
 }
 
 .navBar_visible{
@@ -35,18 +38,25 @@
     position: fixed;
     right: 0px;
     background-color: var(--color_l3);
-    z-index: 100;
+    z-index: 2000;
+    min-width: 68px;
 }
-
+.topBar{
+    width: 100%;
+      background-color: var(--color_l2);
+      position: fixed;
+      z-index: 1000;
+          height: 45px;
+}
 #mainCover{
        /* width: 90%; */
     /*border: dashed green 1px;*/
     position: absolute;
-    right: 60px;
-    top: 0px;
+    /* right: 60px; */
+    /*top: 37px;*/
+    top:0px;
     left: 0px;
     bottom: 0px;
-    /*overflow: scroll ;*/
    
 }
 
@@ -128,9 +138,9 @@ a{ text-decoration: none}
 }
 
 .printOPcard_menu{
-    position: fixed;
-    top: 10cm;
-    right: 3cm;
+   position: fixed;
+    top: 4cm;
+    left: 1cm;
     z-index: 100;
 }
 .td_1{
@@ -144,7 +154,7 @@ a{ text-decoration: none}
 }
 
 .pharmacyCashBill_oneRowTemplate{
-    position: fixed;
+    /*position: fixed;*/
     padding: 1px;
     background-color: var(--color_l3);
     z-index: 13;
@@ -251,9 +261,10 @@ a{ text-decoration: none}
 
 .widgets2{
        position: fixed;
-    /* background-color: red; */
+    background-color: var(--color_l3);
     right: 143px;
     z-index: 1005;
+    border-radius: 20px;
 }
 
 .table_greyBorder{
@@ -294,15 +305,13 @@ a{ text-decoration: none}
 }
 
 .dsc_blue{
-    background-color: #003556;
+   background-color: var(--color_blue)!important;
 }
 
 .dsc_green{
-    background-color: #33bdac;
+    background-color: var(--color_green) !important;
 }
-.dscGreen{
-    background-color: #33bdac;
-}
+
 
 .pageTitle{
     display: block;
@@ -439,7 +448,7 @@ a{ text-decoration: none}
 }
 #main1_inner,#main2_inner,#main3_inner{
     position: relative;
-    top: 42px;
+    /*top: 42px;*/
 }
 
 
@@ -823,7 +832,7 @@ a:hover{
 }
 
 .widgetBar{
-    position: fixed;
+    /*position: fixed;*/
     /*right: 42px;*/
     z-index: 10;
     /*top: 4px;*/
@@ -843,7 +852,7 @@ a:hover{
 
 tr:hover{
     border:dashed green 1px;
-    background: #33bdac;
+    background: var(--color_green)
 }
 
 .widgetBar2{
@@ -917,10 +926,14 @@ tr:hover{
     display: table-row;
 }
 
+.Row:focus {
+  background:var(--color_green);
+}
+
 .Row:hover
 {
     display: table-row;
-    background-color: var(--color_l5);
+    background-color:  #33bdac;
     /*color: var(--color_l3);*/
     border-radius: 10mm;
 

@@ -4,134 +4,47 @@
 <!--<script src='/clinicPlus/module/entity_select/dateForOrganisation/dateForOrganisation.js'></script>-->
 
 <!--nav menu-->
-<div  id="navbar" class="navBar_visible">
-    <!--    <a onclick=" populateCreate2('appointment', 0, 'main1')" 
-           class="akr_nav_item_iconised ">Appointments </a> -->
-    <center>
-        
-       <span id="dateCurrent" class="dateCurrent"
-             class="akr_nav_item_iconised "
-             onclick="window.href='#/cmd?module=dateForOrganisation&action=/all/list&pageNumber=1'"
-             title="calendar"
-             > dateCurrent</span>
-    </center>
-    
-    <a href="#/cmd?module=appointment&action=/all/list&pageNumber=1"  
-       class="akr_nav_item_iconised " title="Appointments">
-        <i class="fa fa-calendar"></i> 
-        <i class="fasub fa-list" ></i> 
-       </a> 
 
-    <a href="#/cmd?module=doctor&action=/all/list&pageNumber=1" 
-       class="akr_nav_item_iconised "
-       title="Doctors"
-       >
-        <i class="fa fa-user-md"></i> 
-         <i class="fasub fa-list"></i> 
-        </a>
+<style>
+    * {
+        box-sizing: border-box;
+    }
 
-    <a href="#/cmd?module=patient&action=/all/list&pageNumber=1" 
-       class="akr_nav_item_iconised "
-       title="Patients"
-       >
-         <i class="fa fa-wheelchair"></i> 
-           <i class="fasub fa-list"></i> 
-        </a>
-    <hr>
-    <a href="#/cmd?module=pharmacyBill&action=/all/list&pageNumber=1" 
-       class="akr_nav_item_iconised "
-       title="pharmacy Bills"
-       >
-         <i class="fa590akr fa-capsules"></i>
-       <i class="fasub fa-file"></i> 
-         
-     
-    </a>
-    <a href="#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1" 
-       class="akr_nav_item_iconised "
-       title="MediBrandNames"
-       >
-         <i class="fa590akr fa-capsules"></i>
-       <i class="fasub fa-file-code-o"></i> 
-        </a> 
-       
-    <a href="#/cmd?module=medicineStock&action=/all/list&pageNumber=1" 
-       class="akr_nav_item_iconised "
-       title="MediStocks"
-       >
-         <i class="fa590akr fa-capsules"></i>
-        <i class="fasub fa-database"></i> 
-        </a>
-         
-
-
-
-    <a href="#/cmd?module=vendor&action=/all/list&pageNumber=1" class="akr_nav_item_iconised"
-       title="Vendors"
-       > 
-          <i class="fa fa-ambulance"></i> 
-          <i class="fasub fa-list"></i> 
-        </a>
-    <hr>
-    <a href="#/cmd?module=fileContent&action=/all/list&pageNumber=1" class="akr_nav_item_iconised "
-       title="fileContent"
-       > 
-         <i class="fa fa-file"></i> 
-          <i class="fasub fa-list"></i> 
-         </a>
-    
-    <a href="#/file?path=help/1.html"  title="Help"
-       class="akr_nav_item_iconised ">
-         <i class="ico"></i> 
-        <i class="fa fa-question-circle-o"></i> 
-          <i class="faspace "></i> 
-    </a> 
-    <a href="#/file?path=help/search.html"  title="Search"
-       class="akr_nav_item_iconised  ">
-        <i class="fa fa-search"></i> 
-        <i class="faspace"></i> 
-        </a> 
-
-
-    <a href="#/file?path=module/reports/patientsByDoctor/list.html" class="akr_nav_item_iconised"
-       title="Report patientsByDoctor "
-       > 
-        <i class="fa fa-file-text-o"></i> 
-         <i class="faspace"></i> 
-        </a>
-
-
-
-    <hr>
-   
-
-
-    
-
-
-    
-
-    <a href="#/cmd?module=jote&action=/all/list&pageNumber=1" class="akr_nav_item_iconised"
-       title="Jote"
-       > 
-        <i class="fa fa-circle"></i> 
-          <i class="faspace"></i> 
-    </a>
-
-    <a href="#/cmd?module=pharmacyBillRow&action=/all/list&pageNumber=1" 
-       class="akr_nav_item_iconised "
-         title="pharmacyBillRow"
-       >
-        <i class="fa fa-circle"></i> 
-          <i class="faspace"></i> 
-    
-    </a>
-
-
+    /* Create two equal columns that floats next to each other */
+    .column1 {
+        float: left;
+        width: 80%;
+        padding: 10px;
+        height: 300px; /* Should be removed. Only for demonstration */
+    }
+    .column2 {
+        float: left;
+        width: 20%;
+        padding: 10px;
+        height: 300px; /* Should be removed. Only for demonstration */
+    }
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
+<div>
 
 </div>
 
-<div id="mainCover" >
+<!--<div class="topBar" data-akr-printable="false">
+    DOCTORS SPECIALITY CENTRE  <br>
+
+    Website:	www.doctorsspecialitycentre.com
+    Phone   	8592918888
+
+</div>-->
+
+
+
+<div id="mainCover" class="column1"  >
 
     <div id="alert_akr" >
         <!--alert_akr-->
@@ -141,17 +54,17 @@
         <div id="alert_akr_body">alert_akr_body</div>
     </div> 
     <center>  
-        
+
     </center>
-     
-   
+
+
     <div id="main1">
         <div id="main1_menu" >
             <!--main1_menu-->
         </div>
 
- 
-      
+
+
         <div id="main1_inner">
             <!--main1_inner-->
             <center>
@@ -167,11 +80,11 @@
 
                 <br>   <br>
                 For any help ? Call /  WhatsApp  / Telegram : 7907996990
-               
+
             </center>
 
         </div>
-       <div id="main1_paging" >
+        <div id="main1_paging" >
             <!--main1_paging-->
         </div>
 
@@ -195,9 +108,9 @@
     <div id='modalDate' > 
         <div onclick="hideDivAy('modalDate')" id='entity_select_closeButton_modalDate'
              class="entity_select_closeButton w3-btn "> <i class="fa fa-times"> </i></div>
-             <div id="modalDate_menu"></div>
+        <div id="modalDate_menu"></div>
         <div id="modalDate_inner">modalDate</div>
-         <div id="modalDate_paging"></div>
+        <div id="modalDate_paging"></div>
     </div>
     <div id='main3' >
         <div onclick="hideDivAy('main3')" 
@@ -209,6 +122,133 @@
     </div>
 
 </div>
+<div class="column2">
+    <div  id="navbar" class="navBar_visible ">
+        <!--    <a onclick=" populateCreate2('appointment', 0, 'main1')" 
+               class="akr_nav_item_iconised ">Appointments </a> -->
+        <center>
 
+            <span id="dateCurrent" class="dateCurrent"
+                  class="akr_nav_item_iconised "
+                  onclick="window.href = '#/cmd?module=dateForOrganisation&action=/all/list&pageNumber=1'"
+                  title="calendar"
+                  > dateCurrent</span>
+        </center>
+
+        <a href="#/cmd?module=appointment&action=/all/list&pageNumber=1"  
+           class="akr_nav_item_iconised " title="Appointments">
+            <i class="fa fa-calendar"></i> 
+            <i class="fasub fa-list" ></i> 
+        </a> 
+
+        <a href="#/cmd?module=doctor&action=/all/list&pageNumber=1" 
+           class="akr_nav_item_iconised "
+           title="Doctors"
+           >
+            <i class="fa fa-user-md"></i> 
+            <i class="fasub fa-list"></i> 
+        </a>
+
+        <a href="#/cmd?module=patient&action=/all/list&pageNumber=1" 
+           class="akr_nav_item_iconised "
+           title="Patients"
+           >
+            <i class="fa fa-wheelchair"></i> 
+            <i class="fasub fa-list"></i> 
+        </a>
+        <hr>
+        <a href="#/cmd?module=pharmacyBill&action=/all/list&pageNumber=1" 
+           class="akr_nav_item_iconised "
+           title="pharmacy Bills"
+           >
+            <i class="fa590akr fa-capsules"></i>
+            <i class="fasub fa-file"></i> 
+
+
+        </a>
+        <a href="#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1" 
+           class="akr_nav_item_iconised "
+           title="MediBrandNames"
+           >
+            <i class="fa590akr fa-capsules"></i>
+            <i class="fasub fa-file-code-o"></i> 
+        </a> 
+
+        <a href="#/cmd?module=medicineStock&action=/all/list&pageNumber=1" 
+           class="akr_nav_item_iconised "
+           title="MediStocks"
+           >
+            <i class="fa590akr fa-capsules"></i>
+            <i class="fasub fa-database"></i> 
+        </a>
+
+
+
+
+        <a href="#/cmd?module=vendor&action=/all/list&pageNumber=1" class="akr_nav_item_iconised"
+           title="Vendors"
+           > 
+            <i class="fa fa-ambulance"></i> 
+            <i class="fasub fa-list"></i> 
+        </a>
+        <hr>
+        <a href="#/cmd?module=fileContent&action=/all/list&pageNumber=1" class="akr_nav_item_iconised "
+           title="fileContent"
+           > 
+            <i class="fa fa-file"></i> 
+            <i class="fasub fa-list"></i> 
+        </a>
+
+        <a href="#/file?path=help/1.html"  title="Help"
+           class="akr_nav_item_iconised ">
+            <i class="ico"></i> 
+            <i class="fa fa-question-circle-o"></i> 
+            <i class="faspace "></i> 
+        </a> 
+        <a href="#/file?path=help/search.html"  title="Search"
+           class="akr_nav_item_iconised  ">
+            <i class="fa fa-search"></i> 
+            <i class="faspace"></i> 
+        </a> 
+
+
+        <a href="#/file?path=module/reports/patientsByDoctor/list.html" class="akr_nav_item_iconised"
+           title="Report patientsByDoctor "
+           > 
+            <i class="fa fa-file-text-o"></i> 
+            <i class="faspace"></i> 
+        </a>
+
+
+
+        <hr>
+
+
+
+
+
+
+
+
+        <a href="#/cmd?module=jote&action=/all/list&pageNumber=1" class="akr_nav_item_iconised"
+           title="Jote"
+           > 
+            <i class="fa fa-circle"></i> 
+            <i class="faspace"></i> 
+        </a>
+
+        <a href="#/cmd?module=pharmacyBillRow&action=/all/list&pageNumber=1" 
+           class="akr_nav_item_iconised "
+           title="pharmacyBillRow"
+           >
+            <i class="fa fa-circle"></i> 
+            <i class="faspace"></i> 
+
+        </a>
+
+
+
+    </div>
+</div>
 
 </body>
