@@ -7,7 +7,8 @@ function  PharmacyCashBill() {
     this.render_list = function (id, divName) {
 
         console.log('GT PharmacyCashBill.render_list() id=' + id);
-//        window.location.href = "#/dummy?a=PharmacyCashBill/" + id;
+      window.location.href = "#/dummy?a=PharmacyCashBill/" + id;
+      
         aylinker({
             urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/menuTop.html?ran=" + Math.random(),
             selector: "main1_menu",
@@ -29,7 +30,6 @@ function  PharmacyCashBill() {
             );
         });
 
-        document.getElementById('cashBill_inbuilt').innerHTML = "kitti";
         document.getElementById('main1_paging').innerHTML = "";
     };
 
@@ -189,8 +189,7 @@ function  PharmacyCashBill() {
                         }
                 );
     };
-    this.calculateAmount =
-            function (j) {
+    this.calculateAmount =function (j) {
                 var medicineStock;
                 var medicineStock_id = document.getElementById('medicineStock').value;
                 $.get("/clinicPlus/api/medicineStock/" + medicineStock_id, function (medicineStock) {

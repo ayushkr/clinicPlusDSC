@@ -145,50 +145,50 @@ function populateCreate2(module, id, divName) {
 
     if (id === 0) {
 //        data_ = mn.module[module + "_new"];
- $.get("/clinicPlus/api/" + module + "/" + id, function (data_) {
-console.log('new data_'+JSON.stringify(data_));
+        $.get("/clinicPlus/api/" + module + "/" + id, function (data_) {
+            console.log('new data_' + JSON.stringify(data_));
 
 //        data_.'id': 0, 'fixedId': 0, 'newId': 0, 'bookId': 0};
-        if (module === 'doctor') {
-            data_.dateOfJoining = getToday().full;
-        }
-        if (module === 'patient') {
-            data_.dateOfRegistration = getToday().full;
-        }
+            if (module === 'doctor') {
+                data_.dateOfJoining = getToday().full;
+            }
+            if (module === 'patient') {
+                data_.dateOfRegistration = getToday().full;
+            }
 
-        if (module === 'appointment') {
-            data_.dateOfAppointment = getToday().full;
-        }
+            if (module === 'appointment') {
+                data_.dateOfAppointment = getToday().full;
+            }
 
-        if (module === 'pharmacyBill') {
-            data_.dateOfBill = getToday().full;
-        }
+            if (module === 'pharmacyBill') {
+                data_.dateOfBill = getToday().full;
+            }
 
-        if (module === 'medicineBrandName') {
-            data_.groupid = 0;
-        }
+            if (module === 'medicineBrandName') {
+                data_.groupid = 0;
+            }
 
-        if (module === 'medicineStock') {
-            data_.cgst = 0;
-            data_.sgst = 0;
-            data_.discount = 0;
-        }
-
-
+            if (module === 'medicineStock') {
+                data_.cgst = 0;
+                data_.sgst = 0;
+                data_.discount = 0;
+            }
 
 
 
 
-        console.log("populateCreate2 , module=" + module + "data-json= " + JSON.stringify(data_));
-        aylinker({
-            urlOfTemplate: "/clinicPlus/module/" + module + "/fillForm/template.html?ran=" + Math.random(),
 
-            selector: divName + "_inner",
-            data: data_
-        }
-        );
 
- });
+            console.log("populateCreate2 , module=" + module + "data-json= " + JSON.stringify(data_));
+            aylinker({
+                urlOfTemplate: "/clinicPlus/module/" + module + "/fillForm/template.html?ran=" + Math.random(),
+
+                selector: divName + "_inner",
+                data: data_
+            }
+            );
+
+        });
 
     } else {
         $.get("/clinicPlus/api/" + module + "/" + id, function (result) {
@@ -590,8 +590,8 @@ function goto_list(moduleName) {
 
 function goto_delete(module, id) {
     console.log('goto_delete , module=' + module + '  id=' + id + '   ' + option);
-
-    var option = prompt("Enter y or Y to confirm ", "");
+var option='y';
+//    var option = prompt("Enter y or Y to confirm ", "");
     console.log(option);
     if (option === 'y' || option === 'Y') {
 
@@ -600,6 +600,7 @@ function goto_delete(module, id) {
                     console.log("goto_delete api result=" + JSON.stringify(result));
                     alert_1("delete", JSON.stringify(result), 'success');
 //                    goto_list(module);
+                    window.history.back();
                 }
         );
     }
@@ -727,18 +728,18 @@ function  PrintUtils() {
         document.title = title;
 //        alert();
         var elems = document.querySelectorAll("[data-akr-printable='false']");
-    for (i = 0; i < elems.length; i++) {
-        elems[i].style.displayPrev = elems[i].style.display;
-        elems[i].style.display = 'none';
+        for (i = 0; i < elems.length; i++) {
+            elems[i].style.displayPrev = elems[i].style.display;
+            elems[i].style.display = 'none';
 
 
-    }
+        }
 
-    window.print();
-    for (i = 0; i < elems.length; i++) {
-        elems[i].style.display = elems[i].style.displayPrev;
-    }
-    document.title = originalTitle;
+        window.print();
+        for (i = 0; i < elems.length; i++) {
+            elems[i].style.display = elems[i].style.displayPrev;
+        }
+        document.title = originalTitle;
 
         document.title = originalTitle;
 

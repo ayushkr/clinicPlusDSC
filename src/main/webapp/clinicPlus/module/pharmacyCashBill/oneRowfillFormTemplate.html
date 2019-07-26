@@ -26,7 +26,7 @@
 
 <!--{{:id}}-->
 <div class="Cell">
-     <button onclick="pharmacyCashBill.deleteRow()"   title="remove"
+    <button onclick="pharmacyCashBill.deleteRow()"   title="remove"
             style="float: left"
             class="paddingButton">
         <i class="fa fa-minus-circle">  </i>
@@ -43,7 +43,7 @@
 
                 )" >
             <div class="title1"    >
-              Now selected
+                Now selected
             </div>
             {{if medicineStock!=null}}
             <input  type="hidden" id="medicineStock" name="medicineStock" 
@@ -86,47 +86,44 @@
 <!--quantity-->
 <div class="Cell">
 
-            <input type="text" name="qty" id="qty"  data-link="qty" 
-                   onkeydown="pharmacyCashBill.calculateAmount(1)" 
-                   onclick="pharmacyCashBill.calculateAmount(1)"
-                   accesskey="q"
-                   title="How many? (Alt q)"
-                   style="width: 80px;"
-                   />
-        
+    <input type="text" name="qty" id="qty"  data-link="qty" 
+           onkeydown="pharmacyCashBill.calculateAmount(1)" 
+           onclick="pharmacyCashBill.calculateAmount(1)"
+           accesskey="q"
+           title="How many? (Alt q)"
+           style="width: 80px;"
+           />
+
 </div>
 <div class="Cell"> 
 </div>
 <!--amount-->
 <div class="Cell">
-    
-            <span class="inp2" 
-                  contenteditable="false" 
-                  id="amount_disp"   
-                  data-link="amount" 
-                  onclick="pharmacyCashBill.calculateAmount(1)"
-                  >---</span>
-            <input type="hidden" id="amount" name="amount" data-link="amount" />
-      
+
+    <span class="inp2" 
+          contenteditable="false" 
+          id="amount_disp"   
+          data-link="amount" 
+          onclick="pharmacyCashBill.calculateAmount(1)"
+          >---</span>
+    <input type="hidden" id="amount" name="amount" data-link="amount" />
+
 </div>
 
 <div class="Cell">
     <button  onclick="pharmacyCashBill.saveEdit()"  title="OK"
              class="paddingButton">
         OK
-<!--        <i class="fa fa-save">  </i>-->
+        <!--        <i class="fa fa-save">  </i>-->
     </button>
 
-   
 
-   
+
+
 </div>
 <!--        </form>-->
 
 
-
-
-<br>
 
 <!--</div>-->
 

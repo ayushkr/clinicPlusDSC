@@ -1,6 +1,6 @@
 
-<div class="pageTitle">{{if id==0}} New  {{else}} Existing  : {{:name}} {{/if}}  </div>
-<form id='form_pharmacyBill' method="post" action="#/cmd/post">
+<div class="pageTitle">{{if id==0}} New  {{else}} Existing  : {{:id}} {{/if}}  </div>
+<form id='form_pharmacyBill' method="post" action="{{:renderInDiv}}#/cmd/post">
     <input type='hidden' name='redirect' value=' #/cmdc?module=pharmacyBill&action=/all/list'>
     <input type='hidden' name='module_direct' value='pharmacyBill'>
     <input type="hidden" name="id" data-link="id" />
@@ -64,7 +64,10 @@
         <span class="inp2" contenteditable="true" id="remarks"   data-link="remarks" >---</span>
         <input type="hidden" name="remarks" data-link="remarks" />
     </div>
- {{if appointment!=null }}
+ 
+
+</form>
+{{if appointment!=null }}
     <button class="w3-button dsc_green"
             style="float: none"
             title="medicines "
@@ -73,8 +76,6 @@
         <i class="fa590akr fa-capsules" ></i>
     </button>
  {{/if}}
-
-</form>
 
 <div id="main1_innert"> cashBill_inbuilt</div>
 

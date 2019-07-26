@@ -480,10 +480,11 @@ a{ text-decoration: none}
 }
 
 #main2{
-   width: 100%;
+   /*width: 100%;*/
     position: fixed;
     top: 0cm;
     left: 0cm;
+    right: 70px;
     z-index: 13;
     /* background-color: rgba(100,100,100,0.95); */
     background-color: var(--color_l4);
@@ -518,15 +519,18 @@ a{ text-decoration: none}
             /*height: 83%;*/
 }
 #main3{
-    width: 100%;
-    position: absolute;
+        /* width: 100%; */
+    position: fixed;
     top: 0cm;
     left: 0cm;
+    right: 67px;
     z-index: 13;
     background-color: var(--color_l4);
     display: none;
-    padding: 1cm;
+    padding: 2cm;
     min-height: 100%;
+    overflow: scroll;
+    height: 100%;
 }
 #pagingBar{
 
@@ -923,6 +927,7 @@ tr:hover{
     display: table-row;
     font-weight: bold;
     text-align: center;
+    background-color: lightblue;
 
 }
 .Row

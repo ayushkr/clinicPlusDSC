@@ -84,10 +84,10 @@ function cmd_post(context, data) {
     if (module_direct !== undefined) {
         module = module_direct;
     }
-    
-     var d = new FormData(document.getElementById('form_'+module));
 
-    
+    var d = new FormData(document.getElementById('form_' + module));
+
+
     console.log("akr api_Posting : " + JSON.stringify(d));
 
     $.ajax({
@@ -115,7 +115,7 @@ function cmd_post(context, data) {
                         var path = "#/cmd?module=" + module + "&action=/all/list" + pageNewAy(1);
                         console.log('redirect to ' + path);
 
-
+                        window.history.back();
                     }
 
                 }

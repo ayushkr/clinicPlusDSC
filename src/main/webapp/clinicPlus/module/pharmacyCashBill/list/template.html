@@ -125,7 +125,7 @@
 
             <div class="Heading">
                 <div class="Cell" 
-                    
+
                      ><ayu1>
 
                         SlNo
@@ -154,13 +154,13 @@
                  onkeydown="pharmacyCashBill.onRowSelectByKey({{:id}})"
 
                  title="{{:id}}"
-                
+
                  tabindex="0"
-                  {{if #getIndex()==1 }}  accesskey="q" {{/if}}
-                 
+                 {{if #getIndex()==1 }}  accesskey="q" {{/if}}
+
                  >
-                <div class="Cell"  >  
-   
+                 <div class="Cell"  >  
+
                     <ayu1>
                         {{:#getIndex()+1}}
                     </ayu1>      
@@ -240,7 +240,8 @@
             </div>
 
             {{/if}}
-            <div class="Row" 
+            <div 
+                class="Row" 
                  style="background-color: pink"
                  data-akr-printable="false"
                  id="oneRowInEdit_{{:id}}">
@@ -260,11 +261,11 @@
                     </ayu1>      
                 </div>
                 <div class="Cell" >
-                    
+
                     <ayu1>
                         <button  class=" w3-red" accesskey="i"
                                  >
-                          medicine Name not selected
+                            medicine Name not selected
                         </button>
 
                     </ayu1>
@@ -277,7 +278,15 @@
                 <div class="Cell" ></div>
 
             </div>
-            <div id="oneRowInEdit_{{:id}}"></div>
+            <div 
+                id="oneRowInEdit_{{:id}}"
+                class="Row" 
+                 style="background-color: pink"
+                 data-akr-printable="false"
+                >
+                
+                
+            </div>
             {{/if}}
 
 
