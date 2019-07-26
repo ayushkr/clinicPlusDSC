@@ -45,7 +45,7 @@
                             </div>
 
 
-                            <div class="inp_outer"   
+                            <div class="inp_outer"    tabindex="0"
                                  onclick="popup_selection_obj(
                                      {
                                      'value' :'{{:dateOfRegistration}}',
@@ -96,10 +96,15 @@
             </table>
             
             
-        
+        <!--background-color: var(--color_l2);-->
             <div class="inp_outer"  style="min-width: 400px;min-height: 100px">
                 <div class="title1">address</div>
-                <span class="inp2" contenteditable="true" id="address"   data-link="address" >---</span>
+                <span class="inp2" contenteditable="true" 
+                      id="address"   data-link="address"
+                      style="
+                      min-height: 100px"
+                      >---</span>
+                
                 <input type="hidden" name="address" data-link="address" />
             </div>
             <br>

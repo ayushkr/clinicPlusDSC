@@ -5,12 +5,17 @@
     Existing Appointment : {{:id}} {{/if}} 
 </div>
 
-{{if id==0}}
-
+{{if doctor}}
+<a class="w3-btn w3-blue"  style="width:100%"
+   onclick="patientCard_show({{:id}})" >
+    show patient Card 
+</a>
+ <br>
+    <br>
 {{else}}
-<a class="w3-btn w3-blue" onclick="patientCard_show({{:id}})" >
-    show patient Card  </a>
-<hr>
+You must save to see the PatientCard
+ <br>
+    <br>
 {{/if}}
 <div class="w3-bar-ay">
     <span class="w3-bar-item  tablink " onClick="openCity(event, 'Basic')">Basic</span>

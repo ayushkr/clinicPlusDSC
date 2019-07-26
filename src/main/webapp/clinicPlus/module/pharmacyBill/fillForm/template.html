@@ -3,13 +3,13 @@
 <form id='form_pharmacyBill' method="post" action="#/cmd/post">
     <input type='hidden' name='redirect' value=' #/cmdc?module=pharmacyBill&action=/all/list'>
     <input type='hidden' name='module_direct' value='pharmacyBill'>
-     <input type="hidden" name="id" data-link="id" />
+    <input type="hidden" name="id" data-link="id" />
     <br>
     ID: <span class="rounded"
               title="ഇതാണ്  ബില്ല്  നമ്പർ "
               >{{:id}} </span>
     <br><br>
-   
+
 
 
     <div class="inp_outer"
@@ -28,10 +28,10 @@
         <span id="dateOfBill_display" class="inp2">{{:dateOfBill}}</span>
         <input id="dateOfBill" type="hidden" name="dateOfBill" data-link="dateOfBill" />
     </div>
-  
+
 
     <div class="inp_outer"
-title="ഒരു അപ്പോയ്ന്റ്മെന്റ്   സെലക്ട്  ചെയ്യുക "
+         title="ഒരു അപ്പോയ്ന്റ്മെന്റ്   സെലക്ട്  ചെയ്യുക "
          onclick="popup_selection_obj(
              {
              'entity_select': 'appointment',
@@ -64,15 +64,16 @@ title="ഒരു അപ്പോയ്ന്റ്മെന്റ്   സെല
         <span class="inp2" contenteditable="true" id="remarks"   data-link="remarks" >---</span>
         <input type="hidden" name="remarks" data-link="remarks" />
     </div>
-    
-     <button class="w3-button dsc_green"
-                            style="float: none"
-                            title="medicines "
-                            onclick="pharmacyCashBill.render_list({{:id}},'main1_inner')"
-                            > 
-                        <i class="fa590akr fa-capsules" ></i>
-                    </button>
-    
+ {{if appointment!=null }}
+    <button class="w3-button dsc_green"
+            style="float: none"
+            title="medicines "
+            onclick="pharmacyCashBill.render_list({{:id}}, 'main1_inner')"
+            > 
+        <i class="fa590akr fa-capsules" ></i>
+    </button>
+ {{/if}}
+
 </form>
 
 <div id="main1_innert"> cashBill_inbuilt</div>
