@@ -103,7 +103,7 @@
 
             <thead>
                 <tr class="bluestrp">
-
+                    <th></th>
                     <th>id
                         <br>
                         <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
@@ -294,16 +294,25 @@
 
 
 
-                    <td>
-                        <span 
-                            onclick="go({{:id}}, 'appointment')"
-                            >
-                            {{:id}}
-                        </span>
-                        <input type="checkbox" name="n"  value="{{:id}}">
+                    <td
+                        
+                        >
+                        
+                            
+                            
+                        <input type="checkbox"
+                               id="checkbox_{{:id}}"
+                              class="regular-checkbox" 
+                               name="n"  value="{{:id}}">
+                        <label for="checkbox_{{:id}}"></label>
                     </td>
-                    <td>{{:bookId}}</td>
-                    <td >
+                    <td>{{:id}}</td>
+                    <td
+                        onclick="go({{:id}}, 'appointment')"
+                        >{{:bookId}}</td>
+                    <td 
+                        onclick="go({{:id}}, 'appointment')"
+                        >
                         {{if doctor!=null}}
 
 
@@ -317,7 +326,9 @@
 
                     </td>
 
-                    <td >
+                    <td 
+                        onclick="go({{:id}}, 'appointment')"
+                        >
 
                         {{if patient!=null}}
                         {{:patient.name}} <br>
@@ -333,21 +344,33 @@
                         {{/if}}
 
                     </td>
-                    <td>{{:dateOfAppointment}}</td>
-                    <td >
+                    <td
+                        onclick="go({{:id}}, 'appointment')"
+                        >{{:dateOfAppointment}}</td>
+                    <td 
+                        onclick="go({{:id}}, 'appointment')"
+                        >
                         {{if appointmentStatusEntity!=null}}
                         <span class="marker_{{:appointmentStatusEntity.id}} rounded">{{:appointmentStatusEntity.name}}</span>
 
                         {{/if}}
                     </td>
-                    <td> {{if appointmentTypeEntity!=null}}
+                    <td
+                        onclick="go({{:id}}, 'appointment')"
+                        > {{if appointmentTypeEntity!=null}}
                         <span class="marker_{{:appointmentTypeEntity.id}} rounded">{{:appointmentTypeEntity.name}}</span>
 
                         {{/if}}
                     </td>
-                    <td>{{:consultFee}}</td>
-                    <td>{{:feeForClinic}}</td>
-                    <td>{{:tokenNumber}}</td>
+                    <td
+                        onclick="go({{:id}}, 'appointment')"
+                        >{{:consultFee}}</td>
+                    <td
+                       onclick="go({{:id}}, 'appointment')" 
+                        >{{:feeForClinic}}</td>
+                    <td
+                       onclick="go({{:id}}, 'appointment')" 
+                        >{{:tokenNumber}}</td>
 
 
                 </tr>
