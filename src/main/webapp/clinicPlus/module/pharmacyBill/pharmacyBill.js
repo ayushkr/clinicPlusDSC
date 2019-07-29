@@ -103,6 +103,7 @@ function  PharmacyCashBill() {
         this.fillParamsFromGUI();
         var d = {
             "qty": -1,
+            "pharmacyBill": this.params['pharmacyBill'],
             "id": this.params['id']
         };
         console.log("deleteRow() d= " + JSON.stringify(d));
