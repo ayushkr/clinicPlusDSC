@@ -35,7 +35,7 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
                     onclick="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:medicineBrandName.brandName}}')"  
 
                     >
-                {{if medicineBrandName!=null}}
+                {{if medicineBrandName}}
                 {{:medicineBrandName.brandName}}
                 {{/if}} 
 
@@ -45,10 +45,14 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
 
         </div>
 
-        <div class="CellNoBorder"> {{:vendor.name}} </div>
+        <div class="CellNoBorder">
+             {{if vendor}}
+                {{:vendor.name}}
+                {{/if}} 
+             </div>
         <div class="CellNoBorder">  {{:expiryDate}} </div>
         <div class="CellNoBorder">  {{:batch}} </div>
-        <div class="CellNoBorder">  {{:rateDecided}} </div>
+        <div class="CellNoBorder">  {{:sellingPrice}} </div>
         <div class="CellNoBorder {{if qtyRemaining<90}} w3-red {{/if}}"  >  {{:qtyRemaining}} </div>
         <div class="CellNoBorder"> 
             <a class="w3-btn" data-toggle="tooltip" title="Edit"
@@ -62,7 +66,10 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
 
 
         <d id='{{:id}}' 
-           medicineBrandName.brandName="{{:medicineBrandName.brandName}}"
+           medicineBrandName.brandName=
+           "{{if medicineBrandName}}
+                {{:medicineBrandName.brandName}}
+                {{/if}} "
 
            >
         </d>

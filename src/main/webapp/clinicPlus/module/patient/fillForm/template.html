@@ -31,21 +31,8 @@
 
                             ID : 
                             <span class="label label-info "> {{:id}} </span> <br> 
-                            <br>
-                           
                             
-                            <div class="inp_outer" style="min-width: 250px">
-                                <div class="title1">name</div>
-                                     <input type="text" name="name" data-link="name" class="akr_input_text" required="" />
-                           </div>
-                            <br>
-                            <div class="inp_outer" style="min-width: 100px">
-                                <div class="title1">bookId</div>
-                                <span class="inp2" contenteditable="true" id="bookId"   data-link="bookId" >---</span>
-                                <input type="hidden" name="bookId" data-link="bookId" />
-                            </div>
-
-
+                            
                             <div class="inp_outer"    tabindex="0"
                                  onclick="popup_selection_obj(
                                      {
@@ -63,6 +50,14 @@
                                 <span id='dateOfRegistration_display' class="inp2">{{:dateOfRegistration}}</span>
                             </div>
                             <br>
+                           
+                            
+                            <div class="inp_outer" style="min-width: 250px">
+                                <div class="title1">name</div>
+                                     <input type="text" name="name" data-link="name" class="akr_input_text" required="" />
+                           </div>
+                            <br>
+                          
                             
                             <div class="inp_outer" style="min-width: 100px">
                                 <div class="title1">age</div>
@@ -84,7 +79,12 @@
                                 </select>
                             
                             </div>
-
+                            <hr>
+                              <div class="inp_outer" style="min-width: 100px">
+                                <div class="title1">bookId</div>
+                                <span class="inp2" contenteditable="true" id="bookId"   data-link="bookId" >---</span>
+                                <input type="hidden" name="bookId" data-link="bookId" />
+                            </div>
 
 
                         </td>

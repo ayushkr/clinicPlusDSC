@@ -878,14 +878,8 @@ a:hover{
 }
 
 .widgetBar{
-/*    position: fixed;
-    right: 42px;
-    z-index: 10;
-    top: 4px;
-    background-color: var(--color_l3);
-    width: 100%;
-    */
-    position: fixed;
+
+    /*position: fixed;*/
     background-color: var(--color_l3);
     right: 143px;
     z-index: 1005;
