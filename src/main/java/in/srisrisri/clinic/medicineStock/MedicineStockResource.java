@@ -1,9 +1,12 @@
 package in.srisrisri.clinic.medicineStock;
 
+import in.srisrisri.clinic.Constants.Constants1;
 import in.srisrisri.clinic.Vendor.VendorEntity;
 import in.srisrisri.clinic.Vendor.VendorRepo;
+import in.srisrisri.clinic.doctor.DoctorEntity;
 import in.srisrisri.clinic.medicineBrandName.*;
 import in.srisrisri.clinic.responses.DeleteResponse;
+import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
 import in.srisrisri.clinic.utils.PageCover;
 import in.srisrisri.clinic.utils.PageExtendedByAyush;
@@ -15,6 +18,7 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import org.slf4j.Logger;
@@ -33,6 +37,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -47,7 +52,7 @@ public class MedicineStockResource {
     private final Logger logger = LoggerFactory.getLogger(MedicineStockResource.class);
 
     @Autowired
-    MedicineStockRepo medicineStockRepo;
+    MedicineStockRepo repo;
     @Autowired
     MedicineBrandNameRepo medicineBrandNameRepo;
     @Autowired
@@ -62,7 +67,7 @@ public class MedicineStockResource {
     public ResponseEntity<List<MedicineStockEntity>> getList() {
         logger.debug("getMedicineNames", new Object() {
         });
-        List<MedicineStockEntity> list = medicineStockRepo.findAll(Sort.by(Sort.Direction.ASC, "expiryDate"));
+        List<MedicineStockEntity> list = repo.findAll(Sort.by(Sort.Direction.ASC, "expiryDate"));
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
@@ -97,30 +102,30 @@ public class MedicineStockResource {
         Page<MedicineStockEntity> page = null;
 
         if (filterColumn.equals("undefined")) {
-            page = medicineStockRepo.findAll(pageable);
+            page = repo.findAll(pageable);
         } else {
             if (filterColumn.equals("brandName")) {
 
-                page = medicineStockRepo.findAllByBrandNameLike(filter, pageable);
+                page = repo.findAllByBrandNameLike(filter, pageable);
             }
 
             if (filterColumn.equals("genericName")) {
 
-                page = medicineStockRepo.findAllByGenericNameLike(filter, pageable);
+                page = repo.findAllByGenericNameLike(filter, pageable);
             }
 
             if (filterColumn.equals("composition")) {
 
-                page = medicineStockRepo.findAllByCompositionLike(filter, pageable);
+                page = repo.findAllByCompositionLike(filter, pageable);
             }
         }
 
         List<MedicineStockEntity> medicineStockEntitysList = page.getContent();
         for (MedicineStockEntity medicineStockEntity : medicineStockEntitysList) {
-            Long qtyUsed = medicineStockRepo.findQtyUsedById(medicineStockEntity);
+            Long qtyUsed = repo.findQtyUsedById(medicineStockEntity);
             if (qtyUsed != null) {
                 medicineStockEntity.setQtyRemaining(medicineStockEntity.getQtyPurchased() - qtyUsed);
-                medicineStockRepo.save(medicineStockEntity);
+                repo.save(medicineStockEntity);
 
             }
 
@@ -138,29 +143,33 @@ public class MedicineStockResource {
 
         Optional<MedicineStockEntity> item;
         if (id > 0) {
-            item = medicineStockRepo.findById(id);
+            item = repo.findById(id);
         } else {
-            MedicineStockEntity entityNew = new MedicineStockEntity();
-           entityNew.setDiscount(BigDecimal.ZERO);
-            item = Optional.of(PostMapping_one(entityNew).getBody());
+            MedicineStockEntity entityAfter = new MedicineStockEntity();
+           entityAfter.setDiscount(BigDecimal.ZERO);
+             
+            entityAfter.setCreationTime(java.sql.Date.valueOf(LocalDate.now()));
+            repo.save(entityAfter);
+            item = Optional.of(entityAfter);
 
         }
-//        long used = medicineStockRepo.findQtyRemainById(item);
+//        long used = repo.findQtyRemainById(item);
 //        item.setQtyRemaining(item.getQtyPurchased() - used);
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
 
     // create
     @PostMapping("")
-    public ResponseEntity<MedicineStockEntity> PostMapping_one(MedicineStockEntity entityBefore) {
-        ResponseEntity<MedicineStockEntity> repsonse = null;
+    public ResponseEntity<JsonResponse> PostMapping_one(MedicineStockEntity entityBefore) {
+        ResponseEntity<JsonResponse> repsonse = null;
+          JsonResponse jsonResponse = new JsonResponse();
         try {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
             logger.warn("---- id ={}", entityBefore.getId());
             MedicineStockEntity entityAfter = null;
             if (entityBefore.getId() != 0) {
 
-                entityAfter = medicineStockRepo.findById(entityBefore.getId()).get();
+                entityAfter = repo.findById(entityBefore.getId()).get();
 
                 //entityAfter.setUpdationTime(new Date());
             } else {
@@ -171,28 +180,26 @@ public class MedicineStockResource {
             BeanUtils.copyProperties(entityBefore, entityAfter);
 //             if(entityBefore.isRateAvailable()==null) entityAfter.setRateAvailable(Boolean.FALSE);
 
-            entityAfter = medicineStockRepo.save(entityAfter);
-
+           try {
+                entityAfter = repo.save(entityAfter);
+                jsonResponse.setMessage("Saved ID:" + entityAfter.getId());
+                jsonResponse.setStatus(Constants1.SUCCESS);
+            } catch (Exception e) {
+                jsonResponse.setMessage(e.toString());
+                jsonResponse.setStatus(Constants1.FAILURE);
+            }
             repsonse = ResponseEntity
                     .created(new URI("/api/MedicineStockEntity/" + entityAfter.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(label,
                             entityAfter.getId() + ""))
-                    .body(entityAfter);
+                    .body(jsonResponse);
         } catch (URISyntaxException ex) {
             java.util.logging.Logger.getLogger("MedicineStockEntity").log(Level.SEVERE, null, ex);
         }
         return repsonse;
     }
 
-    // delete
-    @GetMapping("delete/id/{id}")
-    public DeleteResponse deleteById(@PathVariable("id") Long id) {
-        logger.warn("DeleteMapping_id obj={},id= {}", new Object[]{label, id});
-        medicineStockRepo.deleteById(id);
-        DeleteResponse deleteResponse = new DeleteResponse();
-        deleteResponse.setMessage("Deleted " + label + " with id " + id);
-        return deleteResponse;
-    }
+   
 
     @GetMapping("import/{id}/{test}")
     public ResponseEntity<?> updateFromExcel(@PathVariable("id") String id, @PathVariable("test") String test) {
@@ -382,4 +389,72 @@ public class MedicineStockResource {
         return responseEntity;
     }
 
+     
+    // delete
+    @GetMapping("delete/id/{id}")
+    public JsonResponse DeleteMapping_id(@PathVariable("id") Long id) {
+
+        JsonResponse response = new JsonResponse();
+        logger.warn("REST request to delete {} {}", new Object[]{label, id});
+        try {
+            repo.deleteById(id);
+            response.setStatus(Constants1.SUCCESS);
+            response.setMessage("Deleted " + label + " with id " + id);
+            return response;
+        } catch (ConstraintViolationException e) {
+            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
+            response.setStatus(Constants1.FAILURE);
+            response.setMessage("This " + label + " is used in other ");
+            return response;
+
+        } catch (Exception e) {
+            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
+            response.setStatus(Constants1.FAILURE);
+            if(e.getMessage().contains("ConstraintViolationException")){
+            response.setMessage("This " + label + " (ID: "+id+
+                    ")  is used in other place <br>For eg: in pharmacyBill etc");
+            }else{
+            response.setMessage(e.getMessage());
+            }
+            return response;
+        }
+    }
+
+    // deleteBulk
+    @PostMapping("deleteBulk")
+    public ResponseEntity<JsonResponse> deleteBulk(
+            @RequestParam("n") List<Long> list) {
+        ResponseEntity<JsonResponse> responseEntity = null;
+        JsonResponse jsonResponse = new JsonResponse();
+        String failedIds = "";
+        try {
+            logger.warn("deleteBulk , got={} ", list.toString());
+            for (Long n : list) {
+                System.out.println(" n=" + n);
+                try {
+                    repo.deleteById(n);
+                } catch (Exception e) {
+                    
+                    failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
+                            + "<br>Because  "
+                            +((e.getMessage().contains("ConstraintViolationException")) ? 
+                            "It Used in Other place ":e.getMessage()) 
+                            + "</p><hr>";
+
+                }
+
+            }
+            jsonResponse.setMessage(failedIds);
+            jsonResponse.setStatus(Constants1.FAILURE);
+            responseEntity = ResponseEntity
+                    .created(new URI("/api/" + label + "/"))
+                    .headers(HeaderUtil.createEntityCreationAlert(label,
+                            " "))
+                    .body(jsonResponse);
+        } catch (URISyntaxException ex) {
+            java.util.logging.Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+        return responseEntity;
+    }
+    
 }

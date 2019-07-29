@@ -3,12 +3,17 @@
         <div class="inp1" >
             <div class="title1">medicineBrandName </div>
         </div>
-        <input id="medicineBrandName" name='medicineBrandName' type="text"  value=""
+        <input id="medicineBrandName" 
+               name='medicineBrandName' 
+               type="text"  value=""
                accesskey="q"
+               onkeypress="filter1()"
+               data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=brandName&filter="
+               
+               
+               autofocus
                > 
-        <input type="button" value="Go " id="button_medicineBrandName_go"
-               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=brandName&filter=' + document.getElementById('medicineBrandName').value + ''"
-               >
+       
     </div>
 
     <div class="inp_outer" style="min-width: 200px">
@@ -17,10 +22,12 @@
         </div>
         <input id="genericName" name='genericName' type="text"  value=""
                accesskey="q"
+               
+              onkeypress="filter1()"
+               data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=genericName&filter="
+               
                > 
-        <input type="button" value="Go " id="button_genericName_go"
-               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=genericName&filter=' + document.getElementById('genericName').value + ''"
-               >
+        
     </div>
 
     <div class="inp_outer" style="min-width: 200px">
@@ -29,10 +36,11 @@
         </div>
         <input id="composition" name='composition' type="text"  value=""
                accesskey="q"
+               onkeypress="filter1()"
+               data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=composition&filter="
+               
                > 
-        <input type="button" value="Go " id="button_composition_go"
-               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=composition&filter=' + document.getElementById('composition').value + ''"
-               >
+       
     </div>
 </div>
 

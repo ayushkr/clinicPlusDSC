@@ -1,5 +1,23 @@
 //overall.js
 
+
+
+
+function filter1() {
+    var elem = event.target;
+    console.log('onenter');
+    mn.temp[elem.id] = elem.value;
+
+
+    if (event.keyCode === 13) {
+        console.log('data-href=' + elem.getAttribute('data-href'));
+        window.location.href = elem.getAttribute('data-href') + elem.value;
+
+    }
+}
+
+
+
 var localClipBoardVariable = "";
 function copyToClipBoard(input) {
     /* Get the text field */
@@ -265,30 +283,27 @@ function listAsPages(module, path, divName) {
 //////////
 
 function alert_1(head, body, typ) {
-
-
     var element = document.getElementById("alert_akr");
-    if (typ !== 'success') {
-        element.style = "display:block;background-color: red;";
+    if (typ === 'success') {
+        element.style = "display:block;background-color: #108208eb;";
     } else {
-        element.style = "display:block;background-color: green;";
-
+        element.style = "display:block;background-color: #ef5377eb;";
     }
 
 
     // element.style = "background-color:'red';";
     document.getElementById("alert_akr_head").innerHTML = head;
     document.getElementById("alert_akr_body").innerHTML = body;
+
     if (typ === 'success') {
         setTimeout(function () {
             hideDivAy('alert_akr');
         }, 500);
     }
-//    alert(head + "--" + body);
+
 }
 
 function alert_11(head, body) {
-
     alert(head + "--" + body);
 }
 
@@ -574,11 +589,11 @@ function go(id, module) {
 
 
 
-function goto_update() {
-    var path = '#/cmdc?module=entity&action=/crud/update&id=' + mn.module[mn.module.current].id + pageNewAy(1);
-    console.log("goto_create path=" + path);
-    window.location.href = path;
-}
+//function goto_update() {
+//    var path = '#/cmdc?module=entity&action=/crud/update&id=' + mn.module[mn.module.current].id + pageNewAy(1);
+//    console.log("goto_create path=" + path);
+//    window.location.href = path;
+//}
 
 function goto_list(moduleName) {
 //    save(moduleName);
@@ -590,17 +605,22 @@ function goto_list(moduleName) {
 
 function goto_delete(module, id) {
     console.log('goto_delete , module=' + module + '  id=' + id + '   ' + option);
-var option='y';
+    var option = 'y';
 //    var option = prompt("Enter y or Y to confirm ", "");
     console.log(option);
     if (option === 'y' || option === 'Y') {
 
         $.get("/clinicPlus/api/" + module + "/delete/id/" + id,
                 function (result) {
-                    console.log("goto_delete api result=" + JSON.stringify(result));
-                    alert_1("delete", JSON.stringify(result), 'success');
-//                    goto_list(module);
+                    console.log(" goto_delete api result=" + JSON.stringify(result));
+                    
+//                   
+                    if (result.status === 'success') { 
+                        alert_1("Done :)", result.message, result.status);
                     window.history.back();
+                    }else{
+                        alert_1("Sorry :( <br>I cannot", result.message, result.status);
+                    }
                 }
         );
     }

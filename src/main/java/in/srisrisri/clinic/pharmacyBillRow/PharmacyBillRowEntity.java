@@ -4,11 +4,14 @@ import in.srisrisri.clinic.medicineStock.MedicineStockEntity;
 import in.srisrisri.clinic.pharmacyBill.PharmacyBillEntity;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity(name = "PharmacyBillRow")
 @Table(name = "PharmacyBillRow")
@@ -17,7 +20,7 @@ public class PharmacyBillRowEntity implements Serializable {
     @Id
     @GeneratedValue
     private long id;
-       
+
     @OneToOne
     MedicineStockEntity medicineStock;
     @OneToOne
@@ -26,6 +29,28 @@ public class PharmacyBillRowEntity implements Serializable {
     BigDecimal discount;
 //     BigDecimal amount;//
     BigDecimal amount;//
+
+    @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date creationTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date updationTime;
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getUpdationTime() {
+        return updationTime;
+    }
+
+    public void setUpdationTime(Date updationTime) {
+        this.updationTime = updationTime;
+    }
+
     public long getId() {
         return id;
     }
@@ -42,14 +67,6 @@ public class PharmacyBillRowEntity implements Serializable {
         this.pharmacyBill = pharmacyBill;
     }
 
-    
-
-   
-
-  
-
-
-  
     public MedicineStockEntity getMedicineStock() {
         return medicineStock;
     }
@@ -87,7 +104,4 @@ public class PharmacyBillRowEntity implements Serializable {
         return "PharmacyBillRowEntity{" + "id=" + id + ", medicineStock=" + medicineStock + ", pharmacyBill=" + pharmacyBill + ", qty=" + qty + ", discount=" + discount + ", amount=" + amount + '}';
     }
 
-   
-
-   
 }

@@ -7,8 +7,8 @@ function  PharmacyCashBill() {
     this.render_list = function (id, divName) {
 
         console.log('GT PharmacyCashBill.render_list() id=' + id);
-      window.location.href = "#/dummy?a=PharmacyCashBill/" + id;
-      
+        window.location.href = "#/dummy?a=PharmacyCashBill/" + id;
+
         aylinker({
             urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/menuTop.html?ran=" + Math.random(),
             selector: "main1_menu",
@@ -36,11 +36,11 @@ function  PharmacyCashBill() {
 
     this.onRowSelectByKey =
             function (id) {
-               // alert(event.keyCode);
-                if(event.keyCode===13){
+                // alert(event.keyCode);
+                if (event.keyCode === 13) {
                     this.onRowSelect(id);
                 }
-                
+
             };
 
 
@@ -138,31 +138,35 @@ function  PharmacyCashBill() {
     };
 
     this.postToPharmacyBillRowAPI = function (d) {
-        console.log("postAkr() d= " + JSON.stringify(d));
+        console.log("post  postToPharmacyBillRowAPI() d= " + JSON.stringify(d));
         var apiUrl = '/clinicPlus/api/pharmacyBillRow';
 
         $.post(apiUrl, d)
                 .fail(
                         function (data)
                         {
-                            console.log("postToPharmacyBillRowAPI error ay " + data.responseJSON.message);
+                            console.log("postToPharmacyBillRowAPI() fail ,data.responseJSON.message="
+                                    + data.responseJSON.message);
                             alert_1('ERROR ', data.responseJSON.message);
                         }
                 )
                 .done(
                         function (data)
                         {
-                            console.log("func postToPharmacyBillRowAPI  .done(, create/delete pharmacyBillRow (local) data=" + JSON.stringify(data));
+                            console.log("postToPharmacyBillRowAPI()  .done(), data=" +
+                                    JSON.stringify(data));
 
-                            $.get("/clinicPlus/api/pharmacyBillRow/ByBillId/" + data.pharmacyBill.id, function (result) {
-                                console.log("postToPharmacyBillRowAPI  get ");
-                                aylinker({
-                                    urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/list/template.html?ran=" + Math.random(),
-                                    selector: "main1_inner",
-                                    data: {obj: result}
-                                }
-                                );
-                            });
+                            $.get("/clinicPlus/api/pharmacyBillRow/ByBillId/" +
+                                    d.pharmacyBill,
+                                    function (result) {
+                                        console.log("postToPharmacyBillRowAPI  get ");
+                                        aylinker({
+                                            urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/list/template.html?ran=" + Math.random(),
+                                            selector: "main1_inner",
+                                            data: {obj: result}
+                                        }
+                                        );
+                                    });
                         }
                 );
 
@@ -189,33 +193,33 @@ function  PharmacyCashBill() {
                         }
                 );
     };
-    this.calculateAmount =function (j) {
-                var medicineStock;
-                var medicineStock_id = document.getElementById('medicineStock').value;
-                $.get("/clinicPlus/api/medicineStock/" + medicineStock_id, function (medicineStock) {
+    this.calculateAmount = function (j) {
+        var medicineStock;
+        var medicineStock_id = document.getElementById('medicineStock').value;
+        $.get("/clinicPlus/api/medicineStock/" + medicineStock_id, function (medicineStock) {
 //                    console.log('calculateAmount' + JSON.stringify(medicineStock));
-                     console.log('calculateAmount--->' +medicineStock.id);
-                    
-                    var rate = medicineStock.sellingPrice;
+            console.log('calculateAmount--->' + medicineStock.id);
 
-                    var qty = document.getElementById('qty').value;
+            var rate = medicineStock.sellingPrice;
 
-                    var amt = (rate * qty);
-                    amt = amt.toFixed(2);
-                    console.log('rate =' + rate + ' qty=' + qty + ' amt=' + amt);
-                    console.log('rate qty amt' + rate + '---' + qty + '------amt' + amt);
-                    document.getElementById('amount').value = amt;
-                    document.getElementById('amount_disp').innerHTML = amt;
+            var qty = document.getElementById('qty').value;
 
-                });
+            var amt = (rate * qty);
+            amt = amt.toFixed(2);
+            console.log('rate =' + rate + ' qty=' + qty + ' amt=' + amt);
+            console.log('rate qty amt' + rate + '---' + qty + '------amt' + amt);
+            document.getElementById('amount').value = amt;
+            document.getElementById('amount_disp').innerHTML = amt;
 
- {
-       if (event.keyCode === 13){
-                        this.saveEdit();
-       }
-    }
+        });
 
-            };
+        {
+            if (event.keyCode === 13) {
+                this.saveEdit();
+            }
+        }
+
+    };
 
 
 

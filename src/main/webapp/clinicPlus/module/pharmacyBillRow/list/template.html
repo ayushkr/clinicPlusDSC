@@ -4,8 +4,9 @@
     <table >
         <thead>
             <tr class="bluestrp">
-                <th>Bill</th>
+                
                 <th>id</th>
+                <th>pbill</th>
             
                 <th>item/BrandName</th>
                 <th>Mfg</th>
@@ -33,9 +34,9 @@
             >
                 
                 
+                <td>{{:id}}</td>
+                 <td>{{:pharmacyBill.id}}</td>
                 
-                 <td>bill_{{:pharmacyBill.id}}</td>
-                <td>pbr_{{:id}}</td>
                 
                 {{if medicineStock!=null}}
                 <!--                <td>

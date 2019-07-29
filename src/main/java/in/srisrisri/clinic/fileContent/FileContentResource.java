@@ -1,13 +1,21 @@
 package in.srisrisri.clinic.fileContent;
 
+import in.srisrisri.clinic.Constants.Constants1;
 import in.srisrisri.clinic.appointment.AppointmentEntity;
 import in.srisrisri.clinic.doctor.DoctorEntity;
 import in.srisrisri.clinic.patient.PatientEntity;
 import in.srisrisri.clinic.responses.DeleteResponse;
+import in.srisrisri.clinic.responses.JsonResponse;
+import in.srisrisri.clinic.utils.HeaderUtil;
 import in.srisrisri.clinic.utils.PageCover;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Optional;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +46,7 @@ public class FileContentResource {
     private FileContentRepository fileContentRepo;
     @Autowired
     private FileContentStore fileContentStore;
-    String label = "fileContent";
+    String ENTITY_NAME = "fileContent";
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("pageable")
@@ -51,7 +59,8 @@ public class FileContentResource {
             @RequestParam("filter") String filter
     ) {
         Sort sort;
-        logger.warn("REST getItems() , {} ", new Object[]{label});
+        int pageSize = 20;
+        logger.warn("REST getItems() , {} ", new Object[]{ENTITY_NAME});
 
         if (!sortColumn.equals("undefined")) {
             if (sortOrder.equals("d")) {
@@ -65,6 +74,11 @@ public class FileContentResource {
         }
         if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
+        } else {
+            if (Integer.parseInt(pageNumber) == 0) {
+                pageSize = 10000;
+                pageNumber = "1";
+            }
         }
 
         Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
@@ -95,50 +109,51 @@ public class FileContentResource {
         PageCover<FileContent> pageCover = new PageCover<>(page);
         pageCover.setSortColumn(sortColumn);
         pageCover.setSortOrder(sortOrder);
-        pageCover.setModule(label);
+        pageCover.setModule(ENTITY_NAME);
 
         return pageCover;
     }
 
-    public ResponseEntity<FileContent> postMapping_oneEntityWise(
+    public ResponseEntity<JsonResponse>  postMapping_oneEntityWise(
             int updateFile,
             FileContent fileContent,
             MultipartFile multipartFile
     ) {
         logger.warn("postMapping_oneEntityWise  ");
-               
 
-       return postMapping_one(
-               
+        return postMapping_one(
                 updateFile,
-                 fileContent.getId(),
-                (fileContent.getDoctor()!=null ?
-                        fileContent.getDoctor().getId():null),
-                (fileContent.getPatient()!=null?
-                        fileContent.getPatient().getId():null),
-                (fileContent.getAppointment()!=null?
-                        fileContent.getAppointment().getId():null),
+                fileContent.getId(),
+                (fileContent.getDoctor() != null
+                        ? fileContent.getDoctor().getId() : null),
+                (fileContent.getPatient() != null
+                        ? fileContent.getPatient().getId() : null),
+                (fileContent.getAppointment() != null
+                        ? fileContent.getAppointment().getId() : null),
                 fileContent.getDescription(),
                 multipartFile);
-
         
+        
+
     }
 
     @PostMapping("")
-    public ResponseEntity<FileContent> postMapping_one(
-           
+    public ResponseEntity<JsonResponse> postMapping_one(
             @RequestParam("updateFile") int updateFile,
-             @RequestParam("id") Long id,
+            @RequestParam("id") Long id,
             @RequestParam("doctor") Long doctorId,
             @RequestParam("patient") Long patientId,
             @RequestParam("appointment") Long appointmentId,
             @RequestParam("description") String description,
             @RequestParam("file") MultipartFile multipartFile) {
-        logger.warn("postMapping_one id={}",new Object[]{id});
-               
+
+        logger.warn("postMapping_one id={}", new Object[]{id});
+        ResponseEntity<JsonResponse> responseEntity = null;
+        JsonResponse jsonResponse = new JsonResponse();
 
         FileContent fileContentBefore = null;
         FileContent fileContentAfter = null;
+        try{
         if (id == 0) {
             fileContentBefore = new FileContent();
             fileContentBefore.setCreationTime(Calendar.getInstance().getTime());
@@ -164,14 +179,33 @@ public class FileContentResource {
                 fileContentBefore.setAppointment(new AppointmentEntity().setId(appointmentId));
             }
 
-        } catch (IOException ex) {
+        } catch (IOException e) {
+            jsonResponse.setMessage(e.toString());
+            jsonResponse.setStatus(Constants1.FAILURE);
 
-            return ResponseEntity.badRequest().header("error", ex.toString()).body(null);
         }
 
         // save updated content-related info
         fileContentAfter = fileContentRepo.save(fileContentBefore);
-        return ResponseEntity.ok().header("ok", "saved").body(fileContentAfter);
+        try {
+            fileContentAfter = fileContentRepo.save(fileContentBefore);
+            jsonResponse.setMessage("Saved ID:" + fileContentAfter.getId());
+            jsonResponse.setStatus(Constants1.SUCCESS);
+        } catch (Exception e) {
+            jsonResponse.setMessage(e.toString());
+            jsonResponse.setStatus(Constants1.FAILURE);
+        }
+        
+        responseEntity = ResponseEntity
+                    .created(new URI("/api/"+ENTITY_NAME+"/" + fileContentAfter.getId()))
+                    .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME,
+                            fileContentAfter.getId() + ""))
+                    .body(jsonResponse);
+         } catch (URISyntaxException ex) {
+            java.util.logging.Logger.getLogger(Class.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return responseEntity;
     }
 
 //    @RequestMapping(value = "/files/{fileId}", method = RequestMethod.PUT)
@@ -199,44 +233,49 @@ public class FileContentResource {
 
         Optional<FileContent> fileContent = fileContentRepo.findById(id);
         if (fileContent.isPresent()) {
-            try{
-            InputStreamResource inputStreamResource = new InputStreamResource(fileContentStore.getContent(fileContent.get()));
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentLength(fileContent.get().getContentLength());
-            headers.set("Content-Type", fileContent.get().getMimeType());
-             headers.set("Content-Disposition", fileContent.get().getDescription()+"."+
-                     fileContent.get().getMimeType().split("/")[1]);
-            return new ResponseEntity<>(inputStreamResource, headers, HttpStatus.OK);
-            }catch(Exception e){
-             return new ResponseEntity<>("No file set yet", HttpStatus.OK);
+            try {
+                InputStreamResource inputStreamResource = new InputStreamResource(fileContentStore.getContent(fileContent.get()));
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentLength(fileContent.get().getContentLength());
+                headers.set("Content-Type", fileContent.get().getMimeType());
+                headers.set("Content-Disposition", fileContent.get().getDescription() + "."
+                        + fileContent.get().getMimeType().split("/")[1]);
+                return new ResponseEntity<>(inputStreamResource, headers, HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>("No file set yet", HttpStatus.OK);
             }
-        }else{
-        return new ResponseEntity<>("fileContent is not present", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("fileContent is not present", HttpStatus.OK);
         }
-    
+
     }
 
     @GetMapping("{id}")
     @ResponseBody
     public Optional<FileContent> id(@PathVariable("id") Long id) {
-        logger.warn("id {} No {}", new Object[]{label, id});
-        FileContent fileContent;
+        logger.warn("id {} No {}", new Object[]{ENTITY_NAME, id});
+
+        Optional<FileContent> item;
         if (id > 0) {
-            fileContent = fileContentRepo.findById(id).get();
+            item = fileContentRepo.findById(id);
         } else {
-           FileContent fileContentTemp= new FileContent();
-            fileContentTemp.setId(0L);
-            ResponseEntity<FileContent> postMapping_oneEntityWise = postMapping_oneEntityWise(0, fileContentTemp, null);
-            fileContent= postMapping_oneEntityWise.getBody();
+
+            FileContent entityAfter = new FileContent();
+            entityAfter.setId(0L);
+            entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
+            fileContentRepo.save(entityAfter);
+            item = Optional.of(entityAfter);
 
         }
-        return Optional.of(fileContent);
+
+        return item;
+
     }
 
     // delete
     @GetMapping("delete/id/{id}")
     public DeleteResponse DeleteMapping_id(@PathVariable("id") Long id) {
-        logger.warn("REST request to delete {} {}", new Object[]{label, id});
+        logger.warn("REST request to delete {} {}", new Object[]{ENTITY_NAME, id});
         fileContentRepo.deleteById(id);
         DeleteResponse deleteResponse = new DeleteResponse();
         deleteResponse.setMessage("Deleted FileContent with id " + id);

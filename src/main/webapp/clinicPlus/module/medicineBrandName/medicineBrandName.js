@@ -1,31 +1,22 @@
- 
+
 console.log('medicineBrandName.js');
-setTimeout(init,100);
-
-setTimeout(function(){
-    var medicineBrandNameInp=document.getElementById('medicineBrandName');
-    medicineBrandNameInp.focus();
-     if(medicineBrandName!==undefined){
-    medicineBrandNameInp.value=medicineBrandName;
-     }
-},200);
-
-var medicineBrandName;
 
 
+setTimeout(function () {
 
-function medicineBrandNameKeyUp(e,destination) {
-   
-    // alert('pressed'+e.keyCode);
-    if (e.keyCode === 13) {
-       document.getElementById('button_medicineBrandName_go').click();
-      
-       medicineBrandName= document.getElementById('medicineBrandName').value;
-        
+
+    var inputsFilters= document.querySelectorAll('[data-href]');
+    inputsFilters[0].focus();
+    for (var i = 0; i < inputsFilters.length; ++i) {
+       console.log('inp='+inputsFilters[i].name);
+       if (mn.temp[inputsFilters[i].name] !== undefined) {
+        inputsFilters[i].value = mn.temp[inputsFilters[i].name];
     }
-  
-};
+    }
 
-function init(){
-document.getElementById('medicineBrandName').onkeyup=medicineBrandNameKeyUp;
-}
+
+
+}, 200);
+
+
+

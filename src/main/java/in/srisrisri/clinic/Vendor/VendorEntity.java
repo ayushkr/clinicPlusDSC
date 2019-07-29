@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity(name = "vendor")
@@ -34,6 +36,26 @@ public class VendorEntity implements Serializable  {
     @Column(name="lastTouched", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date lastTouched; 
 
+     @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date creationTime;
+ @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date  updationTime;
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getUpdationTime() {
+        return updationTime;
+    }
+
+    public void setUpdationTime(Date updationTime) {
+        this.updationTime = updationTime;
+    }
    
 
     public long getId() {

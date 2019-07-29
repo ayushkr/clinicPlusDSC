@@ -1,40 +1,52 @@
 <!-- entity /update/template_menuTop_update-->
 
-<div id="widgets" class="widgetBar" data-akr-printable="false" >
 
-    {{if edit}}
+<div id="widgets" class="widgetBar" data-akr-printable="false" >
+ 
+    
+    
     <button onclick="goto_delete('{{:moduleName}}', '{{:id}}')"  data-toggle="tooltip" title="Delete" 
-            class="w3-btn "
+            class="w3-btn w3-red"
+            data-akr-printable="false"
             >
-        <i class="fa fa-trash"  ><span style="margin-left: 2mm;"> </span> </i>
+        <i class="fa fa-trash" 
+           style="font-size: 1em"
+           ><span style="margin-left: 2mm;"> </span> </i>
     </button> 
-    <span style="display:inline-block ;width: 4cm;">
-       </span>
+
+    <span style="display:inline-block ;width: 1cm;"></span>
+
+
+    <!--back button-->
+    <button 
+        onclick="window.history.back()"
+        data-toggle="tooltip" title="Back" 
+        class="w3-btn"
+
+        > <i class="fa fa-backward"> </i>
+    </button>
+
+
+
+    <span style="display:inline-block ;width: 0cm;"></span>
     <button onclick="printDiv_navOff('navbar')" data-toggle="tooltip" title="Print this page" 
             class="w3-btn"
             > <i class="fa fa-print"> </i>
     </button> 
-    {{/if}}
-    {{if divName!='main3'}} 
-
-    <button onclick="goto_list('{{:moduleName}}')"
-            data-toggle="tooltip" title="List"
-            class="w3-btn "
-            >
-        <i class="fa fa-list"  ><span style="margin-left: 2mm;"></span> </i>
-    </button> 
 
 
-    {{/if}}
 
-    <button class="w3-btn " data-toggle="tooltip" title="Save" 
-            onclick="save('{{:moduleName}}');
-            ">
+    <button class="w3-btn " data-toggle="tooltip" 
+            title="Save" 
+            style="float: right"
+            onclick="save('{{:moduleName}}');">
         <i class="fa fa-save"  > </i>
     </button>
 
+
+
     <span style="width:2cm;"></span>
-   
+
 </div>
 
 

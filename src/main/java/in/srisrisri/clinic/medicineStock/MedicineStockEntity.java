@@ -4,12 +4,15 @@ import in.srisrisri.clinic.Vendor.VendorEntity;
 import in.srisrisri.clinic.medicineBrandName.MedicineBrandNameEntity;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -51,6 +54,11 @@ public class MedicineStockEntity implements Serializable {
     private long qtyRemaining;
     @Column(name = "sub_count", nullable = false)
     long subCount;
+    
+     @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date creationTime;
+ @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date  updationTime;
 
     ////////////////////////////////////////////////////////////////
     // special
@@ -72,6 +80,27 @@ public class MedicineStockEntity implements Serializable {
 
     // end of specials
     /////////////////////////////////////////////////////////////////
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getUpdationTime() {
+        return updationTime;
+    }
+
+    public void setUpdationTime(Date updationTime) {
+        this.updationTime = updationTime;
+    }
+    
+    
+    
+    
+    
     public BigDecimal getMrp() {
         return mrp;
     }

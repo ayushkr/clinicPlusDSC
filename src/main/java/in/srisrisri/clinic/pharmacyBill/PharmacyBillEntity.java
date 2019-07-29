@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity(name = "PharmacyBill")
 @Table(name = "PharmacyBill")
@@ -26,7 +28,30 @@ public class PharmacyBillEntity implements Serializable {
    
     @OneToOne
     AppointmentEntity appointment;
+    
+     @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date creationTime;
+ @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date  updationTime;
 
+    public java.util.Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(java.util.Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public java.util.Date getUpdationTime() {
+        return updationTime;
+    }
+
+    public void setUpdationTime(java.util.Date updationTime) {
+        this.updationTime = updationTime;
+    }
+
+ 
+ 
     public Date getDateOfBill() {
         return dateOfBill;
     }

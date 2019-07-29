@@ -70,9 +70,6 @@ function cmd(context) {
 
             , 'main1');
 
-
-
-    // this.partial(partial_path);
 }
 
 
@@ -104,19 +101,36 @@ function cmd_post(context, data) {
                 {
 
 
-                    if (jqXHR.getResponseHeader('ok') === 'no') {
-                        alert_1(jqXHR.getResponseHeader('problem'), JSON.stringify(data), 'error');
 
-                    } else {
-                        alert_1('OK', jqXHR.getResponseHeader('ok'), 'success');
-                        mn.module[module] = data;
-                        console.log("post.done module=" + module + ", data=" + JSON.stringify(data));
-
-                        var path = "#/cmd?module=" + module + "&action=/all/list" + pageNewAy(1);
-                        console.log('redirect to ' + path);
-
+//                    console.log(" jqXHR=" + JSON.stringify(jqXHR));
+                    console.log("cmd post success, module=" +
+                            module + ", data=" + JSON.stringify(data));
+                    var path = "#/cmd?module=" + module + "&action=/all/list" + pageNewAy(1);
+                    console.log('redirect to ' + path);
+                    if (data.status === 'success') {
+                        alert_1('Done :)', data.message, data.status);
                         window.history.back();
+                    } else {
+                        alert_1('Sorry :(', data.message, data.status);
+
                     }
+
+
+//                    if (jqXHR.getResponseHeader('ok') === 'no') {
+//                        alert_1(jqXHR.getResponseHeader('problem'),
+//                                JSON.stringify(data), 'error');
+//
+//                    } else {
+//                        alert_1('OK', jqXHR.getResponseHeader('ok'), 'success');
+//                        mn.module[module] = data;
+//                        console.log("post.done module=" + module + ", data=" + JSON.stringify(data));
+//
+//                        
+//
+//                    }
+
+
+
 
                 }
 

@@ -11,20 +11,20 @@
 
         id <span class="inp2" contenteditable="false" id="id"   data-link="id" >---</span>   <br>
         <input type="hidden" name="id" data-link="id" />
-
+        <div style="float: right">qtyRemaining={{:qtyRemaining}}</div>
         
+        <br>
+
         <fieldset>
             <legend>Vendor Related</legend>
             <div class="inp_outer" style="min-width:200px">
                 <div class="title1">
                     vendor
                 </div>
-                {{if vendor}}
-                <input  type="hidden" id="vendor" name="vendor" data-link="vendor.id" />
-                {{else}}
 
-                <br> Not set
-                {{/if}}
+                <input  type="hidden" id="vendor" name="vendor" 
+                        value= "{{if vendor}}{{:vendor.id}}{{/if}}" />
+
 
 
                 <div style='border: 1px;' 
@@ -52,11 +52,11 @@
             <div class="inp_outer">
                 <div class="title1">dateOfPurchase</div>
 
-                
+
                 <input  type="hidden" id="dateOfPurchase" name="dateOfPurchase" 
                         value="{{if dateOfPurchase}}{{:dateOfPurchase}}{{else}}{{/if}}"
-                         />
-                
+                        />
+
 
                 <div style='border: 1px;' 
                      onclick="popup_selection_obj(
@@ -75,7 +75,7 @@
 
             </div>
 
-           
+
         </fieldset>
         <hr> 
 
@@ -83,11 +83,13 @@
             <legend>Basic</legend>
             <div class="inp_outer">
                 <div class="title1">medicineBrandName</div>
-                {{if medicineBrandName}}
-                <input  type="hidden" id="medicineBrandName" name="medicineBrandName" data-link="medicineBrandName.id"  />
-                {{else}}
-                <br> Not set
-                {{/if}}
+
+                <input  
+                    type="hidden" id="medicineBrandName" 
+                    name="medicineBrandName" 
+                    value= "{{if medicineBrandName}}{{:medicineBrandName.id}}{{/if}}" 
+                    />
+
 
                 <div style='border: 1px;' onclick="popup_selection_obj(
                                 {
@@ -115,11 +117,15 @@
             <div class="inp_outer">
 
                 <div class="title1">expiryDate (MM/yyyy)</div>
-                {{if expiryDate!=null}}
-                <input  type="hidden" id="expiryDate" name="expiryDate" data-link="expiryDate" />
-                {{else}}
-                <br> Not set
-                {{/if}}
+             
+                <input  
+                    type="hidden"
+                    id="expiryDate"
+                    name="expiryDate" 
+                     value= "{{if expiryDate}}{{:expiryDate}}{{/if}}" 
+                    
+                    />
+             
 
 
                 <div style='border: 1px;' 
@@ -131,7 +137,7 @@
                                      })"
                      >
                     <span id="expiryDate_display" class="inp2" >     
-                        {{if expiryDate!=null}}
+                        {{if expiryDate}}
                         {{:expiryDate}}
                         {{else}}
                         ----
@@ -145,12 +151,14 @@
 
             <div class="inp_outer">
                 <div class="title1">batch</div>
-                <span class="inp2" contenteditable="true" id="batch"   data-link="batch" >---</span>
+                <span class="inp2" contenteditable="true" id="batch" 
+                       style="min-width: 100px"
+                      data-link="batch" >---</span>
                 <input type="hidden" name="batch" data-link="batch" />
             </div>
-            
-            
-             <div class="inp_outer">
+
+
+            <div class="inp_outer">
                 <div class="title1">qtyPurchased</div>
 
                 <input type="text" name="qtyPurchased" data-link="qtyPurchased"
@@ -158,34 +166,34 @@
                        class="akr_input_text" required=""
                        />
             </div>
-            
+
         </fieldset>
 
 
         <fieldset id="group2">
             <legend> Rate</legend>
-            
-            
+
+
 
             <div class="inp_outer" >
                 <div class="title1">mrp</div>
                 Rs.<input type="text" id="mrp" name="mrp" data-link="mrp"
                           class="akr_input_text" required="" style="width:90px"
-                       />
+                          />
             </div>
             <div class="inp_outer" >
                 <div class="title1">sellingPrice</div>
                 Rs.<input type="text" id="sellingPrice" name="sellingPrice" data-link="sellingPrice"
                           class="akr_input_text" required="" style="width:90px"
-                       />
+                          />
             </div>
             <div class="inp_outer" >
                 <div class="title1">costPrice</div>
                 Rs.<input type="text" id="costPrice" name="costPrice" data-link="costPrice"
                           class="akr_input_text" required="" style="width:90px"
-                       />
+                          />
             </div>
-           
+
 
         </fieldset>
 
@@ -194,26 +202,26 @@
             * Use 0.06 instead of 6% <br>
             <div class="inp_outer">
                 <div class="title1">discount* </div>
-               
+
                 <input type="text" id="discount" name="discount" data-link="discount" 
-                        class="akr_input_text" required=""
+                       class="akr_input_text" required=""
                        />
             </div>
 
 
             <div class="inp_outer">
                 <div class="title1">cgst* </div>
-            
+
                 <input type="text" name="cgst" data-link="cgst"
-                        class="akr_input_text" required=""
+                       class="akr_input_text" required=""
                        />
             </div>
 
             <div class="inp_outer">
                 <div class="title1">sgst *</div>
-               
+
                 <input type="text" name="sgst" data-link="sgst" 
-                        class="akr_input_text" required=""
+                       class="akr_input_text" required=""
                        />
             </div>
 
@@ -222,16 +230,12 @@
         <hr>
 
 
-        <div class="inp_outer2">
-            <div class="title1">qtyRemaining</div>
-            <span class="inp2" contenteditable="false" id="qtyRemaining"   data-link="qtyRemaining" >---</span>
-            <!--            <input type="hidden" name="qtyRemaining" data-link="qtyRemaining" />-->
-        </div>
+        <span >End</span>
 
-        <fieldset>
+<!--        <fieldset>
             <legend> Full details in JSON</legend>
             <span style=" width: 100px;display: inherit;">{{:~jsonise(~root)}}</span>
 
-        </fieldset>
+        </fieldset>-->
     </div>
 </form>

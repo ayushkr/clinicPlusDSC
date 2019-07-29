@@ -1,13 +1,16 @@
 package in.srisrisri.clinic.pharmacyBill;
 
+import in.srisrisri.clinic.Constants.Constants1;
+import in.srisrisri.clinic.Vendor.VendorEntity;
 import in.srisrisri.clinic.appointment.AppointmentEntity;
-import in.srisrisri.clinic.patient.PatientEntity;
 import in.srisrisri.clinic.responses.DeleteResponse;
+import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
 import in.srisrisri.clinic.utils.PageCover;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Date;
+import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -42,24 +46,26 @@ public class PharmacyBillResource {
         List<PharmacyBillEntity> list = repo.findAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-//   @GetMapping("undefined")
-//    @ResponseBody
-//    public ResponseEntity<Optional<PharmacyBillEntity>> getM(){
-//    
-//      Optional<PharmacyBillEntity> item=Optional.of(new PharmacyBillEntity());
-//        return new ResponseEntity<>(item, HttpStatus.OK);
-//    }
+
 
     @GetMapping("pageable")
     @ResponseBody
     public PageCover<PharmacyBillEntity> allPageNumber(
             @RequestParam("pageNumber") String pageNumber,
             @RequestParam("filterColumn") String filterColumn,
+             @RequestParam(value = "pageSize", required = false) Optional<Integer> pageSizeOb,
+            
             @RequestParam("filter") String filter,
             @RequestParam("sortColumn") String sortColumn,
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
+         int pageSize = 10;
+        if (pageSizeOb.isPresent()) {
+            pageSize = pageSizeOb.get();
+        } else {
+
+        }
         logger.warn("pageable , {} ", new Object[]{label});
 
         if (!sortColumn.equals("undefined")) {
@@ -72,9 +78,15 @@ public class PharmacyBillResource {
         } else {
             sort = Sort.by("dateOfBill").descending();
         }
-        if ("undefined".equals(pageNumber)) {
+         if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
+        } else {
+            if (Integer.parseInt(pageNumber) == 0) {
+                pageSize = 10000;
+                pageNumber = "1";
+            }
         }
+        
         Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
         Page<PharmacyBillEntity> page=null;
 
@@ -118,8 +130,11 @@ public class PharmacyBillResource {
         if(id>0){
          item = repo.findById(id);}
         else{
-          item= Optional.of(PostMapping_one(new PharmacyBillEntity()).getBody());
-       
+          PharmacyBillEntity entityAfter = new PharmacyBillEntity();
+
+            entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
+            repo.save(entityAfter);
+            item = Optional.of(entityAfter);
         }
         return item;
     }
@@ -137,8 +152,9 @@ public class PharmacyBillResource {
 
     // create
     @PostMapping("")
-    public ResponseEntity<PharmacyBillEntity> PostMapping_one(PharmacyBillEntity entityBefore) {
-        ResponseEntity<PharmacyBillEntity> body = null;
+    public ResponseEntity<JsonResponse> PostMapping_one(PharmacyBillEntity entityBefore) {
+        ResponseEntity<JsonResponse> body = null;
+          JsonResponse jsonResponse = new JsonResponse();
         try {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
             logger.warn("---- id ={}", entityBefore.getId());
@@ -153,27 +169,93 @@ public class PharmacyBillResource {
             }
 
             BeanUtils.copyProperties(entityBefore, entityAfter);
-            entityAfter = repo.save(entityAfter);
+            
+            try {
+                entityAfter = repo.save(entityAfter);
+                jsonResponse.setMessage("Saved ID:" + entityAfter.getId());
+                jsonResponse.setStatus(Constants1.SUCCESS);
+            } catch (Exception e) {
+                jsonResponse.setMessage(e.toString());
+                jsonResponse.setStatus(Constants1.FAILURE);
+            }
 
             body = ResponseEntity
                     .created(new URI("/api/" + label + entityAfter.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(label,
                             entityAfter.getId() + ""))
-                    .body(entityAfter);
+                    .body(jsonResponse);
         } catch (URISyntaxException ex) {
             java.util.logging.Logger.getLogger(label).log(Level.SEVERE, null, ex);
         }
         return body;
     }
 
+     
     // delete
     @GetMapping("delete/id/{id}")
-    public DeleteResponse DeleteMapping_id(@PathVariable("id") Long id) {
-        logger.warn("DeleteMapping_id obj={},id= {}", new Object[]{label, id});
-        repo.deleteById(id);
-        DeleteResponse deleteResponse = new DeleteResponse();
-        deleteResponse.setMessage("Deleted " + label + " with id " + id);
-        return deleteResponse;
+    public JsonResponse DeleteMapping_id(@PathVariable("id") Long id) {
+
+        JsonResponse response = new JsonResponse();
+        logger.warn("REST request to delete {} {}", new Object[]{label, id});
+        try {
+            repo.deleteById(id);
+            response.setStatus(Constants1.SUCCESS);
+            response.setMessage("Deleted " + label + " with id " + id);
+            return response;
+        } catch (ConstraintViolationException e) {
+            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
+            response.setStatus(Constants1.FAILURE);
+            response.setMessage("This " + label + " is used in other ");
+            return response;
+
+        } catch (Exception e) {
+            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
+            response.setStatus(Constants1.FAILURE);
+            if(e.getMessage().contains("ConstraintViolationException")){
+            response.setMessage("This " + label + " (ID: "+id+
+                    ")  is used in other place <br>For eg: in pharmacyBill etc");
+            }else{
+            response.setMessage(e.getMessage());
+            }
+            return response;
+        }
+    }
+
+    // deleteBulk
+    @PostMapping("deleteBulk")
+    public ResponseEntity<JsonResponse> deleteBulk(
+            @RequestParam("n") List<Long> list) {
+        ResponseEntity<JsonResponse> responseEntity = null;
+        JsonResponse jsonResponse = new JsonResponse();
+        String failedIds = "";
+        try {
+            logger.warn("deleteBulk , got={} ", list.toString());
+            for (Long n : list) {
+                System.out.println(" n=" + n);
+                try {
+                    repo.deleteById(n);
+                } catch (Exception e) {
+                    
+                    failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
+                            + "<br>Because  "
+                            +((e.getMessage().contains("ConstraintViolationException")) ? 
+                            "It Used in Other place ":e.getMessage()) 
+                            + "</p><hr>";
+
+                }
+
+            }
+            jsonResponse.setMessage(failedIds);
+            jsonResponse.setStatus(Constants1.FAILURE);
+            responseEntity = ResponseEntity
+                    .created(new URI("/api/" + label + "/"))
+                    .headers(HeaderUtil.createEntityCreationAlert(label,
+                            " "))
+                    .body(jsonResponse);
+        } catch (URISyntaxException ex) {
+            java.util.logging.Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+        return responseEntity;
     }
 
 }

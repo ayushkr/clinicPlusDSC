@@ -7,72 +7,80 @@
     <input type='hidden' name='redirect' value=' #/cmdc?module=pharmacyBillRow&action=/all/list'>
     <input type="hidden" name="id" data-link="id" />
     <br>
-    
-    
-     <div id="printableArea" style="margin-left: 0mm" title="patient_{{:id}}_{{:name}}">
-      
-    id {{:id}} <br>
-    <div class="inp_outer" onclick="popup_selection('pharmacyBill')">
-        <div class="title1"   > pharmacyBill</div>
-        {{if pharmacyBill!=null }}
-        <input  type="hidden" id="pharmacyBill" name="pharmacyBill" 
-                value="{{:pharmacyBill.id}}"  />
-        <span id="pharmacyBill_display">     
-            {{:pharmacyBill.id}}         
-        </span>
 
-        {{else}}
-        <input  type="hidden" id="pharmacyBill" name="pharmacyBill" 
-                />
-        <span id="pharmacyBill_display">     
-            Not set                
-        </span>
 
-        {{/if}}   
+    <div id="printableArea" style="margin-left: 0mm" title="patient_{{:id}}_{{:name}}">
+
+        id {{:id}} <br>
+
+
+
+        <div class="inp_outer"   onclick="popup_selection_obj(
+                        {
+                            'value': '{{:pharmacyBill.id}}',
+                            'entity_select': 'pharmacyBill',
+                            'input': 'pharmacyBill'
+                        }
+                )">
+            <input type="hidden" id="pharmacyBill" name="pharmacyBill" 
+
+                   value="{{if pharmacyBill}}{{:pharmacyBill.id}}{{else}}----{{/if}}" />
+            <div class="title1">pharmacyBill</div>
+            <span id='pharmacyBill_display' class="inp2">
+                {{if pharmacyBill}}{{:pharmacyBill.id}}{{else}}Not set{{/if}}</span>
+        </div>
+        <br>
+
+        <div class="inp_outer"   onclick="popup_selection_obj(
+                        {
+                            'value': '',
+                            'entity_select': 'medicineStock',
+                            'input': 'medicineStock'
+                        }
+                )">
+            <input type="hidden" 
+                   id="medicineStock" 
+                   name="medicineStock" 
+                   value="{{if medicineStock}}{{:medicineStock.id}}{{else}}----{{/if}}" />
+            <div class="title1">medicineStock</div>
+            <span id='medicineStock_display' class="inp2">
+                {{if medicineStock}}{{:medicineStock.id}}{{else}}Not set{{/if}}</span>
+        </div>
+        <br>
+        <div class="inp_outer">
+            <div class="title1">qty</div>
+            <span 
+                style="min-width: 100px"
+                class="inp2" contenteditable="true"4 id="qty"   data-link="qty" 
+                  onkeydown="calculateAmount(1)" 
+                  >---</span>
+            <input type="hidden" name="qty" data-link="qty" onkeydown="calculateAmount(1)" />
+        </div>
+
+
+        <br>
+        Amount auto generated after entering qty etc
+        <br>
+        
+        
+        
+
+        <div class="inp_outer"  style="min-width: 100px;min-height: 50px"
+             onclick="calculateAmount(1)">
+            <div class="title1">amount</div>
+            <span class="inp2" 
+                  contenteditable="false" 
+                  id="amount_disp"   
+                  data-link="amount" 
+
+                  >---</span>
+            <input type="hidden" 
+                   id="amount" 
+                   name="amount" 
+                   data-link="amount" />
+        </div>
+
 
     </div>
-
-    <div class="inp_outer" onclick="popup_selection('medicineStock')" >
-        <div class="title1"    >medicineStock</div>
-        {{if medicineStock!=null}}
-        <input  type="hidden" id="medicineStock" name="medicineStock" 
-                value=" {{:medicineStock.id}}"/>
-        <span id="medicineStock_display">     
-            {{:medicineStock.id}}_ {{:medicineStock.medicineBrandName.brandName}}
-        </span>
-
-        {{else}}
-        <input  type="hidden" id="medicineStock" name="medicineStock" 
-                />
-        <span id="medicineStock_display">     
-            Not set
-        </span>
-        {{/if}}
-
-
-    </div>
-
-
-    <div class="inp_outer">
-        <div class="title1">qty</div>
-        <span class="inp2" contenteditable="true" id="qty"   data-link="qty" 
-              onkeydown="calculateAmount(1)" 
-              >---</span>
-        <input type="hidden" name="qty" data-link="qty" onkeydown="calculateAmount(1)" />
-    </div>
-
-
-
-
-    <div class="inp_outer" onclick="calculateAmount(1)">
-        <div class="title1">amount</div>
-        <span class="inp2" contenteditable="false" id="amount_disp"   data-link="amount" 
-
-              >---</span>
-        <input type="hidden" id="amount" name="amount" data-link="amount" />
-    </div>
-
-
-     </div>
 </form>
 

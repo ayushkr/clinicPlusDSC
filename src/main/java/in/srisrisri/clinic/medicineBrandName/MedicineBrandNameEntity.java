@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -33,11 +35,35 @@ public class MedicineBrandNameEntity  {
     private String description;
     String HSN;
     private String other;
+     @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date creationTime;
+ @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date  updationTime;
   
    
     @Column(name="lastTouched", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date lastTouched; 
 
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getUpdationTime() {
+        return updationTime;
+    }
+
+    public void setUpdationTime(Date updationTime) {
+        this.updationTime = updationTime;
+    }
+
+   
+    
+    
+    
     public String getComposition() {
         return composition;
     }
@@ -185,6 +211,8 @@ public class MedicineBrandNameEntity  {
     public String toString() {
         return "MedicineBrandNameEntity{" + "id=" + id + ", brandName=" + brandName + ", company=" + company + ", genericName=" + genericName + ", usedFor=" + usedFor + ", type=" + type + ", groupid=" + groupid + ", description=" + description + ", HSN=" + HSN + ", other=" + other + ", lastTouched=" + lastTouched + '}';
     }
+
+   
 
     
 }

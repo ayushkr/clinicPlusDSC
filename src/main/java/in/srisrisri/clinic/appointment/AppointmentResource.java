@@ -1,9 +1,10 @@
 package in.srisrisri.clinic.appointment;
 
+import in.srisrisri.clinic.Constants.Constants1;
 import in.srisrisri.clinic.doctor.DoctorEntity;
 import in.srisrisri.clinic.patient.PatientEntity;
 
-import in.srisrisri.clinic.responses.DeleteResponse;
+import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
+import org.hibernate.exception.ConstraintViolationException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,10 +39,10 @@ public class AppointmentResource {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private AppointmentRepo appointmentRepo;
+    private AppointmentRepo repo;
 
     public AppointmentResource(AppointmentRepo appointmentRepo) {
-        this.appointmentRepo = appointmentRepo;
+        this.repo = appointmentRepo;
     }
 
     private static final String label = "appointment";
@@ -55,7 +58,7 @@ public class AppointmentResource {
     public List<AppointmentEntity> local_allByDateOfAppointmentDesc() {
         logger.warn("local_allByDateOfAppointmentDesc, {} ", new Object[]{label});
         Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "dateOfAppointment"));
-        List<AppointmentEntity> list = appointmentRepo.findAll(sort);
+        List<AppointmentEntity> list = repo.findAll(sort);
         return list;
     }
 
@@ -82,7 +85,7 @@ public class AppointmentResource {
             dateFrom = "2018-01-01";
         }
 
-        List<AppointmentEntity> list = appointmentRepo.findByDoctorDateBetween(
+        List<AppointmentEntity> list = repo.findByDoctorDateBetween(
                 Date.valueOf(dateFrom), dateToDate, doctorEntity);
 
         ReportIncomeFromDoctorsDTO reportIncomeFromDoctorsDTO = new ReportIncomeFromDoctorsDTO(list);
@@ -97,10 +100,18 @@ public class AppointmentResource {
             @RequestParam("filterColumn") String filterColumn,
             @RequestParam("filter") String filter,
             @RequestParam("pageNumber") String pageNumber,
+            @RequestParam(value = "pageSize", required = false) Optional<Integer> pageSizeOb,
             @RequestParam("sortColumn") String sortColumn,
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
+        int pageSize = 10;
+        if (pageSizeOb.isPresent()) {
+            pageSize = pageSizeOb.get();
+        } else {
+
+        }
+
         logger.warn("REST getItems() , {} ", new Object[]{label});
 
         if (!sortColumn.equals("undefined")) {
@@ -115,24 +126,30 @@ public class AppointmentResource {
         }
         if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
+        } else {
+            if (Integer.parseInt(pageNumber) == 0) {
+                pageSize = 10000;
+                pageNumber = "1";
+            }
         }
-        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
+
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, pageSize, sort);
 
         Page<AppointmentEntity> page = null;
 
         if (filterColumn.equals("undefined")) {
-            page = appointmentRepo.findAll(pageable);
+            page = repo.findAll(pageable);
         } else {
 
             if (filterColumn.equals("patient")) {
                 PatientEntity patientEntity = new PatientEntity();
                 patientEntity.setId(Long.parseLong(filter));
-                page = appointmentRepo.findAllByPatient(patientEntity, pageable);
+                page = repo.findAllByPatient(patientEntity, pageable);
 
             } else if (filterColumn.equals("doctor")) {
                 DoctorEntity doctorEntity = new DoctorEntity();
                 doctorEntity.setId(Long.parseLong(filter));
-                page = appointmentRepo.findAllByDoctor(doctorEntity, pageable);
+                page = repo.findAllByDoctor(doctorEntity, pageable);
 
             }
 
@@ -154,40 +171,49 @@ public class AppointmentResource {
         logger.warn("id {} No {}", new Object[]{label, id});
         Optional<AppointmentEntity> item;
         if (id > 0) {
-            item = appointmentRepo.findById(id);
+            item = repo.findById(id);
         } else {
-            item = Optional.of(PostMapping_one(new AppointmentEntity()).getBody());
-
+            AppointmentEntity entityAfter = new AppointmentEntity();
+            entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
+            repo.save(entityAfter);
+            item = Optional.of(entityAfter);
         }
         return item;
     }
 
     // create
     @PostMapping("")
-    public ResponseEntity<AppointmentEntity> PostMapping_one(AppointmentEntity entityBefore) {
-        ResponseEntity<AppointmentEntity> body = null;
+    public ResponseEntity<JsonResponse> PostMapping_one(AppointmentEntity entityBefore) {
+        ResponseEntity<JsonResponse> body = null;
+        JsonResponse jsonResponse = new JsonResponse();
         try {
             logger.warn("PostMapping_one , entityBefore={} ", entityBefore.toString());
 
             AppointmentEntity entityAfter = null;
             if (entityBefore.getId() != 0) {
 
-                entityAfter = appointmentRepo.findById(entityBefore.getId()).get();
+                entityAfter = repo.findById(entityBefore.getId()).get();
                 //entityAfter.setUpdationTime(new Date());
             } else {
                 entityAfter = new AppointmentEntity();
 
-                //entityAfter.setCreationTime(new Date());
             }
 
             BeanUtils.copyProperties(entityBefore, entityAfter);
-            entityAfter = appointmentRepo.save(entityAfter);
+            try {
+                entityAfter = repo.save(entityAfter);
+                jsonResponse.setMessage("Saved ID:" + entityAfter.getId());
+                jsonResponse.setStatus(Constants1.SUCCESS);
+            } catch (Exception e) {
+                jsonResponse.setMessage(e.toString());
+                jsonResponse.setStatus(Constants1.FAILURE);
+            }
             logger.warn("PostMapping_one, entityAfter ={}", entityAfter);
             body = ResponseEntity
                     .created(new URI("/api/appointment/" + entityAfter.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(label,
                             entityAfter.getId() + ""))
-                    .body(entityAfter);
+                    .body(jsonResponse);
         } catch (URISyntaxException ex) {
             java.util.logging.Logger.getLogger(AppointmentResource.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -210,14 +236,74 @@ public class AppointmentResource {
 
     }
 
+    
+    
+    
     // delete
     @GetMapping("delete/id/{id}")
-    public DeleteResponse DeleteMapping_id(@PathVariable("id") Long id) {
+    public JsonResponse DeleteMapping_id(@PathVariable("id") Long id) {
+
+        JsonResponse response = new JsonResponse();
         logger.warn("REST request to delete {} {}", new Object[]{label, id});
-        appointmentRepo.deleteById(id);
-        DeleteResponse deleteResponse = new DeleteResponse();
-        deleteResponse.setMessage("Deleted appointment with id " + id);
-        return deleteResponse;
+        try {
+            repo.deleteById(id);
+            response.setStatus(Constants1.SUCCESS);
+            response.setMessage("Deleted " + label + " with id " + id);
+            return response;
+        } catch (ConstraintViolationException e) {
+            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
+            response.setStatus(Constants1.FAILURE);
+            response.setMessage("This " + label + " is used in other ");
+            return response;
+
+        } catch (Exception e) {
+            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
+            response.setStatus(Constants1.FAILURE);
+            if(e.getMessage().contains("ConstraintViolationException")){
+            response.setMessage("This " + label + " (ID: "+id+
+                    ")  is used in other place <br>For eg: in pharmacyBill etc");
+            }else{
+            response.setMessage(e.getMessage());
+            }
+            return response;
+        }
+    }
+
+    // deleteBulk
+    @PostMapping("deleteBulk")
+    public ResponseEntity<JsonResponse> deleteBulk(
+            @RequestParam("n") List<Long> list) {
+        ResponseEntity<JsonResponse> responseEntity = null;
+        JsonResponse jsonResponse = new JsonResponse();
+        String failedIds = "";
+        try {
+            logger.warn("deleteBulk , got={} ", list.toString());
+            for (Long n : list) {
+                System.out.println(" n=" + n);
+                try {
+                    repo.deleteById(n);
+                } catch (Exception e) {
+                    
+                    failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
+                            + "<br>Because  "
+                            +((e.getMessage().contains("ConstraintViolationException")) ? 
+                            "It Used in Other place ":e.getMessage()) 
+                            + "</p><hr>";
+
+                }
+
+            }
+            jsonResponse.setMessage(failedIds);
+            jsonResponse.setStatus(Constants1.FAILURE);
+            responseEntity = ResponseEntity
+                    .created(new URI("/api/" + label + "/"))
+                    .headers(HeaderUtil.createEntityCreationAlert(label,
+                            " "))
+                    .body(jsonResponse);
+        } catch (URISyntaxException ex) {
+            java.util.logging.Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+        return responseEntity;
     }
 
 }

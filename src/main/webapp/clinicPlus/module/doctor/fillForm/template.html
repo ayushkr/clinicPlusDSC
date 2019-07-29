@@ -2,13 +2,13 @@
 
 <div id="printableArea"   title="DoctorId_{{:id}}_{{if name}}{{:name}}{{/if}}" >
 
-    <div class="pageTitle">{{if id!=0}}  Existing Doctor : {{:name}} {{else}} New  Doctor {{/if}}  </div>
+    <div class="pageTitle">
+       Doctor
+    </div>
 
-     
-    
-    
-    
-    <form id='form_doctor' method="post" action="{{:renderInDiv}}#/cmd/post">   
+    <form id='form_doctor' 
+          method="post" 
+          action="{{:renderInDiv}}#/cmd/post">   
         <input type='hidden' name='module_direct' value='doctor'>
         <input type='hidden' name='redirect' value=' #/cmdc?module=doctor&action=/all/list'>
         <input type="hidden" name="id" data-link="id" />
@@ -16,11 +16,15 @@
             <tbody>
                 <tr>
                     <td>
-                        ID {{:id}} <br>
+                      
+                        ID: {{:id}}
+                        <br>
 
                         <div class="inp_outer" style="min-width:400px;">
                             <div class="title1">Name</div>
-                            <input type="text" name="name" data-link="name" required class="akr_input_text"  />
+                            <input type="text" name="name" data-link="name" 
+                                   autofocus
+                                   required class="akr_input_text"  />
                         </div>
                         <br>
                         <div class="inp_outer" style="min-width:400px;">
@@ -50,7 +54,7 @@
                             <img  id="form_profileImage_img" 
                                   class="form_profileImage_img" 
                                   src="/uploads/doctor/{{:id}}_profileImage.jpeg?time={{:creationTime}}" 
-                                  alt="doctor/{{:id}} not loaded"
+                                  alt="Photo doctor/{{:id}} not available"
                                   >
                         </div>
 
@@ -177,9 +181,11 @@
                             'input': 'dateOfJoining'
                         }
                 )">
-            <input type="hidden" id="dateOfJoining" name="dateOfJoining" data-link="dateOfJoining" />
+            <input type="hidden" id="dateOfJoining" name="dateOfJoining" 
+                   
+                   value="{{if dateOfJoining}}{{:dateOfJoining}}{{else}}2019-10-10{{/if}}" />
             <div class="title1">dateOfJoining</div>
-            <span id='dateOfJoining_display' class="inp2">{{if dateOfJoining}}{{:dateOfJoining}}{{else}}2019-10-10{{/if}}</span>
+            <span id='dateOfJoining_display' class="inp2">{{if dateOfJoining}}{{:dateOfJoining}}{{else}}Not set{{/if}}</span>
         </div>
 
 

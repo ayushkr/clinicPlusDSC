@@ -25,15 +25,15 @@ function calculateAmount(j) {
     var medicineStock_id = document.getElementById('medicineStock').value;
     $.get("/clinicPlus/api/medicineStock/" + medicineStock_id, function (medicineStock) {
         console.log('calculateAmount' + medicineStock.id);
-        var rate = medicineStock.rate;
-      
+        var rate = medicineStock.sellingPrice;
+
         var qty = document.getElementById('qty').innerHTML;
-       
+
         var amt = rate * qty;
-        console.log('rate =' + rate + ' qty=' + qty+ ' amt=' + amt);
+        console.log('rate =' + rate + ' qty=' + qty + ' amt=' + amt);
         console.log('rate qty amt' + rate + '---' + qty + '------amt' + amt);
-       document.getElementById('amount').value=amt;
-       document.getElementById('amount_disp').innerHTML=amt;
+        document.getElementById('amount').value = amt;
+        document.getElementById('amount_disp').innerHTML = amt;
 
     });
 

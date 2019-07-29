@@ -1,10 +1,15 @@
 package in.srisrisri.clinic.medicineBrandName;
 
+import in.srisrisri.clinic.Constants.Constants1;
+import in.srisrisri.clinic.doctor.DoctorEntity;
 import in.srisrisri.clinic.responses.DeleteResponse;
+import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
 import in.srisrisri.clinic.utils.PageCover;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Date;
+import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,14 +35,14 @@ public class MedicineBrandNameResource {
     private final Logger logger = LoggerFactory.getLogger(MedicineBrandNameResource.class);
 
     @Autowired
-    MedicineBrandNameRepo medicineBrandNameRepo;
+    MedicineBrandNameRepo repo;
 
     @GetMapping("")
     @ResponseBody
     public ResponseEntity<List<MedicineBrandNameEntity>> getMedicineNames() {
         logger.debug("getMedicineNames", new Object() {
         });
-        List<MedicineBrandNameEntity> list = medicineBrandNameRepo.findAll();
+        List<MedicineBrandNameEntity> list = repo.findAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
@@ -78,17 +84,17 @@ public class MedicineBrandNameResource {
 
         if (filterColumn.equals("undefined")) {
 
-            page = medicineBrandNameRepo.findAll(pageable);
+            page = repo.findAll(pageable);
         } else {
 
             if (filterColumn.equals("brandName")) {
-                page = medicineBrandNameRepo.findAllByBrandNameLike(filter, pageable);
+                page = repo.findAllByBrandNameLike(filter, pageable);
             }
             if (filterColumn.equals("genericName")) {
-                page = medicineBrandNameRepo.findAllByGenericNameLike(filter, pageable);
+                page = repo.findAllByGenericNameLike(filter, pageable);
             }
             if (filterColumn.equals("composition")) {
-                page = medicineBrandNameRepo.findAllByCompositionLike(filter, pageable);
+                page = repo.findAllByCompositionLike(filter, pageable);
             }
 
         }
@@ -106,10 +112,13 @@ public class MedicineBrandNameResource {
         
           Optional<MedicineBrandNameEntity> item ;
         if(id>0){
-         item = medicineBrandNameRepo.findById(id);}
+         item = repo.findById(id);}
         else{
-          item= Optional.of(PostMapping_one(new MedicineBrandNameEntity()).getBody());
-       
+        
+            MedicineBrandNameEntity entityAfter = new MedicineBrandNameEntity();
+            entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
+            repo.save(entityAfter);
+            item = Optional.of(entityAfter);
         }
         
         return new ResponseEntity<>(item, HttpStatus.OK);
@@ -117,15 +126,17 @@ public class MedicineBrandNameResource {
 
     // create
     @PostMapping("")
-    public ResponseEntity<MedicineBrandNameEntity> PostMapping_one(MedicineBrandNameEntity entityBefore) {
-        ResponseEntity<MedicineBrandNameEntity> body = null;
+    public ResponseEntity<JsonResponse> PostMapping_one(MedicineBrandNameEntity entityBefore) {
+        ResponseEntity<JsonResponse> responseEntity = null;
+        JsonResponse jsonResponse=new JsonResponse();
+        
         try {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
             logger.warn("entityBefore---- id ={}", entityBefore.getId());
             MedicineBrandNameEntity entityAfter = null;
             if (entityBefore.getId() != 0) {
 
-                entityAfter = medicineBrandNameRepo.findById(entityBefore.getId()).get();
+                entityAfter = repo.findById(entityBefore.getId()).get();
                 //entityAfter.setUpdationTime(new Date());
             } else {
                 entityAfter = new MedicineBrandNameEntity();
@@ -133,33 +144,92 @@ public class MedicineBrandNameResource {
             }
 
             BeanUtils.copyProperties(entityBefore, entityAfter);
-            entityAfter = medicineBrandNameRepo.save(entityAfter);
+            
+            try {
+                entityAfter = repo.save(entityAfter);
+                jsonResponse.setMessage("Saved ID:" + entityAfter.getId());
+                jsonResponse.setStatus(Constants1.SUCCESS);
+            } catch (Exception e) {
+                jsonResponse.setMessage(e.toString());
+                jsonResponse.setStatus(Constants1.FAILURE);
+            }
 
-            body = ResponseEntity
+            responseEntity = ResponseEntity
                     .created(new URI("/api/MedicineBrandNameEntity/" + entityAfter.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(label,
                             entityAfter.getId() + ""))
-                    .body(entityAfter);
+                    .body(jsonResponse);
         } catch (URISyntaxException ex) {
             java.util.logging.Logger.getLogger(label).log(Level.SEVERE, null, ex);
         }
-        return body;
+        return responseEntity;
     }
 
+    
     // delete
     @GetMapping("delete/id/{id}")
-    public DeleteResponse DeleteMapping_id(@PathVariable("id") Long id) {
-        DeleteResponse deleteResponse = new DeleteResponse();
-        logger.warn("DeleteMapping_id obj={},id= {}", new Object[]{label, id});
-        try {
-            medicineBrandNameRepo.deleteById(id);
-            deleteResponse.setMessage("Deleted Jote with id " + id);
-        } catch (Exception e) {
-            deleteResponse.setMessage(e.toString());
-            deleteResponse.setStatus("fail");
-        }
+    public JsonResponse DeleteMapping_id(@PathVariable("id") Long id) {
 
-        return deleteResponse;
+        JsonResponse response = new JsonResponse();
+        logger.warn("REST request to delete {} {}", new Object[]{label, id});
+        try {
+            repo.deleteById(id);
+            response.setStatus(Constants1.SUCCESS);
+            response.setMessage("Deleted " + label + " with id " + id);
+            return response;
+        } catch (ConstraintViolationException e) {
+            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
+            response.setStatus(Constants1.FAILURE);
+            response.setMessage("This " + label + " is used in other ");
+            return response;
+
+        } catch (Exception e) {
+            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
+            response.setStatus(Constants1.FAILURE);
+            if(e.getMessage().contains("ConstraintViolationException")){
+            response.setMessage("This " + label + " (ID: "+id+
+                    ")  is used in other place <br>For eg: in pharmacyBill etc");
+            }else{
+            response.setMessage(e.getMessage());
+            }
+            return response;
+        }
     }
 
+    // deleteBulk
+    @PostMapping("deleteBulk")
+    public ResponseEntity<JsonResponse> deleteBulk(
+            @RequestParam("n") List<Long> list) {
+        ResponseEntity<JsonResponse> responseEntity = null;
+        JsonResponse jsonResponse = new JsonResponse();
+        String failedIds = "";
+        try {
+            logger.warn("deleteBulk , got={} ", list.toString());
+            for (Long n : list) {
+                System.out.println(" n=" + n);
+                try {
+                    repo.deleteById(n);
+                } catch (Exception e) {
+                    
+                    failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
+                            + "<br>Because  "
+                            +((e.getMessage().contains("ConstraintViolationException")) ? 
+                            "It Used in Other place ":e.getMessage()) 
+                            + "</p><hr>";
+
+                }
+
+            }
+            jsonResponse.setMessage(failedIds);
+            jsonResponse.setStatus(Constants1.FAILURE);
+            responseEntity = ResponseEntity
+                    .created(new URI("/api/" + label + "/"))
+                    .headers(HeaderUtil.createEntityCreationAlert(label,
+                            " "))
+                    .body(jsonResponse);
+        } catch (URISyntaxException ex) {
+            java.util.logging.Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+        return responseEntity;
+    }
 }

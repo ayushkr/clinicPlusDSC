@@ -28,7 +28,7 @@
         <span id="dateOfBill_display" class="inp2">{{:dateOfBill}}</span>
         <input id="dateOfBill" type="hidden" name="dateOfBill" data-link="dateOfBill" />
     </div>
-
+    <br>
 
     <div class="inp_outer"
          title="ഒരു അപ്പോയ്ന്റ്മെന്റ്   സെലക്ട്  ചെയ്യുക "
@@ -68,7 +68,7 @@
 
 </form>
 {{if appointment!=null }}
-    <button class="w3-button dsc_green"
+    <button class="w3-button dsc_green w3-padding-24"
             style="float: none"
             title="medicines "
             onclick="pharmacyCashBill.render_list({{:id}}, 'main1_inner')"
