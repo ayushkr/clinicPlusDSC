@@ -51,18 +51,18 @@ public class Starter {
     public static void spring_start(String[] args) {
         SpringApplication.run(Starter.class, args);
         logger.info("-------------started--------------- -");
-        try {
-            Runtime.getRuntime().exec("clear");
-            Runtime.getRuntime().exec("aplay /usr/share/sounds/alsa/serverStarted.wav");
-        } catch (IOException ex) {
-            logger.info("------------aplay issue- --------------- -" + ex.toString());
-        }
+//        try {
+//            Runtime.getRuntime().exec("clear");
+//            Runtime.getRuntime().exec("aplay /usr/share/sounds/alsa/serverStarted.wav");
+//        } catch (Exception ex) {
+//            logger.info("------------aplay issue- --------------- -" + ex.toString());
+//        }
     }
     
     public static void speak(String words) {
         try {
             Runtime.getRuntime().exec("espeak " + words);
-        } catch (IOException ex1) {
+        } catch (Exception ex1) {
             java.util.logging.Logger.getLogger(Starter.class.getName()).log(Level.SEVERE, null, ex1);
         }
     }
