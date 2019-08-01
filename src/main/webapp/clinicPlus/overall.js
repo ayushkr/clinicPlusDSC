@@ -430,7 +430,7 @@ function hideDivAy(e) {
 
 
 function refresh_entitySelectList(module, filterWord) {
-    var divname = 'main2';
+    var divname = 'main_'+mainLayerNumberNow;
     var obj = {'entity_select': module};
     loadTemplate_entity_select_into(obj, divname);
     filter(filterWord);

@@ -125,14 +125,7 @@ function jsonise(o) {
     return JSON.stringify(o);
 }
 
-function pageNewAy(status) {
-    if (status === 1) {
-        return "&refreshId=" + Math.random();
-    } else {
-        return "?refreshId=0";
-    }
 
-}
 
 function ddmmyyyyDashed(yyyymmddValue){
     var parts=yyyymmddValue.split("-");

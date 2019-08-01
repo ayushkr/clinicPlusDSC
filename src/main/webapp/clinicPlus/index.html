@@ -11,11 +11,34 @@
         <!--<link rel="icon" href="icon1.ico">-->
         <link rel="icon" href="./images/favicon-user-md.ico">
         <script src="/clinicPlus/js_css/jquery.min.js"></script>
-
         <script src="/clinicPlus/js_css/jsRV/jsviews.min.js"></script>
-        <link rel="stylesheet" href="/clinicPlus/overall.css">
+
         <link rel="stylesheet" href="/clinicPlus/theme_sailorBlue.css">
-        <script src="/clinicPlus/overall.js?r=2"></script>
+
+        <link rel="stylesheet" href="/clinicPlus/overall.css">
+        <script>
+            function pageNewAy(status) {
+                if (status === 1) {
+                    return "&refreshId=" + Math.random();
+                } else {
+                    return "?refreshId=0";
+                }
+
+            }
+        </script>
+
+
+        <script>
+//view-source:http://localhost:8080/clinicPlus/index.html#/
+            $(document).ready(function () {
+                $("body").load("dashboard/dash.html?ran=" + Math.random());
+
+            });
+            $.getScript("/clinicPlus/overall.js?r=1" + pageNewAy(1));
+
+
+        </script>
+        <!--<script src="/clinicPlus/overall.js?r=2"></script>-->
 
         <link rel="stylesheet" href="/clinicPlus/js_css/index.css">
         <link rel="stylesheet" href="/clinicPlus/js_css/font-awesome.min.css">
@@ -33,15 +56,7 @@
 
         <script src="/clinicPlus/js_css/include_html_snippet.js?ran=11"></script>
 
-        <script>
-//view-source:http://localhost:8080/clinicPlus/index.html#/
-            $(document).ready(function () {
-                $("body").load("dashboard/dash.html?ran=" + Math.random());
 
-            });
-
-
-        </script>
 
     </head>
 
