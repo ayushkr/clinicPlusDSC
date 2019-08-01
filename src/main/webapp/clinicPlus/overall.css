@@ -230,6 +230,7 @@ a{ text-decoration: none}
     font-size: 10px;
     text-align: center;
     line-height: 8px;
+    visibility: visible;
 }
 
 #saveButtonInEditForm{
@@ -435,6 +436,16 @@ a{ text-decoration: none}
     left: 0px;
     z-index: 15;
 }
+
+
+.modalLayer{
+    
+}
+
+.main_{
+     background-color: var(--color_l2);
+    
+}
 #main1_menu{
         /*position: fixed;*/
     width: 92%;
@@ -546,7 +557,7 @@ a{ text-decoration: none}
 }
 
 .entity_select_closeButton{
-       z-index: 100;
+       /*z-index: 100;*/
     /* background-color: var(--color_d3); */
     top: 0px;
     right: 14px;

@@ -38,7 +38,7 @@
                  <td>{{:pharmacyBill.id}}</td>
                 
                 
-                {{if medicineStock!=null}}
+                {{if medicineStock}}
                 <!--                <td>
                                     medicineStock_{{:medicineStock.id}}
                                 </td>-->
@@ -49,7 +49,9 @@
                     {{:medicineStock.medicineBrandName.company}}
                 </td>
                 <td>
+                     {{if medicineStock.vendor}}
                     {{:medicineStock.vendor.name}}
+                    {{/if}}
                 </td>
                 <td>
                     {{:medicineStock.batch}}
@@ -62,7 +64,7 @@
                 <td   >
                     
                     
-                    {{:medicineStock.rateDecided}}
+                    {{:medicineStock.sellingPrice}}
                 </td>
                 <td>
                     {{:medicineStock.discount}}

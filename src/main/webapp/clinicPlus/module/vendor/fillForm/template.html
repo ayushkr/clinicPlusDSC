@@ -3,7 +3,8 @@
 <br>
     <div class="pageTitle">{{if id==0}} New  {{else}} Existing  id {{:id}} : {{:name}} {{/if}}  </div>
 
-<form id='form_vendor' method="post" action="#/cmd/post">
+<form id='form_vendor' method="post" 
+       action="{{:renderInDiv}}#/cmd/post">  
     <input type='hidden' name='module_direct' value='vendor'>
       <input type='hidden' name='redirect' value=' #/cmdc?module=vendor&action=/all/list'>
 

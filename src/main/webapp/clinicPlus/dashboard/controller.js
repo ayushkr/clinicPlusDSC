@@ -26,9 +26,11 @@ var pageNumber = 1;
     console.log('sammy loaded ');
 //var sammy_navbar = $.sammy('#navbar', routeFunctions);
     var sammy_main1 = $.sammy('#main1_inner', routeFunctions);
-    var sammy_main2_inner = $.sammy('#main2_inner', routeFunctions);
-    var sammy_main3_inner = $.sammy('#main3_inner', routeFunctions);
-
+    var sammy_main2_inner = $.sammy('#main_2', routeFunctions);
+    var sammy_main3_inner = $.sammy('#main_3', routeFunctions);
+    var sammy_main4_inner = $.sammy('#main_4', routeFunctions);
+    var sammy_main5_inner = $.sammy('#main_5', routeFunctions);
+     var sammy_main6_inner = $.sammy('#main_6', routeFunctions);
 
 
 
@@ -36,8 +38,11 @@ var pageNumber = 1;
     $(function () {
         //sammy_navbar.run('#/');
         sammy_main1.run('#/');
-        sammy_main2_inner.run('main2');
-        sammy_main3_inner.run('main3');
+        sammy_main2_inner.run('main_2');
+        sammy_main3_inner.run('main_3');
+        sammy_main4_inner.run('main_4');
+        sammy_main5_inner.run('main_5');
+         sammy_main6_inner.run('main_6');
     });
 })(jQuery);
 
@@ -60,6 +65,16 @@ function cmd(context) {
     for (var i = 0; i < params_.length; i++) {
         console.log("param_ ----------" + params_[i] + ":" + this.params[params_[i]]);
     }
+
+    var elems = document.querySelectorAll('.modalLayer');
+    for (var i = 0; i < elems.length; i++) {
+        console.log("modalLayer ----------" + elems[i].id);
+        hideDivAy(elems[i].id);
+    }
+
+
+
+
     listAsPages(this.params['module'],
             'api/' + this.params['module'] +
             '/pageable?pageNumber=' + this.params['pageNumber'] +

@@ -19,7 +19,7 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
         <div class="CellNoBorder"><p>expiryDate</p></div>
         <div class="CellNoBorder"><p>batch</p></div>
         <div class="CellNoBorder"><p>Rate</p></div>
-         <div class="CellNoBorder"><p>remain</p></div>
+        <div class="CellNoBorder"><p>remain</p></div>
         <div class="CellNoBorder"><p>Actions</p></div>
     </div>
 
@@ -32,7 +32,8 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
              > 
 
             <button class="entity_select_selectButton"
-                    onclick="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:medicineBrandName.brandName}}')"  
+                    onclick="selectThis('{{:~root.moduleName}}', {{:id}},
+                                '{{if medicineBrandName}}{{:medicineBrandName.brandName}}{{/if}}')"  
 
                     >
                 {{if medicineBrandName}}
@@ -46,18 +47,21 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
         </div>
 
         <div class="CellNoBorder">
-             {{if vendor}}
-                {{:vendor.name}}
-                {{/if}} 
-             </div>
+            {{if vendor}}
+            {{:vendor.name}}
+            {{/if}} 
+        </div>
         <div class="CellNoBorder">  {{:expiryDate}} </div>
         <div class="CellNoBorder">  {{:batch}} </div>
         <div class="CellNoBorder">  {{:sellingPrice}} </div>
         <div class="CellNoBorder {{if qtyRemaining<90}} w3-red {{/if}}"  >  {{:qtyRemaining}} </div>
         <div class="CellNoBorder"> 
             <a class="w3-btn" data-toggle="tooltip" title="Edit"
-               onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, 'main3');"
-
+               onclick="populateCreate2(
+                           '{{:~root.moduleName}}',
+                           {{:id}},
+                           newModal().id);"
+              
                ><i class="fa fa-edit"></i>
             </a>
 
@@ -68,8 +72,8 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
         <d id='{{:id}}' 
            medicineBrandName.brandName=
            "{{if medicineBrandName}}
-                {{:medicineBrandName.brandName}}
-                {{/if}} "
+           {{:medicineBrandName.brandName}}
+           {{/if}} "
 
            >
         </d>

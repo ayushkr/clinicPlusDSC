@@ -9,18 +9,46 @@
 ////    ctxMenu.style.top = (event.pageY - 10)+"px";
 //},false);
 
+function checkServer() {
+    console.log('checking server ');
+    $.ajax('/clinicPlus/status',
+            {
 
+                timeout: 500, // timeout milliseconds
+                type: 'GET',
+                async: false,
+                success: function (data) {
+                    hideDivAy('alert_akr');
+                    var v = document.getElementById('dateCurrent');
+                    if (v.style.visibility === 'visible') {
+                        v.style.visibility = "hidden";
+                    } else {
+                        v.style.visibility = "visible";
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+
+                    alert_1('Network problem',
+                            'There is no network connection to server '
+                            ,
+                            'failure');
+
+                }
+            }
+    );
+
+    setTimeout(checkServer, 2000);
+}
+
+setTimeout(checkServer, 2000);
 
 function filter1() {
     var elem = event.target;
     console.log('onenter');
     mn.temp[elem.id] = elem.value;
-
-
     if (event.keyCode === 13) {
         console.log('data-href=' + elem.getAttribute('data-href'));
         window.location.href = elem.getAttribute('data-href') + elem.value;
-
     }
 }
 
@@ -30,13 +58,10 @@ var localClipBoardVariable = "";
 function copyToClipBoard(input) {
     /* Get the text field */
     var copyText = document.getElementById(input);
-
     /* Select the text field */
     copyText.select();
-
     /* Copy the text inside the text field */
     document.execCommand("copy");
-
     /* Alert the copied text */
     alert("Copied the text: " + copyText.value);
 }
@@ -46,7 +71,6 @@ function copyToClipBoardValue(val) {
     dummy = document.createElement("textarea");
 //    dummy.style.visibility='hidden';
     document.body.appendChild(dummy);
-
     dummy.setAttribute("id", "dummy_id");
     document.getElementById("dummy_id").value = val;
     dummy.select();
@@ -58,7 +82,6 @@ function copyToClipBoardValue(val) {
 
 function pasteFromClipBoardTo(id) {
     document.getElementById(id).value = localClipBoardVariable;
-
 }
 
 
@@ -69,7 +92,6 @@ function  patientCard_show(id) {
         data: {}
     });
     document.getElementById('main1_paging').innerHTML = "";
-
     var dataGot;
     var path = '/clinicPlus/api/appointment/' + id;
     $.ajax(path,
@@ -86,40 +108,25 @@ function  patientCard_show(id) {
                                 data: data
                             }
                             );
-
                             console.log('ajax success path=' + path);
-
                         }
 
 
 
             });
-
     document.getElementById("header1").innerHTML =
             document.getElementById("header_common").innerHTML;
     document.getElementById("header2").innerHTML =
             document.getElementById("header_common").innerHTML;
-
     document.getElementById("a5_2nd").innerHTML =
             document.getElementById("a5_1st").innerHTML;
-
     console.log('after ajax patient card');
-
-
-
-
-
-
-
-
 }
 
 function getTodayAsExpiryDate() {
     var date = new Date();
-
     var reqDateStr = date.getFullYear() + "-" + twoDigitise(date.getMonth() + 1);
     return reqDateStr;
-
 }
 
 function getToday() {
@@ -132,18 +139,15 @@ function getToday() {
     weekday[4] = "Thursday";
     weekday[5] = "Friday";
     weekday[6] = "Saturday";
-
     var day = weekday[date.getDay()];
     var reqDateStr = date.getFullYear() + "-" + twoDigitise(date.getMonth() + 1) + '-' + twoDigitise(date.getDate());
     return {'full': reqDateStr, 'day': day};
-
 }
 
 function updateCurrentDate(divName) {
     var reqDateStr = getToday();
     console.log(' updateCurrentDate(divName), divName=' + divName + ', reqDate=' + reqDateStr.full);
     document.getElementById(divName).innerHTML = reqDateStr.day + "<br>" + reqDateStr.full;
-
     return reqDateStr;
 }
 
@@ -168,12 +172,10 @@ function populateCreate2(module, id, divName) {
         'divName': divName,
         'id': id
     };
-
     if (id === 0) {
 //        data_ = mn.module[module + "_new"];
         $.get("/clinicPlus/api/" + module + "/" + id, function (data_) {
             console.log('new data_' + JSON.stringify(data_));
-
 //        data_.'id': 0, 'fixedId': 0, 'newId': 0, 'bookId': 0};
             if (module === 'doctor') {
                 data_.dateOfJoining = getToday().full;
@@ -208,14 +210,11 @@ function populateCreate2(module, id, divName) {
             console.log("populateCreate2 , module=" + module + "data-json= " + JSON.stringify(data_));
             aylinker({
                 urlOfTemplate: "/clinicPlus/module/" + module + "/fillForm/template.html?ran=" + Math.random(),
-
                 selector: divName + "_inner",
                 data: data_
             }
             );
-
         });
-
     } else {
         $.get("/clinicPlus/api/" + module + "/" + id, function (result) {
             result.renderInDiv = divName;
@@ -228,62 +227,72 @@ function populateCreate2(module, id, divName) {
             }
             );
         });
-
         paging_data.edit = true;
+    }
 
+
+    if (divName === 'main1') {
+        aylinker({
+            urlOfTemplate: "/clinicPlus/module/entity/crud/update/template_menuTop_update.html?ay=0" + pageNewAy(1),
+            selector: divName + '_menu',
+            data: paging_data
+        });
+    } else {
+        var str= "<i class='fa fa-close entity_select_closeButton' \n\
+onclick=save('"+module+"');hideMainLevel(); ></i>";
+ document.getElementById(divName + "_menu").innerHTML =str;
+        
+   
     }
-    aylinker({
-        urlOfTemplate: "/clinicPlus/module/entity/crud/update/template_menuTop_update.html?ay=0" + pageNewAy(1),
-        selector: divName + '_menu',
-        data: paging_data
-    }
-    );
+
+
 
     document.getElementById(divName + "_paging").innerHTML = '';
-    document.getElementById(divName).style = 'display:block';
+    document.getElementById(divName).style.display = 'block';
     $.getScript("/clinicPlus/module/" + module + "/" + module + ".js");
 }
 
 function listAsPages(module, path, divName) {
     console.log('listAsPages path=' + path);
-    $.get(path
-            , function (result) {
+    $.ajax({
+        dataType: "json",
+        url: path,
+        success:
+                function (result) {
 
-                if (module !== undefined) {
-                    var paging_data = {
-                        'moduleName': module,
-                        'totalPages': result.pageList.totalPages,
-                        'pageable': {'pageNumber': result.pageList.pageable.pageNumber},
-                        'sortOrder': result.sortOrder,
-                        'sortColumn': result.sortColumn
-                    };
-                    aylinker({
-                        // urlOfTemplate: "/clinicPlus/module/" +mn.module.current+ "/all/list/template1.html?ran=" + Math.random(),
-                        urlOfTemplate: "/clinicPlus/module/" + module + "/list/template.html?ay=0" + pageNewAy(1),
-
-                        selector: divName + "_inner",
-                        data: {obj: result}
+                    if (module !== undefined) {
+                        var paging_data = {
+                            'moduleName': module,
+                            'totalPages': result.pageList.totalPages,
+                            'pageable': {'pageNumber': result.pageList.pageable.pageNumber},
+                            'sortOrder': result.sortOrder,
+                            'sortColumn': result.sortColumn
+                        };
+                        aylinker({
+                            // urlOfTemplate: "/clinicPlus/module/" +mn.module.current+ "/all/list/template1.html?ran=" + Math.random(),
+                            urlOfTemplate: "/clinicPlus/module/" + module + "/list/template.html?ay=0" + pageNewAy(1),
+                            selector: divName + "_inner",
+                            data: {obj: result}
+                        }
+                        );
+                        aylinker({
+                            urlOfTemplate: "/clinicPlus/module/entity/all/list/templatePaging.html?ay=0" + pageNewAy(1),
+                            selector: divName + "_paging",
+                            data: {obj: paging_data}
+                        }
+                        );
+                        aylinker({
+                            urlOfTemplate: "/clinicPlus/module/entity/all/list/template_menuTop.html?ay=0" + pageNewAy(1),
+                            selector: divName + "_menu",
+                            data: {obj: paging_data}
+                        }
+                        );
                     }
-                    );
-
-
-                    aylinker({
-                        urlOfTemplate: "/clinicPlus/module/entity/all/list/templatePaging.html?ay=0" + pageNewAy(1),
-                        selector: divName + "_paging",
-                        data: {obj: paging_data}
-                    }
-                    );
-
-
-                    aylinker({
-                        urlOfTemplate: "/clinicPlus/module/entity/all/list/template_menuTop.html?ay=0" + pageNewAy(1),
-                        selector: divName + "_menu",
-                        data: {obj: paging_data}
-                    }
-                    );
-
-                }
-            });
+                },
+        error: function () {
+            alert_1('Network problem', 'There is no network connection to server ', 'failure');
+        }
+    });
     $.getScript("/clinicPlus/module/" + module + "/" + module + ".js");
 }
 
@@ -302,7 +311,6 @@ function alert_1(head, body, typ) {
     // element.style = "background-color:'red';";
     document.getElementById("alert_akr_head").innerHTML = head;
     document.getElementById("alert_akr_body").innerHTML = body;
-
     if (typ === 'success') {
         setTimeout(function () {
             hideDivAy('alert_akr');
@@ -322,13 +330,19 @@ function popupGeneral(level_, moduleName, divName, url) {
     div.style = "display:block";
     mn.module['select'].name = moduleName;
     $("#" + divName + "_inner").load(url + "?" + pageNewAy(1));
-
-
-
-
-
-
-
+}
+var mainLayerNumberNow = 1;
+let divNode = undefined;
+let divNode_menu = undefined;
+let divNode_inner = undefined;
+function hideMainLevel() {
+    var name = 'main_' + mainLayerNumberNow;
+    console.log("name=" + name);
+    var elem = document.getElementById(name)
+    elem.innerHTML="";
+    elem.style.display = "none";
+    // document.body.removeChild(elem);
+    mainLayerNumberNow -= 1;
 }
 
 function popup_selection_obj(obj) {
@@ -337,35 +351,55 @@ function popup_selection_obj(obj) {
     mn.module['select'].obj = obj;
     console.log("entity_select=" + mn.module['select'].obj.entity_select);
     console.log("input=" + mn.module['select'].obj.input);
-
     if (obj.entity_select === 'dateForOrganisation') {
 
         document.getElementById("modalDate").style = "display:block";
         loadTemplate_entity_select_into(obj, 'modalDate');
-
     } else
 
 
     {
-        if (obj.div === undefined) {
-            obj.div = 'main2';
-        }
 
-        document.getElementById(obj.div).style = "display:block";
-        loadTemplate_entity_select_into(obj, obj.div);
-
-        document.getElementById(obj.div + '_menu').innerHTML = '';
+        var divNode = newModal();
+        loadTemplate_entity_select_into(obj, divNode.id);
+        document.getElementById(divNode.id + '_menu').innerHTML = '';
     }
 }
+
+function newModal() {
+
+    mainLayerNumberNow += 1;
+
+//    divNode = document.createElement('div');
+//    divNode.id = "main_" + mainLayerNumberNow;
+//    
+    divNode = document.getElementById("main_" + mainLayerNumberNow);
+
+//    divNode.class = 'main_';
+    divNode.style = "z-index:" + mainLayerNumberNow * 100 +
+            ";background-color:white;position:fixed;width: 90%;height: 100%;\n\
+overflow: scroll;";
+    document.body.appendChild(divNode);
+    divNode_menu = document.createElement('div');
+    divNode_menu.id = "main_" + mainLayerNumberNow + '_menu';
+    divNode.appendChild(divNode_menu);
+    divNode_inner = document.createElement('div');
+    divNode_inner.id = "main_" + mainLayerNumberNow + '_inner';
+    divNode.appendChild(divNode_inner);
+    divNode_paging = document.createElement('div');
+    divNode_paging.id = "main_" + mainLayerNumberNow + '_paging';
+    divNode.appendChild(divNode_paging);
+//              obj.div='main2';
+    console.log('new div added as=' + divNode.id + " body=" + divNode);
+    divNode.style.display = "block";
+    return divNode;
+}
+
 var level = "";
-
-
 function  selectionDone() {
     console.log('selectionDone , name=' + mn.module['select'].name);
     $('#' + mn.module['select'].name).val(mn.module['select'].id);
     $('#' + mn.module['select'].name + '_display').html(mn.module['select'].extra);
-
-
 }
 
 function modal(obj) {
@@ -378,36 +412,41 @@ function modal(obj) {
             data: {obj: result}
         }
         );
-
-
-
-
     });
-
 }
 function showDivAy(e) {
     document.getElementById(e).style = "display:block";
-
 }
 
 function hideDivAy(e) {
-    document.getElementById(e).style = "display:none";
-
+    var elem = document.getElementById(e);
+    if (elem === undefined) {
+        return 'undefined';
+    } else {
+        elem.style.display = "none";
+        return 'hide ' + e;
+    }
 }
+
+
 function refresh_entitySelectList(module, filterWord) {
     var divname = 'main2';
     var obj = {'entity_select': module};
     loadTemplate_entity_select_into(obj, divname);
-
     filter(filterWord);
 }
 function filter(attr) {
-    var givenWord = (event.target.value).toLowerCase();
+    var givenWord="";
+    if(event.target.value===undefined){
+        givenWord=attr;
+    }else{
+       givenWord = (event.target.value).toLowerCase();
+    }
+   
     console.log('-----filterBy attribute=' + attr + "   word =" + givenWord);
     var dom = document.getElementsByTagName('d');
     for (var i = 0; i < dom.length; i++) {
         var id = dom[i].getAttribute('id');
-
         var name = (dom[i].getAttribute(attr) + "").toLowerCase();
         console.log('id=' + id + ' name=' + name);
         if (name.includes(givenWord)) {
@@ -427,6 +466,7 @@ function selectThis(who, id, extra) {
     mn.module['select'].extra = extra;
     console.log(mn.module['select']);
     selectionDone();
+    hideMainLevel();
 }
 
 function check_1() {
@@ -444,8 +484,6 @@ function loadTemplate_entity_select_into(obj, divname) {
     document.getElementById(divname + "_menu").innerHTML = "Loading.... Please wait";
     document.getElementById(divname + "_inner").innerHTML = "";
     document.getElementById(divname + "_paging").innerHTML = "";
-
-
     if (obj.apiUrl === undefined) {
         obj.apiUrl = module;
     }
@@ -459,8 +497,6 @@ function loadTemplate_entity_select_into(obj, divname) {
             }
         }
         );
-
-
         aylinker({
             urlOfTemplate: '/clinicPlus/module/entity_select/template_menu.html',
             selector: divname + "_menu",
@@ -469,15 +505,10 @@ function loadTemplate_entity_select_into(obj, divname) {
                 'a': 2
             }
         });
-
         document.getElementById(divname + "_paging").innerHTML = "";
         //   $.getScript("/clinicPlus/module/entity_select/" + entity + "/" + entity + ".js?" + pageNewAy(1));
 
     });
-
-
-
-
 //    menu
 
 
@@ -495,20 +526,17 @@ function openCity() {
 
 function moveToMark(a, markName) {
     window.location.href = '#' + markName;
-
 }
 
 function openCity(evt, cityName) {
 
     var i, x, tablinks;
     x = document.getElementsByClassName("city");
-
     for (i = 0; i < x.length; i++) {
         x[i].style.display = "none";
     }
 
     tablinks = document.getElementsByClassName("tablink");
-
     for (i = 0; i < x.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" tabSelected", "");
     }
@@ -542,8 +570,6 @@ function post_akr(formId, ToUrl) {
         data: vfd,
         success: function (data) {
             console.log("sccess " + JSON.stringify(data));
-
-
         },
         contentType: false,
         cache: false,
@@ -621,12 +647,11 @@ function goto_delete(module, id) {
         $.get("/clinicPlus/api/" + module + "/delete/id/" + id,
                 function (result) {
                     console.log(" goto_delete api result=" + JSON.stringify(result));
-                    
 //                   
-                    if (result.status === 'success') { 
+                    if (result.status === 'success') {
                         alert_1("Done :)", result.message, result.status);
-                    window.history.back();
-                    }else{
+                        window.history.back();
+                    } else {
                         alert_1("Sorry :( <br>I cannot", result.message, result.status);
                     }
                 }
@@ -645,7 +670,6 @@ function date_ay() {
     var nameOfSource = event.target.name;
     var nameOfTarget = (nameOfSource.split("__"))[0];
     var originalDate = event.target.value;
-
     var dateParts = originalDate.split("-");
     finalDate = dateParts[2] + "/" + dateParts[1] + "/" + dateParts[0];
     t = (document.getElementsByName(nameOfTarget))[0];
@@ -663,44 +687,32 @@ function  PrintUtils() {
     this.printPage = function () {
         alert('printPage not done');
     };
-
     this.printNewWindow = function () {
 
         var toPrint = document.getElementById('main1_inner');
         var popupWin = window.open('', '_blank', 'width=850,height=850,location=no,left=200px');
         popupWin.document.open();
         popupWin.document.write('<html><title>::Preview::</title><link rel="stylesheet" type="text/css" href="print.css" /></head><body onload="window.print()">');
-
         popupWin.document.write(toPrint.innerHTML);
         popupWin.document.write('</html>');
-
         // popupWin.document.close();
     };
-
     this.printDiv_navOff = function (divName, type) {
 
         var navbarDiv, printableAreaDiv, menuDiv, pagerDiv, dateDiv;
         navbarDiv = document.getElementById('navbar');
         navbarDiv.style.visibility = 'hidden';
-
-
-
         if (type === 'main') {
             printableAreaDiv = document.getElementById(divName + "_inner");
-
             menuDiv = document.getElementById(divName + "_menu");
             menuDiv.style = "display:none";
-
             pagerDiv = document.getElementById(divName + "_paging");
             pagerDiv.style = "display:none";
-
             dateDiv = document.getElementById('dateCurrent');
             dateDiv.style = "display:none";
-
         } else {
             divName = 'main1';
             printableAreaDiv = document.getElementById(divName);
-
         }
         title = printableAreaDiv.getAttribute("title");
         console.log(printableAreaDiv);
@@ -711,15 +723,12 @@ function  PrintUtils() {
         var elems = $("[data-printable='false']");
         for (var el in elems) {
             console.log("print false=" + el);
-
         }
 
         window.print();
         document.title = originalTitle;
-
         navbarDiv.style.display = 'block';
         printableAreaDiv.style = 'margin-left:0mm';
-
         if (type === 'main') {
             menuDiv.style.display = 'block';
             pagerDiv.style.display = 'block';
@@ -732,26 +741,18 @@ function  PrintUtils() {
         var navbarDiv, printableAreaDiv, menuDiv, pagerDiv, dateDiv;
         navbarDiv = document.getElementById('navbar');
         navbarDiv.style.visibility = 'hidden';
-
         printableAreaDiv = document.getElementById(divName + "_inner");
-
         menuDiv = document.getElementById(divName + "_menu");
         menuDiv.style.visibility = 'hidden';
-
         pagerDiv = document.getElementById(divName + "_paging");
         pagerDiv.style.visibility = 'hidden';
-
         dateDiv = document.getElementById('dateCurrent');
         dateDiv.style.visibility = 'hidden';
-
         this.hideBorder();
-
         title = printableAreaDiv.getAttribute("title");
         console.log(printableAreaDiv);
         printableAreaDiv.style.left = '0px';
         printableAreaDiv.style.top = '0px';
-
-
         var originalTitle = document.title;
         document.title = title;
 //        alert();
@@ -759,8 +760,6 @@ function  PrintUtils() {
         for (i = 0; i < elems.length; i++) {
             elems[i].style.displayPrev = elems[i].style.display;
             elems[i].style.display = 'none';
-
-
         }
 
         window.print();
@@ -768,25 +767,18 @@ function  PrintUtils() {
             elems[i].style.display = elems[i].style.displayPrev;
         }
         document.title = originalTitle;
-
         document.title = originalTitle;
-
         navbarDiv.style.visibility = 'visible';
         printableAreaDiv.style.left = '0px';
-
-
         menuDiv.style.visibility = 'visible';
         pagerDiv.style.visibility = 'visible';
         dateDiv.style.visibility = 'visible';
-
     };
-
     this.hideBorder = function () {
         document.getElementsByClassName('a4').style = "border:none";
         document.getElementsByClassName('a5').style = "border:none";
         document.getElementsByClassName('a6').style = "border:none";
     };
-
 }
 
 function printDiv_navOff(divName) {
@@ -798,13 +790,10 @@ function printDiv_navOff(divName) {
     console.log(printableAreaDiv);
     var originalTitle = document.title;
     document.title = title;
-
     var elems = document.querySelectorAll("[data-akr-printable='false']");
     for (i = 0; i < elems.length; i++) {
         elems[i].style.displayPrev = elems[i].style.display;
         elems[i].style.display = 'none';
-
-
     }
 
     window.print();
@@ -812,7 +801,6 @@ function printDiv_navOff(divName) {
         elems[i].style.display = elems[i].style.displayPrev;
     }
     document.title = originalTitle;
-
     navbarDiv.style.visibility = 'visible';
 //    printableAreaDiv.style = 'margin-left:0mm';
 

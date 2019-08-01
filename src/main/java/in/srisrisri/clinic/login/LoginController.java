@@ -3,7 +3,8 @@ package in.srisrisri.clinic.login;
 
 import in.srisrisri.clinic.ayfilman.SearchResponse;
 import in.srisrisri.clinic.ayfilman.FileService;
-import in.srisrisri.clinic.user.UserService;
+import in.srisrisri.clinic.user.UserRepo;
+
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,13 @@ public class LoginController {
     Logger logger=Logger.getLogger(LoginController.class);
 
     FileService fileService;
-    UserService userService;
+    UserRepo userRepo;
 
     @Autowired
-    public LoginController(FileService fileService,UserService userService) {
+    public LoginController(FileService fileService,UserRepo userRepo) {
 
         this.fileService=fileService;
-        this.userService=userService;
+        this.userRepo=userRepo;
     }
     
 //     @GetMapping("/error")

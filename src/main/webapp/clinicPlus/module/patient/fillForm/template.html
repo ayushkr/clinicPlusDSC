@@ -4,7 +4,8 @@
 <div class="pageTitle">
     Patient  </div>
 
-<form id='form_patient' method="post" action="#/cmd/post">
+<form id='form_patient' method="post" 
+      action="{{:renderInDiv}}#/cmd/post">  
     <input type='hidden' name='module_direct' value='patient'>
     <input type='hidden' name='redirect' value=' #/cmdc?module=patient&action=/all/list'>
     <input type="hidden" name="id" data-link="id" />

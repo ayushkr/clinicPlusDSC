@@ -5,6 +5,7 @@
  */
 package in.srisrisri.clinic.pharmacyBillRow;
 
+import in.srisrisri.clinic.exception.CustomException;
 import in.srisrisri.clinic.medicineStock.MedicineStockEntity;
 import in.srisrisri.clinic.utils.FinanceUtils;
 import java.math.BigDecimal;
@@ -18,88 +19,107 @@ import org.slf4j.LoggerFactory;
  * @author akr
  */
 public class SumDAO {
-   private final Logger logger = LoggerFactory.getLogger(SumDAO.class);
+
+    private final Logger logger = LoggerFactory.getLogger(SumDAO.class);
 
     List<PharmacyBillRowEntity> pharmacyBillRowEntitys;
 
     BigDecimal mrpTotal = new BigDecimal(0);
     BigDecimal gstTotal = new BigDecimal(0);
     BigDecimal amountTotal = new BigDecimal(0);
-     BigDecimal rounded = new BigDecimal(0);
-      BigDecimal amountTotalRounded = new BigDecimal(0);
+    BigDecimal rounded = new BigDecimal(0);
+    BigDecimal amountTotalRounded = new BigDecimal(0);
     String amountTotalWords = "";
     BigDecimal bd = new BigDecimal(1.75);
-    BigDecimal bd100 = new BigDecimal(100);
-     BigDecimal bd1 = new BigDecimal(1);
-    BigDecimal bd2 = new BigDecimal(2);
+    BigDecimal HUNDRED = new BigDecimal(100);
+    BigDecimal ONE = new BigDecimal(1);
+    BigDecimal TWO = new BigDecimal(2);
     BigDecimal taxableAmount;
     BigDecimal freeOfCost;
-     BigDecimal qty;
-     BigDecimal sp ;
-      BigDecimal discount ;
+    BigDecimal qty;
+    BigDecimal sp;
+    BigDecimal discount;
 
-      Long billId;
-      
-    public boolean calculateTotals() throws Exception{
-String error="";
+    Long billId;
+
+    public boolean calculateTotals() throws Exception {
+        String error = "";
+
         for (PharmacyBillRowEntity pharmacyBillRowEntity : pharmacyBillRowEntitys) {
             MedicineStockEntity mediStockInOneRowInPharmacyBill = pharmacyBillRowEntity.getMedicineStock();
-            
-            
-           logger.warn("findTotals,medicineStock={}", mediStockInOneRowInPharmacyBill);
-         
+
+            logger.warn("calculateTotals ,medicineStock={}", mediStockInOneRowInPharmacyBill);
+
             if (mediStockInOneRowInPharmacyBill != null) {
-               
-                try{
-                sp = mediStockInOneRowInPharmacyBill.getSellingPrice();
-                discount=mediStockInOneRowInPharmacyBill.getDiscount();
-                  logger.warn("findTotals, sp ={}", sp);
-                }catch(Exception e){
-                    error="exception in mrp or discount";
-                    logger.warn("exception in mrp or discount{}", e);
-                    break;
-               
-                }
-                 
-               
-                qty = new BigDecimal(pharmacyBillRowEntity.getQty() + "");
-              //  logger.warn("qty, mrpPerItem ={}", qty);
-              
-                BigDecimal amtWithoutDiscount = sp.multiply(qty);
-          //     logger.warn("findTotals, amtWithoutDiscount ={}", amtWithoutDiscount);
-                BigDecimal amtWithDiscount = sp.multiply(bd1.subtract(discount)).multiply(qty);
-                pharmacyBillRowEntity.setAmount(amtWithDiscount);
-            //      logger.warn("findTotals, amtWithDiscount ={}", amtWithDiscount);
-                BigDecimal gstAmt = (amtWithoutDiscount.multiply(mediStockInOneRowInPharmacyBill.getCgst().add(mediStockInOneRowInPharmacyBill.getSgst())));
-            //     logger.warn("findTotals, gstAmt ={}", gstAmt);
-                
-                mediStockInOneRowInPharmacyBill.setGst(gstAmt);
-                
-                
-                
-            //    logger.warn("findTotals,pharmacyBillRowEntity id={}", pharmacyBillRowEntity.getId());
-                if(mediStockInOneRowInPharmacyBill.getMedicineBrandName().getBrandName().equals("roundOff")){
-                rounded=pharmacyBillRowEntity.getAmount();
-                }else{
-                mrpTotal = mrpTotal.add(mediStockInOneRowInPharmacyBill.getMrp());
-                gstTotal = gstTotal.add(mediStockInOneRowInPharmacyBill.getGst());
-                amountTotal = amountTotal.add(pharmacyBillRowEntity.getAmount());
+
+                try {
+                    sp = mediStockInOneRowInPharmacyBill.getSellingPrice();
+                    logger.warn("\t calculateTotals, sp ={}", sp);
+                    discount = mediStockInOneRowInPharmacyBill.getDiscount();
+                    logger.warn("\t calculateTotals, discount ={}", discount);
+                } catch (Exception e) {
+                    logger.warn("\t--- calculateTotals, sp or discount is null");
                 }
 
-               
+                qty = new BigDecimal(pharmacyBillRowEntity.getQty() + "");
+                logger.warn("\t calculateTotals, qty ={}", qty);
+
+                BigDecimal amtWithoutDiscount = sp.multiply(qty);
+                logger.warn("\t calculateTotals, amtWithoutDiscount ={}", amtWithoutDiscount);
+                BigDecimal amtWithDiscount = BigDecimal.ZERO;
+                if (discount != null) {
+                    amtWithDiscount = sp.multiply(BigDecimal.ONE.subtract(discount)).multiply(qty);
+                    logger.warn("\t calculateTotals, amtWithDiscount ={}", amtWithDiscount);
+                } else {
+                    amtWithDiscount = amtWithoutDiscount;
+                }
+                pharmacyBillRowEntity.setAmount(amtWithDiscount);
+
+                BigDecimal gstAmt = (amtWithoutDiscount.multiply(mediStockInOneRowInPharmacyBill.getCgst().add(mediStockInOneRowInPharmacyBill.getSgst())));
+                logger.warn("\t calculateTotals, gstAmt ={}", gstAmt);
+
+                mediStockInOneRowInPharmacyBill.setGst(gstAmt);
+
+                mediStockInOneRowInPharmacyBill.setGst(BigDecimal.ZERO);
+
+                if (mediStockInOneRowInPharmacyBill.getMedicineBrandName().getBrandName().equals("roundOff")) {
+                    rounded = pharmacyBillRowEntity.getAmount();
+                } else {
+                    BigDecimal mrp = mediStockInOneRowInPharmacyBill.getMrp();
+                    if (mrp == null) {
+                        throw new CustomException("In medicine="
+                                +mediStockInOneRowInPharmacyBill.getMedicineBrandName().getBrandName()+
+                                " with ID="+mediStockInOneRowInPharmacyBill.getId()+", mrp is not set");
+                    }
+                    mrpTotal = mrpTotal.add(mrp);
+
+                    gstTotal = gstTotal.add(mediStockInOneRowInPharmacyBill.getGst());
+                    amountTotal = amountTotal.add(pharmacyBillRowEntity.getAmount());
+                }
 
                 mediStockInOneRowInPharmacyBill.setSellingPrice(FinanceUtils.round(mediStockInOneRowInPharmacyBill.getSellingPrice(), 2));
                 mediStockInOneRowInPharmacyBill.setGst(FinanceUtils.round(mediStockInOneRowInPharmacyBill.getGst(), 2));
                 pharmacyBillRowEntity.setAmount(FinanceUtils.round(pharmacyBillRowEntity.getAmount(), 2));
 
             }
-           
+
         }
-        
-        taxableAmount = FinanceUtils.round(amountTotal.subtract(gstTotal).divide(bd2), 2);
-        freeOfCost = FinanceUtils.round(mrpTotal.subtract(amountTotal), 2);
-        amountTotalRounded=amountTotal.add(rounded);
-         amountTotalWords = FinanceUtils.RsToWords(amountTotalRounded + "");
+
+        try {
+            taxableAmount = FinanceUtils.round(amountTotal.subtract(gstTotal).divide(TWO), 2);
+            logger.warn(" taxableAmount={} ", taxableAmount);
+
+            freeOfCost = FinanceUtils.round(mrpTotal.subtract(amountTotal), 2);
+            logger.warn(" freeOfCost={} ", freeOfCost);
+            amountTotalRounded = amountTotal.add(rounded);
+            logger.warn(" amountTotalRounded={} ", amountTotalRounded);
+            amountTotalWords = FinanceUtils.RsToWords(amountTotalRounded + "");
+            logger.warn(" rounding ");
+        } catch (Exception e) {
+            logger.warn("exception in rounding e={}", e);
+
+        }
+
         return true;
     }
 
@@ -119,7 +139,6 @@ String error="";
         this.amountTotalRounded = amountTotalRounded;
     }
 
-    
     public Long getBillId() {
         return billId;
     }
@@ -160,7 +179,7 @@ String error="";
 
     public SumDAO(List<PharmacyBillRowEntity> pharmacyBillRowEntitys) {
         this.pharmacyBillRowEntitys = pharmacyBillRowEntitys;
-          logger.warn("SumDAO created ");
+        logger.warn("SumDAO created ");
     }
 
     public List<PharmacyBillRowEntity> getPharmacyBillRowEntitys() {

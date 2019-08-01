@@ -59,6 +59,8 @@ public class MedicineStockEntity implements Serializable {
     java.util.Date creationTime;
  @Temporal(TemporalType.TIMESTAMP)
     java.util.Date  updationTime;
+ 
+ 
 
     ////////////////////////////////////////////////////////////////
     // special

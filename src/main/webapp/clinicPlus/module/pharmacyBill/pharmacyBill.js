@@ -25,7 +25,7 @@ function  PharmacyCashBill() {
 //                selector: "main1_inner",
                 selector: divName,
 
-                data: {obj: result}
+                data: result
             }
             );
         });
@@ -164,7 +164,7 @@ function  PharmacyCashBill() {
                                         aylinker({
                                             urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/list/template.html?ran=" + Math.random(),
                                             selector: "main1_inner",
-                                            data: {obj: result}
+                                            data: result
                                         }
                                         );
                                     });

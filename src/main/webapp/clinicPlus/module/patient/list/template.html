@@ -3,26 +3,41 @@
 
     <div class="inp_outer" style="min-width: 200px">
         <div class="inp1" >
-            <div class="title1">name </div>
+            <div class="title1">
+                <i class="fa fa-filter " style="font-size: 0.9em" ></i>
+                name </div>
         </div>
-        <input id="name" name='name' type="text"  value=""
+       
+        
+         <input id="name" 
+               name='name' 
+               type="text"  value=""
                accesskey="q"
+               onkeypress="filter1()"
+               data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=name&filter="
+          
+               autofocus
                > 
-        <input type="button" value="Go " id="button_name_go"
-               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=name&filter=' + document.getElementById('name').value + ''"
-               >
     </div>
 
     <div class="inp_outer" style="min-width: 200px">
         <div class="inp1" >
-            <div class="title1">contactPhone </div>
+         
+            <div class="title1">
+                   <i class="fa fa-filter" style="font-size: 0.9em"></i>
+                contactPhone </div>
         </div>
-        <input id="contactPhone" contactPhone='contactPhone' type="text"  value=""
+        
+         <input id="contactPhone" 
+               name='contactPhone' 
+               type="text"  value=""
                accesskey="q"
+               onkeypress="filter1()"
+               data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=contactPhone&filter="
+          
+               autofocus
                > 
-        <input type="button" value="Go " id="button_contactPhone_go"
-               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=contactPhone&filter=' + document.getElementById('contactPhone').value + ''"
-               >
+        
     </div>
     
      <a href="#/cmd?module={{:obj.module}}&action=/all/list&amp;pageNumber=1" 

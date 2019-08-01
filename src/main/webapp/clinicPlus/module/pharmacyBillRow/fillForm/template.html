@@ -2,7 +2,8 @@
 <div class="pageTitle">{{if id==0}} New  {{else}}
     Existing ID: {{:id}} {{/if}}  </div>
 
-<form id='form_pharmacyBillRow' method="post" action="#/cmd/post">
+<form id='form_pharmacyBillRow' method="post"
+        action="{{:renderInDiv}}#/cmd/post">  
     <input type='hidden' name='module_direct' value='pharmacyBillRow'>
     <input type='hidden' name='redirect' value=' #/cmdc?module=pharmacyBillRow&action=/all/list'>
     <input type="hidden" name="id" data-link="id" />

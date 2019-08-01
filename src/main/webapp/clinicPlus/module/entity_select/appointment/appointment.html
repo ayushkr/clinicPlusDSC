@@ -67,7 +67,8 @@ Filter By patient.name <input  type="text" onkeyup="filter('patient.name')"  ><b
                    
             <input type="button"  
                    class="entity_select_editButton" 
-                   onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, 'main3');"
+                   onclick="populateCreate2('{{:~root.moduleName}}', 
+                               {{:id}}, newModal().id);"
                    value="Edit"
                    >
             

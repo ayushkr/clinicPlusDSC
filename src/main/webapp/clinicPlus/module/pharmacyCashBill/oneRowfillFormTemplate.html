@@ -38,7 +38,8 @@
         <div class="inp1" onclick="popup_selection_obj(
                         {
                             'entity_select': 'medicineStock',
-                            'input': 'medicineStock'
+                            'input': 'medicineStock',
+                            'div':'main2'
                         }
 
                 )" >
@@ -46,7 +47,8 @@
                 Now selected
             </div>
             {{if medicineStock!=null}}
-            <input  type="hidden" id="medicineStock" name="medicineStock" 
+            <input  type="hidden" id="medicineStock" 
+                    name="medicineStock" 
                     value=" {{:medicineStock.id}}"/>
             <button id="medicineStock_display"  
                     class="w3-button w3-theme-d1"

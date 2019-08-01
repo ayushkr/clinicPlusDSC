@@ -43,7 +43,8 @@ Filter By remediesFor <input  type="text" onkeyup="filter('remediesFor')"  ><br>
         <div class="CellNoBorder">  {{:remediesFor}} </div>
         <div class="CellNoBorder"> 
             <a class="w3-btn" data-toggle="tooltip" title="Edit"
-                onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, 'main3');"
+                onclick="populateCreate2('{{:~root.moduleName}}',
+                            {{:id}}, newModal().id);"
 
                 ><i class="fa fa-edit"></i>
             </a>

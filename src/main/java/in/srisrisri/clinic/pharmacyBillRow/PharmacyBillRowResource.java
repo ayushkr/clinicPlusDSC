@@ -51,7 +51,6 @@ public class PharmacyBillRowResource {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-
     @GetMapping("{id}")
     @ResponseBody
     public ResponseEntity<Optional<PharmacyBillRowEntity>> getById(@PathVariable("id") Long id) {
@@ -59,7 +58,7 @@ public class PharmacyBillRowResource {
         if (id > 0) {
             item = repo.findById(id);
         } else {
-  PharmacyBillRowEntity entityAfter = new PharmacyBillRowEntity();
+            PharmacyBillRowEntity entityAfter = new PharmacyBillRowEntity();
             entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
             repo.save(entityAfter);
             item = Optional.of(entityAfter);
@@ -71,7 +70,7 @@ public class PharmacyBillRowResource {
     @GetMapping("pageable")
     @ResponseBody
     public PageCover<PharmacyBillRowEntity> allPageNumber(
-             @RequestParam("filterColumn") String filterColumn,
+            @RequestParam("filterColumn") String filterColumn,
             @RequestParam("filter") String filter,
             @RequestParam("pageNumber") String pageNumber,
             @RequestParam(value = "pageSize", required = false) Optional<Integer> pageSizeOb,
@@ -98,7 +97,7 @@ public class PharmacyBillRowResource {
         } else {
             sort = Sort.by("id").ascending();
         }
-       if ("undefined".equals(pageNumber)) {
+        if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
         } else {
             if (Integer.parseInt(pageNumber) == 0) {
@@ -119,7 +118,7 @@ public class PharmacyBillRowResource {
     @ResponseBody
     public ResponseEntity<?> ByBillId_id(@PathVariable("id") Long id) {
 
-        ResponseEntity<PharmacyBillRowEntity> body = null;
+        JsonResponse jsonResponse = new JsonResponse();
         PharmacyBillEntity pharmacyBillEntity = new PharmacyBillEntity();
         pharmacyBillEntity.setId(id);
 
@@ -127,10 +126,19 @@ public class PharmacyBillRowResource {
         SumDAO sumDAO = new SumDAO(list);
         sumDAO.setBillId(id);
         try {
-            boolean calculateTotals = sumDAO.calculateTotals();
-            return new ResponseEntity<>(sumDAO, HttpStatus.OK);
+            sumDAO.calculateTotals();
+            jsonResponse.setStatus(Constants1.SUCCESS);
+            jsonResponse.setMessage("ok");
+            jsonResponse.getMap().put("payload", sumDAO);
+            
+            return new ResponseEntity<>(jsonResponse, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(e.toString(), HttpStatus.OK);
+            logger.warn("Exception= {} ", e);
+            jsonResponse.setStatus(Constants1.FAILURE);
+            jsonResponse.setMessage("In sumDAO.calculateTotals(); <br>&nbsp;<span>" 
+                    + e.toString()+"</span>");
+            jsonResponse.getMap().put("payload", sumDAO);
+            return new ResponseEntity<>(jsonResponse, HttpStatus.OK);
         }
 
     }
@@ -139,7 +147,7 @@ public class PharmacyBillRowResource {
     @PostMapping("")
     public ResponseEntity<JsonResponse> PostMapping_one(PharmacyBillRowEntity entityBefore) {
         ResponseEntity<JsonResponse> responseEntity = null;
-         JsonResponse jsonResponse = new JsonResponse();
+        JsonResponse jsonResponse = new JsonResponse();
         try {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
             logger.warn("---- id ={}", entityBefore.getId());
@@ -172,18 +180,18 @@ public class PharmacyBillRowResource {
                 }
 
                 BeanUtils.copyProperties(entityBefore, entityAfter);
-               try {
-                entityAfter = repo.save(entityAfter);
-                jsonResponse.setMessage("Saved ID:" + entityAfter.getId());
-                jsonResponse.setStatus(Constants1.SUCCESS);
-            } catch (Exception e) {
-                jsonResponse.setMessage(e.toString());
-                jsonResponse.setStatus(Constants1.FAILURE);
-            }
+                try {
+                    entityAfter = repo.save(entityAfter);
+                    jsonResponse.setMessage("Saved ID:" + entityAfter.getId());
+                    jsonResponse.setStatus(Constants1.SUCCESS);
+                } catch (Exception e) {
+                    jsonResponse.setMessage(e.toString());
+                    jsonResponse.setStatus(Constants1.FAILURE);
+                }
             }
 
-           responseEntity = ResponseEntity
-                    .created(new URI("/api/"+label+"/" + entityAfter.getId()))
+            responseEntity = ResponseEntity
+                    .created(new URI("/api/" + label + "/" + entityAfter.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(label,
                             entityAfter.getId() + ""))
                     .body(jsonResponse);
@@ -193,8 +201,6 @@ public class PharmacyBillRowResource {
         return responseEntity;
     }
 
-    
-     
     // delete
     @GetMapping("delete/id/{id}")
     public JsonResponse DeleteMapping_id(@PathVariable("id") Long id) {
@@ -215,11 +221,11 @@ public class PharmacyBillRowResource {
         } catch (Exception e) {
             logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
             response.setStatus(Constants1.FAILURE);
-            if(e.getMessage().contains("ConstraintViolationException")){
-            response.setMessage("This " + label + " (ID: "+id+
-                    ")  is used in other place <br>For eg: in pharmacyBill etc");
-            }else{
-            response.setMessage(e.getMessage());
+            if (e.getMessage().contains("ConstraintViolationException")) {
+                response.setMessage("This " + label + " (ID: " + id
+                        + ")  is used in other place <br>For eg: in pharmacyBill etc");
+            } else {
+                response.setMessage(e.getMessage());
             }
             return response;
         }
@@ -239,11 +245,11 @@ public class PharmacyBillRowResource {
                 try {
                     repo.deleteById(n);
                 } catch (Exception e) {
-                    
+
                     failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
                             + "<br>Because  "
-                            +((e.getMessage().contains("ConstraintViolationException")) ? 
-                            "It Used in Other place ":e.getMessage()) 
+                            + ((e.getMessage().contains("ConstraintViolationException"))
+                            ? "It Used in Other place " : e.getMessage())
                             + "</p><hr>";
 
                 }
@@ -261,6 +267,5 @@ public class PharmacyBillRowResource {
         }
         return responseEntity;
     }
-
 
 }

@@ -3,6 +3,7 @@ package in.srisrisri.clinic.fileContent;
 import in.srisrisri.clinic.appointment.AppointmentEntity;
 import in.srisrisri.clinic.doctor.DoctorEntity;
 import in.srisrisri.clinic.patient.PatientEntity;
+import in.srisrisri.clinic.user.UserEntity;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -32,6 +33,8 @@ public class FileContent implements Serializable {
 
     private String description;
     private String contentType;
+    private String publicityLevel;
+    private UserEntity uploader;
     
     @OneToOne
     private DoctorEntity  doctor;

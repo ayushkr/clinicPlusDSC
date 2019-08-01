@@ -1,4 +1,15 @@
 
+
+{{if status=='failure'}}
+<div style="background-color: red">
+    Some problem is there <br>
+    {{:message}}
+
+</div>
+
+
+
+{{/if}}
 <div id="printableArea"   title="PharmacyBill_List" 
 
      >
@@ -59,7 +70,9 @@
             </tbody>
         </table>
 
-        {{if obj.pharmacyBillRowEntitys[0]}}
+        <!--status=='success'-->
+        {{if 1==1}}
+        {{if map.payload.pharmacyBillRowEntitys[0]}}
 
         <hr>
         <table border="0" cellspacing="0" cellpadding="0" class="Table1">
@@ -69,7 +82,7 @@
                     <td  class="Table1_A1">
                         Bill No &nbsp;: 
 
-                        {{:obj.billId}} 
+                        {{:map.payload.billId}} 
 
 
 
@@ -83,9 +96,9 @@
                     </td>
                     <td  class="Table1_A1">
 
-                        {{if obj.pharmacyBillRowEntitys[0]}}
+                        {{if map.payload.pharmacyBillRowEntitys[0]}}
                         Bill Date :
-                        {{:~ddmmyyyyDashed(obj.pharmacyBillRowEntitys[0].pharmacyBill.dateOfBill)}} 
+                        {{:~ddmmyyyyDashed(map.payload.pharmacyBillRowEntitys[0].pharmacyBill.dateOfBill)}} 
 
                         {{else}}
                         <h1>Pharmacy Bill Row not exist</h1> 
@@ -96,7 +109,7 @@
                 <tr>
                     <td  class="Table1_A2">
                         Patient : 
-                        <span class="T1"> {{:obj.pharmacyBillRowEntitys[0].pharmacyBill.appointment.patient.name}} </span>
+                        <span class="T1"> {{:map.payload.pharmacyBillRowEntitys[0].pharmacyBill.appointment.patient.name}} </span>
 
                     </td>
                     <td  class="Table1_A2">
@@ -104,7 +117,7 @@
                     </td>
                     <td  class="Table1_A2">
                         Doctor : 
-                        <span class="T1"> {{:obj.pharmacyBillRowEntitys[0].pharmacyBill.appointment.doctor.name}} </span>
+                        <span class="T1"> {{:map.payload.pharmacyBillRowEntitys[0].pharmacyBill.appointment.doctor.name}} </span>
 
                     </td>
                 </tr>
@@ -131,7 +144,8 @@
                         SlNo
                     </ayu1></div>
 
-                <div class="Cell" style="width:250px;"><ayu1>
+                <div class="Cell" 
+                     style="width:250px;"><ayu1>
 
                         item/ BrandName
                     </ayu1></div>
@@ -146,14 +160,14 @@
                 <div class="Cell"><ayu1>Rate</ayu1></div>
                 <div class="Cell"><ayu1>Amount</ayu1></div>
             </div>
-            {{for obj.pharmacyBillRowEntitys}}
+            {{for map.payload.pharmacyBillRowEntitys}}
             {{if medicineStock}}
             {{if  (medicineStock.medicineBrandName.brandName!='roundOff')}}
             <div class="Row"    id="row_{{:id}}" 
                  onclick="pharmacyCashBill.onRowSelect({{:id}})"
                  onkeydown="pharmacyCashBill.onRowSelectByKey({{:id}})"
 
-                 title="{{:id}}"
+                 title="{{:medicineStock.id}}"
 
                  tabindex="0"
                  {{if #getIndex()==1 }}  accesskey="q" {{/if}}
@@ -242,9 +256,9 @@
             {{/if}}
             <div 
                 class="Row" 
-                 style="background-color: pink"
-                 data-akr-printable="false"
-                 id="oneRowInEdit_{{:id}}">
+                style="background-color: pink"
+                data-akr-printable="false"
+                id="oneRowInEdit_{{:id}}">
 
             </div>
 
@@ -281,11 +295,11 @@
             <div 
                 id="oneRowInEdit_{{:id}}"
                 class="Row" 
-                 style="background-color: pink"
-                 data-akr-printable="false"
+                style="background-color: pink"
+                data-akr-printable="false"
                 >
-                
-                
+
+
             </div>
             {{/if}}
 
@@ -300,7 +314,7 @@
                      >
                     <div  data-akr-printable="false"
                           style="color:green"
-                          onclick="pharmacyCashBill.saveNew({{:obj.billId}})" 
+                          onclick="pharmacyCashBill.saveNew({{:map.payload.billId}})" 
 
                           >
 
@@ -316,10 +330,10 @@
                 <div class="Cell"></div>
 
                 <div class="Cell"></div>
-                <!--<div class="Cell" style="font-size: 14px;">{{:obj.gstTotal}}</div>-->
-                <!--<div class="Cell"  style="font-size: 14px;">{{:obj.mrpTotal}}</div>-->
+                <!--<div class="Cell" style="font-size: 14px;">{{:map.payload.gstTotal}}</div>-->
+                <!--<div class="Cell"  style="font-size: 14px;">{{:map.payload.mrpTotal}}</div>-->
                 <div class="Cell"  style="font-size: 14px;">
-                    <span style="float: right">{{:obj.amountTotal}}
+                    <span style="float: right">{{:map.payload.amountTotal}}
                     </span>
                 </div>
 
@@ -334,20 +348,20 @@
                                 Taxable Amount :
                             </td>
                             <td style="text-align: right">
-                                {{:obj.taxableAmount}}  ,
+                                {{:map.payload.taxableAmount}}  ,
                             </td>
                             <td style="text-align: right">
                                 CGST : 
                             </td>
                             <td style="text-align: right">
-                                {{:obj.gstTotal/2}},
+                                {{:map.payload.gstTotal/2}},
                             </td>
         
                             <td style="text-align: right">
                                 SGST :  
                             </td>
                             <td style="text-align: right">
-                                {{:obj.gstTotal/2}}
+                                {{:map.payload.gstTotal/2}}
                             </td>
                         </tr>
                     </tbody>
@@ -358,25 +372,33 @@
             onclick="pharmacyCashBill.onRowSelect(document.getElementById('round').title)" 
             > 
 
-            Rs.{{:~root.obj.rounded}} (RoundOff) 
+            Rs.{{:~root.map.payload.rounded}} (RoundOff) 
         </div>
         <br/>
 
         Total Item(s) : {{:totalItems}} ,
-        Paid Amount :  <span style="font-weight: bold;font-size: 18px">{{:obj.amountTotalRounded}}</span>
+        Paid Amount :  <span style="font-weight: bold;font-size: 18px">{{:map.payload.amountTotalRounded}}</span>
         (
-        {{:obj.amountTotalWords}}  )
+        {{:map.payload.amountTotalWords}}  )
         <br>
         <span style="right: 100px;
               position: absolute;">{{:pharmacistName}}  (Pharmacist)</span>
 
         <br>
         <span colspan="3" style="text-align: center">
-            <!--We provided Rs.{{:obj.freeOfCost}}  value(s) items free of Cost.-->
+            <!--We provided Rs.{{:map.payload.freeOfCost}}  value(s) items free of Cost.-->
         </span>
 
+        {{else}}
+        <div style="background-color: red;padding: 20px;font-size: 30px;"> 
+            some problem is there
+            {{if message}}{{:message}}{{/if}}
 
+        </div>
+
+        {{/if}}
     </center>
 </div>
 <br>
+
 <!--{{:~jsonise(~root)}}-->
