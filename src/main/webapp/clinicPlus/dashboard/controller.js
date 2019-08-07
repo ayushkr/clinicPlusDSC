@@ -39,8 +39,8 @@ var pageNumber = 1;
 
     $(function () {
         //sammy_navbar.run('#/');
-//         sammy_main1_inner.run('#/');
-        sammy_main1_inner.run('main_1');
+        sammy_main1_inner.run('#/');
+//        sammy_main1_inner.run('main_1');
         sammy_main2_inner.run('main_2');
         sammy_main3_inner.run('main_3');
         sammy_main4_inner.run('main_4');
