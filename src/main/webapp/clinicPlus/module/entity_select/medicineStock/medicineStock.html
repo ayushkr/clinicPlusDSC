@@ -32,9 +32,14 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
              > 
 
             <button class="entity_select_selectButton"
-                    onclick="selectThis('{{:~root.moduleName}}', {{:id}},
-                                '{{if medicineBrandName}}{{:medicineBrandName.brandName}}{{/if}}')"  
-
+                   
+onclick="selectThis(
+                 {
+                 who:'{{:~root.moduleName}}',
+                         id:{{:id}},
+                         extra:'{{if medicineBrandName}}{{:medicineBrandName.brandName}}{{else}}-No name-{{/if}}'
+                 }
+                 )"
                     >
                 {{if medicineBrandName}}
                 {{:medicineBrandName.brandName}}

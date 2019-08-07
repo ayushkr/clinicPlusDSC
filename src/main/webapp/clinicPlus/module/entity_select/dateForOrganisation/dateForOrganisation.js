@@ -8,7 +8,7 @@ var guiControls = "";
 function  calendarReload(){
 dateJSON = getTodayJSON();
 dateJSON = getGivenDate();
-console.log(" dateJSON=getTodayJSON();" + JSON.stringify(dateJSON));
+console.log("dateForOrganisation.js,calendarReload(), dateJSON=getTodayJSON();" + JSON.stringify(dateJSON));
 createMonthAndYearGUI();
 displayCalendar(dateJSON);
 }
@@ -37,7 +37,7 @@ function createMonthAndYearGUI() {
 }
 // var day_selected=1;
 function daySel(d) {
-    console.log("day set d" + d);
+    console.log("dateForOrganisation.js,daySel(d), day set d" + d);
     dateJSON.day = d;
     inputChangedByUser();
 //    date_selection_finished2(dateStr);
@@ -56,7 +56,7 @@ function inputChangedByUser() {
 
     dateJSON.year = year_val;
     dateJSON.month = month_val;
-    console.log("from recalculateDate() , dateJSON =" + getDateDashed(dateJSON));
+    console.log("inputChangedByUser() , dateJSON =" + getDateDashed(dateJSON));
     $("#cal_input_date").val(getDateDashed(dateJSON));
     displayCalendar(dateJSON);
 }
@@ -67,7 +67,7 @@ function getTodayJSON() {
     console.log("getTodayJSON() dateJSON= " + JSON.stringify(dateJSON));
     $("#combo_month").val(dateJSON.month);
     $("#combo_year").val(dateJSON.year);
-    console.log("getTodayJSON = " + JSON.stringify(dateJSON));
+    console.log("getTodayJSON() dateJSON= " + JSON.stringify(dateJSON));
     displayCalendar(dateJSON);
     return dateJSON;
 }
@@ -75,7 +75,7 @@ function getGivenDate(){
     var s="";
    
     var strDate=mn.module['select'].obj.value+'';
-     console.log(" getGivenDate() input="+strDate);
+     console.log(" getGivenDate(), input="+strDate);
     if(strDate!==''){
     var parts=strDate.split('-');
      dateJSON.year=Number(parts[0]);
@@ -92,15 +92,15 @@ function getGivenDate(){
 }
 function getDateDashed(dateJSON) {
 
-    console.log("before getDateDashed() dateJSON= " + JSON.stringify(dateJSON));
+    console.log("getDateDashed() dateJSON= " + JSON.stringify(dateJSON));
     var day_str = "0";
     dateStr = "" + dateJSON.year + "-" + twoDigitise(dateJSON.month) + "-" +twoDigitise(dateJSON.day);
-    console.log("-------after getDateDashed() dateStr= " + day_str);
+    console.log("getDateDashed() dateStr= " + day_str);
     return dateStr;
 }
 
 function displayCalendar(dateJSON) {
-    console.log("displayCalendar()");
+    console.log("displayCalendar(dateJSON)");
 
     var htmlContent = "";
     var FebNumberOfDays = "";
@@ -180,7 +180,13 @@ function date_selection_finished2(dateStr) {
     $("#" + mn.module['select'].obj.input).val(dateStr);
     $("#" + mn.module['select'].obj.input+"_display").html(dateStr);
     document.getElementById("modalDate").style = "display:none";
-    console.log("date_selection_finished2  le input" + mn.module['select'].obj.input);
+    console.log("date_selection_finished2()  le input" + mn.module['select'].obj.input);
+
+  if(afterClick===''){
+        
+    }else{
+        document.getElementById(afterClick).click();
+    }
 }
 
 calendarReload();

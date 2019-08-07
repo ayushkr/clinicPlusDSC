@@ -1,11 +1,12 @@
 
 updateCurrentDate('dateCurrent');
 
-function  routeFunctions() {
-    console.log('sammy all ');
+function  routeFunctions(c) {
+    console.log('routeFunctions() ' + c);
     this.debug = true;
     this.get('#/', function () {
 //        this.app.swap('Click form!');
+        console.log('#/  =');
     });
     this.get('#/file', file_i);
     this.get('#/cmd', cmd);
@@ -25,24 +26,27 @@ var pageNumber = 1;
 (function ($) {
     console.log('sammy loaded ');
 //var sammy_navbar = $.sammy('#navbar', routeFunctions);
-    var sammy_main1 = $.sammy('#main1_inner', routeFunctions);
+    var sammy_main1_inner = $.sammy('#main_1', routeFunctions);
     var sammy_main2_inner = $.sammy('#main_2', routeFunctions);
     var sammy_main3_inner = $.sammy('#main_3', routeFunctions);
     var sammy_main4_inner = $.sammy('#main_4', routeFunctions);
     var sammy_main5_inner = $.sammy('#main_5', routeFunctions);
-     var sammy_main6_inner = $.sammy('#main_6', routeFunctions);
+    var sammy_main6_inner = $.sammy('#main_6', routeFunctions);
+//          var sammy_mainCover = $.sammy('#mainCover', routeFunctions);
 
 
 
 
     $(function () {
         //sammy_navbar.run('#/');
-        sammy_main1.run('#/');
+//         sammy_main1_inner.run('#/');
+        sammy_main1_inner.run('main_1');
         sammy_main2_inner.run('main_2');
         sammy_main3_inner.run('main_3');
         sammy_main4_inner.run('main_4');
         sammy_main5_inner.run('main_5');
-         sammy_main6_inner.run('main_6');
+        sammy_main6_inner.run('main_6');
+//         sammy_mainCover.run('mainCover');
     });
 })(jQuery);
 
@@ -52,38 +56,45 @@ function postFile(context, data) {
 }
 
 function dummy(context) {
-    console.log("dummy(context)-----------");
+    console.log("dummy(context)-----------" + context.app.element_selector);
 
 }
 var ayu;
 function cmd(context) {
-    console.log("cmd-----------");
+    console.log("cmd-----------" + context.app.element_selector);
+    console.log('div==' + this.params['div']);
     ayu = context;
 
 
     var params_ = Object.getOwnPropertyNames(this.params);
-    for (var i = 0; i < params_.length; i++) {
-        console.log("param_ ----------" + params_[i] + ":" + this.params[params_[i]]);
+    
+    
+    if (('#' + this.params['div']) === context.app.element_selector) {
+        
+        for (var i = 0; i < params_.length; i++) {
+            console.log("cmd,param_ ----------" + params_[i] + ":" + this.params[params_[i]]);
+        }
+
+        var elems = document.querySelectorAll('.modalLayer');
+        for (var i = 0; i < elems.length; i++) {
+        console.log("cmd,hiding modalLayer ---" + elems[i].id);
+            hideDivAy(elems[i].id);
+        }
+
+
+
+
+        listAsPages(this.params['module'],
+                'api/' + this.params['module'] +
+                '/pageable?pageNumber=' + this.params['pageNumber'] +
+                '&filterColumn=' + this.params['filterColumn'] +
+                '&filter=' + this.params['filter'] +
+                '&sortColumn=' + this.params['sortColumn'] +
+                '&sortOrder=' + this.params['sortOrder']
+
+                , 'main_1');
+
     }
-
-    var elems = document.querySelectorAll('.modalLayer');
-    for (var i = 0; i < elems.length; i++) {
-        console.log("modalLayer ----------" + elems[i].id);
-        hideDivAy(elems[i].id);
-    }
-
-
-
-
-    listAsPages(this.params['module'],
-            'api/' + this.params['module'] +
-            '/pageable?pageNumber=' + this.params['pageNumber'] +
-            '&filterColumn=' + this.params['filterColumn'] +
-            '&filter=' + this.params['filter'] +
-            '&sortColumn=' + this.params['sortColumn'] +
-            '&sortOrder=' + this.params['sortOrder']
-
-            , 'main1');
 
 }
 
@@ -92,6 +103,10 @@ function cmd_post(context, data) {
 //    console.log("akr #/cmd/post=" + this);
 //                    alert('a data' + data);
     var module_direct = this.params['module_direct'];
+    var div = this.params['div'];
+    
+   if(div===undefined) div='main_1';
+   
     var redirect = this.params['redirect'];
     if (module_direct !== undefined) {
         module = module_direct;
@@ -120,11 +135,12 @@ function cmd_post(context, data) {
 //                    console.log(" jqXHR=" + JSON.stringify(jqXHR));
                     console.log("cmd post success, module=" +
                             module + ", data=" + JSON.stringify(data));
-                    var path = "#/cmd?module=" + module + "&action=/all/list" + pageNewAy(1);
-                    console.log('redirect to ' + path);
+                    var path = "#/cmd?module=" + module + "&action=/all/list&div=" + div + pageNewAy(1);
+                    console.log('ok redirect to ' + path);
                     if (data.status === 'success') {
                         alert_1('Done :)', data.message, data.status);
                         window.history.back();
+//                        window.location.href = path;
                     } else {
                         alert_1('Sorry :(', data.message, data.status);
 

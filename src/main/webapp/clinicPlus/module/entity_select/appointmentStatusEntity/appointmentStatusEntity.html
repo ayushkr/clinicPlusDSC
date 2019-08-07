@@ -3,12 +3,22 @@
 Filter By Name <input  type="text" onkeyup="filter('name')"  ><br>
 
 {{for obj}}
-<div id="select_{{:id}}" onclick="selectThis('appointmentStatusEntity', {{:id}}, '{{:name}}')" 
+
+<div id="select_{{:id}}" 
+     
+     
+         onclick="selectThis(
+                 {
+                 who:'{{:~root.moduleName}}',
+                         id:{{:id}},
+                         extra:'{{:name}}'
+                 }
+                 )" 
      class="select_5">   
     <d id='{{:id}}' name="{{:name}}"  >
    
 
-  {{:id}}.  {{:name}}
+  {{:id}}. &nbsp;&nbsp; {{:name}}
   
 
 </d>

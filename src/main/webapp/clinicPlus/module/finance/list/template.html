@@ -1,0 +1,173 @@
+
+
+<div id="printableArea"   title="finance_Profile" >
+    <div class="Table"  class="table_greyBorder" >
+
+        <div  class="Heading">
+
+
+            <div class="Cell">
+                Bill No
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
+                   >
+                    <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-up headerSortSymbol "></i>
+                    </span>
+                </a>
+
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
+                   >
+                    <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-down headerSortSymbol"></i>
+                    </span>
+                </a>
+            </div>
+
+
+            <div class="Cell" style="min-width: 80px;font-size: 0.8em">
+                Bill Date
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfBill&sortOrder=a"
+                   >
+                    <span class=" {{if obj.sortColumn=='dateOfBill'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-up headerSortSymbol "></i>
+                    </span>
+                </a>
+
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfBill&sortOrder=d"
+                   >
+                    <span class=" {{if obj.sortColumn=='dateOfBill'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-down headerSortSymbol"></i>
+                    </span>
+                </a>
+
+            </div>
+
+
+
+            <div class="Cell" >appt No
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_id&sortOrder=a"
+                   >
+                    <span class=" {{if obj.sortColumn=='appointment_id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-up headerSortSymbol "></i>
+                    </span>
+                </a>
+
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_id&sortOrder=d"
+                   >
+                    <span class=" {{if obj.sortColumn=='appointment_id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-down headerSortSymbol"></i>
+                    </span>
+                </a>
+
+            </div>
+
+
+            <div class="Cell" style="min-width: 90px" >appt Date
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_dateOfAppointment&sortOrder=a"
+                   >
+                    <span class=" {{if obj.sortColumn=='appointment_dateOfAppointment'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-up headerSortSymbol "></i>
+                    </span>
+                </a>
+
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_dateOfAppointment&sortOrder=d"
+                   >
+                    <span class=" {{if obj.sortColumn=='appointment_dateOfAppointment'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-down headerSortSymbol"></i>
+                    </span>
+                </a>
+
+            </div>
+
+
+            <div class="Cell" >appt Patient
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_patient_name&sortOrder=a"
+                   >
+                    <span class=" {{if obj.sortColumn=='appointment_patient_name'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-up headerSortSymbol "></i>
+                    </span>
+                </a>
+
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_patient_name&sortOrder=d"
+                   >
+                    <span class=" {{if obj.sortColumn=='appointment_patient_name'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-down headerSortSymbol"></i>
+                    </span>
+                </a>
+
+            </div>
+            <div class="Cell" >appt Doctor
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_doctor_name&sortOrder=a"
+                   >
+                    <span class=" {{if obj.sortColumn=='appointment_doctor_name'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-up headerSortSymbol "></i>
+                    </span>
+                </a>
+
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_doctor_name&sortOrder=d"
+                   >
+                    <span class=" {{if obj.sortColumn=='appointment_doctor_name'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-down headerSortSymbol"></i>
+                    </span>
+                </a>
+
+
+            </div>
+            <div class="Cell" style="min-width: 100px">actions</div>
+            <div class="Cell">remarks
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remarks&sortOrder=a"
+                   >
+                    <span class=" {{if obj.sortColumn=='remarks'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-up headerSortSymbol "></i>
+                    </span>
+                </a>
+
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remarks&sortOrder=d"
+                   >
+                    <span class=" {{if obj.sortColumn=='remarks'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-down headerSortSymbol"></i>
+                    </span>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        {{for obj.pageList.content}}
+        <div class="Row"
+             onclick="go({{:id}}, 'finance')"
+             class="firstrow">
+            <div class="Cell"
+
+                 >
+                {{:id}}
+            </div>
+            <div class="Cell"  style="font-size: 0.8em">
+                {{:dateOfTransaction}}
+            </div>
+
+            <div class="Cell"></div>
+            <div class="Cell"></div>
+            <div class="Cell"></div>
+
+
+        </div>  
+
+        {{else}}
+        No members...
+        {{/for}}
+
+    </div>
+</div>
+
+
+
+<style>
+    .td3{
+        font-size: 10px;
+        text-align: right;
+        padding-right: 12px;
+    }
+
+</style>

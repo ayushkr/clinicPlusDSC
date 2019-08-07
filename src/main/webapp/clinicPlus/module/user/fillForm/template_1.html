@@ -1,20 +1,16 @@
 <!--patient/CRU_template.html -->
 
 
-<div class="pageTitle">
-    Patient  </div>
- 
-<form id='form_patient' method="post" 
-     action="{{:renderInDiv}}#/cmd/post"
-      >  
-    <input type='hidden' name='div' value='{{:renderInDiv}}'>
+<div class="pageTitle">{{if id==0}} New  {{else}} Existing  : {{:name}} {{/if}}  </div>
+
+<form id='form_patient' method="post" action="#/cmd/post">
     <input type='hidden' name='module_direct' value='patient'>
     <input type='hidden' name='redirect' value=' #/cmdc?module=patient&action=/all/list'>
     <input type="hidden" name="id" data-link="id" />
     <br>
-    <div class="w3-bar-ay" data-akr-printable="false" style="position: fixed;z-index: 1">
+    <div class="w3-bar-ay" data-akr-printable="false" style="position: fixed">
         <a class="w3-bar-item  tablink tabSelected" onClick="openCity(event, 'Basic')">Basic</a>
-
+        <a class="w3-bar-item tablink " onClick="openCity(event, 'Communication')">Communication</a>
 
         <a class="w3-bar-item tablink " onClick="openCity(event, 'Notes')">Notes</a>
         <a class="w3-bar-item  tablink " onClick="openCity(event, 'Admin')">Admin</a>
@@ -25,98 +21,77 @@
         <!--basic-->
         <div id="Basic" class="w3-container w3-border city ">
             <h2>Basic</h2>
-            <div style="
+            <table border="0">
+                <thead></thead>
+                <tbody>
+                    <tr>
 
-                 min-width: 185px;
-                 position: absolute;
-                 top: 102px;
-                 right: 45px;
-                 min-height: 188px;
-                 border: steelblue dashed 1px;
-                 text-align: center;
-                 "
+                        <td>
 
-                 >
-                <span style=""> 
-                    Photo Not Available
-                </span>
-            </div>  
-
-            ID : 
-            <span class="label label-info "> {{:id}} </span> 
+                            ID : 
+                            <span class="label label-info "> <b>{{:id}}</b> </span> <br> 
+                            <br>
+                            <div class="inp_outer">
+                                <div class="title1">bookId</div>
+                                <span class="inp2" contenteditable="true" id="bookId"   data-link="bookId" >---</span>
+                                <input type="hidden" name="bookId" data-link="bookId" />
+                            </div>
 
 
+                            <div class="inp_outer"   
+                                 onclick="popup_selection_obj(
+                                     {
+                                     'value' :'{{:dateOfRegistration}}',
+                                             'entity_select': 'dateForOrganisation',
+                                             'input': 'dateOfRegistration'
+                                     }
+                                     )"
 
-            <br>
-
-
-            <div class="inp_outer" style="min-width: 250px">
-                <div class="title1">name</div>
-                <input type="text" name="name" data-link="name" class="akr_input_text" required="" />
-            </div>
-            <br>
-
-
-            <div class="inp_outer" style="min-width: 100px">
-                <div class="title1">age</div>
-                <span class="inp2" contenteditable="true" id="age"   data-link="age" >---</span>
-                <input type="hidden" name="age" data-link="age" />
-            </div>
-
-            <div class="inp_outer">
-                <div class="title1">sex</div>
+                                 >
 
 
+                                <input type="hidden" id="dateOfRegistration" name="dateOfRegistration" data-link="dateOfRegistration" />
+                                <div class="title1">dateOfRegistration</div>
+                                <span id='dateOfRegistration_display' class="inp2">{{:dateOfRegistration}}</span>
+                            </div>
+                            <br>
+                            <div class="inp_outer" style="min-width: 200px">
+                                <div class="title1">name</div>
+                                <span class="inp2" contenteditable="true" id="name"   data-link="name" >---</span>
+                                <input type="hidden" name="name" data-link="name" />
+                            </div>
+                            <br>
+                            <div class="inp_outer" style="min-width: 50px">
+                                <div class="title1">age</div>
+                                <span class="inp2" contenteditable="true" id="age"   data-link="age" >---</span>
+                                <input type="hidden" name="age" data-link="age" />
+                            </div>
 
-                <select name="sex" data-bind="sex" style="background-color: transparent">
-                    <option value="M" {{if sex=="M" }} selected {{/if}}>
-
-                            Male</option>
-                    <option value="F" {{if sex=="F" }} selected {{/if}}>FeMale</option>
-                    <option value="T" {{if sex=="T" }} selected {{/if}}>Trans</option>
-                </select>
-
-            </div>
-            <hr>
-
-            <div class="inp_outer"    tabindex="0"
-                 onclick="popup_selection_obj(
-                     {
-                     'value' :'{{:dateOfRegistration}}',
-                             'entity_select': 'dateForOrganisation',
-                             'input': 'dateOfRegistration'
-                     }
-                     )"
-
-                 >
-
-
-                <input type="hidden" id="dateOfRegistration" name="dateOfRegistration" data-link="dateOfRegistration" />
-                <div class="title1">dateOfRegistration</div>
-                <span id='dateOfRegistration_display' class="inp2">{{:dateOfRegistration}}</span>
-            </div>
-
-            <div class="inp_outer" style="min-width: 100px">
-                <div class="title1">bookId</div>
-                <span class="inp2" contenteditable="true" id="bookId"   data-link="bookId" >---</span>
-                <input type="hidden" name="bookId" data-link="bookId" />
-            </div>
-
-
-            <hr>
+                            <div class="inp_outer">
+                                <div class="title1">sex</div>
+                                
+                                <label>  Male <input type="radio" name="sex" value='M' {{if sex=="M"}} checked="checked"  {{/if}}/></label>
+                                <label>  FeMale <input type="radio" name="sex" value='F' {{if sex=="F"}} checked="checked"  {{/if}}/></label>
+                            </div>
 
 
 
+                        </td>
+                        <td>
 
-            <!--background-color: var(--color_l2);-->
-            <div class="inp_outer"  style="min-width: 400px;min-height: 100px">
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <!--communication-->
+        <div id="Communication" class="w3-container w3-border city city_hide">
+            <h2>Communication</h2>
+            <div class="inp_outer"  style="min-width: 200px">
                 <div class="title1">address</div>
-                <span class="inp2" contenteditable="true" 
-                      id="address"   data-link="address"
-                      style="
-                      min-height: 100px"
-                      >---</span>
-
+                <span class="inp2" contenteditable="true" id="address"   data-link="address" >---</span>
                 <input type="hidden" name="address" data-link="address" />
             </div>
             <br>
@@ -127,16 +102,18 @@
             </div>  
 
             <div class="inp_outer"  style="min-width: 200px">
-                <div class="title1">email</div>
-                <span class="inp2" contenteditable="true" id="email"   data-link="email" >---</span>
-                <input type="hidden" name="email" data-link="email" />
-            </div>
-            <br>
-
-            <div class="inp_outer"  style="min-width: 200px">
                 <div class="title1">contactPhone</div>
                 <span class="inp2" contenteditable="true" id="contactPhone"   data-link="contactPhone" >---</span>
                 <input type="hidden" name="contactPhone" data-link="contactPhone" />
+            </div>
+
+
+
+
+            <div class="inp_outer"  style="min-width: 200px">
+                <div class="title1">email</div>
+                <span class="inp2" contenteditable="true" id="email"   data-link="email" >---</span>
+                <input type="hidden" name="email" data-link="email" />
             </div>
 
             <div class="inp_outer"  style="min-width: 200px">
@@ -144,11 +121,6 @@
                 <span class="inp2" contenteditable="true" id="contactEmergency"   data-link="contactEmergency" >---</span>
                 <input type="hidden" name="contactEmergency" data-link="contactEmergency" />
             </div>
-            <br>
-
-
-
-
 
 
         </div>
@@ -189,24 +161,18 @@
     <form id="form_prescription" 
           enctype="multipart/form-data" >
         <input  name='patientId' value="{{:id}}" type="hidden"     >
-        <table border='1'>
+        <table>
             <tbody>
                 <tr>
                     <td style="padding: 10px">
-                        Show <select name="category" id="category" onchange="listFiles({{:id}},
-                                    this.value, 'fileList')" 
-                                     style="background-color: transparent"
-                                     >
+                        Show <select name="category" id="category" onchange="listFiles({{:id}}, this.value, 'fileList')"  >
 
                             <option >prescription</option>
                             <option >labReport</option>
                         </select>
                     </td>
                     <td style="padding: 10px">
-                        <a onclick="document.getElementById('input_file_prescription').click()" 
-                           data-toggle="tooltip" title="Add New " 
-                           class="button button5" style="position: relative;">
-                            <i class="fa fa-plus"> </i>
+                        <a onclick="document.getElementById('input_file_prescription').click()" data-toggle="tooltip" title="Add New " class="button button5" style="position: relative;left:13cm"> <i class="fa fa-plus"> </i>
                         </a>
 
                         <input id="input_file_prescription" name='file'  type="file" value="add file"

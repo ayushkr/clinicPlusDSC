@@ -1,6 +1,6 @@
 
-    
-    
+
+
 <hr>
 
 
@@ -19,9 +19,9 @@
     <div class="Heading">
 
         <div class="Cell"><p>name</p></div>
-       <div class="Cell"><p>place</p></div>
+        <div class="Cell"><p>place</p></div>
         <div class="Cell"><p>description</p></div>
-          <div class="Cell"><p>Actions</p></div>
+        <div class="Cell"><p>Actions</p></div>
     </div>
 
 
@@ -30,10 +30,16 @@
     <div class="Row" id="select_{{:id}}"  >
         <div class="Cell"
              entity_select_editButton
-             onclick="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:name}}')"  
-
+             onclick2="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:name}}')"  
+             onclick="selectThis(
+                 {
+                 who:'{{:~root.moduleName}}',
+                         id:{{:id}},
+                         extra:'{{:name}}'
+                 }
+                 )"
              > 
-        
+
             <input type="button"  
                    class="entity_select_editButton" 
                    value="{{:name}}"
@@ -41,12 +47,12 @@
 
 
         </div>
-       
+
         <div class="Cell">  {{:place}} </div>
-          <div class="Cell">  {{:description}} </div>
-        
-        
-        
+        <div class="Cell">  {{:description}} </div>
+
+
+
         <div class="Cell"> 
             <a 
                 onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, 'main3');"
@@ -59,7 +65,7 @@
         <d id='{{:id}}' 
            name="{{:name}}" 
            place="{{:place}}" 
-            description="{{:description}}"   
+           description="{{:description}}"   
            >
         </d>
 

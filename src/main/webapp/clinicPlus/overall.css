@@ -593,6 +593,11 @@ html, body {
     text-align: center;
 }
 
+.akr_nav_item_iconised:focus{
+     background-color:var(--color_green) ;
+       
+}
+
 .akr-sidebar {
     height: 100%;
     width: 200px;

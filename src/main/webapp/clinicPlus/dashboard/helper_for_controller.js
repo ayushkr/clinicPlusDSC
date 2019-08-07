@@ -13,6 +13,7 @@ var mn = {
     doctor: {},
     patient: {},
     medicineBrandName: {},
+     medicineStock: {},
     module: ["a", "b"],
     'temp':["a","b"]
 

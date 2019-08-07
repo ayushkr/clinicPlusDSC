@@ -1,10 +1,19 @@
 
 <div id="calendarDiv" class="calendarOuter">
     <center>
+        
+        
+        
         <div class="outer">
+            <input class="w3-btn w3-theme-l1"
+                   onclick="getTodayJSON()" 
+                   type="button" 
+                   value="Show Today"
+                   > 
+            <br>
 
             Year
-            <input type="text" value="2019" id="combo_year" style="min-width: 10px"
+            <input type="text" value="2019" id="combo_year" style="width: 70px"
                    onkeyup="inputChangedByUser()">
 
             Month
@@ -24,11 +33,23 @@
             </SELECT>
             
 
-            <div id="calendar">calendr body appear here</div>
+            <div id="calendar">calendar body appear here</div>
             <br>
-            <input class="w3-btn w3-theme-l1" onclick="getTodayJSON()" type="button" value="Show Today" > 
-            <span style="min-width: 3cm;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <input type="button" class="w3-btn w3-theme-l1"  value="OK" onclick="dateFinalised()">  
+            
+          
+            <button class="w3-btn w3-theme-l1"
+                    onclick="document.getElementById('modalDate').style.display='none';"
+                    >
+                
+                Cancel
+            </button>
+              <span style="min-width: 3cm;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            
+            
+            <input type="button" class="w3-btn w3-theme-l1" 
+                   value="OK"
+                   onclick="dateFinalised()"
+                   >  
 
             <br>
         </div>

@@ -64,14 +64,13 @@ public class AppointmentResource {
 
     @GetMapping("doctor/{id}")
     @ResponseBody
-    public ReportIncomeFromDoctorsDTO all_ByDoctor(@PathVariable("id") int id,
+    public ReportIncomeFromDoctorsDTO all_ByDoctor(@PathVariable("id") int doctorId,
             @RequestParam("dateFrom") String dateFrom,
             @RequestParam("dateTo") String dateTo
     ) {
         logger.warn("REST getItems() , {} ", new Object[]{label});
         Sort sort = Sort.by(Sort.Direction.DESC, "dateOfAppointment");
-        DoctorEntity doctorEntity = new DoctorEntity();
-        doctorEntity.setId(id);
+
         Date dateToDate;
 
         if ("".equals(dateTo)) {
@@ -84,11 +83,27 @@ public class AppointmentResource {
         if ("".equals(dateFrom)) {
             dateFrom = "2018-01-01";
         }
+        List<AppointmentEntity> list = null;
 
-        List<AppointmentEntity> list = repo.findByDoctorDateBetween(
-                Date.valueOf(dateFrom), dateToDate, doctorEntity);
+        if (doctorId == 0) 
+        {
+            list = repo.findByAnyDoctorDateBetween(
+                    Date.valueOf(dateFrom), dateToDate);
+        }
+        else
+        {
+            DoctorEntity doctorEntity = new DoctorEntity();
+            doctorEntity.setId(doctorId);
+            list = repo.findByDoctorDateBetween(
+                    Date.valueOf(dateFrom), dateToDate, doctorEntity);
+        } 
+        
+      
+        
+        
 
         ReportIncomeFromDoctorsDTO reportIncomeFromDoctorsDTO = new ReportIncomeFromDoctorsDTO(list);
+
         reportIncomeFromDoctorsDTO.calculateTotal();
 
         return reportIncomeFromDoctorsDTO;
@@ -214,8 +229,10 @@ public class AppointmentResource {
                     .headers(HeaderUtil.createEntityCreationAlert(label,
                             entityAfter.getId() + ""))
                     .body(jsonResponse);
+
         } catch (URISyntaxException ex) {
-            java.util.logging.Logger.getLogger(AppointmentResource.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppointmentResource.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return body;
     }
@@ -236,9 +253,6 @@ public class AppointmentResource {
 
     }
 
-    
-    
-    
     // delete
     @GetMapping("delete/id/{id}")
     public JsonResponse DeleteMapping_id(@PathVariable("id") Long id) {
@@ -259,11 +273,11 @@ public class AppointmentResource {
         } catch (Exception e) {
             logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
             response.setStatus(Constants1.FAILURE);
-            if(e.getMessage().contains("ConstraintViolationException")){
-            response.setMessage("This " + label + " (ID: "+id+
-                    ")  is used in other place <br>For eg: in pharmacyBill etc");
-            }else{
-            response.setMessage(e.getMessage());
+            if (e.getMessage().contains("ConstraintViolationException")) {
+                response.setMessage("This " + label + " (ID: " + id
+                        + ")  is used in other place <br>For eg: in pharmacyBill etc");
+            } else {
+                response.setMessage(e.getMessage());
             }
             return response;
         }
@@ -283,11 +297,11 @@ public class AppointmentResource {
                 try {
                     repo.deleteById(n);
                 } catch (Exception e) {
-                    
+
                     failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
                             + "<br>Because  "
-                            +((e.getMessage().contains("ConstraintViolationException")) ? 
-                            "It Used in Other place ":e.getMessage()) 
+                            + ((e.getMessage().contains("ConstraintViolationException"))
+                            ? "It Used in Other place " : e.getMessage())
                             + "</p><hr>";
 
                 }

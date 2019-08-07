@@ -8,6 +8,18 @@
 ////    ctxMenu.style.left = (event.pageX - 10)+"px";
 ////    ctxMenu.style.top = (event.pageY - 10)+"px";
 //},false);
+function img_preview_upload(idOfImage) {
+    // <input type='file' onchange=img_preview_upload
+    var imgObj = document.getElementById(idOfImage);
+    imgObj.src = window.URL.createObjectURL(event.target.files[0]);
+    imgObj.parent[0].load();
+    URI.revokeObjURI(imgObj.src);
+}
+
+function  navGo() {
+    var selectedItem = event.target;
+    console.log('navGo ,selectedItem=' + selectedItem.id);
+}
 
 function checkServer() {
     console.log('checking server ');
@@ -18,7 +30,8 @@ function checkServer() {
                 type: 'GET',
                 async: false,
                 success: function (data) {
-                    hideDivAy('alert_akr');
+                    $('#navbar').css('backgroundColor', 'var(--color_l3)');
+//                    hideDivAy('alert_akr');
                     var v = document.getElementById('dateCurrent');
                     if (v.style.visibility === 'visible') {
                         v.style.visibility = "hidden";
@@ -27,11 +40,11 @@ function checkServer() {
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-
-                    alert_1('Network problem',
-                            'There is no network connection to server '
-                            ,
-                            'failure');
+                    $('#navbar').css('backgroundColor', 'red');
+//                    alert_1('Network problem',
+//                            'There is no network connection to server '
+//                            ,
+//                            'failure');
 
                 }
             }
@@ -141,7 +154,7 @@ function getToday() {
     weekday[6] = "Saturday";
     var day = weekday[date.getDay()];
     var reqDateStr = date.getFullYear() + "-" + twoDigitise(date.getMonth() + 1) + '-' + twoDigitise(date.getDate());
-    return {'full': reqDateStr, 'day': day};
+    return {'full': reqDateStr, 'day': day, dd: date.getDate(), mm: date.getMonth() + 1, yyyy: date.getFullYear()};
 }
 
 function updateCurrentDate(divName) {
@@ -200,6 +213,28 @@ function populateCreate2(module, id, divName) {
                 data_.cgst = 0;
                 data_.sgst = 0;
                 data_.discount = 0;
+                data_.dateOfPurchase = getToday().full;
+//              
+                if (mn.medicineStock.vendor !== undefined) {
+
+                    data_.vendor = {};
+
+                    data_.vendor.id = mn.medicineStock.vendor.id;
+                    data_.vendor.name = mn.medicineStock.vendor.name;
+                }
+
+                if (mn.medicineStock.billNo !== undefined) {
+                    data_.billNo = mn.medicineStock.billNo;
+                }
+
+                if (mn.medicineStock.dateOfPurchase !== undefined) {
+                    data_.dateOfPurchase = mn.medicineStock.dateOfPurchase;
+                }
+
+
+            }
+            if (module === 'user') {
+                data_.dateOfRegistration = getToday().full;
             }
 
 
@@ -238,11 +273,11 @@ function populateCreate2(module, id, divName) {
             data: paging_data
         });
     } else {
-        var str= "<i class='fa fa-close entity_select_closeButton' \n\
-onclick=save('"+module+"');hideMainLevel(); ></i>";
- document.getElementById(divName + "_menu").innerHTML =str;
-        
-   
+        var str = "<i class='fa fa-close entity_select_closeButton' \n\
+onclick=save('" + module + "');hideMainLevel(); ></i>";
+        document.getElementById(divName + "_menu").innerHTML = str;
+
+
     }
 
 
@@ -253,6 +288,7 @@ onclick=save('"+module+"');hideMainLevel(); ></i>";
 }
 
 function listAsPages(module, path, divName) {
+    console.log('listAsPages module=' + module + ' divName=' + divName);
     console.log('listAsPages path=' + path);
     $.ajax({
         dataType: "json",
@@ -300,7 +336,10 @@ function listAsPages(module, path, divName) {
 //////////
 
 function alert_1(head, body, typ) {
+
+    console.log('alert_akr type=' + typ);
     var element = document.getElementById("alert_akr");
+
     if (typ === 'success') {
         element.style = "display:block;background-color: #108208eb;";
     } else {
@@ -311,6 +350,7 @@ function alert_1(head, body, typ) {
     // element.style = "background-color:'red';";
     document.getElementById("alert_akr_head").innerHTML = head;
     document.getElementById("alert_akr_body").innerHTML = body;
+
     if (typ === 'success') {
         setTimeout(function () {
             hideDivAy('alert_akr');
@@ -331,26 +371,22 @@ function popupGeneral(level_, moduleName, divName, url) {
     mn.module['select'].name = moduleName;
     $("#" + divName + "_inner").load(url + "?" + pageNewAy(1));
 }
-var mainLayerNumberNow = 1;
-let divNode = undefined;
-let divNode_menu = undefined;
-let divNode_inner = undefined;
-function hideMainLevel() {
-    var name = 'main_' + mainLayerNumberNow;
-    console.log("name=" + name);
-    var elem = document.getElementById(name)
-    elem.innerHTML="";
-    elem.style.display = "none";
-    // document.body.removeChild(elem);
-    mainLayerNumberNow -= 1;
-}
+
 
 function popup_selection_obj(obj) {
 
     console.log('obj=' + JSON.stringify(obj));
     mn.module['select'].obj = obj;
-    console.log("entity_select=" + mn.module['select'].obj.entity_select);
-    console.log("input=" + mn.module['select'].obj.input);
+//    console.log("entity_select=" + mn.module['select'].obj.entity_select);
+//    console.log("input=" + mn.module['select'].obj.input);
+
+    if (obj.afterClick === undefined) {
+
+    } else {
+
+        afterClick = obj.afterClick;
+    }
+
     if (obj.entity_select === 'dateForOrganisation') {
 
         document.getElementById("modalDate").style = "display:block";
@@ -364,6 +400,13 @@ function popup_selection_obj(obj) {
         loadTemplate_entity_select_into(obj, divNode.id);
         document.getElementById(divNode.id + '_menu').innerHTML = '';
     }
+
+
+
+
+
+
+
 }
 
 function newModal() {
@@ -395,11 +438,46 @@ overflow: scroll;";
     return divNode;
 }
 
+var mainLayerNumberNow = 1;
+let divNode = undefined;
+let divNode_menu = undefined;
+let divNode_inner = undefined;
+function hideMainLevel() {
+    var name = 'main_' + mainLayerNumberNow;
+    console.log("name=" + name);
+    var elem = document.getElementById(name)
+//    elem.innerHTML = "";
+    if (mainLayerNumberNow != 1) {
+        elem.style.display = "none";
+        mainLayerNumberNow -= 1;
+    }
+    // document.body.removeChild(elem);
+
+}
+
+
+
 var level = "";
-function  selectionDone() {
-    console.log('selectionDone , name=' + mn.module['select'].name);
-    $('#' + mn.module['select'].name).val(mn.module['select'].id);
-    $('#' + mn.module['select'].name + '_display').html(mn.module['select'].extra);
+var afterClick = '';
+function  selectionDone(obj) {
+    console.log('selectionDone , name=' + mn.module['select'].name + ' obj=' + JSON.stringify(obj));
+    console.log('selectionDone ,obj.extra' + JSON.stringify(obj.extra));
+    $('#' + obj.who).val(obj.id);
+    $('#' + obj.who + '_display').html(obj.extra);
+
+    if (obj.who === 'doctor') {
+        $('#' + obj.who + '_display').html(obj.extra.name);
+        $('#feesList').html((obj.extra.feesList));
+        $('#consultFee').val((obj.extra.feesList).split(',')[0]);
+        $('#feeForClinic').val(obj.extra.feeForClinic);
+    }
+
+
+    if (afterClick === '') {
+
+    } else {
+        document.getElementById(afterClick).click();
+    }
 }
 
 function modal(obj) {
@@ -430,19 +508,19 @@ function hideDivAy(e) {
 
 
 function refresh_entitySelectList(module, filterWord) {
-    var divname = 'main_'+mainLayerNumberNow;
+    var divname = 'main_' + mainLayerNumberNow;
     var obj = {'entity_select': module};
     loadTemplate_entity_select_into(obj, divname);
     filter(filterWord);
 }
 function filter(attr) {
-    var givenWord="";
-    if(event.target.value===undefined){
-        givenWord=attr;
-    }else{
-       givenWord = (event.target.value).toLowerCase();
+    var givenWord = "";
+    if (event.target.value === undefined) {
+        givenWord = attr;
+    } else {
+        givenWord = (event.target.value).toLowerCase();
     }
-   
+
     console.log('-----filterBy attribute=' + attr + "   word =" + givenWord);
     var dom = document.getElementsByTagName('d');
     for (var i = 0; i < dom.length; i++) {
@@ -458,16 +536,20 @@ function filter(attr) {
     }
 }
 
-//entity_select/view.html
-function selectThis(who, id, extra) {
-    document.getElementById("main2").style = "display:none";
-    mn.module['select'].id = id;
-    mn.module['select'].name = who;
-    mn.module['select'].extra = extra;
+
+
+function selectThis(obj) {
+
+    mn.module['select'].id = obj.id;
+    mn.module['select'].name = obj.who;
+    mn.module['select'].extra = obj.extra;
     console.log(mn.module['select']);
-    selectionDone();
+    selectionDone(obj);
     hideMainLevel();
 }
+
+
+
 
 function check_1() {
     var Sname = select_1.getAttribute('Sname');
@@ -618,7 +700,7 @@ function go(id, module) {
 //        console.log("go() .......... path=" + path);
 //        window.location.href = path;
 
-    populateCreate2(module, id, 'main1');
+    populateCreate2(module, id, 'main_1');
 }
 
 
@@ -660,7 +742,7 @@ function goto_delete(module, id) {
 }
 
 function save(module, id) {
-    console.log('save , module=' + module + '  id=' + id + '   ');
+    console.log('save , module=' + module);
     $('#form_' + module).submit();
     // goto_list(module) ;
 }

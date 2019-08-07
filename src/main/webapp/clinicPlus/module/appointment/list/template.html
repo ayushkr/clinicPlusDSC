@@ -3,32 +3,30 @@
 
 <div style="position: relative;z-index: 1;
      background-color: transparent"
-    data-akr-printable="false"
-    >
-    <div class="w3-bar-ay" 
-        
-         >
+     data-akr-printable="false"
+     >
+    <div class="w3-bar-ay"  >
+
         <a class="w3-bar-item  tablink tabSelected" 
            onClick="openCity(event, 'filter')">Filter</a>
 
 
         <a class="w3-bar-item tablink " 
            onClick="openCity(event, 'bulk')">Bulk</a>
-        <a class="w3-bar-item  tablink " onClick="openCity(event, 'Admin')">Admin</a>
-        <a class="w3-bar-item  tablink " onClick="openCity(event, 'Files')">Files</a>
+
     </div>
-  
+
     <div id="filter" class="w3-container w3-border city ">
 
         <div class="inp_outer" style="min-width: 200px">
 
             <div class="inp1" 
                  onclick="popup_selection_obj(
-                 {
-                 'entity_select': 'patient',
-                         'input': 'patient'
-                 }
-                 )"
+                     {
+                     'entity_select': 'patient',
+                             'input': 'patient'
+                     }
+                     )"
                  >
 
                 <div class="title1">
@@ -51,11 +49,11 @@
 
             <div class="inp1" 
                  onclick="popup_selection_obj(
-                 {
-                 'entity_select': 'doctor',
-                         'input': 'doctor'
-                 }
-                 )"
+                     {
+                     'entity_select': 'doctor',
+                             'input': 'doctor'
+                     }
+                     )"
                  >
 
                 <div class="title1">
@@ -76,7 +74,7 @@
     </div>
 
     <div id="bulk" class="w3-container w3-border city city_hide">
-       
+
         <input type="submit" value="Bulk Delete"
                form='form_appointment/deleteBulk'>
 
@@ -295,14 +293,14 @@
 
 
                     <td
-                        
+
                         >
-                        
-                            
-                            
+
+
+
                         <input type="checkbox"
                                id="checkbox_{{:id}}"
-                              class="regular-checkbox" 
+                               class="regular-checkbox" 
                                name="n"  value="{{:id}}">
                         <label for="checkbox_{{:id}}"></label>
                     </td>
@@ -366,10 +364,10 @@
                         onclick="go({{:id}}, 'appointment')"
                         >{{:consultFee}}</td>
                     <td
-                       onclick="go({{:id}}, 'appointment')" 
+                        onclick="go({{:id}}, 'appointment')" 
                         >{{:feeForClinic}}</td>
                     <td
-                       onclick="go({{:id}}, 'appointment')" 
+                        onclick="go({{:id}}, 'appointment')" 
                         >{{:tokenNumber}}</td>
 
 

@@ -1,85 +1,228 @@
 <div style="padding: 10px">
-<center>
-    <hr>
-    Report - Income from Consultation
-    <hr>
-</center>
+    <center>
+        <hr>
+        Report - Income from Consultation
+        <hr>
+    </center>
+    <br>
+    <!--doctor-->
+    <div class="inp_outer" style="min-width: 200px">
+        <input id="doctor" name='doctor' type="hidden" 
+               data-link="doctor.id" value="0"
 
-<!--doctor-->
-<div class="inp_outer" style="min-width: 200px">
-    <input id="doctor" name='doctor' type="hidden" data-link="doctor.id" value="1"> 
-    <div class="inp1" 
-         onclick="popup_selection_obj(
-                                 {
-                                     'entity_select': 'doctor',
-                                     'input': 'doctor'
-                                 }
-                         )"
-         >
-        <div class="title1"> Doctor </div>
+               > 
+        <div class="inp1" 
+             onclick="popup_selection_obj(
+                             {
+                                 'entity_select': 'doctor',
+                                 'input': 'doctor',
+                                 'afterClick': 'reportPatientsByDoctor_Calculate'
+                             }
+                     )"
+             >
+            <div class="title1"> Doctor </div>
 
-        <span id="doctor_display" class="inp2" >
-            All
-        </span>
+            <span id="doctor_display" class="inp2"
+                  style="    min-height: 58px;"
+                  onchange="alert()"
+                  >
+                Any
+            </span>
 
+        </div>
     </div>
-</div>
+    <!--    <br>-->
+    <div id="dateGr" style="    display: inline-block;">
+        <!--        Select Date: <br>-->
+        <div class="w3-bar-ay"  >
 
-<div class="inp_outer" >
-    <div class="inp1" 
-         onclick="popup_selection_obj(
+            <a class="w3-bar-item  tablink tabSelected" 
+               onClick="openCity(event, 'range')">Date Range</a>
+
+
+            <a class="w3-bar-item tablink " 
+               onClick="openCity(event, 'group')">Date Group</a>
+
+        </div>
+
+        <div id="range" class="w3-container w3-border city ">
+
+            <div class="inp_outer" >
+                <div class="inp1" 
+                     onclick="popup_selection_obj(
                                  {
-                                     'value': getToday().full,
+                                     'value': dateDecide('dateFrom'),
                                      'entity_select': 'dateForOrganisation',
-                                     'input': 'dateFrom'
+                                     'input': 'dateFrom',
+                                     'afterClick': 'reportPatientsByDoctor_Calculate'
                                  }
                          )"
-         >
-        <div class="title1">Date From</div>
+                     >
+                    <div class="title1">Date From</div>
 
-        <span id='dateFrom_display' class="inp2" >All</span>
-        <input id="dateFrom" name='dateFrom' type="hidden" data-link="dateFrom"> 
-    </div>
-</div>
+                    <span id='dateFrom_display' class="inp2" >Starting</span>
+                    <input id="dateFrom" name='dateFrom' type="hidden" data-link="dateFrom"> 
+                </div>
+            </div>
 
-<div class="inp_outer" >
-    <div class="inp1" 
-         onclick="popup_selection_obj(
+            <div class="inp_outer" >
+                <div class="inp1" 
+                     onclick="popup_selection_obj(
                                  {
-                                     'value': getToday().full,
+                                     'value': dateDecide('dateTo'),
                                      'entity_select': 'dateForOrganisation',
-                                     'input': 'dateTo'
+                                     'input': 'dateTo',
+                                     'afterClick': 'reportPatientsByDoctor_Calculate'
                                  }
                          )"
-         >
-        <div class="title1">Date To</div>
+                     >
+                    <div class="title1">Date To</div>
 
-        <span id='dateTo_display' class="inp2" >All</span>
-        <input id="dateTo" name='dateTo' type="hidden" data-link="dateTo"> 
+                    <span id='dateTo_display' class="inp2" >Till Now</span>
+                    <input id="dateTo" name='dateTo' type="hidden" 
+
+                           data-link="dateTo"> 
+                </div>
+            </div>
+        </div>
+
+        <div id="group" class="w3-container w3-border city city_hide" >
+
+            <button class="w3-btn dsc_blue"
+                    onclick="dateGroup('db_yesterday')"
+                    >day Before <br>yesterday</button>
+            <button class="w3-btn dsc_blue"
+                    onclick="dateGroup('yesterday')"
+                    >yesterday</button>
+            <button class="w3-btn dsc_blue"
+                    onclick="dateGroup('today')"
+                    >Today</button>
+            <button class="w3-btn dsc_blue"
+                    onclick="dateGroup('thisMonth')"
+                    >This <br>Month</button>
+            <button class="w3-btn dsc_blue"
+                    onclick="dateGroup('lastMonth')"
+                    >Last <br> Month</button>
+            <button class="w3-btn dsc_blue"
+                    onclick="dateGroup('tillNow')"
+                    >Till<br> Now</button>
+            <button class="w3-btn dsc_blue"
+                    onclick="dateGroup('tillLastMonth')"
+                    >till <br> Last Month</button>
+
+
+        </div>
+
     </div>
-</div>
 
-<br>
-<div id="widgets"  data-akr-printable="false">
-    <input type="button" id="doctorId" value="Calculate" onclick="popul___()"  class="w3-button w3-green"> 
 
-    <a onclick="printDiv_navOff('navbar')" data-toggle="tooltip" title="Print this page" class="w3-btn w3-blue"> <i class="fa fa-print"> </i>
-    </a>
+    <div id="widgets"  data-akr-printable="false" style="display: inline-block">
+        <input type="button" id="reportPatientsByDoctor_Calculate" value="Calculate" onclick="popul___()"  class="w3-button w3-green"> 
 
-</div>
+        <a onclick="printDiv_navOff('navbar')" data-toggle="tooltip" title="Print this page" class="w3-btn w3-blue"> <i class="fa fa-print"> </i>
+        </a>
 
-<br>
-<div id="printableArea" title="report income by doctors">
-
-    <div id="patientsByDoctor" style="padding: 10px">
-        <!--alert area placeholder--> 
     </div>
-</div>
+
+    <div id="printableArea" title="report income by doctors">
+
+        <div id="patientsByDoctor" style="padding: 10px">
+            <!--alert area placeholder--> 
+        </div>
+    </div>
 
 </div>
 <script>
 //    /clinicPlus/module/reports/patientsByDoctor/menuTop.html
     document.getElementById("main1_paging").innerHTML = '';
+
+
+
+    function dateGroup(type) {
+        var dateFromObj = document.getElementById('dateFrom');
+        var dateToObj = document.getElementById('dateTo');
+        var calcButton = document.getElementById('reportPatientsByDoctor_Calculate');
+        var today = getToday();
+
+        if (type === 'db_yesterday') {
+            if(today.dd===2) 
+            { 
+                today.dd=31;
+                today.mm-=1;
+            }else{
+                today.dd-=2;
+                
+            }
+            dateFromObj.value = today.yyyy + '-' + twoDigitise(today.mm) + '-' + twoDigitise(today.dd);
+            dateToObj.value = today.yyyy + '-' + twoDigitise(today.mm) + '-' + twoDigitise(today.dd);
+
+            calcButton.click();
+            return 0;
+        }
+
+
+        if (type === 'yesterday') {
+             if(today.dd===1) 
+            { 
+                today.dd=31;
+                today.mm-=1;
+            }else{
+                today.dd-=1;
+                
+            }
+            dateFromObj.value = today.yyyy + '-' + twoDigitise(today.mm) + '-' + twoDigitise(today.dd);
+            dateToObj.value = today.yyyy + '-' + twoDigitise(today.mm) + '-' + twoDigitise(today.dd);
+
+            calcButton.click();
+            return 0;
+        }
+
+        if (type === 'today') {
+            dateFromObj.value = getToday().full;
+            dateToObj.value = getToday().full;
+            calcButton.click();
+            return 0;
+        }
+        if (type === 'thisMonth') {
+
+            dateFromObj.value = today.yyyy + '-' + twoDigitise(today.mm) + '-' + twoDigitise(1);
+            dateToObj.value = today.yyyy + '-' + twoDigitise(today.mm) + '-' + twoDigitise(31);
+            calcButton.click();
+            return 0;
+        }
+        if (type === 'lastMonth') {
+
+            dateFromObj.value = today.yyyy + '-' + twoDigitise(today.mm - 1) + '-' + twoDigitise(1);
+            dateToObj.value = today.yyyy + '-' + twoDigitise(today.mm - 1) + '-' + twoDigitise(31);
+            calcButton.click();
+            return 0;
+        }
+        if (type === 'tillNow') {
+
+            dateFromObj.value = today.yyyy - 2 + '-' + twoDigitise(today.mm) + '-' + twoDigitise(1);
+            dateToObj.value = today.yyyy + '-' + twoDigitise(today.mm) + '-' + twoDigitise(31);
+            calcButton.click();
+            return 0;
+        }
+        if (type === 'tillLastMonth') {
+
+            dateFromObj.value = today.yyyy - 2 + '-' + twoDigitise(today.mm) + '-' + twoDigitise(1);
+            dateToObj.value = today.yyyy + '-' + twoDigitise(today.mm - 1) + '-' + twoDigitise(31);
+            calcButton.click();
+            return 0;
+        }
+
+    }
+
+    function dateDecide(id) {
+        if ($('#' + id).val === 0) {
+            return getToday().full;
+        } else {
+            var v = (document.getElementById(id).value) + '';
+            console.log('v=' + v);
+            return v;
+        }
+    }
 
     function popul___() {
         var id = document.getElementById('doctor').value;

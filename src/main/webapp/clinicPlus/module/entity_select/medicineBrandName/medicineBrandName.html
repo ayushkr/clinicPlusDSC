@@ -29,9 +29,15 @@
         {{for obj}}
         <div class="Row" id="select_{{:id}}"  >
             <div class="Cell"
-                 entity_select_editButton
-                 onclick="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:brandName}}')"  
 
+                 
+                 onclick="selectThis(
+                 {
+                 who:'{{:~root.moduleName}}',
+                         id:{{:id}},
+                         extra:'{{if brandName}}{{:brandName}}{{else}}-No name-{{/if}}'
+                 }
+                 )"
                  > 
 
                 <button   

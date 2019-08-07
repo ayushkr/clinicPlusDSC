@@ -2,11 +2,7 @@ package in.srisrisri.clinic;
 
 import in.srisrisri.clinic.FileStorage.FileStorageProperties;
 import in.srisrisri.clinic.FileStorage.FileStorageService;
-import in.srisrisri.clinic.derbyDatabase.LaunchFrameServer;
-import in.srisrisri.clinic.derbyDatabase.run;
-import java.awt.EventQueue;
 import java.io.File;
-import java.io.IOException;
 import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
@@ -21,36 +17,28 @@ import org.springframework.content.fs.io.FileSystemResourceLoader;
     FileStorageProperties.class
 })
 public class Starter {
-    
+
     private static org.apache.log4j.Logger logger = Logger.getLogger(Starter.class);
-    
+
     public static void main(String[] args) {
         logger.info("----------- before SpringApplication.run----------------->");
         try {
-            //
-//        EventQueue.invokeLater(new Runnable() /*     */ {
-//            /* 224 */ public void run() {
-//                (new LaunchFrameServer()).setVisible(true);
-//            }
-//            /*     */        });
-//            run.main(new String[]{"server", "start"});
-        
             spring_start(args);
         } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(Starter.class.getName()).log(Level.SEVERE, null, ex);
+            logger.info("-------->"+ex.toString());
         }
-        
+
     }
-    
+
     public static void test() {
         FileStorageService fileStorageService = new FileStorageService(new FileStorageProperties());
         fileStorageService.listFilesInThisFolder("patient");
-        
+
     }
-    
+
     public static void spring_start(String[] args) {
         SpringApplication.run(Starter.class, args);
-        logger.info("-------------started--------------- -");
+        logger.info("--------spring_start()-----started--------------- -");
 //        try {
 //            Runtime.getRuntime().exec("clear");
 //            Runtime.getRuntime().exec("aplay /usr/share/sounds/alsa/serverStarted.wav");
@@ -58,7 +46,7 @@ public class Starter {
 //            logger.info("------------aplay issue- --------------- -" + ex.toString());
 //        }
     }
-    
+
     public static void speak(String words) {
         try {
             Runtime.getRuntime().exec("espeak " + words);
@@ -66,27 +54,27 @@ public class Starter {
             java.util.logging.Logger.getLogger(Starter.class.getName()).log(Level.SEVERE, null, ex1);
         }
     }
-    
+
     @Bean
     File filesystemRoot() {
         try {
             return new File("/home/akr2/NetBeansProjects/persisted/fileRepo/clinicPlus");
         } catch (Exception ioe) {
-            
+
         }
         return null;
     }
-    
+
     @Bean
     FileSystemResourceLoader fileSystemResourceLoader() {
         return new FileSystemResourceLoader(filesystemRoot().getAbsolutePath());
     }
-    
+
     @Bean
     public CommandLineRunner demo() {
         logger.info("started CommandLineRunner");
         return null;
-        
+
     }
-    
+
 }

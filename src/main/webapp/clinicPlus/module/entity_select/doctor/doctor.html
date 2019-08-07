@@ -1,70 +1,123 @@
 <div style="padding: 40px;">
-<p class="pageTitle"> Select a Doctor</p>
-Filter By Name <input  type="text" onkeyup="filter('name')"  ><br>
-Filter By department <input  type="text" onkeyup="filter('department')"  ><br>
+    <p class="pageTitle"> Select a Doctor</p>
+    Filter By Name <input  type="text" onkeyup="filter('name')"  ><br>
+    Filter By department <input  type="text" onkeyup="filter('department')"  ><br>
 
-Filter By description <input  type="text" onkeyup="filter('description')"  ><br>
-Filter By remediesFor <input  type="text" onkeyup="filter('remediesFor')"  ><br>
-
-
-
-<div class="Table">
-    <div class="Title">
-
-    </div>
-
-    <div class="Heading">
-
-        <div class="CellNoBorder"><p>name</p></div>
-        <div class="CellNoBorder"><p>dept</p></div>
-        <div class="CellNoBorder"><p>remedies</p></div>
-        <div class="CellNoBorder"><p>actions</p></div>
-    </div>
+    Filter By description <input  type="text" onkeyup="filter('description')"  ><br>
+    Filter By remediesFor <input  type="text" onkeyup="filter('remediesFor')"  ><br>
 
 
 
-    {{for obj}}
-    <div class="Row" id="select_{{:id}}"  >
-        <div class="CellNoBorder"
-             onclick="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:name}}<br>Fees({{:feesList}})')"  
-
-             > 
-           <img class="img_round" src="/uploads/doctor/{{:id}}_profileImage.jpeg?time=" alt="doctor/1" width="70px"> 
-            
-            
-            <input type="button"  
-                   class="entity_select_editButton" 
-                   value="{{:name}}"
-                   >
-
-
-        </div>
-        <div class="CellNoBorder">  {{:department}} </div>
-        <div class="CellNoBorder">  {{:remediesFor}} </div>
-        <div class="CellNoBorder"> 
-            <a class="w3-btn" data-toggle="tooltip" title="Edit"
-                onclick="populateCreate2('{{:~root.moduleName}}',
-                            {{:id}}, newModal().id);"
-
-                ><i class="fa fa-edit"></i>
-            </a>
+    <div class="Table">
+        <div class="Title">
 
         </div>
 
-        <d id='{{:id}}' 
-           name="{{:name}}" 
-           department="{{:department}}" 
-           remediesFor="{{:remediesFor}}" 
-           description="{{:description}}"
-           >
-        </d>
+        <div class="Heading">
 
+            <div class="CellNoBorder"><p>name</p></div>
+            <div class="CellNoBorder"><p>dept</p></div>
+            <div class="CellNoBorder"><p>remedies</p></div>
+            <div class="CellNoBorder"><p>actions</p></div>
+        </div>
+
+<div class="Row" id="select_0"  >
+            <div class="CellNoBorder"
+                 onclick2="selectThis('{{:~root.moduleName}}',0, 'Any')"  
+                 onclick="selectThis(
+                     {
+                     who:'{{:~root.moduleName}}',
+                             id:0,
+                             extra:'Any'
+                     }
+                     )"  
+
+                 > 
+                <img class="img_round" src="/uploads/doctor/0_profileImage.jpeg?time=" alt="doctor/0" width="70px"> 
+
+
+                <input type="button"  
+                       class="entity_select_editButton" 
+                       value="Any"
+                       >
+
+
+            </div>
+            <div class="CellNoBorder">  --- </div>
+            <div class="CellNoBorder">  --- </div>
+            <div class="CellNoBorder"> 
+                <a class="w3-btn" data-toggle="tooltip" title="Edit"
+                   onclick="populateCreate2('{{:~root.moduleName}}',
+                       0, newModal().id);"
+
+                   ><i class="fa fa-edit"></i>
+                </a>
+
+            </div>
+
+            <d id='0' 
+               name="Any" 
+               department="--" 
+               remediesFor="--" 
+               description="--"
+               >
+            </d>
+
+        </div>
+
+        {{for obj  itemVar='~one'}}
+      
+        <div class="Row" id="select_{{:id}}"  >
+            <div class="CellNoBorder"
+                 onclick2="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:name}}<br>Fees({{:feesList}})')"  
+                 onclick="selectThis(
+                     {
+                     who:'{{:~root.moduleName}}',
+                             id:{{:id}},
+                             
+                             extra:{'name': '{{:name}}',
+                                 'feesList':'{{:feesList}}',
+                                 'feeForClinic':'{{:feeForClinic}}' }
+                     }
+                     )"  
+
+                 > 
+                <img class="img_round" src="/uploads/doctor/{{:id}}_profileImage.jpeg?time=" alt="doctor/1" width="70px"> 
+
+
+                <input type="button"  
+                       class="entity_select_editButton" 
+                       value="{{:name}}"
+                       >
+
+
+            </div>
+            <div class="CellNoBorder">  {{:department}} </div>
+            <div class="CellNoBorder">  {{:remediesFor}} </div>
+            <div class="CellNoBorder"> 
+                <a class="w3-btn" data-toggle="tooltip" title="Edit"
+                   onclick="populateCreate2('{{:~root.moduleName}}',
+                       {{:id}}, newModal().id);"
+
+                   ><i class="fa fa-edit"></i>
+                </a>
+
+            </div>
+
+            <d id='{{:id}}' 
+               name="{{:name}}" 
+               department="{{:department}}" 
+               remediesFor="{{:remediesFor}}" 
+               description="{{:description}}"
+               >
+            </d>
+
+        </div>
+
+
+
+
+        {{/for}}
     </div>
-
-
-
-
-    {{/for}}
-</div>
 
 </div>

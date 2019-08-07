@@ -21,7 +21,7 @@
     .column2 {
         float: left;
         width: 20%;
-        padding: 10px;
+        /*padding: 10px;*/
         height: 300px; /* Should be removed. Only for demonstration */
     }
     /* Clear floats after the columns */
@@ -61,15 +61,15 @@
     </center>
 
 
-    <div id="main1" >
-        <div id="main1_menu" >
-            <!--main1_menu-->
+    <div id="main_1"  >
+        <div id="main_1_menu" >
+            <!--main_1_menu-->
         </div>
 
 
 
-        <div id="main1_inner">
-            <!--main1_inner-->
+        <div id="main_1_inner">
+            <!--main_1_inner-->
             <center>
                 <br><br>
                 
@@ -92,27 +92,12 @@
             </center>
 
         </div>
-        <div id="main1_paging" >
-            <!--main1_paging-->
+        <div id="main_1_paging" >
+            <!--main_1_paging-->
         </div>
 
     </div>
-    <div id='main2' class='modalLayer' >
 
-        <!--        <div onclick="hideDivAy('main2')" 
-                     class="entity_select_closeButton ">
-                    <i class="fa fa-times"> </i>
-                </div>-->
-
-        <div id="main2_menu" >main2_menu
-        </div>
-        <div id="main2_paging" >main2_paging
-        </div>
-
-        <div id="main2_inner">main2_inner
-
-        </div>
-    </div>
     <div id='modalDate' class='modalLayer'> 
         <div onclick="hideMainLevel()" id='entity_select_closeButton_modalDate'
              class="entity_select_closeButton w3-btn "> <i class="fa fa-times"> </i></div>
@@ -120,17 +105,7 @@
         <div id="modalDate_inner">modalDate</div>
         <div id="modalDate_paging"></div>
     </div>
-    <div id='main3' class='modalLayer'>
-        <div onclick="hideDivAy('main3')" 
-             class="entity_select_closeButton w3-btn "> 
-            <i class="fa fa-times"> </i></div>
-        <div id="main3_menu">main3_menu</div>
-        <div id="main3_paging" >
-        </div>
-        <div id="main3_inner">main3_inner</div>
-    </div>
    
-    <div id="main_1" class='modalLayer'></div>
      <div id="main_2" class='modalLayer'></div>
       <div id="main_3" class='modalLayer'></div>
        <div id="main_4" class='modalLayer'></div>
@@ -147,26 +122,28 @@
             <span id="dateCurrent" class="dateCurrent"
                   data-akr-printable="false"
                   class="akr_nav_item_iconised "
-                  onclick="window.href = '#/cmd?module=dateForOrganisation&action=/all/list&pageNumber=1'"
+                  onclick="window.href = '#/cmd?module=dateForOrganisation&action=/all/list&pageNumber=1&div=main_1'"
                   title="calendar"
                   > dateCurrent</span>
         </center>
 
-        <a href="#/cmd?module=appointment&action=/all/list&pageNumber=1"  
+        <a href="#/cmd?module=appointment&action=/all/list&pageNumber=1&div=main_1"  
            class="akr_nav_item_iconised " title="Appointments">
             <i class="fa fa-calendar"></i> 
             <i class="fasub fa-list" ></i> 
         </a> 
 
-        <a href="#/cmd?module=doctor&action=/all/list&pageNumber=1" 
+        <a href="#/cmd?module=doctor&action=/all/list&pageNumber=1&div=main_1"
+           onclick="navGo()"
            class="akr_nav_item_iconised "
            title="Doctors"
            >
             <i class="fa fa-user-md"></i> 
             <i class="fasub fa-list"></i> 
         </a>
+        
 
-        <a href="#/cmd?module=patient&action=/all/list&pageNumber=1" 
+        <a href="#/cmd?module=patient&action=/all/list&pageNumber=1&div=main_1" 
            class="akr_nav_item_iconised "
            title="Patients"
            >
@@ -174,7 +151,7 @@
             <i class="fasub fa-list"></i> 
         </a>
         <hr>
-        <a href="#/cmd?module=pharmacyBill&action=/all/list&pageNumber=1" 
+        <a href="#/cmd?module=pharmacyBill&action=/all/list&pageNumber=1&div=main_1" 
            class="akr_nav_item_iconised "
            title="pharmacy Bills"
            >
@@ -183,7 +160,7 @@
 
 
         </a>
-        <a href="#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1" 
+        <a href="#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1&div=main_1" 
            class="akr_nav_item_iconised "
            title="MediBrandNames"
            >
@@ -191,7 +168,7 @@
             <i class="fasub fa-file-code-o"></i> 
         </a> 
 
-        <a href="#/cmd?module=medicineStock&action=/all/list&pageNumber=1" 
+        <a href="#/cmd?module=medicineStock&action=/all/list&pageNumber=1&div=main_1" 
            class="akr_nav_item_iconised "
            title="MediStocks"
            >
@@ -202,14 +179,14 @@
 
 
 
-        <a href="#/cmd?module=vendor&action=/all/list&pageNumber=1" class="akr_nav_item_iconised"
+        <a href="#/cmd?module=vendor&action=/all/list&pageNumber=1&div=main_1" class="akr_nav_item_iconised"
            title="Vendors"
            > 
             <i class="fa fa-ambulance"></i> 
             <i class="fasub fa-list"></i> 
         </a>
         <hr>
-        <a href="#/cmd?module=fileContent&action=/all/list&pageNumber=1" class="akr_nav_item_iconised "
+        <a href="#/cmd?module=fileContent&action=/all/list&pageNumber=1&div=main_1" class="akr_nav_item_iconised "
            title="fileContent"
            > 
             <i class="fa fa-file"></i> 
@@ -236,8 +213,20 @@
             <i class="faspace"></i> 
         </a>
 
+<a href="#/cmd?module=finance&action=/all/list&pageNumber=1&div=main_1" class="akr_nav_item_iconised"
+           title="finance"
+           > 
+            <i class="fa fa-money"></i> 
+            <i class="faspace"></i> 
+        </a>
 
-
+        
+        <a href="#/cmd?module=user&action=/all/list&pageNumber=1&div=main_1" class="akr_nav_item_iconised"
+           title="user"
+           > 
+            <i class="fa fa-user"></i> 
+            <i class="faspace"></i> 
+        </a>
         <hr>
 
 
@@ -247,14 +236,14 @@
 
 
 
-        <a href="#/cmd?module=jote&action=/all/list&pageNumber=1" class="akr_nav_item_iconised"
+        <a href="#/cmd?module=jote&action=/all/list&pageNumber=1&div=main_1" class="akr_nav_item_iconised"
            title="Jote"
            > 
             <i class="fa fa-circle"></i> 
             <i class="faspace"></i> 
         </a>
 
-        <a href="#/cmd?module=pharmacyBillRow&action=/all/list&pageNumber=1" 
+        <a href="#/cmd?module=pharmacyBillRow&action=/all/list&pageNumber=1&div=main_1" 
            class="akr_nav_item_iconised "
            title="pharmacyBillRow"
            >

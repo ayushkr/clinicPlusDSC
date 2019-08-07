@@ -192,10 +192,10 @@ public class PatientResource {
             if (entityBefore.getId() != 0) {
 
                 entityAfter = repo.findById(entityBefore.getId()).get();
-                //entityAfter.setUpdationTime(new Date());
+                 entityAfter.setUpdationTime(Date.valueOf(LocalDate.now()));
             } else {
                 entityAfter = new PatientEntity();
-                //entityAfter.setCreationTime(new Date());
+               entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
             }
 
             BeanUtils.copyProperties(entityBefore, entityAfter);

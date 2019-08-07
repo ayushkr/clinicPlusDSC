@@ -18,7 +18,7 @@
 
         <input type="hidden" name="updateFile"  id="updateFile" value="0"/>
 
-        <a href="/clinicPlus/api/fileContent/content/{{:id}}?upt={{:updationTime}}" target="_blank"
+        <a href="/clinicPlus/api/fileContent/{{:id}}/content?upt={{:updationTime}}" target="_blank"
 
            >
             <div style="border:dashed green 1px;min-height: 200px;"
@@ -26,13 +26,13 @@
                  >
                 {{if contentType=='image'}}
 
-                <img src="/clinicPlus/api/fileContent/content/{{:id}}?upt={{:updationTime}}" 
-                     class="imgStyle" alt="img"><br>
+                <img src="/clinicPlus/api/fileContent/{{:id}}/content?upt={{:updationTime}}" 
+                     class="imgStyle" alt="img" id="img1" width="600"><br>
                 {{/if}}
 
                 {{if contentType=='video'}}
                 <video width="320" height="240" controls>
-                    <source src="/clinicPlus/api/fileContent/content/{{:id}}?upt={{:updationTime}}" type="video/mp4">
+                    <source src="/clinicPlus/api/fileContent/{{:id}}/content?upt={{:updationTime}}" type="video/mp4">
 
                     Your browser does not support the video tag.
                 </video>
@@ -41,7 +41,7 @@
 
                 {{if contentType=='text'}}
 
-                <iframe src="/clinicPlus/api/fileContent/content/{{:id}}?upt={{:updationTime}}" style="width: 100%"></iframe>
+                <iframe src="/clinicPlus/api/fileContent/{{:id}}/content?upt={{:updationTime}}" style="width: 100%"></iframe>
 
                 {{/if}}
             </div>
@@ -130,6 +130,7 @@
 
 
         <br>
+        <!--img_preview_upload('img1');-->
         File:
         <input type="file" name="file" id="file" data-link="file" 
                onchange="document.getElementById('updateFile').value = 1"

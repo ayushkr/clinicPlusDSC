@@ -3,7 +3,7 @@
 <div id="printableArea"   title="DoctorId_{{:id}}_{{if name}}{{:name}}{{/if}}" >
 
     <div class="pageTitle">
-       Doctor
+        Doctor
     </div>
 
     <form id='form_doctor' 
@@ -16,7 +16,7 @@
             <tbody>
                 <tr>
                     <td>
-                      
+
                         ID: {{:id}}
                         <br>
 
@@ -72,42 +72,41 @@
         <br>
         <div class="inp_outer">
             <div class="title1">sun</div>
-            <input type="text" name="sun" data-link="sun" />
+            <textarea style='width:69px' name="sun" data-link="sun" class='dayTiming'></textarea>
         </div>
-        <br>
-        
-         <div class="inp_outer">
+           
+        <div class="inp_outer">
             <div class="title1">mon</div>
-            <input type="text" name="mon" data-link="mon" />
+            <textarea style='width:69px' name="mon" data-link="mon" > </textarea>
         </div>
-        <br>
-         <div class="inp_outer">
+           
+        <div class="inp_outer">
             <div class="title1">tue</div>
-            <input type="text" name="tue" data-link="tue" />
+            <textarea style='width:69px' name="tue" data-link="tue" > </textarea>
         </div>
-        <br>
-         <div class="inp_outer">
+           
+        <div class="inp_outer">
             <div class="title1">wed</div>
-            <input type="text" name="wed" data-link="wed" />
+            <textarea style='width:69px' name="wed" data-link="wed" > </textarea>
         </div>
-        <br>
-         <div class="inp_outer">
+           
+        <div class="inp_outer">
             <div class="title1">thu</div>
-            <input type="text" name="thu" data-link="thu" />
+            <textarea style='width:69px' name="thu" data-link="thu" > </textarea>
         </div>
-        <br>
-         <div class="inp_outer">
+           
+        <div class="inp_outer">
             <div class="title1">fri</div>
-            <input type="text" name="fri" data-link="fri" />
+            <textarea style='width:69px' name="fri" data-link="fri" > </textarea>
         </div>
-        <br>
-         <div class="inp_outer">
+           
+        <div class="inp_outer">
             <div class="title1">sat</div>
-            <input type="text" name="sat" data-link="sat" />
+            <textarea style='width:69px' name="sat" data-link="sat" > </textarea>
         </div>
+           
+
         <br>
-        
-        
         <div class="inp_outer">
             <div class="title1">visitTime</div>
             <span class="inp2" contenteditable="true" id="visitTime"   data-link="visitTime" >---</span>
@@ -123,7 +122,7 @@
 
         <div class="inp_outer">
             <div class="title1">fees</div>
-            
+
             <input type="text" name="fees" data-link="fees" required class="akr_input_text"/>
         </div>
 
@@ -131,13 +130,13 @@
 
         <div class="inp_outer">
             <div class="title1">feeForClinic</div>
-           
+
             <input type="text" name="feeForClinic" data-link="feeForClinic" required class="akr_input_text"/>
         </div>
         <br>
         <div class="inp_outer" style="min-width:200px;" >
             <div class="title1">contactPhone</div>
-           
+
             <input type="tel" name="contactPhone" data-link="contactPhone" required=""  class="akr_input_text"/>
         </div>
 
@@ -182,7 +181,7 @@
                         }
                 )">
             <input type="hidden" id="dateOfJoining" name="dateOfJoining" 
-                   
+
                    value="{{if dateOfJoining}}{{:dateOfJoining}}{{else}}2019-10-10{{/if}}" />
             <div class="title1">dateOfJoining</div>
             <span id='dateOfJoining_display' class="inp2">{{if dateOfJoining}}{{:dateOfJoining}}{{else}}Not set{{/if}}</span>
@@ -200,6 +199,10 @@
                >
 
     </form>
+<!--    
+    <img alt="img" id="img1" width="200">
+    <input type="file" onchange="img_preview_upload('img1')">
+    -->
     <br>
 </div>
 

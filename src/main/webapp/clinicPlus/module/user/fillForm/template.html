@@ -1,15 +1,13 @@
-<!--patient/CRU_template.html -->
+<!--user/CRU_template.html -->
 
 
 <div class="pageTitle">
-    Patient  </div>
- 
-<form id='form_patient' method="post" 
-     action="{{:renderInDiv}}#/cmd/post"
-      >  
-    <input type='hidden' name='div' value='{{:renderInDiv}}'>
-    <input type='hidden' name='module_direct' value='patient'>
-    <input type='hidden' name='redirect' value=' #/cmdc?module=patient&action=/all/list'>
+    user  </div>
+
+<form id='form_user' method="post" 
+      action="{{:renderInDiv}}#/cmd/post">  
+    <input type='hidden' name='module_direct' value='user'>
+    <input type='hidden' name='redirect' value=' #/cmdc?module=user&action=/all/list'>
     <input type="hidden" name="id" data-link="id" />
     <br>
     <div class="w3-bar-ay" data-akr-printable="false" style="position: fixed;z-index: 1">
@@ -21,7 +19,7 @@
         <a class="w3-bar-item  tablink " onClick="openCity(event, 'Files')">Files</a>
     </div>
     <br>
-    <div id="printableArea" style="margin-left: 0mm" title="patient_{{:id}}_{{:name}}">
+    <div id="printableArea" style="margin-left: 0mm" title="user_{{:id}}_{{:name}}">
         <!--basic-->
         <div id="Basic" class="w3-container w3-border city ">
             <h2>Basic</h2>
@@ -188,7 +186,7 @@
     <h2>Files</h2>
     <form id="form_prescription" 
           enctype="multipart/form-data" >
-        <input  name='patientId' value="{{:id}}" type="hidden"     >
+        <input  name='userId' value="{{:id}}" type="hidden"     >
         <table border='1'>
             <tbody>
                 <tr>
@@ -211,7 +209,7 @@
 
                         <input id="input_file_prescription" name='file'  type="file" value="add file"
                                onchange="
-                                   submitFormAKR('form_prescription', '/clinicPlus/api/patient/prescription');
+                                   submitFormAKR('form_prescription', '/clinicPlus/api/user/prescription');
                                    listFiles({{:id}}, document.getElementById('category').value, 'fileList');
                                "
                                style="display: none"
@@ -221,7 +219,7 @@
             </tbody>
         </table>
     </form>
-    <h3> List of existing files for this patient</h3>
+    <h3> List of existing files for this user</h3>
     <div id="fileList" style=""> {{:~listFiles(id,'prescription','fileList')}}</div>
 </div>
 

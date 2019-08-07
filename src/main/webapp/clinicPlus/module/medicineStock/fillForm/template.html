@@ -24,7 +24,7 @@
                 </div>
 
                 <input  type="hidden" id="vendor" name="vendor" 
-                        value= "{{if vendor}}{{:vendor.id}}{{/if}}" />
+                        value= "{{if vendor}}{{:vendor.id}} {{/if}}" />
 
 
 
@@ -32,23 +32,33 @@
                      onclick="popup_selection_obj(
                                      {
                                          'entity_select': 'vendor',
-                                         'input': 'vendor'
+                                         'input': 'vendor',
+                                         afterClick:'vendor_selected_button'
                                      })"
                      >
                     <span id="vendor_display" class="inp2" >     
-                        {{if vendor!=null}}
+                        {{if vendor}}
                         {{:vendor.name}}
                         {{else}}
                         ----
                         {{/if}}
                     </span>
-                </div>       
+                </div>  
+                <button id="vendor_selected_button" 
+                        onclick="vendorSelected()" 
+                        style="display:none">vendor selected</button>
             </div> 
 
             <div class="inp_outer">
                 <div class="title1">bill/Invoice Number</div>
-                <span class="inp2" contenteditable="true" id="billNo"   data-link="billNo" >---</span>
-                <input type="hidden" name="billNo" data-link="billNo" />
+                
+                <input type="text" 
+                       class="akr_input_text"
+                       required=""
+                       id="billNo" 
+                       name="billNo" 
+                       onchange="billNoChanged()"
+                       data-link="billNo" />
             </div>
             <div class="inp_outer">
                 <div class="title1">dateOfPurchase</div>
@@ -65,8 +75,12 @@
                                          'entity_select': 'dateForOrganisation',
                                          'input': 'dateOfPurchase',
                                          'value': '{{:dateOfPurchase}}',
+                                         afterClick:'dateOfPurchase_selected_button'
                                      })"
                      >
+                    <button id="dateOfPurchase_selected_button" 
+                        onclick="dateOfPurchase_selected()" 
+                        style="display:none">dateOfPurchase_selected</button>
                     <span id="dateOfPurchase_display" class="inp2" >     
                         {{if dateOfPurchase}} {{:dateOfPurchase}}{{else}}
                         ----

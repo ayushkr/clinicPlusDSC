@@ -14,6 +14,7 @@ import java.net.URISyntaxException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import org.slf4j.Logger;
@@ -114,7 +115,7 @@ public class FileContentResource {
         return pageCover;
     }
 
-    public ResponseEntity<JsonResponse>  postMapping_oneEntityWise(
+    public ResponseEntity<JsonResponse> postMapping_oneEntityWise(
             int updateFile,
             FileContent fileContent,
             MultipartFile multipartFile
@@ -125,15 +126,13 @@ public class FileContentResource {
                 updateFile,
                 fileContent.getId(),
                 (fileContent.getDoctor() != null
-                        ? fileContent.getDoctor().getId() : null),
+                ? fileContent.getDoctor().getId() : null),
                 (fileContent.getPatient() != null
-                        ? fileContent.getPatient().getId() : null),
+                ? fileContent.getPatient().getId() : null),
                 (fileContent.getAppointment() != null
-                        ? fileContent.getAppointment().getId() : null),
+                ? fileContent.getAppointment().getId() : null),
                 fileContent.getDescription(),
                 multipartFile);
-        
-        
 
     }
 
@@ -153,55 +152,55 @@ public class FileContentResource {
 
         FileContent fileContentBefore = null;
         FileContent fileContentAfter = null;
-        try{
-        if (id == 0) {
-            fileContentBefore = new FileContent();
-            fileContentBefore.setCreationTime(Calendar.getInstance().getTime());
-        } else {
-            fileContentBefore = fileContentRepo.findById(id).get();
-            fileContentBefore.setUpdationTime(Calendar.getInstance().getTime());
-        }
-
         try {
-            fileContentBefore.setDescription(description);
-
-            if (updateFile == 1) {
-                fileContentBefore.setMimeType(multipartFile.getContentType());
-                fileContentStore.setContent(fileContentBefore, multipartFile.getInputStream());
-            }
-            if (doctorId != null) {
-                fileContentBefore.setDoctor(new DoctorEntity().setId(doctorId));
-            }
-            if (patientId != null) {
-                fileContentBefore.setPatient(new PatientEntity().setId(patientId));
-            }
-            if (appointmentId != null) {
-                fileContentBefore.setAppointment(new AppointmentEntity().setId(appointmentId));
+            if (id == 0) {
+                fileContentBefore = new FileContent();
+                fileContentBefore.setCreationTime(Calendar.getInstance().getTime());
+            } else {
+                fileContentBefore = fileContentRepo.findById(id).get();
+                fileContentBefore.setUpdationTime(Calendar.getInstance().getTime());
             }
 
-        } catch (IOException e) {
-            jsonResponse.setMessage(e.toString());
-            jsonResponse.setStatus(Constants1.FAILURE);
+            try {
+                fileContentBefore.setDescription(description);
 
-        }
+                if (updateFile == 1) {
+                    fileContentBefore.setMimeType(multipartFile.getContentType());
+                    fileContentStore.setContent(fileContentBefore, multipartFile.getInputStream());
+                }
+                if (doctorId != null) {
+                    fileContentBefore.setDoctor(new DoctorEntity().setId(doctorId));
+                }
+                if (patientId != null) {
+                    fileContentBefore.setPatient(new PatientEntity().setId(patientId));
+                }
+                if (appointmentId != null) {
+                    fileContentBefore.setAppointment(new AppointmentEntity().setId(appointmentId));
+                }
 
-        // save updated content-related info
-        fileContentAfter = fileContentRepo.save(fileContentBefore);
-        try {
+            } catch (IOException e) {
+                jsonResponse.setMessage(e.toString());
+                jsonResponse.setStatus(Constants1.FAILURE);
+
+            }
+
+            // save updated content-related info
             fileContentAfter = fileContentRepo.save(fileContentBefore);
-            jsonResponse.setMessage("Saved ID:" + fileContentAfter.getId());
-            jsonResponse.setStatus(Constants1.SUCCESS);
-        } catch (Exception e) {
-            jsonResponse.setMessage(e.toString());
-            jsonResponse.setStatus(Constants1.FAILURE);
-        }
-        
-        responseEntity = ResponseEntity
-                    .created(new URI("/api/"+ENTITY_NAME+"/" + fileContentAfter.getId()))
+            try {
+                fileContentAfter = fileContentRepo.save(fileContentBefore);
+                jsonResponse.setMessage("Saved ID:" + fileContentAfter.getId());
+                jsonResponse.setStatus(Constants1.SUCCESS);
+            } catch (Exception e) {
+                jsonResponse.setMessage(e.toString());
+                jsonResponse.setStatus(Constants1.FAILURE);
+            }
+
+            responseEntity = ResponseEntity
+                    .created(new URI("/api/" + ENTITY_NAME + "/" + fileContentAfter.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME,
                             fileContentAfter.getId() + ""))
                     .body(jsonResponse);
-         } catch (URISyntaxException ex) {
+        } catch (URISyntaxException ex) {
             java.util.logging.Logger.getLogger(Class.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -228,7 +227,7 @@ public class FileContentResource {
     }
 
 //    @RequestMapping(value = "/files/{fileId}", method = RequestMethod.GET)
-    @GetMapping("content/{fileId}")
+    @GetMapping("{fileId}/content")
     public ResponseEntity<?> getContent(@PathVariable("fileId") Long id) {
 
         Optional<FileContent> fileContent = fileContentRepo.findById(id);
@@ -242,7 +241,7 @@ public class FileContentResource {
                         + fileContent.get().getMimeType().split("/")[1]);
                 return new ResponseEntity<>(inputStreamResource, headers, HttpStatus.OK);
             } catch (Exception e) {
-                return new ResponseEntity<>("No file set yet", HttpStatus.OK);
+                return new ResponseEntity<>("No file set yet "+e.toString(), HttpStatus.OK);
             }
         } else {
             return new ResponseEntity<>("fileContent is not present", HttpStatus.OK);
@@ -272,10 +271,21 @@ public class FileContentResource {
 
     }
 
+    @GetMapping("")
+    @ResponseBody
+    public List<FileContent> all() {
+        logger.warn("id {} ", new Object[]{ENTITY_NAME});
+        List<FileContent> findAll = fileContentRepo.findAll();
+        return findAll;
+    }
+
     // delete
     @GetMapping("delete/id/{id}")
     public DeleteResponse DeleteMapping_id(@PathVariable("id") Long id) {
         logger.warn("REST request to delete {} {}", new Object[]{ENTITY_NAME, id});
+        
+        FileContent get = fileContentRepo.findById(id).get();
+        fileContentStore.unsetContent(get);
         fileContentRepo.deleteById(id);
         DeleteResponse deleteResponse = new DeleteResponse();
         deleteResponse.setMessage("Deleted FileContent with id " + id);

@@ -1,0 +1,21 @@
+<div id="printableArea"   title="finance_List" >
+<div class="pageTitle">{{if id==0}} New  {{else}} Existing  : {{:id}} {{/if}}  </div>
+<form id='form_finance' method="post" 
+      action="{{:renderInDiv}}#/cmd/post">
+    <input type='hidden' name='redirect' value=' #/cmdc?module=finance&action=/all/list'>
+    <input type='hidden' name='module_direct' value='finance'>
+    <input type="hidden" name="id" data-link="id" />
+    <br>
+    ID: <span class="rounded"
+              title="ഇതാണ്  ബില്ല്  നമ്പർ "
+              >{{:id}} </span>
+    <br><br>
+
+
+    
+ 
+
+</form>
+
+
+</div>
