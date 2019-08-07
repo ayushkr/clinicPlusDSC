@@ -68,6 +68,9 @@ function cmd(context) {
 
     var params_ = Object.getOwnPropertyNames(this.params);
     
+    if(this.params['div']===undefined){
+        this.params['div']='main_1';
+    }
     
     if (('#' + this.params['div']) === context.app.element_selector) {
         
