@@ -1,4 +1,5 @@
 <!--appointment/fillForm.html-->
+<div id="printableArea"   title="appt_{{:id}}_{{if name}}{{:name}}{{/if}}" >
 
 <div class="pageTitle">{{if id==0}} New  Appointment{{else}}
     <i class="fa fa-edit"  > </i>
@@ -88,7 +89,7 @@ You must save to see the PatientCard
         <br>
         
          <fieldset>
-            <legend>Patient</legend>
+            <legend>Patient </legend>
         <!--patient-->
         <div class="inp_outer" style="min-width: 200px">
             <input id="patient" name='patient' type="hidden" 
@@ -104,7 +105,7 @@ You must save to see the PatientCard
                      )"
                  >
 
-                <div class="title1">Patient </div>
+                <div class="title1">Patient Name</div>
                 <span id='patient_display' class="inp2">
                     {{if patient}}{{:patient.name}}{{else}} --- {{/if}}
                 </span>
@@ -158,7 +159,7 @@ You must save to see the PatientCard
                      }
                      )"
                  >
-                <div class="title1"> Doctor </div>
+                <div class="title1"> Doctor Name </div>
 
                 <span id="doctor_display" class="inp2" >
                     {{if doctor}} {{:doctor.name}} 
@@ -302,3 +303,5 @@ You must save to see the PatientCard
 </div>
 
 {{/if}}
+
+</div>

@@ -266,7 +266,7 @@ function populateCreate2(module, id, divName) {
     }
 
 
-    if (divName === 'main1') {
+    if (divName === 'main_1') {
         aylinker({
             urlOfTemplate: "/clinicPlus/module/entity/crud/update/template_menuTop_update.html?ay=0" + pageNewAy(1),
             selector: divName + '_menu',
