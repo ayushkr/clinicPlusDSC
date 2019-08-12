@@ -128,7 +128,9 @@
         {{else}}
         <h1>Pharmacy Bill Row not exist</h1> 
         {{/if}}
-        <div id="oneRowInEdit"></div>
+        <div id="oneRowInEdit"
+             class="oneRowInEdit_Row"
+             ></div>
         <hr>
         <div class="Table">
             <div class="Title">
@@ -163,8 +165,14 @@
             </div>
             {{for map.payload.pharmacyBillRowEntitys}}
             {{if medicineStock}}
-            {{if  (medicineStock.medicineBrandName.brandName!='roundOff')}}
-            <div class="Row"    id="row_{{:id}}" 
+            
+            <div 
+               {{if  (medicineStock.medicineBrandName.brandName=='roundOff')}}
+               data-akr-printable="false"
+               style="background-color: pink;"
+               {{/if}}
+                
+                class="Row"    id="row_{{:id}}" 
                  onclick="pharmacyCashBill.onRowSelect({{:id}})"
                  onkeydown="pharmacyCashBill.onRowSelectByKey({{:id}})"
 
@@ -244,20 +252,9 @@
 
             </div>
 
-
-
-            {{else}}
-            <div class="Row"    id="row_{{:id}}" >
-
-                <span id='round'  title='{{:id}}'></span>
-
-
-            </div>
-
-            {{/if}}
             <div 
-                class="Row" 
-                style="background-color: pink"
+                class="oneRowInEdit_Row" 
+                
                 data-akr-printable="false"
                 id="oneRowInEdit_{{:id}}">
 
@@ -280,7 +277,8 @@
                     <ayu1>
                         <button  class=" w3-red" accesskey="i"
                                  >
-                            medicine Name not selected
+                            <!--medicine Name not selected-->
+                            ---
                         </button>
 
                     </ayu1>
@@ -295,7 +293,7 @@
             </div>
             <div 
                 id="oneRowInEdit_{{:id}}"
-                class="Row" 
+                class="oneRowInEdit_Row" 
                 style="background-color: pink"
                 data-akr-printable="false"
                 >
@@ -377,7 +375,7 @@
         </div>
         <br/>
 
-        Total Item(s) : {{:totalItems}} ,
+       
         Paid Amount :  <span style="font-weight: bold;font-size: 18px">{{:map.payload.amountTotalRounded}}</span>
         (
         {{:map.payload.amountTotalWords}}  )

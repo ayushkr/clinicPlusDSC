@@ -146,6 +146,7 @@ function cmd_post(context, data) {
 //                        window.location.href = path;
                     } else {
                         alert_1('Sorry :(', data.message, data.status);
+                         window.history.back();
 
                     }
 

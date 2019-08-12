@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name = "MedicineStock")
 @Table(name = "MedicineStock")
@@ -22,7 +23,8 @@ import org.hibernate.annotations.ColumnDefault;
 public class MedicineStockEntity implements Serializable {
 
     @Id
-    @GeneratedValue
+   @GenericGenerator(name = "generator", strategy = "increment")
+    @GeneratedValue(generator = "generator") 
     private long id;
 
     @OneToOne

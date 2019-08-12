@@ -11,13 +11,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name = "PharmacyBill")
 @Table(name = "PharmacyBill")
 public class PharmacyBillEntity implements Serializable {
 
     @Id
-    @GeneratedValue
+    
+     @GenericGenerator(name = "generator", strategy = "increment")
+    @GeneratedValue(generator = "generator") 
     private long id;
     String remarks;
    

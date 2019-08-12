@@ -16,6 +16,17 @@ function img_preview_upload(idOfImage) {
     URI.revokeObjURI(imgObj.src);
 }
 
+
+function  smallMenuToggle(id) {
+    var m = document.getElementById(id);
+    if (m.style.display === 'block') {
+        m.style.display = 'none';
+    } else {
+        m.style.display = 'block';
+    }
+
+}
+
 function  navGo() {
     var selectedItem = event.target;
     console.log('navGo ,selectedItem=' + selectedItem.id);
@@ -266,19 +277,28 @@ function populateCreate2(module, id, divName) {
     }
 
 
-    if (divName === 'main_1') {
+
+    {
         aylinker({
             urlOfTemplate: "/clinicPlus/module/entity/crud/update/template_menuTop_update.html?ay=0" + pageNewAy(1),
             selector: divName + '_menu',
             data: paging_data
         });
-    } else {
-        var str = "<i class='fa fa-close entity_select_closeButton' \n\
-onclick=save('" + module + "');hideMainLevel(); ></i>";
-        document.getElementById(divName + "_menu").innerHTML = str;
-
-
     }
+//
+//    if (divName === 'main_1') {
+//        aylinker({
+//            urlOfTemplate: "/clinicPlus/module/entity/crud/update/template_menuTop_update.html?ay=0" + pageNewAy(1),
+//            selector: divName + '_menu',
+//            data: paging_data
+//        });
+//    } else {
+//        var str = "<i class='fa fa-close entity_select_closeButton' \n\
+//onclick=save('" + module + "');hideMainLevel(); ></i>";
+//        document.getElementById(divName + "_menu").innerHTML = str;
+//
+//
+//    }
 
 
 

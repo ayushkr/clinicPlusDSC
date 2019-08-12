@@ -58,7 +58,7 @@ public class Starter {
     @Bean
     File filesystemRoot() {
         try {
-            return new File("/home/akr2/NetBeansProjects/persisted/fileRepo/clinicPlus");
+            return new File("/common/common/NetBeansProjects/persisted/fileRepo/clinicPlus");
         } catch (Exception ioe) {
 
         }

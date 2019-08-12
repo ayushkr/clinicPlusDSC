@@ -1,20 +1,4 @@
 
-<!--class="pharmacyCashBill_oneRowTemplate"-->
-<!--
-<div id="formDiv" 
-     
-
-     >-->
-<!--    onmouseout2="hideDivAy('oneRowInEdit_{{:id}}');"-->
-<!--    OneRowfillFormTemplate-->
-
-<!--pharmacyCashBill.onRowSelect(0)-->
-
-
-
-
-<!--row form-->
-<!--<form name="f1" id="f1" action="#/cmd/post" method="POST">-->
 
 <input type="hidden" name="addOrDeleteFlag" value="edit"> 
 <input type="hidden" name="module_direct" value="pharmacyBillRow"> 
@@ -39,7 +23,7 @@
                         {
                             'entity_select': 'medicineStock',
                             'input': 'medicineStock',
-                            'div':'main2'
+                            'div': 'main2'
                         }
 
                 )" >
@@ -53,7 +37,7 @@
             <button id="medicineStock_display"  
                     class="w3-button w3-theme-d1"
                     >     
-                <!--{{:medicineStock.id}}_--> 
+
                 {{:medicineStock.medicineBrandName.brandName}}
             </button>
 
@@ -62,14 +46,14 @@
                     name="medicineStock" 
                     />
             <span id="medicineStock_display">    
-                <button  class="w3-button w3-theme-d1"  
-                         accesskey="m"
-                         title="Add/Change Medicine ? (Alt m)"
-                         > 
-                    <i class="fa fa-plus-circle">
-                        Medicine Name <br>
-                        ( മരുന്നിന്റെ പേര്  )
-                    </i>
+
+                <button id="medicineStock_display"  
+                        class="w3-button w3-theme-d1"
+                        accesskey="m"
+                        title="Add/Change Medicine ? (Alt m)"
+                        >     
+
+                    ----
                 </button>
 
             </span>
@@ -125,10 +109,3 @@
 
 
 </div>
-<!--        </form>-->
-
-
-
-<!--</div>-->
-
-

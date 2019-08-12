@@ -289,6 +289,7 @@ public class AppointmentResource {
             @RequestParam("n") List<Long> list) {
         ResponseEntity<JsonResponse> responseEntity = null;
         JsonResponse jsonResponse = new JsonResponse();
+         jsonResponse.setStatus(Constants1.SUCCESS);
         String failedIds = "";
         try {
             logger.warn("deleteBulk , got={} ", list.toString());
@@ -296,6 +297,10 @@ public class AppointmentResource {
                 System.out.println(" n=" + n);
                 try {
                     repo.deleteById(n);
+                      failedIds += "<hr><p>Ok deleted " + label + " ID:" + n
+                            
+                            + "</p><hr>";
+                    
                 } catch (Exception e) {
 
                     failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
@@ -303,12 +308,12 @@ public class AppointmentResource {
                             + ((e.getMessage().contains("ConstraintViolationException"))
                             ? "It Used in Other place " : e.getMessage())
                             + "</p><hr>";
-
+                    jsonResponse.setStatus(Constants1.FAILURE);
                 }
 
             }
             jsonResponse.setMessage(failedIds);
-            jsonResponse.setStatus(Constants1.FAILURE);
+            
             responseEntity = ResponseEntity
                     .created(new URI("/api/" + label + "/"))
                     .headers(HeaderUtil.createEntityCreationAlert(label,
@@ -316,6 +321,7 @@ public class AppointmentResource {
                     .body(jsonResponse);
         } catch (URISyntaxException ex) {
             java.util.logging.Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        
         }
         return responseEntity;
     }

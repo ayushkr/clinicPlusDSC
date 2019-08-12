@@ -33,7 +33,7 @@ import org.springframework.data.domain.Sort;
 @RequestMapping("/clinicPlus/api/pharmacyBillRow")
 public class PharmacyBillRowResource {
 
-    String label = "PharmacyBillRow";
+    String label = "pharmacyBillRow";
     private final Logger logger = LoggerFactory.getLogger(PharmacyBillRowResource.class);
 
     @Autowired

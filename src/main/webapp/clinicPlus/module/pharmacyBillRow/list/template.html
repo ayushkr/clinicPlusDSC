@@ -1,98 +1,343 @@
-<div id="printableArea"   title="PharmacyBill_List" >
-    <h3 >Pharmacy Bill Row</h3>
- 
-    <table >
-        <thead>
-            <tr class="bluestrp">
-                
-                <th>id</th>
-                <th>pbill</th>
-            
-                <th>item/BrandName</th>
-                <th>Mfg</th>
-                <th>Vendor</th>
-                <th>Batch</th>
-                <th>Exp</th>
-                <th>Qty</th>
-                <th>Rate</th>
-                <th>Dis%</th>
-                <th>GST</th>
-                <th>MRP</th>
-                <th>Amount</th>
 
-            </tr>
-        </thead>
-        <tbody>
 
-           {{for obj.pageList.content}}
-         
-                
-                <tr 
-            onclick="go({{:id}},'pharmacyBillRow')"
-            class="firstrow"
-            tabindex="0"
-            >
-                
-                
-                <td>{{:id}}</td>
-                 <td>{{:pharmacyBill.id}}</td>
-                
-                
-                {{if medicineStock}}
-                <!--                <td>
-                                    medicineStock_{{:medicineStock.id}}
-                                </td>-->
-                <td>
-                    {{:medicineStock.medicineBrandName.brandName}} (ID : {{:medicineStock.id}})
-                </td>
-                <td>
-                    {{:medicineStock.medicineBrandName.company}}
-                </td>
-                <td>
-                     {{if medicineStock.vendor}}
-                    {{:medicineStock.vendor.name}}
-                    {{/if}}
-                </td>
-                <td>
-                    {{:medicineStock.batch}}
-                </td>
-                <td>
-                    {{:medicineStock.expiryDate}}
-                </td>
-                <td>{{:qty}}</td>
+<h3 >Pharmacy Bill Row</h3>
+<div style="position: relative;z-index: 1;
+     background-color: transparent"
+     data-akr-printable="false"
+     >
+    <div class="w3-bar-ay"  >
 
-                <td   >
-                    
-                    
-                    {{:medicineStock.sellingPrice}}
-                </td>
-                <td>
-                    {{:medicineStock.discount}}
-                </td>
-                <td>
-                    {{:medicineStock.gst}}
-                </td>
-                <td>
-                    {{:medicineStock.mrp}}
-                </td>
+        <a class="w3-bar-item  tablink tabSelected" 
+           onClick="openCity(event, 'filter')">Filter</a>
 
-                <td>
-                    {{:amount}}
-                </td>
-              
-                {{else}}
-                Not set
-                {{/if}}
+
+        <a class="w3-bar-item tablink " 
+           onClick="openCity(event, 'bulk')">Bulk</a>
+
+    </div>
+
+    <div id="filter" class="w3-container w3-border city ">
+
+        <div class="inp_outer" style="min-width: 200px">
+
+            <div class="inp1" 
+                 onclick="popup_selection_obj(
+                     {
+                     'entity_select': 'patient',
+                             'input': 'patient'
+                     }
+                     )"
+                 >
+
+                <div class="title1">
+                    <i class="fa fa-filter"></i>
+                    Patient Name </div>
+                <span id='patient_display' 
+                      class="inp2 " >
+                    Select
+                </span>
+
+            </div>
+            or enter ID   <input id="patient" name='patient' type="text"  value="" 
+                                 style="height: 50px;height: 25px;width: 89px;"> 
+            <input type="button" value="Go "
+                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=patient&filter=' + document.getElementById('patient').value + ''"
+                   >
+        </div>
+
+        <div class="inp_outer" style="min-width: 200px">
+
+            <div class="inp1" 
+                 onclick="popup_selection_obj(
+                     {
+                     'entity_select': 'doctor',
+                             'input': 'doctor'
+                     }
+                     )"
+                 >
+
+                <div class="title1">
+                    <i class="fa fa-filter"></i>
+                    doctor Name </div>
+                <span id='doctor_display' class="inp2">
+                    Select
+                </span>
+
+            </div>
+            or enter ID   <input id="doctor" name='doctor' type="text"  value="" 
+                                 style="height: 50px;height: 25px;width: 89px;"> 
+            <input type="button" value="Go "
+                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=doctor&filter=' + document.getElementById('doctor').value + ''"
+                   >
+        </div>
+
+    </div>
+
+    <div id="bulk" class="w3-container w3-border city city_hide">
+
+        <input type="submit" value="Bulk Delete"
+               form='form_appointment/deleteBulk'
+               onclick="window.location.href = '#/dummy?a=3'"
+               >
+
+    </div>  
 
 
 
-
-            </tr>
-            {{else}}
-    No members...
-            {{/for}}
-        </tbody>
-
-
-    </table>
 </div>
+
+<hr>
+<form id='form_appointment/deleteBulk' 
+      method="post" 
+      action="{{:renderInDiv}}#/cmd/post"> 
+    <input type='hidden' name='module_direct'
+           value='appointment/deleteBulk'>
+    <input type='hidden' name='redirect' 
+           value=' #/cmdc?module=doctor&action=/all/list'>
+
+    <div id="printableArea"   title="pharmBillRow_List" >
+        List of Appointments in DSC
+        <table  class="table_greyBorder" 
+                cellspacing="0" cellpadding="5" border="1"  >
+
+
+            <thead>
+                <tr class="bluestrp">
+                     <th style="min-width: 20px" >
+                        
+                    </th>
+                   <th style="min-width: 20px" >
+                        
+                    </th>
+                    <th>id
+                        <br>
+                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
+                           >
+                            <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                                <i class="fa fa-caret-up headerSortSymbol "></i>
+                            </span>
+                        </a>
+
+                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
+                           >
+                            <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                                <i class="fa fa-caret-down headerSortSymbol"></i>
+                            </span>
+                        </a>
+
+
+                    </th>
+
+                    <th>bill Id
+                        <br>
+                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=pharmacyBill&sortOrder=a"
+                           >
+                            <span class=" {{if obj.sortColumn=='pharmacyBill'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                                <i class="fa fa-caret-up headerSortSymbol "></i>
+                            </span>
+                        </a>
+
+                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=pharmacyBill&sortOrder=d"
+                           >
+                            <span class=" {{if obj.sortColumn=='pharmacyBill'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                                <i class="fa fa-caret-down headerSortSymbol"></i>
+                            </span>
+                        </a>
+
+
+                    </th>
+
+                    <th style="min-width: 100px">
+                        Doctor
+                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=doctor&sortOrder=a"
+                           >
+                            <span class=" {{if obj.sortColumn=='doctor'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                                <i class="fa fa-caret-up headerSortSymbol "></i>
+                            </span>
+                        </a>
+
+                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=doctor&sortOrder=d"
+                           >
+                            <span class=" {{if obj.sortColumn=='doctor'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                                <i class="fa fa-caret-down headerSortSymbol"></i>
+                            </span>
+                        </a>
+
+
+
+
+                    </th>
+                    <th style="min-width: 100px" >
+                        Patient
+                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=patient&sortOrder=a"
+                           >
+                            <span class=" {{if obj.sortColumn=='patient'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                                <i class="fa fa-caret-up headerSortSymbol "></i>
+                            </span>
+                        </a>
+
+                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=patient&sortOrder=d"
+                           >
+                            <span class=" {{if obj.sortColumn=='patient'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                                <i class="fa fa-caret-down headerSortSymbol"></i>
+                            </span>
+                        </a>
+
+
+                    </th>
+
+
+
+                    <th>item/BrandName</th>
+                    <th>Mfg</th>
+                    <th>Vendor</th>
+                    <th>Batch</th>
+                    <th>Exp</th>
+                    <th>Qty</th>
+                    <th>Rate</th>
+                    <th>Dis%</th>
+                    <th>GST</th>
+                    <th>MRP</th>
+                    <th>Amount</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                {{for obj.pageList.content}}
+<!--                <tr> 
+                    <td colspan="12">
+
+
+                    </td>
+                </tr>-->
+
+                <tr 
+                    onclick2="smallMenuToggle('menu_individual_{{:id}}')"
+                    class="firstrow"
+                    tabindex="0"
+                    >
+                    
+                    <td>
+                         <div id='menu_individual_{{:id}}' 
+                             data-akr-printable="false"
+                             style2="display: none"
+                             >
+
+                            <input type="checkbox"
+                                   title="select"
+                                   id="checkbox_{{:id}}"
+                                   class="regular-checkbox" 
+                                   name="n"  value="{{:id}}">
+                            <label for="checkbox_{{:id}}"></label>
+
+
+
+
+                        </div>
+                        
+                    </td>
+
+                    <td >
+                        <div id='menu_individual_{{:id}}' 
+                             data-akr-printable="false"
+                             style2="display: none"
+                             >
+
+
+                            <i class="fa fa-edit"
+                               title="Edit"
+                               onclick="go({{:id}}, 'pharmacyBillRow')" 
+
+                               ></i>
+
+
+                        </div>
+
+                    </td>
+                    <td>{{:id}}</td>
+                    <td>
+                        {{if pharmacyBill}}
+                        {{:pharmacyBill.id}}
+                        {{/if}}
+                    </td>
+
+                    <td>
+                        {{if pharmacyBill}}
+                        {{:pharmacyBill.appointment.doctor.name}}
+                        {{/if}}
+                    </td>
+                    <td>
+                        {{if pharmacyBill}}
+                        {{:pharmacyBill.appointment.patient.name}}
+                        {{/if}}
+                    </td>
+
+
+
+
+
+
+                    {{if medicineStock}}
+                    <!--                <td>
+                                        medicineStock_{{:medicineStock.id}}
+                                    </td>-->
+                    <td>
+                        {{:medicineStock.medicineBrandName.brandName}} (ID : {{:medicineStock.id}})
+                    </td>
+                    <td>
+                        {{:medicineStock.medicineBrandName.company}}
+                    </td>
+                    <td>
+                        {{if medicineStock.vendor}}
+                        {{:medicineStock.vendor.name}}
+                        {{/if}}
+                    </td>
+                    <td>
+                        {{:medicineStock.batch}}
+                    </td>
+                    <td>
+                        {{:medicineStock.expiryDate}}
+                    </td>
+                    <td>{{:qty}}</td>
+
+                    <td   >
+
+
+                        {{:medicineStock.sellingPrice}}
+                    </td>
+                    <td>
+                        {{:medicineStock.discount}}
+                    </td>
+                    <td>
+                        {{:medicineStock.gst}}
+                    </td>
+                    <td>
+                        {{:medicineStock.mrp}}
+                    </td>
+
+                    <td>
+                        {{:amount}}
+                    </td>
+
+                    {{else}}
+                    Not set
+                    {{/if}}
+
+
+
+
+                </tr>
+                {{else}}
+                No members...
+                {{/for}}
+            </tbody>
+
+
+        </table>
+    </div>
+
+
+</form>
+
+

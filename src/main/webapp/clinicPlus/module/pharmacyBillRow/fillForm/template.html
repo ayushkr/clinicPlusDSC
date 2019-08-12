@@ -18,7 +18,7 @@
 
         <div class="inp_outer"   onclick="popup_selection_obj(
                         {
-                            'value': '{{:pharmacyBill.id}}',
+                            'value': '{{if pharmacyBill}}{{:pharmacyBill.id}}{{else}}----{{/if}}',
                             'entity_select': 'pharmacyBill',
                             'input': 'pharmacyBill'
                         }

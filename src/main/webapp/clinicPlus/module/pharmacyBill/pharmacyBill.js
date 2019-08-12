@@ -11,7 +11,7 @@ function  PharmacyCashBill() {
 
         aylinker({
             urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/menuTop.html?ran=" + Math.random(),
-            selector: "main1_menu",
+            selector: "main_1_menu",
             data: {id: id}
         }
         );
@@ -22,7 +22,7 @@ function  PharmacyCashBill() {
             console.log('PharmacyCashBill.render_list()  get("/clinicPlus/api/pharmacyBillRow/ByBillId/' + id);
             aylinker({
                 urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/list/template.html?ran=" + Math.random(),
-//                selector: "main1_inner",
+//                selector: "main_1_inner",
                 selector: divName,
 
                 data: result
@@ -30,7 +30,7 @@ function  PharmacyCashBill() {
             );
         });
 
-        document.getElementById('main1_paging').innerHTML = "";
+        document.getElementById('main_1_paging').innerHTML = "";
     };
 
 
@@ -58,7 +58,7 @@ function  PharmacyCashBill() {
 //                    document.getElementById('row_' + id).style =
 //                            'background-color: var(--color_d4);color: var(--color_l4); ';
 //                }
-
+  document.getElementById('row_' + id).style.display = 'none';
                 document.getElementById('oneRowInEdit_' + id).style.display = 'table-row';
 
                 $.get("/clinicPlus/api/pharmacyBillRow/" + id, function (result) {
@@ -66,13 +66,15 @@ function  PharmacyCashBill() {
                     aylinker({
                         urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/oneRowfillFormTemplate.html?ran=" + Math.random(),
                         selector: 'oneRowInEdit_' + id,
-//                       selector: 'row_' + id,
+//                      
                         data: result
                     }
                     );
                 });
 
                 setTimeout(function () {
+                    
+                    
                     document.getElementById('qty').select();
                 }, 100);
 
@@ -163,7 +165,7 @@ function  PharmacyCashBill() {
                                         console.log("postToPharmacyBillRowAPI  get ");
                                         aylinker({
                                             urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/list/template.html?ran=" + Math.random(),
-                                            selector: "main1_inner",
+                                            selector: "main_1_inner",
                                             data: result
                                         }
                                         );

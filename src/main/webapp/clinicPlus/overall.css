@@ -165,6 +165,11 @@ a{ text-decoration: none}
     border: #295dd2 dashed 1px;
 }
 
+.oneRowInEdit_Row{
+    display:table-row;
+    background-color: white;
+}
+
 /*navbar*/ 
 #alert_akr{
     display: none;

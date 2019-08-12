@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity(name = "vendor")
@@ -17,7 +18,8 @@ import javax.persistence.TemporalType;
 public class VendorEntity implements Serializable  {
 
     @Id
-    @GeneratedValue
+    @GenericGenerator(name = "generator", strategy = "increment")
+    @GeneratedValue(generator = "generator") 
     @Column(name = "id", nullable = false)
     private long id;
     

@@ -18,12 +18,11 @@ import org.hibernate.annotations.Parameter;
 
 @Entity(name = "MedicineBrandName")
 @Table(name="MedicineBrandName")
-@TableGenerator(name="tab1", initialValue=1, allocationSize=50)
 public class MedicineBrandNameEntity  {
 
     @Id
-//   @GeneratedValue(strategy=GenerationType.TABLE, generator="tab1")
-     @GeneratedValue
+  @GenericGenerator(name = "generator", strategy = "increment")
+    @GeneratedValue(generator = "generator") 
     private long id;
     private String brandName;
     private String company;
