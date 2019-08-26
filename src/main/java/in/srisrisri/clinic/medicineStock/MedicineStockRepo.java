@@ -1,6 +1,8 @@
 package in.srisrisri.clinic.medicineStock;
 
 import in.srisrisri.clinic.medicineBrandName.MedicineBrandNameEntity;
+import in.srisrisri.clinic.purchaseBill.PurchaseBillEntity;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,6 +25,8 @@ public interface MedicineStockRepo extends JpaRepository<MedicineStockEntity,Lon
   
     @Query("select u from MedicineStock u where LOWER(u.medicineBrandName.composition) LIKE LOWER(CONCAT('%',?1, '%'))  order by id asc ")
     public Page<MedicineStockEntity> findAllByCompositionLike(String filter, Pageable pageable);
+
+    public List<MedicineStockEntity> findByPurchaseBill(PurchaseBillEntity purchaseBillEntity);
 
    
 

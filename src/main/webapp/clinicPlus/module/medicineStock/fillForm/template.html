@@ -2,98 +2,20 @@
 <!--medicineStock-->
 
 <form id='form_medicineStock' method="post" 
-    action="{{:renderInDiv}}#/cmd/post">  
+      action="{{:renderInDiv}}#/cmd/post">  
     <input type='hidden' name='module_direct' value='medicineStock'>
     <input type='hidden' name='redirect' value=' #/cmdc?module=medicineStock&action=/all/list'>
 
-    medicineStock
+   
     <div id="printableArea"   
          title="MedicineStock_{{:id}}_{{if medicineBrandName}}{{:medicineBrandName.brandName}}{{/if}}" >
-
-        id <span class="inp2" contenteditable="false" id="id"   data-link="id" >---</span>   <br>
-        <input type="hidden" name="id" data-link="id" />
+ medicineStock 
+         <input type="hidden" name="id" data-link="id" />
+        id <span class="" data-link="id" >---</span> 
+       
         <div style="float: right">qtyRemaining={{:qtyRemaining}}</div>
-        
-        <br>
 
-        <fieldset>
-            <legend>Vendor Related</legend>
-            <div class="inp_outer" style="min-width:200px">
-                <div class="title1">
-                    vendor
-                </div>
-
-                <input  type="hidden" id="vendor" name="vendor" 
-                        value= "{{if vendor}}{{:vendor.id}} {{/if}}" />
-
-
-
-                <div style='border: 1px;' 
-                     onclick="popup_selection_obj(
-                                     {
-                                         'entity_select': 'vendor',
-                                         'input': 'vendor',
-                                         afterClick:'vendor_selected_button'
-                                     })"
-                     >
-                    <span id="vendor_display" class="inp2" >     
-                        {{if vendor}}
-                        {{:vendor.name}}
-                        {{else}}
-                        ----
-                        {{/if}}
-                    </span>
-                </div>  
-                <button id="vendor_selected_button" 
-                        onclick="vendorSelected()" 
-                        style="display:none">vendor selected</button>
-            </div> 
-
-            <div class="inp_outer">
-                <div class="title1">bill/Invoice Number</div>
-                
-                <input type="text" 
-                       class="akr_input_text"
-                       required=""
-                       id="billNo" 
-                       name="billNo" 
-                       onchange="billNoChanged()"
-                       data-link="billNo" />
-            </div>
-            <div class="inp_outer">
-                <div class="title1">dateOfPurchase</div>
-
-
-                <input  type="hidden" id="dateOfPurchase" name="dateOfPurchase" 
-                        value="{{if dateOfPurchase}}{{:dateOfPurchase}}{{else}}{{/if}}"
-                        />
-
-
-                <div style='border: 1px;' 
-                     onclick="popup_selection_obj(
-                                     {
-                                         'entity_select': 'dateForOrganisation',
-                                         'input': 'dateOfPurchase',
-                                         'value': '{{:dateOfPurchase}}',
-                                         afterClick:'dateOfPurchase_selected_button'
-                                     })"
-                     >
-                    <button id="dateOfPurchase_selected_button" 
-                        onclick="dateOfPurchase_selected()" 
-                        style="display:none">dateOfPurchase_selected</button>
-                    <span id="dateOfPurchase_display" class="inp2" >     
-                        {{if dateOfPurchase}} {{:dateOfPurchase}}{{else}}
-                        ----
-                        {{/if}}
-                    </span>
-                </div>
-
-            </div>
-
-
-        </fieldset>
-        <hr> 
-
+        <div id="selectLarge_purchaseBill" style="display: inline-block"></div>
         <fieldset>
             <legend>Basic</legend>
             <div class="inp_outer">
@@ -132,15 +54,15 @@
             <div class="inp_outer">
 
                 <div class="title1">expiryDate (MM/yyyy)</div>
-             
+
                 <input  
                     type="hidden"
                     id="expiryDate"
                     name="expiryDate" 
-                     value= "{{if expiryDate}}{{:expiryDate}}{{/if}}" 
-                    
+                    value= "{{if expiryDate}}{{:expiryDate}}{{/if}}" 
+
                     />
-             
+
 
 
                 <div style='border: 1px;' 
@@ -167,7 +89,7 @@
             <div class="inp_outer">
                 <div class="title1">batch</div>
                 <span class="inp2" contenteditable="true" id="batch" 
-                       style="min-width: 100px"
+                      style="min-width: 100px"
                       data-link="batch" >---</span>
                 <input type="hidden" name="batch" data-link="batch" />
             </div>
@@ -242,15 +164,19 @@
 
         </fieldset>
 
-        <hr>
-
+        <div class="inp_outer" title="വേറെ  വിശേഷം വല്ലതും ഉണ്ടോ ?" 
+             style="min-width: 400px;min-height: 50px">
+            <div class="title1"   >  Remarks</div>
+            <span class="inp2" contenteditable="true" id="remarks"   data-link="remarks" >---</span>
+            <input type="hidden" name="remarks" data-link="remarks" />
+        </div>
 
         <span >End</span>
 
-<!--        <fieldset>
-            <legend> Full details in JSON</legend>
-            <span style=" width: 100px;display: inherit;">{{:~jsonise(~root)}}</span>
-
-        </fieldset>-->
+        <!--        <fieldset>
+                    <legend> Full details in JSON</legend>
+                    <span style=" width: 100px;display: inherit;">{{:~jsonise(~root)}}</span>
+        
+                </fieldset>-->
     </div>
 </form>

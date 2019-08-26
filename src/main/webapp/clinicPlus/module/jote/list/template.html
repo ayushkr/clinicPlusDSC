@@ -1,69 +1,88 @@
-<div id="printableArea"   title="Jote_List" >
-    
-    
+<div id="printableArea"   title="{{:obj.module}}_List" >
+
+ 
+
+    <table  class="table_greyBorder" cellspacing="0" cellpadding="5" border="1"  >
+
+        <thead>
+            <tr class="bluestrp">
+               
+                <th style="min-width: 30px;">
+                    Id
+                    
+                    
+                      <br>
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+                    
+
+                 
+                </th>
+               <th style="min-width: 30px;">
+                    status
+               
+                  <br>
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=status&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='status'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol"></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=status&sortOrder=d"
+                       >
+                        <span class=" {{if obj.sortColumn=='status'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                               <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+                    
+                
+                </th>
+                <th>body</th>
+                <th>category</th>
+                <th>title</th>
 
 
-
-    <p style="font-size: 24px; font-weight: bold; text-align: justify">Patient</p>
-    Page <span class="w3-badge">{{:obj.pageable.pageNumber+1}}</span>  of {{:obj.totalPages}}
-    
-    {{for start=1 end=obj.totalPages+1  itemVar='~page' }}
-    <a {{if false}} class="pageNumberButtonSel" {{else}}  class="pageNumberButton" {{/if}}  href="#/cmd?module=jote&action=/all/list&pageNumber={{:~page}}"> {{:~page}}</a>
-    {{/for}}
-    <br>
-    {{if obj.pageable.pageNumber>0}}
-    <a class="pageNumberButton" href="#/cmd?module=jote&action=/all/list&pageNumber={{:obj.pageable.pageNumber+0}}">Prev</a>
-    {{else}}
-    --
-    {{/if}}
-     {{if obj.pageable.pageNumber< obj.totalPages-1}}
-    <a class="pageNumberButton" href="#/cmd?module=jote&action=/all/list&pageNumber={{:obj.pageable.pageNumber+2}}">Next</a>
-      {{/if}}
-<table >
-    
-            <thead>
-        <tr>
-            <!--<th></th>-->
-<!--            <th>id</th>-->
-            <th>rid</th>
-            <th>title_____________</th>
-            <th>category</th>
-          
-             <th>status</th>
-            
-        </tr>
+            </tr>
         </thead>
         <tbody>
 
-        {{for obj.content}}
-      
-         <tr onclick="go({{:id}})">
-             <!--<td> <img class='img_round' src='/clinicPlus/images/dsc/doctors/id_{{:id}}'+pageNewAy(1) width=30px> </td>-->
-<!--            <td>{{:id}}</td>-->
-             <td>{{:rid}}</td>
-             <td>{{:title}}</td>
-              <td>{{:category}}</td>
-            
-            <td><span class="status_{{:status}}">{{:status}}</span></td>
-        </tr>
-        {{/for}}
-    </tbody>
+            {{for obj.pageList.content}}
 
 
-</table>
+            <tr class="firstrow"
+                onclick="go({{:id}}, 'jote')"
+                {{if id===0}} style="display:none" {{/if}} 
+                >
+               
+
+                <td>{{:id}}</td>
+                <td style="min-width: 10mm;">{{:status}}</td>
+                <td style="min-width: 40mm;">{{:body}}</td>
+                <td style="min-width: 10mm;">{{:category}}</td>
+                <td style="min-width: 10mm;">{{:title}}</td>
+               
+                
+
+            </tr>
+           
+            {{else}}
+            No members...
+            {{/for}}
+        </tbody>
+
+
+    </table>
 </div>
 
-<style>
-    .status_2_done{
-        background-color: aquamarine;
-        padding: 4px;
-    }
-    
-     .status_1_pending{
-        background-color: lightpink;
-         padding: 4px;
-        
-    }
-    
-</style>
-    

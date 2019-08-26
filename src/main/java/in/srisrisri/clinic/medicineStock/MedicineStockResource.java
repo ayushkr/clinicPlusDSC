@@ -3,13 +3,13 @@ package in.srisrisri.clinic.medicineStock;
 import in.srisrisri.clinic.Constants.Constants1;
 import in.srisrisri.clinic.Vendor.VendorEntity;
 import in.srisrisri.clinic.Vendor.VendorRepo;
-import in.srisrisri.clinic.doctor.DoctorEntity;
 import in.srisrisri.clinic.medicineBrandName.*;
-import in.srisrisri.clinic.responses.DeleteResponse;
+import in.srisrisri.clinic.pharmacyBillRow.SumDAOForPharmacyBill;
+import in.srisrisri.clinic.purchaseBill.PurchaseBillEntity;
+import in.srisrisri.clinic.purchaseBill.SumDAOForPurchaseBill;
 import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
 import in.srisrisri.clinic.utils.PageCover;
-import in.srisrisri.clinic.utils.PageExtendedByAyush;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,7 +19,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +51,7 @@ public class MedicineStockResource {
     private final Logger logger = LoggerFactory.getLogger(MedicineStockResource.class);
 
     @Autowired
-    MedicineStockRepo repo;
+    MedicineStockRepo medicineStockRepo;
     @Autowired
     MedicineBrandNameRepo medicineBrandNameRepo;
     @Autowired
@@ -67,7 +66,7 @@ public class MedicineStockResource {
     public ResponseEntity<List<MedicineStockEntity>> getList() {
         logger.debug("getMedicineNames", new Object() {
         });
-        List<MedicineStockEntity> list = repo.findAll(Sort.by(Sort.Direction.ASC, "expiryDate"));
+        List<MedicineStockEntity> list = medicineStockRepo.findAll(Sort.by(Sort.Direction.ASC, "expiryDate"));
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
@@ -81,7 +80,7 @@ public class MedicineStockResource {
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
-        int noOfItemsInAPage = 30;
+        int noOfItemsInAPage = 5;
         logger.warn("pageable={} , filter={}by {} ", new Object[]{label, filterColumn, filter});
 
         if (!sortColumn.equals("undefined")) {
@@ -102,30 +101,30 @@ public class MedicineStockResource {
         Page<MedicineStockEntity> page = null;
 
         if (filterColumn.equals("undefined")) {
-            page = repo.findAll(pageable);
+            page = medicineStockRepo.findAll(pageable);
         } else {
             if (filterColumn.equals("brandName")) {
 
-                page = repo.findAllByBrandNameLike(filter, pageable);
+                page = medicineStockRepo.findAllByBrandNameLike(filter, pageable);
             }
 
             if (filterColumn.equals("genericName")) {
 
-                page = repo.findAllByGenericNameLike(filter, pageable);
+                page = medicineStockRepo.findAllByGenericNameLike(filter, pageable);
             }
 
             if (filterColumn.equals("composition")) {
 
-                page = repo.findAllByCompositionLike(filter, pageable);
+                page = medicineStockRepo.findAllByCompositionLike(filter, pageable);
             }
         }
 
         List<MedicineStockEntity> medicineStockEntitysList = page.getContent();
         for (MedicineStockEntity medicineStockEntity : medicineStockEntitysList) {
-            Long qtyUsed = repo.findQtyUsedById(medicineStockEntity);
+            Long qtyUsed = medicineStockRepo.findQtyUsedById(medicineStockEntity);
             if (qtyUsed != null) {
                 medicineStockEntity.setQtyRemaining(medicineStockEntity.getQtyPurchased() - qtyUsed);
-                repo.save(medicineStockEntity);
+                medicineStockRepo.save(medicineStockEntity);
 
             }
 
@@ -142,20 +141,50 @@ public class MedicineStockResource {
     public ResponseEntity<Optional<MedicineStockEntity>> findById(@PathVariable("id") Long id) {
 
         Optional<MedicineStockEntity> item;
-        if (id > 0) {
-            item = repo.findById(id);
+        if (id >= 0) {
+            item = medicineStockRepo.findById(id);
         } else {
             MedicineStockEntity entityAfter = new MedicineStockEntity();
            entityAfter.setDiscount(BigDecimal.ZERO);
              
             entityAfter.setCreationTime(java.sql.Date.valueOf(LocalDate.now()));
-            repo.save(entityAfter);
+            medicineStockRepo.save(entityAfter);
             item = Optional.of(entityAfter);
 
         }
-//        long used = repo.findQtyRemainById(item);
+//        long used = medicineStockRepo.findQtyRemainById(item);
 //        item.setQtyRemaining(item.getQtyPurchased() - used);
         return new ResponseEntity<>(item, HttpStatus.OK);
+    }
+    
+    @GetMapping("ByBillId/{id}")
+    @ResponseBody
+    public ResponseEntity<?> ByBillId_id(@PathVariable("id") Long id) {
+
+        JsonResponse jsonResponse = new JsonResponse();
+        PurchaseBillEntity purchaseBillEntity = new PurchaseBillEntity();
+        purchaseBillEntity.setId(id);
+
+        List<MedicineStockEntity> list =
+                medicineStockRepo.findByPurchaseBill(purchaseBillEntity);
+        SumDAOForPurchaseBill sumDAO = new SumDAOForPurchaseBill(list);
+        sumDAO.setBillId(id);
+        try {
+            sumDAO.calculateTotals();
+            jsonResponse.setStatus(Constants1.SUCCESS);
+            jsonResponse.setMessage("ok");
+            jsonResponse.getMap().put("payload", sumDAO);
+            
+            return new ResponseEntity<>(jsonResponse, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.warn("Exception= {} ", e);
+            jsonResponse.setStatus(Constants1.FAILURE);
+            jsonResponse.setMessage("In sumDAO.calculateTotals(); <br>&nbsp;<span>" 
+                    + e.toString()+"</span>");
+            jsonResponse.getMap().put("payload", sumDAO);
+            return new ResponseEntity<>(jsonResponse, HttpStatus.OK);
+        }
+
     }
 
     // create
@@ -167,21 +196,15 @@ public class MedicineStockResource {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
             logger.warn("---- id ={}", entityBefore.getId());
             MedicineStockEntity entityAfter = null;
-            if (entityBefore.getId() != 0) {
+          
+                entityAfter = medicineStockRepo.findById(entityBefore.getId()).get();
 
-                entityAfter = repo.findById(entityBefore.getId()).get();
-
-                //entityAfter.setUpdationTime(new Date());
-            } else {
-                entityAfter = new MedicineStockEntity();
-                // entityAfter.setCreationTime(new Date());
-            }
 
             BeanUtils.copyProperties(entityBefore, entityAfter);
 //             if(entityBefore.isRateAvailable()==null) entityAfter.setRateAvailable(Boolean.FALSE);
 
            try {
-                entityAfter = repo.save(entityAfter);
+                entityAfter = medicineStockRepo.save(entityAfter);
                 jsonResponse.setMessage("Saved ID:" + entityAfter.getId());
                 jsonResponse.setStatus(Constants1.SUCCESS);
             } catch (Exception e) {
@@ -339,7 +362,7 @@ public class MedicineStockResource {
                                 double value = cell0.getNumericCellValue();
                                 VendorEntity vendorEntity = new VendorEntity();
                                 vendorEntity.setId((int) value);
-                                medicineStockEntity.setVendor(vendorEntity);
+//                                medicineStockEntity.setVendor(vendorEntity);
                                 break;
                             }
 
@@ -397,7 +420,7 @@ public class MedicineStockResource {
         JsonResponse response = new JsonResponse();
         logger.warn("REST request to delete {} {}", new Object[]{label, id});
         try {
-            repo.deleteById(id);
+            medicineStockRepo.deleteById(id);
             response.setStatus(Constants1.SUCCESS);
             response.setMessage("Deleted " + label + " with id " + id);
             return response;
@@ -432,7 +455,7 @@ public class MedicineStockResource {
             for (Long n : list) {
                 System.out.println(" n=" + n);
                 try {
-                    repo.deleteById(n);
+                    medicineStockRepo.deleteById(n);
                 } catch (Exception e) {
                     
                     failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n

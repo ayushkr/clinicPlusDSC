@@ -4,6 +4,7 @@ import in.srisrisri.clinic.medicineStock.MedicineStockEntity;
 import in.srisrisri.clinic.pharmacyBill.PharmacyBillEntity;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,16 +13,21 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name = "PharmacyBillRow")
 @Table(name = "PharmacyBillRow")
-public class PharmacyBillRowEntity implements Serializable {
+public  class PharmacyBillRowEntity implements Serializable {
 
     @Id
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator") 
     private long id;
+    
+    @ColumnDefault(value = "0")
+      private long idSpecial;
+    
 
     @OneToOne
     MedicineStockEntity medicineStock;
@@ -37,11 +43,23 @@ public class PharmacyBillRowEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     java.util.Date updationTime;
 
+   
+
+    
+    
+    public long getIdSpecial() {
+        return idSpecial;
+    }
+
+    public void setIdSpecial(long idSpecial) {
+        this.idSpecial = idSpecial;
+    }
+
     public Date getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(Date creationTime) {
+    public  void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
     }
 
@@ -103,7 +121,8 @@ public class PharmacyBillRowEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "PharmacyBillRowEntity{" + "id=" + id + ", medicineStock=" + medicineStock + ", pharmacyBill=" + pharmacyBill + ", qty=" + qty + ", discount=" + discount + ", amount=" + amount + '}';
+        return "PharmacyBillRowEntity{" + "id=" + id + ", idSpecial=" + idSpecial + ", medicineStock=" + medicineStock + ", pharmacyBill=" + pharmacyBill + ", qty=" + qty + ", discount=" + discount + ", amount=" + amount + ", creationTime=" + creationTime + ", updationTime=" + updationTime + '}';
     }
 
+    
 }

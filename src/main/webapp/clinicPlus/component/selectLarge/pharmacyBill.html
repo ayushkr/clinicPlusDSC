@@ -1,0 +1,14 @@
+ <div class="inp_outer"   onclick="popup_selection_obj(
+                        {
+                            'value': '{{if pharmacyBill}}{{:pharmacyBill.id}}{{else}}----{{/if}}',
+                            'entity_select': 'pharmacyBill',
+                            'input': 'pharmacyBill'
+                        }
+                )">
+            <input type="hidden" id="pharmacyBill" name="pharmacyBill" 
+
+                   value="{{if pharmacyBill}}{{:pharmacyBill.id}}{{else}}----{{/if}}" />
+            <div class="title1">pharmacyBill</div>
+            <span id='pharmacyBill_display' class="inp2">
+                {{if pharmacyBill}}{{:pharmacyBill.id}}{{else}}Not set{{/if}}</span>
+        </div>

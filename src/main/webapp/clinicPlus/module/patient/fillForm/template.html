@@ -3,25 +3,32 @@
 
 <div class="pageTitle">
     Patient  </div>
- 
+
 <form id='form_patient' method="post" 
-     action="{{:renderInDiv}}#/cmd/post"
+      action="{{:renderInDiv}}#/cmd/post"
       >  
     <input type='hidden' name='div' value='{{:renderInDiv}}'>
     <input type='hidden' name='module_direct' value='patient'>
-    <input type='hidden' name='redirect' value=' #/cmdc?module=patient&action=/all/list'>
+    <input type='hidden' name='redirect' 
+           value=' #/cmdc?module=patient&action=/all/list'>
     <input type="hidden" name="id" data-link="id" />
     <br>
-    <div class="w3-bar-ay" data-akr-printable="false" style="position: fixed;z-index: 1">
-        <a class="w3-bar-item  tablink tabSelected" onClick="openCity(event, 'Basic')">Basic</a>
+    <div class="w3-bar-ay" data-akr-printable="false" 
+         style="position: fixed;z-index: 1">
+        <a class="w3-bar-item  tablink tabSelected" 
+           onClick="openCity(event, 'Basic')">Basic</a>
 
 
-        <a class="w3-bar-item tablink " onClick="openCity(event, 'Notes')">Notes</a>
-        <a class="w3-bar-item  tablink " onClick="openCity(event, 'Admin')">Admin</a>
-        <a class="w3-bar-item  tablink " onClick="openCity(event, 'Files')">Files</a>
+        <a class="w3-bar-item tablink " 
+           onClick="openCity(event, 'Notes')">Notes</a>
+        <a class="w3-bar-item  tablink " 
+           onClick="openCity(event, 'Admin')">Admin</a>
+        <a class="w3-bar-item  tablink " 
+           onClick="openCity(event, 'Files')">Files</a>
     </div>
     <br>
-    <div id="printableArea" style="margin-left: 0mm" title="patient_{{:id}}_{{:name}}">
+    <div id="printableArea" style="margin-left: 0mm" 
+         title="patient_{{:id}}_{{:name}}">
         <!--basic-->
         <div id="Basic" class="w3-container w3-border city ">
             <h2>Basic</h2>
@@ -52,29 +59,29 @@
 
             <div class="inp_outer" style="min-width: 250px">
                 <div class="title1">name</div>
-                <input type="text" name="name" data-link="name" class="akr_input_text" required="" />
+                <input type="text" name="name" data-link="name" 
+                       class="akr_input_text" required="" />
             </div>
             <br>
 
 
             <div class="inp_outer" style="min-width: 100px">
                 <div class="title1">age</div>
-                <span class="inp2" contenteditable="true" id="age"   data-link="age" >---</span>
+                <span class="inp2" contenteditable="true" id="age"
+                      data-link="age" >---</span>
                 <input type="hidden" name="age" data-link="age" />
             </div>
 
             <div class="inp_outer">
                 <div class="title1">sex</div>
 
-
-
-                <select name="sex" data-bind="sex" style="background-color: transparent">
-                    <option value="M" {{if sex=="M" }} selected {{/if}}>
-
-                            Male</option>
-                    <option value="F" {{if sex=="F" }} selected {{/if}}>FeMale</option>
-                    <option value="T" {{if sex=="T" }} selected {{/if}}>Trans</option>
+                <select name="sex" data-link="sex" style="background-color: transparent">
+                    <option value="M" title="Male" >M</option>
+                    <option value="F" >F</option>
+                    <option value="T" >T</option>
                 </select>
+
+
 
             </div>
             <hr>

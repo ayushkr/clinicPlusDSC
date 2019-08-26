@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -24,6 +25,16 @@ public class MedicineBrandNameEntity  {
   @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator") 
     private long id;
+    
+    
+    @ColumnDefault(value = "0")
+    private long id2;
+     
+    @ColumnDefault(value = "0")
+      private long idSpecial;
+    
+    @ColumnDefault(value = "0")
+    private long sn;
     private String brandName;
     private String company;
     private String genericName;
@@ -57,6 +68,30 @@ public class MedicineBrandNameEntity  {
 
     public void setUpdationTime(Date updationTime) {
         this.updationTime = updationTime;
+    }
+
+    public long getSn() {
+        return sn;
+    }
+
+    public void setSn(long sn) {
+        this.sn = sn;
+    }
+
+    public long getId2() {
+        return id2;
+    }
+
+    public void setId2(long id2) {
+        this.id2 = id2;
+    }
+
+    public long getIdSpecial() {
+        return idSpecial;
+    }
+
+    public void setIdSpecial(long idSpecial) {
+        this.idSpecial = idSpecial;
     }
 
    

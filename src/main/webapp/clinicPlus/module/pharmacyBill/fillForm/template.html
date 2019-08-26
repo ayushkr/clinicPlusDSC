@@ -1,83 +1,127 @@
-<div id="printableArea"   title="PharmacyBill_List" >
-<div class="pageTitle">{{if id==0}} New  {{else}} Existing  : {{:id}} {{/if}}  </div>
-<form id='form_pharmacyBill' method="post" 
-      action="{{:renderInDiv}}#/cmd/post">
-    <input type='hidden' name='redirect' value=' #/cmdc?module=pharmacyBill&action=/all/list'>
-    <input type='hidden' name='module_direct' value='pharmacyBill'>
-    <input type="hidden" name="id" data-link="id" />
-    <br>
-    ID: <span class="rounded"
-              title="ഇതാണ്  ബില്ല്  നമ്പർ "
-              >{{:id}} </span>
-    <br><br>
-
-
-
-    <div class="inp_outer"
-         title="എന്നാണ്  ബില്ല്   അടിച്ചത് "
-         onclick="popup_selection_obj(
-             {
-             'value': '{{:dateOfBill}}',
-                     'entity_select': 'dateForOrganisation',
-                     'input': 'dateOfBill'
-             }
-             )"
-         >
-        <div class="title1" >
-            dateOfBill
+<div data-akr-printable="false">
+    <div class="pageTitle"> </div>
+    <form id='form_pharmacyBill' method="post" 
+          action="{{:renderInDiv}}#/cmd/post">
+        <input type='hidden' name='redirect' value=' #/cmdc?module=pharmacyBill&action=/all/list'>
+        <input type='hidden' name='module_direct' value='pharmacyBill'>
+        <input type="hidden" name="id" data-link="id" />
+      
+        
+        <div class="inp_outer">
+            <div class="title1" > dateOfBill </div>
+            <div id="selectLarge_dateOfBill"  >
+                selectLarge_dateOfBill
+            </div>
         </div>
-        <span id="dateOfBill_display" class="inp2">{{:dateOfBill}}</span>
-        <input id="dateOfBill" type="hidden" name="dateOfBill" data-link="dateOfBill" />
-    </div>
-    <br>
+        <div id="selectLarge_appointment" 
+             style="display: inline-block">
+            selectLarge_appointment
+        </div>
+        <div class="inp_outer" title="വേറെ  വിശേഷം വല്ലതും ഉണ്ടോ ?" 
+             style="min-width: 150px;min-height: 50px">
+            <div class="title1"   >  Remarks</div>
+            <span class="inp2" contenteditable="true" id="remarks"   data-link="remarks" >---</span>
+            <input type="hidden" name="remarks" data-link="remarks" />
+        </div>
 
-    <div class="inp_outer"
-         title="ഒരു അപ്പോയ്ന്റ്മെന്റ്   സെലക്ട്  ചെയ്യുക "
-         onclick="popup_selection_obj(
-             {
-             'entity_select': 'appointment',
-                     'input': 'appointment'
-             }
-             )"
-         >
-        <div class="title1"   > appointment</div>
-        {{if appointment!=null }}
-        <input  type="hidden" id="appointment" name="appointment" 
-                value="{{:appointment.id}}"  />
-        <span id="appointment_display" class="inp2">     
-            No: {{:appointment.id}}--- 
-            {{:appointment.dateOfAppointment}} ---
-            <b style="font-size: 20px;background-color: var(--color_l4);padding:5px;margin:10px">{{:appointment.patient.name}}</b>
-            --
-            {{:appointment.doctor.name}}
-        </span>
-        {{else}}
-        <input  type="hidden" id="appointment" name="appointment" />
-        <span id="appointment_display">     
-            Not set                
-        </span>
-        {{/if}}    
-    </div>
-    <br>
-    <div class="inp_outer" title="വേറെ  വിശേഷം വല്ലതും ഉണ്ടോ ?" 
-         style="min-width: 400px;min-height: 50px">
-        <div class="title1"   >  Remarks</div>
-        <span class="inp2" contenteditable="true" id="remarks"   data-link="remarks" >---</span>
-        <input type="hidden" name="remarks" data-link="remarks" />
-    </div>
- 
 
-</form>
-{{if appointment!=null }}
-    <button class="w3-button dsc_green w3-padding-24"
-            style="float: none"
-            title="medicines "
-            onclick="pharmacyCashBill.render_list({{:id}}, 'main_1_inner')"
-            > 
-        <i class="fa590akr fa-capsules" ></i>
-    </button>
- {{/if}}
+    </form>
+</div>
 
-<!--<div id="main_1_innert"> cashBill_inbuilt</div>-->
+    <table border="0">
+        <tbody>
+            <tr>
+                <td colspan="3">
+        <center>
+            <table >
+                <tbody>
+                    <tr>
+                        <td>
+                <center>
+
+                    <span style="font-size:30px;text-align:left;font-weight: bold">
+                        DOCTORS SPECIALITY CENTRE <br>
+                    </span>
+
+                    <span style="font-size:14px;text-align:center;">
+                        36/5588, USHUS THIRUVAMBADY,
+                        PATTURAIKKAL JN ,THRISSUR -680022 <br>
+                    </span>
+
+                    <span style="font-size:14px;text-align:center;">
+                        Website: &nbsp; www.doctorsspecialitycentre.com &nbsp;&nbsp;
+                        email : &nbsp; doctorsspecialitycentre@gmail.com &nbsp;&nbsp;
+                        <br>
+                        Phone &nbsp;<i class="fa fa-phone-square"></i> &nbsp;8592918888 
+
+                    </span>
+
+                </center>
+
+
+                </td>
+                </tr>
+                </tbody>
+            </table>
+        </center>  
+
+        </td>
+        <hr>
+        </tr>
+
+        <tr>
+
+            <td class="gstSpacing">
+        <center>
+            &nbsp;  DL No:KL-TSR-137508, KL-TSR-137509
+            &nbsp; 
+            <!--DL Date: 14/10/2018-->
+        </center>
+        </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+    <hr>
+    <table border="0" cellspacing="0" cellpadding="0" class="Table1">
+        <colgroup><col width="248"><col width="248"><col width="248"></colgroup>
+        <tbody>
+            <tr>
+                <td  class="Table1_A1" style="float: left">
+                    Bill No &nbsp;: <span data-link="id"></span>
+                </td>
+                <td  class="Table1_A1"><span class="T1"></span>
+                </td>
+                <td  class="Table1_A1" style="float: right">
+                    Bill Date :
+                    {{:~ddmmyyyyDashed(dateOfBill) }}
+                </td>
+            </tr>
+            <tr>
+                <td  class="Table1_A2" style="float: left">
+                    Patient : 
+                    <span class="T1"> {{:appointment.patient.name}} </span>
+
+                </td>
+                <td  class="Table1_A2">
+
+                </td>
+                <td  class="Table1_A2" style="float: right">
+                    Doctor : 
+                    <span class="T1"> {{:appointment.doctor.name}} </span>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+<div id="printableArea"   title="PharmacyBill_List" >
+    
+    {{:~pharmacyBill_render_list(id)}}
+    <div id="main_1_innert"> main_1_innert</div>
 
 </div>

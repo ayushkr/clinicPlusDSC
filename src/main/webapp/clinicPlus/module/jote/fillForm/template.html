@@ -1,50 +1,37 @@
-<!--jote-->
-<input type="button" value="Save" class="btn btn-success btn-sm"
-       data-toggle="tooltip" title="Save"
-       onclick="$('#form_jote').submit();"
-       >
-<br>
-<div id="printableArea"   title="jote_{{:id}}" >
+<div id="printableArea"   title="jote_List" >
+<div class="pageTitle">--  </div>
+<form id='form_jote' method="post" 
+      action="{{:renderInDiv}}#/cmd/post">
+    <input type='hidden' name='redirect' 
+           value=' #/cmdc?module=jote&action=/all/list'>
+    <input type='hidden' name='module_direct' value='jote'>
+    <input type="hidden" name="id" data-link="id" />
+    <br>
+    ID: <span class="rounded"
+              title="ഇതാണ്  ബില്ല്  നമ്പർ "
+              >{{:id}} </span>
     <br><br>
-    <form id='form_jote' method="post"
-          action="{{:renderInDiv}}#/cmd/post">  
-        <input type='hidden' name='module_direct' value='jote'>
-              <input type='hidden' name='redirect' value=' #/cmdc?module=jote&action=/all/list'>
-              <input type="hidden" name="id" data-link="id" />
-        <div class="w3-container w3-blue">
-            <h2>Jote </h2>
-        </div>
+    
+    <div class="inp_outer" title="വേറെ  വിശേഷം വല്ലതും ഉണ്ടോ ?" 
+         style="min-width: 400px;min-height: 50px">
+        <div class="title1"   >  status</div>
+        <span class="inp2" contenteditable="true" id="status"   data-link="status" >---</span>
+        <input type="hidden" name="status" data-link="status" />
+    </div>
+    
+   <div class="inp_outer" title="വേറെ  വിശേഷം വല്ലതും ഉണ്ടോ ?" 
+         style="min-width: 400px;min-height: 50px">
+        <div class="title1"   >  body</div>
+        <span class="inp2" contenteditable="true" id="body"   data-link="body" >---</span>
+        <input type="hidden" name="body" data-link="body" />
+    </div>
 
-        <div class="w3-container" >
 
-            <label for="id">ID</label>  {{:id}}      
-           
 
-            <div class="inp_outer">
-                <div class="title1">title</div>
-                <span class="inp2" contenteditable="true" id="title"   data-link="title" >---</span>
-                <input type="hidden" name="title" data-link="title" />
-            </div>
+    
+ 
 
-            <div class="inp_outer">
-                <div class="title1">category</div>
-                <span class="inp2" contenteditable="true" id="category"   data-link="category" >---</span>
-                <input type="hidden" name="category" data-link="category" />
-            </div>
-            <div class="inp_outer">
-                <div class="title1">body</div>
-                <span class="inp2" contenteditable="true" id="body"   data-link="body" >---</span>
-                <input type="hidden" name="body" data-link="body" />
-            </div>
+</form>
 
-            <div class="inp_outer">
-                <div class="title1">status</div>
-                <span class="inp2" contenteditable="true" id="status"   data-link="status" >---</span>
-                <input type="hidden" name="status" data-link="status" />
-            </div>
 
-        </div>
-    </form>
 </div>
-
-

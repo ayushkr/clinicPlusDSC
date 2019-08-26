@@ -84,7 +84,7 @@ public class VendorResource {
     public ResponseEntity<Optional<VendorEntity>> gets(@PathVariable("id") Long id) {
 
         Optional<VendorEntity> item;
-        if (id > 0) {
+        if (id >= 0) {
             item = repo.findById(id);
         } else {
             VendorEntity entityAfter = new VendorEntity();
@@ -107,14 +107,10 @@ public class VendorResource {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
             logger.warn("---- id ={}", entityBefore.getId());
             VendorEntity entityAfter = null;
-            if (entityBefore.getId() != 0) {
-
+            
                 entityAfter = repo.findById(entityBefore.getId()).get();
                 //entityAfter.setUpdationTime(new Date());
-            } else {
-                entityAfter = new VendorEntity();
-                // entityAfter.setCreationTime(new Date());
-            }
+           
 
             BeanUtils.copyProperties(entityBefore, entityAfter);
 

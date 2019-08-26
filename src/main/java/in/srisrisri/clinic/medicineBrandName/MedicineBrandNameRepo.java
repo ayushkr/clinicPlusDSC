@@ -19,6 +19,6 @@ public interface MedicineBrandNameRepo extends JpaRepository<MedicineBrandNameEn
       @Query("select u from MedicineBrandName u where LOWER(u.composition) LIKE LOWER(CONCAT('%',?1, '%'))  order by brandName asc ")
     public Page<MedicineBrandNameEntity> findAllByCompositionLike(String filter, Pageable pageable);
 
-
+public MedicineBrandNameEntity findAllByIdSpecial(Long v);
 
 }

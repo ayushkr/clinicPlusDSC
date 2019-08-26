@@ -16,15 +16,14 @@ import org.hibernate.annotations.GenericGenerator;
  *
  * @author akr
  */
-
-@Entity(name="AppointmentTypeEntity")
-@Table(name="AppointmentTypeEntity")
+@Entity(name = "AppointmentTypeEntity")
+@Table(name = "AppointmentTypeEntity")
 public class AppointmentTypeEntity implements Serializable {
-    
+
     @Id
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
-  long id;
+    long id;
     String name;
     String description;
 
@@ -35,8 +34,6 @@ public class AppointmentTypeEntity implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
-
-   
 
     public String getName() {
         return name;
@@ -58,7 +55,5 @@ public class AppointmentTypeEntity implements Serializable {
     public String toString() {
         return "AppointmentTypeEntity{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
     }
-    
-    
-    
+
 }

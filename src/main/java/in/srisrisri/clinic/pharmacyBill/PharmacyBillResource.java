@@ -1,12 +1,14 @@
 package in.srisrisri.clinic.pharmacyBill;
 
 import in.srisrisri.clinic.Constants.Constants1;
-import in.srisrisri.clinic.Vendor.VendorEntity;
 import in.srisrisri.clinic.appointment.AppointmentEntity;
-import in.srisrisri.clinic.responses.DeleteResponse;
+import in.srisrisri.clinic.appointment.AppointmentRepo;
+import in.srisrisri.clinic.pharmacyBillRow.PharmacyBillRowEntity;
+import in.srisrisri.clinic.pharmacyBillRow.PharmacyBillRowRepo;
 import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
 import in.srisrisri.clinic.utils.PageCover;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Date;
@@ -35,32 +37,38 @@ public class PharmacyBillResource {
     String label = "pharmacyBill";
     private final Logger logger = LoggerFactory.getLogger(PharmacyBillResource.class);
 
+ @Autowired
+    PharmacyBillRepo pharmacyBillRepo;
+
+ @Autowired
+    PharmacyBillRowRepo pharmacyBillRowRepo;
+    
     @Autowired
-    PharmacyBillRepo repo;
+    AppointmentRepo appointmentRepo;
+
+   
 
     @GetMapping("")
     @ResponseBody
     public ResponseEntity<List<PharmacyBillEntity>> getList() {
         logger.debug("getList", new Object() {
         });
-        List<PharmacyBillEntity> list = repo.findAll();
+        List<PharmacyBillEntity> list = pharmacyBillRepo.findAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-
 
     @GetMapping("pageable")
     @ResponseBody
     public PageCover<PharmacyBillEntity> allPageNumber(
             @RequestParam("pageNumber") String pageNumber,
             @RequestParam("filterColumn") String filterColumn,
-             @RequestParam(value = "pageSize", required = false) Optional<Integer> pageSizeOb,
-            
+            @RequestParam(value = "pageSize", required = false) Optional<Integer> pageSizeOb,
             @RequestParam("filter") String filter,
             @RequestParam("sortColumn") String sortColumn,
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
-         int pageSize = 10;
+        int pageSize = 10;
         if (pageSizeOb.isPresent()) {
             pageSize = pageSizeOb.get();
         } else {
@@ -78,7 +86,7 @@ public class PharmacyBillResource {
         } else {
             sort = Sort.by("dateOfBill").descending();
         }
-         if ("undefined".equals(pageNumber)) {
+        if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
         } else {
             if (Integer.parseInt(pageNumber) == 0) {
@@ -86,28 +94,26 @@ public class PharmacyBillResource {
                 pageNumber = "1";
             }
         }
-        
+
         Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
-        Page<PharmacyBillEntity> page=null;
+        Page<PharmacyBillEntity> page = null;
 
         if ("undefined".equals(filterColumn)) {
-            page = repo.findAll(pageable);
+            page = pharmacyBillRepo.findAll(pageable);
         } else {
 
             if (filterColumn.equals("appointment")) {
 
                 AppointmentEntity appointmentEntity = new AppointmentEntity();
                 appointmentEntity.setId(Long.parseLong(filter));
-                page =repo.findAllByAppointment(appointmentEntity, pageable);
+                page = pharmacyBillRepo.findAllByAppointment(appointmentEntity, pageable);
 
             }
-             if (filterColumn.equals("patientName")) {
+            if (filterColumn.equals("patientName")) {
 
-                page =repo.findAllByPatientNameLike(filter, pageable);
+                page = pharmacyBillRepo.findAllByPatientNameLike(filter, pageable);
 
             }
-
-           
 
         }
 
@@ -125,18 +131,29 @@ public class PharmacyBillResource {
     @GetMapping("{id}")
     @ResponseBody
     public Optional<PharmacyBillEntity> getMedicineNames(@PathVariable("id") Long id) {
-        Optional<PharmacyBillEntity> item ;
-        
-        if(id>0){
-         item = repo.findById(id);}
-        else{
-          PharmacyBillEntity entityAfter = new PharmacyBillEntity();
+        Optional<PharmacyBillEntity> PharmacyBillEntitySaved;
 
-            entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
-            repo.save(entityAfter);
-            item = Optional.of(entityAfter);
+        if (id > 0) {
+            PharmacyBillEntitySaved = pharmacyBillRepo.findById(id);
+        } else {
+            PharmacyBillEntity PharmacyBillEntityNew = new PharmacyBillEntity();
+
+            PharmacyBillEntityNew.setCreationTime(Date.valueOf(LocalDate.now()));
+            AppointmentEntity appointmentEntity = appointmentRepo.findById(0L).get();
+           
+            PharmacyBillEntityNew.setAppointment(appointmentEntity);
+            PharmacyBillEntityNew.setDateOfBill(Date.valueOf(LocalDate.now()));
+            pharmacyBillRepo.save(PharmacyBillEntityNew);
+            PharmacyBillEntitySaved = Optional.of(PharmacyBillEntityNew);
+
+             PharmacyBillRowEntity pharmacyBillRowEntityNew = new PharmacyBillRowEntity();
+            pharmacyBillRowEntityNew.setIdSpecial(1);
+            pharmacyBillRowEntityNew.setPharmacyBill(PharmacyBillEntitySaved.get());
+            pharmacyBillRowEntityNew.setCreationTime(Date.valueOf(LocalDate.now()));
+            pharmacyBillRowEntityNew.setAmount(BigDecimal.ZERO);
+            PharmacyBillRowEntity pharmacyBillRowEntitySaved = pharmacyBillRowRepo.save(pharmacyBillRowEntityNew);
         }
-        return item;
+        return PharmacyBillEntitySaved;
     }
 
     @GetMapping("betweenDates/{dateStart}/{dateEnd}")
@@ -145,7 +162,7 @@ public class PharmacyBillResource {
 
         List<PharmacyBillEntity> item = null;
         System.out.println("dateStart" + dateStart.toString());
-        item = repo.findByDateOfBillBetween(dateStart, dateEnd);
+        item = pharmacyBillRepo.findByDateOfBillBetween(dateStart, dateEnd);
 
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
@@ -154,14 +171,14 @@ public class PharmacyBillResource {
     @PostMapping("")
     public ResponseEntity<JsonResponse> PostMapping_one(PharmacyBillEntity entityBefore) {
         ResponseEntity<JsonResponse> body = null;
-          JsonResponse jsonResponse = new JsonResponse();
+        JsonResponse jsonResponse = new JsonResponse();
         try {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
             logger.warn("---- id ={}", entityBefore.getId());
             PharmacyBillEntity entityAfter = null;
             if (entityBefore.getId() != 0) {
 
-                entityAfter = repo.findById(entityBefore.getId()).get();
+                entityAfter = pharmacyBillRepo.findById(entityBefore.getId()).get();
                 //entityAfter.setUpdationTime(new Date());
             } else {
                 entityAfter = new PharmacyBillEntity();
@@ -169,9 +186,9 @@ public class PharmacyBillResource {
             }
 
             BeanUtils.copyProperties(entityBefore, entityAfter);
-            
+
             try {
-                entityAfter = repo.save(entityAfter);
+                entityAfter = pharmacyBillRepo.save(entityAfter);
                 jsonResponse.setMessage("Saved ID:" + entityAfter.getId());
                 jsonResponse.setStatus(Constants1.SUCCESS);
             } catch (Exception e) {
@@ -190,7 +207,6 @@ public class PharmacyBillResource {
         return body;
     }
 
-     
     // delete
     @GetMapping("delete/id/{id}")
     public JsonResponse DeleteMapping_id(@PathVariable("id") Long id) {
@@ -198,7 +214,7 @@ public class PharmacyBillResource {
         JsonResponse response = new JsonResponse();
         logger.warn("REST request to delete {} {}", new Object[]{label, id});
         try {
-            repo.deleteById(id);
+            pharmacyBillRepo.deleteById(id);
             response.setStatus(Constants1.SUCCESS);
             response.setMessage("Deleted " + label + " with id " + id);
             return response;
@@ -211,11 +227,11 @@ public class PharmacyBillResource {
         } catch (Exception e) {
             logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
             response.setStatus(Constants1.FAILURE);
-            if(e.getMessage().contains("ConstraintViolationException")){
-            response.setMessage("This " + label + " (ID: "+id+
-                    ")  is used in other place <br>For eg: in pharmacyBill etc");
-            }else{
-            response.setMessage(e.getMessage());
+            if (e.getMessage().contains("ConstraintViolationException")) {
+                response.setMessage("This " + label + " (ID: " + id
+                        + ")  is used in other place <br>For eg: in pharmacyBill etc");
+            } else {
+                response.setMessage(e.getMessage());
             }
             return response;
         }
@@ -233,13 +249,13 @@ public class PharmacyBillResource {
             for (Long n : list) {
                 System.out.println(" n=" + n);
                 try {
-                    repo.deleteById(n);
+                    pharmacyBillRepo.deleteById(n);
                 } catch (Exception e) {
-                    
+
                     failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
                             + "<br>Because  "
-                            +((e.getMessage().contains("ConstraintViolationException")) ? 
-                            "It Used in Other place ":e.getMessage()) 
+                            + ((e.getMessage().contains("ConstraintViolationException"))
+                            ? "It Used in Other place " : e.getMessage())
                             + "</p><hr>";
 
                 }

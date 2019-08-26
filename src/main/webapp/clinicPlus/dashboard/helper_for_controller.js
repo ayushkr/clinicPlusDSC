@@ -13,11 +13,48 @@ var mn = {
     doctor: {},
     patient: {},
     medicineBrandName: {},
-     medicineStock: {},
+    medicineStock: {},
     module: ["a", "b"],
-    'temp':["a","b"]
+    'temp': ["a", "b"]
 
 };
+
+
+//  {{createStars averageRating max=5/}}
+//{{sort array reverse=true/}}
+
+$.views.tags({
+    createStars:
+            function (rating) {
+                var ratingArray = [], defaultMax = 5;
+                var max = this.props.max || defaultMax;
+                for (var i = 1; i <= max; i++) {
+                    ratingArray.push(i <= rating ?
+                            "rating fullStar" : "rating emptyStar");
+                }
+                var htmlString = "";
+                if (this.tmpl) {
+// Use the content or the template passed in with the template
+                    htmlString = this.renderContent(ratingArray);
+                } else {
+// Use the compiled named template.
+                    htmlString = $.render.compiledRatingTmpl(ratingArray);
+                }
+                return htmlString;
+            },
+
+    sort: function (array) {
+        var ret = "";
+        if (this.props.reverse) {
+            for (var i = array.length; i; i--) {
+                ret += this.tmpl.render(array[i - 1]);
+            }
+        } else {
+            ret += this.tmpl.render(array);
+        }
+        return ret;
+    }
+});
 
 
 
@@ -46,30 +83,31 @@ $.views.helpers(
 
             listFiles: listFiles
             ,
-
             jsonise: jsonise
             ,
-
             ayLoad: ayLoad
             ,
-            ddmmyyyyDashed:ddmmyyyyDashed,
-          ddyyyDashed:ddyyyyDashed,
+            ddmmyyyyDashed: ddmmyyyyDashed,
+            ddyyyDashed: ddyyyyDashed,
 
             utilities: {
                 maxCount: 23,
                 subtractMax: function (val) {
                     return val - this.maxCount;
-                },
+                }
+                ,
                 errorMessages: {
                     msg1: "not available"
-                },
+                }
+                ,
                 alert2: function (val) {
                     alert('hai2');
                 }
 
             }
 
-        });
+        }
+);
 function ayLoad(url) {
     $.get(url, function (result) {
         console.log('ayLoad url=' + url);
@@ -91,13 +129,13 @@ function listFiles(patientId, category, div) {
             for (var a  in dataGot) {
                 console.log('a.path=' + dataGot[a].path);
                 if (dataGot[a].fileType === 'jpeg') {
-                    result += "<a target='_blank' href='" + dataGot[a].path + "'>" 
-                           +
-                            "<img width='150px' style='padding:10px' src='"+dataGot[a].path +"'></a>";
+                    result += "<a target='_blank' href='" + dataGot[a].path + "'>"
+                            +
+                            "<img width='150px' style='padding:10px' src='" + dataGot[a].path + "'></a>";
 
                 } else {
                     result += "<a target='_blank' href='" + dataGot[a].path + "'>"
-                          +
+                            +
                             "<img width='150px' style='padding:10px' src='./images/pdf.png'></a>";
 
                 }
@@ -128,18 +166,18 @@ function jsonise(o) {
 
 
 
-function ddmmyyyyDashed(yyyymmddValue){
-    var parts=yyyymmddValue.split("-");
-    var ddmmyyyyValue=parts[2]+"-"+parts[1]+"-"+parts[0];
+function ddmmyyyyDashed(yyyymmddValue) {
+    var parts = yyyymmddValue.split("-");
+    var ddmmyyyyValue = parts[2] + "-" + parts[1] + "-" + parts[0];
     return ddmmyyyyValue;
-    
+
 }
 
-function ddyyyyDashed(yyyymmddValue){
-    var parts=yyyymmddValue.split("-");
-    var ddmmyyyyValue=parts[1]+"-"+parts[0];
+function ddyyyyDashed(yyyymmddValue) {
+    var parts = yyyymmddValue.split("-");
+    var ddmmyyyyValue = parts[1] + "-" + parts[0];
     return ddmmyyyyValue;
-    
+
 }
 
 

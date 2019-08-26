@@ -1,0 +1,33 @@
+
+<div class="inp_outer" style="min-width:200px">
+    <div class="title1">
+        vendor
+    </div>
+
+    <input  type="hidden" id="vendor" name="vendor" 
+            value= "{{if vendor}}{{:vendor.id}} {{/if}}" />
+
+
+
+    <div style='border: 1px;' 
+         onclick="popup_selection_obj(
+                                     {
+                                         'entity_select': 'vendor',
+                                         'input': 'vendor',
+                                         _afterClick: 'vendor_selected_button'
+                                     })"
+         >
+        <span id="vendor_display" class="inp2" >     
+            {{if vendor}}
+            {{:vendor.name}}
+            {{else}}
+            ----
+            {{/if}}
+        </span>
+    </div>  
+    <button id="vendor_selected_button" 
+            onclick="vendorSelected()" 
+            style="display:none">
+        vendor selected
+    </button>
+</div> 

@@ -111,7 +111,7 @@ public class MedicineBrandNameResource {
     public ResponseEntity<Optional<MedicineBrandNameEntity>> getMedicineNames(@PathVariable("id") Long id) {
         
           Optional<MedicineBrandNameEntity> item ;
-        if(id>0){
+        if(id>=0){
          item = repo.findById(id);}
         else{
         

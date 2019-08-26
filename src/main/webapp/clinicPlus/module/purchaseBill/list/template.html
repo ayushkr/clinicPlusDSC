@@ -1,0 +1,213 @@
+<div 
+    data-akr-printable="false"
+    >
+    <div class="inp_outer" style="min-width: 200px">
+
+        <div class="inp1" 
+             onclick="popup_selection_obj(
+                 {
+                 'entity_select': 'appointment',
+                         'input': 'appointment'
+                 }
+                 )"
+             >
+
+            <div class="title1"> 
+                <i class="fa fa-filter"></i>
+                appointment</div>
+            <span id='appointment_display' 
+                  class="inp2 w3-btn w3-blue-gray" >
+                Select
+            </span>
+
+        </div>
+        or enter ID   <input id="appointment" name='appointment' type="text"  value="" 
+                             style="height: 50px;height: 25px;width: 89px;"> 
+        <input type="button" value="Go "
+               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=appointment&filter=' + document.getElementById('appointment').value + ''"
+               >
+    </div>
+
+    <div class="inp_outer" style="min-width: 200px">
+        <div class="inp1" >
+            <div class="title1">patientName </div>
+        </div>
+        <input id="patientName" patientName='patientName' type="text"  value=""
+               accesskey="q"
+               > 
+        <input type="button" value="Go " id="button_patientName_go"
+               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=patientName&filter=' + document.getElementById('patientName').value + ''"
+               >
+    </div>
+
+
+    <a href="#/cmd?module={{:obj.module}}&action=/all/list&amp;pageNumber=1" class="w3-btn w3-blue-grey"> 
+        All </a>
+
+
+</div>
+
+<hr>
+
+
+<div id="printableArea"   title="PharmacyBill_Profile" >
+    <div class="Table"  class="table_greyBorder" >
+
+        <div  class="Heading">
+
+
+            <div class="Cell">
+                id 
+                <br>
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
+                   >
+                    <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-up headerSortSymbol "></i>
+                    </span>
+                </a>
+
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
+                   >
+                    <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-down headerSortSymbol"></i>
+                    </span>
+                </a>
+            </div>
+            
+            
+             <div class="Cell">
+               billNo
+                <br>
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=billNo&sortOrder=a"
+                   >
+                    <span class=" {{if obj.sortColumn=='billNo'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-up headerSortSymbol "></i>
+                    </span>
+                </a>
+
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=billNo&sortOrder=d"
+                   >
+                    <span class=" {{if obj.sortColumn=='billNo'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-down headerSortSymbol"></i>
+                    </span>
+                </a>
+            </div>
+
+
+            <div class="Cell" style="min-width: 80px;font-size: 0.8em">
+                Bill Date
+                <br>
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfBill&sortOrder=a"
+                   >
+                    <span class=" {{if obj.sortColumn=='dateOfBill'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-up headerSortSymbol "></i>
+                    </span>
+                </a>
+
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfBill&sortOrder=d"
+                   >
+                    <span class=" {{if obj.sortColumn=='dateOfBill'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-down headerSortSymbol"></i>
+                    </span>
+                </a>
+
+            </div>
+
+
+
+            <div class="Cell" >
+                vendor
+                <br>
+                <a class='headerSortSymbol' 
+                   href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=vendor_id&sortOrder=a"
+                   >
+                    <span 
+                        class=" {{if obj.sortColumn=='vendor_id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-up headerSortSymbol "></i>
+                    </span>
+                </a>
+
+                <a class='headerSortSymbol' 
+                   href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=vendor_id&sortOrder=d"
+                   >
+                    <span class=" {{if obj.sortColumn=='vendor_id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-down headerSortSymbol"></i>
+                    </span>
+                </a>
+
+            </div>
+            <div class="Cell">
+                cash
+                <br>
+            </div>
+            
+            <div class="Cell">
+                remarks
+                <br>
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remarks&sortOrder=a"
+                   >
+                    <span class=" {{if obj.sortColumn=='remarks'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-up headerSortSymbol "></i>
+                    </span>
+                </a>
+
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remarks&sortOrder=d"
+                   >
+                    <span class=" {{if obj.sortColumn=='remarks'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                        <i class="fa fa-caret-down headerSortSymbol"></i>
+                    </span>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        {{for obj.pageList.content}}
+        <div class="Row"
+             onclick="go({{:id}}, 'purchaseBill')"
+             class="firstrow">
+            <div class="Cell"
+
+                 >
+                {{:id}}
+            </div>
+            <div class="Cell"  style="font-size: 0.8em">
+                {{:billNo}}
+            </div>
+            <div class="Cell"  style="font-size: 0.8em">
+                {{:dateOfBill}}
+            </div>
+
+
+            <div class="Cell">
+                {{if vendor }} {{:vendor.name}}{{/if}}
+            </div>
+             <div class="Cell"  style="font-size: 0.8em">
+                {{:cash}}
+            </div>
+            <div class="Cell" style="min-width: 150px">
+                {{:remarks}}
+            </div>
+
+
+
+        </div>  
+
+        {{else}}
+        No members...
+        {{/for}}
+
+    </div>
+</div>
+
+
+
+<style>
+    .td3{
+        font-size: 10px;
+        text-align: right;
+        padding-right: 12px;
+    }
+
+</style>

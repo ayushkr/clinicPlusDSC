@@ -59,6 +59,26 @@
                         </span>
                     </a>
                 </th>
+                <th style="min-width: 50px;">bill No
+                    <br>
+                    <a class='headerSortSymbol'
+                       href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=purchaseBill&sortOrder=a"
+                       >
+                        <span class=" {{if obj.sortColumn=='purchaseBill'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </span>
+                    </a>
+
+                    <a class='headerSortSymbol'
+                       href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=purchaseBill&sortOrder=d"
+                       >
+                        <span 
+                            class=" {{if obj.sortColumn=='purchaseBill'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                            <i class="fa fa-caret-down headerSortSymbol"></i>
+                        </span>
+                    </a>
+
+                </th>
                 <th style="min-width: 150px;">brandName
 
                     <br>
@@ -150,7 +170,7 @@
                 <th>cgst</th>
                 <th>sgst</th>
 
-                <th>dateOf Purchase</th>
+
                 <th>qty Purch ased
                     <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=qtyPurchased&sortOrder=a"
                        >
@@ -165,13 +185,7 @@
                             <i class="fa fa-caret-down headerSortSymbol"></i>
                         </span>
                     </a>
-
-
                 </th>
-
-                <th>vendor</th>
-
-
             </tr>
         </thead>
         <tbody>
@@ -181,6 +195,14 @@
                 onclick="go({{:id}}, 'medicineStock')"
                 class="firstrow">
                 <td>{{:id}}</td>
+                <td>
+                    {{if purchaseBill}}
+                    {{:purchaseBill.id}}<br>
+
+                    {{/if}}
+                </td>
+
+
                 <td>
                     {{if medicineBrandName!=null}}
                     {{:medicineBrandName.brandName}}<br>
@@ -197,8 +219,6 @@
                     {{:medicineBrandName.company}}
                     {{/if}}
                 </td> 
-
-
                 <td>{{:qtyRemaining}}</td>
                 <td>{{:expiryDate}}</td>
                 <td>{{:batch}}</td>
@@ -206,20 +226,9 @@
                 <td>{{:mrp}}</td>
                 <td>{{:sellingPrice}}</td>
                 <td>{{:costPrice}}</td>
-
-
-
                 <td>{{:cgst}}</td>
                 <td>{{:sgst}}</td>
-
-
-                <td>{{:dateOfPurchase}}</td>
                 <td>{{:qtyPurchased}}</td>
-                <td>
-                    {{if vendor!=null}}
-                    {{:vendor.name}}
-                    {{/if}}
-                </td>
             </tr>
             {{/for}}
         </tbody>

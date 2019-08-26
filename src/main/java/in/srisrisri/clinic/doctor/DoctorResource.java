@@ -86,7 +86,7 @@ public class DoctorResource {
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
-        int pageSize = 20;
+        int pageSize = 5;
         logger.warn("REST getItems() , {} ", new Object[]{ENTITY_NAME});
 
         if (!sortColumn.equals("undefined")) {
@@ -123,7 +123,7 @@ public class DoctorResource {
     public Optional<DoctorEntity> id(@PathVariable("id") Long id) {
         logger.warn("id {} No {}", new Object[]{label, id});
         Optional<DoctorEntity> item;
-        if (id > 0) {
+        if (id >= 0) {
             item = repo.findById(id);
         } else {
 
@@ -146,15 +146,11 @@ public class DoctorResource {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
             logger.warn("---- id ={}", entityBefore.getId());
             DoctorEntity entityAfter = null;
-            if (entityBefore.getId() == 0) {
-                entityAfter = new DoctorEntity();
-                entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
-
-            } else {
+            
 
                 entityAfter = repo.findById(entityBefore.getId()).get();
                 entityAfter.setUpdationTime(Date.valueOf(LocalDate.now()));
-            }
+            
 
             BeanUtils.copyProperties(entityBefore, entityAfter);
             try {

@@ -2,6 +2,7 @@ package in.srisrisri.clinic.medicineStock;
 
 import in.srisrisri.clinic.Vendor.VendorEntity;
 import in.srisrisri.clinic.medicineBrandName.MedicineBrandNameEntity;
+import in.srisrisri.clinic.purchaseBill.PurchaseBillEntity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,7 +14,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,15 +23,18 @@ import org.hibernate.annotations.GenericGenerator;
 public class MedicineStockEntity implements Serializable {
 
     @Id
-   @GenericGenerator(name = "generator", strategy = "increment")
-    @GeneratedValue(generator = "generator") 
+    @GenericGenerator(name = "generator", strategy = "increment")
+    @GeneratedValue(generator = "generator")
     private long id;
 
+      @ColumnDefault(value = "0")
+    private long idSpecial;
+    
     @OneToOne
     MedicineBrandNameEntity medicineBrandName;
-    @OneToOne
-    VendorEntity vendor;
+
     private String expiryDate;
+    String batch;
     BigDecimal cgst;
     BigDecimal sgst;
     BigDecimal gst;
@@ -42,27 +45,28 @@ public class MedicineStockEntity implements Serializable {
     @ColumnDefault(value = "0")
     BigDecimal mrp;
 
-    String batch;
-    String billNo;
-    String cash;
-
     @Column(name = "discount", nullable = false)
     @ColumnDefault(value = "0")
     BigDecimal discount;
 
-    private String dateOfPurchase;
     private long qtyPurchased;
 //    @Transient
     private long qtyRemaining;
     @Column(name = "sub_count", nullable = false)
     long subCount;
     
-     @Temporal(TemporalType.TIMESTAMP)
+    @OneToOne
+    PurchaseBillEntity purchaseBill;
+    
+    @ColumnDefault(value = "0")
+    BigDecimal amountTotal;
+
+    @Temporal(TemporalType.TIMESTAMP)
     java.util.Date creationTime;
- @Temporal(TemporalType.TIMESTAMP)
-    java.util.Date  updationTime;
- 
- 
+    @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date updationTime;
+    
+    String remarks;
 
     ////////////////////////////////////////////////////////////////
     // special
@@ -85,6 +89,37 @@ public class MedicineStockEntity implements Serializable {
     // end of specials
     /////////////////////////////////////////////////////////////////
 
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    
+    
+    public BigDecimal getAmountTotal() {
+        return amountTotal;
+    }
+
+    public void setAmountTotal(BigDecimal amountTotal) {
+        this.amountTotal = amountTotal;
+    }
+
+    
+    
+    public long getIdSpecial() {
+        return idSpecial;
+    }
+
+    public void setIdSpecial(long idSpecial) {
+        this.idSpecial = idSpecial;
+    }
+   
+    
+    
+    
     public Date getCreationTime() {
         return creationTime;
     }
@@ -100,11 +135,7 @@ public class MedicineStockEntity implements Serializable {
     public void setUpdationTime(Date updationTime) {
         this.updationTime = updationTime;
     }
-    
-    
-    
-    
-    
+
     public BigDecimal getMrp() {
         return mrp;
     }
@@ -113,13 +144,6 @@ public class MedicineStockEntity implements Serializable {
         this.mrp = mrp;
     }
 
-    public String getCash() {
-        return cash;
-    }
-
-    public void setCash(String cash) {
-        this.cash = cash;
-    }
 
     public long getId() {
         return id;
@@ -135,14 +159,6 @@ public class MedicineStockEntity implements Serializable {
 
     public void setMedicineBrandName(MedicineBrandNameEntity medicineBrandName) {
         this.medicineBrandName = medicineBrandName;
-    }
-
-    public VendorEntity getVendor() {
-        return vendor;
-    }
-
-    public void setVendor(VendorEntity vendor) {
-        this.vendor = vendor;
     }
 
     public String getExpiryDate() {
@@ -197,14 +213,6 @@ public class MedicineStockEntity implements Serializable {
         this.batch = batch;
     }
 
-    public String getBillNo() {
-        return billNo;
-    }
-
-    public void setBillNo(String billNo) {
-        this.billNo = billNo;
-    }
-
     public BigDecimal getDiscount() {
         return discount;
     }
@@ -213,13 +221,7 @@ public class MedicineStockEntity implements Serializable {
         this.discount = discount;
     }
 
-    public String getDateOfPurchase() {
-        return dateOfPurchase;
-    }
-
-    public void setDateOfPurchase(String dateOfPurchase) {
-        this.dateOfPurchase = dateOfPurchase;
-    }
+    
 
     public long getQtyPurchased() {
         return qtyPurchased;
@@ -237,9 +239,16 @@ public class MedicineStockEntity implements Serializable {
         this.subCount = subCount;
     }
 
-    @Override
-    public String toString() {
-        return "MedicineStockEntity{" + "id=" + id + ", medicineBrandName=" + medicineBrandName + ", vendor=" + vendor + ", expiryDate=" + expiryDate + ", cgst=" + cgst + ", sgst=" + sgst + ", gst=" + gst + ", costPrice=" + costPrice + ", sellingPrice=" + sellingPrice + ", batch=" + batch + ", billNo=" + billNo + ", cash=" + cash + ", discount=" + discount + ", dateOfPurchase=" + dateOfPurchase + ", qtyPurchased=" + qtyPurchased + ", qtyRemaining=" + qtyRemaining + ", subCount=" + subCount + '}';
+    public PurchaseBillEntity getPurchaseBill() {
+        return purchaseBill;
     }
+
+    public void setPurchaseBill(PurchaseBillEntity purchaseBill) {
+        this.purchaseBill = purchaseBill;
+    }
+
+   
+
+    
 
 }

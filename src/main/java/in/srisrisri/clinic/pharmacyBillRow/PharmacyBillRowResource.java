@@ -1,10 +1,7 @@
 package in.srisrisri.clinic.pharmacyBillRow;
 
 import in.srisrisri.clinic.Constants.Constants1;
-import in.srisrisri.clinic.doctor.DoctorEntity;
-import in.srisrisri.clinic.medicineStock.MedicineStockRepo;
 import in.srisrisri.clinic.pharmacyBill.PharmacyBillEntity;
-import in.srisrisri.clinic.responses.DeleteResponse;
 import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
 import in.srisrisri.clinic.utils.PageCover;
@@ -39,8 +36,7 @@ public class PharmacyBillRowResource {
     @Autowired
     PharmacyBillRowRepo repo;
 
-    @Autowired
-    MedicineStockRepo medicineStockRepo;
+   
 
     @GetMapping("")
     @ResponseBody
@@ -123,7 +119,7 @@ public class PharmacyBillRowResource {
         pharmacyBillEntity.setId(id);
 
         List<PharmacyBillRowEntity> list = repo.findByPharmacyBill(pharmacyBillEntity);
-        SumDAO sumDAO = new SumDAO(list);
+        SumDAOForPharmacyBill sumDAO = new SumDAOForPharmacyBill(list,repo);
         sumDAO.setBillId(id);
         try {
             sumDAO.calculateTotals();

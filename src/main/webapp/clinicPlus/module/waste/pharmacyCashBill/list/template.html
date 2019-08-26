@@ -1,0 +1,413 @@
+
+
+{{if status=='failure'}}
+<div style="background-color: red">
+    Some problem is there <br>
+    {{:message}}
+
+</div>
+
+
+
+{{/if}}
+<div id="printableArea"   title="PharmacyBill_List" 
+     style="position: fixed;/* width: 100%; */"
+
+     >
+    <!--style="font-family: Calibri"-->
+    <center>
+        <table border="0">
+            <tbody>
+                <tr>
+                    <td colspan="3">
+            <center>
+                <table >
+                    <tbody>
+                        <tr>
+                            <td>
+                    <center>
+
+                        <span style="font-size:30px;text-align:left;font-weight: bold">
+                            DOCTORS SPECIALITY CENTRE <br>
+                        </span>
+
+                        <span style="font-size:14px;text-align:center;">
+                            36/5588, USHUS THIRUVAMBADY,
+                            PATTURAIKKAL JN ,THRISSUR -680022 <br>
+                        </span>
+
+                        <span style="font-size:14px;text-align:center;">
+                            Website: &nbsp; www.doctorsspecialitycentre.com &nbsp;&nbsp;
+                            email : &nbsp; doctorsspecialitycentre@gmail.com &nbsp;&nbsp;
+                            <br>
+                            Phone &nbsp;<i class="fa fa-phone-square"></i> &nbsp;8592918888 
+
+                        </span>
+
+                    </center>
+
+
+                    </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </center>  
+
+            </td>
+            <hr>
+            </tr>
+
+            <tr>
+
+                <td class="gstSpacing">
+            <center>
+                &nbsp;  DL No:KL-TSR-137508, KL-TSR-137509
+                &nbsp; 
+                <!--DL Date: 14/10/2018-->
+            </center>
+            </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+        <!--status=='success'-->
+        {{if 1==1}}
+        {{if map.payload.pharmacyBillRowEntitys[0]}}
+
+        <hr>
+        <table border="0" cellspacing="0" cellpadding="0" class="Table1">
+            <colgroup><col width="248"><col width="248"><col width="248"></colgroup>
+            <tbody>
+                <tr>
+                    <td  class="Table1_A1">
+                        Bill No &nbsp;: 
+
+                        {{:map.payload.billId}} 
+
+
+
+                    </td>
+                    <td  class="Table1_A1">
+                        <!--                        Ref# No : -->
+                        <span class="T1">
+
+
+                        </span>
+                    </td>
+                    <td  class="Table1_A1">
+
+                        {{if map.payload.pharmacyBillRowEntitys[0]}}
+                        Bill Date :
+                        {{:~ddmmyyyyDashed(map.payload.pharmacyBillRowEntitys[0].pharmacyBill.dateOfBill)}} 
+
+                        {{else}}
+                        <h1>Pharmacy Bill Row not exist</h1> 
+                        {{/if}}
+
+                    </td>
+                </tr>
+                <tr>
+                    <td  class="Table1_A2">
+                        Patient : 
+                        <span class="T1"> {{:map.payload.pharmacyBillRowEntitys[0].pharmacyBill.appointment.patient.name}} </span>
+
+                    </td>
+                    <td  class="Table1_A2">
+
+                    </td>
+                    <td  class="Table1_A2">
+                        Doctor : 
+                        <span class="T1"> {{:map.payload.pharmacyBillRowEntitys[0].pharmacyBill.appointment.doctor.name}} </span>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        {{else}}
+        <h1>Pharmacy Bill Row not exist</h1> 
+        {{/if}}
+        <div id="oneRowInEdit"
+             class="oneRowInEdit_Row"
+             ></div>
+        <hr>
+        <div class="Table">
+            <div class="Title">
+                RETAIL BILL
+
+
+            </div>
+
+            <div class="Heading">
+                <div class="Cell" 
+
+                     ><ayu1>
+
+                        SlNo
+                    </ayu1></div>
+
+                <div class="Cell" 
+                     style="width:250px;"><ayu1>
+
+                        item/ BrandName
+                    </ayu1></div>
+                <div class="Cell"><ayu1>Mfg</ayu1></div>
+
+                <div class="Cell"><ayu1>Batch</ayu1></div>
+                <div class="Cell"><ayu1>Exp</ayu1></div>
+                <div class="Cell"><ayu1>Qty</ayu1></div>
+                <!--<div class="Cell"><ayu1>Rate</ayu1></div>-->
+                <!--<div class="Cell"><ayu1>Dis%</ayu1></div>-->
+                <!--<div class="Cell"><ayu1>GST</ayu1></div>-->
+                <div class="Cell"><ayu1>Rate</ayu1></div>
+                <div class="Cell"><ayu1>Amount</ayu1></div>
+            </div>
+            {{for map.payload.pharmacyBillRowEntitys}}
+
+
+            <div 
+                class="Row"    id="row_{{:id}}" 
+                   {{if idSpecial!=1}}
+                onclick="pharmacyCashBill.onRowSelect({{:id}})"
+                {{else}}
+                data-akr-printable='false'
+                {{/if}}
+                onkeydown="pharmacyCashBill.onRowSelectByKey({{:id}})"
+                title="{{if medicineStock}}{{:medicineStock.id}}{{/if}}"
+                tabindex="0"
+                {{if #getIndex()==1 }}  accesskey="q" {{/if}}
+                >
+                {{if medicineStock}}
+                <div class="Cell"  >  
+                    <ayu1>
+                        {{:#getIndex()}}
+                    </ayu1>      
+                </div>
+
+                <div class="CellNoPadding">
+                    <ayu1>
+                        <span class="button_none" 
+
+                              onclick="pharmacyCashBill.onRowSelect({{:id}})"
+                              style="text-align: left;"
+                              >
+                            {{if medicineStock}}{{:medicineStock.medicineBrandName.brandName}}{{/if}}
+
+                        </span>
+                    </ayu1>    
+                    <div id="_oneRowInEdit_{{:id}}"></div>
+                </div>
+                <div class="Cell">            <ayu1>
+                        {{:medicineStock.medicineBrandName.company}}
+                    </ayu1>      
+                </div>
+
+                <div class="Cell">            <ayu1>
+                        {{:medicineStock.batch}}
+                    </ayu1>    
+                </div>
+                <div class="Cell" style="min-width: 66px">            <ayu1>
+
+                        {{:~expiryDate_mmyyyy(medicineStock.expiryDate)}}
+
+                    </ayu1>      
+                </div>
+                <div class="Cell">         
+                    <ayu1 style="float: right">{{:qty}} </ayu1>  
+                </div>
+
+                <!--                <div class="Cell">            <ayu1>
+                                        {{:medicineStock.rate}}
+                                    </ayu1>
+                                </div>-->
+
+
+                <!--                <div class="Cell">            <ayu1>
+                                        {{:medicineStock.discount}}
+                                    </ayu1>        </div>-->
+
+
+                <!--                <div class="Cell">            <ayu1>
+                                        {{:medicineStock.gst}}
+                                    </ayu1>        </div>-->
+
+
+                <div class="Cell">            
+                    <ayu1 style="float: right">
+                        {{:medicineStock.sellingPrice}}
+                    </ayu1>      
+                </div>
+
+                <div class="Cell" >            
+                    <ayu1 style="float: right">
+
+                        {{:amount}}
+                    </ayu1>        
+                </div>
+                {{else}}
+
+                {{if idSpecial==1}}
+               
+                <span style="position: fixed;bottom: 0px;"> 
+                    Round Off Rs {{:amount}}</span>
+                {{else}}
+                <span>select Medicine</span>
+                
+                {{/if}}
+
+
+                {{/if}}
+
+
+            </div>
+
+            <div 
+                class="oneRowInEdit_Row" 
+
+                data-akr-printable="false"
+                id="oneRowInEdit_{{:id}}">
+
+            </div>
+
+            {{else}}
+            <div class="Row"  
+                 id="row_{{:id}}" 
+                 onclick="pharmacyCashBill.onRowSelect({{:id}})"      
+
+                 data-akr-printable="false" 
+
+                 >
+                <div class="Cell">            <ayu1>
+                        {{:#getIndex()+1}}
+                    </ayu1>      
+                </div>
+                <div class="Cell" >
+
+                    <ayu1>
+                        <button  class=" w3-red" accesskey="i"
+                                 >
+                            <!--medicine Name not selected-->
+                            ---
+                        </button>
+
+                    </ayu1>
+                </div>
+                <div class="Cell" ></div>
+                <div class="Cell" ></div>
+                <div class="Cell" ></div>
+                <div class="Cell" ></div>
+                <div class="Cell" ></div>
+                <div class="Cell" ></div>
+
+            </div>
+            <div 
+                id="oneRowInEdit_{{:id}}"
+                class="oneRowInEdit_Row" 
+                style="background-color: pink"
+                data-akr-printable="false"
+                >
+
+
+            </div>
+
+
+
+
+            {{/for}}
+            <div class="Heading">
+
+                <div class="Cell"   ></div>
+                <div class="Cell"
+                     title="add new" tabindex="0"
+                     >
+                    <div  data-akr-printable="false"
+                          style="color:green"
+                          onclick="pharmacyCashBill.saveNew({{:map.payload.billId}})" 
+
+                          >
+
+                        + 
+                        Add New 
+                    </div>
+
+                </div>
+                <div class="Cell"></div>
+                <div class="Cell"></div>
+                <div class="Cell"></div>
+                <!--<div class="Cell"></div>-->
+                <div class="Cell"></div>
+
+                <div class="Cell"></div>
+                <!--<div class="Cell" style="font-size: 14px;">{{:map.payload.gstTotal}}</div>-->
+                <!--<div class="Cell"  style="font-size: 14px;">{{:map.payload.mrpTotal}}</div>-->
+                <div class="Cell"  style="font-size: 14px;">
+                    <span style="float: right">{{:map.payload.amountTotal}}
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <!--
+                <table >
+                    <tbody>
+                        <tr>
+                            <td>
+                                Taxable Amount :
+                            </td>
+                            <td style="text-align: right">
+                                {{:map.payload.taxableAmount}}  ,
+                            </td>
+                            <td style="text-align: right">
+                                CGST : 
+                            </td>
+                            <td style="text-align: right">
+                                {{:map.payload.gstTotal/2}},
+                            </td>
+        
+                            <td style="text-align: right">
+                                SGST :  
+                            </td>
+                            <td style="text-align: right">
+                                {{:map.payload.gstTotal/2}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>-->
+
+
+        <div 
+            onclick="pharmacyCashBill.onRowSelect(document.getElementById('round').title)" 
+            > 
+
+            Rs.{{:~root.map.payload.rounded}} (RoundOff) 
+        </div>
+        <br/>
+
+
+        Paid Amount :  <span style="font-weight: bold;font-size: 18px">{{:map.payload.amountTotalRounded}}</span>
+        (
+        {{:map.payload.amountTotalWords}}  )
+        <br>
+        <span style="right: 100px;
+              position: absolute;">{{:pharmacistName}}  (Pharmacist)</span>
+
+        <br>
+        <span colspan="3" style="text-align: center">
+            <!--We provided Rs.{{:map.payload.freeOfCost}}  value(s) items free of Cost.-->
+        </span>
+
+        {{else}}
+        <div style="background-color: red;padding: 20px;font-size: 30px;"> 
+            some problem is there
+            {{if message}}{{:message}}{{/if}}
+
+        </div>
+
+        {{/if}}
+    </center>
+</div>
+<br>
+
+<!--{{:~jsonise(~root)}}-->

@@ -1,0 +1,15 @@
+<div class="inp_outer"   onclick="popup_selection_obj(
+                 {
+                     'value': '{{if purchaseBill}}{{:purchaseBill.id}}{{else}}----{{/if}}',
+                     'entity_select': 'purchaseBill',
+                     'input': 'purchaseBill'
+                 }
+         )">
+    <input type="hidden" id="purchaseBill" 
+           name="purchaseBill" data-link="purchaseBill.id" 
+           />
+    <div class="title1">purchaseBill</div>
+    <span id='purchaseBill_display' class="inp2">
+        {{if purchaseBill}}{{:purchaseBill.id}}{{else}}Not set{{/if}}
+    </span>
+</div>

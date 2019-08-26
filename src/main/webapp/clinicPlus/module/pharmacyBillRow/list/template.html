@@ -103,11 +103,11 @@
 
             <thead>
                 <tr class="bluestrp">
-                     <th style="min-width: 20px" >
-                        
+                    <th style="min-width: 20px" >
+
                     </th>
-                   <th style="min-width: 20px" >
-                        
+                    <th style="min-width: 20px" >
+
                     </th>
                     <th>id
                         <br>
@@ -187,8 +187,9 @@
                     </th>
 
 
-
+                    <th>Amount</th>
                     <th>item/BrandName</th>
+
                     <th>Mfg</th>
                     <th>Vendor</th>
                     <th>Batch</th>
@@ -198,28 +199,28 @@
                     <th>Dis%</th>
                     <th>GST</th>
                     <th>MRP</th>
-                    <th>Amount</th>
+
 
                 </tr>
             </thead>
             <tbody>
 
                 {{for obj.pageList.content}}
-<!--                <tr> 
-                    <td colspan="12">
-
-
-                    </td>
-                </tr>-->
+                <!--                <tr> 
+                                    <td colspan="12">
+                
+                
+                                    </td>
+                                </tr>-->
 
                 <tr 
                     onclick2="smallMenuToggle('menu_individual_{{:id}}')"
                     class="firstrow"
                     tabindex="0"
                     >
-                    
+
                     <td>
-                         <div id='menu_individual_{{:id}}' 
+                        <div id='menu_individual_{{:id}}' 
                              data-akr-printable="false"
                              style2="display: none"
                              >
@@ -235,7 +236,7 @@
 
 
                         </div>
-                        
+
                     </td>
 
                     <td >
@@ -273,9 +274,11 @@
                         {{/if}}
                     </td>
 
+                    <td>
+                        {{:amount}}
+                    </td>
 
-
-
+                    {{if idSpecial==1}}<td style="color:red"> roundOff </td>{{/if}}
 
 
                     {{if medicineStock}}
@@ -316,9 +319,7 @@
                         {{:medicineStock.mrp}}
                     </td>
 
-                    <td>
-                        {{:amount}}
-                    </td>
+
 
                     {{else}}
                     Not set

@@ -3,7 +3,7 @@
     <hr>
 
 
-    1. Filter By brandName <input  type="text" onkeyup="filter('brandName')"  ><br>
+    1. Filter By brandName <input  type="text" onkeyup="filter('brandName','{{:~root.moduleName}}')"  ><br>
 
     2. Select a Medicine Brand Name  (Click item in dark rounded rectangle)<br>
     <hr>
@@ -72,13 +72,13 @@
 
             </div>
 
-            <d id='{{:id}}' 
+            <d_{{:~root.moduleName}} id='{{:id}}' 
                brandName="{{:brandName}}" 
                company="{{:company}}" 
                genericName="{{:genericName}}" 
                usedFor="{{:usedFor}}" 
                >
-            </d>
+            </d_{{:~root.moduleName}}>
 
         </div>
 

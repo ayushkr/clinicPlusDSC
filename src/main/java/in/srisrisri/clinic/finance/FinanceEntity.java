@@ -41,9 +41,14 @@ public class FinanceEntity implements Serializable {
     
     @OneToOne
     UserEntity fromUser;
+    String fromStr;
+    
+     @ColumnDefault(value = "0")
+    int credit;
     
     @OneToOne
     UserEntity toUser;
+    String toStr;
     
     BigDecimal amount;
     
@@ -53,6 +58,18 @@ public class FinanceEntity implements Serializable {
  @Temporal(TemporalType.TIMESTAMP)
     java.util.Date  updationTime;
 
+    public int getCredit() {
+        return credit;
+    }
+
+    public void setCredit(int credit) {
+        this.credit = credit;
+    }
+
+   
+ 
+ 
+ 
     public java.util.Date getCreationTime() {
         return creationTime;
     }
@@ -68,6 +85,24 @@ public class FinanceEntity implements Serializable {
     public void setUpdationTime(java.util.Date updationTime) {
         this.updationTime = updationTime;
     }
+
+    public String getFromStr() {
+        return fromStr;
+    }
+
+    public void setFromStr(String fromStr) {
+        this.fromStr = fromStr;
+    }
+
+    public String getToStr() {
+        return toStr;
+    }
+
+    public void setToStr(String toStr) {
+        this.toStr = toStr;
+    }
+
+   
  
  
 

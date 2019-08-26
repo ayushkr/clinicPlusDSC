@@ -1,5 +1,5 @@
 
-updateCurrentDate('dateCurrent');
+//updateCurrentDate('dateCurrent');
 
 function  routeFunctions(c) {
     console.log('routeFunctions() ' + c);
@@ -56,7 +56,34 @@ function postFile(context, data) {
 }
 
 function dummy(context) {
-    console.log("dummy(context)-----------" + context.app.element_selector);
+
+
+    var params_ = Object.getOwnPropertyNames(this.params);
+
+    if (this.params['divName'] === undefined) {
+        this.params['divName'] = 'main_1';
+    }
+
+    if (('#' + this.params['divName']) === context.app.element_selector) {
+        result_ = context;
+        console.log("dummy(context)-----context.app.element_selector="
+                + context.app.element_selector);
+        if (context.params['function'] !== undefined) {
+            if (context.params['function'] === "populateCreate2") {
+                populateCreate2(context.params['module'],
+                        context.params['id'],
+                        context.params['divName']);
+            } else {
+
+
+            }
+
+            console.log('Not impl fn()=' + context.params['function']);
+        }
+    }
+
+
+
 
 }
 var ayu;
@@ -67,20 +94,20 @@ function cmd(context) {
 
 
     var params_ = Object.getOwnPropertyNames(this.params);
-    
-    if(this.params['div']===undefined){
-        this.params['div']='main_1';
+
+    if (this.params['div'] === undefined) {
+        this.params['div'] = 'main_1';
     }
-    
+
     if (('#' + this.params['div']) === context.app.element_selector) {
-        
+
         for (var i = 0; i < params_.length; i++) {
             console.log("cmd,param_ ----------" + params_[i] + ":" + this.params[params_[i]]);
         }
 
         var elems = document.querySelectorAll('.modalLayer');
         for (var i = 0; i < elems.length; i++) {
-        console.log("cmd,hiding modalLayer ---" + elems[i].id);
+            console.log("cmd,hiding modalLayer ---" + elems[i].id);
             hideDivAy(elems[i].id);
         }
 
@@ -107,9 +134,10 @@ function cmd_post(context, data) {
 //                    alert('a data' + data);
     var module_direct = this.params['module_direct'];
     var div = this.params['div'];
-    
-   if(div===undefined) div='main_1';
-   
+
+    if (div === undefined)
+        div = 'main_1';
+
     var redirect = this.params['redirect'];
     if (module_direct !== undefined) {
         module = module_direct;
@@ -138,7 +166,7 @@ function cmd_post(context, data) {
 //                    console.log(" jqXHR=" + JSON.stringify(jqXHR));
                     console.log("cmd post success, module=" +
                             module + ", data=" + JSON.stringify(data));
-                    var path = "#/cmd?module=" + module + "&action=/all/list&div=" + div + pageNewAy(1);
+                    var path = "#/cmd"+ pageNewAy(1)+"&module=" + module + "&action=/all/list&div=" + div ;
                     console.log('ok redirect to ' + path);
                     if (data.status === 'success') {
                         alert_1('Done :)', data.message, data.status);
@@ -146,7 +174,7 @@ function cmd_post(context, data) {
 //                        window.location.href = path;
                     } else {
                         alert_1('Sorry :(', data.message, data.status);
-                         window.history.back();
+                        window.history.back();
 
                     }
 
@@ -181,16 +209,34 @@ function cmd_post(context, data) {
 
 function file_i(context) {
 
+    if (this.params['div'] === undefined) {
+        this.params['div'] = 'main_1';
+    }
+
     var path = this.params['path'];
     id = this.params['id'];
 
-    mn.module[module] = {"id": id};
-    mn.module.current = module;
+    if (('#' + this.params['div']) === context.app.element_selector) {
 
-    var partial_path = '/clinicPlus/' + path + '?' + pageNewAy(1);
-    document.getElementById('main1_menu').innerHTML = "";
 
-    console.log("#/file , partial=" + partial_path);
-    this.partial(partial_path);
+
+        var elems = document.querySelectorAll('.modalLayer');
+        for (var i = 0; i < elems.length; i++) {
+            console.log("file_i,hiding modalLayer ---" + elems[i].id);
+            hideDivAy(elems[i].id);
+        }
+
+        var pathUpdated = '/clinicPlus/' + path  + pageNewAy(1);
+        document.getElementById('main_1_menu').innerHTML = "";
+        document.getElementById('main_1_inner').innerHTML = "";
+        document.getElementById('main_1_paging').innerHTML = "";
+
+        console.log("#/file , pathUpdated=" + pathUpdated);
+        $.getScript(pathUpdated);
+
+    } else {
+        console.log("#/file not matches div");
+
+    }
 }
 

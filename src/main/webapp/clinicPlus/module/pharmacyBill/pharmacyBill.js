@@ -1,35 +1,45 @@
 
+aylinker({
+    urlOfTemplate: '/clinicPlus/component/selectLarge/appointment.html' + pageNewAy(1),
+    selector: 'selectLarge_appointment',
+    data: {appointment: apiDataGlobal.appointment}
+
+});
+
+aylinker({
+    urlOfTemplate: '/clinicPlus/component/selectLarge/dateOfBill.html' + pageNewAy(1),
+    selector: 'selectLarge_dateOfBill',
+    data: {dateOfBill: apiDataGlobal.dateOfBill}
+
+});
+
+$.views.helpers(
+        {
+            pharmacyBill_render_list: function (id) {
+                pharmacyCashBill.render_list(id,'main_1_innert');
+            }
+        } );
+
+
 var pharmacyCashBill = new PharmacyCashBill();
 function  PharmacyCashBill() {
     this.moduleName = 'pharmacyCashBill';
     this.id = 0;
+    
+     
 
     this.render_list = function (id, divName) {
-
-        console.log('GT PharmacyCashBill.render_list() id=' + id);
-        window.location.href = "#/dummy?a=PharmacyCashBill/" + id;
-
-        aylinker({
-            urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/menuTop.html?ran=" + Math.random(),
-            selector: "main_1_menu",
-            data: {id: id}
-        }
-        );
-
-
-
-        $.get("/clinicPlus/api/pharmacyBillRow/ByBillId/" + id, function (result) {
-            console.log('PharmacyCashBill.render_list()  get("/clinicPlus/api/pharmacyBillRow/ByBillId/' + id);
+        $.get("/clinicPlus/api/pharmacyBillRow/ByBillId/" + id, 
+        function (result) {
+            console.log('  get("/clinicPlus/api/pharmacyBillRow/ByBillId/' + id);
             aylinker({
-                urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/list/template.html?ran=" + Math.random(),
+                urlOfTemplate:
+                        "/clinicPlus/module/pharmacyBill/billBodyTemplate.html" + pageNewAy(1),
 //                selector: "main_1_inner",
                 selector: divName,
-
                 data: result
-            }
-            );
+            });
         });
-
         document.getElementById('main_1_paging').innerHTML = "";
     };
 
@@ -58,13 +68,13 @@ function  PharmacyCashBill() {
 //                    document.getElementById('row_' + id).style =
 //                            'background-color: var(--color_d4);color: var(--color_l4); ';
 //                }
-  document.getElementById('row_' + id).style.display = 'none';
+                document.getElementById('row_' + id).style.display = 'none';
                 document.getElementById('oneRowInEdit_' + id).style.display = 'table-row';
 
                 $.get("/clinicPlus/api/pharmacyBillRow/" + id, function (result) {
                     // console.log('onRowSelect result=' + JSON.stringify(result));
                     aylinker({
-                        urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/oneRowfillFormTemplate.html?ran=" + Math.random(),
+                        urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/oneRowfillFormTemplate.html" + pageNewAy(1),
                         selector: 'oneRowInEdit_' + id,
 //                      
                         data: result
@@ -73,8 +83,8 @@ function  PharmacyCashBill() {
                 });
 
                 setTimeout(function () {
-                    
-                    
+
+
                     document.getElementById('qty').select();
                 }, 100);
 

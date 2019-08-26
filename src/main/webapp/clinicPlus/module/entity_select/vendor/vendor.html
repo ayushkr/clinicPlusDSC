@@ -1,10 +1,11 @@
 
 
-
+{{:~root.moduleName}}
 <hr>
 
 
-1. Filter By name <input  type="text" onkeyup="filter('name')"  ><br>
+1. Filter By name <input  type="text" 
+                          onkeyup="filter('name','{{:~root.moduleName}}')"  ><br>
 
 2. Select a Vendor  (Click item in dark rounded rectangle)<br>
 <hr>
@@ -55,19 +56,20 @@
 
         <div class="Cell"> 
             <a 
-                onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, 'main3');"
+                onclick="populateCreate2('{{:~root.moduleName}}',
+                    {{:id}}, newModal().id);"
 
                 ><i class="fa fa-edit"> Edit</i>
             </a>
 
         </div>
 
-        <d id='{{:id}}' 
+        <d_{{:~root.moduleName}} id='{{:id}}' 
            name="{{:name}}" 
            place="{{:place}}" 
            description="{{:description}}"   
            >
-        </d>
+        </d_{{:~root.moduleName}}>
 
     </div>
 

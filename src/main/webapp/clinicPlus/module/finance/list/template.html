@@ -7,7 +7,7 @@
 
 
             <div class="Cell">
-                Bill No
+                id
                 <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
                    >
                     <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -25,17 +25,17 @@
 
 
             <div class="Cell" style="min-width: 80px;font-size: 0.8em">
-                Bill Date
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfBill&sortOrder=a"
+                dateOfTransaction
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfTransaction&sortOrder=a"
                    >
-                    <span class=" {{if obj.sortColumn=='dateOfBill'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                    <span class=" {{if obj.sortColumn=='dateOfTransaction'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                         <i class="fa fa-caret-up headerSortSymbol "></i>
                     </span>
                 </a>
 
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfBill&sortOrder=d"
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfTransaction&sortOrder=d"
                    >
-                    <span class=" {{if obj.sortColumn=='dateOfBill'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                    <span class=" {{if obj.sortColumn=='dateOfTransaction'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                         <i class="fa fa-caret-down headerSortSymbol"></i>
                     </span>
                 </a>
@@ -44,17 +44,17 @@
 
 
 
-            <div class="Cell" >appt No
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_id&sortOrder=a"
+            <div class="Cell" >from
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=fromStr&sortOrder=a"
                    >
-                    <span class=" {{if obj.sortColumn=='appointment_id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                    <span class=" {{if obj.sortColumn=='fromStr'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                         <i class="fa fa-caret-up headerSortSymbol "></i>
                     </span>
                 </a>
 
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_id&sortOrder=d"
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=fromStr&sortOrder=d"
                    >
-                    <span class=" {{if obj.sortColumn=='appointment_id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                    <span class=" {{if obj.sortColumn=='fromStr'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                         <i class="fa fa-caret-down headerSortSymbol"></i>
                     </span>
                 </a>
@@ -62,74 +62,27 @@
             </div>
 
 
-            <div class="Cell" style="min-width: 90px" >appt Date
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_dateOfAppointment&sortOrder=a"
+            <div class="Cell">to
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=toStr&sortOrder=a"
                    >
-                    <span class=" {{if obj.sortColumn=='appointment_dateOfAppointment'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                    <span class=" {{if obj.sortColumn=='toStr'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                         <i class="fa fa-caret-up headerSortSymbol "></i>
                     </span>
                 </a>
 
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_dateOfAppointment&sortOrder=d"
+                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=toStr&sortOrder=d"
                    >
-                    <span class=" {{if obj.sortColumn=='appointment_dateOfAppointment'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
+                    <span class=" {{if obj.sortColumn=='toStr'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
                         <i class="fa fa-caret-down headerSortSymbol"></i>
                     </span>
                 </a>
 
             </div>
-
-
-            <div class="Cell" >appt Patient
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_patient_name&sortOrder=a"
-                   >
-                    <span class=" {{if obj.sortColumn=='appointment_patient_name'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-up headerSortSymbol "></i>
-                    </span>
-                </a>
-
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_patient_name&sortOrder=d"
-                   >
-                    <span class=" {{if obj.sortColumn=='appointment_patient_name'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-down headerSortSymbol"></i>
-                    </span>
-                </a>
-
-            </div>
-            <div class="Cell" >appt Doctor
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_doctor_name&sortOrder=a"
-                   >
-                    <span class=" {{if obj.sortColumn=='appointment_doctor_name'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-up headerSortSymbol "></i>
-                    </span>
-                </a>
-
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_doctor_name&sortOrder=d"
-                   >
-                    <span class=" {{if obj.sortColumn=='appointment_doctor_name'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-down headerSortSymbol"></i>
-                    </span>
-                </a>
-
-
-            </div>
-            <div class="Cell" style="min-width: 100px">actions</div>
-            <div class="Cell">remarks
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remarks&sortOrder=a"
-                   >
-                    <span class=" {{if obj.sortColumn=='remarks'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-up headerSortSymbol "></i>
-                    </span>
-                </a>
-
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remarks&sortOrder=d"
-                   >
-                    <span class=" {{if obj.sortColumn=='remarks'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-down headerSortSymbol"></i>
-                    </span>
-                </a>
-
-            </div>
+             <div class="Cell">particulars
+             </div>
+             <div class="Cell">amount
+             </div>
+            
 
         </div>
 
@@ -147,9 +100,10 @@
                 {{:dateOfTransaction}}
             </div>
 
-            <div class="Cell"></div>
-            <div class="Cell"></div>
-            <div class="Cell"></div>
+            <div class="Cell">{{:fromStr}}</div>
+            <div class="Cell">{{:toStr}}</div>
+            <div class="Cell">{{:particulars}}</div>
+            <div class="Cell">{{:amount}}</div>
 
 
         </div>  

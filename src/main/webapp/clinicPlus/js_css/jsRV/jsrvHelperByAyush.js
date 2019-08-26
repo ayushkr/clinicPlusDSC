@@ -1,4 +1,5 @@
 // item{name:"url" ,selector:"commonArea" }
+ console.log("jsrvHelperByAyush");
 var ayrender = function (item) {
   //  console.log("ayrender item= " + JSON.stringify(item));
     $.ajax(item.name,

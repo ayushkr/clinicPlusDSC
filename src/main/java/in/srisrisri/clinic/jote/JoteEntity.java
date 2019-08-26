@@ -12,37 +12,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
  * @author ayush
  */
-
-@Entity(name = "jote") // this name will be used to name the Entity
-@Table(name = "jote") // this name will be used to name a table in DB
+@Entity(name = "JoteEntity") // this name will be used to name the Entity
+@Table(name = "JoteEntity") // this name will be used to name a table in DB
 public class JoteEntity implements Serializable {
 
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
     @Id
-    
     Long id;
-    Long rid;
+    Long fxedId;
     String title;
     String category;
     String body;
     String status;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    Date dateOfCreation;
-
-    public Long getRid() {
-        return rid;
-    }
-
-    public void setRid(Long rid) {
-        this.rid = rid;
-    }
+    @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date creationTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date updationTime;
 
     public Long getId() {
         return id;
@@ -68,14 +61,7 @@ public class JoteEntity implements Serializable {
         this.status = status;
     }
 
-    public Date getDateOfCreation() {
-        return dateOfCreation;
-    }
-
-    public void setDateOfCreation(Date dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
-    }
-
+   
     public String getTitle() {
         return title;
     }
@@ -92,9 +78,30 @@ public class JoteEntity implements Serializable {
         this.category = category;
     }
 
-    @Override
-    public String toString() {
-        return "Jote{" + "rid=" + rid + ", id=" + id + ", body=" + body + ", status=" + status + ", dateOfCreation=" + dateOfCreation + '}';
+    public Long getFxedId() {
+        return fxedId;
     }
+
+    public void setFxedId(Long fxedId) {
+        this.fxedId = fxedId;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getUpdationTime() {
+        return updationTime;
+    }
+
+    public void setUpdationTime(Date updationTime) {
+        this.updationTime = updationTime;
+    }
+
+    
 
 }

@@ -594,7 +594,7 @@ html, body {
 
 .akr_nav_item_iconised{
        display: block;
-       padding: 10px 0px 6px 0px;
+       padding: 3px 0px 3px 0px;
     text-align: center;
 }
 
@@ -909,6 +909,21 @@ a:hover{
     
     
 }
+.w3-btn2{
+    border: none;
+    display: inline-block;
+    /*padding: 8px 16px;*/
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    border-radius: 2mm;
+}
+
 .w3-button2{
     padding: 8px;
     margin: 8px;

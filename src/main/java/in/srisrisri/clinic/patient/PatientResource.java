@@ -92,8 +92,8 @@ public class PatientResource {
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
-       int pageSize=20;
-        logger.warn("pageable={},filter= ", new Object[]{label,filter});
+        int pageSize = 10;
+        logger.warn("pageable={},filter= ", new Object[]{label, filter});
 
         if (!sortColumn.equals("undefined")) {
             if (sortOrder.equals("d")) {
@@ -110,10 +110,10 @@ public class PatientResource {
         } else {
             if (Integer.parseInt(pageNumber) == 0) {
                 pageSize = 10000;
-                pageNumber="1";
+                pageNumber = "1";
             }
         }
-        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1,pageSize, sort);
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, pageSize, sort);
         Page<PatientEntity> page = null;
         if (filterColumn.equals("undefined")) {
             page = repo.findAll(pageable);
@@ -127,7 +127,7 @@ public class PatientResource {
                 page = repo.findAllByContactPhoneLike(filter, pageable);
 
             }
-            
+
         }
 
         PageCover<PatientEntity> pageCover = new PageCover<>(page);
@@ -143,12 +143,12 @@ public class PatientResource {
     @ResponseBody
     public Optional<PatientEntity> id(@PathVariable("id") Long id) {
         logger.warn("id  No {}", new Object[]{id});
-      
-          Optional<PatientEntity> item ;
-        if(id>0){
-         item = repo.findById(id);}
-        else{
-         
+
+        Optional<PatientEntity> item;
+        if (id >= 0) {
+            item = repo.findById(id);
+        } else {
+
             PatientEntity entityAfter = new PatientEntity();
             entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
             repo.save(entityAfter);
@@ -184,22 +184,17 @@ public class PatientResource {
     @PostMapping("")
     public ResponseEntity<JsonResponse> PostMapping_one(PatientEntity entityBefore) {
         ResponseEntity<JsonResponse> responseEntity = null;
-         JsonResponse jsonResponse = new JsonResponse();
+        JsonResponse jsonResponse = new JsonResponse();
         try {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
             logger.warn("---- id ={}", entityBefore.getId());
             PatientEntity entityAfter = null;
-            if (entityBefore.getId() != 0) {
 
-                entityAfter = repo.findById(entityBefore.getId()).get();
-                 entityAfter.setUpdationTime(Date.valueOf(LocalDate.now()));
-            } else {
-                entityAfter = new PatientEntity();
-               entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
-            }
+            entityAfter = repo.findById(entityBefore.getId()).get();
+            entityAfter.setUpdationTime(Date.valueOf(LocalDate.now()));
 
             BeanUtils.copyProperties(entityBefore, entityAfter);
-              try {
+            try {
                 entityAfter = repo.save(entityAfter);
                 jsonResponse.setMessage("Saved ID:" + entityAfter.getId());
                 jsonResponse.setStatus(Constants1.SUCCESS);
@@ -219,8 +214,6 @@ public class PatientResource {
         return responseEntity;
     }
 
-    
- 
     // delete
     @GetMapping("delete/id/{id}")
     public JsonResponse DeleteMapping_id(@PathVariable("id") Long id) {
@@ -241,11 +234,11 @@ public class PatientResource {
         } catch (Exception e) {
             logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
             response.setStatus(Constants1.FAILURE);
-            if(e.getMessage().contains("ConstraintViolationException")){
-            response.setMessage("This " + label + " (ID: "+id+
-                    ")  is used in other place <br>For eg: in pharmacyBill etc");
-            }else{
-            response.setMessage(e.getMessage());
+            if (e.getMessage().contains("ConstraintViolationException")) {
+                response.setMessage("This " + label + " (ID: " + id
+                        + ")  is used in other place <br>For eg: in pharmacyBill etc");
+            } else {
+                response.setMessage(e.getMessage());
             }
             return response;
         }
@@ -265,11 +258,11 @@ public class PatientResource {
                 try {
                     repo.deleteById(n);
                 } catch (Exception e) {
-                    
+
                     failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
                             + "<br>Because  "
-                            +((e.getMessage().contains("ConstraintViolationException")) ? 
-                            "It Used in Other place ":e.getMessage()) 
+                            + ((e.getMessage().contains("ConstraintViolationException"))
+                            ? "It Used in Other place " : e.getMessage())
                             + "</p><hr>";
 
                 }
@@ -287,5 +280,5 @@ public class PatientResource {
         }
         return responseEntity;
     }
-    
+
 }

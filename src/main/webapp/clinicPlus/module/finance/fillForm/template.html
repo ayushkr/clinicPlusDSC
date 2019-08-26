@@ -10,8 +10,45 @@
               title="ഇതാണ്  ബില്ല്  നമ്പർ "
               >{{:id}} </span>
     <br><br>
+    
+      <div class="inp_outer"   onclick="popup_selection_obj(
+                        {
+                            'value': '{{:dateOfTransaction}}',
+                            'entity_select': 'dateForOrganisation',
+                            'input': 'dateOfTransaction'
+                        }
+                )">
+            <input type="hidden" id="dateOfTransaction" name="dateOfTransaction" 
 
+                   value="{{if dateOfTransaction}}{{:dateOfTransaction}}{{else}}2019-10-10{{/if}}" />
+            <div class="title1">dateOfTransaction</div>
+            <span id='dateOfTransaction_display' class="inp2">{{if dateOfTransaction}}{{:dateOfTransaction}}{{else}}Not set{{/if}}</span>
+        </div>
+    <br>
+   
 
+ <div class="inp_outer" style="min-width:400px;">
+                            <div class="title1">from</div>
+                            <span class="inp2" contenteditable="true" id="fromStr"   data-link="fromStr" >---</span>
+                            <input type="hidden" name="fromStr" data-link="fromStr" />
+                        </div>
+    
+      <div class="inp_outer" style="min-width:400px;">
+                            <div class="title1">to</div>
+                            <span class="inp2" contenteditable="true" id="toStr"   data-link="toStr" >---</span>
+                            <input type="hidden" name="toStr" data-link="toStr" />
+                        </div>
+    <div class="inp_outer" style="min-width:400px;">
+                            <div class="title1">particulars</div>
+                            <span class="inp2" contenteditable="true" id="particulars"   data-link="particulars" >---</span>
+                            <input type="hidden" name="particulars" data-link="particulars" />
+                        </div>
+    
+     <div class="inp_outer" style="min-width:400px;">
+                            <div class="title1">amount</div>
+                            <span class="inp2" contenteditable="true" id="amount"   data-link="amount" >---</span>
+                            <input type="hidden" name="amount" data-link="amount" />
+                        </div>
     
  
 

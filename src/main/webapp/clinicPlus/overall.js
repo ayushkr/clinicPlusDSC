@@ -8,6 +8,8 @@
 ////    ctxMenu.style.left = (event.pageX - 10)+"px";
 ////    ctxMenu.style.top = (event.pageY - 10)+"px";
 //},false);
+
+console.log('loaded overall.js');
 function img_preview_upload(idOfImage) {
     // <input type='file' onchange=img_preview_upload
     var imgObj = document.getElementById(idOfImage);
@@ -60,12 +62,10 @@ function checkServer() {
                 }
             }
     );
-
     setTimeout(checkServer, 2000);
 }
 
 setTimeout(checkServer, 2000);
-
 function filter1() {
     var elem = event.target;
     console.log('onenter');
@@ -176,6 +176,7 @@ function updateCurrentDate(divName) {
 }
 
 
+
 function twoDigitise(num) {
     var res = num;
     if (num < 10)
@@ -185,126 +186,104 @@ function twoDigitise(num) {
 
 
 
+var apiDataGlobal = {};
 
 function populateCreate2(module, id, divName) {
-//    var data_;
 
-    window.location.href = '#/dummy?a=populateCreate2/' + module + '/' + divName + '/' + id;
     var paging_data = {
         'moduleName': module,
         'edit': false,
         'divName': divName,
         'id': id
     };
-    if (id === 0) {
-//        data_ = mn.module[module + "_new"];
-        $.get("/clinicPlus/api/" + module + "/" + id, function (data_) {
-            console.log('new data_' + JSON.stringify(data_));
-//        data_.'id': 0, 'fixedId': 0, 'newId': 0, 'bookId': 0};
+    var path = "/clinicPlus/api/" + module + "/" + id;
+    $.get(path, function (apiData) {
+        apiDataGlobal = apiData;
+        console.log('populateCreate2(), api called' + path);
+        return apiData;
+    }).then(d => {
+        console.log('populateCreate2(), api returned ');
+//        console.log( JSON.stringify(d));
+        if (id === -1) {
+
+            console.log('initialise' + JSON.stringify());
+
             if (module === 'doctor') {
-                data_.dateOfJoining = getToday().full;
+                apiDataGlobal.dateOfJoining = getToday().full;
             }
             if (module === 'patient') {
-                data_.dateOfRegistration = getToday().full;
+                apiDataGlobal.dateOfRegistration = getToday().full;
             }
 
             if (module === 'appointment') {
-                data_.dateOfAppointment = getToday().full;
+                apiDataGlobal.dateOfAppointment = getToday().full;
             }
 
             if (module === 'pharmacyBill') {
-                data_.dateOfBill = getToday().full;
+                apiDataGlobal.dateOfBill = getToday().full;
             }
 
             if (module === 'medicineBrandName') {
-                data_.groupid = 0;
+                apiDataGlobal.groupid = 0;
             }
 
             if (module === 'medicineStock') {
-                data_.cgst = 0;
-                data_.sgst = 0;
-                data_.discount = 0;
-                data_.dateOfPurchase = getToday().full;
+                apiDataGlobal.cgst = 0;
+                apiDataGlobal.sgst = 0;
+                apiDataGlobal.discount = 0;
+                apiDataGlobal.dateOfPurchase = getToday().full;
 //              
                 if (mn.medicineStock.vendor !== undefined) {
 
-                    data_.vendor = {};
-
-                    data_.vendor.id = mn.medicineStock.vendor.id;
-                    data_.vendor.name = mn.medicineStock.vendor.name;
+                    apiDataGlobal.vendor = {};
+                    apiDataGlobal.vendor.id = mn.medicineStock.vendor.id;
+                    apiDataGlobal.vendor.name = mn.medicineStock.vendor.name;
                 }
 
                 if (mn.medicineStock.billNo !== undefined) {
-                    data_.billNo = mn.medicineStock.billNo;
+                    apiDataGlobal.billNo = mn.medicineStock.billNo;
                 }
 
                 if (mn.medicineStock.dateOfPurchase !== undefined) {
-                    data_.dateOfPurchase = mn.medicineStock.dateOfPurchase;
+                    apiDataGlobal.dateOfPurchase = mn.medicineStock.dateOfPurchase;
                 }
 
 
             }
             if (module === 'user') {
-                data_.dateOfRegistration = getToday().full;
+                apiDataGlobal.dateOfRegistration = getToday().full;
             }
 
-
-
-
-
-
-            console.log("populateCreate2 , module=" + module + "data-json= " + JSON.stringify(data_));
-            aylinker({
-                urlOfTemplate: "/clinicPlus/module/" + module + "/fillForm/template.html?ran=" + Math.random(),
-                selector: divName + "_inner",
-                data: data_
-            }
-            );
-        });
-    } else {
-        $.get("/clinicPlus/api/" + module + "/" + id, function (result) {
-            result.renderInDiv = divName;
-            //var result={entity, 'a':'1'}
-            console.log("populateCreate2 , module=" + module + ', data-api=' + JSON.stringify(result));
-            aylinker({
-                urlOfTemplate: "/clinicPlus/module/" + module + "/fillForm/template.html?ay=0" + pageNewAy(1),
-                selector: divName + "_inner",
-                data: result
-            }
-            );
-        });
-        paging_data.edit = true;
-    }
-
-
-
-    {
+        } else {
+            paging_data.edit = true;
+        }
+        apiDataGlobal.renderInDiv = divName;
         aylinker({
-            urlOfTemplate: "/clinicPlus/module/entity/crud/update/template_menuTop_update.html?ay=0" + pageNewAy(1),
-            selector: divName + '_menu',
-            data: paging_data
+            urlOfTemplate: "/clinicPlus/module/" + module + "/fillForm/template.html?ran=" + Math.random(),
+            selector: divName + "_inner",
+            data: apiDataGlobal
         });
-    }
-//
-//    if (divName === 'main_1') {
-//        aylinker({
-//            urlOfTemplate: "/clinicPlus/module/entity/crud/update/template_menuTop_update.html?ay=0" + pageNewAy(1),
-//            selector: divName + '_menu',
-//            data: paging_data
-//        });
-//    } else {
-//        var str = "<i class='fa fa-close entity_select_closeButton' \n\
-//onclick=save('" + module + "');hideMainLevel(); ></i>";
-//        document.getElementById(divName + "_menu").innerHTML = str;
-//
-//
-//    }
+
+
+        if (mainLayerNumberNow === 1)
+        {
+            aylinker({
+                urlOfTemplate: "/clinicPlus/module/entity/form/template_menuTop_update.html" + pageNewAy(1),
+                selector: divName + '_menu',
+                data: paging_data
+            });
+        } else {
+//       document.getElementById(divName + "_menu").innerHTML += 'issue';  
+
+        }
+
+        document.getElementById(divName + "_paging").innerHTML = '';
+        document.getElementById(divName).style.display = 'block';
+        $.getScript("/clinicPlus/module/" + module + "/" + module + ".js");
+    });
 
 
 
-    document.getElementById(divName + "_paging").innerHTML = '';
-    document.getElementById(divName).style.display = 'block';
-    $.getScript("/clinicPlus/module/" + module + "/" + module + ".js");
 }
 
 function listAsPages(module, path, divName) {
@@ -326,27 +305,27 @@ function listAsPages(module, path, divName) {
                         };
                         aylinker({
                             // urlOfTemplate: "/clinicPlus/module/" +mn.module.current+ "/all/list/template1.html?ran=" + Math.random(),
-                            urlOfTemplate: "/clinicPlus/module/" + module + "/list/template.html?ay=0" + pageNewAy(1),
+                            urlOfTemplate: "/clinicPlus/module/" + module + "/list/template.html" + pageNewAy(1),
                             selector: divName + "_inner",
                             data: {obj: result}
                         }
                         );
                         aylinker({
-                            urlOfTemplate: "/clinicPlus/module/entity/all/list/templatePaging.html?ay=0" + pageNewAy(1),
+                            urlOfTemplate: "/clinicPlus/module/entity/list/templatePaging.html" + pageNewAy(1),
                             selector: divName + "_paging",
                             data: {obj: paging_data}
                         }
                         );
                         aylinker({
-                            urlOfTemplate: "/clinicPlus/module/entity/all/list/template_menuTop.html?ay=0" + pageNewAy(1),
+                            urlOfTemplate: "/clinicPlus/module/entity/list/template_menuTop.html" + pageNewAy(1),
                             selector: divName + "_menu",
                             data: {obj: paging_data}
                         }
                         );
                     }
                 },
-        error: function () {
-            alert_1('Network problem', 'There is no network connection to server ', 'failure');
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert_1('API ' + module, JSON.stringify(jqXHR), 'failure');
         }
     });
     $.getScript("/clinicPlus/module/" + module + "/" + module + ".js");
@@ -359,7 +338,6 @@ function alert_1(head, body, typ) {
 
     console.log('alert_akr type=' + typ);
     var element = document.getElementById("alert_akr");
-
     if (typ === 'success') {
         element.style = "display:block;background-color: #108208eb;";
     } else {
@@ -367,10 +345,9 @@ function alert_1(head, body, typ) {
     }
 
 
-    // element.style = "background-color:'red';";
+// element.style = "background-color:'red';";
     document.getElementById("alert_akr_head").innerHTML = head;
     document.getElementById("alert_akr_body").innerHTML = body;
-
     if (typ === 'success') {
         setTimeout(function () {
             hideDivAy('alert_akr');
@@ -389,7 +366,7 @@ function popupGeneral(level_, moduleName, divName, url) {
     console.log('modulename=' + moduleName + ',  divname=' + divName + '  div=' + div + '  url=' + url);
     div.style = "display:block";
     mn.module['select'].name = moduleName;
-    $("#" + divName + "_inner").load(url + "?" + pageNewAy(1));
+    $("#" + divName + "_inner").load(url + pageNewAy(1));
 }
 
 
@@ -432,12 +409,10 @@ function popup_selection_obj(obj) {
 function newModal() {
 
     mainLayerNumberNow += 1;
-
 //    divNode = document.createElement('div');
 //    divNode.id = "main_" + mainLayerNumberNow;
 //    
     divNode = document.getElementById("main_" + mainLayerNumberNow);
-
 //    divNode.class = 'main_';
     divNode.style = "z-index:" + mainLayerNumberNow * 100 +
             ";background-color:white;position:fixed;width: 90%;height: 100%;\n\
@@ -484,7 +459,6 @@ function  selectionDone(obj) {
     console.log('selectionDone ,obj.extra' + JSON.stringify(obj.extra));
     $('#' + obj.who).val(obj.id);
     $('#' + obj.who + '_display').html(obj.extra);
-
     if (obj.who === 'doctor') {
         $('#' + obj.who + '_display').html(obj.extra.name);
         $('#feesList').html((obj.extra.feesList));
@@ -533,7 +507,7 @@ function refresh_entitySelectList(module, filterWord) {
     loadTemplate_entity_select_into(obj, divname);
     filter(filterWord);
 }
-function filter(attr) {
+function filter(attr, moduleName) {
     var givenWord = "";
     if (event.target.value === undefined) {
         givenWord = attr;
@@ -542,15 +516,14 @@ function filter(attr) {
     }
 
     console.log('-----filterBy attribute=' + attr + "   word =" + givenWord);
-    var dom = document.getElementsByTagName('d');
+    var dom = document.getElementsByTagName('d_' + moduleName);
     for (var i = 0; i < dom.length; i++) {
         var id = dom[i].getAttribute('id');
         var name = (dom[i].getAttribute(attr) + "").toLowerCase();
-        console.log('id=' + id + ' name=' + name);
+        document.getElementById('select_' + id).style = 'display:none';
         if (name.includes(givenWord)) {
+            console.log('match id=' + id + ' name=' + name);
             document.getElementById('select_' + id).style = 'display:table-row';
-        } else {
-            document.getElementById('select_' + id).style = 'display:none';
         }
 
     }
@@ -579,7 +552,7 @@ function check_1() {
 function loadTemplate_entity_select_into(obj, divname) {
 //var entity = mn.module['select'].obj.entity_select;
     var module = obj.entity_select;
-    var urlOfTemplate = "/clinicPlus/module/entity_select/" + module + "/" + module + ".html?" + pageNewAy(1);
+    var urlOfTemplate = "/clinicPlus/module/entity_select/" + module + "/" + module + ".html" + pageNewAy(1);
     console.log('loadTemplate_entity_select_into(obj, divname)' +
             '  \n urlOfTemplate=' + urlOfTemplate
             + '\n divname=' + divname + '_inner');
@@ -600,7 +573,7 @@ function loadTemplate_entity_select_into(obj, divname) {
         }
         );
         aylinker({
-            urlOfTemplate: '/clinicPlus/module/entity_select/template_menu.html',
+            urlOfTemplate: '/clinicPlus/module/entity_select/template_menu.html' + pageNewAy(1),
             selector: divname + "_menu",
             data: {
                 'moduleName': module,
@@ -608,7 +581,7 @@ function loadTemplate_entity_select_into(obj, divname) {
             }
         });
         document.getElementById(divname + "_paging").innerHTML = "";
-        //   $.getScript("/clinicPlus/module/entity_select/" + entity + "/" + entity + ".js?" + pageNewAy(1));
+       
 
     });
 //    menu
@@ -700,7 +673,7 @@ function submitFormAKR(formId, ToUrl) {
             var img = document.getElementById(formId + '_img');
             console.log(img);
             if (img !== null) {
-                document.getElementById(formId + '_img').src = data.fileDownloadUri + '?a=3' + pageNewAy(1);
+                document.getElementById(formId + '_img').src = data.fileDownloadUri  + pageNewAy(1);
             }
 
         },
@@ -716,11 +689,12 @@ function submitFormAKR(formId, ToUrl) {
 
 
 function go(id, module) {
-//        var path = '#/cmdc?module=' + module + '&action=/crud/update&id=' + id + pageNewAy(1);
-//        console.log("go() .......... path=" + path);
-//        window.location.href = path;
-
-    populateCreate2(module, id, 'main_1');
+    
+    window.location.href = '#/dummy?function=populateCreate2'
+            + '&module=' + module
+            + '&id=' + id
+            + '&divName=' + 'main_1';
+//    populateCreate2(module, id, 'main_1');
 }
 
 

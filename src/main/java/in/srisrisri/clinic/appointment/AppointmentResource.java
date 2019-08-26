@@ -120,7 +120,7 @@ public class AppointmentResource {
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
-        int pageSize = 10;
+        int pageSize = 5;
         if (pageSizeOb.isPresent()) {
             pageSize = pageSizeOb.get();
         } else {
@@ -185,7 +185,7 @@ public class AppointmentResource {
     public Optional<AppointmentEntity> id(@PathVariable("id") Long id) {
         logger.warn("id {} No {}", new Object[]{label, id});
         Optional<AppointmentEntity> item;
-        if (id > 0) {
+        if (id >= 0) {
             item = repo.findById(id);
         } else {
             AppointmentEntity entityAfter = new AppointmentEntity();
@@ -205,14 +205,11 @@ public class AppointmentResource {
             logger.warn("PostMapping_one , entityBefore={} ", entityBefore.toString());
 
             AppointmentEntity entityAfter = null;
-            if (entityBefore.getId() != 0) {
+         
 
                 entityAfter = repo.findById(entityBefore.getId()).get();
-                //entityAfter.setUpdationTime(new Date());
-            } else {
-                entityAfter = new AppointmentEntity();
-
-            }
+               entityAfter.setUpdationTime(Date.valueOf(LocalDate.now()));
+           
 
             BeanUtils.copyProperties(entityBefore, entityAfter);
             try {

@@ -21,52 +21,10 @@
             <div class="CellNoBorder"><p>actions</p></div>
         </div>
 
-<div class="Row" id="select_0"  >
-            <div class="CellNoBorder"
-                 onclick2="selectThis('{{:~root.moduleName}}',0, 'Any')"  
-                 onclick="selectThis(
-                     {
-                     who:'{{:~root.moduleName}}',
-                             id:0,
-                             extra:'Any'
-                     }
-                     )"  
-
-                 > 
-                <img class="img_round" src="/uploads/doctor/0_profileImage.jpeg?time=" alt="doctor/0" width="70px"> 
-
-
-                <input type="button"  
-                       class="entity_select_editButton" 
-                       value="Any"
-                       >
-
-
-            </div>
-            <div class="CellNoBorder">  --- </div>
-            <div class="CellNoBorder">  --- </div>
-            <div class="CellNoBorder"> 
-                <a class="w3-btn" data-toggle="tooltip" title="Edit"
-                   onclick="populateCreate2('{{:~root.moduleName}}',
-                       0, newModal().id);"
-
-                   ><i class="fa fa-edit"></i>
-                </a>
-
-            </div>
-
-            <d id='0' 
-               name="Any" 
-               department="--" 
-               remediesFor="--" 
-               description="--"
-               >
-            </d>
-
-        </div>
+       
 
         {{for obj  itemVar='~one'}}
-      
+
         <div class="Row" id="select_{{:id}}"  >
             <div class="CellNoBorder"
                  onclick2="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:name}}<br>Fees({{:feesList}})')"  
@@ -74,10 +32,9 @@
                      {
                      who:'{{:~root.moduleName}}',
                              id:{{:id}},
-                             
                              extra:{'name': '{{:name}}',
-                                 'feesList':'{{:feesList}}',
-                                 'feeForClinic':'{{:feeForClinic}}' }
+                                     'feesList':'{{:feesList}}',
+                                     'feeForClinic':'{{:feeForClinic}}' }
                      }
                      )"  
 
