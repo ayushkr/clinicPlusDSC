@@ -131,10 +131,10 @@ public class PharmacyBillResource {
     @GetMapping("{id}")
     @ResponseBody
     public Optional<PharmacyBillEntity> getMedicineNames(@PathVariable("id") Long id) {
-        Optional<PharmacyBillEntity> PharmacyBillEntitySaved;
+      PharmacyBillEntity pharmacyBillEntitySaved;
 
         if (id >= 0) {
-            PharmacyBillEntitySaved = pharmacyBillRepo.findById(id);
+            pharmacyBillEntitySaved = pharmacyBillRepo.findById(id).get();
         } else {
             PharmacyBillEntity PharmacyBillEntityNew = new PharmacyBillEntity();
 
@@ -143,17 +143,17 @@ public class PharmacyBillResource {
            
             PharmacyBillEntityNew.setAppointment(appointmentEntity);
             PharmacyBillEntityNew.setDateOfBill(Date.valueOf(LocalDate.now()));
-            pharmacyBillRepo.save(PharmacyBillEntityNew);
-            PharmacyBillEntitySaved = Optional.of(PharmacyBillEntityNew);
+            pharmacyBillEntitySaved= pharmacyBillRepo.save(PharmacyBillEntityNew);
+             
 
              PharmacyBillRowEntity pharmacyBillRowEntityNew = new PharmacyBillRowEntity();
             pharmacyBillRowEntityNew.setIdSpecial(1);
-            pharmacyBillRowEntityNew.setPharmacyBill(PharmacyBillEntitySaved.get());
+            pharmacyBillRowEntityNew.setPharmacyBill(pharmacyBillEntitySaved);
             pharmacyBillRowEntityNew.setCreationTime(Date.valueOf(LocalDate.now()));
             pharmacyBillRowEntityNew.setAmount(BigDecimal.ZERO);
             PharmacyBillRowEntity pharmacyBillRowEntitySaved = pharmacyBillRowRepo.save(pharmacyBillRowEntityNew);
         }
-        return PharmacyBillEntitySaved;
+        return Optional.of(pharmacyBillEntitySaved);
     }
 
     @GetMapping("betweenDates/{dateStart}/{dateEnd}")

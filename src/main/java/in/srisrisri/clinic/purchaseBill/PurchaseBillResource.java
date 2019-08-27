@@ -131,24 +131,24 @@ public class PurchaseBillResource {
     @GetMapping("{id}")
     @ResponseBody
     public Optional<PurchaseBillEntity> getMedicineNames(@PathVariable("id") Long id) {
-        Optional<PurchaseBillEntity> PurchaseBillEntitySaved;
+      PurchaseBillEntity purchaseBillEntitySaved;
 
         if (id >= 0) {
-            PurchaseBillEntitySaved = purchaseBillRepo.findById(id);
+           purchaseBillEntitySaved = purchaseBillRepo.findById(id).get();
         } else {
-            PurchaseBillEntity PurchaseBillEntityNew = new PurchaseBillEntity();
+            PurchaseBillEntity purchaseBillEntityNew = new PurchaseBillEntity();
 
-            PurchaseBillEntityNew.setCreationTime(Date.valueOf(LocalDate.now()));
+            purchaseBillEntityNew.setCreationTime(Date.valueOf(LocalDate.now()));
             VendorEntity vendorEntity = vendorRepo.findById(0L).get();
            
-            PurchaseBillEntityNew.setVendor(vendorEntity);
-            PurchaseBillEntityNew.setDateOfBill(Date.valueOf(LocalDate.now()));
-            purchaseBillRepo.save(PurchaseBillEntityNew);
-            PurchaseBillEntitySaved = Optional.of(PurchaseBillEntityNew);
+            purchaseBillEntityNew.setVendor(vendorEntity);
+            purchaseBillEntityNew.setDateOfBill(Date.valueOf(LocalDate.now()));
+           purchaseBillEntitySaved =  purchaseBillRepo.save(purchaseBillEntityNew);
+         
 
        
         }
-        return PurchaseBillEntitySaved;
+        return Optional.of(purchaseBillEntitySaved);
     }
 
     @GetMapping("betweenDates/{dateStart}/{dateEnd}")
