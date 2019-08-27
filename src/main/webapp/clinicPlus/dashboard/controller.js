@@ -72,11 +72,16 @@ function dummy(context) {
             if (context.params['function'] === "populateCreate2") {
                 populateCreate2(context.params['module'],
                         context.params['id'],
-                        context.params['divName']);
-            } else {
-
-
+                        context.params['divName'],
+                        context.params['paramsExtra']
+                        
+                );
+            } 
+            if (context.params['function'] === "patientCard_show") {
+                patientCard_show(context.params['id']);
             }
+            
+            
 
             console.log('Not impl fn()=' + context.params['function']);
         }
@@ -102,7 +107,8 @@ function cmd(context) {
     if (('#' + this.params['div']) === context.app.element_selector) {
 
         for (var i = 0; i < params_.length; i++) {
-            console.log("cmd,param_ ----------" + params_[i] + ":" + this.params[params_[i]]);
+            console.log("cmd,param_ ----------" 
+                    + params_[i] + ":" + this.params[params_[i]]);
         }
 
         var elems = document.querySelectorAll('.modalLayer');
@@ -116,7 +122,8 @@ function cmd(context) {
 
         listAsPages(this.params['module'],
                 'api/' + this.params['module'] +
-                '/pageable?pageNumber=' + this.params['pageNumber'] +
+                '/pageable?pageNumber=' + this.params['pageNumber'] 
+                +
                 '&filterColumn=' + this.params['filterColumn'] +
                 '&filter=' + this.params['filter'] +
                 '&sortColumn=' + this.params['sortColumn'] +

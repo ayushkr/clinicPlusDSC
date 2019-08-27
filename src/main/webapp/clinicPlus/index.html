@@ -131,13 +131,15 @@
                 <center>
 
                     <span id="dateCurrent" class="dateCurrent"
+                          data-1="1"
                           data-akr-printable="false"
                           class="akr_nav_item_iconised "
                           onclick="window.href = '#/cmd?module=dateForOrganisation&action=/all/list&pageNumber=1&div=main_1'"
                           title="calendar"
                           > dateCurrent</span>
                 </center>
-
+                <hr style=" margin: 1px 7px 5px;">
+                
                 <a href="#/cmd?module=appointment&action=/all/list&pageNumber=1&div=main_1"  
                    class="akr_nav_item_iconised " title="Appointments">
                     <i class="fa fa-calendar"></i> 
@@ -161,6 +163,14 @@
                     <i class="fa fa-wheelchair"></i> 
                     <i class="fasub fa-list"></i> 
                 </a>
+                 <a href="#/file?path=module/reports/patientsByDoctor/list/list.js" 
+                   class="akr_nav_item_iconised"
+                   title="Report patientsByDoctor "
+                   > 
+                    <i class="fa fa-file"></i>
+                    <i class="fasub fa-wheelchair"></i> 
+                    <i class="fasub fa-user-md"></i> 
+                </a>
                 <hr>
                 <a href="#/cmd?module=pharmacyBill&action=/all/list&pageNumber=1&div=main_1" 
                    class="akr_nav_item_iconised "
@@ -171,39 +181,16 @@
 
 
                 </a>
-                <a href="#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1&div=main_1" 
-                   class="akr_nav_item_iconised "
-                   title="MediBrandNames"
-                   >
-                    <i class="fa590akr fa-capsules"></i>
-                    <i class="fasub fa-file-code-o"></i> 
-                </a> 
-
-                <a href="#/cmd?module=medicineStock&action=/all/list&pageNumber=1&div=main_1" 
-                   class="akr_nav_item_iconised "
-                   title="MediStocks"
-                   >
-                    <i class="fa590akr fa-capsules"></i>
-                    <i class="fasub fa-database"></i> 
-                </a>
-
-
-                <a href="#/cmd?module=purchaseBill&action=/all/list&pageNumber=1&div=main_1" 
+                
+                  <a href="#/cmd?module=purchaseBill&action=/all/list&pageNumber=1&div=main_1" 
                    class="akr_nav_item_iconised "
                    title="purchaseBill"
                    >
                     <i class="fa590akr fa-capsules"></i>
-                    <i class="fasub fa-ambulance"></i>  
+                    <i class="fasub fa-database"></i>  
                 </a>
-
-
-                <a href="#/cmd?module=vendor&action=/all/list&pageNumber=1&div=main_1"
-                   class="akr_nav_item_iconised"
-                   title="Vendors"
-                   > 
-                    <i class="fa fa-ambulance"></i> 
-                    <i class="fasub fa-list"></i> 
-                </a>
+                
+                
                 <hr>
                 <a href="#/cmd?module=fileContent&action=/all/list&pageNumber=1&div=main_1"
                    class="akr_nav_item_iconised "
@@ -228,14 +215,7 @@
                 </a> 
 
 
-                <a href="#/file?path=module/reports/patientsByDoctor/list/list.js" 
-                   class="akr_nav_item_iconised"
-                   title="Report patientsByDoctor "
-                   > 
-                    <i class="fa fa-file"></i>
-                    <i class="fasub fa-wheelchair"></i> 
-                    <i class="fasub fa-user-md"></i> 
-                </a>
+               
 
                 <a href="#/cmd?module=finance&action=/all/list&pageNumber=1&div=main_1"
                    class="akr_nav_item_iconised"
@@ -263,6 +243,16 @@
                     <i class="fa fa-pencil"></i> 
                     <i class="fasub">Jo</i> 
                 </a>
+                
+                 <hr>
+                
+                <a href="#/cmd?module=medicineStock&action=/all/list&pageNumber=1&div=main_1" 
+                   class="akr_nav_item_iconised "
+                   title="MediStocks"
+                   >
+                    <i class="fa590akr fa-capsules"></i>
+                    <i class="fasub fa-database">All</i> 
+                </a>
 
                 <a href="#/cmd?module=pharmacyBillRow&action=/all/list&pageNumber=1&div=main_1" 
                    class="akr_nav_item_iconised "
@@ -271,6 +261,24 @@
                     <i class="fa590akr fa-capsules"></i> 
                     <i class="fasub">Rx All</i> 
 
+                </a>
+                 
+                 <hr>
+                 
+                <a href="#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1&div=main_1" 
+                   class="akr_nav_item_iconised "
+                   title="MediBrandNames"
+                   >
+                    <i class="fa590akr fa-capsules"></i>
+                    <i class="fasub fa-file-code-o"></i> 
+                </a> 
+
+                <a href="#/cmd?module=vendor&action=/all/list&pageNumber=1&div=main_1"
+                   class="akr_nav_item_iconised"
+                   title="Vendors"
+                   > 
+                    <i class="fa590akr fa-capsules"></i>
+                    <i class="fasub fa-ambulance"></i>  
                 </a>
 
 

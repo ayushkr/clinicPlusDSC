@@ -1,16 +1,7 @@
 //http://localhost:8080/clinicPlus/module/pharmacyBill/1.js?_=1556297803504
 
 
-function popup_selection(name) {
-
-    document.getElementById("main2").style = "display:block";
-    mn.module['select'].name = name;
-    console.log(name + "_selected " + mn.module['select'].name);
-    $("#main2").load("/clinicPlus/module/entity_select/view.html?" + pageNewAy(1));
-}
-
-
-
+manifestGUISelectLarge('medicineStock',apiDataGlobal.medicineStock);
 
 function  selectionDone() {
     console.log('selectionDone , name=' + mn.module['select'].name);

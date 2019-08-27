@@ -1,9 +1,12 @@
-Items in this Bill 
 
-<span onclick="go( - 1, 'medicineStock')" >
+{{for map.payload}}
+Items in this Bill <br>
+
+<span onclick="go( - 1, 'medicineStock', {{:billId}})" >
     <i class="fa fa-plus" title="add New"></i></span>
+
 <div class="Table">
-    {{for map.payload.medicineStockEntitys }}
+    {{for medicineStockEntitys }}
 
     <div class="Row" onclick="go({{:id}}, 'medicineStock')" >
         <div class="Cell">{{:id}} </div>
@@ -18,3 +21,7 @@ Items in this Bill
     {{/for}}
 
 </div>
+<br>
+
+
+{{/for}}

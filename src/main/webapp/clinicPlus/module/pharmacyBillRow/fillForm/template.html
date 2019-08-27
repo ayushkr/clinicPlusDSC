@@ -1,20 +1,16 @@
 
-<div class="pageTitle">{{if id==0}} New  {{else}}
-    Existing ID: {{:id}} {{/if}}  </div>
+<div class="pageTitle">
+   pharmacyBillRow_{{:id}}  </div>
 
 <form id='form_pharmacyBillRow' method="post"
         action="{{:renderInDiv}}#/cmd/post">  
     <input type='hidden' name='module_direct' value='pharmacyBillRow'>
     <input type='hidden' name='redirect' value=' #/cmdc?module=pharmacyBillRow&action=/all/list'>
     <input type="hidden" name="id" data-link="id" />
-    <br>
+   
 
 
     <div id="printableArea" style="margin-left: 0mm" title="patient_{{:id}}_{{:name}}">
-
-        id {{:id}} <br>
-
-
 
         <div class="inp_outer"   onclick="popup_selection_obj(
                         {
@@ -32,21 +28,8 @@
         </div>
         <br>
 
-        <div class="inp_outer"   onclick="popup_selection_obj(
-                        {
-                            'value': '',
-                            'entity_select': 'medicineStock',
-                            'input': 'medicineStock'
-                        }
-                )">
-            <input type="hidden" 
-                   id="medicineStock" 
-                   name="medicineStock" 
-                   value="{{if medicineStock}}{{:medicineStock.id}}{{else}}----{{/if}}" />
-            <div class="title1">medicineStock</div>
-            <span id='medicineStock_display' class="inp2">
-                {{if medicineStock}}{{:medicineStock.id}}{{else}}Not set{{/if}}</span>
-        </div>
+        <div id="selectLarge_medicineStock" >
+            selectLarge_medicineStock</div>
         <br>
         <div class="inp_outer">
             <div class="title1">qty</div>

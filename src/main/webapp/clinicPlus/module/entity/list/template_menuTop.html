@@ -1,5 +1,7 @@
 <!--from /entity/all/list/template_menuTop.html-->
-<div id="widgets" class="widgets2" data-akr-printable="false" >
+<div id="widgets" 
+     class="widgets2"
+     data-akr-printable="false" >
 <!--   
     <menu id="ctxMenu" 
 
@@ -20,30 +22,26 @@
     </menu>-->
 
 
-
-
-
-
-
     <button 
         onclick="window.history.back()"
         data-toggle="tooltip" title="Back" 
         style="float: left"
-        class="w3-btn"
+        class="w3-btn2"
         > <i class="fa fa-backward"> </i>
     </button>
 
     <!--print button-->
-    <button onclick="printDiv_navOff('navbar')" data-toggle="tooltip" title="Print this page" 
-            class="w3-btn"
+    <button onclick="printDiv_navOff('navbar')"
+            data-toggle="tooltip" title="Print this page" 
+            class="w3-btn2"
             > <i class="fa fa-print"> </i>
     </button> 
 
     <!--create button-->
     <button 
-        onclick=" populateCreate2('{{:obj.moduleName}}', -1, 'main_1')"
+        onclick="go(-1,'{{:obj.moduleName}}')"
         data-toggle="tooltip" title="Add New {{:obj.moduleName}}" 
-        class="w3-btn"
+        class="w3-btn2"
         > <i class="fa fa-plus"> </i>
     </button>
 
@@ -103,4 +101,4 @@
         content:"\2630";
     }
 </style>
-
+<hr>

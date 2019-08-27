@@ -1,46 +1,53 @@
 <!-- entity /update/template_menuTop_update-->
 
 
-<div id="widgets" class="widgetBar" data-akr-printable="false" >
- 
-    
-    
-    <button onclick="goto_delete('{{:moduleName}}', '{{:id}}')"  data-toggle="tooltip" title="Delete" 
-            class="w3-btn w3-red"
-            data-akr-printable="false"
-            >
+<div id="widgets" class="widgetBar" 
+     data-akr-printable="false" >
+
+
+
+    <button 
+        onclick="goto_delete('{{:moduleName}}', '{{:id}}')" 
+        data-toggle="tooltip" title="Delete" 
+        class="w3-btn2 w3-red"
+        data-akr-printable="false"
+        >
         <i class="fa fa-trash" 
            style="font-size: 1em"
-           ><span style="margin-left: 2mm;"> </span> </i>
+           ><span style="margin-left: 2mm;"> 
+            </span> </i>
     </button> 
 
-    <span style="display:inline-block ;width: 1cm;"></span>
+    <span style="display:inline-block ;width: 1cm;">
+        
+    </span>
 
 
-    <!--back button-->
+<!--    back button
     <button 
         onclick="window.history.back()"
         data-toggle="tooltip" title="Back" 
-        class="w3-btn"
+        class="w3-btn2"
 
         > <i class="fa fa-backward"> </i>
-    </button>
+    </button>-->
 
 
 
     <span style="display:inline-block ;width: 0cm;"></span>
-    <button onclick="printDiv_navOff('navbar')" data-toggle="tooltip" title="Print this page" 
-            class="w3-btn"
+    <button onclick="printDiv_navOff('navbar')" 
+            data-toggle="tooltip" title="Print this page" 
+            class="w3-btn2"
             > <i class="fa fa-print"> </i>
     </button> 
 
 
 
-    <button class="w3-btn " data-toggle="tooltip" 
+    <button class="w3-btn2 " data-toggle="tooltip" 
             title="Save" 
             style="float: right"
             onclick="save('{{:moduleName}}');">
-        <i class="fa fa-save"  > </i>
+        <i class="fa fa-save"  > OK</i>
     </button>
 
 
@@ -48,6 +55,7 @@
     <span style="width:2cm;"></span>
 
 </div>
+<hr>
 
 
 

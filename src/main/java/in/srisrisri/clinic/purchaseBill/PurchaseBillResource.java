@@ -133,7 +133,7 @@ public class PurchaseBillResource {
     public Optional<PurchaseBillEntity> getMedicineNames(@PathVariable("id") Long id) {
         Optional<PurchaseBillEntity> PurchaseBillEntitySaved;
 
-        if (id > 0) {
+        if (id >= 0) {
             PurchaseBillEntitySaved = purchaseBillRepo.findById(id);
         } else {
             PurchaseBillEntity PurchaseBillEntityNew = new PurchaseBillEntity();

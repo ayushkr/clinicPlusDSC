@@ -12,17 +12,12 @@ function vendorSelected() {
 
 }
 
-$.views.helpers(
-        {
-            purchaseBill_render_list: function (id) {
-                purchaseBill.render_list(id,'main_1_innert');
-            }
-        } );
 
 
 
 
-var purchaseBill = new PurchaseBill();
+
+
 function  PurchaseBill() {
     this.moduleName = 'purchaseBill';
     this.id = 0;
@@ -36,7 +31,7 @@ function  PurchaseBill() {
                     console.log('PurchaseBill.render_list() api/medicineStock/ByBillId/' + id);
                     aylinker({
                         urlOfTemplate:
-                                "/clinicPlus/module/purchaseBill/billBodyTemplate.html?ran=" + Math.random(),
+                                "/clinicPlus/module/purchaseBill/billBodyTemplate.html"+pageNewAy(1),
 //                selector: "main_1_inner",
                         selector: divName,
 
@@ -236,12 +231,15 @@ function  PurchaseBill() {
                 this.saveEdit();
             }
         }
-
     };
-
-
-
 }
+var purchaseBill = new PurchaseBill();
+$.views.helpers(
+        {
+            purchaseBill_render_list: function (id) {
+                purchaseBill.render_list(id,'main_1_innert');
+            }
+        } );
 
 
 

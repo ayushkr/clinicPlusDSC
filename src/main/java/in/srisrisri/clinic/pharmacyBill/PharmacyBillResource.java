@@ -133,7 +133,7 @@ public class PharmacyBillResource {
     public Optional<PharmacyBillEntity> getMedicineNames(@PathVariable("id") Long id) {
         Optional<PharmacyBillEntity> PharmacyBillEntitySaved;
 
-        if (id > 0) {
+        if (id >= 0) {
             PharmacyBillEntitySaved = pharmacyBillRepo.findById(id);
         } else {
             PharmacyBillEntity PharmacyBillEntityNew = new PharmacyBillEntity();

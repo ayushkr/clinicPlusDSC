@@ -1,27 +1,13 @@
 
-aylinker({
-    urlOfTemplate: '/clinicPlus/component/selectLarge/appointment.html' + pageNewAy(1),
-    selector: 'selectLarge_appointment',
-    data: {appointment: apiDataGlobal.appointment}
-
-});
-
-aylinker({
-    urlOfTemplate: '/clinicPlus/component/selectLarge/dateOfBill.html' + pageNewAy(1),
-    selector: 'selectLarge_dateOfBill',
-    data: {dateOfBill: apiDataGlobal.dateOfBill}
-
-});
-
-$.views.helpers(
-        {
-            pharmacyBill_render_list: function (id) {
-                pharmacyCashBill.render_list(id,'main_1_innert');
-            }
-        } );
 
 
-var pharmacyCashBill = new PharmacyCashBill();
+manifestGUISelectLarge('appointment',apiDataGlobal.appointment);
+manifestGUISelectLarge('dateOfBill',apiDataGlobal.dateOfBill);
+
+
+
+
+
 function  PharmacyCashBill() {
     this.moduleName = 'pharmacyCashBill';
     this.id = 0;
@@ -54,41 +40,6 @@ function  PharmacyCashBill() {
             };
 
 
-    this.onRowSelect =
-            function (id) {
-
-                console.log('onRowSelect id=' + id);
-
-//                var rows = document.getElementsByClassName('Row');
-//                for (let row of rows) {
-//                    row.style = "background:'#ecf6fd';color:'white';";
-//                    // row.className+="pharmacyCashBill_selectedRow";
-//                }
-//                if (id !== 0) {
-//                    document.getElementById('row_' + id).style =
-//                            'background-color: var(--color_d4);color: var(--color_l4); ';
-//                }
-                document.getElementById('row_' + id).style.display = 'none';
-                document.getElementById('oneRowInEdit_' + id).style.display = 'table-row';
-
-                $.get("/clinicPlus/api/pharmacyBillRow/" + id, function (result) {
-                    // console.log('onRowSelect result=' + JSON.stringify(result));
-                    aylinker({
-                        urlOfTemplate: "/clinicPlus/module/pharmacyCashBill/oneRowfillFormTemplate.html" + pageNewAy(1),
-                        selector: 'oneRowInEdit_' + id,
-//                      
-                        data: result
-                    }
-                    );
-                });
-
-                setTimeout(function () {
-
-
-                    document.getElementById('qty').select();
-                }, 100);
-
-            };
 
     this.fillParamsFromGUI =
             function () {
@@ -237,3 +188,10 @@ function  PharmacyCashBill() {
 
 
 }
+var pharmacyCashBill = new PharmacyCashBill();
+$.views.helpers(
+        {
+            pharmacyBill_render_list: function (id) {
+                pharmacyCashBill.render_list(id,'main_1_innert');
+            }
+        } );

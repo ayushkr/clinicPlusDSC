@@ -51,7 +51,7 @@ public class PharmacyBillRowResource {
     @ResponseBody
     public ResponseEntity<Optional<PharmacyBillRowEntity>> getById(@PathVariable("id") Long id) {
         Optional<PharmacyBillRowEntity> item;
-        if (id > 0) {
+        if (id >= 0) {
             item = repo.findById(id);
         } else {
             PharmacyBillRowEntity entityAfter = new PharmacyBillRowEntity();

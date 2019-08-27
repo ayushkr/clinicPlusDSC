@@ -1,10 +1,10 @@
 
 <center>
-    
+
 
 
     {{for map.payload }}
-    
+
     <div class="Table">
         <div class="Title">
             RETAIL BILL
@@ -34,13 +34,13 @@
 
         {{for pharmacyBillRowEntitys}}
         <div 
-            class="Row"    id="row_{{:id}}" 
+            class="Row"   
+            onclick="go({{:id}}, 'pharmacyBillRow')"
+            id="row_{{:id}}" 
             {{if idSpecial!=1}}
-            onclick="pharmacyCashBill.onRowSelect({{:id}})"
             {{else}}
             data-akr-printable='false'
             {{/if}}
-            onkeydown="pharmacyCashBill.onRowSelectByKey({{:id}})"
             title="{{if medicineStock}}{{:medicineStock.id}}{{/if}}"
             tabindex="0"
             {{if #getIndex()==1 }}  accesskey="q" {{/if}}
@@ -55,15 +55,13 @@
             <div class="CellNoPadding">
                 <ayu1>
                     <span class="button_none" 
-
-                          onclick="pharmacyCashBill.onRowSelect({{:id}})"
                           style="text-align: left;"
                           >
                         {{if medicineStock}}{{:medicineStock.medicineBrandName.brandName}}{{/if}}
 
                     </span>
                 </ayu1>    
-                <div id="_oneRowInEdit_{{:id}}"></div>
+               
             </div>
             <div class="Cell">            <ayu1>
                     {{:medicineStock.medicineBrandName.company}}
@@ -119,47 +117,9 @@
             {{/if}}
             {{/if}}
         </div>
-        <div 
-            class="oneRowInEdit_Row" 
-            data-akr-printable="false"
-            id="oneRowInEdit_{{:id}}">
-        </div>
-        {{else}}
-        <div class="Row"  
-             id="row_{{:id}}" 
-             onclick="pharmacyCashBill.onRowSelect({{:id}})"      
-             data-akr-printable="false" 
-             >
-            <div class="Cell">            <ayu1>
-                    {{:#getIndex()+1}}
-                </ayu1>      
-            </div>
-            <div class="Cell" >
-                <ayu1>
-                    <button  class=" w3-red" accesskey="i"
-                             >
-                        <!--medicine Name not selected-->
-                        ---
-                    </button>
-
-                </ayu1>
-            </div>
-            <div class="Cell" ></div>
-            <div class="Cell" ></div>
-            <div class="Cell" ></div>
-            <div class="Cell" ></div>
-            <div class="Cell" ></div>
-            <div class="Cell" ></div>
-        </div>
-        <div 
-            id="oneRowInEdit_{{:id}}"
-            class="oneRowInEdit_Row" 
-            style="background-color: pink"
-            data-akr-printable="false"
-            >
-        </div>
 
         {{/for}}
+        
         <div class="Heading">
             <div class="Cell"   ></div>
             <div class="Cell"
@@ -167,7 +127,7 @@
                  >
                 <div  data-akr-printable="false"
                       style="color:green"
-                      onclick="go( - 1, 'pharmacyBillRow')"
+                      onclick="go(-1, 'pharmacyBillRow',{{:billId}})"
                       >
                     + 
                     Add New 
@@ -214,13 +174,6 @@
                 </tbody>
             </table>-->
 
-
-    <div 
-        onclick="pharmacyCashBill.onRowSelect(document.getElementById('round').title)" 
-        > 
-
-        Rs.{{:~root.rounded}} (RoundOff) 
-    </div>
     <br/>
 
 
@@ -240,9 +193,9 @@
 
 
 
-{{else}}
-<h1>oo  not exist</h1> 
-{{/for}}
+    {{else}}
+    <h1>oo  not exist</h1> 
+    {{/for}}
 
 </center>
 {{if status=="success"}}

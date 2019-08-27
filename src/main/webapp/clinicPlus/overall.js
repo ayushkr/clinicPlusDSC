@@ -10,6 +10,20 @@
 //},false);
 
 console.log('loaded overall.js');
+
+function manifestGUISelectLarge(name, dataV) {
+    var jsonStr = '{"' + name + '":' + JSON.stringify(dataV) + '}';
+    var jso = JSON.parse(jsonStr);
+    console.log(JSON.stringify(jso));
+
+    aylinker({
+        urlOfTemplate: '/clinicPlus/component/selectLarge/' + name + '.html' + pageNewAy(1),
+        selector: 'selectLarge_' + name,
+        data: jso
+
+    });
+}
+
 function img_preview_upload(idOfImage) {
     // <input type='file' onchange=img_preview_upload
     var imgObj = document.getElementById(idOfImage);
@@ -43,13 +57,19 @@ function checkServer() {
                 type: 'GET',
                 async: false,
                 success: function (data) {
+                    updateCurrentDate('dateCurrent');
                     $('#navbar').css('backgroundColor', 'var(--color_l3)');
 //                    hideDivAy('alert_akr');
                     var v = document.getElementById('dateCurrent');
-                    if (v.style.visibility === 'visible') {
-                        v.style.visibility = "hidden";
+
+                    console.log('status  ' + v.getAttribute('data-1'));
+                    if (v.getAttribute('data-1') === "1") {
+                        v.setAttribute('data-1', 0);
+                        $('#dateCurrent').css('font-weight', 'bolder');
+
                     } else {
-                        v.style.visibility = "visible";
+                        v.setAttribute('data-1', 1);
+                        $('#dateCurrent').css('font-weight', 'lighter');
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -110,12 +130,14 @@ function pasteFromClipBoardTo(id) {
 
 
 function  patientCard_show(id) {
+
+
     aylinker({
         urlOfTemplate: "/clinicPlus/module/appointment/patientCard/patientCardMenuTemplate.html?ran=" + Math.random(),
-        selector: "main1_menu",
+        selector: "main_1_menu",
         data: {}
     });
-    document.getElementById('main1_paging').innerHTML = "";
+    document.getElementById('main_1_paging').innerHTML = "";
     var dataGot;
     var path = '/clinicPlus/api/appointment/' + id;
     $.ajax(path,
@@ -128,7 +150,7 @@ function  patientCard_show(id) {
                         function (data) {
                             aylinker({
                                 urlOfTemplate: "/clinicPlus/module/appointment/patientCard/patientCardTemplate.html?ran=" + Math.random(),
-                                selector: "main1_inner",
+                                selector: "main_1_inner",
                                 data: data
                             }
                             );
@@ -170,7 +192,7 @@ function getToday() {
 
 function updateCurrentDate(divName) {
     var reqDateStr = getToday();
-    console.log(' updateCurrentDate(divName), divName=' + divName + ', reqDate=' + reqDateStr.full);
+//    console.log(' updateCurrentDate(divName), divName=' + divName + ', reqDate=' + reqDateStr.full);
     document.getElementById(divName).innerHTML = reqDateStr.day + "<br>" + reqDateStr.full;
     return reqDateStr;
 }
@@ -188,8 +210,8 @@ function twoDigitise(num) {
 
 var apiDataGlobal = {};
 
-function populateCreate2(module, id, divName) {
-
+function populateCreate2(module, id, divName, paramsExtraStr) {
+    console.log('paramsExtraStr=' + JSON.stringify(paramsExtraStr));
     var paging_data = {
         'moduleName': module,
         'edit': false,
@@ -199,14 +221,19 @@ function populateCreate2(module, id, divName) {
     var path = "/clinicPlus/api/" + module + "/" + id;
     $.get(path, function (apiData) {
         apiDataGlobal = apiData;
+        apiDataGlobal.renderInDiv = divName;
         console.log('populateCreate2(), api called' + path);
-        return apiData;
-    }).then(d => {
-        console.log('populateCreate2(), api returned ');
-//        console.log( JSON.stringify(d));
-        if (id === -1) {
 
-            console.log('initialise' + JSON.stringify());
+        apiDataGlobal.paging_data = paging_data;
+        return apiDataGlobal;
+    }).then(d => {
+        var module = d.paging_data.moduleName;
+        console.log('populateCreate2(), api returning ');
+//        console.log(' d=' + JSON.stringify(d));
+        console.log('module=' + JSON.stringify(module));
+        if (d.paging_data.id === "-1") {
+
+            console.log('altering  id === -1 ' + JSON.stringify(d));
 
             if (module === 'doctor') {
                 apiDataGlobal.dateOfJoining = getToday().full;
@@ -228,36 +255,40 @@ function populateCreate2(module, id, divName) {
             }
 
             if (module === 'medicineStock') {
+
                 apiDataGlobal.cgst = 0;
                 apiDataGlobal.sgst = 0;
                 apiDataGlobal.discount = 0;
                 apiDataGlobal.dateOfPurchase = getToday().full;
-//              
-                if (mn.medicineStock.vendor !== undefined) {
-
-                    apiDataGlobal.vendor = {};
-                    apiDataGlobal.vendor.id = mn.medicineStock.vendor.id;
-                    apiDataGlobal.vendor.name = mn.medicineStock.vendor.name;
-                }
-
-                if (mn.medicineStock.billNo !== undefined) {
-                    apiDataGlobal.billNo = mn.medicineStock.billNo;
-                }
-
-                if (mn.medicineStock.dateOfPurchase !== undefined) {
-                    apiDataGlobal.dateOfPurchase = mn.medicineStock.dateOfPurchase;
-                }
-
+                apiDataGlobal.purchaseBill = {id: paramsExtraStr - 0};
+//            
 
             }
+            if (module === 'pharmacyBillRow') {
+
+                console.log('paramsExtraStr from inner=' + JSON.stringify(paramsExtraStr));
+                apiDataGlobal.pharmacyBill = {id: paramsExtraStr - 0};
+            }
+
+            if (module === 'purchaseBill') {
+
+                console.log('paramsExtraStr from inner=' + JSON.stringify(paramsExtraStr));
+                apiDataGlobal.pharmacyBill = {id: paramsExtraStr - 0};
+            }
+
+
             if (module === 'user') {
                 apiDataGlobal.dateOfRegistration = getToday().full;
             }
-
+            console.log('altered apiDataGlobal =' +
+                    JSON.stringify(apiDataGlobal));
         } else {
             paging_data.edit = true;
         }
-        apiDataGlobal.renderInDiv = divName;
+
+
+
+
         aylinker({
             urlOfTemplate: "/clinicPlus/module/" + module + "/fillForm/template.html?ran=" + Math.random(),
             selector: divName + "_inner",
@@ -279,7 +310,7 @@ function populateCreate2(module, id, divName) {
 
         document.getElementById(divName + "_paging").innerHTML = '';
         document.getElementById(divName).style.display = 'block';
-        $.getScript("/clinicPlus/module/" + module + "/" + module + ".js");
+        $.getScript("/clinicPlus/module/" + module + "/" + module + ".js" + pageNewAy(1));
     });
 
 
@@ -328,7 +359,7 @@ function listAsPages(module, path, divName) {
             alert_1('API ' + module, JSON.stringify(jqXHR), 'failure');
         }
     });
-    $.getScript("/clinicPlus/module/" + module + "/" + module + ".js");
+    $.getScript("/clinicPlus/module/" + module + "/" + module + ".js" + pageNewAy(1));
 }
 
 
@@ -507,6 +538,8 @@ function refresh_entitySelectList(module, filterWord) {
     loadTemplate_entity_select_into(obj, divname);
     filter(filterWord);
 }
+
+
 function filter(attr, moduleName) {
     var givenWord = "";
     if (event.target.value === undefined) {
@@ -516,7 +549,9 @@ function filter(attr, moduleName) {
     }
 
     console.log('-----filterBy attribute=' + attr + "   word =" + givenWord);
-    var dom = document.getElementsByTagName('d_' + moduleName);
+//    var dom = document.getElementsByTagName('d_' + moduleName);
+    var dom = document.getElementsByClassName('data');
+
     for (var i = 0; i < dom.length; i++) {
         var id = dom[i].getAttribute('id');
         var name = (dom[i].getAttribute(attr) + "").toLowerCase();
@@ -581,7 +616,7 @@ function loadTemplate_entity_select_into(obj, divname) {
             }
         });
         document.getElementById(divname + "_paging").innerHTML = "";
-       
+
 
     });
 //    menu
@@ -673,7 +708,7 @@ function submitFormAKR(formId, ToUrl) {
             var img = document.getElementById(formId + '_img');
             console.log(img);
             if (img !== null) {
-                document.getElementById(formId + '_img').src = data.fileDownloadUri  + pageNewAy(1);
+                document.getElementById(formId + '_img').src = data.fileDownloadUri + pageNewAy(1);
             }
 
         },
@@ -688,12 +723,14 @@ function submitFormAKR(formId, ToUrl) {
 //////////////////////////////////
 
 
-function go(id, module) {
-    
+function go(id, module, paramsExtra) {
+
     window.location.href = '#/dummy?function=populateCreate2'
             + '&module=' + module
             + '&id=' + id
-            + '&divName=' + 'main_1';
+            + '&divName=' + 'main_1'
+            + '&paramsExtra=' + paramsExtra
+            ;
 //    populateCreate2(module, id, 'main_1');
 }
 
@@ -765,7 +802,7 @@ function  PrintUtils() {
     };
     this.printNewWindow = function () {
 
-        var toPrint = document.getElementById('main1_inner');
+        var toPrint = document.getElementById('main_1_inner');
         var popupWin = window.open('', '_blank', 'width=850,height=850,location=no,left=200px');
         popupWin.document.open();
         popupWin.document.write('<html><title>::Preview::</title><link rel="stylesheet" type="text/css" href="print.css" /></head><body onload="window.print()">');
@@ -787,7 +824,7 @@ function  PrintUtils() {
             dateDiv = document.getElementById('dateCurrent');
             dateDiv.style = "display:none";
         } else {
-            divName = 'main1';
+            divName = 'main_1';
             printableAreaDiv = document.getElementById(divName);
         }
         title = printableAreaDiv.getAttribute("title");
@@ -813,7 +850,7 @@ function  PrintUtils() {
     };
     this.printOPcard = function () {
 
-        var divName = 'main1';
+        var divName = 'main_1';
         var navbarDiv, printableAreaDiv, menuDiv, pagerDiv, dateDiv;
         navbarDiv = document.getElementById('navbar');
         navbarDiv.style.visibility = 'hidden';
