@@ -130,7 +130,7 @@ public class PharmacyBillResource {
     @ResponseBody
     public Optional<PharmacyBillEntity> getMedicineNames(@PathVariable("id") Long id) {
         PharmacyBillEntity pharmacyBillEntitySaved;
-        logger.warn("id = {} ", new Object[]{id});
+        logger.warn("id   = {} ", new Object[]{id});
         if (id >= 0) {
             logger.warn("id >= 0  ", new Object[]{id});
             pharmacyBillEntitySaved = pharmacyBillRepo.findById(id).get();
