@@ -1,41 +1,5 @@
 /*overall.css    clinicplus */
 
-/*little boy*/
-/*:root{
-    --color_l5:   #f6f9fd ;
-    --color_l4:#e2ecf7 ;
-    --color_l3:#c5d8ef ;
-    --color_l2:#a9c5e7 ;
-    --color_l1:#8cb1df ;
-    --color_l0:#6f9fd8 ;
-    --color_d1:#558dd1 ;
-    --color_d2:#3c7bc9 ;
-    --color_d3:#316cb3 ;
-    --color_d4:#2a5c9a ;
-    --color_d5:#234d80 ;
-}*/
-/*sailor blue*/
-:root{
-    --color_l5:#f0f4f8 ;
-    --color_l5p2:#e4e8ec ;
-    
-    --color_l4:#cddbe7 ;
-    --color_l3:#9bb7d0 ;
-    --color_l3p5:#c5d4e0;
-    --color_l2:#6993b8 ;
-    --color_l1:#456f93 ;
-    --color_l0:#2e4a62 ;
-    --color_d1:#294257 ;
-    --color_d2:#253a4e ;
-    --color_d3:#203344 ;
-    --color_d4:#1b2c3a ;
-    --color_d5:#172531 ;
-    --color_green:darkcyan;
-    --color_blue:#33bdac;
-    --color_bg:#bfd1e0;
-
-}
-
 .navBar_visible{
     height: 100%;
     position: fixed;
@@ -632,7 +596,7 @@ html, body {
     font-size: 14px;
     /*line-height: 1.5;*/
     /*color: var(--color_d5);*/
-    background-color: var(--color_bg);
+    /*background-color: var(--color_l4);*/
 }
 
 .imgLoading{
@@ -652,16 +616,7 @@ html, body {
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
 }
 
-.akr_nav_item_iconised{
-    display: block;
-    padding: 6px 0px 7px 0px;
-    text-align: center;
-}
 
-.akr_nav_item_iconised:focus{
-    background-color:var(--color_l0) ;
-color:whitesmoke;
-}
 
 .akr-sidebar {
     height: 100%;
@@ -1211,7 +1166,9 @@ input:focus {
 hr{
     margin: 0px;
     border:none;
-    border-top: solid steelblue 1px;}
+    border-top: solid  1px;
+    border-color: var(--color_l0);
+}
 hr_ay {
     border: 0;
     border-top: 1px solid #eee;
