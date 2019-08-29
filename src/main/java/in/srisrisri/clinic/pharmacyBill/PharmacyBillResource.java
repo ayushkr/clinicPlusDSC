@@ -125,7 +125,7 @@ public class PharmacyBillResource {
 
         return pageCover;
     }
-
+//ooo
     @GetMapping("{id}")
     @ResponseBody
     public Optional<PharmacyBillEntity> getMedicineNames(@PathVariable("id") Long id) {
