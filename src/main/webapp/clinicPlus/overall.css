@@ -293,11 +293,13 @@ a{ text-decoration: none}
    text-align: right;
     background-color: var(--color_l3);
     padding: 10px 0px 0px 0px;
+        border-radius: 0px 0px 24px 24px;
 }
 .widgetBar{
    text-align: right;
     background-color: var(--color_l3);
     padding: 10px 0px 0px 0px;
+        border-radius: 0px 0px 24px 24px;
 }
 .widgets2_rounded{
     position: fixed;
