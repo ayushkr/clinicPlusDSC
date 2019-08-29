@@ -292,7 +292,7 @@ a{ text-decoration: none}
 }
 
 .bluestrp {
-    background-color:#b1cce2;
+    background-color:var(--color_d3);
     /*color: var(--color_d3);*/
     height: 30px;
     text-align: center;
