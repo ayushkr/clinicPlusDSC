@@ -132,16 +132,18 @@ public class PharmacyBillResource {
     @ResponseBody
     public Optional<PharmacyBillEntity> getMedicineNames(@PathVariable("id") Long id) {
       PharmacyBillEntity pharmacyBillEntitySaved;
-
+logger.warn("id = {} ", new Object[]{id});
         if (id >= 0) {
+            logger.warn("id >= 0  ", new Object[]{id});
             pharmacyBillEntitySaved = pharmacyBillRepo.findById(id).get();
-          pharmacyBillEntitySaved.setCreationTime(Date.valueOf(LocalDate.now()));
+          pharmacyBillEntitySaved.setUpdationTime(Date.valueOf(LocalDate.now()));
         } else {
+            logger.warn("else of id  0  ", new Object[]{id});
             PharmacyBillEntity pharmacyBillEntityNew = new PharmacyBillEntity();
             AppointmentEntity appointmentEntity = appointmentRepo.findById(0L).get();
             pharmacyBillEntityNew.setAppointment(appointmentEntity);
             pharmacyBillEntityNew.setDateOfBill(Date.valueOf(LocalDate.now()));
-            pharmacyBillEntityNew.setUpdationTime(Date.valueOf(LocalDate.now()));
+            pharmacyBillEntityNew.setCreationTime(Date.valueOf(LocalDate.now()));
             pharmacyBillEntitySaved= pharmacyBillRepo.save(pharmacyBillEntityNew);
              
 // add rounder
