@@ -265,12 +265,16 @@
 
                     <td>
                         {{if pharmacyBill}}
+                        {{if pharmacyBill.appointment}}
                         {{:pharmacyBill.appointment.doctor.name}}
+                        {{/if}}
                         {{/if}}
                     </td>
                     <td>
-                        {{if pharmacyBill}}
+                       {{if pharmacyBill}}
+                        {{if pharmacyBill.appointment}}
                         {{:pharmacyBill.appointment.patient.name}}
+                        {{/if}}
                         {{/if}}
                     </td>
 

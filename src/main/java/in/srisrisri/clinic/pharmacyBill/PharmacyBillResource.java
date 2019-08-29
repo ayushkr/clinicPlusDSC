@@ -140,7 +140,8 @@ public class PharmacyBillResource {
         } else {
             logger.warn("else of id  0  ", new Object[]{id});
             PharmacyBillEntity pharmacyBillEntityNew = new PharmacyBillEntity();
-            AppointmentEntity appointmentEntity = appointmentRepo.findById(0L).get();
+             
+         AppointmentEntity appointmentEntity = appointmentRepo.findById(0L).get();
             pharmacyBillEntityNew.setAppointment(appointmentEntity);
             pharmacyBillEntityNew.setDateOfBill(Date.valueOf(LocalDate.now()));
             pharmacyBillEntityNew.setCreationTime(Date.valueOf(LocalDate.now()));

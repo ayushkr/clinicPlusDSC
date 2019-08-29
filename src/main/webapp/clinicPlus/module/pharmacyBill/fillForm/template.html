@@ -110,7 +110,10 @@
             <tr>
                 <td  class="Table1_A2" style="float: left">
                     Patient : 
-                    <span class="T1"> {{:appointment.patient.name}} </span>
+                    <span class="T1">{{if appointment}} 
+                        {{:appointment.patient.name}} {{else}}-- 
+                        {{/if}} </span>
+                    <span data-link="appointment.patient.name">appointment.patient.name</span>
 
                 </td>
                 <td  class="Table1_A2">
@@ -118,7 +121,9 @@
                 </td>
                 <td  class="Table1_A2" style="float: right">
                     Doctor : 
-                    <span class="T1"> {{:appointment.doctor.name}} </span>
+                    <span class="T1"> {{if appointment}} 
+                        {{:appointment.doctor.name}} 
+                        {{else}}--{{/if}} </span>
 
                 </td>
             </tr>
