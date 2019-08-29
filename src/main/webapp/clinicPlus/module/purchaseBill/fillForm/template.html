@@ -58,8 +58,13 @@
 
 
     </form>
-   
+<!--   <div class='imgLoading' ></div>-->
+{{if updationTime}}
     <div id="main_1_innert"> </div>
-    {{:~purchaseBill_render_list(id)}}
+    
+    {{else}}
+    First Save and Load Bill again
+    {{/if}}
+   
 
 </div>

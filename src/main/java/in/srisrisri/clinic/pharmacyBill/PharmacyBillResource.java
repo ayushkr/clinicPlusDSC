@@ -135,23 +135,22 @@ public class PharmacyBillResource {
 
         if (id >= 0) {
             pharmacyBillEntitySaved = pharmacyBillRepo.findById(id).get();
+          pharmacyBillEntitySaved.setCreationTime(Date.valueOf(LocalDate.now()));
         } else {
-            PharmacyBillEntity PharmacyBillEntityNew = new PharmacyBillEntity();
-
-            PharmacyBillEntityNew.setCreationTime(Date.valueOf(LocalDate.now()));
+            PharmacyBillEntity pharmacyBillEntityNew = new PharmacyBillEntity();
             AppointmentEntity appointmentEntity = appointmentRepo.findById(0L).get();
-           
-            PharmacyBillEntityNew.setAppointment(appointmentEntity);
-            PharmacyBillEntityNew.setDateOfBill(Date.valueOf(LocalDate.now()));
-            pharmacyBillEntitySaved= pharmacyBillRepo.save(PharmacyBillEntityNew);
+            pharmacyBillEntityNew.setAppointment(appointmentEntity);
+            pharmacyBillEntityNew.setDateOfBill(Date.valueOf(LocalDate.now()));
+            pharmacyBillEntityNew.setUpdationTime(Date.valueOf(LocalDate.now()));
+            pharmacyBillEntitySaved= pharmacyBillRepo.save(pharmacyBillEntityNew);
              
-
+// add rounder
              PharmacyBillRowEntity pharmacyBillRowEntityNew = new PharmacyBillRowEntity();
             pharmacyBillRowEntityNew.setIdSpecial(1);
             pharmacyBillRowEntityNew.setPharmacyBill(pharmacyBillEntitySaved);
             pharmacyBillRowEntityNew.setCreationTime(Date.valueOf(LocalDate.now()));
             pharmacyBillRowEntityNew.setAmount(BigDecimal.ZERO);
-            PharmacyBillRowEntity pharmacyBillRowEntitySaved = pharmacyBillRowRepo.save(pharmacyBillRowEntityNew);
+           pharmacyBillRowRepo.save(pharmacyBillRowEntityNew);
         }
         return Optional.of(pharmacyBillEntitySaved);
     }

@@ -189,9 +189,5 @@ function  PharmacyCashBill() {
 
 }
 var pharmacyCashBill = new PharmacyCashBill();
-$.views.helpers(
-        {
-            pharmacyBill_render_list: function (id) {
-                pharmacyCashBill.render_list(id,'main_1_innert');
-            }
-        } );
+
+pharmacyCashBill.render_list(apiDataGlobal.id,'main_1_innert');

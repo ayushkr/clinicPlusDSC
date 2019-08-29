@@ -1,21 +1,10 @@
 
+manifestGUISelectLarge('vendor', apiDataGlobal.vendor);
 
-aylinker({
-    urlOfTemplate: "/clinicPlus/component/selectLarge/vendor.html" + pageNewAy(1),
-    selector: "selectLarge_vendor",
-    data: {
-        vendor: apiDataGlobal.vendor
-    }
-});
 
 function vendorSelected() {
 
 }
-
-
-
-
-
 
 
 function  PurchaseBill() {
@@ -23,18 +12,16 @@ function  PurchaseBill() {
     this.id = 0;
 
     this.render_list = function (id, divName) {
-
-
-
+  document.getElementById(divName).innerHTML = 
+          "<div class='imgLoading' ></div>";
         $.get("/clinicPlus/api/medicineStock/ByBillId/" + id,
                 function (result) {
                     console.log('PurchaseBill.render_list() api/medicineStock/ByBillId/' + id);
                     aylinker({
                         urlOfTemplate:
-                                "/clinicPlus/module/purchaseBill/billBodyTemplate.html"+pageNewAy(1),
+                                "/clinicPlus/module/purchaseBill/billBodyTemplate.html" + pageNewAy(1),
 //                selector: "main_1_inner",
                         selector: divName,
-
                         data: result
                     }
                     );
@@ -74,7 +61,7 @@ function  PurchaseBill() {
                 $.get("/clinicPlus/api/medicineStock/" + id, function (result) {
                     // console.log('onRowSelect result=' + JSON.stringify(result));
                     aylinker({
-                        urlOfTemplate: "/clinicPlus/module/PurchaseBill/oneRowfillFormTemplate.html"+pageNewAy(1),
+                        urlOfTemplate: "/clinicPlus/module/PurchaseBill/oneRowfillFormTemplate.html" + pageNewAy(1),
                         selector: 'oneRowInEdit_' + id,
 //                      
                         data: result
@@ -234,12 +221,6 @@ function  PurchaseBill() {
     };
 }
 var purchaseBill = new PurchaseBill();
-$.views.helpers(
-        {
-            purchaseBill_render_list: function (id) {
-                purchaseBill.render_list(id,'main_1_innert');
-            }
-        } );
-
+purchaseBill.render_list(apiDataGlobal.id, 'main_1_innert');
 
 

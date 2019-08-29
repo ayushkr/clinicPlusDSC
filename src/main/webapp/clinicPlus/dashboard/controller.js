@@ -56,9 +56,11 @@ function postFile(context, data) {
 }
 
 function dummy(context) {
+ console.log("dummy()-----------" + context.app.element_selector);
+    console.log('dummy() div==' + this.params['divName']);
+    ayu = context;
 
-
-    var params_ = Object.getOwnPropertyNames(this.params);
+//    var params_ = Object.getOwnPropertyNames(this.params);
 
     if (this.params['divName'] === undefined) {
         this.params['divName'] = 'main_1';
@@ -181,7 +183,7 @@ function cmd_post(context, data) {
 //                        window.location.href = path;
                     } else {
                         alert_1('Sorry :(', data.message, data.status);
-                        window.history.back();
+//                        window.history.back();
 
                     }
 

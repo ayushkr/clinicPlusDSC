@@ -16,7 +16,7 @@
 
     </div>
 
-    <div id="filter" class="w3-container w3-border city ">
+    <div id="filter" class="w3-container_akr city ">
 
         <div class="inp_outer" style="min-width: 200px">
 
@@ -73,7 +73,7 @@
 
     </div>
 
-    <div id="bulk" class="w3-container w3-border city city_hide">
+    <div id="bulk" class="w3-container_akr city city_hide">
 
         <input type="submit" value="Bulk Delete"
                form='form_appointment/deleteBulk'
@@ -333,12 +333,9 @@
                         {{if patient!=null}}
                         {{:patient.name}} <br>
 
-                        <span class="" style="font-style: italic; font-size: 0.6em;
-                              float: left;
-                              background-color: var(--color_l3);
-                              padding: 0px {{:patient.age-20}}px;
-                              ">{{:patient.age}} yr</span><br>
-                        <span class="" style="font-size: 0.8em;float: left">ID : {{:patient.id}} </span> 
+                        <span class="age">{{:patient.age}} yr</span><br>
+                        <span class="" 
+                              style="font-size: 0.8em;float: right">ID : {{:patient.id}} </span> 
                         {{else}}
                         Not Set
                         {{/if}}

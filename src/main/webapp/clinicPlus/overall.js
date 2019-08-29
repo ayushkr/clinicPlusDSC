@@ -49,7 +49,7 @@ function  navGo() {
 }
 
 function checkServer() {
-    console.log('checking server ');
+//    console.log('checking server ');
     $.ajax('/clinicPlus/status',
             {
 
@@ -62,7 +62,7 @@ function checkServer() {
 //                    hideDivAy('alert_akr');
                     var v = document.getElementById('dateCurrent');
 
-                    console.log('status  ' + v.getAttribute('data-1'));
+//                    console.log('status  ' + v.getAttribute('data-1'));
                     if (v.getAttribute('data-1') === "1") {
                         v.setAttribute('data-1', 0);
                         $('#dateCurrent').css('font-weight', 'bolder');
@@ -85,7 +85,7 @@ function checkServer() {
     setTimeout(checkServer, 2000);
 }
 
-setTimeout(checkServer, 2000);
+//setTimeout(checkServer, 2000);
 function filter1() {
     var elem = event.target;
     console.log('onenter');
@@ -296,7 +296,7 @@ function populateCreate2(module, id, divName, paramsExtraStr) {
         });
 
 
-        if (mainLayerNumberNow === 1)
+        if (mainLayerNumberNow !== 0)
         {
             aylinker({
                 urlOfTemplate: "/clinicPlus/module/entity/form/template_menuTop_update.html" + pageNewAy(1),
@@ -304,7 +304,7 @@ function populateCreate2(module, id, divName, paramsExtraStr) {
                 data: paging_data
             });
         } else {
-//       document.getElementById(divName + "_menu").innerHTML += 'issue';  
+            document.getElementById(divName + "_menu").innerHTML += 'issue';
 
         }
 
@@ -403,30 +403,22 @@ function popupGeneral(level_, moduleName, divName, url) {
 
 function popup_selection_obj(obj) {
 
-    console.log('obj=' + JSON.stringify(obj));
+    console.log('popup_selection_obj=' + JSON.stringify(obj));
     mn.module['select'].obj = obj;
 //    console.log("entity_select=" + mn.module['select'].obj.entity_select);
 //    console.log("input=" + mn.module['select'].obj.input);
 
-    if (obj.afterClick === undefined) {
-
-    } else {
-
+    if (obj.afterClick !== undefined) {
         afterClick = obj.afterClick;
     }
 
     if (obj.entity_select === 'dateForOrganisation') {
-
         document.getElementById("modalDate").style = "display:block";
         loadTemplate_entity_select_into(obj, 'modalDate');
-    } else
-
-
-    {
-
+    } else {
         var divNode = newModal();
         loadTemplate_entity_select_into(obj, divNode.id);
-        document.getElementById(divNode.id + '_menu').innerHTML = '';
+        document.getElementById(divNode.id + '_menu0').innerHTML = 'ooo';
     }
 
 
@@ -445,19 +437,25 @@ function newModal() {
 //    
     divNode = document.getElementById("main_" + mainLayerNumberNow);
 //    divNode.class = 'main_';
-    divNode.style = "z-index:" + mainLayerNumberNow * 100 +
-            ";background-color:white;position:fixed;width: 90%;height: 100%;\n\
-overflow: scroll;";
+    divNode.style = "z-index:" + mainLayerNumberNow * 100 + ";";
     document.body.appendChild(divNode);
+
+    divNode_menu0 = document.createElement('div');
+    divNode_menu0.id = "main_" + mainLayerNumberNow + '_menu0';
+    divNode.appendChild(divNode_menu0);
+
     divNode_menu = document.createElement('div');
     divNode_menu.id = "main_" + mainLayerNumberNow + '_menu';
     divNode.appendChild(divNode_menu);
+
     divNode_inner = document.createElement('div');
     divNode_inner.id = "main_" + mainLayerNumberNow + '_inner';
     divNode.appendChild(divNode_inner);
+
     divNode_paging = document.createElement('div');
     divNode_paging.id = "main_" + mainLayerNumberNow + '_paging';
     divNode.appendChild(divNode_paging);
+
 //              obj.div='main2';
     console.log('new div added as=' + divNode.id + " body=" + divNode);
     divNode.style.display = "block";
@@ -586,8 +584,14 @@ function check_1() {
 
 function loadTemplate_entity_select_into(obj, divname) {
 //var entity = mn.module['select'].obj.entity_select;
+    console.log('function loadTemplate_entity_select_into(obj, divname),divName=' + divname);
+//window.location.href="/clinicPlus/home.html#/dummy?function=a&divName="+divname;
+    window.location.href = "#/dummy" + pageNewAy(1) +
+            "function=a&divName=" + divname;
+
     var module = obj.entity_select;
-    var urlOfTemplate = "/clinicPlus/module/entity_select/" + module + "/" + module + ".html" + pageNewAy(1);
+    var urlOfTemplate = "/clinicPlus/module/entity_select/" 
+            + module + "/" + module + ".html" + pageNewAy(1);
     console.log('loadTemplate_entity_select_into(obj, divname)' +
             '  \n urlOfTemplate=' + urlOfTemplate
             + '\n divname=' + divname + '_inner');
@@ -609,7 +613,7 @@ function loadTemplate_entity_select_into(obj, divname) {
         );
         aylinker({
             urlOfTemplate: '/clinicPlus/module/entity_select/template_menu.html' + pageNewAy(1),
-            selector: divname + "_menu",
+            selector: divname + "_menu0",
             data: {
                 'moduleName': module,
                 'a': 2
@@ -821,8 +825,8 @@ function  PrintUtils() {
             menuDiv.style = "display:none";
             pagerDiv = document.getElementById(divName + "_paging");
             pagerDiv.style = "display:none";
-            dateDiv = document.getElementById('dateCurrent');
-            dateDiv.style = "display:none";
+//            dateDiv = document.getElementById('dateCurrent');
+//            dateDiv.style = "display:none";
         } else {
             divName = 'main_1';
             printableAreaDiv = document.getElementById(divName);
@@ -859,8 +863,8 @@ function  PrintUtils() {
         menuDiv.style.visibility = 'hidden';
         pagerDiv = document.getElementById(divName + "_paging");
         pagerDiv.style.visibility = 'hidden';
-        dateDiv = document.getElementById('dateCurrent');
-        dateDiv.style.visibility = 'hidden';
+//        dateDiv = document.getElementById('dateCurrent');
+//        dateDiv.style.visibility = 'hidden';
         this.hideBorder();
         title = printableAreaDiv.getAttribute("title");
         console.log(printableAreaDiv);
@@ -885,7 +889,7 @@ function  PrintUtils() {
         printableAreaDiv.style.left = '0px';
         menuDiv.style.visibility = 'visible';
         pagerDiv.style.visibility = 'visible';
-        dateDiv.style.visibility = 'visible';
+//        dateDiv.style.visibility = 'visible';
     };
     this.hideBorder = function () {
         document.getElementsByClassName('a4').style = "border:none";

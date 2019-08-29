@@ -1,26 +1,27 @@
 <!--appointment/fillForm.html-->
 <div id="printableArea"   title="appt_{{:id}}_{{if name}}{{:name}}{{/if}}" >
 
-<div class="pageTitle">{{if id==0}} New  Appointment{{else}}
-    <i class="fa fa-edit"  > </i>
-    Existing Appointment : {{:id}} {{/if}} 
-</div>
+<div class="pageTitle"> Appointment : {{:id}}
+
 
 {{if doctor}}
 <a class="w3-btn w3-blue"  style="float: right"
    onclick2="patientCard_show({{:id}})"
    href="#/dummy?function=patientCard_show&id={{:id}}"
    >
-    show patient Card 
+   PatientCard 
     
 </a>
  <br>
     <br>
 {{else}}
 You must save to see the PatientCard
- <br>
-    <br>
+ <br><br>
 {{/if}}
+</div>
+
+    
+    
 <div class="w3-bar-ay">
     <span class="w3-bar-item  tablink " onClick="openCity(event, 'Basic')">Basic</span>
     {{if id!=0}}

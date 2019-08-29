@@ -1,11 +1,19 @@
 
 {{for map.payload}}
-Items in this Bill <br>
+ <br>
 
 <span onclick="go( - 1, 'medicineStock', {{:billId}})" >
-    <i class="fa fa-plus" title="add New"></i></span>
+    <i class="fa fa-plus" title="add New MedicineStock"></i></span>
 
 <div class="Table">
+    <div class="Row bluestrp" >
+         <div class="Cell">Id </div>
+         <div class="Cell">Name </div>
+           <div class="Cell">expiryDate </div>
+         <div class="Cell">qtyPurchased </div>
+          <div class="Cell">costPrice </div>
+          <div class="Cell">remarks </div>
+    </div>
     {{for medicineStockEntitys }}
 
     <div class="Row" onclick="go({{:id}}, 'medicineStock')" >
@@ -15,8 +23,15 @@ Items in this Bill <br>
             {{:medicineBrandName.brandName}}
             {{/if}}
         </div>
-        <div class="Cell">{{:remarks}} </div>
+         <div class="Cell" data-link="expiryDate"> </div>
+        
+         <div class="Cell" data-link="qtyPurchased"> </div>
+        <div class="Cell" data-link="costPrice"> </div>
+        <div class="Cell" data-link="remarks"> </div>
     </div>
+    
+    {{else}}
+    Nothing 
 
     {{/for}}
 

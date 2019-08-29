@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="margin: 0px">
+        
+        <link 
+            rel="stylesheet"
+            href="/clinicPlus/js_css/font-awesome.min.css">
+        <link 
+            rel="stylesheet"
+            href="/clinicPlus/overall.css">
+
+    <center>
+
+        <span id="dateCurrent" class="dateCurrent"
+              data-1="1"
+              data-akr-printable="false"
+              class="akr_nav_item_iconised "
+              onclick="window.href = '#/cmd?module=dateForOrganisation&action=/all/list&pageNumber=1&div=main_1'"
+              title="calendar"
+              > dateCurrent</span>
+    </center>
+    <hr style=" margin: 1px 7px 5px;">
+
+    <a target='iframe1'
+       href="home.html#/cmd?module=appointment&action=/all/list&pageNumber=1&div=main_1"  
+       class="akr_nav_item_iconised " title="Appointments">
+        <i class="fa fa-calendar"></i> 
+        <i class="fasub fa-list" ></i> 
+    </a> 
+
+    <a target='iframe1' href="home.html#/cmd?module=doctor&action=/all/list&pageNumber=1&div=main_1"
+
+       class="akr_nav_item_iconised "
+       title="Doctors"
+       >
+        <i class="fa fa-user-md"></i> 
+        <i class="fasub fa-list"></i> 
+    </a>
+
+
+    <a target='iframe1' href="home.html#/cmd?module=patient&action=/all/list&pageNumber=1&div=main_1" 
+       class="akr_nav_item_iconised "
+       title="Patients"
+       >
+        <i class="fa fa-wheelchair"></i> 
+        <i class="fasub fa-list"></i> 
+    </a>
+    <a target='iframe1' href="home.html#/file?path=module/reports/patientsByDoctor/list/list.js" 
+       class="akr_nav_item_iconised"
+       title="Report patientsByDoctor "
+       > 
+        <i class="fa fa-file"></i>
+        <i class="fasub fa-wheelchair"></i> 
+        <i class="fasub fa-user-md"></i> 
+    </a>
+    <hr>
+    <a target='iframe1' href="home.html#/cmd?module=pharmacyBill&action=/all/list&pageNumber=1&div=main_1" 
+       class="akr_nav_item_iconised "
+       title="pharmacy Bills"
+       >
+        <i class="fa590akr fa-capsules"></i> 
+        <i class="fasub ">Rx</i> 
+
+
+    </a>
+
+    <a target='iframe1' href="home.html#/cmd?module=purchaseBill&action=/all/list&pageNumber=1&div=main_1" 
+       class="akr_nav_item_iconised "
+       title="purchaseBill"
+       >
+        <i class="fa590akr fa-capsules"></i>
+        <i class="fasub fa-database"></i>  
+    </a>
+
+
+    <hr>
+    <a target='iframe1' href="home.html#/cmd?module=fileContent&action=/all/list&pageNumber=1&div=main_1"
+       class="akr_nav_item_iconised "
+       title="fileContent"
+       > 
+        <i class="fa fa-file"></i> 
+        <i class="fasub fa-list"></i> 
+    </a>
+
+    <a target='iframe1' href="home.html#/file?path=help/help.js"  
+       title="Help"
+       class="akr_nav_item_iconised ">
+        <i class="ico"></i> 
+        <i class="fa fa-question-circle-o"></i> 
+        <i class="faspace "></i> 
+    </a> 
+    <a target='iframe1' href="home.html#/file?path=search/search.js"  
+       title="Search"
+       class="akr_nav_item_iconised  ">
+        <i class="fa fa-search"></i> 
+        <i class="faspace"></i> 
+    </a> 
+
+
+
+
+    <a target='iframe1' href="home.html#/cmd?module=finance&action=/all/list&pageNumber=1&div=main_1"
+       class="akr_nav_item_iconised"
+       title="finance"
+       > 
+        <i class="fa fa-money"></i> 
+        <i class="faspace"></i> 
+    </a>
+
+
+    <a target='iframe1' href="home.html#/cmd?module=user&action=/all/list&pageNumber=1&div=main_1" 
+       class="akr_nav_item_iconised"
+       title="user"
+       > 
+        <i class="fa fa-user"></i> 
+        <i class="faspace"></i> 
+    </a>
+    <hr>
+
+
+    <a target='iframe1' href="home.html#/cmd?module=jote&action=/all/list&pageNumber=1&div=main_1" 
+       class="akr_nav_item_iconised"
+       title="Jote"
+       > 
+        <i class="fa fa-pencil"></i> 
+        <i class="fasub">Jo</i> 
+    </a>
+
+    <hr>
+
+    <a target='iframe1' href="home.html#/cmd?module=medicineStock&action=/all/list&pageNumber=1&div=main_1" 
+       class="akr_nav_item_iconised "
+       title="MediStocks"
+       >
+        <i class="fa590akr fa-capsules"></i>
+        <i class="fasub fa-database">All</i> 
+    </a>
+
+    <a target='iframe1' href="home.html#/cmd?module=pharmacyBillRow&action=/all/list&pageNumber=1&div=main_1" 
+       class="akr_nav_item_iconised "
+       title="pharmacyBillRow"
+       >
+        <i class="fa590akr fa-capsules"></i> 
+        <i class="fasub">Rx All</i> 
+
+    </a>
+
+    <hr>
+
+    <a target='iframe1' href="home.html#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1&div=main_1" 
+       class="akr_nav_item_iconised "
+       title="MediBrandNames"
+       >
+        <i class="fa590akr fa-capsules"></i>
+        <i class="fasub fa-file-code-o"></i> 
+    </a> 
+
+    <a target='iframe1' href="home.html#/cmd?module=vendor&action=/all/list&pageNumber=1&div=main_1"
+       class="akr_nav_item_iconised"
+       title="Vendors"
+       > 
+        <i class="fa590akr fa-capsules"></i>
+        <i class="fasub fa-ambulance"></i>  
+    </a>
+
+</body>
+
+</html>
