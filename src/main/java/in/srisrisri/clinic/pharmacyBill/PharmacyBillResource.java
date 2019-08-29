@@ -125,13 +125,15 @@ public class PharmacyBillResource {
 
         return pageCover;
     }
-//ooo
+//ooo2
     @GetMapping("{id}")
     @ResponseBody
     public Optional<PharmacyBillEntity> getMedicineNames(@PathVariable("id") Long id) {
         PharmacyBillEntity pharmacyBillEntitySaved;
         logger.warn("id   = {} ", new Object[]{id});
+        
         if (id >= 0) {
+            
             logger.warn("id >= 0  ", new Object[]{id});
             pharmacyBillEntitySaved = pharmacyBillRepo.findById(id).get();
             pharmacyBillEntitySaved.setUpdationTime(Date.valueOf(LocalDate.now()));
