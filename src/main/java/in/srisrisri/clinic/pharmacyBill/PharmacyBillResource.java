@@ -37,16 +37,14 @@ public class PharmacyBillResource {
     String label = "pharmacyBill";
     private final Logger logger = LoggerFactory.getLogger(PharmacyBillResource.class);
 
- @Autowired
+    @Autowired
     PharmacyBillRepo pharmacyBillRepo;
 
- @Autowired
+    @Autowired
     PharmacyBillRowRepo pharmacyBillRowRepo;
-    
+
     @Autowired
     AppointmentRepo appointmentRepo;
-
-   
 
     @GetMapping("")
     @ResponseBody
@@ -131,12 +129,12 @@ public class PharmacyBillResource {
     @GetMapping("{id}")
     @ResponseBody
     public Optional<PharmacyBillEntity> getMedicineNames(@PathVariable("id") Long id) {
-      PharmacyBillEntity pharmacyBillEntitySaved;
-logger.warn("id = {} ", new Object[]{id});
+        PharmacyBillEntity pharmacyBillEntitySaved;
+        logger.warn("id = {} ", new Object[]{id});
         if (id >= 0) {
             logger.warn("id >= 0  ", new Object[]{id});
             pharmacyBillEntitySaved = pharmacyBillRepo.findById(id).get();
-          pharmacyBillEntitySaved.setUpdationTime(Date.valueOf(LocalDate.now()));
+            pharmacyBillEntitySaved.setUpdationTime(Date.valueOf(LocalDate.now()));
         } else {
             logger.warn("else of id  0  ", new Object[]{id});
             PharmacyBillEntity pharmacyBillEntityNew = new PharmacyBillEntity();
@@ -144,15 +142,15 @@ logger.warn("id = {} ", new Object[]{id});
             pharmacyBillEntityNew.setAppointment(appointmentEntity);
             pharmacyBillEntityNew.setDateOfBill(Date.valueOf(LocalDate.now()));
             pharmacyBillEntityNew.setCreationTime(Date.valueOf(LocalDate.now()));
-            pharmacyBillEntitySaved= pharmacyBillRepo.save(pharmacyBillEntityNew);
-             
+            pharmacyBillEntitySaved = pharmacyBillRepo.save(pharmacyBillEntityNew);
+
 // add rounder
-             PharmacyBillRowEntity pharmacyBillRowEntityNew = new PharmacyBillRowEntity();
+            PharmacyBillRowEntity pharmacyBillRowEntityNew = new PharmacyBillRowEntity();
             pharmacyBillRowEntityNew.setIdSpecial(1);
             pharmacyBillRowEntityNew.setPharmacyBill(pharmacyBillEntitySaved);
             pharmacyBillRowEntityNew.setCreationTime(Date.valueOf(LocalDate.now()));
             pharmacyBillRowEntityNew.setAmount(BigDecimal.ZERO);
-           pharmacyBillRowRepo.save(pharmacyBillRowEntityNew);
+            pharmacyBillRowRepo.save(pharmacyBillRowEntityNew);
         }
         return Optional.of(pharmacyBillEntitySaved);
     }
