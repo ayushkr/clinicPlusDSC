@@ -100,26 +100,27 @@ function dateDecide(id) {
 var result_;
 function popul___() {
     var id = document.getElementById('doctor').value;
-    document.getElementById('reportPart').innerHTML="Please Wait";
-
-    $.get("/clinicPlus/api/appointment/doctor/" +
-            id + '?a=1' +
-            '&dateFrom=' + document.getElementById('dateFrom').value +
-            '&dateTo=' + document.getElementById('dateTo').value
-
-
-            , function (result) {
-                result_=result;
-                aylinker({
-                    // urlOfTemplate: "/clinicPlus/module/" +mn.module.current+ "/all/list/template1.html?ran=" + Math.random(),
-                    urlOfTemplate: "/clinicPlus/module/reports/patientsByDoctor/list/listTemplate2.html?ran=" + Math.random(),
-                    selector: "reportPart",
-                    data: {obj: result,
-                        'doctor': $('#doctor_display').html()
-                    }
+    document.getElementById('reportPart').innerHTML = "Please Wait";
+    $.ajax({
+        type: 'GET',
+        url: "/clinicPlus/api/appointment/doctor/" +
+                id + '?a=1' +
+                '&dateFrom=' + document.getElementById('dateFrom').value +
+                '&dateTo=' + document.getElementById('dateTo').value
+        ,
+          beforeSend: beforeSend_authorize,
+        success: function (result) {
+            result_ = result;
+            aylinker({
+                // urlOfTemplate: "/clinicPlus/module/" +mn.module.current+ "/all/list/template1.html?ran=" + Math.random(),
+                urlOfTemplate: "/clinicPlus/module/reports/patientsByDoctor/list/listTemplate2.html?ran=" + Math.random(),
+                selector: "reportPart",
+                data: {obj: result,
+                    'doctor': $('#doctor_display').html()
                 }
-                );
             });
+        }
+    });
 
 
-}
+            

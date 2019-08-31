@@ -1,194 +1,189 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        
+<html>
+<head>
+    <title>kk</title>
+</head>
+<body>
+<div id="navbar"></div>
+<div id="mainCover"   >
+    <div id="alert_akr" >
+        <!--alert_akr-->
+        <div onclick="hideDivAy('alert_akr')" >
+            <i class="fa fa-times" 
+               style="font-size: 50px;float: right;"> </i></div>
+        <div id="alert_akr_head">alert_akr_head</div>
+        <div id="alert_akr_body">alert_akr_body</div>
+    </div> 
 
-        <link rel="stylesheet" href="/clinicPlus/theme_sailorBlue.css">
-        <link rel="stylesheet" href="/clinicPlus/overall.css">
-        <link rel="stylesheet" href="/clinicPlus/js_css/index.css">
-        <link rel="stylesheet" href="/clinicPlus/js_css/font-awesome.min.css">
-        <!--<link rel="stylesheet" href="/clinicPlus/js_css/fontAwesome/fontawesome-free-5.9.0-web/css/all.css">-->
-        <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.css" />-->
-        <link rel="stylesheet" href="/clinicPlus/js_css/w3.css">
-         <link rel="stylesheet" href="/clinicPlus/theme.css">
-        <style>
-            * {
-                box-sizing: border-box;
-            }
-
-            /* Create two equal columns that floats next to each other */
-            .column1 {
-                float: left;
-                width: 80%;
-                padding: 10px;
-                height: 300px; /* Should be removed. Only for demonstration */
-            }
-            .column2 {
-                float: left;
-                width: 20%;
-                /*padding: 10px;*/
-                height: 300px; /* Should be removed. Only for demonstration */
-            }
-            /* Clear floats after the columns */
-            .row:after {
-                content: "";
-                display: table;
-                clear: both;
-            }
-        </style>
-
-    </head>
-
-    <body >
-        <div id="navbar"></div>
-        <!--        <div style="position: relative;z-index: 1000">
-        
-                    <a target='iframe1' href="#/cmd?module=doctor&action=/all/list&pageNumber=1&div=main_1"
-        
-                       class="akr_nav_item_iconised "
-                       title="Doctors"
-                       >
-                        <i class="fa fa-user-md"></i> 
-                        <i class="fasub fa-list"></i> 
-                    </a>
-        
-        
-                    <a target='iframe1' href="#/cmd?module=patient&action=/all/list&pageNumber=1&div=main_1" 
-                       class="akr_nav_item_iconised "
-                       title="Patients"
-                       >
-                        <i class="fa fa-wheelchair"></i> 
-                        <i class="fasub fa-list"></i> 
-                    </a>
-                </div>-->
-
-
-        <div id="main">
-
-        </div>
-
-        <!--<script src='/clinicPlus/module/entity_select/dateForOrganisation/dateForOrganisation.js'></script>-->
-
-
-
-        <!--<div class="topBar" data-akr-printable="false">
-            DOCTORS SPECIALITY CENTRE  <br>
-            Website:	www.doctorsspecialitycentre.com
-            Phone   	8592918888
-        </div>-->
-
-
-
-        <div id="mainCover"  >
-            <div id="alert_akr" >
-                <!--alert_akr-->
-                <div onclick="hideDivAy('alert_akr')" >
-                    <i class="fa fa-times" 
-                       style="font-size: 50px;float: right;"> </i></div>
-                <div id="alert_akr_head">alert_akr_head</div>
-                <div id="alert_akr_body">alert_akr_body</div>
-            </div> 
-
-            <div id="main_1" 
-                 style="height: -webkit-fill-available;" >
-                <div id="main_1_menu" >
-                    <!--main_1_menu-->
-                </div>
-
-
-
-                <div id="main_1_inner">
-                    <!--main_1_inner-->
-
-                    <center>
-                        <br><br>
-
-                        <br><br>
-                        <div style="font-family: 'Prototype'">
-                            <span style="font-size: 100px;
-                                  background-color: darkcyan;
-                                  color: white;
-                                  padding: 19px;
-                                  border-radius: 11px;">
-                                ClinicPlus</span> 
-                            <br><br>
-                            <h2 style="color: var(--color_d3);">
-                                My Comfortable Clinic 
-                            </h2>
-                        </div>
-                        <span>Version 2.1.0   [2019.08.24]</span>
-
-                        <br>  
-                        Copyrighted By SRISRISRI
-                        <br>
-                        emailidofayush@gmail.com
-                        <br>
-                        WhatsApp  / Telegram : 7907996990
-
-                    </center>
-
-                </div>
-                <div id="main_1_paging" >
-                    <!--main_1_paging-->
-                </div>
-
-            </div>
-
-           
-
-            <div id="main_2" class='modalLayer'>
-                
-                
-            </div>
-            <div id="main_3" class='modalLayer'>
-                
-            </div>
-            <div id="main_4" class='modalLayer'>
-                
-            </div>
-            <div id="main_5" class='modalLayer'>
-               
-            </div>
-            <div id="main_6" class='modalLayer'>
-                
-            </div>
-             <div id='modalDate' class='modalLayer'> 
-                <div onclick="hideMainLevel()" id='entity_select_closeButton_modalDate'
-                     class="entity_select_closeButton w3-btn "> <i class="fa fa-times"> </i></div>
-                <div id="modalDate_menu"></div>
-                <div id="modalDate_inner">modalDate</div>
-                <div id="modalDate_paging"></div>
-            </div>
-
+    <div id="main_1" 
+         style="height: -webkit-fill-available;" >
+        <div id="main_1_menu" >
+            <!--main_1_menu-->
         </div>
 
 
 
+        <div id="main_1_inner">
+            <!--main_1_inner-->
 
-    </body>
-    <script src="/clinicPlus/js_css/jquery.min.js"></script>
-    <script src="/clinicPlus/js_css/jsRV/jsviews.min.js"></script>
+            <center>
+                <br><br>
 
-    <script>
-                    console.log('pageNewAy');
-                    function pageNewAy(status) {
+                <br><br>
+                <div style="font-family: 'Prototype'">
+                    <span style="font-size: 100px;
+                          background-color: darkcyan;
+                          color: white;
+                          padding: 19px;
+                          border-radius: 11px;">
+                        ClinicPlus</span> 
+                    <br><br>
+                    <h2 style="color: var(--color_d3);">
+                        My Comfortable Clinic 
+                    </h2>
+                </div>
+                <span>Version 2.1.0   [2019.08.24]</span>
 
-                        if (status === 1) {
-                            return "?refreshId=" + Math.random();
-                        } else {
-                            return "?refreshId=0";
-                        }
+                <br>  
+                Copyrighted By SRISRISRI
+                <br>
+                emailidofayush@gmail.com
+                <br>
+                WhatsApp  / Telegram : 7907996990
 
-                    }
-                    $.getScript("/clinicPlus/overall.js" + pageNewAy(1));
-    </script>
 
-    <script src="/clinicPlus/js_css/mousetrap.min.js"></script>
-    <script src="/clinicPlus/js_css/mousetrap-bind-dictionary.min.js"></script>
-    <script src="/clinicPlus/js_css/jsRV/jsrvHelperByAyush.js?ran=1234567"></script>
-    <script src="/clinicPlus/js_css/sammy.js"></script>
-    <script src="/clinicPlus/js_css/include_html_snippet.js?ran=11"></script>
-    <script src='/clinicPlus/dashboard/helper_for_controller.js'></script>
-    <script src='/clinicPlus/dashboard/controller.js'></script>
 
+
+                <div id="loginForm"
+
+                     class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-sm-4" style="background-color:lavender;"></div>
+                        <div class="col-sm-4">
+                            <div class="form-signin">
+                                <h5 id="prompt" class="form-signin-heading">Please sign in</h5>
+
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                username
+                                            </td>
+                                            <td>
+                                                <input id="username" name='username'
+                                                       class="form-control" 
+                                                       placeholder="username"
+                                                       required="" autofocus=""
+                                                       value="javainuse" type="text">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Password
+                                            </td>
+                                            <td>
+                                                <input id="password" 
+                                                       class="form-control" 
+                                                       placeholder="password" 
+                                                       name='password'
+                                                       required="" 
+                                                       value='password' 
+                                                       type="password">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                                <button onclick="authorize()">Ok
+
+
+                                </button>
+                            </div>
+                        </div> <!-- /container -->
+                    </div>
+                </div>
+
+
+            </center>
+
+        </div>
+        <div id="main_1_paging" >
+            <!--main_1_paging-->
+        </div>
+
+    </div>
+
+
+
+    <div id="main_2" class='modalLayer'>
+
+
+    </div>
+    <div id="main_3" class='modalLayer'>
+
+    </div>
+    <div id="main_4" class='modalLayer'>
+
+    </div>
+    <div id="main_5" class='modalLayer'>
+
+    </div>
+    <div id="main_6" class='modalLayer'>
+
+    </div>
+    <div id='modalDate' class='modalLayer'> 
+        <div onclick="hideMainLevel()" id='entity_select_closeButton_modalDate'
+             class="entity_select_closeButton w3-btn "> <i class="fa fa-times"> </i></div>
+        <div id="modalDate_menu"></div>
+        <div id="modalDate_inner">modalDate</div>
+        <div id="modalDate_paging"></div>
+    </div>
+
+</div>
+
+<div id="main">
+</div>
+
+<link rel="stylesheet" href="/clinicPlus/theme_sailorBlue.css">
+<link rel="stylesheet" href="/clinicPlus/overall.css">
+<link rel="stylesheet" href="/clinicPlus/js_css/index.css">
+<link rel="stylesheet" href="/clinicPlus/js_css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="/clinicPlus/js_css/fontAwesome/fontawesome-free-5.9.0-web/css/all.css">-->
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.css" />-->
+<link rel="stylesheet" href="/clinicPlus/js_css/w3.css">
+
+
+<link rel="icon" href="./dscLogo.png">
+<link rel="stylesheet" href="/clinicPlus/theme.css">
+<script src="/clinicPlus/js_css/jquery.min.js"></script>
+<script src="/clinicPlus/js_css/jsRV/jsviews.min.js"></script>
+<script src="/clinicPlus/js_css/jsRV/jsrvHelperByAyush.js?ran=1234"></script>
+<script >
+console.log('home.html');
+    function pageNewAy(status) {
+
+        if (status === 1) {
+            return "?refreshId=" + Math.random();
+        } else {
+            return "?refreshId=0";
+        }
+
+    };
+    
+    $.getScript("/clinicPlus/overall.js" + pageNewAy(1));
+    console.log(' end of script pageNewAy home.html');
+</script>
+<!--<script src="/clinicPlus/overall.js"></script>-->
+
+
+<!--<script src="/clinicPlus/js_css/mousetrap.min.js"></script>-->
+<!--<script src="/clinicPlus/js_css/mousetrap-bind-dictionary.min.js"></script>-->
+
+<script src="/clinicPlus/js_css/sammy.js"></script>
+<script src="/clinicPlus/js_css/include_html_snippet.js?ran=11"></script>
+<script src='/clinicPlus/dashboard/helper_for_controller.js'></script>
+<script src='/clinicPlus/dashboard/controller.js'></script>
+
+</body>
 </html>

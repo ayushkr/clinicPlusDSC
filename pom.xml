@@ -25,6 +25,11 @@
     </properties>
 
     <dependencies>
+          <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -116,7 +121,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-rest-core</artifactId>
-            <version>3.2.0.M4</version>
+          
             <type>jar</type>
         </dependency>
          <dependency>
@@ -124,6 +129,12 @@
             <artifactId>spring-content-rest-boot-starter</artifactId>
             <version>0.9.0</version>
         </dependency>
+        
+        <dependency>
+<groupId>io.jsonwebtoken</groupId>
+<artifactId>jjwt</artifactId>
+<version>0.9.1</version>
+</dependency>
     </dependencies>
 
     <build>

@@ -6,14 +6,20 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>nav</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/clinicPlus/theme.css">
+         <link 
+            rel="stylesheet"
+            href="/clinicPlus/js_css/font-awesome.min.css">
+        <link 
+            rel="stylesheet"
+            href="/clinicPlus/overall.css">
         <style>
             .akr_nav_item_iconised{
                 display: block;
-                padding: 6px 0px 7px 0px;
+                padding: 8px 0px 8px 0px;
                 text-align: center;
                 color:var(--color_l0) ;
             }
@@ -23,21 +29,16 @@ and open the template in the editor.
                 color:whitesmoke;
             }
             a:visited{
-                 /*color: black;*/
+                /*color: black;*/
             }
-            
-          
-        </style>
 
+
+        </style>
+       
     </head>
     <body style="margin: 0px">
 
-        <link 
-            rel="stylesheet"
-            href="/clinicPlus/js_css/font-awesome.min.css">
-        <link 
-            rel="stylesheet"
-            href="/clinicPlus/overall.css">
+
 
     <center>
 
@@ -45,20 +46,20 @@ and open the template in the editor.
               data-1="1"
               data-akr-printable="false"
               class="akr_nav_item_iconised "
-              onclick="window.href = '#/cmd?module=dateForOrganisation&action=/all/list&pageNumber=1&div=main_1'"
+              onclick="window.href = '/clinicPlus/home.html#/cmd?module=dateForOrganisation&action=/all/list&pageNumber=1&div=main_1'"
               title="calendar"
               > dateCurrent</span>
     </center>
     <hr style=" margin: 1px 7px 5px;">
-
-    <a target='iframe1'
-       href="home.html#/cmd?module=appointment&action=/all/list&pageNumber=1&div=main_1"  
-       class="akr_nav_item_iconised " title="Appointments">
+   
+    <a  target='iframe1'
+        href="/clinicPlus/home.html#/cmd?module=appointment&action=/all/list&pageNumber=1&div=main_1"  
+        class="akr_nav_item_iconised " title="Appointments">
         <i class="fa fa-calendar"></i> 
         <i class="fasub fa-list" ></i> 
     </a> 
 
-    <a target='iframe1' href="home.html#/cmd?module=doctor&action=/all/list&pageNumber=1&div=main_1"
+    <a target='iframe1'  href="/clinicPlus/home.html#/cmd?module=doctor&action=/all/list&pageNumber=1&div=main_1"
 
        class="akr_nav_item_iconised "
        title="Doctors"
@@ -68,14 +69,14 @@ and open the template in the editor.
     </a>
 
 
-    <a target='iframe1' href="home.html#/cmd?module=patient&action=/all/list&pageNumber=1&div=main_1" 
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=patient&action=/all/list&pageNumber=1&div=main_1" 
        class="akr_nav_item_iconised "
        title="Patients"
        >
         <i class="fa fa-wheelchair"></i> 
         <i class="fasub fa-list"></i> 
     </a>
-    <a target='iframe1' href="home.html#/file?path=module/reports/patientsByDoctor/list/list.js" 
+    <a target='iframe1' href="/clinicPlus/home.html#/file?path=module/reports/patientsByDoctor/list/list.js" 
        class="akr_nav_item_iconised"
        title="Report patientsByDoctor "
        > 
@@ -84,7 +85,7 @@ and open the template in the editor.
         <i class="fasub fa-user-md"></i> 
     </a>
     <hr>
-    <a target='iframe1' href="home.html#/cmd?module=pharmacyBill&action=/all/list&pageNumber=1&div=main_1" 
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=pharmacyBill&action=/all/list&pageNumber=1&div=main_1" 
        class="akr_nav_item_iconised "
        title="pharmacy Bills"
        >
@@ -94,7 +95,7 @@ and open the template in the editor.
 
     </a>
 
-    <a target='iframe1' href="home.html#/cmd?module=purchaseBill&action=/all/list&pageNumber=1&div=main_1" 
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=purchaseBill&action=/all/list&pageNumber=1&div=main_1" 
        class="akr_nav_item_iconised "
        title="purchaseBill"
        >
@@ -104,7 +105,7 @@ and open the template in the editor.
 
 
     <hr>
-    <a target='iframe1' href="home.html#/cmd?module=fileContent&action=/all/list&pageNumber=1&div=main_1"
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=fileContent&action=/all/list&pageNumber=1&div=main_1"
        class="akr_nav_item_iconised "
        title="fileContent"
        > 
@@ -112,14 +113,14 @@ and open the template in the editor.
         <i class="fasub fa-list"></i> 
     </a>
 
-    <a target='iframe1' href="home.html#/file?path=help/help.js"  
+    <a target='iframe1' href="#/file?path=help/help.js"  
        title="Help"
        class="akr_nav_item_iconised ">
         <i class="ico"></i> 
         <i class="fa fa-question-circle-o"></i> 
         <i class="faspace "></i> 
     </a> 
-    <a target='iframe1' href="home.html#/file?path=search/search.js"  
+    <a target='iframe1' href="#/file?path=search/search.js"  
        title="Search"
        class="akr_nav_item_iconised  ">
         <i class="fa fa-search"></i> 
@@ -129,7 +130,7 @@ and open the template in the editor.
 
 
 
-    <a target='iframe1' href="home.html#/cmd?module=finance&action=/all/list&pageNumber=1&div=main_1"
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=finance&action=/all/list&pageNumber=1&div=main_1"
        class="akr_nav_item_iconised"
        title="finance"
        > 
@@ -138,7 +139,7 @@ and open the template in the editor.
     </a>
 
 
-    <a target='iframe1' href="home.html#/cmd?module=user&action=/all/list&pageNumber=1&div=main_1" 
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=user&action=/all/list&pageNumber=1&div=main_1" 
        class="akr_nav_item_iconised"
        title="user"
        > 
@@ -148,7 +149,7 @@ and open the template in the editor.
     <hr>
 
 
-    <a target='iframe1' href="home.html#/cmd?module=jote&action=/all/list&pageNumber=1&div=main_1" 
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=jote&action=/all/list&pageNumber=1&div=main_1" 
        class="akr_nav_item_iconised"
        title="Jote"
        > 
@@ -158,7 +159,7 @@ and open the template in the editor.
 
     <hr>
 
-    <a target='iframe1' href="home.html#/cmd?module=medicineStock&action=/all/list&pageNumber=1&div=main_1" 
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=medicineStock&action=/all/list&pageNumber=1&div=main_1" 
        class="akr_nav_item_iconised "
        title="MediStocks"
        >
@@ -166,7 +167,7 @@ and open the template in the editor.
         <i class="fasub fa-database">All</i> 
     </a>
 
-    <a target='iframe1' href="home.html#/cmd?module=pharmacyBillRow&action=/all/list&pageNumber=1&div=main_1" 
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=pharmacyBillRow&action=/all/list&pageNumber=1&div=main_1" 
        class="akr_nav_item_iconised "
        title="pharmacyBillRow"
        >
@@ -177,7 +178,7 @@ and open the template in the editor.
 
     <hr>
 
-    <a target='iframe1' href="home.html#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1&div=main_1" 
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1&div=main_1" 
        class="akr_nav_item_iconised "
        title="MediBrandNames"
        >
@@ -185,7 +186,7 @@ and open the template in the editor.
         <i class="fasub fa-file-code-o"></i> 
     </a> 
 
-    <a target='iframe1' href="home.html#/cmd?module=vendor&action=/all/list&pageNumber=1&div=main_1"
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=vendor&action=/all/list&pageNumber=1&div=main_1"
        class="akr_nav_item_iconised"
        title="Vendors"
        > 

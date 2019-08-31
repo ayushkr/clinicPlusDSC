@@ -56,7 +56,7 @@ function postFile(context, data) {
 }
 
 function dummy(context) {
- console.log("dummy()-----------" + context.app.element_selector);
+    console.log("dummy()-----------" + context.app.element_selector);
     console.log('dummy() div==' + this.params['divName']);
     ayu = context;
 
@@ -76,16 +76,14 @@ function dummy(context) {
                         context.params['id'],
                         context.params['divName'],
                         context.params['paramsExtra']
-                        
-                );
-            } 
+
+                        );
+            } else
             if (context.params['function'] === "patientCard_show") {
                 patientCard_show(context.params['id']);
+            } else {
+                console.log('Not impl fn()=' + context.params['function']);
             }
-            
-            
-
-            console.log('Not impl fn()=' + context.params['function']);
         }
     }
 
@@ -109,7 +107,7 @@ function cmd(context) {
     if (('#' + this.params['div']) === context.app.element_selector) {
 
         for (var i = 0; i < params_.length; i++) {
-            console.log("cmd,param_ ----------" 
+            console.log("cmd,param_ ----------"
                     + params_[i] + ":" + this.params[params_[i]]);
         }
 
@@ -124,7 +122,7 @@ function cmd(context) {
 
         listAsPages(this.params['module'],
                 'api/' + this.params['module'] +
-                '/pageable?pageNumber=' + this.params['pageNumber'] 
+                '/pageable?pageNumber=' + this.params['pageNumber']
                 +
                 '&filterColumn=' + this.params['filterColumn'] +
                 '&filter=' + this.params['filter'] +
@@ -161,6 +159,7 @@ function cmd_post(context, data) {
         type: "POST",
         enctype: 'multipart/form-data',
         url: '/clinicPlus/api/' + module + '',
+        beforeSend: beforeSend_authorize,
         data: d,
         processData: false,
         contentType: false,
@@ -175,7 +174,7 @@ function cmd_post(context, data) {
 //                    console.log(" jqXHR=" + JSON.stringify(jqXHR));
                     console.log("cmd post success, module=" +
                             module + ", data=" + JSON.stringify(data));
-                    var path = "#/cmd"+ pageNewAy(1)+"&module=" + module + "&action=/all/list&div=" + div ;
+                    var path = "#/cmd" + pageNewAy(1) + "&module=" + module + "&action=/all/list&div=" + div;
                     console.log('ok redirect to ' + path);
                     if (data.status === 'success') {
                         alert_1('Done :)', data.message, data.status);
@@ -235,7 +234,7 @@ function file_i(context) {
             hideDivAy(elems[i].id);
         }
 
-        var pathUpdated = '/clinicPlus/' + path  + pageNewAy(1);
+        var pathUpdated = '/clinicPlus/' + path + pageNewAy(1);
         document.getElementById('main_1_menu').innerHTML = "";
         document.getElementById('main_1_inner').innerHTML = "";
         document.getElementById('main_1_paging').innerHTML = "";

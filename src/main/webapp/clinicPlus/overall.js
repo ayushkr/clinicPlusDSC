@@ -10,6 +10,46 @@
 //},false);
 
 console.log('loaded overall.js');
+var authorizationToken;
+
+function  beforeSend_authorize(request)
+{
+    if (authorizationToken !== undefined) {
+        request.setRequestHeader("Authorization", 'Bearer ' + authorizationToken);
+    }
+}
+
+
+function  authorize() {
+    var myJSObject = {
+        'username': $('#username').val(),
+        'password': $('#password').val()
+    };
+
+    $.ajax({
+        url: '/authenticate',
+        type: 'POST',
+        data: JSON.stringify(myJSObject),
+        contentType: 'application/json',
+        success: function (data) {
+            console.log('succ of sendJson=' + JSON.stringify(data));
+            result_ = data;
+            authorizationToken = data.token;
+            $('#prompt').html('<h2 style="color:green;">' + 'Ok' + '</h2>');
+            $('#loginForm').html('Login Success <a href="home.html#/cmd?module=appointment&action=/all/list&pageNumber=1&div=main_1" > a</a>');
+//                window.location.href = '/clinicPlus/index.html';
+//window.location.href="#/cmd?module=appointment&action=/all/list&pageNumber=1&div=main_1";
+
+        },
+        error: function (xhr, status, error) {
+            result_ = xhr;
+            console.log('error of sendJson=' + JSON.stringify(xhr));
+            console.log('error of sendJson=' + JSON.stringify(error));
+            $('#prompt').html('<h2 style="color:red;">' + xhr.responseJSON.message + '</h2>');
+
+        }
+    });
+}
 
 function manifestGUISelectLarge(name, dataV) {
     var jsonStr = '{"' + name + '":' + JSON.stringify(dataV) + '}';
@@ -140,26 +180,26 @@ function  patientCard_show(id) {
     document.getElementById('main_1_paging').innerHTML = "";
     var dataGot;
     var path = '/clinicPlus/api/appointment/' + id;
-    $.ajax(path,
-            {
-                dataType: 'json', // type of response data
-                timeout: 500, // timeout milliseconds
-                type: 'GET',
-                async: false,
-                success:
-                        function (data) {
-                            aylinker({
-                                urlOfTemplate: "/clinicPlus/module/appointment/patientCard/patientCardTemplate.html?ran=" + Math.random(),
-                                selector: "main_1_inner",
-                                data: data
-                            }
-                            );
-                            console.log('ajax success path=' + path);
-                        }
+    $.ajax({
+        url: path,
+        dataType: 'json', // type of response data
+        timeout: 500, // timeout milliseconds
+        type: 'GET',
+        async: false,
+        success:
+                function (data) {
+                    aylinker({
+                        urlOfTemplate: "/clinicPlus/module/appointment/patientCard/patientCardTemplate.html?ran=" + Math.random(),
+                        selector: "main_1_inner",
+                        data: data
+                    }
+                    );
+                    console.log('ajax success path=' + path);
+                }
 
 
 
-            });
+    });
     document.getElementById("header1").innerHTML =
             document.getElementById("header_common").innerHTML;
     document.getElementById("header2").innerHTML =
@@ -219,19 +259,29 @@ function populateCreate2(module, id, divName, paramsExtraStr) {
         'id': id
     };
     var path = "/clinicPlus/api/" + module + "/" + id;
-    $.get(path, function (apiData) {
-        apiDataGlobal = apiData;
-        apiDataGlobal.renderInDiv = divName;
-        console.log('populateCreate2(), api called' + path);
+    $.ajax({
+        type: "GET",
+        url: path,
+        beforeSend: beforeSend_authorize,
+        success: function (apiData) {
+            apiDataGlobal = apiData;
+            apiDataGlobal.renderInDiv = divName;
+            console.log('populateCreate2() success ' + path);
+//             console.log('populateCreate2() success apiDataGlobal' 
+//                     + JSON.stringify(apiData));
 
-        apiDataGlobal.paging_data = paging_data;
-        return apiDataGlobal;
-    }).then(d => {
-        var module = d.paging_data.moduleName;
-        console.log('populateCreate2(), api returning ');
+            apiDataGlobal.paging_data = paging_data;
+            return apiDataGlobal;
+        }
+    }
+
+    ).then(d => {
+        var module = paging_data.moduleName;
+//        console.log('populateCreate2(), api returning with paging_data='
+//                +JSON.stringify(paging_data));
 //        console.log(' d=' + JSON.stringify(d));
-        console.log('module=' + JSON.stringify(module));
-        if (d.paging_data.id === "-1") {
+//        console.log('d=' + JSON.stringify(d));
+        if (paging_data.id === "-1") {
 
             console.log('altering  id === -1 ' + JSON.stringify(d));
 
@@ -313,16 +363,21 @@ function populateCreate2(module, id, divName, paramsExtraStr) {
         $.getScript("/clinicPlus/module/" + module + "/" + module + ".js" + pageNewAy(1));
     });
 
-
-
 }
 
+var result_ = {};
 function listAsPages(module, path, divName) {
     console.log('listAsPages module=' + module + ' divName=' + divName);
     console.log('listAsPages path=' + path);
     $.ajax({
+        type: "GET",
         dataType: "json",
         url: path,
+        beforeSend: function (request) {
+            if (authorizationToken !== undefined) {
+                request.setRequestHeader("Authorization", 'Bearer ' + authorizationToken);
+            }
+        },
         success:
                 function (result) {
 
@@ -356,7 +411,8 @@ function listAsPages(module, path, divName) {
                     }
                 },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert_1('API ' + module, JSON.stringify(jqXHR), 'failure');
+            result_ = jqXHR;
+            alert_1('API ' + module + "  " + errorThrown, JSON.stringify(jqXHR), 'failure');
         }
     });
     $.getScript("/clinicPlus/module/" + module + "/" + module + ".js" + pageNewAy(1));
@@ -420,13 +476,6 @@ function popup_selection_obj(obj) {
         loadTemplate_entity_select_into(obj, divNode.id);
         document.getElementById(divNode.id + '_menu0').innerHTML = 'ooo';
     }
-
-
-
-
-
-
-
 }
 
 function newModal() {
@@ -441,6 +490,7 @@ function newModal() {
     document.body.appendChild(divNode);
 
     divNode_menu0 = document.createElement('div');
+    divNode_menu0.innerHTML="<span class='hideMainLevelButton' onclick=hideMainLevel() >Close</span>";
     divNode_menu0.id = "main_" + mainLayerNumberNow + '_menu0';
     divNode.appendChild(divNode_menu0);
 
@@ -506,13 +556,17 @@ function  selectionDone(obj) {
 function modal(obj) {
     console.log('modal url=' + obj.url);
     document.getElementById('main3').style = 'display:block';
-    $.get(obj.url, function (result) {
-        aylinker({
-            urlOfTemplate: obj.url,
-            selector: 'main3_inner',
-            data: {obj: result}
+    $.ajax({
+        type: "GET",
+        url: obj.url,
+        beforeSend: beforeSend_authorize,
+        success: function (result) {
+            aylinker({
+                urlOfTemplate: obj.url,
+                selector: 'main3_inner',
+                data: {obj: result}
+            });
         }
-        );
     });
 }
 function showDivAy(e) {
@@ -549,7 +603,6 @@ function filter(attr, moduleName) {
     console.log('-----filterBy attribute=' + attr + "   word =" + givenWord);
 //    var dom = document.getElementsByTagName('d_' + moduleName);
     var dom = document.getElementsByClassName('data');
-
     for (var i = 0; i < dom.length; i++) {
         var id = dom[i].getAttribute('id');
         var name = (dom[i].getAttribute(attr) + "").toLowerCase();
@@ -586,11 +639,10 @@ function loadTemplate_entity_select_into(obj, divname) {
 //var entity = mn.module['select'].obj.entity_select;
     console.log('function loadTemplate_entity_select_into(obj, divname),divName=' + divname);
 //window.location.href="/clinicPlus/home.html#/dummy?function=a&divName="+divname;
-    window.location.href = "#/dummy" + pageNewAy(1) +
-            "function=a&divName=" + divname;
-
+//    window.location.href = "home.html#/dummy" + pageNewAy(1) +
+//            "function=a&divName=" + divname;
     var module = obj.entity_select;
-    var urlOfTemplate = "/clinicPlus/module/entity_select/" 
+    var urlOfTemplate = "/clinicPlus/module/entity_select/"
             + module + "/" + module + ".html" + pageNewAy(1);
     console.log('loadTemplate_entity_select_into(obj, divname)' +
             '  \n urlOfTemplate=' + urlOfTemplate
@@ -601,35 +653,31 @@ function loadTemplate_entity_select_into(obj, divname) {
     if (obj.apiUrl === undefined) {
         obj.apiUrl = module;
     }
-    $.get("/clinicPlus/api/" + obj.apiUrl, function (result) {
-        aylinker({
-            urlOfTemplate: urlOfTemplate,
-            selector: divname + '_inner',
-            data: {
-                obj: result,
-                'moduleName': module
-            }
+    $.ajax({
+        type: "GET",
+        url: "/clinicPlus/api/" + obj.apiUrl,
+        beforeSend: beforeSend_authorize,
+        success: function (result) {
+            aylinker({
+                urlOfTemplate: urlOfTemplate,
+                selector: divname + '_inner',
+                data: {
+                    obj: result,
+                    'moduleName': module
+                }
+            });
+            aylinker({
+                urlOfTemplate: '/clinicPlus/module/entity_select/template_menu.html' + pageNewAy(1),
+                selector: divname + "_menu0",
+                data: {
+                    'moduleName': module,
+                    'a': 2
+                }
+            });
+            document.getElementById(divname + "_paging").innerHTML = "";
         }
-        );
-        aylinker({
-            urlOfTemplate: '/clinicPlus/module/entity_select/template_menu.html' + pageNewAy(1),
-            selector: divname + "_menu0",
-            data: {
-                'moduleName': module,
-                'a': 2
-            }
-        });
-        document.getElementById(divname + "_paging").innerHTML = "";
-
-
     });
 //    menu
-
-
-
-
-
-
 
 }
 
@@ -729,7 +777,7 @@ function submitFormAKR(formId, ToUrl) {
 
 function go(id, module, paramsExtra) {
 
-    window.location.href = '#/dummy?function=populateCreate2'
+    window.location.href = 'home.html#/dummy?function=populateCreate2'
             + '&module=' + module
             + '&id=' + id
             + '&divName=' + 'main_1'
@@ -748,7 +796,7 @@ function go(id, module, paramsExtra) {
 
 function goto_list(moduleName) {
 //    save(moduleName);
-    var path = '#/cmd?module=' + moduleName + '&action=/all/list' + pageNewAy(1);
+    var path = 'home.html#/cmd?module=' + moduleName + '&action=/all/list' + pageNewAy(1);
     console.log("goto_list path=" + path);
     window.location.href = path;
 }
@@ -760,18 +808,20 @@ function goto_delete(module, id) {
 //    var option = prompt("Enter y or Y to confirm ", "");
     console.log(option);
     if (option === 'y' || option === 'Y') {
-
-        $.get("/clinicPlus/api/" + module + "/delete/id/" + id,
-                function (result) {
-                    console.log(" goto_delete api result=" + JSON.stringify(result));
+        $.ajax({
+            type: "GET",
+            url: "/clinicPlus/api/" + module + "/delete/id/" + id,
+            success: function (result) {
+                console.log(" goto_delete api result=" + JSON.stringify(result));
 //                   
-                    if (result.status === 'success') {
-                        alert_1("Done :)", result.message, result.status);
-                        window.history.back();
-                    } else {
-                        alert_1("Sorry :( <br>I cannot", result.message, result.status);
-                    }
+                if (result.status === 'success') {
+                    alert_1("Done :)", result.message, result.status);
+                    window.history.back();
+                } else {
+                    alert_1("Sorry :( <br>I cannot", result.message, result.status);
                 }
+            }
+        }
         );
     }
 }
@@ -799,7 +849,7 @@ function  pharmacyBill() {
     this.name = 'a';
 }
 
-var printUtils = new PrintUtils();
+
 function  PrintUtils() {
     this.printPage = function () {
         alert('printPage not done');
@@ -897,6 +947,7 @@ function  PrintUtils() {
         document.getElementsByClassName('a6').style = "border:none";
     };
 }
+var printUtils = new PrintUtils();
 
 function printDiv_navOff(divName) {
     var navbarDiv = document.getElementById('navbar');
@@ -922,6 +973,4 @@ function printDiv_navOff(divName) {
 //    printableAreaDiv.style = 'margin-left:0mm';
 
 }
-
-
-
+    
