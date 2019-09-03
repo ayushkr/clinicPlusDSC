@@ -9,6 +9,16 @@
 ////    ctxMenu.style.top = (event.pageY - 10)+"px";
 //},false);
 
+
+function  back(){
+    if(mainLayerNumberNow===1){
+        window.history.back();
+    }else{
+        hideMainLevel();
+    }
+}
+
+
 console.log('loaded overall.js');
 var authorizationToken;
 
@@ -339,11 +349,7 @@ function populateCreate2(module, id, divName, paramsExtraStr) {
 
 
 
-        aylinker({
-            urlOfTemplate: "/clinicPlus/module/" + module + "/fillForm/template.html?ran=" + Math.random(),
-            selector: divName + "_inner",
-            data: apiDataGlobal
-        });
+       
 
 
         if (mainLayerNumberNow !== 0)
@@ -357,6 +363,14 @@ function populateCreate2(module, id, divName, paramsExtraStr) {
             document.getElementById(divName + "_menu").innerHTML += 'issue';
 
         }
+        
+        
+         aylinker({
+            urlOfTemplate: "/clinicPlus/module/" + module + "/fillForm/template.html?ran=" + Math.random(),
+            selector: divName + "_inner",
+            data: apiDataGlobal
+        });
+        
 
         document.getElementById(divName + "_paging").innerHTML = '';
         document.getElementById(divName).style.display = 'block';
@@ -389,13 +403,7 @@ function listAsPages(module, path, divName) {
                             'sortOrder': result.sortOrder,
                             'sortColumn': result.sortColumn
                         };
-                        aylinker({
-                            // urlOfTemplate: "/clinicPlus/module/" +mn.module.current+ "/all/list/template1.html?ran=" + Math.random(),
-                            urlOfTemplate: "/clinicPlus/module/" + module + "/list/template.html" + pageNewAy(1),
-                            selector: divName + "_inner",
-                            data: {obj: result}
-                        }
-                        );
+                       
                         aylinker({
                             urlOfTemplate: "/clinicPlus/module/entity/list/templatePaging.html" + pageNewAy(1),
                             selector: divName + "_paging",
@@ -406,8 +414,13 @@ function listAsPages(module, path, divName) {
                             urlOfTemplate: "/clinicPlus/module/entity/list/template_menuTop.html" + pageNewAy(1),
                             selector: divName + "_menu",
                             data: {obj: paging_data}
-                        }
-                        );
+                        });
+                         aylinker({
+                            // urlOfTemplate: "/clinicPlus/module/" +mn.module.current+ "/all/list/template1.html?ran=" + Math.random(),
+                            urlOfTemplate: "/clinicPlus/module/" + module + "/list/template.html" + pageNewAy(1),
+                            selector: divName + "_inner",
+                            data: {obj: result}
+                        });
                     }
                 },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -470,11 +483,11 @@ function popup_selection_obj(obj) {
 
     if (obj.entity_select === 'dateForOrganisation') {
         document.getElementById("modalDate").style = "display:block";
-        loadTemplate_entity_select_into(obj, 'modalDate');
+        entitySelect(obj, 'modalDate');
     } else {
         var divNode = newModal();
-        loadTemplate_entity_select_into(obj, divNode.id);
-        document.getElementById(divNode.id + '_menu0').innerHTML = 'ooo';
+        entitySelect(obj, divNode.id);
+
     }
 }
 
@@ -487,26 +500,41 @@ function newModal() {
     divNode = document.getElementById("main_" + mainLayerNumberNow);
 //    divNode.class = 'main_';
     divNode.style = "z-index:" + mainLayerNumberNow * 100 + ";";
-    document.body.appendChild(divNode);
+
+
 
     divNode_menu0 = document.createElement('div');
-    divNode_menu0.innerHTML="<span class='hideMainLevelButton' onclick=hideMainLevel() >Close</span>";
+    divNode_menu0.innerHTML = "<span class='hideMainLevelButton' onclick=back() >Close</span>";
     divNode_menu0.id = "main_" + mainLayerNumberNow + '_menu0';
-    divNode.appendChild(divNode_menu0);
+
+
+    if (true) {
+        var closeNode = document.getElementById('hideMainLevelButton_div');
+        divNode_menu0.innerHTML = closeNode.innerHTML;
+    }
 
     divNode_menu = document.createElement('div');
     divNode_menu.id = "main_" + mainLayerNumberNow + '_menu';
-    divNode.appendChild(divNode_menu);
 
     divNode_inner = document.createElement('div');
     divNode_inner.id = "main_" + mainLayerNumberNow + '_inner';
-    divNode.appendChild(divNode_inner);
 
     divNode_paging = document.createElement('div');
     divNode_paging.id = "main_" + mainLayerNumberNow + '_paging';
-    divNode.appendChild(divNode_paging);
 
 //              obj.div='main2';
+    console.log('data-populated=' + divNode.getAttribute('data-populated'));
+    if (divNode.getAttribute('data-populated') === null) {
+        document.body.appendChild(divNode);
+        divNode.appendChild(divNode_menu0);
+        divNode.appendChild(divNode_menu);
+        divNode.appendChild(divNode_inner);
+        divNode.appendChild(divNode_paging);
+        divNode.setAttribute('data-populated', true);
+    }
+
+
+
     console.log('new div added as=' + divNode.id + " body=" + divNode);
     divNode.style.display = "block";
     return divNode;
@@ -534,17 +562,33 @@ function hideMainLevel() {
 var level = "";
 var afterClick = '';
 function  selectionDone(obj) {
-    console.log('selectionDone , name=' + mn.module['select'].name + ' obj=' + JSON.stringify(obj));
-    console.log('selectionDone ,obj.extra' + JSON.stringify(obj.extra));
+    console.log('selectionDone , mn.module[select].name=' + mn.module['select'].name );
+    console.log('selectionDone ,obj=' + JSON.stringify(obj));
+  
     $('#' + obj.who).val(obj.id);
+    
     $('#' + obj.who + '_display').html(obj.extra);
+    
     if (obj.who === 'doctor') {
         $('#' + obj.who + '_display').html(obj.extra.name);
         $('#feesList').html((obj.extra.feesList));
         $('#consultFee').val((obj.extra.feesList).split(',')[0]);
         $('#feeForClinic').val(obj.extra.feeForClinic);
     }
+    if (obj.who === 'dateForOrganisation') {
+    
+    }
+    
+    
+    var aclickNodeId = obj.who + '_afterClick';
+    var aclick_node = document.getElementById(aclickNodeId);
 
+    if (aclick_node !== null) {
+        console.log('aclick_node clicked =' + aclickNodeId);
+        aclick_node.click();
+    } else {
+        console.log('aclick_node   not exist for :' + aclickNodeId);
+    }
 
     if (afterClick === '') {
 
@@ -553,22 +597,7 @@ function  selectionDone(obj) {
     }
 }
 
-function modal(obj) {
-    console.log('modal url=' + obj.url);
-    document.getElementById('main3').style = 'display:block';
-    $.ajax({
-        type: "GET",
-        url: obj.url,
-        beforeSend: beforeSend_authorize,
-        success: function (result) {
-            aylinker({
-                urlOfTemplate: obj.url,
-                selector: 'main3_inner',
-                data: {obj: result}
-            });
-        }
-    });
-}
+
 function showDivAy(e) {
     document.getElementById(e).style = "display:block";
 }
@@ -587,7 +616,7 @@ function hideDivAy(e) {
 function refresh_entitySelectList(module, filterWord) {
     var divname = 'main_' + mainLayerNumberNow;
     var obj = {'entity_select': module};
-    loadTemplate_entity_select_into(obj, divname);
+    entitySelect(obj, divname);
     filter(filterWord);
 }
 
@@ -635,16 +664,16 @@ function check_1() {
     console.log('Sname=' + Sname);
 }
 
-function loadTemplate_entity_select_into(obj, divname) {
+function entitySelect(obj, divname) {
 //var entity = mn.module['select'].obj.entity_select;
-    console.log('function loadTemplate_entity_select_into(obj, divname),divName=' + divname);
+    console.log('entity_select_into(obj, divname),\n divName=' + divname);
 //window.location.href="/clinicPlus/home.html#/dummy?function=a&divName="+divname;
 //    window.location.href = "home.html#/dummy" + pageNewAy(1) +
 //            "function=a&divName=" + divname;
     var module = obj.entity_select;
     var urlOfTemplate = "/clinicPlus/module/entity_select/"
             + module + "/" + module + ".html" + pageNewAy(1);
-    console.log('loadTemplate_entity_select_into(obj, divname)' +
+    console.log('entitySelect(obj, divname)' +
             '  \n urlOfTemplate=' + urlOfTemplate
             + '\n divname=' + divname + '_inner');
     document.getElementById(divname + "_menu").innerHTML = "Loading.... Please wait";
@@ -659,6 +688,14 @@ function loadTemplate_entity_select_into(obj, divname) {
         beforeSend: beforeSend_authorize,
         success: function (result) {
             aylinker({
+                urlOfTemplate: '/clinicPlus/module/entity_select/template_menu.html' + pageNewAy(1),
+                selector: divname + "_menu",
+                data: {
+                    'moduleName': module,
+                    'a': 2
+                }
+            });
+            aylinker({
                 urlOfTemplate: urlOfTemplate,
                 selector: divname + '_inner',
                 data: {
@@ -666,14 +703,7 @@ function loadTemplate_entity_select_into(obj, divname) {
                     'moduleName': module
                 }
             });
-            aylinker({
-                urlOfTemplate: '/clinicPlus/module/entity_select/template_menu.html' + pageNewAy(1),
-                selector: divname + "_menu0",
-                data: {
-                    'moduleName': module,
-                    'a': 2
-                }
-            });
+            
             document.getElementById(divname + "_paging").innerHTML = "";
         }
     });
@@ -829,6 +859,7 @@ function goto_delete(module, id) {
 function save(module, id) {
     console.log('save , module=' + module);
     $('#form_' + module).submit();
+    return  id;
     // goto_list(module) ;
 }
 
@@ -867,8 +898,8 @@ function  PrintUtils() {
     this.printDiv_navOff = function (divName, type) {
 
         var navbarDiv, printableAreaDiv, menuDiv, pagerDiv, dateDiv;
-        navbarDiv = document.getElementById('navbar');
-        navbarDiv.style.visibility = 'hidden';
+//        navbarDiv = document.getElementById('navbar');
+//        navbarDiv.style.visibility = 'hidden';
         if (type === 'main') {
             printableAreaDiv = document.getElementById(divName + "_inner");
             menuDiv = document.getElementById(divName + "_menu");
@@ -893,8 +924,13 @@ function  PrintUtils() {
         }
 
         window.print();
+        
+        window.iframe1.style.height="auto";
+        window.iframe1.style.height="-webkit-fill-available";
+        window.iframeNav.style.height="-webkit-fill-available"
+        
         document.title = originalTitle;
-        navbarDiv.style.display = 'block';
+//        navbarDiv.style.display = 'block';
         printableAreaDiv.style = 'margin-left:0mm';
         if (type === 'main') {
             menuDiv.style.display = 'block';
@@ -902,6 +938,8 @@ function  PrintUtils() {
             dateDiv.style.display = 'block';
         }
     };
+    
+    
     this.printOPcard = function () {
 
         var divName = 'main_1';

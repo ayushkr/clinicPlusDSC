@@ -1,5 +1,5 @@
 <div data-akr-printable="false">
-    <div class="pageTitle"> </div>
+
     <form id='form_pharmacyBill' method="post" 
           action="{{:renderInDiv}}#/cmd/post">
         <input type='hidden' name='redirect' value=' #/cmdc?module=pharmacyBill&action=/all/list'>
@@ -7,26 +7,34 @@
         <input type="hidden" name="id" data-link="id" />
 
 
-        <div class="inp_outer">
+        <div class="inp_outer" style="display: none">
             <div class="title1" > dateOfBill </div>
             <div id="selectLarge_dateOfBill"  >
                 selectLarge_dateOfBill
             </div>
         </div>
         <div id="selectLarge_appointment" 
-             style="display: inline-block">
+             style="display: none">
             selectLarge_appointment
         </div>
+
+        <div id="dateOfBill_afterClick"  style="display: none"
+             onclick="appointment_afterClick({{:id}})"></div>
+        <div id="appointment_afterClick"  style="display: none"
+             onclick="appointment_afterClick({{:id}})"></div>
+
         <div class="inp_outer" title="വേറെ  വിശേഷം വല്ലതും ഉണ്ടോ ?" 
-             style="min-width: 150px;min-height: 50px">
+             style="min-width: -webkit-fill-available;min-height: 50px">
             <div class="title1"   >  Remarks</div>
             <span class="inp2" contenteditable="true" id="remarks"   data-link="remarks" >---</span>
             <input type="hidden" name="remarks" data-link="remarks" />
         </div>
-
+        <input type="hidden" name="freshness" value="1" />
 
     </form>
 </div>
+
+{{if freshness==1}}
 <center>
     <table border="0">
         <tbody>
@@ -74,7 +82,7 @@
         </center>  
 
         </td>
-        <hr>
+       
         </tr>
 
         <tr>
@@ -102,24 +110,30 @@
                 </td>
                 <td  class="Table1_A1"><span class="T1"></span>
                 </td>
-                <td  class="Table1_A1" style="float: right">
+                <td onclick="document.getElementById('dateOfBill').click()"
+
+                    class="Table1_A1" style="float: right">
                     Bill Date :
                     {{:~ddmmyyyyDashed(dateOfBill) }}
                 </td>
             </tr>
             <tr>
-                <td  class="Table1_A2" style="float: left">
-                    Patient : 
+                <td  
+                    onclick="document.getElementById('appointment').click();"
+                    class="Table1_A2" style="float: left">
+                    Patient :  
                     <span class="T1">{{if appointment}} 
                         {{:appointment.patient.name}} {{else}}-- 
                         {{/if}} </span>
-<!--                    <span data-link="appointment.patient.name">appointment.patient.name</span>-->
+                    <!--                    <span data-link="appointment.patient.name">appointment.patient.name</span>-->
 
                 </td>
                 <td  class="Table1_A2">
 
                 </td>
-                <td  class="Table1_A2" style="float: right">
+                <td 
+                    onclick="document.getElementById('appointment').click()"
+                    class="Table1_A2" style="float: right">
                     Doctor : 
                     <span class="T1"> {{if appointment}} 
                         {{:appointment.doctor.name}} 
@@ -135,8 +149,13 @@
     <div id="printableArea"   title="PharmacyBill_List" >
 
 
-        <div id="main_1_innert"> main_1_innert</div>
+        <div id="main_1_innert"> Loading Data, Please wait ...</div>
 
     </div>
 
 </center>
+{{else}}
+<center>
+<button onclick="appointment_afterClick({{:id}})">Create </button>
+</center>
+{{/if}}

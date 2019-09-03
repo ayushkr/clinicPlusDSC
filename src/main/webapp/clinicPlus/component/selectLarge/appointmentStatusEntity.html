@@ -1,0 +1,28 @@
+<div class="inp_outer">
+
+    <div class="inp1" 
+
+         onclick="popup_selection_obj(
+                         {
+                             'entity_select': 'appointmentStatusEntity',
+                             'input': 'appointmentStatusEntity'
+                         }
+                 )"
+
+         >
+
+        <div class="title1">appointmentStatusEntity</div>
+        {{if appointmentStatusEntity!=null}}
+        <input  type="hidden" id="appointmentStatusEntity" name="appointmentStatusEntity" data-link="appointmentStatusEntity.id"  />
+        <span id="appointmentStatusEntity_display" class="inp2" >        
+            {{:appointmentStatusEntity.name}}     
+        </span>
+        {{else}}
+
+        <input  type="hidden" id="appointmentStatusEntity" name="appointmentStatusEntity"   />
+        <span id="appointmentStatusEntity_display" class="inp2" >        
+            not set  
+        </span>
+        {{/if}}
+    </div>
+</div>

@@ -1,25 +1,6 @@
 //http://localhost:8080/clinicPlus/module/pharmacyBill/1.js?_=1556297803504
 
 
-function popup_selection(name) {
-
-    document.getElementById("main2").style = "display:block";
-    mn.module['select'].name = name;
-    console.log(name + "_selected " + mn.module['select'].name);
-    $("#main2").load("/clinicPlus/module/entity_select/view.html?" + pageNewAy(1));
-}
-
-
-
-
-function  selectionDone() {
-    console.log('selectionDone , name=' + mn.module['select'].name);
-    $('#' + mn.module['select'].name).val(mn.module['select'].id);
-    $('#' + mn.module['select'].name + '_display').html(mn.module['select'].extra);
-
-
-}
-
 function calculateAmount(j) {
     var medicineStock;
     var medicineStock_id = document.getElementById('medicineStock').value;
@@ -37,11 +18,4 @@ function calculateAmount(j) {
 
     });
 
-}
-
-function date_selection_finished(dateStr) {
-   //  alert(dateStr);
-    $("#dateForOrganisation_display").html(dateStr);
-    $("#dateOfBill").val(dateStr);
-    document.getElementById("main2").style = "display:none";
 }

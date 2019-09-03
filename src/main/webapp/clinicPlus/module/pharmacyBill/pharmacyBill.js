@@ -1,31 +1,51 @@
 
 
 
-manifestGUISelectLarge('appointment',apiDataGlobal.appointment);
-manifestGUISelectLarge('dateOfBill',apiDataGlobal.dateOfBill);
+manifestGUISelectLarge('appointment', apiDataGlobal.appointment);
+manifestGUISelectLarge('dateOfBill', apiDataGlobal.dateOfBill);
 
 
+function appointment_afterClick(id) {
+// var pro=Promise.resolve(save('pharmacyBill',id));
+//   pro.then(id=>{
+//       
+//        
+//    
+//    });
+    save('pharmacyBill', id);
+//     setTimeout(go(id, 'pharmacyBill'),1000);
 
+    setTimeout(
+            () => {
+window.location.href='#/dummy?function=populateCreate2&module=pharmacyBill&id='+id+'&divName=main_1&paramsExtra=undefined&a='+Math.random();
+//        Promise.resolve(window.history.back()).then(window.history.forward());
+//        window.history.back();
+//        setTimeout(window.history.forward(), 2000);
+//
+    }, 100);
+
+
+}
 
 
 function  PharmacyCashBill() {
     this.moduleName = 'pharmacyCashBill';
     this.id = 0;
-    
-     
+
+
 
     this.render_list = function (id, divName) {
-        $.get("/clinicPlus/api/pharmacyBillRow/ByBillId/" + id, 
-        function (result) {
-            console.log('  get("/clinicPlus/api/pharmacyBillRow/ByBillId/' + id);
-            aylinker({
-                urlOfTemplate:
-                        "/clinicPlus/module/pharmacyBill/billBodyTemplate.html" + pageNewAy(1),
+        $.get("/clinicPlus/api/pharmacyBillRow/ByBillId/" + id,
+                function (result) {
+                    console.log('  get("/clinicPlus/api/pharmacyBillRow/ByBillId/' + id);
+                    aylinker({
+                        urlOfTemplate:
+                                "/clinicPlus/module/pharmacyBill/billBodyTemplate.html" + pageNewAy(1),
 //                selector: "main_1_inner",
-                selector: divName,
-                data: result
-            });
-        });
+                        selector: divName,
+                        data: result
+                    });
+                });
         document.getElementById('main_1_paging').innerHTML = "";
     };
 
@@ -190,4 +210,4 @@ function  PharmacyCashBill() {
 }
 var pharmacyCashBill = new PharmacyCashBill();
 
-pharmacyCashBill.render_list(apiDataGlobal.id,'main_1_innert');
+pharmacyCashBill.render_list(apiDataGlobal.id, 'main_1_innert');

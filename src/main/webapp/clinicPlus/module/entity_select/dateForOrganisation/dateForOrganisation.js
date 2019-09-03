@@ -1,16 +1,16 @@
 // entity_select/dateForOrganisation/dateForOrganisation.js
 
 var fieldName = "";
-var dateStr;
+var dateStrDashed;
 var dateJSON = {year: 2000, month: 1, day: 1};
 var guiControls = "";
 
-function  calendarReload(){
-dateJSON = getTodayJSON();
-dateJSON = getGivenDate();
-console.log("dateForOrganisation.js,calendarReload(), dateJSON=getTodayJSON();" + JSON.stringify(dateJSON));
-createMonthAndYearGUI();
-displayCalendar(dateJSON);
+function  calendarReload() {
+    dateJSON = getTodayJSON();
+    dateJSON = getGivenDate();
+    console.log("dateForOrganisation.js,calendarReload(), dateJSON=getTodayJSON();" + JSON.stringify(dateJSON));
+    createMonthAndYearGUI();
+    displayCalendar(dateJSON);
 }
 
 function createMonthAndYearGUI() {
@@ -40,13 +40,21 @@ function daySel(d) {
     console.log("dateForOrganisation.js,daySel(d), day set d" + d);
     dateJSON.day = d;
     inputChangedByUser();
-//    date_selection_finished2(dateStr);
 }
 
-function dateFinalised(){
-    dateStr=getDateDashed(dateJSON);
-      date_selection_finished2(dateStr);
-     document.getElementById('modalDate').style='display:none';
+function updateCallerUIWithDate() {
+    dateStrDashed = getDateDashed(dateJSON);
+//    $("#" + mn.module['select'].obj.input).val(dateStrDashed);
+//    $("#" + mn.module['select'].obj.input + "_display").html(dateStrDashed);
+//    
+    document.getElementById("modalDate").style = "display:none";
+    console.log("updateCallerUIWithDate()  le input" + mn.module['select'].obj.input);
+    var obj = {
+        who : mn.module['select'].obj.input,
+        id: dateStrDashed,
+        extra: dateStrDashed
+    };
+    selectionDone(obj);
 }
 
 function inputChangedByUser() {
@@ -71,32 +79,32 @@ function getTodayJSON() {
     displayCalendar(dateJSON);
     return dateJSON;
 }
-function getGivenDate(){
-    var s="";
-   
-    var strDate=mn.module['select'].obj.value+'';
-     console.log(" getGivenDate(), input="+strDate);
-    if(strDate!==''){
-    var parts=strDate.split('-');
-     dateJSON.year=Number(parts[0]);
-     dateJSON.month=Number(parts[1]);
-     dateJSON.day=Number(parts[2]);
- }else{
-      dateJSON=  getTodayJSON();
- }
-     $("#combo_month").val(dateJSON.month);
+function getGivenDate() {
+    var s = "";
+
+    var strDate = mn.module['select'].obj.value + '';
+    console.log(" getGivenDate(), input=" + strDate);
+    if (strDate !== '') {
+        var parts = strDate.split('-');
+        dateJSON.year = Number(parts[0]);
+        dateJSON.month = Number(parts[1]);
+        dateJSON.day = Number(parts[2]);
+    } else {
+        dateJSON = getTodayJSON();
+    }
+    $("#combo_month").val(dateJSON.month);
     $("#combo_year").val(dateJSON.year);
     displayCalendar(dateJSON);
-     console.log(' got '+strDate+' is converted to json '+JSON.stringify(dateJSON));
+    console.log(' got ' + strDate + ' is converted to json ' + JSON.stringify(dateJSON));
     return dateJSON;
 }
 function getDateDashed(dateJSON) {
 
     console.log("getDateDashed() dateJSON= " + JSON.stringify(dateJSON));
     var day_str = "0";
-    dateStr = "" + dateJSON.year + "-" + twoDigitise(dateJSON.month) + "-" +twoDigitise(dateJSON.day);
+    dateStrDashed = "" + dateJSON.year + "-" + twoDigitise(dateJSON.month) + "-" + twoDigitise(dateJSON.day);
     console.log("getDateDashed() dateStr= " + day_str);
-    return dateStr;
+    return dateStrDashed;
 }
 
 function displayCalendar(dateJSON) {
@@ -152,9 +160,9 @@ function displayCalendar(dateJSON) {
 // highlight current day using the CSS defined in header.
         var handle1 = "onclick='daySel(" + counter + ")' ";
         if (counter == day) {
-            htmlContent += "<td " + handle1+" class='dayNow td' >"+ counter + "</td>";
+            htmlContent += "<td " + handle1 + " class='dayNow td' >" + counter + "</td>";
         } else {
-            htmlContent += "<td " + handle1+ " class='monthNow td' >" + counter + "</td>";
+            htmlContent += "<td " + handle1 + " class='monthNow td' >" + counter + "</td>";
         }
 
         weekdays2++;
@@ -176,18 +184,7 @@ function displayCalendar(dateJSON) {
     // console.log(guiControls+calendarBody);
     document.getElementById("calendar").innerHTML = calendarBody;
 }
-function date_selection_finished2(dateStr) {
-    $("#" + mn.module['select'].obj.input).val(dateStr);
-    $("#" + mn.module['select'].obj.input+"_display").html(dateStr);
-    document.getElementById("modalDate").style = "display:none";
-    console.log("date_selection_finished2()  le input" + mn.module['select'].obj.input);
 
-  if(afterClick===''){
-        
-    }else{
-        document.getElementById(afterClick).click();
-    }
-}
 
 calendarReload();
-document.getElementById('entity_select_closeButton_modalDate').style.display='none';
+document.getElementById('entity_select_closeButton_modalDate').style.display = 'none';

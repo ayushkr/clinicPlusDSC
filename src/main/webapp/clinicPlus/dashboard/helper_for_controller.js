@@ -131,12 +131,12 @@ function listFiles(patientId, category, div) {
                 if (dataGot[a].fileType === 'jpeg') {
                     result += "<a target='_blank' href='" + dataGot[a].path + "'>"
                             +
-                            "<img width='150px' style='padding:10px' src='" + dataGot[a].path + "'></a>";
+                            "<img width=150 style='padding:10px' src='" + dataGot[a].path + "'></a>";
 
                 } else {
                     result += "<a target='_blank' href='" + dataGot[a].path + "'>"
                             +
-                            "<img width='150px' style='padding:10px' src='./images/pdf.png'></a>";
+                            "<img  style='padding:10px' src='./images/text-x-generic.png'></a>";
 
                 }
             }

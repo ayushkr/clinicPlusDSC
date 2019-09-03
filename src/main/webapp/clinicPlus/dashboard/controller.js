@@ -142,17 +142,14 @@ function cmd_post(context, data) {
     var module_direct = this.params['module_direct'];
     var div = this.params['div'];
 
-    if (div === undefined)
+    if (div === undefined) {
         div = 'main_1';
-
+    }
     var redirect = this.params['redirect'];
     if (module_direct !== undefined) {
         module = module_direct;
     }
-
     var d = new FormData(document.getElementById('form_' + module));
-
-
     console.log("akr api_Posting : " + JSON.stringify(d));
 
     $.ajax({
@@ -168,9 +165,6 @@ function cmd_post(context, data) {
         success:
                 function (data, textStatus, jqXHR)
                 {
-
-
-
 //                    console.log(" jqXHR=" + JSON.stringify(jqXHR));
                     console.log("cmd post success, module=" +
                             module + ", data=" + JSON.stringify(data));
@@ -178,15 +172,14 @@ function cmd_post(context, data) {
                     console.log('ok redirect to ' + path);
                     if (data.status === 'success') {
                         alert_1('Done :)', data.message, data.status);
-                        window.history.back();
+                     if(mainLayerNumberNow===1){
+                         window.history.back();
+                         }
 //                        window.location.href = path;
                     } else {
                         alert_1('Sorry :(', data.message, data.status);
 //                        window.history.back();
-
                     }
-
-
 //                    if (jqXHR.getResponseHeader('ok') === 'no') {
 //                        alert_1(jqXHR.getResponseHeader('problem'),
 //                                JSON.stringify(data), 'error');
@@ -195,14 +188,7 @@ function cmd_post(context, data) {
 //                        alert_1('OK', jqXHR.getResponseHeader('ok'), 'success');
 //                        mn.module[module] = data;
 //                        console.log("post.done module=" + module + ", data=" + JSON.stringify(data));
-//
-//                        
-//
 //                    }
-
-
-
-
                 }
 
         ,

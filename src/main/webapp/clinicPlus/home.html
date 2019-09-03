@@ -3,8 +3,17 @@
     <title>kk</title>
 </head>
 <body>
-<div id="navbar"></div>
+<!--    <span onclick="window.print()">pr</span>-->
+    <div id="navbar" style="display: none"></div>
 <div id="mainCover"   >
+    
+    <div id="hideMainLevelButton_div" style="display: none" >
+        <span class="hideMainLevelButton" 
+         onclick="hideMainLevel()">
+             <i class="fa fa-arrow-left"> </i>
+        </span>
+    </div>
+    
     <div id="alert_akr" >
         <!--alert_akr-->
         <div onclick="hideDivAy('alert_akr')" >
@@ -132,9 +141,12 @@
     <div id="main_6" class='modalLayer'>
 
     </div>
+    
     <div id='modalDate' class='modalLayer'> 
         <div onclick="hideMainLevel()" id='entity_select_closeButton_modalDate'
-             class="entity_select_closeButton w3-btn "> <i class="fa fa-times"> </i></div>
+             class="entity_select_closeButton w3-btn "> 
+            <i class="fa fa-times"> </i>
+        </div>
         <div id="modalDate_menu"></div>
         <div id="modalDate_inner">modalDate</div>
         <div id="modalDate_paging"></div>

@@ -1,8 +1,7 @@
 <!--select_patient/list.html-->
 
 
-<div style="position: relative;z-index: 1;
-     background-color: transparent"
+<div 
      data-akr-printable="false"
      >
     <div class="w3-bar-ay"  >
@@ -82,11 +81,11 @@
 
     </div>  
 
-
+<hr>
 
 </div>
 
-<hr>
+
 <form id='form_appointment/deleteBulk' 
       method="post" 
       action="{{:renderInDiv}}#/cmd/post"> 
@@ -101,7 +100,7 @@
                 cellspacing="0" cellpadding="5" border="1"  >
 
 
-            <thead>
+            <thead style="    font-size: 10px;">
                 <tr class="bluestrp">
                     <th></th>
                     <th>id
@@ -280,13 +279,10 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody style="    font-size: 12px;">
 
 
                 {{for obj.pageList.content}}
-
-
-
 
                 <tr class="firstrow"
 
@@ -355,7 +351,10 @@
                     <td
                         onclick="go({{:id}}, 'appointment')"
                         > {{if appointmentTypeEntity!=null}}
-                        <span class="marker_{{:appointmentTypeEntity.id}} rounded">{{:appointmentTypeEntity.name}}</span>
+                        <span class="marker_{{:appointmentTypeEntity.id}} rounded">
+                            {{:appointmentTypeEntity.name}}
+                        </span><br>
+                        <span>{{:remarks}}</span>
 
                         {{/if}}
                     </td>

@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name = "PharmacyBill")
@@ -36,6 +37,25 @@ public class PharmacyBillEntity implements Serializable {
     java.util.Date creationTime;
  @Temporal(TemporalType.TIMESTAMP)
     java.util.Date  updationTime;
+ 
+ @ColumnDefault(value = "0")
+ private int freshness;
+
+ 
+ 
+ 
+ 
+    public int getFreshness() {
+        return freshness;
+    }
+
+    public void setFreshness(int freshness) {
+        this.freshness = freshness;
+    }
+ 
+ 
+ 
+ 
 
     public java.util.Date getCreationTime() {
         return creationTime;

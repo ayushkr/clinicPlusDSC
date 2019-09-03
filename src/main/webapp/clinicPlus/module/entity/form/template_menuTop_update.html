@@ -1,61 +1,60 @@
 <!-- entity /update/template_menuTop_update-->
-
-
 <div id="widgets" class="widgetBar" 
      data-akr-printable="false" >
 
-
-
-    <button 
-        onclick="goto_delete('{{:moduleName}}', '{{:id}}')" 
-        data-toggle="tooltip" title="Delete" 
-        class="w3-btn2 "
-        data-akr-printable="false"
-        >
-        <i class="fa fa-trash " 
-           style="font-size: 1.5em;"
-           ><span style="margin-left: 2mm;"> 
-            </span> </i>
-    </button> 
-
-    <span style="display:inline-block ;width: 1cm;">
-        
-    </span>
-
-
-<!--    back button
-    <button 
-        onclick="window.history.back()"
-        data-toggle="tooltip" title="Back" 
-        class="w3-btn2"
-
-        > <i class="fa fa-backward"> </i>
-    </button>-->
+    <div style="position:fixed" class="topBarStrip" >
+        <span 
+            class="pageTitle"
+            style="float:left">{{:moduleName}}</span>
 
 
 
-    <span style="display:inline-block ;width: 0cm;"></span>
-    <button onclick="printDiv_navOff('navbar')" 
-            data-toggle="tooltip" title="Print this page" 
-            class="w3-btn2"
-            > <i class="fa fa-print"> </i>
-    </button> 
+
+
+        <button  data-toggle="tooltip" 
+                 title="Save" 
+                 class="w3-btn2 "
+                 style="float: right"
+                 onclick="save('{{:moduleName}}');">
+            <i class="fa fa-save"  > </i>
+        </button>
 
 
 
-    <button class="w3-btn2 " data-toggle="tooltip" 
-            title="Save" 
+        <button onclick="printDiv_navOff('navbar')" 
+                class="w3-btn2 "
+                style="float: right"
+                data-toggle="tooltip" title="Print this page" 
+                > <i class="fa fa-print"> </i>
+        </button> 
+
+        <!--back button-->
+        <button 
             style="float: right"
-            onclick="save('{{:moduleName}}');">
-        <i class="fa fa-save"  > </i>
-    </button>
+            class="w3-btn2 "
+            onclick="back()"
+            data-toggle="tooltip" title="Back" 
+            > <i class="fa fa-arrow-left"> </i>
+        </button>
+        
+        
+        
+        <span style="margin-left: 2cm;float:right"> &nbsp;  </span>
+        <button 
+            onclick="goto_delete('{{:moduleName}}', '{{:id}}')" 
+            data-toggle="tooltip" title="Delete" 
+            style="float: right"
+            class="w3-btn2 "
 
+            >
+            <i class="fa fa-trash " 
 
-
-    <span style="width:2cm;"></span>
+               ></i>
+        </button> 
+    </div>
+    <br><br>
 
 </div>
-<br>
 
 
 

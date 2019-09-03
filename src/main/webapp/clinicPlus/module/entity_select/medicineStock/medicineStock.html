@@ -13,6 +13,7 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
     </div>
 
     <div class="HeadingBackgroundDark">
+        <div class="CellNoBorder"><p>Actions</p></div>
         <div class="CellNoBorder"><p>id</p></div>
         <div class="CellNoBorder"><p>brandNameId</p></div>
         <div class="CellNoBorder"><p>vendor</p></div>
@@ -20,12 +21,23 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
         <div class="CellNoBorder"><p>batch</p></div>
         <div class="CellNoBorder"><p>Rate</p></div>
         <div class="CellNoBorder"><p>remain</p></div>
-        <div class="CellNoBorder"><p>Actions</p></div>
+        
     </div>
 
 
     {{for obj}}
     <div class="Row" id="select_{{:id}}"  >
+        <div class="CellNoBorder"> 
+            <a class="w3-btn" data-toggle="tooltip" title="Edit"
+               onclick="populateCreate2(
+                           '{{:~root.moduleName}}',
+                           {{:id}},
+                           newModal().id);"
+              
+               ><i class="fa fa-edit"></i>
+            </a>
+
+        </div>
         <div class="CellNoBorder" style="color:var(--color_l1)"> {{:id}} </div>
         <div class="CellNoBorder " 
              tabindex="1"
@@ -60,17 +72,7 @@ onclick="selectThis(
         <div class="CellNoBorder">  {{:batch}} </div>
         <div class="CellNoBorder">  {{:sellingPrice}} </div>
         <div class="CellNoBorder {{if qtyRemaining<90}} w3-red {{/if}}"  >  {{:qtyRemaining}} </div>
-        <div class="CellNoBorder"> 
-            <a class="w3-btn" data-toggle="tooltip" title="Edit"
-               onclick="populateCreate2(
-                           '{{:~root.moduleName}}',
-                           {{:id}},
-                           newModal().id);"
-              
-               ><i class="fa fa-edit"></i>
-            </a>
-
-        </div>
+        
 
 
 

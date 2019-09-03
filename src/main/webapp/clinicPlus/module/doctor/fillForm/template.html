@@ -1,11 +1,7 @@
 <!--doctor/CRU_template.html -->
 
 <div id="printableArea"   title="DoctorId_{{:id}}_{{if name}}{{:name}}{{/if}}" >
-
-    <div class="pageTitle">
-        Doctor
-    </div>
-
+    <center><b>Doctor Profile</b></center> 
     <form id='form_doctor' 
           method="post" 
           action="{{:renderInDiv}}#/cmd/post">   
@@ -62,8 +58,7 @@
                 </tr>
             </tbody>
         </table>
-        <br>
-
+       
         <div class="inp_outer">
             <div class="title1">visitDay</div>
             <span class="inp2" contenteditable="true" id="visitDay"   data-link="visitDay" >---</span>
@@ -113,14 +108,15 @@
             <input type="hidden" name="visitTime" data-link="visitTime" />
         </div>
 
-        <div class="inp_outer">
+        <div class="inp_outer" style="min-width: 200px;">
             <div class="title1">feesList</div>
-            <span class="inp2" contenteditable="true" id="feesList"   data-link="feesList" >---</span>
+            <span class="inp2"
+                  contenteditable="true" id="feesList"   data-link="feesList" >---</span>
             <input type="hidden" name="feesList" data-link="feesList" />
         </div>
 
 
-        <div class="inp_outer">
+        <div class="inp_outer" style="min-width:100px;">
             <div class="title1">fees</div>
 
             <input type="text" name="fees" data-link="fees" required class="akr_input_text"/>
@@ -133,6 +129,7 @@
 
             <input type="text" name="feeForClinic" data-link="feeForClinic" required class="akr_input_text"/>
         </div>
+        
         <br>
         <div class="inp_outer" style="min-width:200px;" >
             <div class="title1">contactPhone</div>

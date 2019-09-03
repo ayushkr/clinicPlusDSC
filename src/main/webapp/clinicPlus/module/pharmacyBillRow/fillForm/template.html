@@ -1,6 +1,6 @@
 
 <div class="pageTitle">
-   pharmacyBillRow_{{:id}}  </div>
+   pharmacyBillRow ID: {{:id}}  </div>
 
 <form id='form_pharmacyBillRow' method="post"
         action="{{:renderInDiv}}#/cmd/post">  
@@ -12,7 +12,9 @@
 
     <div id="printableArea" style="margin-left: 0mm" title="patient_{{:id}}_{{:name}}">
 
-        <div class="inp_outer"   onclick="popup_selection_obj(
+        <div class="inp_outer"   
+             style="min-width: 100px;"
+             onclick="popup_selection_obj(
                         {
                             'value': '{{if pharmacyBill}}{{:pharmacyBill.id}}{{else}}----{{/if}}',
                             'entity_select': 'pharmacyBill',
@@ -28,8 +30,10 @@
         </div>
         <br>
 
-        <div id="selectLarge_medicineStock" >
-            selectLarge_medicineStock</div>
+        <span id="selectLarge_medicineStock"
+             style="min-width: 200px;"
+             >
+            selectLarge_medicineStock</span>
         <br>
         <div class="inp_outer">
             <div class="title1">qty</div>
@@ -43,16 +47,15 @@
 
 
         <br>
-        Amount auto generated after entering qty etc
-        <br>
-        
         
         
 
-        <div class="inp_outer"  style="min-width: 100px;min-height: 50px"
+        <div class="inp_outer" 
+             style="min-width: 100px;min-height: 50px"
              onclick="calculateAmount(1)">
-            <div class="title1">amount</div>
+            <div class="title1">amount (Auto generated)</div>
             <span class="inp2" 
+                  style="background-color: var(--color_safe)"
                   contenteditable="false" 
                   id="amount_disp"   
                   data-link="amount" 
