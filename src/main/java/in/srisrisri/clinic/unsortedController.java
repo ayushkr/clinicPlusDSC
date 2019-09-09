@@ -3,6 +3,9 @@ package in.srisrisri.clinic;
 
 
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +29,20 @@ public class unsortedController {
       @GetMapping("/clinicPlus/api/expiryDate")
     public String get2(){
       return "[]";
+    }
+    
+      @GetMapping("/clinicPlus/startOldVersion")
+    public String get3(){
+        try {
+            Runtime.getRuntime().exec("sh /common/common/dsc/test.sh") ;
+            return "/clinicPlus/startOldVersion";
+        } catch (IOException ex) {
+           
+            java.util.logging.Logger.getLogger(unsortedController.class.getName()).log(Level.SEVERE, null, ex);
+          return ex.toString();
+        }
+        
+     
     }
 
 }
