@@ -1,6 +1,6 @@
 //http://localhost:8080/clinicPlus/module/pharmacyBill/1.js?_=1556297803504
 
-
+//aa
 function calculateAmount(j) {
     var medicineStock;
     var medicineStock_id = document.getElementById('medicineStock').value;

@@ -10,10 +10,10 @@
 //},false);
 
 
-function  back(){
-    if(mainLayerNumberNow===1){
+function  back() {
+    if (mainLayerNumberNow === 1) {
         window.history.back();
-    }else{
+    } else {
         hideMainLevel();
     }
 }
@@ -62,16 +62,31 @@ function  authorize() {
 }
 
 function manifestGUISelectLarge(name, dataV) {
-    var jsonStr = '{"' + name + '":' + JSON.stringify(dataV) + '}';
-    var jso = JSON.parse(jsonStr);
-    console.log(JSON.stringify(jso));
+    var jso;
+    var elem = document.getElementById('selectLarge_' + name);
+    console.log('dataV=' + dataV);
+    if (elem === null) {
+        console.log('xxx  manifestGUISelectLarge=' + name + " is null");
+    } else {
+        console.log('manifestGUISelectLarge=' + name + " OK");
+        elem.innerHTML += 'modified';
+        if (dataV === undefined) {
+            jso = {};
+            elem.innerHTML = "data undefined";
+        } else {
+            var jsonStr = '{"' + name + '":' + JSON.stringify(dataV) + '}';
+            jso = JSON.parse(jsonStr);
+        }
 
-    aylinker({
-        urlOfTemplate: '/clinicPlus/component/selectLarge/' + name + '.html' + pageNewAy(1),
-        selector: 'selectLarge_' + name,
-        data: jso
+        console.log('jso=' + JSON.stringify(jso));
 
-    });
+        aylinker({
+            urlOfTemplate: '/clinicPlus/component/selectLarge/' + name + '.html' + pageNewAy(1),
+            selector: 'selectLarge_' + name,
+            data: jso
+
+        });
+    }
 }
 
 function img_preview_upload(idOfImage) {
@@ -144,6 +159,7 @@ function filter1() {
         console.log('data-href=' + elem.getAttribute('data-href'));
         window.location.href = elem.getAttribute('data-href') + elem.value;
     }
+
 }
 
 
@@ -349,7 +365,7 @@ function populateCreate2(module, id, divName, paramsExtraStr) {
 
 
 
-       
+
 
 
         if (mainLayerNumberNow !== 0)
@@ -363,14 +379,14 @@ function populateCreate2(module, id, divName, paramsExtraStr) {
             document.getElementById(divName + "_menu").innerHTML += 'issue';
 
         }
-        
-        
-         aylinker({
+
+
+        aylinker({
             urlOfTemplate: "/clinicPlus/module/" + module + "/fillForm/template.html?ran=" + Math.random(),
             selector: divName + "_inner",
             data: apiDataGlobal
         });
-        
+
 
         document.getElementById(divName + "_paging").innerHTML = '';
         document.getElementById(divName).style.display = 'block';
@@ -384,6 +400,7 @@ function listAsPages(module, path, divName) {
     console.log('listAsPages module=' + module + ' divName=' + divName);
     console.log('listAsPages path=' + path);
     $.ajax({
+        async: true,
         type: "GET",
         dataType: "json",
         url: path,
@@ -394,16 +411,18 @@ function listAsPages(module, path, divName) {
         },
         success:
                 function (result) {
-
+                    apiDataGlobal = result;
                     if (module !== undefined) {
                         var paging_data = {
                             'moduleName': module,
                             'totalPages': result.pageList.totalPages,
                             'pageable': {'pageNumber': result.pageList.pageable.pageNumber},
+                            'filter': result.filter,
+                            'filterColumn': result.filterColumn,
                             'sortOrder': result.sortOrder,
                             'sortColumn': result.sortColumn
                         };
-                       
+
                         aylinker({
                             urlOfTemplate: "/clinicPlus/module/entity/list/templatePaging.html" + pageNewAy(1),
                             selector: divName + "_paging",
@@ -415,12 +434,13 @@ function listAsPages(module, path, divName) {
                             selector: divName + "_menu",
                             data: {obj: paging_data}
                         });
-                         aylinker({
+                        aylinker({
                             // urlOfTemplate: "/clinicPlus/module/" +mn.module.current+ "/all/list/template1.html?ran=" + Math.random(),
                             urlOfTemplate: "/clinicPlus/module/" + module + "/list/template.html" + pageNewAy(1),
                             selector: divName + "_inner",
                             data: {obj: result}
                         });
+                        $.getScript("/clinicPlus/module/" + module + "/" + module + ".js" + pageNewAy(1));
                     }
                 },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -428,7 +448,7 @@ function listAsPages(module, path, divName) {
             alert_1('API ' + module + "  " + errorThrown, JSON.stringify(jqXHR), 'failure');
         }
     });
-    $.getScript("/clinicPlus/module/" + module + "/" + module + ".js" + pageNewAy(1));
+
 }
 
 
@@ -460,6 +480,24 @@ function alert_11(head, body) {
     alert(head + "--" + body);
 }
 
+function loading(head, body) {
+
+
+    var element = document.getElementById("alert_akr");
+
+    element.style = "display:block;background-color: #108208eb;";
+// element.style = "background-color:'red';";
+    document.getElementById("alert_akr_head").innerHTML = head;
+    document.getElementById("alert_akr_body").innerHTML = body;
+
+    setTimeout(function () {
+        hideDivAy('alert_akr');
+    }, 2000);
+
+}
+
+
+
 function popupGeneral(level_, moduleName, divName, url) {
     level = level_;
     var div = document.getElementById(divName);
@@ -471,7 +509,8 @@ function popupGeneral(level_, moduleName, divName, url) {
 
 
 function popup_selection_obj(obj) {
-
+parent.document.iframeNav.style.visibility = 'hidden';
+//    parent.document.iframeNav.style.display = 'none';
     console.log('popup_selection_obj=' + JSON.stringify(obj));
     mn.module['select'].obj = obj;
 //    console.log("entity_select=" + mn.module['select'].obj.entity_select);
@@ -482,6 +521,10 @@ function popup_selection_obj(obj) {
     }
 
     if (obj.entity_select === 'dateForOrganisation') {
+        document.getElementById("modalDate").style = "display:block";
+        entitySelect(obj, 'modalDate');
+    } else
+    if (obj.entity_select === 'expiryDate') {
         document.getElementById("modalDate").style = "display:block";
         entitySelect(obj, 'modalDate');
     } else {
@@ -549,12 +592,23 @@ function hideMainLevel() {
     console.log("name=" + name);
     var elem = document.getElementById(name)
 //    elem.innerHTML = "";
-    if (mainLayerNumberNow != 1) {
+    if (mainLayerNumberNow !== 1) {
         elem.style.display = "none";
         mainLayerNumberNow -= 1;
+    } else {
+
     }
     // document.body.removeChild(elem);
+    if (mainLayerNumberNow === 1) {
+//        parent.document.iframeNav.style.display = 'unset';
+         parent.document.iframeNav.style.visibility = 'visible';
+    }
+}
 
+function hideDateModal(){
+    document.getElementById('modalDate').style.display = 'none';
+//    parent.document.iframeNav.style.display = 'unset';
+ parent.document.iframeNav.style.visibility = 'visible';
 }
 
 
@@ -562,26 +616,36 @@ function hideMainLevel() {
 var level = "";
 var afterClick = '';
 function  selectionDone(obj) {
-    console.log('selectionDone , mn.module[select].name=' + mn.module['select'].name );
-    console.log('selectionDone ,obj=' + JSON.stringify(obj));
-  
+    console.log('selectionDone , mn.module[select].name=' + mn.module['select'].name);
+    console.log('selectionDone ,obj ..=' + JSON.stringify(obj));
+//
+
+var manifest_elem = document.getElementById('selectLarge_' + obj.who);
+    
+    if (manifest_elem !== null) {
+    manifestGUISelectLarge(obj.who, obj.extra);
+}else{
+      console.log('manifest_elem '+'selectLarge_' + obj.who +' not exist');
     $('#' + obj.who).val(obj.id);
-    
     $('#' + obj.who + '_display').html(obj.extra);
-    
+}
+
     if (obj.who === 'doctor') {
-        $('#' + obj.who + '_display').html(obj.extra.name);
+//        $('#' + obj.who + '_display').html(obj.extra.name);
+
         $('#feesList').html((obj.extra.feesList));
         $('#consultFee').val((obj.extra.feesList).split(',')[0]);
         $('#feeForClinic').val(obj.extra.feeForClinic);
     }
-    if (obj.who === 'dateForOrganisation') {
-    
-    }
-    
-    
+
+
+
+
     var aclickNodeId = obj.who + '_afterClick';
     var aclick_node = document.getElementById(aclickNodeId);
+    if (aclick_node !== null) {
+        aclick_node.setAttribute('data:full', JSON.stringify(obj));
+    }
 
     if (aclick_node !== null) {
         console.log('aclick_node clicked =' + aclickNodeId);
@@ -590,11 +654,9 @@ function  selectionDone(obj) {
         console.log('aclick_node   not exist for :' + aclickNodeId);
     }
 
-    if (afterClick === '') {
 
-    } else {
-        document.getElementById(afterClick).click();
-    }
+
+
 }
 
 
@@ -682,32 +744,42 @@ function entitySelect(obj, divname) {
     if (obj.apiUrl === undefined) {
         obj.apiUrl = module;
     }
-    $.ajax({
-        type: "GET",
-        url: "/clinicPlus/api/" + obj.apiUrl,
-        beforeSend: beforeSend_authorize,
-        success: function (result) {
-            aylinker({
-                urlOfTemplate: '/clinicPlus/module/entity_select/template_menu.html' + pageNewAy(1),
-                selector: divname + "_menu",
-                data: {
-                    'moduleName': module,
-                    'a': 2
+
+    if (true) {
+        $.ajax({
+            type: "GET",
+            url: "/clinicPlus/api/" + obj.apiUrl,
+            beforeSend: beforeSend_authorize,
+            success: function (result) {
+
+                if (module === 'dateExpiry') {
+                    document.getElementById(divname + "_menu").innerHTML = "";
+                } else {
+                    aylinker({
+                        urlOfTemplate: '/clinicPlus/module/entity_select/template_menu.html' + pageNewAy(1),
+                        selector: divname + "_menu",
+                        data: {
+                            'moduleName': module,
+                            'a': 2
+                        }
+                    });
+
                 }
-            });
-            aylinker({
-                urlOfTemplate: urlOfTemplate,
-                selector: divname + '_inner',
-                data: {
-                    obj: result,
-                    'moduleName': module
-                }
-            });
-            
-            document.getElementById(divname + "_paging").innerHTML = "";
-        }
-    });
-//    menu
+                aylinker({
+                    urlOfTemplate: urlOfTemplate,
+                    selector: divname + '_inner',
+                    data: {
+                        obj: result,
+                        'moduleName': module
+                    }
+                });
+
+                document.getElementById(divname + "_paging").innerHTML = "";
+            }
+        });
+    }
+
+  
 
 }
 
@@ -924,11 +996,11 @@ function  PrintUtils() {
         }
 
         window.print();
-        
-        window.iframe1.style.height="auto";
-        window.iframe1.style.height="-webkit-fill-available";
-        window.iframeNav.style.height="-webkit-fill-available"
-        
+
+        window.iframe1.style.height = "auto";
+        window.iframe1.style.height = "-webkit-fill-available";
+        window.iframeNav.style.height = "-webkit-fill-available"
+
         document.title = originalTitle;
 //        navbarDiv.style.display = 'block';
         printableAreaDiv.style = 'margin-left:0mm';
@@ -938,8 +1010,8 @@ function  PrintUtils() {
             dateDiv.style.display = 'block';
         }
     };
-    
-    
+
+
     this.printOPcard = function () {
 
         var divName = 'main_1';

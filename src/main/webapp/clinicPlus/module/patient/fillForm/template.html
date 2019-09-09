@@ -27,28 +27,29 @@
     </div>
 
     <div id="printableArea" style="margin-left: 0mm" 
+         class="w3-container_akr"
          title="patient_{{:id}}_{{:name}}">
         <!--basic-->
         <div id="Basic" class="w3-container w3-border city ">
-            <h2>Patient Profile: Basic
-            <div style="
-                 
-                 min-width: 185px; */
-                 position: relative;
-                 float: right;
-                 /* top: 77px; */
-                 /* right: 45px; */
-                 min-height: 200px;
-                 border: steelblue dashed 1px;
-                 text-align: center;
-                 "
+            <span>Patient Profile: Basic
+                <div style="
 
-                 >
-                <span style=""> 
-                    Photo Not <br>Available
-                </span>
-            </div>  
-</h2>
+                     min-width: 155px; */
+                     position: relative;
+                     float: right;
+                     /* top: 77px; */
+                     /* right: 45px; */
+                     min-height: 165px;
+                     border: steelblue dashed 1px;
+                     text-align: center;
+                     "
+
+                     >
+                    <span style=""> 
+                        Photo Not <br>Available
+                    </span>
+                </div>  
+            </span>
             ID : 
             <span class="label label-info "> {{:id}} </span> 
 
@@ -75,7 +76,10 @@
             <div class="inp_outer">
                 <div class="title1">sex</div>
 
-                <select name="sex" data-link="sex" style="background-color: transparent">
+                <select name="sex" data-link="sex"
+                       
+                        class='select_akr'
+                        >
                     <option value="M" title="Male" >M</option>
                     <option value="F" >F</option>
                     <option value="T" >T</option>
@@ -84,35 +88,6 @@
 
 
             </div>
-            <hr>
-
-            <div class="inp_outer"    tabindex="0"
-                 onclick="popup_selection_obj(
-                     {
-                     'value' :'{{:dateOfRegistration}}',
-                             'entity_select': 'dateForOrganisation',
-                             'input': 'dateOfRegistration'
-                     }
-                     )"
-
-                 >
-
-
-                <input type="hidden" id="dateOfRegistration" name="dateOfRegistration" data-link="dateOfRegistration" />
-                <div class="title1">dateOfRegistration</div>
-                <span id='dateOfRegistration_display' class="inp2">{{:dateOfRegistration}}</span>
-            </div>
-
-            <div class="inp_outer" style="min-width: 100px">
-                <div class="title1">bookId</div>
-                <span class="inp2" contenteditable="true" id="bookId"   data-link="bookId" >---</span>
-                <input type="hidden" name="bookId" data-link="bookId" />
-            </div>
-
-
-            <hr>
-
-
 
 
             <!--background-color: var(--color_l2);-->
@@ -153,6 +128,18 @@
             </div>
             <br>
 
+
+            <span
+                id="selectLarge_dateOfRegistration"
+                >
+                selectLarge_dateOfRegistration    
+            </span>
+
+            <div class="inp_outer" style="min-width: 100px">
+                <div class="title1">bookId</div>
+                <span class="inp2" contenteditable="true" id="bookId"   data-link="bookId" >---</span>
+                <input type="hidden" name="bookId" data-link="bookId" />
+            </div>
 
 
 

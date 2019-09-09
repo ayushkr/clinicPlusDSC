@@ -57,7 +57,11 @@
                     <span class="button_none" 
                           style="text-align: left;"
                           >
-                        {{if medicineStock}}{{:medicineStock.medicineBrandName.brandName}}{{/if}}
+                       
+                        {{if medicineStock.medicineBrandName}}
+                        {{:medicineStock.medicineBrandName.brandName}}
+                        {{/if}}
+                        
 
                     </span>
                 </ayu1>    
@@ -110,11 +114,14 @@
             {{else}}
 
             {{if idSpecial==1}}
-            <span style="position: fixed;bottom: 0px;"> 
+            <span style="position: fixed;bottom: 0px;
+                  background-color: steelblue;width: 100%"> 
                 Round Off Rs {{:amount}}</span>
             {{else}}
             <span>select Medicine</span>
             {{/if}}
+            
+            
             {{/if}}
         </div>
 

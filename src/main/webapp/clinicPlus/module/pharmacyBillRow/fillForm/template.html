@@ -1,54 +1,50 @@
 
 <div class="pageTitle">
-   pharmacyBillRow ID: {{:id}}  </div>
+    pharmacyBillRow ID: {{:id}}  </div>
 
 <form id='form_pharmacyBillRow' method="post"
-        action="{{:renderInDiv}}#/cmd/post">  
+      action="{{:renderInDiv}}#/cmd/post">  
     <input type='hidden' name='module_direct' value='pharmacyBillRow'>
     <input type='hidden' name='redirect' value=' #/cmdc?module=pharmacyBillRow&action=/all/list'>
     <input type="hidden" name="id" data-link="id" />
-   
+
 
 
     <div id="printableArea" style="margin-left: 0mm" title="patient_{{:id}}_{{:name}}">
 
-        <div class="inp_outer"   
-             style="min-width: 100px;"
-             onclick="popup_selection_obj(
-                        {
-                            'value': '{{if pharmacyBill}}{{:pharmacyBill.id}}{{else}}----{{/if}}',
-                            'entity_select': 'pharmacyBill',
-                            'input': 'pharmacyBill'
-                        }
-                )">
-            <input type="hidden" id="pharmacyBill" name="pharmacyBill" 
+        <center>
 
-                   value="{{if pharmacyBill}}{{:pharmacyBill.id}}{{else}}----{{/if}}" />
-            <div class="title1">pharmacyBill</div>
-            <span id='pharmacyBill_display' class="inp2">
-                {{if pharmacyBill}}{{:pharmacyBill.id}}{{else}}Not set{{/if}}</span>
-        </div>
+        <span id="selectLarge_pharmacyBill">
+            selectLarge_pharmacyBill
+        </span>
         <br>
-
         <span id="selectLarge_medicineStock"
-             style="min-width: 200px;"
-             >
-            selectLarge_medicineStock</span>
+              style="min-width: 200px;"
+              >
+            selectLarge_medicineStock
+        </span>
+        
+        <span id="medicineStock_afterClick"
+              onclick="pharmacyBillRow_calculateAmount(1)"
+              ></span>
+        
+        
         <br>
         <div class="inp_outer">
             <div class="title1">qty</div>
             <span 
                 style="min-width: 100px"
                 class="inp2" contenteditable="true"4 id="qty"   data-link="qty" 
-                  onkeydown="calculateAmount(1)" 
-                  >---</span>
-            <input type="hidden" name="qty" data-link="qty" onkeydown="calculateAmount(1)" />
+                onkeydown="pharmacyBillRow_calculateAmount(1)" 
+                >---</span>
+            <input type="hidden" name="qty" data-link="qty" 
+                   onkeydown="calculateAmount(1)" />
         </div>
 
 
         <br>
-        
-        
+
+
 
         <div class="inp_outer" 
              style="min-width: 100px;min-height: 50px"
@@ -66,6 +62,8 @@
                    name="amount" 
                    data-link="amount" />
         </div>
+        
+        </center>
 
 
     </div>

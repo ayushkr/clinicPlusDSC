@@ -4,7 +4,7 @@
         Report - Income from Consultation
         <hr>
     </center>
-
+    <div class='w3-padding'>
     <span style="font-weight: bold;float: left"
           onclick="popup_selection_obj(
                  {
@@ -16,8 +16,12 @@
           >
         Doctor:
         &nbsp;
+        {{if obj.doctorId==0}}
+        All
+        {{else}}
         {{if obj.appointmentEntitys[0] }}
         {{:obj.appointmentEntitys[0].doctor.name}}
+        {{/if}}
         {{/if}}
     </span>
 
@@ -30,7 +34,9 @@
     <span style="font-weight: bold;float: right" >
         Total Fee For Clinic : 
         &nbsp;
-        {{:obj.totalFeeForClinic}}</span>  <br>
+        {{:obj.totalFeeForClinic}}</span>  
+    </div>
+        <br>
     <br>
     <hr>
     <br>

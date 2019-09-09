@@ -1,0 +1,19 @@
+<div class="inp_outer"    tabindex="0"
+                 onclick="popup_selection_obj(
+                     {
+                     'value' :'{{:dateOfRegistration}}',
+                             'entity_select': 'dateForOrganisation',
+                             'input': 'dateOfRegistration'
+                     }
+                     )"
+
+                 >
+
+
+                <input type="hidden" id="dateOfRegistration" name="dateOfRegistration" data-link="dateOfRegistration" />
+                <div class="title1">dateOfRegistration</div>
+                <span id='dateOfRegistration_display' class="inp2">
+                 
+                  {{:~ddmmyyyyDashed(dateOfRegistration) }}
+                </span>
+            </div>

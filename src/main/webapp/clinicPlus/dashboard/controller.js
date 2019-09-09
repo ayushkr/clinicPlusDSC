@@ -56,12 +56,10 @@ function postFile(context, data) {
 }
 
 function dummy(context) {
-    console.log("dummy()-----------" + context.app.element_selector);
-    console.log('dummy() div==' + this.params['divName']);
+    console.log("dummy---context.app.element_selector=" + context.app.element_selector);
+    console.log('divName=' + this.params['divName']);
+
     ayu = context;
-
-//    var params_ = Object.getOwnPropertyNames(this.params);
-
     if (this.params['divName'] === undefined) {
         this.params['divName'] = 'main_1';
     }
@@ -81,6 +79,17 @@ function dummy(context) {
             } else
             if (context.params['function'] === "patientCard_show") {
                 patientCard_show(context.params['id']);
+            } else
+            if (context.params['function'] === "fileDirect") {
+                var pathUpdated = '/clinicPlus/' + context.params['path'] + pageNewAy(1);
+                document.getElementById('main_1_menu').innerHTML = "fileDirect";
+                document.getElementById('main_1_inner').innerHTML = "fileDirect";
+                document.getElementById('main_1_paging').innerHTML = "fileDirect";
+
+                console.log("fileDirect() , pathUpdated=" + pathUpdated);
+                console.log(" $.getScript(pathUpdated)=" + pathUpdated);
+                $.getScript(pathUpdated);
+//                    $.getScript('/clinicPlus/module/a.js'+ pageNewAy(1));
             } else {
                 console.log('Not impl fn()=' + context.params['function']);
             }
@@ -93,10 +102,11 @@ function dummy(context) {
 }
 var ayu;
 function cmd(context) {
-    console.log("cmd-----------" + context.app.element_selector);
-    console.log('div==' + this.params['div']);
+    console.log("cmd---context.app.element_selector=" + context.app.element_selector);
+    console.log('div=' + this.params['div']);
     ayu = context;
-
+//    
+//    loading('Loading','Please Wait....');
 
     var params_ = Object.getOwnPropertyNames(this.params);
 
@@ -172,9 +182,9 @@ function cmd_post(context, data) {
                     console.log('ok redirect to ' + path);
                     if (data.status === 'success') {
                         alert_1('Done :)', data.message, data.status);
-                     if(mainLayerNumberNow===1){
-                         window.history.back();
-                         }
+                        if (mainLayerNumberNow === 1) {
+                            window.history.back();
+                        }
 //                        window.location.href = path;
                     } else {
                         alert_1('Sorry :(', data.message, data.status);

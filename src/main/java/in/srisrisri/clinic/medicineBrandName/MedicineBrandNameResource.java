@@ -102,6 +102,8 @@ public class MedicineBrandNameResource {
         PageCover<MedicineBrandNameEntity> pageCover = new PageCover<>(page);
         pageCover.setSortColumn(sortColumn);
         pageCover.setSortOrder(sortOrder);
+        pageCover.setFilter(filter);
+        pageCover.setFilterColumn(filterColumn);
         pageCover.setModule(label);
         return pageCover;
     }

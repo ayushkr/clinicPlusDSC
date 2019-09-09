@@ -50,10 +50,13 @@ function updateCallerUIWithDate() {
     document.getElementById("modalDate").style = "display:none";
     console.log("updateCallerUIWithDate()  le input" + mn.module['select'].obj.input);
     var obj = {
-        who : mn.module['select'].obj.input,
+        who: mn.module['select'].obj.input,
         id: dateStrDashed,
         extra: dateStrDashed
+        
+
     };
+    hideMainLevel();
     selectionDone(obj);
 }
 
@@ -99,6 +102,15 @@ function getGivenDate() {
     return dateJSON;
 }
 function getDateDashed(dateJSON) {
+
+    console.log("getDateDashed() dateJSON= " + JSON.stringify(dateJSON));
+    var day_str = "0";
+    dateStrDashed = "" + dateJSON.year + "-" + twoDigitise(dateJSON.month) + "-" + twoDigitise(dateJSON.day);
+    console.log("getDateDashed() dateStr= " + day_str);
+    return dateStrDashed;
+}
+
+function getDateDashed_ddmmyyyy(dateJSON) {
 
     console.log("getDateDashed() dateJSON= " + JSON.stringify(dateJSON));
     var day_str = "0";

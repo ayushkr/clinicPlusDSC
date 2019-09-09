@@ -64,7 +64,7 @@ public class AppointmentResource {
 
     @GetMapping("doctor/{id}")
     @ResponseBody
-    public ReportIncomeFromDoctorsDTO all_ByDoctor(@PathVariable("id") int doctorId,
+    public ReportIncomeFromDoctorsDTO all_ByDoctor(@PathVariable("id") Long doctorId,
             @RequestParam("dateFrom") String dateFrom,
             @RequestParam("dateTo") String dateTo
     ) {
@@ -103,7 +103,7 @@ public class AppointmentResource {
         
 
         ReportIncomeFromDoctorsDTO reportIncomeFromDoctorsDTO = new ReportIncomeFromDoctorsDTO(list);
-
+reportIncomeFromDoctorsDTO.setDoctorId(doctorId);
         reportIncomeFromDoctorsDTO.calculateTotal();
 
         return reportIncomeFromDoctorsDTO;

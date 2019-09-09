@@ -11,18 +11,30 @@
 
     <div id="select_{{:id}}"
          
-         
-            onclick="selectThis(
+          onclick='selectThis(
                  {
-                 who:'{{:~root.moduleName}}',
+                 who:"{{:~root.moduleName}}",
                          id:{{:id}},
-                         extra:'{{:id}}'
+                          extra:{{:~jsonise(#data)}}
                  }
-                 )" 
-         
-         
-         class="select_5">
-        Bill_{{:id}} ___dated_  {{:dateOfBill}} 
+                 )' 
+    style="background-color: var(--color_l4);
+    width:fit-content;
+    margin: 10px;padding:10px"
+         >
+        
+        ID: {{:id}}
+        <br>dateOfBill:  {{:dateOfBill}}
+        <br> {{for appointment}}
+        <br>Doctor: {{:doctor.name}}
+        <br>Patient: {{:patient.name}}
+        {{else}}
+        ---no appointment--
+        {{/for}}
+        
+       
+        
+        
     </div>
 <d 
     class="data"

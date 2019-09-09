@@ -313,13 +313,19 @@ a{ text-decoration: none}
 }
 
 .dsc_blue{
-    background-color: var(--color_blue)!important;
+    background-color: var(--color_l3)!important;
 }
 
 .dsc_green{
     background-color: var(--color_green) !important;
 }
 
+.select_akr{
+    background-color: var(--color_l5p2);
+    border: none;
+    font-size: 1.1em;
+        padding: 3px;
+}
 
 
 .pageTitle{
@@ -328,9 +334,10 @@ a{ text-decoration: none}
 }
 
 .w3-bar-ay {
-    background-color:var(--color_l3);
-    /*padding: 5px;*/
-    /*margin: 10px;*/
+       background-color: var(--color_l2);
+    /* padding: 5px; */
+    /* margin: 10px; */
+    border-top: solid var(--color_l2);
 
 }
 
@@ -422,16 +429,17 @@ a{ text-decoration: none}
 }
 
 #modalDate{
-    display: none;
-    position: absolute;
+       /* display: none; */
+    /* position: absolute; */
     width: 100%;
     background-color: var(--color_l4);
     position: absolute;
     width: 100%;
-
     top: 0px;
     left: 0px;
+    border: red 1px solid;
     z-index: 15;
+    height: 0px;
 }
 
 
@@ -492,7 +500,7 @@ textArea{
 
 .tabSelected{
     display: inline-block;
-   background-color:var(--color_l4);
+   background-color:var(--color_l3p5);
     /* color: var(--color_l3); */
     padding: 1px 10px 1px 10px;
 

@@ -1,7 +1,7 @@
 // item{name:"url" ,selector:"commonArea" }
- console.log("jsrvHelperByAyush");
+console.log("jsrvHelperByAyush");
 var ayrender = function (item) {
-  //  console.log("ayrender item= " + JSON.stringify(item));
+    //  console.log("ayrender item= " + JSON.stringify(item));
     $.ajax(item.name,
             {
                 dataType: 'json', // type of response data
@@ -18,22 +18,25 @@ var ayrender = function (item) {
 
 
     var rend = function (tmplData) {
-        // console.log("got tmplData"+JSON.stringify(tmplData));
+//        console.log("got tmplData" + JSON.stringify(tmplData));
         // console.log("name=" + item.name);
-        // console.log("SELECTOR " + item.selector);
-        // console.log("data" + JSON.stringify(item.data));
+//        console.log("SELECTOR " + item.selector);
+//        console.log("data" + JSON.stringify(item.data));
         $.templates({tmpl: tmplData});
-        $(item.selector).html($.render.tmpl(item.data));
+        
+       var res= $.render.tmpl(item.data);
+       console.log("rendered res=" + res);
+        $(item.selector).html(res);
     };
 };
 
 var link_ay = function (templateBody, item) {
-    // console.log("templateBody---->  \n"+templateBody);
-    // console.log("item.data ---> \n " + JSON.stringify(item.data));
-    console.log("link_ay , item.selector --->  " + item.selector);
+//    console.log("link_ay,templateBody---->  \n" + templateBody);
+//    console.log("link_ay, item.data ---> \n " + JSON.stringify(item.data));
+//    console.log("link_ay , item.selector --->  " + item.selector);
 
     var templateObj = $.templates(templateBody);
-    //    console.log("templateObj=",templateObj);
+//    console.log("templateObj=",  JSON.stringify(templateObj));
     templateObj.link("#" + item.selector, item.data);
 //    console.log('link_ay finish');
     try {
@@ -47,7 +50,7 @@ var link_ay = function (templateBody, item) {
 var templateBodyG = "";
 
 var aylinker = function (item) {
- //   console.log("aylinker item= " + JSON.stringify(item));
+    //   console.log("aylinker item= " + JSON.stringify(item));
 
     $.ajax(item.urlOfTemplate,
             {
@@ -62,5 +65,29 @@ var aylinker = function (item) {
                         }
             }
     );
+
+};
+
+
+var ayRenderNoSelector = function (item) {
+var reso;
+   $.ajax(item.urlOfTemplate,
+            {
+
+                type: 'GET',
+                async: false,
+                success:
+                        function (templateBody, status) {
+                         //   console.log("item.urlOfTemplate ---> \n" + item.urlOfTemplate);
+                         //  console.log("templateBody ---> \n" + templateBody);
+                            $.templates({tmpl: templateBody});
+                           var result= $.render.tmpl(item.data);
+                         //    console.log("result="+result);
+                             reso=result;
+                        }
+            }
+    );
+    
+    return reso;
 
 };

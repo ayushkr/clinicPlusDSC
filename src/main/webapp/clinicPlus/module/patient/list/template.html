@@ -41,8 +41,11 @@
     </div>
     
      <a href="#/cmd?module={{:obj.module}}&action=/all/list&amp;pageNumber=1" 
-        class="w3-btn w3-blue-grey"> 
-        All </a>
+        title="No filter"
+        
+        > 
+         <i class="fa fa-filter">x</i> 
+     </a>
 
 </div>
 <br>
@@ -260,7 +263,11 @@
                     >{{:bookId}}</td>
                 <td
                     onclick="go({{:id}}, 'patient')"
-                    >{{:dateOfRegistration}}</td>
+                    >
+                     {{:~ddmmyyyyDashed(dateOfRegistration) }}
+                      
+                   
+                </td>
                 <td
                    onclick="go({{:id}}, 'patient')" 
                     >{{:age}}</td>

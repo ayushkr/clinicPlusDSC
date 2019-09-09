@@ -12,13 +12,13 @@
     <div id="select_{{:id}}"
          
          
-            onclick="selectThis(
+             onclick='selectThis(
                  {
-                 who:'{{:~root.moduleName}}',
+                 who:"{{:~root.moduleName}}",
                          id:{{:id}},
-                         extra:'{{:id}}'
+                          extra:{{:~jsonise(#data)}}
                  }
-                 )" 
+                 )'  
          
          
          class="select_5">

@@ -17,6 +17,7 @@
         <b>{{:appointment.patient.name}}</b>/
         {{:appointment.doctor.name}}
     </span>
+    <data value="{{:~jsonise()}}"></data>
     {{else}}
     <input  type="hidden" id="appointment" name="appointment" />
     <span id="appointment_display">     

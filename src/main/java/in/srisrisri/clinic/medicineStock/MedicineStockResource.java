@@ -132,6 +132,8 @@ public class MedicineStockResource {
         PageCover<MedicineStockEntity> medicineStockpageCover = new PageCover<>(page);
         medicineStockpageCover.setSortColumn(sortColumn);
         medicineStockpageCover.setSortOrder(sortOrder);
+          medicineStockpageCover.setFilter(filter);
+            medicineStockpageCover.setFilterColumn(filterColumn);
         medicineStockpageCover.setModule(label);
         return medicineStockpageCover;
     }

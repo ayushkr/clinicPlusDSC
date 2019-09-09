@@ -1,14 +1,9 @@
 //GUI injectors
 
+manifestGUISelectLarge('purchaseBill',apiDataGlobal.purchaseBill);
+manifestGUISelectLarge('expiryDate',apiDataGlobal.expiryDate)
 
 
-aylinker({
-            urlOfTemplate: "/clinicPlus/component/selectLarge/purchaseBill.html?ran=" + Math.random(),
-            selector: "selectLarge_purchaseBill",
-            data: {
-                purchaseBill:apiDataGlobal.purchaseBill
-            }
-        });
 
 
 

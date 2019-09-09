@@ -1,17 +1,16 @@
-//http://localhost:8080/clinicPlus/module/pharmacyBill/1.js?_=1556297803504
+//pharmacyBillRow.js
 
-
+manifestGUISelectLarge('pharmacyBill',apiDataGlobal.pharmacyBill);
 manifestGUISelectLarge('medicineStock',apiDataGlobal.medicineStock);
 
-function  selectionDone() {
-    console.log('selectionDone , name=' + mn.module['select'].name);
-    $('#' + mn.module['select'].name).val(mn.module['select'].id);
-    $('#' + mn.module['select'].name + '_display').html(mn.module['select'].extra);
+//function  selectionDone() {
+//    console.log('selectionDone , name=' + mn.module['select'].name);
+//    $('#' + mn.module['select'].name).val(mn.module['select'].id);
+//    $('#' + mn.module['select'].name + '_display').html(mn.module['select'].extra);
+//
+//}
 
-
-}
-
-function calculateAmount(j) {
+function pharmacyBillRow_calculateAmount(j) {
     var medicineStock;
     var medicineStock_id = document.getElementById('medicineStock').value;
     $.get("/clinicPlus/api/medicineStock/" + medicineStock_id, function (medicineStock) {

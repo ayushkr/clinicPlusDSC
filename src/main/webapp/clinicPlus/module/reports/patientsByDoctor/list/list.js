@@ -1,6 +1,7 @@
 
 //    /clinicPlus/module/reports/patientsByDoctor/menuTop.html
 document.getElementById("main_1_paging").innerHTML = '';
+document.getElementById("main_1_menu").innerHTML = '';
 
 
 aylinker({
@@ -108,7 +109,7 @@ function popul___() {
                 '&dateFrom=' + document.getElementById('dateFrom').value +
                 '&dateTo=' + document.getElementById('dateTo').value
         ,
-          beforeSend: beforeSend_authorize,
+        beforeSend: beforeSend_authorize,
         success: function (result) {
             result_ = result;
             aylinker({
@@ -120,7 +121,7 @@ function popul___() {
                 }
             });
         }
-    });
+    }
+    );
 
-
-            
+}

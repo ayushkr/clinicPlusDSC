@@ -1,0 +1,58 @@
+
+
+<html ng-app="phonecatApp">
+    <head>
+        <title>t</title>
+        <script src="/clinicPlus/angularjs/static/lib/1_7_x/angular.js"></script>
+        <script src="/clinicPlus/angularjs/static/app.js"></script>
+        <script src="/clinicPlus/angularjs/static/app.js"></script>
+        <script src="/clinicPlus/angularjs/static/phone_list_component.js"></script>
+
+    </head>
+    <body ng-controller="a">
+
+        <div >
+            <h3>Using component</h3>
+            <phone-list></phone-list>
+
+
+            Hello {{world}}
+
+            <div ng-controller="PhoneListController">
+                <ul>
+                    <li ng-repeat="phone in phones">
+                        <span>{{phone.name}}</span>
+                        <p>{{phone.snippet}}</p>
+                    </li>
+                </ul>
+
+                <p>Total number of phones: {{phones.length}}</p>
+
+                <p>phone 1 {{phones[1]}}</p>
+                <p>phone 5 {{phones[5]}}</p>
+            </div>
+
+            <div ng-controller="a">
+
+                <button ng-click="count = count + 1" ng-init="count = 0">
+
+                    Increment
+                </button>
+                <div ng-if="count==3">
+                    aaa
+                </div>
+                count: {{count}}
+
+            </div>
+
+            <h3>Table 1</h3>
+            <table>
+                <tr><th>Row number</th></tr>
+                <tr ng-repeat="i in [0, 1, 2, 3, 4, 5, 6, 7]">
+                    <td>{{i}}</td>
+                </tr>
+            </table>
+        </div>
+
+    </body>
+</html>

@@ -54,6 +54,8 @@ $.views.tags({
         }
         return ret;
     }
+
+
 });
 
 
@@ -88,7 +90,7 @@ $.views.helpers(
             ayLoad: ayLoad
             ,
             ddmmyyyyDashed: ddmmyyyyDashed,
-            ddyyyDashed: ddyyyyDashed,
+            ddyyyyDashed: ddyyyyDashed,
 
             utilities: {
                 maxCount: 23,
@@ -104,10 +106,24 @@ $.views.helpers(
                     alert('hai2');
                 }
 
-            }
+            },
+            sortByColumnUI: sortByColumnUI
 
         }
 );
+
+function sortByColumnUI(name, obj) {
+    var r = ayRenderNoSelector({
+        urlOfTemplate: '/clinicPlus/component/sortByColumnUI.html' + pageNewAy(1),
+        data: {name: name,
+            obj: obj
+        }
+    });
+//    console.log('r=' + r);
+    return r;
+}
+
+
 function ayLoad(url) {
     $.get(url, function (result) {
         console.log('ayLoad url=' + url);
@@ -167,16 +183,25 @@ function jsonise(o) {
 
 
 function ddmmyyyyDashed(yyyymmddValue) {
-    var parts = yyyymmddValue.split("-");
-    var ddmmyyyyValue = parts[2] + "-" + parts[1] + "-" + parts[0];
-    return ddmmyyyyValue;
+    if (yyyymmddValue !== null) {
+        var parts = yyyymmddValue.split("-");
+        var ddmmyyyyValue = parts[2] + "-" + parts[1] + "-" + parts[0];
+        return ddmmyyyyValue;
+    } else {
+        return 'undefined';
+    }
 
 }
 
 function ddyyyyDashed(yyyymmddValue) {
-    var parts = yyyymmddValue.split("-");
-    var ddmmyyyyValue = parts[1] + "-" + parts[0];
-    return ddmmyyyyValue;
+    if (yyyymmddValue !== null) {
+        var parts = yyyymmddValue.split("-");
+        var ddmmyyyyValue = parts[1] + "-" + parts[0];
+        return ddmmyyyyValue;
+    } else {
+        return 'undefined';
+    }
+
 
 }
 

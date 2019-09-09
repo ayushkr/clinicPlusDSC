@@ -30,14 +30,15 @@
         <div class="Row" id="select_{{:id}}"  >
             <div class="Cell"
 
-                 
-                 onclick="selectThis(
+                 onclick='selectThis(
                  {
-                 who:'{{:~root.moduleName}}',
+                 who:"{{:~root.moduleName}}",
                          id:{{:id}},
-                         extra:'{{if brandName}}{{:brandName}}{{else}}-No name-{{/if}}'
+                          extra:{{:~jsonise(#data)}}
                  }
-                 )"
+                 )' 
+                 
+                 
                  > 
 
                 <button   

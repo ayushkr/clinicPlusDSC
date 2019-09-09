@@ -45,20 +45,21 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
 
             <button class="entity_select_selectButton"
                    
-onclick="selectThis(
+ onclick='selectThis(
                  {
-                 who:'{{:~root.moduleName}}',
+                 who:"{{:~root.moduleName}}",
                          id:{{:id}},
-                         extra:'{{if medicineBrandName}}{{:medicineBrandName.brandName}}{{else}}-No name-{{/if}}'
+                          extra:{{:~jsonise(#data)}}
                  }
-                 )"
+                 )' 
+                 
+ 
                     >
                 {{if medicineBrandName}}
                 {{:medicineBrandName.brandName}}
                 {{/if}} 
 
             </button>
-
 
 
         </div>

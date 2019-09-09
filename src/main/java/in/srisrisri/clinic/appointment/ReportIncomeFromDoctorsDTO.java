@@ -13,9 +13,17 @@ import java.util.List;
  */
 public class ReportIncomeFromDoctorsDTO {
     List<AppointmentEntity> appointmentEntitys;
-
+Long doctorId;
     float totalConsultFee;
     float totalFeeForClinic;
+
+    public Long getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
+    }
 
     public ReportIncomeFromDoctorsDTO(List<AppointmentEntity> appointmentEntitys) {
         this.appointmentEntitys = appointmentEntitys;

@@ -30,15 +30,14 @@
     {{for obj}}
     <div class="Row" id="select_{{:id}}"  >
         <div class="Cell"
-             entity_select_editButton
-             onclick2="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:name}}')"  
-             onclick="selectThis(
+             
+              onclick='selectThis(
                  {
-                 who:'{{:~root.moduleName}}',
+                 who:"{{:~root.moduleName}}",
                          id:{{:id}},
-                         extra:'{{:name}}'
+                          extra:{{:~jsonise(#data)}}
                  }
-                 )"
+                 )' 
              > 
 
             <input type="button"  

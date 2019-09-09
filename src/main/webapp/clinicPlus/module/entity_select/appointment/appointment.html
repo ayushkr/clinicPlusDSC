@@ -29,10 +29,9 @@
 
 
         {{for obj}}
-        <d_json id="json_appointment_{{:id}}" style="display: none"> {{:~jsonise(#data)}}></d_json>
+        <d_json id="json_appointment_{{:id}}" style="display: none">
+            {{:~jsonise(#data)}}></d_json>
         <div class="Row" id="select_{{:id}}" >
-
-
 
             {{if patient || doctor}}  
 
@@ -40,11 +39,14 @@
                 <input 
                     type="button" 
                     class="entity_select_selectButton" 
-                    onclick="selectThis(
-                        { who: '{{:~root.moduleName}}',
-                                id:{{:id}},
-                                extra:'No {{:id}} / {{:dateOfAppointment}} / <b> {{:patient.name}}</b> / {{:doctor.name}}'})"
-
+                    
+                     onclick='selectThis(
+                 {
+                 who:"{{:~root.moduleName}}",
+                         id:{{:id}},
+                          extra:{{:~jsonise(#data)}}
+                 }
+                 )' 
                     value="{{:patient.name}}">
 
 

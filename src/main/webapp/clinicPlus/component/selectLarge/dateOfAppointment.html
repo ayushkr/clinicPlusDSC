@@ -1,0 +1,22 @@
+<div class="inp_outer" style="float: right" >
+   
+    <div class="inp1" 
+         onclick="popup_selection_obj(
+                                         {
+                                             'value': '{{:dateOfAppointment}}',
+                                             'entity_select': 'dateForOrganisation',
+                                             'input': 'dateOfAppointment'
+                                         }
+                                 )"
+         >
+        <div class="title1">Date of Appointment/consultation</div>
+
+        <span id='dateOfAppointment_display'
+              class="inp2" >
+            {{:~ddmmyyyyDashed(dateOfAppointment)}}</span>
+        <input id="dateOfAppointment"
+               name='dateOfAppointment'
+               type="hidden"
+               data-link="dateOfAppointment"> 
+    </div>
+</div>

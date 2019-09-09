@@ -1,20 +1,62 @@
- <div class="inp_outer"   onclick="popup_selection_obj(
-                        {
-                            'value': '',
-                            'entity_select': 'medicineStock',
-                            'input': 'medicineStock'
-                        }
-                )">
-            <input type="hidden" 
-                   id="medicineStock" 
-                   name="medicineStock" 
-                   data-link="medicineStock.id"
-                    />
-            <div class="title1">medicineStock</div>
-            <span id='medicineStock_display'
-                  class="inp2"
-                  style="min-height: 25px;"
-                  data-link="medicineStock.medicineBrandName.brandName"
-                  >
-                </span>
-        </div>
+<div class="inp_outer"   onclick="popup_selection_obj(
+                {
+                    'value': '',
+                    'entity_select': 'medicineStock',
+                    'input': 'medicineStock'
+                }
+        )">
+    <input type="hidden" 
+           id="medicineStock" 
+           name="medicineStock" 
+           data-link="medicineStock.id"
+           />
+    <div class="title1">medicineStock</div>
+    <span id='medicineStock_display'
+          class="inp2"
+          style="min-height: 25px;float:none"
+         
+          data-link="medicineStock.medicineBrandName.brandName"
+          _onmouseover="$('#medicineStock_display2').css('display','unset')"
+
+          _onmouseout="$('#medicineStock_display2').css('display','none')"
+          >
+    </span>
+
+    <span style="float: right;position: relative;left: 30px;
+          font-style: italic
+          " 
+          id="medicineStock_display2">
+
+        {{if medicineStock}}
+        ID: <span data-link="medicineStock.id" style="font-weight: bold">
+
+        </span> <br>
+
+        expiryDate:   
+        <span data-link="medicineStock.expiryDate" style="font-weight: bold">
+        </span> <br>
+
+        sellingPrice:   
+        <span data-link="medicineStock.sellingPrice" style="font-weight: bold">
+        </span> <br>
+
+
+        {{for medicineStock.medicineBrandName}}
+       
+
+        company:
+        <span data-link="company" style="font-weight: bold">
+        </span> <br>
+
+        composition:
+        <span data-link="composition" style="font-weight: bold">
+        </span> <br>
+
+        {{/for}}
+        
+        {{else}}
+        Null
+
+        {{/if}}
+    </span>
+</div>

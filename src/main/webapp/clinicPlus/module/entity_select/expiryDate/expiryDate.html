@@ -1,0 +1,49 @@
+
+
+<div class="w3-container">
+    <center>
+        Date expiry
+  <br>
+        <br>
+        Year
+        <input type="text" value="2020" id="year" style="width: 70px"
+               onkeyup="inputChangedByUser()">
+        <br>
+        <br>
+        Month
+        <SELECT id="combo_month" onchange="inputChangedByUser()">
+            <option value="1" selected>01 Jan</option>
+            <option value="2">02 Feb</option>
+            <option value="3">03 March</option>
+            <option value="4">04 April</option>
+            <option value="5">05 May</option>
+            <option value="6">06 June</option>
+            <option value="7">07 July</option>
+            <option value="8">08 Aug</option>
+            <option value="9">09 Sep</option>
+            <option value="10">10 Oct</option>
+            <option value="11">11 Nov</option> 
+            <option value="12">12 Dec</option>
+        </SELECT>
+
+        <br>
+          <br>
+          
+          <button class="w3-btn w3-theme-l1"
+                onclick="hideDateModal()">
+
+            Cancel
+        </button>
+              <span style="min-width: 3cm;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            
+            
+            <input type="button" class="w3-btn w3-theme-l1" 
+                   value="OK"
+                   onclick="updateCallerUIWithDate()"
+                   > 
+          
+          
+       
+    </center>
+</div>
+{{:~ayLoad('/clinicPlus/module/entity_select/expiryDate/expiryDate.js')}}

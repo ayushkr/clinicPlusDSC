@@ -28,15 +28,13 @@
         <div class="Row" id="select_{{:id}}"  >
             <div class="CellNoBorder"
                  onclick2="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:name}}<br>Fees({{:feesList}})')"  
-                 onclick="selectThis(
+                 onclick='selectThis(
                      {
-                     who:'{{:~root.moduleName}}',
+                     who:"{{:~root.moduleName}}",
                              id:{{:id}},
-                             extra:{'name': '{{:name}}',
-                                     'feesList':'{{:feesList}}',
-                                     'feeForClinic':'{{:feeForClinic}}' }
+                             extra:{{:~jsonise(#data)}}
                      }
-                     )"  
+                     )' 
 
                  > 
                 <img class="img_round" src="/uploads/doctor/{{:id}}_profileImage.jpeg?time=" alt="doctor/1" width="70px"> 

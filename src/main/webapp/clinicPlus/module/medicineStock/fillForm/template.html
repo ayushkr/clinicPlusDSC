@@ -6,13 +6,13 @@
     <input type='hidden' name='module_direct' value='medicineStock'>
     <input type='hidden' name='redirect' value=' #/cmdc?module=medicineStock&action=/all/list'>
 
-   
+
     <div id="printableArea"   
          title="MedicineStock_{{:id}}_{{if medicineBrandName}}{{:medicineBrandName.brandName}}{{/if}}" >
- medicineStock 
-         <input type="hidden" name="id" data-link="id" />
+        medicineStock 
+        <input type="hidden" name="id" data-link="id" />
         id <span class="" data-link="id" >---</span> 
-       
+
         <div style="float: right">qtyRemaining={{:qtyRemaining}}</div>
 
         <div id="selectLarge_purchaseBill" style="display: inline-block"></div>
@@ -50,38 +50,13 @@
 
 
 
-
-            <div class="inp_outer">
-
-                <div class="title1">expiryDate (MM/yyyy)</div>
-
-                <input  
-                    type="hidden"
-                    id="expiryDate"
-                    name="expiryDate" 
-                    value= "{{if expiryDate}}{{:expiryDate}}{{/if}}" 
-
-                    />
-
-
-
-                <div style='border: 1px;' 
-                     onclick="popup_selection_obj(
-                                     {
-                                         'value': '{{:expiryDate}}',
-                                         'entity_select': 'dateForOrganisation',
-                                         'input': 'expiryDate'
-                                     })"
-                     >
-                    <span id="expiryDate_display" class="inp2" >     
-                        {{if expiryDate}}
-                        {{:expiryDate}}
-                        {{else}}
-                        ----
-                        {{/if}}
-                    </span>
-                </div>       
-            </div>
+            <span
+                id="selectLarge_expiryDate"
+                >
+                 selectLarge_expiryDate   
+                
+            </span>
+           
 
 
 

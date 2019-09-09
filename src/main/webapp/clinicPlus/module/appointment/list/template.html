@@ -2,12 +2,14 @@
 
 
 <div 
-     data-akr-printable="false"
-     >
+    data-akr-printable="false"
+    >
     <div class="w3-bar-ay"  >
 
         <a class="w3-bar-item  tablink tabSelected" 
-           onClick="openCity(event, 'filter')">Filter</a>
+           onClick="openCity(event, 'filter')">
+            <i class="fa fa-filter"></i>
+            Filter</a>
 
 
         <a class="w3-bar-item tablink " 
@@ -16,60 +18,58 @@
     </div>
 
     <div id="filter" class="w3-container_akr city ">
+ 
+        
+        
+        
+        <span id='selectLarge_patient'>
+            selectLarge_patient</span>
+         
 
-        <div class="inp_outer" style="min-width: 200px">
-
-            <div class="inp1" 
-                 onclick="popup_selection_obj(
-                     {
-                     'entity_select': 'patient',
-                             'input': 'patient'
-                     }
-                     )"
-                 >
-
-                <div class="title1">
-                    <i class="fa fa-filter"></i>
-                    Patient Name </div>
-                <span id='patient_display' 
-                      class="inp2 " >
-                    Select
-                </span>
-
-            </div>
-            or enter ID   <input id="patient" name='patient' type="text"  value="" 
-                                 style="height: 50px;height: 25px;width: 89px;"> 
-            <input type="button" value="Go "
-                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=patient&filter=' + document.getElementById('patient').value + ''"
+        <input type="button" 
+               style="display: none"
+               id='patient_afterClick'
+               
+               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=patient&filter=' + document.getElementById('patient').value + ''"
+               >
+        
+         <span id='selectLarge_doctor'>
+            selectLarge_doctor</span>
+        
+        
+        <input 
+             id='doctor_afterClick'
+            type="button" value="Go "
+               style="display: none"
+                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=doctor&filter=' + document.getElementById('doctor').value + ''"
                    >
-        </div>
-
-        <div class="inp_outer" style="min-width: 200px">
-
-            <div class="inp1" 
-                 onclick="popup_selection_obj(
-                     {
-                     'entity_select': 'doctor',
-                             'input': 'doctor'
-                     }
-                     )"
-                 >
-
-                <div class="title1">
-                    <i class="fa fa-filter"></i>
-                    doctor Name </div>
-                <span id='doctor_display' class="inp2">
-                    Select
-                </span>
-
-            </div>
-            or enter ID   <input id="doctor" name='doctor' type="text"  value="" 
-                                 style="height: 50px;height: 25px;width: 89px;"> 
-            <input type="button" value="Go "
-                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=doctor&filter=' + document.getElementById('doctor').value + ''"
-                   >
-        </div>
-
+        <span 
+             id='doctor_afterClick'
+             title="No filter "
+             
+                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=undefined&filter=undefined'"
+            >
+            
+            
+            <i class="fa fa-filter">x</i>           
+            
+        </span>
+       
+ <br>
+       Filter:  
+       <span data-link="obj.filterColumn" style="font-weight: bold"></span>
+      
+       
+       {{if obj.filterColumn=='doctor'}}  
+       <!--{{obj.pageList.content[0].doctor.name }}--> 
+       
+       {{else}}
+       
+       {{/if}}
+       ID: 
+       <span data-link="obj.filter" style="font-weight: bold"></span>
+      
+        
     </div>
 
     <div id="bulk" class="w3-container_akr city city_hide">
@@ -81,7 +81,7 @@
 
     </div>  
 
-<hr>
+    <hr>
 
 </div>
 
@@ -96,6 +96,8 @@
 
     <div id="printableArea"   title="Appointment_List" >
         List of Appointments in DSC
+        
+       
         <table  class="table_greyBorder" 
                 cellspacing="0" cellpadding="5" border="1"  >
 
@@ -103,145 +105,40 @@
             <thead style="    font-size: 10px;">
                 <tr class="bluestrp">
                     <th></th>
+                    <th>SLNo</th>
                     <th>id
-                        <br>
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
-                           >
-                            <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-up headerSortSymbol "></i>
-                            </span>
-                        </a>
-
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
-                           >
-                            <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-down headerSortSymbol"></i>
-                            </span>
-                        </a>
-
-
+                        {{:~sortByColumnUI('id',obj)}}
                     </th>
-                    <th>book Id
-                        <br>
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=bookId&sortOrder=a"
-                           >
-                            <span class=" {{if obj.sortColumn=='bookId'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-up headerSortSymbol "></i>
-                            </span>
-                        </a>
-
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=bookId&sortOrder=d"
-                           >
-                            <span class=" {{if obj.sortColumn=='bookId'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-down headerSortSymbol"></i>
-                            </span>
-                        </a>
-
-
+                    <th>
+                        book Id
+                        {{:~sortByColumnUI('bookId',obj)}}
                     </th>
                     <th style="min-width: 150px">
                         Doctor
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=doctor&sortOrder=a"
-                           >
-                            <span class=" {{if obj.sortColumn=='doctor'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-up headerSortSymbol "></i>
-                            </span>
-                        </a>
-
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=doctor&sortOrder=d"
-                           >
-                            <span class=" {{if obj.sortColumn=='doctor'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-down headerSortSymbol"></i>
-                            </span>
-                        </a>
-
-
-
-
+                        {{:~sortByColumnUI('doctor',obj)}}
                     </th>
                     <th style="min-width: 150px" >
                         Patient
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=patient&sortOrder=a"
-                           >
-                            <span class=" {{if obj.sortColumn=='patient'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-up headerSortSymbol "></i>
-                            </span>
-                        </a>
-
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=patient&sortOrder=d"
-                           >
-                            <span class=" {{if obj.sortColumn=='patient'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-down headerSortSymbol"></i>
-                            </span>
-                        </a>
-
-
+                        {{:~sortByColumnUI('patient',obj)}}
                     </th>
                     <th style="min-width: 92px">
                         date Of Appt
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfAppointment&sortOrder=a"
-                           >
-                            <span class=" {{if obj.sortColumn=='dateOfAppointment'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-up headerSortSymbol "></i>
-                            </span>
-                        </a>
 
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfAppointment&sortOrder=d"
-                           >
-                            <span class=" {{if obj.sortColumn=='dateOfAppointment'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-down headerSortSymbol"></i>
-                            </span>
-                        </a>
-
+                        {{:~sortByColumnUI('dateOfAppointment',obj)}}
                     </th>
                     <th>status
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointmentStatusEntity&sortOrder=a"
-                           >
-                            <span class=" {{if obj.sortColumn=='appointmentStatusEntity'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-up headerSortSymbol "></i>
-                            </span>
-                        </a>
 
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointmentStatusEntity&sortOrder=d"
-                           >
-                            <span class=" {{if obj.sortColumn=='appointmentStatusEntity'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-down headerSortSymbol"></i>
-                            </span>
-                        </a>
-
+                        {{:~sortByColumnUI('appointmentStatusEntity',obj)}}
 
                     </th>
+
                     <th>type
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointmentTypeEntity&sortOrder=a"
-                           >
-                            <span class=" {{if obj.sortColumn=='appointmentTypeEntity'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-up headerSortSymbol "></i>
-                            </span>
-                        </a>
 
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointmentTypeEntity&sortOrder=d"
-                           >
-                            <span class=" {{if obj.sortColumn=='appointmentTypeEntity'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-down headerSortSymbol"></i>
-                            </span>
-                        </a>
-
+                        {{:~sortByColumnUI('appointmentTypeEntity',obj)}}
                     </th>
                     <th>consult Fee
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=consultFee&sortOrder=a"
-                           >
-                            <span class=" {{if obj.sortColumn=='consultFee'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-up headerSortSymbol "></i>
-                            </span>
-                        </a>
 
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=consultFee&sortOrder=d"
-                           >
-                            <span class=" {{if obj.sortColumn=='consultFee'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-down headerSortSymbol"></i>
-                            </span>
-                        </a>
-
+                        {{:~sortByColumnUI('consultFee',obj)}}
                     </th>
                     <th>reg fee
                         <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=feeForClinic&sortOrder=a"
@@ -302,6 +199,7 @@
                                name="n"  value="{{:id}}">
                         <label for="checkbox_{{:id}}"></label>
                     </td>
+                     <td>{{:#index+1}}</td>
                     <td>{{:id}}</td>
                     <td
                         onclick="go({{:id}}, 'appointment')"
@@ -339,7 +237,10 @@
                     </td>
                     <td
                         onclick="go({{:id}}, 'appointment')"
-                        >{{:dateOfAppointment}}</td>
+                        >
+                        {{:~ddmmyyyyDashed(dateOfAppointment) }}
+                      
+                    </td>
                     <td 
                         onclick="go({{:id}}, 'appointment')"
                         >

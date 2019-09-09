@@ -4,26 +4,39 @@
 manifestGUISelectLarge('appointment', apiDataGlobal.appointment);
 manifestGUISelectLarge('dateOfBill', apiDataGlobal.dateOfBill);
 
+function dateOfBill_afterClick(id) {
+     console.log('dateOfBill_afterClick....');
+    var str_dataFull = document.getElementById('dateOfBill_afterClick').
+            getAttribute('data:full');
+    console.log('str' + str_dataFull);
+    var obj_dataFull = JSON.parse(str_dataFull);
 
+    document.getElementById('pharmacyBill_dateOfBill').innerHTML =
+            obj_dataFull.extra;
+}
 function appointment_afterClick(id) {
-// var pro=Promise.resolve(save('pharmacyBill',id));
-//   pro.then(id=>{
-//       
-//        
-//    
-//    });
-    save('pharmacyBill', id);
-//     setTimeout(go(id, 'pharmacyBill'),1000);
+//    save('pharmacyBill', id);
 
-    setTimeout(
-            () => {
-window.location.href='#/dummy?function=populateCreate2&module=pharmacyBill&id='+id+'&divName=main_1&paramsExtra=undefined&a='+Math.random();
-//        Promise.resolve(window.history.back()).then(window.history.forward());
-//        window.history.back();
-//        setTimeout(window.history.forward(), 2000);
+//    setTimeout(
+//            () => {
+//        window.location.href = '#/dummy?function=populateCreate2&module=pharmacyBill&id=' + id + '&divName=main_1&paramsExtra=undefined&a=' + Math.random();
 //
-    }, 100);
+//    }, 100);
+    console.log('appointment_afterClick....');
+    var str_dataFull = document.getElementById('appointment_afterClick').
+            getAttribute('data:full');
+    console.log('str' + str_dataFull);
+    var obj_dataFull = JSON.parse(str_dataFull);
 
+    document.getElementById('pharmacyBill_doctor').innerHTML =
+            obj_dataFull.extra.doctor.name;
+    document.getElementById('pharmacyBill_patient').innerHTML =
+            obj_dataFull.extra.patient.name;
+
+//  $.observable($.view(this).data).
+//            setProperty("appointment.patient.name", "pat");
+//    $.observable($.view(this).data).
+//            setProperty("appointment.doctor.name", "doc");
 
 }
 

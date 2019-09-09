@@ -1,3 +1,12 @@
+
+manifestGUISelectLarge
+('dateOfAppointment',apiDataGlobal.dateOfAppointment);
+
+manifestGUISelectLarge
+('patient',apiDataGlobal.patient);
+manifestGUISelectLarge
+('doctor',apiDataGlobal.doctor);
+
 manifestGUISelectLarge
 ('appointmentTypeEntity',apiDataGlobal.appointmentTypeEntity);
 manifestGUISelectLarge
@@ -6,8 +15,8 @@ var appi;
 function appointmentTypeEntity_afterClick_fn(){
     
     
-    appi=$.view(this);
-    var vvv=$.observable($.view(this).data);
+//    appi=$.view(this);
+//    var vvv=$.observable($.view(this).data);
             
 //            vvv.setProperty("feeForClinic",2);
     

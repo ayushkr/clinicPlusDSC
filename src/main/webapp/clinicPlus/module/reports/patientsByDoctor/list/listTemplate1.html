@@ -1,21 +1,21 @@
-<div id="wid" data-akr-printable="false">
+<div id="wid" data-akr-printable="false" class="">
     <!--doctor-->
-    <div class="inp_outer" style="min-width: 0px;"
+    <div class="inp_outer" style="min-width: 0px; display: none"
          >
         <input id="doctor" name='doctor' type="hidden" 
                data-link="doctor.id" value="0"
                > 
         <div class="inp1"  
              onclick="popup_selection_obj(
-                 {
-                 'entity_select': 'doctor',
-                         'input': 'doctor',
-                         'afterClick': 'reportPatientsByDoctor_Calculate'
-                 }
-                 )"
+                             {
+                                 'entity_select': 'doctor',
+                                 'input': 'doctor',
+                                 'afterClick': 'reportPatientsByDoctor_Calculate'
+                             }
+                     )"
              >
             <div class="title1"
-                
+
                  > Select <br>Doctor </div>
 
             <span id="doctor_display" class="inp2"
@@ -27,8 +27,9 @@
 
         </div>
     </div>
+    <br>
 
-    <div id="dateGr" style="    display: inline-block;">
+    <div id="dateGr" >
 
         <div class="w3-bar-ay"  >
 
@@ -39,18 +40,18 @@
                onClick="openCity(event, 'group')">Date Group</a>
         </div>
 
-        <div id="range" class=" w3-border city ">
+        <div id="range" class=" w3-border city w3-container_akr">
 
             <div class="inp_outer" >
                 <div class="inp1" 
                      onclick="popup_selection_obj(
-                         {
-                         'value': dateDecide('dateFrom'),
-                                 'entity_select': 'dateForOrganisation',
-                                 'input': 'dateFrom',
-                                 'afterClick': 'reportPatientsByDoctor_Calculate'
-                         }
-                         )"
+                                     {
+                                         'value': dateDecide('dateFrom'),
+                                         'entity_select': 'dateForOrganisation',
+                                         'input': 'dateFrom',
+                                         'afterClick': 'reportPatientsByDoctor_Calculate'
+                                     }
+                             )"
                      >
                     <div class="title1">Date From</div>
 
@@ -62,13 +63,13 @@
             <div class="inp_outer" >
                 <div class="inp1" 
                      onclick="popup_selection_obj(
-                         {
-                         'value': dateDecide('dateTo'),
-                                 'entity_select': 'dateForOrganisation',
-                                 'input': 'dateTo',
-                                 'afterClick': 'reportPatientsByDoctor_Calculate'
-                         }
-                         )"
+                                     {
+                                         'value': dateDecide('dateTo'),
+                                         'entity_select': 'dateForOrganisation',
+                                         'input': 'dateTo',
+                                         'afterClick': 'reportPatientsByDoctor_Calculate'
+                                     }
+                             )"
                      >
                     <div class="title1">Date To</div>
 
@@ -80,7 +81,7 @@
             </div>
         </div>
 
-        <div id="group" class=" w3-border city city_hide" >
+        <div id="group" class=" w3-border city city_hide w3-container_akr" >
 
             <button class="w3-btn2 dsc_blue"
                     onclick="dateGroup('db_yesterday')"
@@ -110,14 +111,15 @@
     </div>
 
 
-    <div id="widgets"  data-akr-printable="false" style="display: inline-block">
-        <input type="button" id="reportPatientsByDoctor_Calculate" 
-               value="Calculate" onclick="popul___()"  
-               class="w3-button w3-green"> 
+    <div   >
+        <center>
+            <input type="button" id="reportPatientsByDoctor_Calculate" 
+                   value="Calculate" onclick="popul___()"  
+                   class="w3-button w3-green"> 
 
-        <a onclick="printDiv_navOff('navbar')" data-toggle="tooltip" title="Print this page" class="w3-btn w3-blue"> <i class="fa fa-print"> </i>
-        </a>
-
+            <a onclick="printDiv_navOff('navbar')" data-toggle="tooltip" title="Print this page" class="w3-btn w3-blue"> <i class="fa fa-print"> </i>
+            </a>
+        </center>
     </div>
 
 

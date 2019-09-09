@@ -7,13 +7,13 @@ Filter By Name <input  type="text" onkeyup="filter('name')"  ><br>
 <div id="select_{{:id}}" 
      
      
-         onclick="selectThis(
+         onclick='selectThis(
                  {
-                 who:'{{:~root.moduleName}}',
+                 who:"{{:~root.moduleName}}",
                          id:{{:id}},
-                         extra:'{{:name}}'
+                          extra:{{:~jsonise(#data)}}
                  }
-                 )" 
+                 )' 
      class="select_5"> 
     
     {{:id}}. &nbsp;&nbsp; {{:name}}

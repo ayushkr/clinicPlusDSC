@@ -64,13 +64,13 @@
         <div class="Cell" >{{:id}}</div>
         <div class="Cell" >
            <input type="button" class="entity_select_selectButton" 
-                   onclick="selectThis(
+                   onclick='selectThis(
                  {
-                 who:'{{:~root.moduleName}}',
+                 who:"{{:~root.moduleName}}",
                          id:{{:id}},
-                         extra:'{{:name}}'
+                         extra:{{:~jsonise(#data)}}
                  }
-                 )" 
+                 )'
                   
                    
                    value="{{:name}}"> 

@@ -1,0 +1,17 @@
+  <div class="inp_outer"   onclick="popup_selection_obj(
+                        {
+                            'value': '{{:dateOfJoining}}',
+                            'entity_select': 'dateForOrganisation',
+                            'input': 'dateOfJoining'
+                        }
+                )">
+            <input type="hidden" id="dateOfJoining" name="dateOfJoining" 
+
+                   value="{{if dateOfJoining}}{{:dateOfJoining}}{{else}}2019-10-10{{/if}}" />
+            <div class="title1">dateOfJoining</div>
+            <span id='dateOfJoining_display' class="inp2">
+                {{if dateOfJoining}}
+                {{:~ddmmyyyyDashed(dateOfJoining) }}
+              
+                {{else}}Not set{{/if}}</span>
+        </div>

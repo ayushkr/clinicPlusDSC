@@ -4,14 +4,14 @@
     {{if obj.pageable.pageNumber>0}}
     <a class="pageNumberButton" style="position: absolute;right: 3cm;" 
 
-       href="#/cmd?module={{:~root.obj.moduleName}}&pageNumber={{:obj.pageable.pageNumber+0}}&sortOrder={{:obj.sortOrder}}&sortColumn={{:obj.sortColumn}}">
+       href="#/cmd?module={{:~root.obj.moduleName}}&pageNumber={{:obj.pageable.pageNumber+0}}&filter={{:~root.obj.filter}}&filterColumn={{:~root.obj.filterColumn}}&sortOrder={{:obj.sortOrder}}&sortColumn={{:obj.sortColumn}}">
         << Prev</a>
     {{else}}
 
     {{/if}}
     {{if obj.pageable.pageNumber< obj.totalPages-1}}
     <a class="pageNumberButton" style="position: absolute;right: 1cm;" 
-       href="#/cmd?module={{:~root.obj.moduleName}}&pageNumber={{:obj.pageable.pageNumber+2}}&sortOrder={{:obj.sortOrder}}&sortColumn={{:obj.sortColumn}}">
+       href="#/cmd?module={{:~root.obj.moduleName}}&pageNumber={{:obj.pageable.pageNumber+2}}&filter={{:~root.obj.filter}}&filterColumn={{:~root.obj.filterColumn}}&sortOrder={{:obj.sortOrder}}&sortColumn={{:obj.sortColumn}}">
         Next >></a>
     {{/if}}
     <br>
@@ -25,7 +25,7 @@
         {{else}}
         class="pageNumberButton"
         {{/if}}
-        href="#/cmd?module={{:~root.obj.moduleName}}&pageNumber={{:~page}}&sortOrder={{:~root.obj.sortOrder}}&sortColumn={{:~root.obj.sortColumn}}"> {{if ~page==0}}All {{else}} {{:~page}}{{/if}} </a>
+        href="#/cmd?module={{:~root.obj.moduleName}}&pageNumber={{:~page}}&filter={{:~root.obj.filter}}&filterColumn={{:~root.obj.filterColumn}}&sortOrder={{:~root.obj.sortOrder}}&sortColumn={{:~root.obj.sortColumn}}"> {{if ~page==0}}All {{else}} {{:~page}}{{/if}} </a>
     {{/for}}
     </div>
         </center>

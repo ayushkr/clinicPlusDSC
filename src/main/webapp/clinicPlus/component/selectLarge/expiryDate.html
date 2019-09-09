@@ -1,0 +1,32 @@
+ <div class="inp_outer">
+
+                <div class="title1">expiryDate (MM/yyyy)</div>
+
+                <input  
+                    type="hidden"
+                    id="expiryDate"
+                    name="expiryDate" 
+                    value= "{{if expiryDate}}{{:expiryDate}}{{/if}}" 
+
+                    />
+
+
+
+                <div style='border: 1px;' 
+                     onclick="popup_selection_obj(
+                                     {
+                                         'value': '{{:expiryDate}}',
+                                         'entity_select': 'expiryDate',
+                                         'input': 'expiryDate'
+                                     })"
+                     >
+                    <span id="expiryDate_display" class="inp2" >     
+                        {{if expiryDate}}
+                        {{:~ddyyyyDashed(expiryDate) }}
+
+                        {{else}}
+                        ----
+                        {{/if}}
+                    </span>
+                </div>       
+            </div>
