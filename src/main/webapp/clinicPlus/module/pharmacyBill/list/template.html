@@ -1,18 +1,19 @@
 <div 
     data-akr-printable="false"
     >
+ 
     <div class="inp_outer" style="min-width: 200px">
         <div class="inp1" >
             <div class="title1">Appointment ID </div>
         </div>
-        
+
         <!--2onkeyup="document.getElementById('afterClick_appointment').click()"-->
         <input id="appointment" 
                name='appointment' type="text"  value="" 
                style="height: 50px;height: 25px;width: 89px;"
-               
+
                data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=appointment&filter="
-                onkeyup="filter1()"
+               onkeyup="filter1()"
                > 
 
     </div>
@@ -23,13 +24,13 @@
         </div>
         <input id="patientName" 
                onkeyup="filter1()"
-                
+
                type="text"  
                value=""
                accesskey="q"
                data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=patientName&filter="
                > 
-        
+
     </div>
 
 
@@ -180,13 +181,14 @@
 
 
         {{for obj.pageList.content}}
+        {{if id!=0}}
         <div class="Row" 
              onclick="go({{:id}}, 'pharmacyBill')"
              class="firstrow">
             <div class="Cell" 
                  style="height: 30px"
                  >
-                {{:id}}
+                {{:id}} 
             </div>
             <div class="Cell"  style="font-size: 0.8em">
                 {{:dateOfBill}}
@@ -224,7 +226,7 @@
 
 
         </div>  
-
+        {{/if}}
         {{else}}
         No members...
         {{/for}}

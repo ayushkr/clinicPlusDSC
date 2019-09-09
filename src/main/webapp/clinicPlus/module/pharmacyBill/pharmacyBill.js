@@ -27,11 +27,12 @@ function appointment_afterClick(id) {
             getAttribute('data:full');
     console.log('str' + str_dataFull);
     var obj_dataFull = JSON.parse(str_dataFull);
-
+if(obj_dataFull!==null){
     document.getElementById('pharmacyBill_doctor').innerHTML =
             obj_dataFull.extra.doctor.name;
     document.getElementById('pharmacyBill_patient').innerHTML =
             obj_dataFull.extra.patient.name;
+}
 
 //  $.observable($.view(this).data).
 //            setProperty("appointment.patient.name", "pat");
