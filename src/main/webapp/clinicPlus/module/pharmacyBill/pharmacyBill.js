@@ -15,13 +15,14 @@ function dateOfBill_afterClick(id) {
             obj_dataFull.extra;
 }
 function appointment_afterClick(id) {
-//    save('pharmacyBill', id);
+    save('pharmacyBill', id);
 
-//    setTimeout(
-//            () => {
-//        window.location.href = '#/dummy?function=populateCreate2&module=pharmacyBill&id=' + id + '&divName=main_1&paramsExtra=undefined&a=' + Math.random();
-//
-//    }, 100);
+    setTimeout(
+            () => {
+        window.location.href = '#/dummy?function=populateCreate2&module=pharmacyBill&id=' + id + '&divName=main_1&paramsExtra=undefined&a=' + Math.random();
+
+    }, 100);
+
     console.log('appointment_afterClick....');
     var str_dataFull = document.getElementById('appointment_afterClick').
             getAttribute('data:full');
