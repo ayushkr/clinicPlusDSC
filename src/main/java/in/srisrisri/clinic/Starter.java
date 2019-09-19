@@ -82,9 +82,13 @@ public class Starter {
     
     public static String server2_start(){
     try {
+        
+           logger.info("started server2_start trying");
             Runtime.getRuntime().exec("sh /common/common/dsc/test.sh") ;
+             logger.info("started server2_start done");
             return "/clinicPlus/startOldVersion";
         } catch (IOException ex) {
+            logger.info("server2_start failed");
             java.util.logging.Logger.getLogger(unsortedController.class.getName()).log(Level.SEVERE, null, ex);
           return ex.toString();
         }
