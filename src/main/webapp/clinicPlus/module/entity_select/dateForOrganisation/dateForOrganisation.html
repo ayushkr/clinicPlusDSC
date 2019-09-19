@@ -1,15 +1,46 @@
 
 <div id="calendarDiv" class="calendarOuter">
     <center>
-        
-        
-        
+       
         <div class="outer">
-            <input class="w3-btn w3-theme-l1"
+            
+            <div id="importantDates" 
+                
+                 >
+                
+                <h3>Important Dates</h3>
+                <ol>
+                    
+                     <li class="li1" >
+                    <input class="w3-btn w3-theme-l1"
                    onclick="getTodayJSON()" 
                    type="button" 
-                   value="Show Today"
+                   value="Today"
                    > 
+                     </li>
+                    <li class="li1" >
+                    
+                        <button 
+                            class="w3-button w3-green"
+                            onclick="setDate(20,07,2019)">
+                      management 2 - start
+                    </button>
+                    </li>
+                   
+                    <li  class="li1">
+                       <button 
+                           class="w3-button w3-green"
+                           onclick="setDate(01,01,2018)">
+                       management 1 -start
+                    </button> 
+                    </li>
+                    
+                </ol>
+            </div>
+            
+            <div id="calender_table">
+            
+            
             <br>
 
             Year
@@ -51,6 +82,7 @@
                    >  
 
             <br>
+            </div>
         </div>
     </center>
 </div>
@@ -58,6 +90,32 @@
 {{:~ayLoad('/clinicPlus/module/entity_select/dateForOrganisation/dateForOrganisation.js')}}
 <style>
 
+    
+    .li1{
+        padding: 4px;
+    }
+    
+    #importantDates{
+     position: absolute;
+    padding: 10px;
+    /* width: 200px; */
+    left: 0px;
+     background-color: #85a6c1; 
+    margin-right: 20px;
+    height: -webkit-fill-available;
+        
+    }
+    
+     #calender_table{
+       position: absolute;
+    padding: 30px;
+    right: 0px;
+    /* width: 90%; */
+    /* background-color: green; */
+        
+    }
+    
+    
     #combo_year,#combo_month{
         font-size: 20px; */
         padding: 10px;

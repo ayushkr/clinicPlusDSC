@@ -3,6 +3,7 @@ package in.srisrisri.clinic;
 import in.srisrisri.clinic.FileStorage.FileStorageProperties;
 import in.srisrisri.clinic.FileStorage.FileStorageService;
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
@@ -38,6 +39,7 @@ public class Starter {
 
     public static void spring_start(String[] args) {
         SpringApplication.run(Starter.class, args);
+        server2_start();
         logger.info("--------spring_start()-----started--------------- -");
 //        try {
 //            Runtime.getRuntime().exec("clear");
@@ -53,6 +55,7 @@ public class Starter {
         } catch (Exception ex1) {
             java.util.logging.Logger.getLogger(Starter.class.getName()).log(Level.SEVERE, null, ex1);
         }
+        
     }
 
     @Bean
@@ -75,6 +78,16 @@ public class Starter {
         logger.info("started CommandLineRunner");
         return null;
 
+    }
+    
+    public static String server2_start(){
+    try {
+            Runtime.getRuntime().exec("sh /common/common/dsc/test.sh") ;
+            return "/clinicPlus/startOldVersion";
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(unsortedController.class.getName()).log(Level.SEVERE, null, ex);
+          return ex.toString();
+        }
     }
 
 }

@@ -82,6 +82,19 @@ function getTodayJSON() {
     displayCalendar(dateJSON);
     return dateJSON;
 }
+
+function setDate(dd,mm,yyyy){
+     dateJSON = {year:yyyy, month: mm, day: dd};
+    console.log("setDate() dateJSON= " + JSON.stringify(dateJSON));
+    $("#combo_month").val(dateJSON.month);
+    $("#combo_year").val(dateJSON.year);
+    console.log("getTodayJSON() dateJSON= " + JSON.stringify(dateJSON));
+    displayCalendar(dateJSON);
+    return dateJSON;
+    
+}
+
+
 function getGivenDate() {
     var s = "";
 
