@@ -1,58 +1,14 @@
 <div class='w3-container'>
 
     <div 
-        data-akr-printable="false"
+        data-akr-printable="false" class="w3-container"
         >
-        <div class="inp_outer" style="min-width: 200px">
-
-            <div class="inp1" 
-                 onclick="popup_selection_obj(
-                     {
-                     'entity_select': 'appointment',
-                             'input': 'appointment'
-                     }
-                     )"
-                 >
-
-                <div class="title1"> 
-                    <i class="fa fa-filter"></i>
-                    appointment</div>
-                <span id='appointment_display' 
-                      class="inp2 w3-btn w3-blue-gray" >
-                    Select
-                </span>
-
-            </div>
-            or enter ID   <input id="appointment" name='appointment' type="text"  value="" 
-                                 style="height: 50px;height: 25px;width: 89px;"> 
-            <input type="button" value="Go "
-                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=appointment&filter=' + document.getElementById('appointment').value + ''"
-                   >
-        </div>
-
-        <div class="inp_outer" style="min-width: 200px">
-            <div class="inp1" >
-                <div class="title1">patientName </div>
-            </div>
-            <input id="patientName" 
-                   patientName='patientName' 
-                   type="text"  value=""
-                   accesskey="q"
-                   > 
-            <input type="button" value="Go "
-                   id="button_patientName_go"
-                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=patientName&filter=' + document.getElementById('patientName').value + ''"
-                   >
-        </div>
-
-
-        <a href="#/cmd?module={{:obj.module}}&action=/all/list&amp;pageNumber=1" class="w3-btn w3-blue-grey"> 
-            All </a>
-
-
+        
+        <br>
+      
     </div>
 
-    <hr>
+    
 
 
     <div id="printableArea"   title="PharmacyBill_Profile" >
