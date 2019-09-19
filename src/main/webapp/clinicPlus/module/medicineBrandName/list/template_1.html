@@ -1,0 +1,83 @@
+<div class='w3-container'  >
+<div data-akr-printable="false" class='w3-container_akr'>
+    <a target="iframe1" 
+       class='w3-button2'
+           href="/clinicPlus/home.html#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1&div=main_1&template=template" 
+           
+           title="default">
+        Back to Default 
+    </a>
+</div>
+
+
+
+<div id="printableArea"   title="MedicineBrandName_List" class="w3-container"  >
+    <h4>Report Type-2</h4>
+    <table  cellpadding="5" class="table_greyBorder" >
+
+        <thead>
+            <tr class="bluestrp">
+
+                <th style="min-width: 50px;">Id
+                    {{:~sortByColumnUI('id',obj)}}
+                </th>
+                <th style="min-width: 50px;">
+                    
+                </th>
+                <th style="min-width: 150px;">brandName
+                    {{:~sortByColumnUI('brandName',obj)}}
+                </th>
+                <th>genericName
+                    {{:~sortByColumnUI('genericName',obj)}}
+                </th>
+                <th>composition
+                    {{:~sortByColumnUI('composition',obj)}}
+                </th>
+
+                <th>HSN
+                    {{:~sortByColumnUI('HSN',obj)}}
+
+                </th>
+                <th>company
+                    {{:~sortByColumnUI('company',obj)}}
+                </th>
+                <th>usedFor
+                    {{:~sortByColumnUI('usedFor',obj)}}
+                </th>
+                
+                <th>
+                    description
+                {{:~sortByColumnUI('description',obj)}}
+                </th>
+               
+
+
+            </tr>
+        </thead>
+        <tbody>
+
+            {{for obj.pageList.content}}
+            <tr >
+                <td><span >{{:id}}</span></td>
+                <td></td>
+                <td >
+                   {{:brandName}}
+                </td>
+                <td>{{:genericName}}</td>
+                <td>{{:composition}}</td>
+
+                <td>{{:hsn}}</td>
+                <td>{{:company}}</td>
+                <td>{{:usedFor}}</td>
+               
+                <td>{{:description}}</td>
+              
+
+            </tr>
+            {{/for}}
+        </tbody>
+
+
+    </table>
+</div>
+</div>

@@ -1,6 +1,8 @@
 <!--doctor/CRU_template.html -->
 
-<div id="printableArea"   title="DoctorId_{{:id}}_{{if name}}{{:name}}{{/if}}" >
+<div id="printableArea"  
+     class="w3-container"
+     title="DoctorId_{{:id}}_{{if name}}{{:name}}{{/if}}" >
     <center><b>Doctor Profile</b></center> 
     <form id='form_doctor' 
           method="post" 
@@ -58,7 +60,18 @@
                 </tr>
             </tbody>
         </table>
-       
+        <div class="inp_outer">
+                <div class="title1">sex</div>
+
+                <select name="sex" data-link="sex"
+                       
+                        class='select_akr'
+                        >
+                    <option value="M" title="Male" >M</option>
+                    <option value="F" >F</option>
+                    <option value="T" >T</option>
+                </select>
+            </div>
         <div class="inp_outer">
             <div class="title1">visitDay</div>
             <span class="inp2" contenteditable="true" id="visitDay"   data-link="visitDay" >---</span>

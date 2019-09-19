@@ -1,3 +1,5 @@
+
+<div class='w3-container'>
 <div 
     data-akr-printable="false"
     >
@@ -50,145 +52,80 @@
     <div class="Table table_greyBorder"  class="table_greyBorder" >
 
         <div  class="Heading bluestrp">
-
+            <div class="Cell">Sl <br> No</div>
 
             <div class="Cell">
                 Bill No
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
-                   >
-                    <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-up headerSortSymbol "></i>
-                    </span>
-                </a>
-
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
-                   >
-                    <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-down headerSortSymbol"></i>
-                    </span>
-                </a>
+                 {{:~sortByColumnUI('id',obj)}}
+                
             </div>
 
 
             <div class="Cell" style="min-width: 80px;font-size: 0.8em">
                 Bill Date
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfBill&sortOrder=a"
-                   >
-                    <span class=" {{if obj.sortColumn=='dateOfBill'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-up headerSortSymbol "></i>
-                    </span>
-                </a>
-
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfBill&sortOrder=d"
-                   >
-                    <span class=" {{if obj.sortColumn=='dateOfBill'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-down headerSortSymbol"></i>
-                    </span>
-                </a>
-
+                 {{:~sortByColumnUI('dateOfBill',obj)}}
+               
             </div>
 
 
 
             <div class="Cell" >appt No
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_id&sortOrder=a"
-                   >
-                    <span class=" {{if obj.sortColumn=='appointment_id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-up headerSortSymbol "></i>
-                    </span>
-                </a>
-
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_id&sortOrder=d"
-                   >
-                    <span class=" {{if obj.sortColumn=='appointment_id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-down headerSortSymbol"></i>
-                    </span>
-                </a>
-
+                 {{:~sortByColumnUI('appointment_id',obj)}}
+                
             </div>
 
 
             <div class="Cell" style="min-width: 90px" >appt Date
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_dateOfAppointment&sortOrder=a"
-                   >
-                    <span class=" {{if obj.sortColumn=='appointment_dateOfAppointment'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-up headerSortSymbol "></i>
-                    </span>
-                </a>
-
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_dateOfAppointment&sortOrder=d"
-                   >
-                    <span class=" {{if obj.sortColumn=='appointment_dateOfAppointment'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-down headerSortSymbol"></i>
-                    </span>
-                </a>
-
+                 {{:~sortByColumnUI('appointment_dateOfAppointment',obj)}}
+            
             </div>
 
 
             <div class="Cell" >appt Patient
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_patient_name&sortOrder=a"
-                   >
-                    <span class=" {{if obj.sortColumn=='appointment_patient_name'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-up headerSortSymbol "></i>
-                    </span>
-                </a>
-
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_patient_name&sortOrder=d"
-                   >
-                    <span class=" {{if obj.sortColumn=='appointment_patient_name'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-down headerSortSymbol"></i>
-                    </span>
-                </a>
+                 {{:~sortByColumnUI('appointment_patient_name',obj)}}
+              
 
             </div>
-            <div class="Cell" style="min-width: 180px"  >appt Doctor
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_doctor_name&sortOrder=a"
-                   >
-                    <span class=" {{if obj.sortColumn=='appointment_doctor_name'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-up headerSortSymbol "></i>
-                    </span>
-                </a>
-
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=appointment_doctor_name&sortOrder=d"
-                   >
-                    <span class=" {{if obj.sortColumn=='appointment_doctor_name'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-down headerSortSymbol"></i>
-                    </span>
-                </a>
-
-
+            
+            <div class="Cell" style="min-width: 180px"  >
+                appt Doctor
+                 {{:~sortByColumnUI('appointment_doctor_name',obj)}}
+            
             </div>
+            
             <div class="Cell" style="min-width: 100px">actions</div>
+            
             <div class="Cell">remarks
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remarks&sortOrder=a"
-                   >
-                    <span class=" {{if obj.sortColumn=='remarks'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-up headerSortSymbol "></i>
-                    </span>
-                </a>
-
-                <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=remarks&sortOrder=d"
-                   >
-                    <span class=" {{if obj.sortColumn=='remarks'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                        <i class="fa fa-caret-down headerSortSymbol"></i>
-                    </span>
-                </a>
+                 {{:~sortByColumnUI('remarks',obj)}}
 
             </div>
 
         </div>
-
-
+ 
+<div class="Row" 
+      accesskey="l"
+    
+     tabindex="0" ></div>
+        
         {{for obj.pageList.content}}
         {{if id!=0}}
+        
         <div class="Row" 
              onclick="go({{:id}}, 'pharmacyBill')"
+             
              class="firstrow">
+            <div class="Cell" >
+                {{:#getIndex()+1}}
+                    
+            </div>
+            
             <div class="Cell" 
                  style="height: 30px"
                  >
-                {{:id}} 
+                <button >
+                      {{:id}}
+                </button>
+               
             </div>
             <div class="Cell"  style="font-size: 0.8em">
                 {{:dateOfBill}}
@@ -232,6 +169,8 @@
         {{/for}}
 
     </div>
+</div>
+
 </div>
 
 

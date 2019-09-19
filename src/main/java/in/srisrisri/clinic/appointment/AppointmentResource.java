@@ -85,25 +85,18 @@ public class AppointmentResource {
         }
         List<AppointmentEntity> list = null;
 
-        if (doctorId == 0) 
-        {
+        if (doctorId == 0) {
             list = repo.findByAnyDoctorDateBetween(
                     Date.valueOf(dateFrom), dateToDate);
-        }
-        else
-        {
+        } else {
             DoctorEntity doctorEntity = new DoctorEntity();
             doctorEntity.setId(doctorId);
             list = repo.findByDoctorDateBetween(
                     Date.valueOf(dateFrom), dateToDate, doctorEntity);
-        } 
-        
-      
-        
-        
+        }
 
         ReportIncomeFromDoctorsDTO reportIncomeFromDoctorsDTO = new ReportIncomeFromDoctorsDTO(list);
-reportIncomeFromDoctorsDTO.setDoctorId(doctorId);
+        reportIncomeFromDoctorsDTO.setDoctorId(doctorId);
         reportIncomeFromDoctorsDTO.calculateTotal();
 
         return reportIncomeFromDoctorsDTO;
@@ -148,7 +141,8 @@ reportIncomeFromDoctorsDTO.setDoctorId(doctorId);
             }
         }
 
-        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, pageSize, sort);
+        Pageable pageable = PageRequest.of(
+                Integer.parseInt(pageNumber) - 1, pageSize, sort);
 
         Page<AppointmentEntity> page = null;
 
@@ -205,11 +199,9 @@ reportIncomeFromDoctorsDTO.setDoctorId(doctorId);
             logger.warn("PostMapping_one , entityBefore={} ", entityBefore.toString());
 
             AppointmentEntity entityAfter = null;
-         
 
-                entityAfter = repo.findById(entityBefore.getId()).get();
-               entityAfter.setUpdationTime(Date.valueOf(LocalDate.now()));
-           
+            entityAfter = repo.findById(entityBefore.getId()).get();
+            entityAfter.setUpdationTime(Date.valueOf(LocalDate.now()));
 
             BeanUtils.copyProperties(entityBefore, entityAfter);
             try {
@@ -286,7 +278,7 @@ reportIncomeFromDoctorsDTO.setDoctorId(doctorId);
             @RequestParam("n") List<Long> list) {
         ResponseEntity<JsonResponse> responseEntity = null;
         JsonResponse jsonResponse = new JsonResponse();
-         jsonResponse.setStatus(Constants1.SUCCESS);
+        jsonResponse.setStatus(Constants1.SUCCESS);
         String failedIds = "";
         try {
             logger.warn("deleteBulk , got={} ", list.toString());
@@ -294,10 +286,9 @@ reportIncomeFromDoctorsDTO.setDoctorId(doctorId);
                 System.out.println(" n=" + n);
                 try {
                     repo.deleteById(n);
-                      failedIds += "<hr><p>Ok deleted " + label + " ID:" + n
-                            
+                    failedIds += "<hr><p>Ok deleted " + label + " ID:" + n
                             + "</p><hr>";
-                    
+
                 } catch (Exception e) {
 
                     failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
@@ -310,7 +301,7 @@ reportIncomeFromDoctorsDTO.setDoctorId(doctorId);
 
             }
             jsonResponse.setMessage(failedIds);
-            
+
             responseEntity = ResponseEntity
                     .created(new URI("/api/" + label + "/"))
                     .headers(HeaderUtil.createEntityCreationAlert(label,
@@ -318,7 +309,7 @@ reportIncomeFromDoctorsDTO.setDoctorId(doctorId);
                     .body(jsonResponse);
         } catch (URISyntaxException ex) {
             java.util.logging.Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        
+
         }
         return responseEntity;
     }

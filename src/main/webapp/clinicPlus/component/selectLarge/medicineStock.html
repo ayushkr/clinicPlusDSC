@@ -1,33 +1,38 @@
-<div class="inp_outer"   onclick="popup_selection_obj(
-                {
-                    'value': '',
-                    'entity_select': 'medicineStock',
-                    'input': 'medicineStock'
-                }
-        )">
+<div class="inp_outer" >
     <input type="hidden" 
            id="medicineStock" 
            name="medicineStock" 
            data-link="medicineStock.id"
            />
+
     <div class="title1">medicineStock</div>
-    <span id='medicineStock_display'
-          class="inp2"
-          style="min-height: 25px;float:none"
-         
-          data-link="medicineStock.medicineBrandName.brandName"
-          _onmouseover="$('#medicineStock_display2').css('display','unset')"
 
-          _onmouseout="$('#medicineStock_display2').css('display','none')"
-          >
-    </span>
+    <input type="button"
+        id='medicineStock_button'    
+            class="inp2"
+            style="min-height: 25px;float:none;width: inherit"
+          
+            data-link="medicineStock.medicineBrandName.brandName"
+            onclick="popup_selection_obj(
+                            {
+                                'value': '',
+                                'entity_select': 'medicineStock',
+                                'input': 'medicineStock'
+                            }
+                    )"
+            />
 
-    <span style="float: right;position: relative;
-          left: 30px;
-          font-style: italic;
-          text-align: left;
-          " 
-          id="medicineStock_display2">
+    <div id='medicineStock_display'>
+        
+    </div>
+
+    <div style="float: right;
+         /* position: relative; */
+         /* left: 30px; */
+         font-style: italic;
+         /* text-align: left; */
+         " 
+         id="medicineStock_display2">
 
         {{if medicineStock}}
         ID: <span data-link="medicineStock.id" style="font-weight: bold">
@@ -44,7 +49,7 @@
 
 
         {{for medicineStock.medicineBrandName}}
-       
+
 
         company:
         <span data-link="company" style="font-weight: bold">
@@ -55,10 +60,10 @@
         </span> <br>
 
         {{/for}}
-        
+
         {{else}}
         Null
 
         {{/if}}
-    </span>
+    </div>
 </div>

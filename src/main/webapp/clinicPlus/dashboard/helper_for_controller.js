@@ -117,6 +117,7 @@ function sortByColumnUI(name, obj) {
         urlOfTemplate: '/clinicPlus/component/sortByColumnUI.html' + pageNewAy(1),
         data: {name: name,
             obj: obj
+           
         }
     });
 //    console.log('r=' + r);

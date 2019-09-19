@@ -1,0 +1,143 @@
+<div id="wid" data-akr-printable="false" >
+    <!--doctor-->
+    <span id="selectLarge_doctor"  style="display: none">
+        selectLarge_doctor
+    </span>
+
+
+    <div id="dateGr" >
+
+        <div class="w3-bar-ay"  >
+
+            <a class="w3-bar-item  tablink tabSelected" 
+               onClick="openCity(event, 'range')">Date Range</a>
+
+            <a class="w3-bar-item tablink " 
+               onClick="openCity(event, 'group')">Date Group</a>
+        </div>
+
+        <div id="range" class=" w3-border city w3-container_akr">
+
+            <div class="inp_outer" >
+                <div class="inp1" 
+                     onclick="popup_selection_obj(
+                                     {
+                                         'value': dateDecide('dateFrom'),
+                                         'entity_select': 'dateForOrganisation',
+                                         'input': 'dateFrom',
+                                         'afterClick': 'reportPatientsByDoctor_Calculate'
+                                     }
+                             )"
+                     >
+                    <div class="title1">Date From</div>
+
+                    <span id='dateFrom_display' class="inp2" >Starting</span>
+                    <input id="dateFrom" name='dateFrom' type="hidden" data-link="dateFrom"> 
+                </div>
+            </div>
+
+            <span
+                id="dateFrom_afterClick"
+                onclick="popul___()"
+                ></span>
+
+
+            <div class="inp_outer" >
+                <div class="inp1" 
+                     onclick="popup_selection_obj(
+                                     {
+                                         'value': dateDecide('dateTo'),
+                                         'entity_select': 'dateForOrganisation',
+                                         'input': 'dateTo',
+                                         'afterClick': 'reportPatientsByDoctor_Calculate'
+                                     }
+                             )"
+                     >
+                    <div class="title1">Date To</div>
+
+                    <span id='dateTo_display' class="inp2" >Till Now</span>
+                    <input id="dateTo" name='dateTo' type="hidden" 
+
+                           data-link="dateTo"> 
+                </div>
+            </div>
+
+            <span
+                id="dateTo_afterClick"
+                onclick="popul___()"
+                ></span>
+
+            <span
+                id="doctor_afterClick"
+                onclick="popul___()"
+                ></span>
+
+
+        </div>
+
+        <div id="group" class=" w3-border city city_hide w3-container_akr" >
+
+            <button class="w3-btn2 dsc_blue"
+                    onclick="dateGroup('db_yesterday')"
+                    >day Before <br>yesterday</button>
+            <button class="w3-btn2 dsc_blue"
+                    onclick="dateGroup('yesterday')"
+                    >yesterday</button>
+            <button class="w3-btn2 dsc_blue"
+                    onclick="dateGroup('today')"
+                    >Today</button>
+            <button class="w3-btn2 dsc_blue"
+                    onclick="dateGroup('thisMonth')"
+                    >This <br>Month</button>
+            <button class="w3-btn2 dsc_blue"
+                    onclick="dateGroup('lastMonth')"
+                    >Last <br> Month</button>
+            <button class="w3-btn2 dsc_blue"
+                    onclick="dateGroup('tillNow')"
+                    >Till<br> Now</button>
+            <button class="w3-btn2 dsc_blue"
+                    onclick="dateGroup('tillLastMonth')"
+                    >till <br> Last Month</button>
+
+
+        </div>
+
+    </div>
+
+
+    <div   >
+
+
+        <center>
+            <input type="button" 
+                   style="display: none"
+                   id="reportPatientsByDoctor_Calculate" 
+                   value="Calculate" onclick="popul___()"  
+                   class="w3-button w3-green"> 
+
+        </center>
+    </div>
+
+
+</div>
+<div id="reportPart" class="w3-container">
+
+</div>
+
+
+
+
+
+<style>
+    .table1{
+        border: solid black 1px;
+    }
+    .td1{
+        padding: 6px;
+        border: dashed grey 1px;
+
+    }
+    .th1{
+        background-color: grey;
+    }
+</style>

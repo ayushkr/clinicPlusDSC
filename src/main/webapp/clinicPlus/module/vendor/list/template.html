@@ -1,14 +1,23 @@
-<div id="printableArea"   title="Vendor_List" >
-    <table cellspacing="1" cellpadding="5" border="0" style="width:85%;">
+<div id="printableArea"   title="Vendor_List"  class='w3-container'>
+    <br>
+    <table 
+       class="table_greyBorder" 
+        cellspacing="1" cellpadding="5" border="0" style="width:85%;">
 
         <thead>
             <tr class="bluestrp">
-                <th>id</th>
-                <th>name</th>
-                <th>place</th>
-                <th>address</th>
-                <th>phone</th>
-                <th>description</th>
+                <th>id
+                 {{:~sortByColumnUI('id',obj)}}</th>
+                <th>name
+                 {{:~sortByColumnUI('name',obj)}}</th>
+                <th>place
+                 {{:~sortByColumnUI('place',obj)}}</th>
+                <th>address
+                 {{:~sortByColumnUI('address',obj)}}</th>
+                <th>phone
+                 {{:~sortByColumnUI('contactPhone',obj)}}</th>
+                <th>description
+                 {{:~sortByColumnUI('description',obj)}}</th>
             </tr>
         </thead>
         <tbody>

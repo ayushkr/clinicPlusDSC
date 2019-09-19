@@ -1,6 +1,9 @@
 package in.srisrisri.clinic.pharmacyBillRow;
 
 import in.srisrisri.clinic.Constants.Constants1;
+import in.srisrisri.clinic.appointment.AppointmentEntity;
+import in.srisrisri.clinic.doctor.DoctorEntity;
+import in.srisrisri.clinic.patient.PatientEntity;
 import in.srisrisri.clinic.pharmacyBill.PharmacyBillEntity;
 import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
@@ -101,11 +104,39 @@ public class PharmacyBillRowResource {
                 pageNumber = "1";
             }
         }
-        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, pageSize, sort);
-        Page<PharmacyBillRowEntity> pageList = repo.findAll(pageable);
-        PageCover<PharmacyBillRowEntity> pageCover = new PageCover<>(pageList);
+        
+        Page<PharmacyBillRowEntity> page = null;
+        
+        Pageable pageable = PageRequest.of(
+                Integer.parseInt(pageNumber) - 1, pageSize, sort);
+
+        
+
+        if (filterColumn.equals("undefined")) {
+            page = repo.findAll(pageable);
+        } else {
+
+            if (filterColumn.equals("patient")) {
+                PatientEntity patientEntity = new PatientEntity();
+                patientEntity.setId(Long.parseLong(filter));
+                page = repo.findAllByPatient(patientEntity, pageable);
+
+            } else if (filterColumn.equals("doctor")) {
+                DoctorEntity doctorEntity = new DoctorEntity();
+                doctorEntity.setId(Long.parseLong(filter));
+                page = repo.findAllByDoctor(doctorEntity, pageable);
+
+            }
+
+        }
+        
+        
+        
+        PageCover<PharmacyBillRowEntity> pageCover = new PageCover<>(page);
         pageCover.setSortColumn(sortColumn);
         pageCover.setSortOrder(sortOrder);
+        pageCover.setFilter(filter);
+        pageCover.setFilterColumn(filterColumn);
         pageCover.setModule(label);
         return pageCover;
     }

@@ -18,13 +18,83 @@
             <menu title="Paste"></menu>
         </menu>
     </menu>-->
+<div class="companyHeader">
+    <center>
+      <table border="0">
+        <tbody>
+            <tr>
+                <td colspan="3">
+        <center>
+            <table >
+                <tbody>
+                    <tr>
+                        <td>
+                            <div style="font-family: ProtoType">
+                                <center>
+
+                                    <span style="font-size:30px;text-align:left;font-weight: bold">
+                                        DOCTORS SPECIALITY CENTRE <br>
+                                    </span>
+
+                                    <span style="font-size:14px;text-align:center;">
+                                        36/5588, USHUS THIRUVAMBADY,
+                                        PATTURAIKKAL JN ,THRISSUR -680022 <br>
+                                    </span>
+
+                                    <span style="font-size:14px;text-align:center;">
+                                        <!--                        Website: &nbsp;-->
+                                        <i class="fa fa-globe"></i>
+                                        www.doctorsspecialitycentre.com &nbsp;&nbsp;
+                                        <!--                        email : &nbsp; -->
+                                        <i class="fa fa-envelope"></i>
+                                        doctorsspecialitycentre@gmail.com &nbsp;&nbsp;
+                                        <br>
+                                        <!--                        Phone &nbsp;-->
+                                        <i class="fa fa-phone"></i> 
+                                        &nbsp;8592918888 
+
+                                    </span>
+
+                                </center>
+                            </div>
+
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </center>  
+
+        </td>
+       
+        </tr>
+
+        <tr>
+
+            <td class="gstSpacing">
+        <center>
+            
+        </center>
+        </td>
+
+        </tr>
+        </tbody>
+    </table>
+        <hr>
+    </center>
+</div>
+
 
 <div id="widgets" 
+     
      class="widgets2"
      data-akr-printable="false" >
     <div style="position:fixed" class="topBarStrip" >
 
-        <span class="pageTitle"  style="float:left">
+        <span class="pageTitle" 
+               accesskey="m"
+              tabindex="0"
+              style="float:left">
             {{:~root.obj.moduleName}}</span>
 
         
@@ -33,6 +103,7 @@
 
         <!--create button-->
         <button 
+            accesskey="a"
             onclick="go(-1, '{{:obj.moduleName}}')"
             data-toggle="tooltip" title="Add New {{:obj.moduleName}}" 
               style="float: right"
@@ -42,6 +113,7 @@
         
         <!--print button-->
         <button onclick="printDiv_navOff('navbar')"
+                accesskey="p"
                 data-toggle="tooltip" title="Print this page" 
                   style="float: right"
                 class="w3-btn2"
@@ -50,6 +122,7 @@
 
         <!--back button-->
         <button 
+           accesskey="b"
             onclick="back()"
             data-toggle="tooltip" title="Back" 
             style="float: right"

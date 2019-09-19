@@ -1,4 +1,13 @@
-<div data-akr-printable="false">
+
+<div class='w3-container'>
+<div data-akr-printable="false" class='w3-container_akr'>
+    <div class="w3-bar-ay">
+        <a onclick="openCity(event,'filter')" 
+           class="w3-bar-item tablink tabSelected">Filter</a>
+        <a onclick="openCity(event,'other')" 
+           class="w3-bar-item tablink ">Others</a>
+    </div>
+    <div id="filter" class="city w3-container_margin10">
     <div class="inp_outer" style="min-width: 200px">
         <div class="inp1" >
             <div class="title1">medicineBrandName </div>
@@ -9,11 +18,11 @@
                accesskey="q"
                onkeypress="filter1()"
                data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=brandName&filter="
-               
-               
+
+
                autofocus
                > 
-       
+
     </div>
 
     <div class="inp_outer" style="min-width: 200px">
@@ -22,12 +31,12 @@
         </div>
         <input id="genericName" name='genericName' type="text"  value=""
                accesskey="q"
-               
-              onkeypress="filter1()"
+
+               onkeypress="filter1()"
                data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=genericName&filter="
-               
+
                > 
-        
+
     </div>
 
     <div class="inp_outer" style="min-width: 200px">
@@ -38,9 +47,19 @@
                accesskey="q"
                onkeypress="filter1()"
                data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=composition&filter="
-               
+
                > 
+
+    </div>
+    </div>
+    <div id="other" class="city w3-container_margin10 city_hide">
        
+        <a target="iframe1" 
+           href="/clinicPlus/home.html#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1&div=main_1&template=template_1" 
+           class='w3-button2'
+           title="MediBrandNames">
+      Report 2
+    </a>
     </div>
 </div>
 
@@ -52,57 +71,44 @@
 
         <thead>
             <tr class="bluestrp">
+
                 <th style="min-width: 50px;">Id
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
-                       >
-                        <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-up headerSortSymbol "></i>
-                        </span>
-                    </a>
-
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
-                       >
-                        <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
-
-
+                    {{:~sortByColumnUI('id',obj)}}
                 </th>
                 <th style="min-width: 150px;">brandName
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=brandName&sortOrder=a"
-                       >
-                        <span class=" {{if obj.sortColumn=='brandName'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-up headerSortSymbol "></i>
-                        </span>
-                    </a>
-
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=brandName&sortOrder=d"
-                       >
-                        <span class=" {{if obj.sortColumn=='brandName'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
-
-
+                    {{:~sortByColumnUI('brandName',obj)}}
                 </th>
                 <th>genericName
-
+                    {{:~sortByColumnUI('genericName',obj)}}
                 </th>
                 <th>composition
-
+                    {{:~sortByColumnUI('composition',obj)}}
                 </th>
 
                 <th>HSN
-
+                    {{:~sortByColumnUI('HSN',obj)}}
 
                 </th>
-                <th>company</th>
-                <th>usedFor</th>
-                <th>type</th>
-                <th>groupid</th>
-                <th>description</th>
-                <th>other</th>
+                <th>company
+                    {{:~sortByColumnUI('company',obj)}}
+                </th>
+                <th>usedFor
+                    {{:~sortByColumnUI('usedFor',obj)}}
+                </th>
+                <th>type
+                    {{:~sortByColumnUI('type',obj)}}
+                </th>
+                <th>groupid
+                    {{:~sortByColumnUI('groupid',obj)}}
+                </th>
+                <th>
+                    description
+                {{:~sortByColumnUI('description',obj)}}
+                </th>
+                <th>
+                    other
+                {{:~sortByColumnUI('other',obj)}}
+                </th>
 
 
             </tr>
@@ -136,4 +142,5 @@
 
 
     </table>
+</div>
 </div>

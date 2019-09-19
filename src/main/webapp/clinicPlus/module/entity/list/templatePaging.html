@@ -25,14 +25,14 @@
         {{else}}
         class="pageNumberButton"
         {{/if}}
-        href="#/cmd?module={{:~root.obj.moduleName}}&pageNumber={{:~page}}&filter={{:~root.obj.filter}}&filterColumn={{:~root.obj.filterColumn}}&sortOrder={{:~root.obj.sortOrder}}&sortColumn={{:~root.obj.sortColumn}}"> {{if ~page==0}}All {{else}} {{:~page}}{{/if}} </a>
+        href="#/cmd?module={{:~root.obj.moduleName}}&pageNumber={{:~page}}&filter={{:~root.obj.filter}}&filterColumn={{:~root.obj.filterColumn}}&sortOrder={{:~root.obj.sortOrder}}&sortColumn={{:~root.obj.sortColumn}}&template={{:~root.obj.template}}"> 
+        {{if ~page==0}}All {{else}} {{:~page}}{{/if}} 
+    </a>
     {{/for}}
     </div>
         </center>
     <br>
-    
-    
-<!--     {{:~jsonise(~root)}}-->
+   
 </div> 
 
 

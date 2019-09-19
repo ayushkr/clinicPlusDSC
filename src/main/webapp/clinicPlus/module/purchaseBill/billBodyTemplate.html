@@ -23,7 +23,9 @@
             {{:medicineBrandName.brandName}}
             {{/if}}
         </div>
-         <div class="Cell" data-link="expiryDate"> </div>
+         <div class="Cell" >
+          {{:~ddyyyyDashed(expiryDate) }}
+         </div>
         
          <div class="Cell" data-link="qtyPurchased"> </div>
         <div class="Cell" data-link="costPrice"> </div>

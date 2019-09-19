@@ -1,5 +1,6 @@
 //pharmacyBillRow.js
-
+manifestGUISelectLarge('doctor',apiDataGlobal.doctor);
+manifestGUISelectLarge('patient',apiDataGlobal.patient);
 manifestGUISelectLarge('pharmacyBill',apiDataGlobal.pharmacyBill);
 manifestGUISelectLarge('medicineStock',apiDataGlobal.medicineStock);
 
@@ -17,7 +18,8 @@ function pharmacyBillRow_calculateAmount(j) {
         console.log('calculateAmount' + medicineStock.id);
         var rate = medicineStock.sellingPrice;
 
-        var qty = document.getElementById('qty').innerHTML;
+//        var qty = document.getElementById('qty').innerHTML;
+       var qty = document.getElementById('qty').value;
 
         var amt = rate * qty;
         console.log('rate =' + rate + ' qty=' + qty + ' amt=' + amt);

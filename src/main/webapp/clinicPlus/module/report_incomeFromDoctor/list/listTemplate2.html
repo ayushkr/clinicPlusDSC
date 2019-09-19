@@ -1,0 +1,111 @@
+<div id="printableArea" title="report income by doctors">
+    <center>
+        <hr>
+        Report - Income from Consultation
+        <hr>
+    </center>
+    <div class='w3-padding'>
+    <span style="font-weight: bold;float: left"
+          onclick="popup_selection_obj(
+                 {
+                 'entity_select': 'doctor',
+                         'input': 'doctor',
+                         'afterClick': 'reportPatientsByDoctor_Calculate'
+                 }
+                 )"
+          >
+        Doctor:
+        &nbsp;
+        {{if obj.doctorId==0}}
+        All
+        {{else}}
+        {{if obj.appointmentEntitys[0] }}
+        {{:obj.appointmentEntitys[0].doctor.name}}
+        {{/if}}
+        {{/if}}
+    </span>
+
+
+
+    <span style="font-weight: bold;float: right">
+        Total Consultation Fee :
+        &nbsp;
+        {{:obj.totalConsultFee}}</span>  <br>
+    <span style="font-weight: bold;float: right" >
+        Total Fee For Clinic : 
+        &nbsp;
+        {{:obj.totalFeeForClinic}}</span>  
+    </div>
+        <br>
+    <br>
+    <hr>
+    <br>
+    <table  class="table_greyBorder" 
+            cellspacing="0"
+            cellPadding="5"
+            border="1">
+        <thead>
+            <tr class="firstrow">
+                <th>SlNo</th>
+                <th style="width:200px">Patient</th>
+                <th>Date Of Appointment</th>
+                <th>Status</th>
+                <th>type</th>
+                <th> Consult Fee 
+
+                </th>
+                <th>fee For Clinic
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {{for obj.appointmentEntitys}}
+            <tr onclick="go({{:id}})">
+                <td> {{:#getIndex()+1}}</td>
+                <td>
+                    {{if patient!=null}}
+                    {{:patient.name}}
+                    <span style="float: right;font-size: 
+                          0.7em;font-style:italic ">
+                        {{:patient.age}} Yrs</span>
+
+                    {{else}}
+                    Not Set
+                    {{/if}}
+                </td>
+                <td>{{:~ddmmyyyyDashed(dateOfAppointment)}}</td>
+                <td >
+                    {{if appointmentStatusEntity!=null}}
+                    <span class="marker_{{:appointmentStatusEntity.id}} rounded">{{:appointmentStatusEntity.name}}</span>
+
+                    {{/if}}
+                </td>
+                <td> {{if appointmentTypeEntity!=null}}
+                    <span class="marker_{{:appointmentTypeEntity.id}} rounded">{{:appointmentTypeEntity.name}}</span>
+
+                    {{/if}}
+                </td>
+                <td>{{:consultFee}}</td>
+                <td>{{:feeForClinic}}</td>
+
+
+
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="7">
+                    No Patients
+                </td>
+            </tr>
+
+            {{/for}}
+        </tbody>
+
+
+    </table>
+    <br>
+    <center><hr> End of Report <hr></center>
+
+</div>

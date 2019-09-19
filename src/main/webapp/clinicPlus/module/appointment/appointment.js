@@ -1,17 +1,41 @@
 
 manifestGUISelectLarge
 ('dateOfAppointment',apiDataGlobal.dateOfAppointment);
+manifestGUISelectLarge
+('doctor',apiDataGlobal.doctor);
 
 manifestGUISelectLarge
 ('patient',apiDataGlobal.patient);
-manifestGUISelectLarge
-('doctor',apiDataGlobal.doctor);
+
 
 manifestGUISelectLarge
 ('appointmentTypeEntity',apiDataGlobal.appointmentTypeEntity);
 manifestGUISelectLarge
 ('appointmentStatusEntity',apiDataGlobal.appointmentStatusEntity);
 var appi;
+
+
+function  doctor_afterClick_fn(){
+    doctorFeesDecisionMaker();
+    
+}
+
+function doctorFeesDecisionMaker() {
+    var consultLevel = $('#consultLevel').val();
+    console.log('consultLevel=' + consultLevel);
+    var feesList=$('#feesList').html();
+    var list = feesList.split(',');
+    console.log('list size=' + list.length);
+    if (consultLevel > (list.length - 1)) {
+        var consultFee = list[(list.length) - 1];
+    } else {
+        var consultFee = list[consultLevel];
+    }
+    $('#consultFee').val(consultFee);
+
+}
+
+
 function appointmentTypeEntity_afterClick_fn(){
     
     

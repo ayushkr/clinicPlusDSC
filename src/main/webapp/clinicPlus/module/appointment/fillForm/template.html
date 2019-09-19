@@ -1,6 +1,13 @@
 <!--appointment/fillForm.html-->
 <div id="printableArea"   title="appt_{{:id}}_{{if name}}{{:name}}{{/if}}" >
+   
+    
+    <span id="selectLarge_appointmentStatusEntity" style="float:left">
+                selectLarge_appointmentStatusEntity
+            </span>
+    <br>
 
+    <span style="float: right">&nbsp;&nbsp;</span>
     <div data-akr-printable="false" style="float:right"> 
         {{if doctor}}
         <a class="w3-btn w3-blue"  style="float: right"
@@ -16,6 +23,7 @@
 
         {{/if}}
     </div>
+
     <br>
     <br>
 
@@ -41,10 +49,10 @@
 
 
             <div> 
-             <span id="selectLarge_dateOfAppointment">
-                selectLarge_dateOfAppointment
-            </span>  
-            
+                <span id="selectLarge_dateOfAppointment">
+                    selectLarge_dateOfAppointment
+                </span>  
+
                 <span style="    float: left;
                       position: relative;
                       top: 25px;"> 
@@ -61,13 +69,20 @@
             <span id="selectLarge_patient">
                 selectLarge_patient
             </span>
-            <br>
- <span id="selectLarge_doctor">
+
+            <span id="selectLarge_doctor">
                 selectLarge_doctor
             </span>
-
             
+             <span id="doctor_afterClick"
+                  style="display: unset"
+                  onclick="doctor_afterClick_fn()"
+                  >
+
+            </span>
+
             <br>
+
 
             <span id="selectLarge_appointmentTypeEntity">
                 selectLarge_appointmentTypeEntity
@@ -82,6 +97,7 @@
 
 
 
+
             <div class="inp_outer" style="min-width: 500px;">
                 <div class="inp1" >
                     <div class="title1">remarks</div>
@@ -92,128 +108,142 @@
                 </div>
             </div>  
 
+           
+
+        
 
 
 
-
-
-
-            <fieldset>
-                <legend>Fees /Payment Details</legend>
-                <div style="font-size: 0.8em;display: inline-block"> 
-                    FeesList<hr>
-
+        <fieldset>
+            <legend>Fees /Payment Details</legend>
+            <div style="font-size: 0.8em;display: inline-block"> 
+                FeesList<hr>
+                <span id='feesList' >
                     {{if doctor }}
-                    <span id='feesList' data-link="doctor.feesList"></span> 
+                    {{:doctor.feesList}}
                     {{else}}
                     ----
                     {{/if}}
-                </div>
+                </span> 
 
-                <div class="inp_outer" >
-                    <div class="inp1" >
-                        <div class="title1">consultFee</div>
-                        <!--<span data-link="consultFee"></span>-->
-                        <input  type="text" id="consultFee" name="consultFee" 
-                                data-link="consultFee"
-                                style="width: 50px"
-                                class="oakr_input_text" required="" readonly=""
-                                /> 
-                    </div>
-                </div>
-
-
-
-
-                <div class="inp_outer" > 
-                    <div class="inp1" >
-                        <div class="title1">feeForClinic</div>
-                        <!--<span data-link="feeForClinic"></span>-->
-                        <input  type="text" id="feeForClinic"
-                                style="width: 50px"
-                                name="feeForClinic" data-link="feeForClinic"
-                                class="oakr_input_text" required="" readonly=""
-                                /> 
-                    </div>
-                </div>
-
-                <span id="selectLarge_appointmentStatusEntity">
-                    selectLarge_appointmentStatusEntity
-                </span>
-
-
-            </fieldset>
-
-            <div class="inp_outer">
-                <div class="inp1" >
-                    <div class="title1">tokenNumber</div>
-                    {{if tokenNumber==0}} Save to generate Token number {{/if}}
-                </div>
             </div>
+            
+                <div class="inp_outer">
+            <span class="title1">   Level</span>
 
-            <div class="inp_outer">
-                <div class="inp1" >
-                    <div class="title1">bookId</div>
-                    <input  class="inp2"
-                            type="text" id="bookId" name="bookId" data-link="bookId"   /> 
-                </div>
-            </div>
-
-
-
-
-
+            <select id="consultLevel"
+                    class="inp2"
+                    onchange=
+                    "doctorFeesDecisionMaker
+                                ('{{if doctor }}{{:doctor.feesList}}{{/if}} ')"
+                    >
+                <option value="0" selected="">first</option>
+                <option value="1">second</option>
+                <option value="2">third</option>
+            </select>
         </div>
+
+           
+            <div class="inp_outer" >
+                <div class="inp1" >
+                    <div class="title1">consultFee</div>
+                    <!--<span data-link="consultFee"></span>-->
+                    <input  type="text" id="consultFee" name="consultFee" 
+                            data-link="consultFee"
+                            style="width: 50px;    border: none;"
+                            class="oakr_input_text" required="" readonly=""
+                            /> 
+                </div>
+            </div>
+
+
+            
+            <div class="inp_outer" > 
+                <div class="inp1" >
+                    <div class="title1">feeForClinic</div>
+                    <!--<span data-link="feeForClinic"></span>-->
+                    <input  type="text" id="feeForClinic"
+                            style="width: 50px;    border: none;"
+                            name="feeForClinic" data-link="feeForClinic"
+                            class="oakr_input_text" required="" readonly=""
+                            /> 
+                </div>
+            </div>
+
+
+
+        </fieldset>
+
+        <div class="inp_outer">
+            <div class="inp1" >
+                <div class="title1">tokenNumber</div>
+                {{if tokenNumber==0}} Save to generate Token number {{/if}}
+            </div>
+        </div>
+
+        <div class="inp_outer">
+            <div class="inp1" >
+                <div class="title1">bookId</div>
+                <input  class="inp2"
+                        type="text" id="bookId" name="bookId" data-link="bookId"   /> 
+            </div>
+        </div>
+
+
+
+
+
+</div>
+</form>
+
+
+{{if id!=0}}
+<!--file uploads-->
+<div id="Files" class="w3-container w3-border city city_hide">
+
+    {{if patient}}
+
+    <form id="form_prescription" 
+          enctype="multipart/form-data" >
+        <div style="position: relative;top: 0px;display: none"> 
+            p <input  name='patientId' value="{{:patient.id}}" type="text"     ><br>
+            d <input  name='doctorId' value="{{:doctor.id}}" type="text"     ><br>
+            name  <input  name='name' value="ssss" type="text"     ><br>
+        </div>
+
+        <hr>
+        <select name="category" id="category" 
+
+                onchange="listFiles({{:patient.id}}, this.value, 'fileList')"  >
+            <option >other</option>
+            <option >prescription</option>
+            <option >labReport</option>
+        </select>
+
+        <a onclick="document.getElementById('input_file_prescription').click()" 
+           data-toggle="tooltip" title="Add New "  
+           > <i class="fa fa-plus"> </i>
+        </a>
+
+
+        <input id="input_file_prescription" name='file'  type="file"
+               onchange="submitFormAKR('form_prescription', '/clinicPlus/api/patient/prescription');
+                   listFiles({{:patient.id}}, document.getElementById('category').value, 'fileList');
+               "
+               style="display: none"
+               >
     </form>
 
+    <div id="fileList" style=""> 
+        {{:~listFiles(patient.id,'prescription','fileList')}}</div>
 
-    {{if id!=0}}
-    <!--file uploads-->
-    <div id="Files" class="w3-container w3-border city city_hide">
-
-        {{if patient}}
-
-        <form id="form_prescription" 
-              enctype="multipart/form-data" >
-            <div style="position: relative;top: 0px;display: none"> 
-                p <input  name='patientId' value="{{:patient.id}}" type="text"     ><br>
-                d <input  name='doctorId' value="{{:doctor.id}}" type="text"     ><br>
-                name  <input  name='name' value="ssss" type="text"     ><br>
-            </div>
-
-            <hr>
-            <select name="category" id="category" 
-
-                    onchange="listFiles({{:patient.id}}, this.value, 'fileList')"  >
-                <option >other</option>
-                <option >prescription</option>
-                <option >labReport</option>
-            </select>
-
-            <a onclick="document.getElementById('input_file_prescription').click()" 
-               data-toggle="tooltip" title="Add New "  
-               > <i class="fa fa-plus"> </i>
-            </a>
-
-
-            <input id="input_file_prescription" name='file'  type="file"
-                   onchange="submitFormAKR('form_prescription', '/clinicPlus/api/patient/prescription');
-                       listFiles({{:patient.id}}, document.getElementById('category').value, 'fileList');
-                   "
-                   style="display: none"
-                   >
-        </form>
-
-        <div id="fileList" style=""> 
-            {{:~listFiles(patient.id,'prescription','fileList')}}</div>
-
-        {{else}}
-        Patient is not set
-
-        {{/if}}
-
-    </div>
+    {{else}}
+    Patient is not set
 
     {{/if}}
+
+</div>
+
+{{/if}}
 
 </div>

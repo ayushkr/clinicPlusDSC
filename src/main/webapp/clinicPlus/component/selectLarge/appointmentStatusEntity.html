@@ -13,15 +13,21 @@
 
         <div class="title1">appointmentStatusEntity</div>
         {{if appointmentStatusEntity!=null}}
-        <input  type="hidden" id="appointmentStatusEntity" name="appointmentStatusEntity" data-link="appointmentStatusEntity.id"  />
+        <input  type="hidden" 
+                id="appointmentStatusEntity" 
+                name="appointmentStatusEntity" 
+                data-link="appointmentStatusEntity.id"  />
         <span id="appointmentStatusEntity_display" class="inp2" >        
             {{:appointmentStatusEntity.name}}     
         </span>
         {{else}}
 
-        <input  type="hidden" id="appointmentStatusEntity" name="appointmentStatusEntity"   />
+        <input  type="hidden" id="appointmentStatusEntity" 
+                value="1"
+                name="appointmentStatusEntity"  
+                />
         <span id="appointmentStatusEntity_display" class="inp2" >        
-            not set  
+           debit  
         </span>
         {{/if}}
     </div>

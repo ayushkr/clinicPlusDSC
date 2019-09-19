@@ -1,240 +1,148 @@
-
-<div data-akr-printable="false">
-    <div class="inp_outer" style="min-width: 200px">
-        <div class="inp1" >
-            <div class="title1">medicineBrandName </div>
+<div class='w3-container'>
+    <div data-akr-printable="false">
+        <div class="inp_outer" style="min-width: 200px">
+            <div class="inp1" >
+                <div class="title1">medicineBrandName </div>
+            </div>
+            <input id="medicineBrandName" name='medicineBrandName' type="text"  value=""
+                   accesskey="q"
+                   > 
+            <input type="button" value="Go " id="button_medicineBrandName_go"
+                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=brandName&filter=' + document.getElementById('medicineBrandName').value + ''"
+                   >
         </div>
-        <input id="medicineBrandName" name='medicineBrandName' type="text"  value=""
-               accesskey="q"
-               > 
-        <input type="button" value="Go " id="button_medicineBrandName_go"
-               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=brandName&filter=' + document.getElementById('medicineBrandName').value + ''"
-               >
+
+        <div class="inp_outer" style="min-width: 200px">
+            <div class="inp1" >
+                <div class="title1">generic Name </div>
+            </div>
+            <input id="genericName" name='genericName' type="text"  value=""
+                   accesskey="q"
+                   > 
+            <input type="button" value="Go " id="button_genericName_go"
+                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=genericName&filter=' + document.getElementById('genericName').value + ''"
+                   >
+        </div>
+
+        <div class="inp_outer" style="min-width: 200px">
+            <div class="inp1" >
+                <div class="title1">composition </div>
+            </div>
+            <input id="composition" name='composition' type="text"  value=""
+                   accesskey="q"
+                   > 
+            <input type="button" value="Go " id="button_composition_go"
+                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=composition&filter=' + document.getElementById('composition').value + ''"
+                   >
+        </div>
     </div>
 
-    <div class="inp_outer" style="min-width: 200px">
-        <div class="inp1" >
-            <div class="title1">generic Name </div>
-        </div>
-        <input id="genericName" name='genericName' type="text"  value=""
-               accesskey="q"
-               > 
-        <input type="button" value="Go " id="button_genericName_go"
-               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=genericName&filter=' + document.getElementById('genericName').value + ''"
-               >
+
+    <div id="printableArea"   title="MedicineStock_List" >
+        <table class="table_greyBorder" cellspacing="0" cellpadding="5"  style="width:85%;">
+
+            <thead>
+                <tr class="bluestrp">
+                    <th>id
+                        {{:~sortByColumnUI('id',obj)}}
+                    </th>
+                    <th style="min-width: 50px;">bill No
+                        {{:~sortByColumnUI('purchaseBill',obj)}}
+                    </th>
+                    <th style="min-width: 150px;">brandName
+                        {{:~sortByColumnUI('medicineBrandName_brandName',obj)}}
+                    </th>
+                    <th>company
+                    {{:~sortByColumnUI('company',obj)}}
+                    </th>
+                    <th>qty Remai ning
+                        {{:~sortByColumnUI('qtyRemaining',obj)}}
+                    </th>
+                    <th style="min-width: 75px;">
+                        expiry Date
+                        {{:~sortByColumnUI('expiryDate',obj)}}
+                    </th>
+                    <th>batch{{:~sortByColumnUI('batch',obj)}}</th>
+                    <th>sub Count
+                    {{:~sortByColumnUI('subCount',obj)}}
+                    </th>
+                    <th>mrp
+                        {{:~sortByColumnUI('mrp',obj)}}
+                    </th>
+
+
+                    <th>SP
+                    {{:~sortByColumnUI('sellingPrice',obj)}}
+                    </th>
+                    <th>CP
+                    {{:~sortByColumnUI('costPrice',obj)}}
+                    </th>
+
+                    <th>cgst
+                    {{:~sortByColumnUI('cgst',obj)}}
+                    </th>
+                    <th>sgst
+                        {{:~sortByColumnUI('sgst',obj)}}
+                    
+                    </th>
+
+
+                    <th>qty Purch ased
+                        {{:~sortByColumnUI('qtyPurchased',obj)}}
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {{for obj.pageList.content}}
+                {{if idSpecial!=1}}
+                <tr 
+                    onclick="go({{:id}}, 'medicineStock')"
+                    class="firstrow">
+                    <td>{{:id}}</td>
+                    <td>
+                        {{if purchaseBill}}
+                        {{:purchaseBill.id}}<br>
+
+                        {{/if}}
+                    </td>
+
+
+                    <td>
+                        {{if medicineBrandName!=null}}
+                        {{:medicineBrandName.brandName}}<br>
+                        <span style="font-size: 0.7em">
+                            Gener-> {{:medicineBrandName.genericName}}
+                        </span> <br>
+                        <span style="font-size: 0.7em">
+                            Comp-> {{:medicineBrandName.composition}}
+                        </span> <br>
+                        {{/if}}
+                    </td>
+                    <td>
+                        {{if medicineBrandName!=null}}
+                        {{:medicineBrandName.company}}
+                        {{/if}}
+                    </td> 
+                    <td>{{:qtyRemaining}}</td>
+                    <td>
+                        {{:~ddyyyyDashed(expiryDate) }}
+                    </td>
+                    <td>{{:batch}}</td>
+                    <td>{{:subCount}}</td>
+                    <td>{{:mrp}}</td>
+                    <td>{{:sellingPrice}}</td>
+                    <td>{{:costPrice}}</td>
+                    <td>{{:cgst}}</td>
+                    <td>{{:sgst}}</td>
+                    <td>{{:qtyPurchased}}</td>
+                </tr>
+                {{/if}}
+                {{/for}}
+            </tbody>
+
+
+        </table>
     </div>
-
-    <div class="inp_outer" style="min-width: 200px">
-        <div class="inp1" >
-            <div class="title1">composition </div>
-        </div>
-        <input id="composition" name='composition' type="text"  value=""
-               accesskey="q"
-               > 
-        <input type="button" value="Go " id="button_composition_go"
-               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=composition&filter=' + document.getElementById('composition').value + ''"
-               >
-    </div>
-</div>
-
-
-<div id="printableArea"   title="MedicineStock_List" >
-    <table class="table_greyBorder" cellspacing="0" cellpadding="5"  style="width:85%;">
-
-        <thead>
-            <tr class="bluestrp">
-                <th>id
-                    <br>
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
-                       >
-                        <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-up headerSortSymbol "></i>
-                        </span>
-                    </a>
-
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
-                       >
-                        <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
-                </th>
-                <th style="min-width: 50px;">bill No
-                    <br>
-                    <a class='headerSortSymbol'
-                       href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=purchaseBill&sortOrder=a"
-                       >
-                        <span class=" {{if obj.sortColumn=='purchaseBill'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-up headerSortSymbol "></i>
-                        </span>
-                    </a>
-
-                    <a class='headerSortSymbol'
-                       href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=purchaseBill&sortOrder=d"
-                       >
-                        <span 
-                            class=" {{if obj.sortColumn=='purchaseBill'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
-
-                </th>
-                <th style="min-width: 150px;">brandName
-
-                    <br>
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=medicineBrandName_brandName&sortOrder=a"
-                       >
-                        <span class=" {{if obj.sortColumn=='medicineBrandName_brandName'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-up headerSortSymbol "></i>
-                        </span>
-                    </a>
-
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=medicineBrandName_brandName&sortOrder=d"
-                       >
-                        <span class=" {{if obj.sortColumn=='medicineBrandName_brandName'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
-
-
-
-                </th>
-                <th>company</th>
-                <th>qty Remai ning
-                    <br>
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=qtyRemaining&sortOrder=a"
-                       >
-                        <span class=" {{if obj.sortColumn=='qtyRemaining'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-up headerSortSymbol "></i>
-                        </span>
-                    </a>
-
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=qtyRemaining&sortOrder=d"
-                       >
-                        <span class=" {{if obj.sortColumn=='qtyRemaining'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
-
-
-                </th>
-                <th style="min-width: 75px;">
-                    expiry Date
-
-
-                    <br>
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=expiryDate&sortOrder=a"
-                       >
-                        <span class=" {{if obj.sortColumn=='expiryDate'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-up headerSortSymbol "></i>
-                        </span>
-                    </a>
-
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=expiryDate&sortOrder=d"
-                       >
-                        <span class=" {{if obj.sortColumn=='expiryDate'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
-
-
-
-                </th>
-                <th>batch</th>
-                <th>sub Count</th>
-                <th>mrp
-
-                    <br>
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=mrp&sortOrder=a"
-                       >
-                        <span class=" {{if obj.sortColumn=='mrp'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-up headerSortSymbol "></i>
-                        </span>
-                    </a>
-
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=mrp&sortOrder=d"
-                       >
-                        <span class=" {{if obj.sortColumn=='mrp'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
-
-
-
-                </th>
-
-
-                <th>SP</th>
-                <th>CP</th>
-
-                <th>cgst</th>
-                <th>sgst</th>
-
-
-                <th>qty Purch ased
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=qtyPurchased&sortOrder=a"
-                       >
-                        <span class=" {{if obj.sortColumn=='qtyPurchased'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-up headerSortSymbol "></i>
-                        </span>
-                    </a>
-
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=qtyPurchased&sortOrder=d"
-                       >
-                        <span class=" {{if obj.sortColumn=='qtyPurchased'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-
-            {{for obj.pageList.content}}
-            <tr 
-                onclick="go({{:id}}, 'medicineStock')"
-                class="firstrow">
-                <td>{{:id}}</td>
-                <td>
-                    {{if purchaseBill}}
-                    {{:purchaseBill.id}}<br>
-
-                    {{/if}}
-                </td>
-
-
-                <td>
-                    {{if medicineBrandName!=null}}
-                    {{:medicineBrandName.brandName}}<br>
-                    <span style="font-size: 0.7em">
-                        Gener-> {{:medicineBrandName.genericName}}
-                    </span> <br>
-                    <span style="font-size: 0.7em">
-                        Comp-> {{:medicineBrandName.composition}}
-                    </span> <br>
-                    {{/if}}
-                </td>
-                <td>
-                    {{if medicineBrandName!=null}}
-                    {{:medicineBrandName.company}}
-                    {{/if}}
-                </td> 
-                <td>{{:qtyRemaining}}</td>
-                <td>
-                    {{:~ddyyyyDashed(expiryDate) }}
-                   </td>
-                <td>{{:batch}}</td>
-                <td>{{:subCount}}</td>
-                <td>{{:mrp}}</td>
-                <td>{{:sellingPrice}}</td>
-                <td>{{:costPrice}}</td>
-                <td>{{:cgst}}</td>
-                <td>{{:sgst}}</td>
-                <td>{{:qtyPurchased}}</td>
-            </tr>
-            {{/for}}
-        </tbody>
-
-
-    </table>
 </div>

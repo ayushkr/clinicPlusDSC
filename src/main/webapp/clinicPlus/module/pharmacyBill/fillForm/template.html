@@ -1,3 +1,5 @@
+
+<div class="w3-container">
 <div data-akr-printable="false">
 
     <form id='form_pharmacyBill' method="post" 
@@ -28,8 +30,11 @@
              style="min-width: -webkit-fill-available;
              min-height: 50px">
             <div class="title1"   >  Remarks</div>
-            <span class="inp2" contenteditable="true" id="remarks"   data-link="remarks" >---</span>
-            <input type="hidden" name="remarks" data-link="remarks" />
+           
+            <input type="text" name="remarks" data-link="remarks"
+                   class="inp2"  id="remarks"
+                   accesskey="r"
+                   />
         </div>
         <input type="hidden" name="freshness" value="1" />
 
@@ -166,3 +171,5 @@
 <button onclick="appointment_afterClick({{:id}})">Create </button>
 </center>
 {{/if}}
+
+</div>

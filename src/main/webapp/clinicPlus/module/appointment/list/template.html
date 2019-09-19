@@ -15,64 +15,63 @@
         <a class="w3-bar-item tablink " 
            onClick="openCity(event, 'bulk')">Bulk</a>
 
+        <a class="w3-bar-item tablink " 
+           onClick="openCity(event, 'Reports')">Reports</a>
+
     </div>
 
-    <div id="filter" class="w3-container_akr city ">
- 
-        
-        
-        
+    <div id="filter" class="w3-container_margin10 city ">
+
+
+
+
         <span id='selectLarge_patient'>
             selectLarge_patient</span>
-         
+
 
         <input type="button" 
                style="display: none"
                id='patient_afterClick'
-               
+
                onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=patient&filter=' + document.getElementById('patient').value + ''"
                >
-        
-         <span id='selectLarge_doctor'>
+
+        <span id='selectLarge_doctor'>
             selectLarge_doctor</span>
-        
-        
+
+
         <input 
-             id='doctor_afterClick'
+            id='doctor_afterClick'
             type="button" value="Go "
-               style="display: none"
-                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=doctor&filter=' + document.getElementById('doctor').value + ''"
-                   >
-        <span 
-             id='doctor_afterClick'
-             title="No filter "
-             
-                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=undefined&filter=undefined'"
+            style="display: none"
+            onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=doctor&filter=' + document.getElementById('doctor').value + ''"
             >
-            
-            
+        <span 
+            id='doctor_afterClick'
+            title="No filter "
+            onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=undefined&filter=undefined'"
+            >
             <i class="fa fa-filter">x</i>           
-            
         </span>
-       
- <br>
-       Filter:  
-       <span data-link="obj.filterColumn" style="font-weight: bold"></span>
-      
-       
-       {{if obj.filterColumn=='doctor'}}  
-       <!--{{obj.pageList.content[0].doctor.name }}--> 
-       
-       {{else}}
-       
-       {{/if}}
-       ID: 
-       <span data-link="obj.filter" style="font-weight: bold"></span>
-      
-        
+
+        <br>
+        Filter:  
+        <span data-link="obj.filterColumn" style="font-weight: bold"></span>
+
+
+        {{if obj.filterColumn=='doctor'}}  
+        <!--{{obj.pageList.content[0].doctor.name }}--> 
+
+        {{else}}
+
+        {{/if}}
+        ID: 
+        <span data-link="obj.filter" style="font-weight: bold"></span>
+
+
     </div>
 
-    <div id="bulk" class="w3-container_akr city city_hide">
+    <div id="bulk" class="w3-container_margin10 city city_hide">
 
         <input type="submit" value="Bulk Delete"
                form='form_appointment/deleteBulk'
@@ -81,203 +80,189 @@
 
     </div>  
 
+
+    <div id="Reports" class="w3-container_akr city city_hide">
+
+        <a target="iframe1" href="/clinicPlus/home.html#/cmd?module=appointment&action=/all/list&pageNumber=1&div=main_1&template=incomeFromDoctors" class="w3-button2" title="MediBrandNames">
+            Report 2
+        </a>
+
+    </div> 
+
     <hr>
 
 </div>
 
+<div class="w3-container">
+    <form id='form_appointment/deleteBulk' 
+          method="post" 
+          action="{{:renderInDiv}}#/cmd/post"> 
+        <input type='hidden' name='module_direct'
+               value='appointment/deleteBulk'>
+        <input type='hidden' name='redirect' 
+               value=' #/cmdc?module=doctor&action=/all/list'>
 
-<form id='form_appointment/deleteBulk' 
-      method="post" 
-      action="{{:renderInDiv}}#/cmd/post"> 
-    <input type='hidden' name='module_direct'
-           value='appointment/deleteBulk'>
-    <input type='hidden' name='redirect' 
-           value=' #/cmdc?module=doctor&action=/all/list'>
-
-    <div id="printableArea"   title="Appointment_List" >
-        List of Appointments in DSC
-        
-       
-        <table  class="table_greyBorder" 
-                cellspacing="0" cellpadding="5" border="1"  >
+        <div id="printableArea"   title="Appointment_List" >
+            List of Appointments in DSC
 
 
-            <thead style="    font-size: 10px;">
-                <tr class="bluestrp">
-                    <th></th>
-                    <th>SLNo</th>
-                    <th>id
-                        {{:~sortByColumnUI('id',obj)}}
-                    </th>
-                    <th>
-                        book Id
-                        {{:~sortByColumnUI('bookId',obj)}}
-                    </th>
-                    <th style="min-width: 150px">
-                        Doctor
-                        {{:~sortByColumnUI('doctor',obj)}}
-                    </th>
-                    <th style="min-width: 150px" >
-                        Patient
-                        {{:~sortByColumnUI('patient',obj)}}
-                    </th>
-                    <th style="min-width: 92px">
-                        date Of Appt
+            <table  class="table_greyBorder" 
+                    cellspacing="0" cellpadding="5" border="1"  >
 
-                        {{:~sortByColumnUI('dateOfAppointment',obj)}}
-                    </th>
-                    <th>status
 
-                        {{:~sortByColumnUI('appointmentStatusEntity',obj)}}
+                <thead style="    font-size: 10px;">
+                    <tr class="bluestrp">
+                        <th></th>
+                        <th>SLNo</th>
+                        <th>id
+                            {{:~sortByColumnUI('id',obj)}}
+                        </th>
+                        <th>
+                            book Id
+                            {{:~sortByColumnUI('bookId',obj)}}
+                        </th>
+                        <th style="min-width: 77px">
+                            date Of Appt
 
-                    </th>
+                            {{:~sortByColumnUI('dateOfAppointment',obj)}}
+                        </th>
+                        <th style="min-width: 150px">
+                            Doctor
+                            {{:~sortByColumnUI('doctor',obj)}}
+                        </th>
+                        <th style="min-width: 150px" >
+                            Patient
+                            {{:~sortByColumnUI('patient',obj)}}
+                        </th>
 
-                    <th>type
+                        <th>status
 
-                        {{:~sortByColumnUI('appointmentTypeEntity',obj)}}
-                    </th>
-                    <th>consult Fee
+                            {{:~sortByColumnUI('appointmentStatusEntity',obj)}}
 
-                        {{:~sortByColumnUI('consultFee',obj)}}
-                    </th>
-                    <th>reg fee
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=feeForClinic&sortOrder=a"
-                           >
-                            <span class=" {{if obj.sortColumn=='feeForClinic'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-up headerSortSymbol "></i>
+                        </th>
+
+                        <th>type
+
+                            {{:~sortByColumnUI('appointmentTypeEntity',obj)}}
+                        </th>
+                         <th>remarks
+
+                            {{:~sortByColumnUI('remarks',obj)}}
+                        </th>
+                         <th>token No:
+                            {{:~sortByColumnUI('tokenNumber',obj)}}
+                        </th>
+                        <th>consult Fee
+
+                            {{:~sortByColumnUI('consultFee',obj)}}
+                        </th>
+                        <th>reg fee
+                             {{:~sortByColumnUI('feeForClinic',obj)}}
+                            
+                        </th>
+                       
+
+                    </tr>
+                </thead>
+
+                <tbody style="    font-size: 12px;">
+
+
+                    {{for obj.pageList.content}}
+
+                    <tr class="firstrow">
+                        <td>
+                            <input type="checkbox"
+                                   id="checkbox_{{:id}}"
+                                   class="regular-checkbox" 
+                                   name="n"  value="{{:id}}">
+                            <label for="checkbox_{{:id}}"></label>
+                        </td>
+                        <td>{{:#index+1}}</td>
+                        <td>{{:id}}</td>
+                        <td
+                            onclick="go({{:id}}, 'appointment')"
+                            >{{:bookId}}</td>
+                        <td
+                            onclick="go({{:id}}, 'appointment')"
+                            >
+                            {{:~ddmmyyyyDashed(dateOfAppointment) }}
+
+                        </td>
+                        <td 
+                            onclick="go({{:id}}, 'appointment')"
+                            >
+                            {{if doctor!=null}}
+
+
+                            <span> {{:doctor.name}} </span><br>
+                            &nbsp;<i style="font-size: 0.8em;float: right">{{:doctor.department}}</i>
+
+
+                            {{else}}
+                            Not set
+                            {{/if}}
+
+                        </td>
+
+                        <td 
+                            onclick="go({{:id}}, 'appointment')"
+                            >
+
+                            {{if patient!=null}}
+                            {{:patient.name}} <br>
+
+                            <span class="age">{{:patient.age}} yr</span><br>
+                            <span class="" 
+                                  style="font-size: 0.8em;float: right">ID : {{:patient.id}} </span> 
+                            {{else}}
+                            Not Set
+                            {{/if}}
+
+                        </td>
+
+                        <td 
+                            onclick="go({{:id}}, 'appointment')"
+                            >
+                            {{if appointmentStatusEntity!=null}}
+                            <span class="marker_{{:appointmentStatusEntity.id}} rounded">{{:appointmentStatusEntity.name}}</span>
+
+                            {{/if}}
+                        </td>
+                        <td
+                            onclick="go({{:id}}, 'appointment')"
+                            > {{if appointmentTypeEntity!=null}}
+                            <span class="marker_{{:appointmentTypeEntity.id}} rounded">
+                                {{:appointmentTypeEntity.name}}
                             </span>
-                        </a>
 
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=feeForClinic&sortOrder=d"
-                           >
-                            <span class=" {{if obj.sortColumn=='feeForClinic'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-down headerSortSymbol"></i>
-                            </span>
-                        </a>
-                    </th>
-                    <th>token No:
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=tokenNumber&sortOrder=a"
-                           >
-                            <span class=" {{if obj.sortColumn=='tokenNumber'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-up headerSortSymbol "></i>
-                            </span>
-                        </a>
-
-                        <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=tokenNumber&sortOrder=d"
-                           >
-                            <span class=" {{if obj.sortColumn=='tokenNumber'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                                <i class="fa fa-caret-down headerSortSymbol"></i>
-                            </span>
-                        </a>
+                            {{/if}}
+                        </td>
+                        <td
+                            onclick="go({{:id}}, 'appointment')"
+                            >{{:remarks}}</td>
+                        
+                        <td
+                            onclick="go({{:id}}, 'appointment')" 
+                            >{{:tokenNumber}}</td>
+                        
+                        <td
+                            onclick="go({{:id}}, 'appointment')"
+                            >{{:consultFee}}</td>
+                        <td
+                            onclick="go({{:id}}, 'appointment')" 
+                            >{{:feeForClinic}}</td>
+                        
 
 
-                    </th>
-
-                </tr>
-            </thead>
-
-            <tbody style="    font-size: 12px;">
-
-
-                {{for obj.pageList.content}}
-
-                <tr class="firstrow"
-
-                    >
+                    </tr>
+                    {{else}}
+                    No members...
+                    {{/for}}
+                </tbody>
 
 
-
-                    <td
-
-                        >
-
-
-
-                        <input type="checkbox"
-                               id="checkbox_{{:id}}"
-                               class="regular-checkbox" 
-                               name="n"  value="{{:id}}">
-                        <label for="checkbox_{{:id}}"></label>
-                    </td>
-                     <td>{{:#index+1}}</td>
-                    <td>{{:id}}</td>
-                    <td
-                        onclick="go({{:id}}, 'appointment')"
-                        >{{:bookId}}</td>
-                    <td 
-                        onclick="go({{:id}}, 'appointment')"
-                        >
-                        {{if doctor!=null}}
-
-
-                        <span> {{:doctor.name}} </span><br>
-                        &nbsp;<i style="font-size: 0.8em;float: right">{{:doctor.department}}</i>
-
-
-                        {{else}}
-                        Not set
-                        {{/if}}
-
-                    </td>
-
-                    <td 
-                        onclick="go({{:id}}, 'appointment')"
-                        >
-
-                        {{if patient!=null}}
-                        {{:patient.name}} <br>
-
-                        <span class="age">{{:patient.age}} yr</span><br>
-                        <span class="" 
-                              style="font-size: 0.8em;float: right">ID : {{:patient.id}} </span> 
-                        {{else}}
-                        Not Set
-                        {{/if}}
-
-                    </td>
-                    <td
-                        onclick="go({{:id}}, 'appointment')"
-                        >
-                        {{:~ddmmyyyyDashed(dateOfAppointment) }}
-                      
-                    </td>
-                    <td 
-                        onclick="go({{:id}}, 'appointment')"
-                        >
-                        {{if appointmentStatusEntity!=null}}
-                        <span class="marker_{{:appointmentStatusEntity.id}} rounded">{{:appointmentStatusEntity.name}}</span>
-
-                        {{/if}}
-                    </td>
-                    <td
-                        onclick="go({{:id}}, 'appointment')"
-                        > {{if appointmentTypeEntity!=null}}
-                        <span class="marker_{{:appointmentTypeEntity.id}} rounded">
-                            {{:appointmentTypeEntity.name}}
-                        </span><br>
-                        <span>{{:remarks}}</span>
-
-                        {{/if}}
-                    </td>
-                    <td
-                        onclick="go({{:id}}, 'appointment')"
-                        >{{:consultFee}}</td>
-                    <td
-                        onclick="go({{:id}}, 'appointment')" 
-                        >{{:feeForClinic}}</td>
-                    <td
-                        onclick="go({{:id}}, 'appointment')" 
-                        >{{:tokenNumber}}</td>
-
-
-                </tr>
-                {{else}}
-                No members...
-                {{/for}}
-            </tbody>
-
-
-        </table>
+            </table>
 
 
 
@@ -285,8 +270,8 @@
 
 
 
-    </div>
+        </div>
 
-</form>
+    </form>
+</div>
 
-<!--{{:~jsonise(~root)}}-->

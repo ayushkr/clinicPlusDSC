@@ -1,0 +1,29 @@
+<div class="inp_outer">
+    <div class="title1">medicineBrandName</div>
+
+    <input  
+        type="hidden" id="medicineBrandName" 
+        name="medicineBrandName" 
+        value= "{{if medicineBrandName}}{{:medicineBrandName.id}}{{/if}}" 
+        />
+
+
+    <div style='border: 1px;' onclick="popup_selection_obj(
+                                {
+                                    'entity_select': 'medicineBrandName',
+                                    'input': 'medicineBrandName'
+                                }
+                        )">
+       
+        <span id="medicineBrandName_display" class="inp2" >     
+            {{if medicineBrandName}}
+            {{:medicineBrandName.brandName}} <br>
+            <span style="font-size: 0.8em;font-style: italic">
+             Company:   {{:medicineBrandName.company}} </span>
+            {{else}}
+            ----
+            {{/if}}
+        </span>
+        
+    </div>
+</div>

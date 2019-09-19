@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>ClinicPlus</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="stylesheet" href="/clinicPlus/theme.css">
+        <style>
+            .container {
+                /*background: #aafed6;*/
+                overflow: hidden;
+
+                height: 100%;
+            }
+
+            .nav {
+                /*margin-right: 19px;*/
+                width: 75px;
+                float: right;
+                /*background: #aafed6;*/ 
+                border-left: solid black 1px;
+                overflow: hidden;
+                height: -webkit-fill-available;
+            }
+
+
+            .bdy {
+                float: none; /* not needed, just for clarification */
+                /*background: #e8f6fe;*/
+                /* the next props are meant to keep this block independent from the other floated one */
+                width: auto;
+                overflow: hidden;
+                /*overflow: scroll;*/
+                /*border: solid red 2px;*/
+                height: 100%;
+                /*height: -webkit-fill-available;*/
+            }
+        </style>
+    </head>
+    <body 
+        style="margin:0px;overflow: hidden;
+        background-color: var(--color_l3p5);
+        _background-color: #bfd1e0">
+        <div class="container">
+
+
+            <div class="nav"
+                 id="navbar"
+                 >
+                <object 
+                    data="nav.html"
+                    id="iframeNav"
+                    name="iframeNav"
+                    style="width: 75px;height: -webkit-fill-available;"
+                    >
+                </object>
+            </div>
+
+            <div id="bdy" class="bdy">
+
+                <object 
+                    data="home.html"
+                    id="iframe1"
+                    name="iframe1"
+                    style=" width: 100%;   height: -webkit-fill-available;"
+                    >
+                </object>
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <script>
+            console.log('index.html');
+//            $("#nav").html('aaa');
+//            aylinker({
+//                urlOfTemplate: 'nav.html' + pageNewAy(1),
+//                selector: 'navbar',
+//                data: {}
+//
+//            });
+//            aylinker({
+//                urlOfTemplate: 'home.html' + pageNewAy(1),
+//                selector: 'bdy',
+//                data: {}
+//
+//            });
+
+
+        </script>
+
+    </body>
+
+</html>

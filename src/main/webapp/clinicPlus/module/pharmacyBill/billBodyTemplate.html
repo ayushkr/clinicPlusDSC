@@ -12,6 +12,7 @@
 
         <div class="Heading">
             <div class="Cell" 
+                
                  ><ayu1>
                     SlNo
                 </ayu1></div>
@@ -42,7 +43,7 @@
             data-akr-printable='false'
             {{/if}}
             title="{{if medicineStock}}{{:medicineStock.id}}{{/if}}"
-            tabindex="0"
+         
             {{if #getIndex()==1 }}  accesskey="q" {{/if}}
             >
             {{if medicineStock}}
@@ -54,18 +55,15 @@
 
             <div class="CellNoPadding">
                 <ayu1>
-                    <span class="button_none" 
+                   <button 
+                    class="button_none" 
                           style="text-align: left;"
-                          >
-                       
-                        {{if medicineStock.medicineBrandName}}
+                    >  {{if medicineStock.medicineBrandName}}
                         {{:medicineStock.medicineBrandName.brandName}}
                         {{/if}}
-                        
-
-                    </span>
+                </button>
                 </ayu1>    
-               
+                
             </div>
             <div class="Cell">            <ayu1>
                     {{:medicineStock.medicineBrandName.company}}
@@ -130,14 +128,23 @@
         <div class="Heading">
             <div class="Cell"   ></div>
             <div class="Cell"
-                 title="add new" tabindex="0"
+                 title="add new" 
                  >
                 <div  data-akr-printable="false"
-                      style="color:green"
-                      onclick="go(-1, 'pharmacyBillRow',{{:billId}})"
+                      class="w3-padding"
+                      
                       >
-                    + 
-                    Add New 
+                    <button 
+                        accesskey="a"
+                        type="button"
+                            class="w3-button w3-green"
+                            style="color:green"
+                            onclick="go(-1, 'pharmacyBillRow',{{:billId}})"
+                            >
+                         + 
+                    Add New
+                    </button>
+                    
                 </div>
             </div>
             <div class="Cell"></div>

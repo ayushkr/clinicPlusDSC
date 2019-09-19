@@ -63,7 +63,9 @@
          >   
         <div class="Cell" >{{:id}}</div>
         <div class="Cell" >
-           <input type="button" class="entity_select_selectButton" 
+           <button
+               type="button" 
+                  class="entity_select_selectButton" 
                    onclick='selectThis(
                  {
                  who:"{{:~root.moduleName}}",
@@ -72,8 +74,9 @@
                  }
                  )'
                   
-                   
-                   value="{{:name}}"> 
+                 >
+               {{:name}}
+           </button>
             
         </div>
         <div class="Cell" >{{:age}} y</div>

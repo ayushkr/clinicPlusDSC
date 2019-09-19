@@ -47,6 +47,7 @@ public class DoctorEntity implements Serializable {
     long id_display;
     String remarks;
     String profileImage;
+     String sex;
     
    String sun;
    String mon;
@@ -56,6 +57,18 @@ public class DoctorEntity implements Serializable {
    String fri;
    String sat;
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+   
+   
+   
+   
     public String getSun() {
         return sun;
     }

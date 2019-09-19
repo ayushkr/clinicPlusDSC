@@ -1,9 +1,9 @@
 //GUI injectors
 
 manifestGUISelectLarge('purchaseBill',apiDataGlobal.purchaseBill);
-manifestGUISelectLarge('expiryDate',apiDataGlobal.expiryDate)
+manifestGUISelectLarge('expiryDate',apiDataGlobal.expiryDate);
 
-
+manifestGUISelectLarge('medicineBrandName',apiDataGlobal.medicineBrandName);
 
 
 

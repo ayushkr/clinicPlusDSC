@@ -137,9 +137,10 @@ function cmd(context) {
                 '&filterColumn=' + this.params['filterColumn'] +
                 '&filter=' + this.params['filter'] +
                 '&sortColumn=' + this.params['sortColumn'] +
-                '&sortOrder=' + this.params['sortOrder']
+                '&sortOrder=' + this.params['sortOrder']+
+               '&template='+this.params['template']
 
-                , 'main_1');
+                , 'main_1',this.params['template']);
 
     }
 

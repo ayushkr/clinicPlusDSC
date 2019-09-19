@@ -18,43 +18,17 @@
         <div id="selectLarge_purchaseBill" style="display: inline-block"></div>
         <fieldset>
             <legend>Basic</legend>
-            <div class="inp_outer">
-                <div class="title1">medicineBrandName</div>
-
-                <input  
-                    type="hidden" id="medicineBrandName" 
-                    name="medicineBrandName" 
-                    value= "{{if medicineBrandName}}{{:medicineBrandName.id}}{{/if}}" 
-                    />
-
-
-                <div style='border: 1px;' onclick="popup_selection_obj(
-                                {
-                                    'entity_select': 'medicineBrandName',
-                                    'input': 'medicineBrandName'
-                                }
-                        )">
-                    <span id="medicineBrandName_display" class="inp2" >     
-                        {{if medicineBrandName}}
-                        {{:medicineBrandName.brandName}} 
-                        {{else}}
-                        ----
-                        {{/if}}
-                    </span>
-                </div>
-            </div>
-
-
-
-
-
-
-
+            
+            <span id="selectLarge_medicineBrandName">
+                selectLarge_medicineBrandName
+            </span>
+          
+            
+            
             <span
                 id="selectLarge_expiryDate"
                 >
-                 selectLarge_expiryDate   
-                
+                 selectLarge_expiryDate      
             </span>
            
 

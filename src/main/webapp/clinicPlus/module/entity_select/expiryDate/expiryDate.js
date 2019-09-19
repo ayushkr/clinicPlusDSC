@@ -45,6 +45,8 @@ function getTodayJSON() {
     displayCalendar(dateJSON);
     return dateJSON;
 }
+
+
 function getGivenDate() {
     var s = "";
 
@@ -64,6 +66,8 @@ function getGivenDate() {
     console.log(' got ' + strDate + ' is converted to json ' + JSON.stringify(dateJSON));
     return dateJSON;
 }
+
+
 function getDateDashed(dateJSON) {
 
     console.log("getDateDashed() dateJSON= " + JSON.stringify(dateJSON));
@@ -85,6 +89,13 @@ function getDateDashed_ddmmyyyy(dateJSON) {
     console.log("getDateDashed() dateStr= " + day_str);
     return dateStrDashed;
 }
+
+
+function displayCalendar(date_){
+    console.log('displayCalendar '+date_);
+}
+
+getGivenDate();
 
 
 document.getElementById('entity_select_closeButton_modalDate').style.display = 'none';

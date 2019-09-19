@@ -19,16 +19,19 @@ public class unsortedController {
     Logger logger=Logger.getLogger(unsortedController.class);
 
     
-   
+    @GetMapping("/clinicPlus/api/report_incomeFromDoctor/pageable")
+    public String get12(){
+      return "{ }";
+    }
     
     @GetMapping("/clinicPlus/api/dateExpiry")
     public String get1(){
-      return "[]";
+      return "{}";
     }
     
       @GetMapping("/clinicPlus/api/expiryDate")
     public String get2(){
-      return "[]";
+      return "{}";
     }
     
       @GetMapping("/clinicPlus/startOldVersion")

@@ -10,48 +10,62 @@
 
 
 
-    <div id="printableArea" style="margin-left: 0mm" title="patient_{{:id}}_{{:name}}">
+    <div id="printableArea"  class="w3-container"
+         title="patient_{{:id}}_{{:name}}">
 
-        <center>
+    
 
-        <span id="selectLarge_pharmacyBill">
+        <span id="selectLarge_pharmacyBill"
+              style="visibility: hidden"
+              >
             selectLarge_pharmacyBill
         </span>
         <br>
+        
         <span id="selectLarge_medicineStock"
-              style="min-width: 200px;"
+              
+              style="width: -webkit-fill-available;
+              font-size: 3em;
+              "
+              accesskey="l"
+              
               >
             selectLarge_medicineStock
         </span>
         
         <span id="medicineStock_afterClick"
-              onclick="pharmacyBillRow_calculateAmount(1)"
+              onclick="pharmacyBillRow_calculateAmount(1);
+              document.getElementById('medicineStock_button').focus()
+              "
+             
               ></span>
         
         
         <br>
         <div class="inp_outer">
             <div class="title1">qty</div>
-            <span 
-                style="min-width: 100px"
-                class="inp2" contenteditable="true"4 id="qty"   data-link="qty" 
-                onkeydown="pharmacyBillRow_calculateAmount(1)" 
-                >---</span>
-            <input type="hidden" name="qty" data-link="qty" 
-                   onkeydown="calculateAmount(1)" />
+          
+            <input type="text" id="qty" name="qty" data-link="qty" 
+                   class="inp2"
+                   style="min-width: 100px"
+                onkeydown="pharmacyBillRow_calculateAmount(1)" />
         </div>
 
 
         <br>
-
+        <br>
 
 
         <div class="inp_outer" 
              style="min-width: 100px;min-height: 50px"
              onclick="calculateAmount(1)">
-            <div class="title1">amount (Auto generated)</div>
+            <div class="title1">amount (Auto generated) in Rs</div>
+           
             <span class="inp2" 
-                  style="background-color: var(--color_safe)"
+                  style="background-color: var(--color_safe);
+                  font-size: 3em;
+                      border: none;
+                  "
                   contenteditable="false" 
                   id="amount_disp"   
                   data-link="amount" 
@@ -62,8 +76,14 @@
                    name="amount" 
                    data-link="amount" />
         </div>
+        <br><br><br>
+       
         
-        </center>
+        <button type="button" id="a3" autofocus
+             onclick="save('pharmacyBillRow');"
+            > OK</button>
+      
+      
 
 
     </div>

@@ -1,24 +1,34 @@
- <div class="inp_outer" style="min-width: 200px">
-                <input id="patient" name='patient' type="hidden" 
+<div class="inp_outer" 
+     style="min-width: 200px;
+     background-color:#65dcb0;
+     {{if patient }} {{if patient.id==0}} border: dashed red 4px ;{{/if}}{{/if}}
+     ">
+    <input id="patient" name='patient' type="hidden" 
 
-                       value="{{if patient}}{{:patient.id}}{{else}}0{{/if}}"
-                       > 
-                <div class="inp1" 
-                     onclick="popup_selection_obj(
+           value="{{if patient}}{{:patient.id}}{{else}}0{{/if}}"
+           > 
+    <div class="inp1" 
+         onclick="popup_selection_obj(
                          {
-                         'entity_select': 'patient',
-                                 'input': 'patient'
+                             'entity_select': 'patient',
+                             'input': 'patient'
                          }
-                         )"
-                     >
+                 )"
+         >
 
-                    <div class="title1">Patient Name</div>
-                    <span id='patient_display' class="inp2">
-                        {{if patient}}
-                        {{:patient.name}}
-                      <br> Age: {{:patient.age}}
-                       <br> ID: {{:patient.id}}
-                        {{else}} --- {{/if}}
-                    </span>
-                </div>
-            </div>
+        <div class="title1">Patient Name</div>
+        
+        <span id='patient_display' class="inp2">
+            {{if patient}}
+            {{:patient.name}}
+            <span style="font-size:0.7em;">
+                <br> Age: {{:patient.age}}
+                <br> ID: {{:patient.id}}
+                
+            </span>
+            {{else}} 
+            --- 
+            {{/if}}
+        </span>
+    </div>
+</div>

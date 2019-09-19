@@ -1,57 +1,33 @@
-<div id="printableArea"   title="{{:obj.module}}_List" >
+<div id="printableArea"   title="{{:obj.module}}_List" 
+     class='w3-container'
+     >
 
- 
+    <br>
 
     <table  class="table_greyBorder" cellspacing="0" cellpadding="5" border="1"  >
 
         <thead>
             <tr class="bluestrp">
-               
+
                 <th style="min-width: 30px;">
                     Id
-                    
-                    
-                      <br>
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
-                       >
-                        <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-up headerSortSymbol "></i>
-                        </span>
-                    </a>
-
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=d"
-                       >
-                        <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
-                    
-
-                 
+                    {{:~sortByColumnUI('id',obj)}}
                 </th>
-               <th style="min-width: 30px;">
+
+                <th style="min-width: 30px;">
                     status
-               
-                  <br>
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=status&sortOrder=a"
-                       >
-                        <span class=" {{if obj.sortColumn=='status'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                            <i class="fa fa-caret-up headerSortSymbol"></i>
-                        </span>
-                    </a>
-
-                    <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=status&sortOrder=d"
-                       >
-                        <span class=" {{if obj.sortColumn=='status'}}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
-                               <i class="fa fa-caret-down headerSortSymbol"></i>
-                        </span>
-                    </a>
-                    
-                
+                    {{:~sortByColumnUI('status',obj)}}
                 </th>
+
                 <th>body</th>
-                <th>category</th>
-                <th>title</th>
+
+                <th>category
+                    {{:~sortByColumnUI('category',obj)}}
+                </th>
+
+                <th>
+                    {{:~sortByColumnUI('title',obj)}}
+                    title</th>
 
 
             </tr>
@@ -65,18 +41,18 @@
                 onclick="go({{:id}}, 'jote')"
                 {{if id===0}} style="display:none" {{/if}} 
                 >
-               
+
 
                 <td>{{:id}}</td>
                 <td style="min-width: 10mm;">{{:status}}</td>
                 <td style="min-width: 40mm;">{{:body}}</td>
                 <td style="min-width: 10mm;">{{:category}}</td>
                 <td style="min-width: 10mm;">{{:title}}</td>
-               
-                
+
+
 
             </tr>
-           
+
             {{else}}
             No members...
             {{/for}}

@@ -1,8 +1,9 @@
 <html>
 <head>
     <title>kk</title>
+    <link rel="stylesheet" href="/clinicPlus/theme.css">
 </head>
-<body >
+<body class="body">
    
  
     
@@ -10,20 +11,29 @@
     <div id="navbar" style="display: none"></div>
 <div id="mainCover"   >
     
-    <div id="hideMainLevelButton_div" style="display: none" >
+    <div id="hideMainLevelButton_div" 
+         
+         style="display: none" >
         <span class="hideMainLevelButton" 
+              title="close"
+              accesskey="x"
          onclick="hideMainLevel()">
-             <i class="fa fa-arrow-left"> </i>
+             <i class="fa fa-close"> </i>
         </span>
+       
     </div>
     
-    <div id="alert_akr" >
+    <div id="alert_akr" class="alert_akr" style="display: none">
         <!--alert_akr-->
         <div onclick="hideDivAy('alert_akr')" >
             <i class="fa fa-times" 
                style="font-size: 50px;float: right;"> </i></div>
-        <div id="alert_akr_head">alert_akr_head</div>
-        <div id="alert_akr_body">alert_akr_body</div>
+        <div id="alert_akr_head"
+              class="alert_akr_head"
+             >alert_akr_head</div>
+        <div id="alert_akr_body"
+             class="alert_akr_body"
+             >alert_akr_body</div>
     </div> 
 
     <div id="main_1" 
@@ -158,6 +168,7 @@
 </div>
 
 <link rel="stylesheet" href="/clinicPlus/theme_sailorBlue.css">
+<link rel="stylesheet" media="print" href="/clinicPlus/print.css" />
 <link rel="stylesheet" href="/clinicPlus/overall.css">
 <link rel="stylesheet" href="/clinicPlus/js_css/index.css">
 <link rel="stylesheet" href="/clinicPlus/js_css/font-awesome.min.css">
