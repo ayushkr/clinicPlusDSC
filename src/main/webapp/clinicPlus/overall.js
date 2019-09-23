@@ -282,24 +282,28 @@ function twoDigitise(num) {
 var apiDataGlobal = {};
 
 function populateCreate2(module, id, divName, paramsExtraStr) {
-    console.log('paramsExtraStr=' + JSON.stringify(paramsExtraStr));
+    console.log('populateCreate2(), id='+id+', paramsExtraStr=' + JSON.stringify(paramsExtraStr));
+   
     var paging_data = {
         'moduleName': module,
         'edit': false,
         'divName': divName,
         'id': id
     };
+    
     var path = "/clinicPlus/api/" + module + "/" + id;
+     console.log('api path='+path);
+    
     $.ajax({
         type: "GET",
         url: path,
         beforeSend: beforeSend_authorize,
         success: function (apiData) {
+//            paging_data.id=apiData.id;
             apiDataGlobal = apiData;
             apiDataGlobal.renderInDiv = divName;
-            console.log('populateCreate2() success ' + path);
-//             console.log('populateCreate2() success apiDataGlobal' 
-//                     + JSON.stringify(apiData));
+            console.log('populateCreate2()->ajax-> apiData= ' + JSON.stringify(apiData));
+//           
 
             apiDataGlobal.paging_data = paging_data;
             return apiDataGlobal;
@@ -314,7 +318,7 @@ function populateCreate2(module, id, divName, paramsExtraStr) {
 //        console.log('d=' + JSON.stringify(d));
         if (paging_data.id === "-1") {
 
-            console.log('altering  id === -1 ' + JSON.stringify(d));
+            console.log('id= -1 data= ' + JSON.stringify(d));
 
             if (module === 'doctor') {
                 apiDataGlobal.dateOfJoining = getToday().full;
@@ -372,7 +376,7 @@ function populateCreate2(module, id, divName, paramsExtraStr) {
 
 
 
-
+// populting menu
         if (mainLayerNumberNow !== 0)
         {
             aylinker({
@@ -385,7 +389,7 @@ function populateCreate2(module, id, divName, paramsExtraStr) {
 
         }
 
-
+// populting inner
         aylinker({
             urlOfTemplate: "/clinicPlus/module/" + module + "/fillForm/template.html?ran=" + Math.random(),
             selector: divName + "_inner",
@@ -923,7 +927,7 @@ function submitFormAKR(formId, ToUrl) {
 
 
 function go(id, module, paramsExtra) {
-
+console.log('go( id='+id);
     window.location.href = 'home.html#/dummy?function=populateCreate2'
             + '&module=' + module
             + '&id=' + id
@@ -963,7 +967,17 @@ function goto_delete(module, id) {
 //                   
                 if (result.status === 'success') {
                     alert_1("Done :)", result.message, result.status);
-                    window.history.back();
+                     if (mainLayerNumberNow === 1) {
+                            
+                           
+                            window.history.back();
+                            
+                        }else{
+                            hideMainLevel();
+                        }
+                        
+                   
+                    
                 } else {
                     alert_1("Sorry :( <br>I cannot", result.message, result.status);
                 }

@@ -19,15 +19,21 @@
     .companyHeader{
         display: none;
     }
-    
-}
 
-.body{
-    
+    .table_greyBorder{
+        border-color: var(--color_l0);
+
+    }
+
+
+
+
+    .body{
+
         background-color: var(--color_l3p5);
-        
-}
-    
+
+    }
+
 
     .navBar_visible{
         height: 100%;
@@ -305,7 +311,7 @@
     }
 
     .table_greyBorder{
-        border-color: var(--color_l4);
+        border-color: var(--color_l0);
 
     }
 
@@ -677,20 +683,15 @@
         /*background-color: green;*/
     }
 
-    table{
-        /*box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);*/
-    }
-    h3{
+   
+/*    h3{
         font-size: 24px; 
         font-weight: bold; 
         text-align: justify;
         color: #007abf;
-    }
+    }*/
 
 
-    table{
-
-    }
 
     th2 {
         padding: 10px;
@@ -817,7 +818,7 @@
         margin: 3px;
         padding: 3px;
         display: block;
-        /*width: 100%;*/
+        width: 100%;
         /*height: 100%;*/
     }
 
@@ -941,11 +942,7 @@
 
 
 
-    .akr_nav_item_iconised:hover{
-        background-color: var(--color_l0);
-        color: var(--color_l5);
-        /*padding: 5px;*/
-    }
+
 
     .calendarOuter{
         position: fixed;
@@ -1049,83 +1046,6 @@
         vertical-align: central;
     }
 
-    /*table*/ 
-    .Table
-    {
-        display: table;
-        /*background-color: #029ef3*/
-    }
-    .Title
-    {
-        display: table-caption;
-        text-align: center;
-        font-weight: bold;
-        font-size: larger;
-    }
-
-    .HeadingBackgroundDark
-    {
-        display: table-row;
-        font-weight: bold;
-        text-align: center;
-        /*background-color:var(--color_d3);*/
-        color:var(--color_l3);
-    }
-    .Heading
-    {
-        display: table-row;
-        font-weight: bold;
-        text-align: center;
-
-
-    }
-    .Row
-    {
-        display: table-row;
-    }
-
-    /*.Row:focus {
-        background:var(--color_green);
-    }
-    
-    .Row:hover
-    {
-        display: table-row;
-        background-color:  #33bdac;
-        color: var(--color_l3);
-        border-radius: 10mm;
-    
-    }*/
-
-    .CellNoPadding
-    {
-        display: table-cell;
-        border: solid var(--color_l3) 1px;
-        border-width: thin;
-        padding-left: 4px;
-        padding-right: 5px;
-        text-align: left;
-    }
-
-    .Cell
-    {
-        display: table-cell;
-        border: solid var(--color_l3) 1px;
-        border-width: thin;
-        padding-left: 4px;
-        padding-right: 5px;
-        text-align: left;
-    }
-
-    .CellNoBorder
-    {
-        display: table-cell;
-        /*border: solid var(--color_l3) 1px;*/
-        border-width: thin;
-        padding-left: 4px;
-        padding-right: 5px;
-        text-align: left;
-    }
 
 
     .gstSpacing{
@@ -1241,7 +1161,7 @@
         /* margin: 20px 0; */
     }
 
-    .table_greyBorder td, .table_greyBorder th{
+    .table_greyBorder+td, .table_greyBorder+th{
         border: solid var(--color_l4) 1px;
     }
     /* table{
@@ -1274,5 +1194,89 @@
         }
     
     */
+
+    /*table*/ 
+    .Table
+    {
+        display: table;
+        /*background-color: #029ef3*/
+    }
+    .Title
+    {
+        display: table-caption;
+        text-align: center;
+        font-weight: bold;
+        font-size: larger;
+    }
+
+    .HeadingBackgroundDark
+    {
+        display: table-row;
+        font-weight: bold;
+        text-align: center;
+        /*background-color:var(--color_d3);*/
+        color:var(--color_l3);
+    }
+    .Heading
+    {
+        display: table-row;
+        font-weight: bold;
+        text-align: center;
+
+
+    }
+    .Row
+    {
+        display: table-row;
+    }
+
+    /*.Row:focus {
+        background:var(--color_green);
+    }
+    
+    .Row:hover
+    {
+        display: table-row;
+        background-color:  #33bdac;
+        color: var(--color_l3);
+        border-radius: 10mm;
+    
+    }*/
+
+    .CellNoPadding
+    {
+        display: table-cell;
+        border: solid var(--color_l3) 1px;
+        border-width: thin;
+        padding-left: 4px;
+        padding-right: 5px;
+        text-align: left;
+    }
+
+    .Cell
+    {
+        display: table-cell;
+        border: solid var(--color_l3) 1px;
+        border-width: thin;
+        padding-left: 4px;
+        padding-right: 5px;
+        text-align: left;
+    }
+
+    .CellNoBorder
+    {
+        display: table-cell;
+        /*border: solid var(--color_l3) 1px;*/
+        border-width: thin;
+        padding-left: 4px;
+        padding-right: 5px;
+        text-align: left;
+    }
+
+}
+
+/*common css*/
+
+
 
 

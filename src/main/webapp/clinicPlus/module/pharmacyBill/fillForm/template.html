@@ -1,175 +1,189 @@
 
 <div class="w3-container">
-<div data-akr-printable="false">
+    <div data-akr-printable="false">
 
-    <form id='form_pharmacyBill' method="post" 
-          action="{{:renderInDiv}}#/cmd/post">
-        <input type='hidden' name='redirect' value=' #/cmdc?module=pharmacyBill&action=/all/list'>
-        <input type='hidden' name='module_direct' value='pharmacyBill'>
-        <input type="hidden" name="id" data-link="id" />
+        <form id='form_pharmacyBill' method="post" 
+              action="{{:renderInDiv}}#/cmd/post">
+            <input type='hidden' name='redirect' value=' #/cmdc?module=pharmacyBill&action=/all/list'>
+            <input type='hidden' name='module_direct' value='pharmacyBill'>
+            <input type="hidden" name="id" data-link="id" />
 
 
-        <div class="inp_outer" 
-             style="display: {{if freshness==0 }}inline-block{{else}}none{{/if}}">
-            <div class="title1" > dateOfBill </div>
-            <div id="selectLarge_dateOfBill"  >
-                selectLarge_dateOfBill
+            <div class="inp_outer" 
+                 style="display: {{if freshness==0 }}inline-block{{else}}none{{/if}}">
+                <div class="title1" > dateOfBill </div>
+                <div id="selectLarge_dateOfBill"  >
+                    selectLarge_dateOfBill
+                </div>
             </div>
-        </div>
-        <div id="selectLarge_appointment" 
-             style="display: {{if freshness==0 }}inline-block{{else}}none{{/if}}">
-            selectLarge_appointment
-        </div>
+            <div id="selectLarge_appointment" 
+                 style="display: {{if freshness==0 }}inline-block{{else}}none{{/if}}">
+                selectLarge_appointment
+            </div>
 
-        <div id="dateOfBill_afterClick"  style="display: none"
-             onclick="dateOfBill_afterClick({{:id}})"></div>
-        <div id="appointment_afterClick"  style="display: none"
-             onclick="appointment_afterClick({{:id}})"></div>
+            <div id="dateOfBill_afterClick"  style="display: none"
+                 onclick="dateOfBill_afterClick({{:id}})"></div>
+            <div id="appointment_afterClick"  style="display: none"
+                 onclick="appointment_afterClick({{:id}})"></div>
+            
+            
+             <div class="inp_outer" title="manual id in book" 
+                 >
+                <div class="title1"   >  id_manual</div>
 
-        <div class="inp_outer" title="വേറെ  വിശേഷം വല്ലതും ഉണ്ടോ ?" 
-             style="min-width: -webkit-fill-available;
-             min-height: 50px">
-            <div class="title1"   >  Remarks</div>
-           
-            <input type="text" name="remarks" data-link="remarks"
-                   class="inp2"  id="remarks"
-                   accesskey="r"
-                   />
-        </div>
-        <input type="hidden" name="freshness" value="1" />
+                <input type="text" name="id_manual" data-link="id_manual"
+                       class="inp2"  id="id_manual"
+                       
+                       />
+            </div>
 
-    </form>
-</div>
+            <div class="inp_outer" title="" 
+                 style="min-width: -webkit-fill-available;
+                 min-height: 50px">
+                <div class="title1"   >  Remarks</div>
 
-{{if freshness==1}}
-<center>
-    <table border="0">
-        <tbody>
-            <tr>
-                <td colspan="3">
-        <center>
-            <table >
-                <tbody>
-                    <tr>
-                        <td>
-                            <div style="font-family: ProtoType">
-                                <center>
+                <input type="text" name="remarks" data-link="remarks"
+                       class="inp2"  id="remarks"
+                       accesskey="r"
+                       />
+            </div>
+            
+            
+            
+            <input type="hidden" name="freshness" value="1" />
 
-                                    <span style="font-size:30px;text-align:left;font-weight: bold">
-                                        DOCTORS SPECIALITY CENTRE <br>
-                                    </span>
-
-                                    <span style="font-size:14px;text-align:center;">
-                                        36/5588, USHUS THIRUVAMBADY,
-                                        PATTURAIKKAL JN ,THRISSUR -680022 <br>
-                                    </span>
-
-                                    <span style="font-size:14px;text-align:center;">
-                                        <!--                        Website: &nbsp;-->
-                                        <i class="fa fa-globe"></i>
-                                        www.doctorsspecialitycentre.com &nbsp;&nbsp;
-                                        <!--                        email : &nbsp; -->
-                                        <i class="fa fa-envelope"></i>
-                                        doctorsspecialitycentre@gmail.com &nbsp;&nbsp;
-                                        <br>
-                                        <!--                        Phone &nbsp;-->
-                                        <i class="fa fa-phone"></i> 
-                                        &nbsp;8592918888 
-
-                                    </span>
-
-                                </center>
-                            </div>
-
-
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </center>  
-
-        </td>
-       
-        </tr>
-
-        <tr>
-
-            <td class="gstSpacing">
-        <center>
-            &nbsp;  DL No:KL-TSR-144303, KL-TSR-144304
-            &nbsp; 
-            <!--DL Date: -->
-        </center>
-        </td>
-
-        </tr>
-        </tbody>
-    </table>
-
-
-    <hr>
-    <table border="0" cellspacing="0" cellpadding="0" class="Table1">
-        <colgroup><col width="248"><col width="248"><col width="248"></colgroup>
-        <tbody>
-            <tr>
-                <td  class="Table1_A1" style="float: left">
-                    Bill No &nbsp;: <span data-link="id"></span>
-                </td>
-                <td  class="Table1_A1"><span class="T1"></span>
-                </td>
-                <td onclick="document.getElementById('dateOfBill').click()"
-
-                    class="Table1_A1" style="float: right"
-                    id="pharmacyBill_dateOfBill"
-                    
-                    >
-                    Bill Date :
-                    {{:~ddmmyyyyDashed(dateOfBill) }}
-                </td>
-            </tr>
-            <tr>
-                <td  
-                    onclick="document.getElementById('appointment').click();"
-                    class="Table1_A2" style="float: left">
-                    Patient :  
-                    <span class="T1" id="pharmacyBill_patient">
-                        {{if appointment}} 
-                        {{:appointment.patient.name}} {{else}}-- 
-                        {{/if}} </span>
-                    <!--                    <span data-link="appointment.patient.name">appointment.patient.name</span>-->
-
-                </td>
-                <td  class="Table1_A2">
-
-                </td>
-                <td 
-                    onclick="document.getElementById('appointment').click()"
-                    class="Table1_A2" style="float: right">
-                    Doctor : 
-                    <span class="T1" id="pharmacyBill_doctor"> 
-                        {{if appointment}} 
-                        {{:appointment.doctor.name}} 
-                        {{else}}--{{/if}} </span>
-
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-
-
-    <div id="printableArea"   title="PharmacyBill_List" >
-
-
-        <div id="main_1_innert"> Loading Data, Please wait ...</div>
-
+        </form>
     </div>
 
-</center>
-{{else}}
-<center>
-<button onclick="appointment_afterClick({{:id}})">Create </button>
-</center>
-{{/if}}
+    {{if freshness==1}}
+    <center>
+        <table border="0">
+            <tbody>
+                <tr>
+                    <td colspan="3">
+            <center>
+                <table >
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style="font-family: ProtoType">
+                                    <center>
+
+                                        <span style="font-size:30px;text-align:left;font-weight: bold">
+                                            DOCTORS SPECIALITY CENTRE <br>
+                                        </span>
+
+                                        <span style="font-size:14px;text-align:center;">
+                                            36/5588, USHUS THIRUVAMBADY,
+                                            PATTURAIKKAL JN ,THRISSUR -680022 <br>
+                                        </span>
+
+                                        <span style="font-size:14px;text-align:center;">
+                                            <!--                        Website: &nbsp;-->
+                                            <i class="fa fa-globe"></i>
+                                            www.doctorsspecialitycentre.com &nbsp;&nbsp;
+                                            <!--                        email : &nbsp; -->
+                                            <i class="fa fa-envelope"></i>
+                                            doctorsspecialitycentre@gmail.com &nbsp;&nbsp;
+                                            <br>
+                                            <!--                        Phone &nbsp;-->
+                                            <i class="fa fa-phone"></i> 
+                                            &nbsp;8592918888 
+
+                                        </span>
+
+                                    </center>
+                                </div>
+
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </center>  
+
+            </td>
+
+            </tr>
+
+            <tr>
+
+                <td class="gstSpacing">
+            <center>
+                &nbsp;  DL No:KL-TSR-144303, KL-TSR-144304
+                &nbsp; 
+                <!--DL Date: -->
+            </center>
+            </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+
+        <hr>
+        <table border="0" cellspacing="0" cellpadding="0" class="Table1">
+            <colgroup><col width="248"><col width="248"><col width="248"></colgroup>
+            <tbody>
+                <tr>
+                    <td  class="Table1_A1" style="float: left">
+                        Bill No &nbsp;: <span data-link="id"></span>
+                    </td>
+                    <td  class="Table1_A1"><span class="T1"></span>
+                    </td>
+                    <td onclick="document.getElementById('dateOfBill').click()"
+
+                        class="Table1_A1" style="float: right"
+                        id="pharmacyBill_dateOfBill"
+
+                        >
+                        Bill Date :
+                        {{:~ddmmyyyyDashed(dateOfBill) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td  
+                        onclick="document.getElementById('appointment').click();"
+                        class="Table1_A2" style="float: left">
+                        Patient :  
+                        <span class="T1" id="pharmacyBill_patient">
+                            {{if appointment}} 
+                            {{:appointment.patient.name}} {{else}}-- 
+                            {{/if}} </span>
+                        <!--                    <span data-link="appointment.patient.name">appointment.patient.name</span>-->
+
+                    </td>
+                    <td  class="Table1_A2">
+
+                    </td>
+                    <td 
+                        onclick="document.getElementById('appointment').click()"
+                        class="Table1_A2" style="float: right">
+                        Doctor : 
+                        <span class="T1" id="pharmacyBill_doctor"> 
+                            {{if appointment}} 
+                            {{:appointment.doctor.name}} 
+                            {{else}}--{{/if}} </span>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        <div id="printableArea"   title="PharmacyBill_List" >
+
+
+            <div id="main_1_innert"> Loading Data, Please wait ...</div>
+
+        </div>
+
+    </center>
+    {{else}}
+    <center>
+        <button onclick="appointment_afterClick({{:id}})">Create </button>
+    </center>
+    {{/if}}
 
 </div>

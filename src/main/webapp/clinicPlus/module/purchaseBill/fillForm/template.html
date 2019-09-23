@@ -1,17 +1,18 @@
 <div id="printableArea"   title="PurchaseBill_List"
      class="w3-container"
      >
-    <div class="pageTitle">PurchaseBill ID:{{:id}} </div>
+
     <form id='form_purchaseBill' method="post" 
           action="{{:renderInDiv}}#/cmd/post">
-        <input type='hidden' name='redirect' value=' #/cmdc?module=purchaseBill&action=/all/list'>
+        <input type='hidden' name='redirect' value=0>
         <input type='hidden' name='module_direct' value='purchaseBill'>
+
         <input type="hidden" name="id" data-link="id" />
-      
-        ID: <span class="rounded"
+
+        ID: <span class="rounded w3-padding"
                   title="ഇതാണ്  ബില്ല്  നമ്പർ "
                   >{{:id}} </span>
-        
+
         <div class="inp_outer" title="വേറെ  വിശേഷം വല്ലതും ഉണ്ടോ ?" 
              style="min-width: 95px;min-height: 50px">
             <div class="title1"   >  billNo</div>
@@ -25,12 +26,12 @@
         <div class="inp_outer"
              title="എന്നാണ്  ബില്ല്   അടിച്ചത് "
              onclick="popup_selection_obj(
-             {
-             'value': '{{:dateOfBill}}',
-                     'entity_select': 'dateForOrganisation',
-                     'input': 'dateOfBill'
-             }
-             )"
+                 {
+                 'value': '{{:dateOfBill}}',
+                         'entity_select': 'dateForOrganisation',
+                         'input': 'dateOfBill'
+                 }
+                 )"
              >
             <div class="title1" >
                 dateOfBill
@@ -40,23 +41,23 @@
             <input id="dateOfBill" type="hidden"
                    name="dateOfBill" data-link="dateOfBill" />
         </div>
-       
-        
+
+
 
         <span id="selectLarge_vendor" 
-             style="display: inline-block">
+              style="display: inline-block">
             selectLarge_vendor</span>
         <div class="inp_outer">
             <div class="title1">Cash / Credit</div>
-        <select name="cash" 
-                class="inp2"
-                data-link="cash">
-            <option value="cash">Cash</option>
-            <option value="credit" >Credit</option>
-        </select>
-            
+            <select name="cash" 
+                    class="inp2"
+                    data-link="cash">
+                <option value="cash">Cash</option>
+                <option value="credit" >Credit</option>
+            </select>
+
         </div>
-        <br>
+
         <div class="inp_outer" title="വേറെ  വിശേഷം വല്ലതും ഉണ്ടോ ?" 
              style="min-width: 400px;min-height: 50px">
             <div class="title1"   >  Remarks</div>
@@ -66,13 +67,40 @@
 
 
     </form>
-<!--   <div class='imgLoading' ></div>-->
-{{if updationTime}}
-    <div id="main_1_innert"> </div>
+
     
-    {{else}}
-    First Save and Load Bill again
-    {{/if}}
+    
+    <a target="iframe1" 
+       href="/clinicPlus/home.html#/cmd?module=purchaseBill&amp;action=/all/list&amp;pageNumber=1&amp;div=main_1" 
+        class='w3-button w3-green w3-margin'
+        style="float: right"
+       title="purchaseBill">
+         Bills  
+    </a>
+    
    
+
+    {{if updationTime}}
+
+
+
+    {{:~purchaseBill_render_list(id) }}
+    {{else}}
+    <center>
+        <button 
+            class="w3-button w3-red"
+
+            onclick="saveAndReload({{:id}})
+            ">
+            Next
+        </button>
+
+        <br>
+        <!--First Save and Load Bill again-->
+        <!--go({{:id}}, 'purchaseBill', {{:id}})-->
+    </center>
+
+    {{/if}}
+
 
 </div>

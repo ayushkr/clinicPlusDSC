@@ -19,32 +19,41 @@ import org.hibernate.annotations.GenericGenerator;
 public class PharmacyBillEntity implements Serializable {
 
     @Id
-    
-     @GenericGenerator(name = "generator", strategy = "increment")
-    @GeneratedValue(generator = "generator") 
+
+    @GenericGenerator(name = "generator", strategy = "increment")
+    @GeneratedValue(generator = "generator")
     private long id;
+
+     @ColumnDefault(value = "0")
+    Long id_manual;
     String remarks;
-   
-      @JsonDeserialize(using = in.srisrisri.clinic.utils.DateHandler.class)
+
+    @JsonDeserialize(using = in.srisrisri.clinic.utils.DateHandler.class)
     Date dateOfBill;
 
-    
-   
     @OneToOne
     AppointmentEntity appointment;
-    
-     @Temporal(TemporalType.TIMESTAMP)
-    java.util.Date creationTime;
- @Temporal(TemporalType.TIMESTAMP)
-    java.util.Date  updationTime;
- 
- @ColumnDefault(value = "0")
- private int freshness;
 
- 
- 
- 
- 
+    @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date creationTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date updationTime;
+
+    @ColumnDefault(value = "0")
+    private int freshness;
+    
+   
+    
+    ///////////// methods /////////////
+
+    public long getId_manual() {
+        return id_manual;
+    }
+
+    public void setId_manual(long id_manual) {
+        this.id_manual = id_manual;
+    }
+
     public int getFreshness() {
         return freshness;
     }
@@ -52,10 +61,6 @@ public class PharmacyBillEntity implements Serializable {
     public void setFreshness(int freshness) {
         this.freshness = freshness;
     }
- 
- 
- 
- 
 
     public java.util.Date getCreationTime() {
         return creationTime;
@@ -73,8 +78,6 @@ public class PharmacyBillEntity implements Serializable {
         this.updationTime = updationTime;
     }
 
- 
- 
     public Date getDateOfBill() {
         return dateOfBill;
     }
@@ -82,8 +85,6 @@ public class PharmacyBillEntity implements Serializable {
     public void setDateOfBill(Date dateOfBill) {
         this.dateOfBill = dateOfBill;
     }
-
-    
 
     public String getRemarks() {
         return remarks;
@@ -108,7 +109,5 @@ public class PharmacyBillEntity implements Serializable {
     public void setAppointment(AppointmentEntity appointment) {
         this.appointment = appointment;
     }
-
-  
 
 }

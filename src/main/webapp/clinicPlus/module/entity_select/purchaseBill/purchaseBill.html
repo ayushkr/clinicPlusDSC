@@ -4,29 +4,46 @@
     Filter By id <input  type="text" onkeyup="filter('id')"  ><br>
 
 </div>
-
-
-{{for obj}}
-
-
-    <div id="select_{{:id}}"
-         
-         
-             onclick='selectThis(
-                 {
-                 who:"{{:~root.moduleName}}",
-                         id:{{:id}},
-                          extra:{{:~jsonise(#data)}}
-                 }
-                 )'  
-         
-         
-         class="select_5">
-        Bill_{{:id}} ___dated_  {{:dateOfBill}} 
+<div class="Table w3-container">
+     <div class="Title">
+        </div>
+    <div class="Heading">
+        <div class="Cell"> Bill No</div>
+        <div class="Cell">dateOfBill</div>
+        <div class="Cell">Vendor</div>
     </div>
-<d class="data"
-    id='{{:id}}'  >
-</d>
-<br>
-{{/for}}
+    {{for obj}}
+    <div id="select_{{:id}}" class="Row "
+
+
+         onclick='selectThis(
+             {
+             who:"{{:~root.moduleName}}",
+                     id:{{:id}},
+                     extra:{{:~jsonise(#data)}}
+             }
+             )'  
+
+         >
+        <div class="Cell w3-padding-16">
+            {{:id}}
+        </div>
+        <div class="Cell">
+            {{:dateOfBill}} 
+        </div>
+        <div class="Cell">
+            {{if vendor}}
+            {{:vendor.name}}
+            {{else}}
+            --
+            {{/if}}
+        </div>
+        <d class="data"
+           id='{{:id}}'  >
+        </d>
+    </div>
+
+    {{/for}}
+
+</div>
 

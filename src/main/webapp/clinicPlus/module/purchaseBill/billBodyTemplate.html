@@ -1,23 +1,34 @@
-
+<hr>
 {{for map.payload}}
- <br>
-
-<span onclick="go( - 1, 'medicineStock', {{:billId}})" >
-    <i class="fa fa-plus" title="add New MedicineStock"></i></span>
+ 
+<span  >
+    <button
+        onclick="go( - 1, 'medicineStock', {{:billId}})"
+        class="w3-button w3-blue w3-margin" 
+        >
+         <i class="fa fa-plus" title="add New MedicineStock">
+        
+    </i>
+    </button>
+   
+</span>
 
 <div class="Table">
     <div class="Row bluestrp" >
          <div class="Cell">Id </div>
          <div class="Cell">Name </div>
            <div class="Cell">expiryDate </div>
-         <div class="Cell">qtyPurchased </div>
+         <div class="Cell">qty </div>
           <div class="Cell">costPrice </div>
+          <div class="Cell">amount </div>
           <div class="Cell">remarks </div>
     </div>
     {{for medicineStockEntitys }}
 
-    <div class="Row" onclick="go({{:id}}, 'medicineStock')" >
-        <div class="Cell">{{:id}} </div>
+    <div class="Row " 
+         
+         onclick="go({{:id}}, 'medicineStock')" >
+        <div class="Cell w3-padding ">{{:id}} </div>
         <div class="Cell">
             {{if medicineBrandName }}
             {{:medicineBrandName.brandName}}
@@ -27,9 +38,20 @@
           {{:~ddyyyyDashed(expiryDate) }}
          </div>
         
-         <div class="Cell" data-link="qtyPurchased"> </div>
-        <div class="Cell" data-link="costPrice"> </div>
-        <div class="Cell" data-link="remarks"> </div>
+         <div class="Cell" >
+         {{:qtyPurchased}}
+         </div>
+        <div class="Cell" >
+        {{:costPrice}}
+        </div>
+        
+          <div class="Cell" >
+        {{:amountTotal}}
+        </div>
+        
+        <div class="Cell" > 
+        {{:remarks}}
+        </div>
     </div>
     
     {{else}}

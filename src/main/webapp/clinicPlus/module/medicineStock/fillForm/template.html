@@ -7,7 +7,8 @@
     <input type='hidden' name='redirect' value=' #/cmdc?module=medicineStock&action=/all/list'>
 
 
-    <div id="printableArea"   
+    <div id="printableArea"  
+         class="w3-container"
          title="MedicineStock_{{:id}}_{{if medicineBrandName}}{{:medicineBrandName.brandName}}{{/if}}" >
         medicineStock 
         <input type="hidden" name="id" data-link="id" />
@@ -79,6 +80,18 @@
                           class="akr_input_text" required="" style="width:90px"
                           />
             </div>
+            
+            
+            <div class="inp_outer" >
+                <div class="title1">amountTotal</div>
+                Rs.<input type="text" id="amountTotal" 
+                          name="amountTotal" 
+                          data-link="amountTotal"
+                          class="akr_input_text" required="" style="width:90px"
+                          />
+            </div>
+            
+            
 
 
         </fieldset>

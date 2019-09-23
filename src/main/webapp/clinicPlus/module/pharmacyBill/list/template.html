@@ -49,16 +49,27 @@
 
 
 <div id="printableArea"   title="PharmacyBill_Profile" >
+    
+    <h3>List of pharmacy Bills</h3>
+    
     <div class="Table table_greyBorder"  class="table_greyBorder" >
 
         <div  class="Heading bluestrp">
             <div class="Cell">Sl <br> No</div>
 
             <div class="Cell">
-                Bill No
+                ID
                  {{:~sortByColumnUI('id',obj)}}
                 
             </div>
+            
+             <div class="Cell">
+                ID manual
+                 {{:~sortByColumnUI('id_manual',obj)}}
+                
+            </div>
+            
+            
 
 
             <div class="Cell" style="min-width: 80px;font-size: 0.8em">
@@ -126,6 +137,11 @@
                       {{:id}}
                 </button>
                
+            </div>
+            
+            <div class="Cell" >
+                {{:id_manual}}
+                    
             </div>
             <div class="Cell"  style="font-size: 0.8em">
                 {{:dateOfBill}}

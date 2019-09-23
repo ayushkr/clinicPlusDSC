@@ -22,13 +22,23 @@ and open the template in the editor.
                 display: block;
                 padding: 8px 0px 8px 0px;
                 text-align: center;
-                color:var(--color_l0) ;
+                color:var(--color_l5) ;
+                background-color:var(--color_l0) ;
+               /*border: solid var(--color_l3) 3px;*/
+               border-radius: 10px;
+               margin: 3px;
             }
 
             .akr_nav_item_iconised:focus{
                 background-color:var(--color_l0) ;
                 color:whitesmoke;
             }
+            
+            .akr_nav_item_iconised:hover{
+        background-color: var(--color_l0);
+        color: var(--color_l5);
+        /*padding: 5px;*/
+    }
             a:visited{
                 /*color: black;*/
             }
@@ -42,6 +52,7 @@ and open the template in the editor.
 
 
     <center>
+        NavMenu 
 
         <span id="dateCurrent" class="dateCurrent"
               data-1="1"
@@ -81,6 +92,7 @@ and open the template in the editor.
     
     
     <hr>
+    <div style="background-color: #76deae;padding: 4px">
     <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=pharmacyBill&action=/all/list&pageNumber=1&div=main_1" 
        class="akr_nav_item_iconised "
        title="pharmacy Bills"
@@ -98,8 +110,44 @@ and open the template in the editor.
         <i class="fa590akr fa-capsules"></i>
         <i class="fasub fa-database"></i>  
     </a>
+          <hr>
+        
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=medicineStock&action=/all/list&pageNumber=1&div=main_1" 
+       class="akr_nav_item_iconised "
+       title="MediStocks"
+       >
+        <i class="fa590akr fa-capsules"></i>
+        <i class="fasub fa-database">All</i> 
+    </a>
 
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=pharmacyBillRow&action=/all/list&pageNumber=1&div=main_1" 
+       class="akr_nav_item_iconised "
+       title="pharmacyBillRow"
+       >
+        <i class="fa590akr fa-capsules"></i> 
+        <i class="fasub">Rx All</i> 
 
+    </a>
+
+  
+
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1&div=main_1" 
+       class="akr_nav_item_iconised "
+       title="MediBrandNames"
+       >
+        <i class="fa590akr fa-capsules"></i>
+        <i class="fasub fa-file-code-o"></i> 
+    </a> 
+
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=vendor&action=/all/list&pageNumber=1&div=main_1"
+       class="akr_nav_item_iconised"
+       title="Vendors"
+       > 
+        <i class="fa590akr fa-capsules"></i>
+        <i class="fasub fa-ambulance"></i>  
+    </a>
+
+    </div>
     <hr>
     <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=fileContent&action=/all/list&pageNumber=1&div=main_1"
        class="akr_nav_item_iconised "
@@ -150,44 +198,10 @@ and open the template in the editor.
 
     <hr>
 
-    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=medicineStock&action=/all/list&pageNumber=1&div=main_1" 
-       class="akr_nav_item_iconised "
-       title="MediStocks"
-       >
-        <i class="fa590akr fa-capsules"></i>
-        <i class="fasub fa-database">All</i> 
-    </a>
-
-    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=pharmacyBillRow&action=/all/list&pageNumber=1&div=main_1" 
-       class="akr_nav_item_iconised "
-       title="pharmacyBillRow"
-       >
-        <i class="fa590akr fa-capsules"></i> 
-        <i class="fasub">Rx All</i> 
-
-    </a>
-
-    <hr>
-
-    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1&div=main_1" 
-       class="akr_nav_item_iconised "
-       title="MediBrandNames"
-       >
-        <i class="fa590akr fa-capsules"></i>
-        <i class="fasub fa-file-code-o"></i> 
-    </a> 
-
-    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=vendor&action=/all/list&pageNumber=1&div=main_1"
-       class="akr_nav_item_iconised"
-       title="Vendors"
-       > 
-        <i class="fa590akr fa-capsules"></i>
-        <i class="fasub fa-ambulance"></i>  
-    </a>
     
-    <a
+<!--    <a
        href="/clinicPlus/startOldVersion" 
-        >Old</a>
+        >Old</a>-->
 
 </body>
 

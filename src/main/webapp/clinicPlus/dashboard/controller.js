@@ -157,11 +157,12 @@ function cmd_post(context, data) {
         div = 'main_1';
     }
     var redirect = this.params['redirect'];
+    
     if (module_direct !== undefined) {
         module = module_direct;
     }
     var d = new FormData(document.getElementById('form_' + module));
-    console.log("akr api_Posting : " + JSON.stringify(d));
+    console.log("akr api_Posting  form_"+module+'----> ' + JSON.stringify(d));
 
     $.ajax({
         type: "POST",
@@ -180,17 +181,33 @@ function cmd_post(context, data) {
                     console.log("cmd post success, module=" +
                             module + ", data=" + JSON.stringify(data));
                     var path = "#/cmd" + pageNewAy(1) + "&module=" + module + "&action=/all/list&div=" + div;
-                    console.log('ok redirect to ' + path);
+//                    console.log('redirect to ' + path);
+                    
+                    
                     if (data.status === 'success') {
                         alert_1('Done :)', data.message, data.status);
                         if (mainLayerNumberNow === 1) {
+                            
+                            if(redirect==0){
+                                
+                            }else{
                             window.history.back();
+                            }
+                        }else{
+                            hideMainLevel();
                         }
+                        
+                        
+                        
 //                        window.location.href = path;
                     } else {
                         alert_1('Sorry :(', data.message, data.status);
 //                        window.history.back();
                     }
+                    
+                    
+                    
+                    
 //                    if (jqXHR.getResponseHeader('ok') === 'no') {
 //                        alert_1(jqXHR.getResponseHeader('problem'),
 //                                JSON.stringify(data), 'error');
