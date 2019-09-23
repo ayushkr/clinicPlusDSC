@@ -132,8 +132,8 @@ public class MedicineStockResource {
         PageCover<MedicineStockEntity> medicineStockpageCover = new PageCover<>(page);
         medicineStockpageCover.setSortColumn(sortColumn);
         medicineStockpageCover.setSortOrder(sortOrder);
-          medicineStockpageCover.setFilter(filter);
-            medicineStockpageCover.setFilterColumn(filterColumn);
+        medicineStockpageCover.setFilter(filter);
+        medicineStockpageCover.setFilterColumn(filterColumn);
         medicineStockpageCover.setModule(label);
         return medicineStockpageCover;
     }
@@ -147,8 +147,8 @@ public class MedicineStockResource {
             item = medicineStockRepo.findById(id);
         } else {
             MedicineStockEntity entityAfter = new MedicineStockEntity();
-           entityAfter.setDiscount(BigDecimal.ZERO);
-             
+            entityAfter.setDiscount(BigDecimal.ZERO);
+
             entityAfter.setCreationTime(java.sql.Date.valueOf(LocalDate.now()));
             medicineStockRepo.save(entityAfter);
             item = Optional.of(entityAfter);
@@ -158,7 +158,7 @@ public class MedicineStockResource {
 //        item.setQtyRemaining(item.getQtyPurchased() - used);
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
-    
+
     @GetMapping("ByBillId/{id}")
     @ResponseBody
     public ResponseEntity<?> ByBillId_id(@PathVariable("id") Long id) {
@@ -167,8 +167,8 @@ public class MedicineStockResource {
         PurchaseBillEntity purchaseBillEntity = new PurchaseBillEntity();
         purchaseBillEntity.setId(id);
 
-        List<MedicineStockEntity> list =
-                medicineStockRepo.findByPurchaseBill(purchaseBillEntity);
+        List<MedicineStockEntity> list
+                = medicineStockRepo.findByPurchaseBill(purchaseBillEntity);
         SumDAOForPurchaseBill sumDAO = new SumDAOForPurchaseBill(list);
         sumDAO.setBillId(id);
         try {
@@ -176,13 +176,13 @@ public class MedicineStockResource {
             jsonResponse.setStatus(Constants1.SUCCESS);
             jsonResponse.setMessage("ok");
             jsonResponse.getMap().put("payload", sumDAO);
-            
+
             return new ResponseEntity<>(jsonResponse, HttpStatus.OK);
         } catch (Exception e) {
             logger.warn("Exception= {} ", e);
             jsonResponse.setStatus(Constants1.FAILURE);
-            jsonResponse.setMessage("In sumDAO.calculateTotals(); <br>&nbsp;<span>" 
-                    + e.toString()+"</span>");
+            jsonResponse.setMessage("In sumDAO.calculateTotals(); <br>&nbsp;<span>"
+                    + e.toString() + "</span>");
             jsonResponse.getMap().put("payload", sumDAO);
             return new ResponseEntity<>(jsonResponse, HttpStatus.OK);
         }
@@ -193,19 +193,24 @@ public class MedicineStockResource {
     @PostMapping("")
     public ResponseEntity<JsonResponse> PostMapping_one(MedicineStockEntity entityBefore) {
         ResponseEntity<JsonResponse> repsonse = null;
-          JsonResponse jsonResponse = new JsonResponse();
+        JsonResponse jsonResponse = new JsonResponse();
         try {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
             logger.warn("---- id ={}", entityBefore.getId());
             MedicineStockEntity entityAfter = null;
-          
-                entityAfter = medicineStockRepo.findById(entityBefore.getId()).get();
 
+            entityAfter = medicineStockRepo.findById(entityBefore.getId()).get();
 
             BeanUtils.copyProperties(entityBefore, entityAfter);
 //             if(entityBefore.isRateAvailable()==null) entityAfter.setRateAvailable(Boolean.FALSE);
 
-           try {
+            try {
+//                if (entityAfter.getCostPrice() == BigDecimal.ZERO) {
+//                    long qtyPurchased = entityAfter.getQtyPurchased();
+//                    BigDecimal qtyBigDec = new BigDecimal(qtyPurchased);
+//                    entityAfter.setCostPrice(entityAfter.getAmountTotal().divide(qtyBigDec));
+//                }
+
                 entityAfter = medicineStockRepo.save(entityAfter);
                 jsonResponse.setMessage("Saved ID:" + entityAfter.getId());
                 jsonResponse.setStatus(Constants1.SUCCESS);
@@ -223,8 +228,6 @@ public class MedicineStockResource {
         }
         return repsonse;
     }
-
-   
 
     @GetMapping("import/{id}/{test}")
     public ResponseEntity<?> updateFromExcel(@PathVariable("id") String id, @PathVariable("test") String test) {
@@ -384,7 +387,7 @@ public class MedicineStockResource {
                 try {
                     if (medicineBrandNameEntityFound == null) {
                         if (test.equals("post")) {
-                           medicineBrandNameResource.PostMapping_one(medicineBrandName);
+                            medicineBrandNameResource.PostMapping_one(medicineBrandName);
                         }
                     }
                 } catch (Exception e) {
@@ -394,7 +397,7 @@ public class MedicineStockResource {
                 try {
                     System.out.println("row " + rowNum + "    " + medicineStockEntity.toString());
                     if (test.equals("post")) {
-                       medicineStockResource.PostMapping_one(medicineStockEntity);
+                        medicineStockResource.PostMapping_one(medicineStockEntity);
                     }
 
                 } catch (Exception e) {
@@ -414,7 +417,6 @@ public class MedicineStockResource {
         return responseEntity;
     }
 
-     
     // delete
     @GetMapping("delete/id/{id}")
     public JsonResponse DeleteMapping_id(@PathVariable("id") Long id) {
@@ -435,11 +437,11 @@ public class MedicineStockResource {
         } catch (Exception e) {
             logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
             response.setStatus(Constants1.FAILURE);
-            if(e.getMessage().contains("ConstraintViolationException")){
-            response.setMessage("This " + label + " (ID: "+id+
-                    ")  is used in other place <br>For eg: in pharmacyBill etc");
-            }else{
-            response.setMessage(e.getMessage());
+            if (e.getMessage().contains("ConstraintViolationException")) {
+                response.setMessage("This " + label + " (ID: " + id
+                        + ")  is used in other place <br>For eg: in pharmacyBill etc");
+            } else {
+                response.setMessage(e.getMessage());
             }
             return response;
         }
@@ -459,11 +461,11 @@ public class MedicineStockResource {
                 try {
                     medicineStockRepo.deleteById(n);
                 } catch (Exception e) {
-                    
+
                     failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
                             + "<br>Because  "
-                            +((e.getMessage().contains("ConstraintViolationException")) ? 
-                            "It Used in Other place ":e.getMessage()) 
+                            + ((e.getMessage().contains("ConstraintViolationException"))
+                            ? "It Used in Other place " : e.getMessage())
                             + "</p><hr>";
 
                 }
@@ -481,5 +483,5 @@ public class MedicineStockResource {
         }
         return responseEntity;
     }
-    
+
 }

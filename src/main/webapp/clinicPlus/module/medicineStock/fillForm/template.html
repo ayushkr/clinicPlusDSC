@@ -48,7 +48,9 @@
             <div class="inp_outer">
                 <div class="title1">qtyPurchased</div>
 
-                <input type="text" name="qtyPurchased" data-link="qtyPurchased"
+                <input type="text" name="qtyPurchased" 
+                       id="qtyPurchased"
+                       data-link="qtyPurchased"
                        style="width: 100px"
                        class="akr_input_text" required=""
                        />
@@ -76,7 +78,9 @@
             </div>
             <div class="inp_outer" >
                 <div class="title1">costPrice</div>
-                Rs.<input type="text" id="costPrice" name="costPrice" data-link="costPrice"
+                Rs.<input type="text" id="costPrice" 
+                          onkeyup="costPrice_keyUp()"
+                          name="costPrice" data-link="costPrice"
                           class="akr_input_text" required="" style="width:90px"
                           />
             </div>
@@ -86,6 +90,7 @@
                 <div class="title1">amountTotal</div>
                 Rs.<input type="text" id="amountTotal" 
                           name="amountTotal" 
+                          onkeyup="amountTotal_keyUp()"
                           data-link="amountTotal"
                           class="akr_input_text" required="" style="width:90px"
                           />

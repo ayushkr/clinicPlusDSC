@@ -5,6 +5,25 @@ manifestGUISelectLarge('expiryDate',apiDataGlobal.expiryDate);
 
 manifestGUISelectLarge('medicineBrandName',apiDataGlobal.medicineBrandName);
 
+function amountTotal_keyUp(){
+    
+    var qtyPurchased = document.getElementById('qtyPurchased');
+    var amountTotal = document.getElementById('amountTotal');
+     var costPrice = document.getElementById('costPrice');
+    
+         costPrice.value=amountTotal.value/qtyPurchased.value;
+     
+}
+
+function costPrice_keyUp(){
+    
+    var qtyPurchased = document.getElementById('qtyPurchased');
+    var amountTotal = document.getElementById('amountTotal');
+     var costPrice = document.getElementById('costPrice');
+    
+         amountTotal.value=costPrice.value*qtyPurchased.value;
+     
+}
 
 
 
