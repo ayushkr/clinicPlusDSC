@@ -33,6 +33,8 @@ public class PurchaseBillEntity implements Serializable {
     long id;
     @ColumnDefault(value = "0")
     long fixedId;
+     @ColumnDefault(value = "0")
+    long bookId;
     String remarks;
 
     
@@ -56,6 +58,14 @@ public class PurchaseBillEntity implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(long bookId) {
+        this.bookId = bookId;
     }
 
     public long getFixedId() {

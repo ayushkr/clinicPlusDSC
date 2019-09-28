@@ -44,6 +44,9 @@ public class MedicineStockEntity implements Serializable {
     BigDecimal sellingPrice;
     @ColumnDefault(value = "0")
     BigDecimal mrp;
+    
+      @ColumnDefault(value = "0")
+    BigDecimal pts;
 
     @Column(name = "discount", nullable = false)
     @ColumnDefault(value = "0")
@@ -89,6 +92,17 @@ public class MedicineStockEntity implements Serializable {
     // end of specials
     /////////////////////////////////////////////////////////////////
 
+    public BigDecimal getPts() {
+        return pts;
+    }
+
+    public void setPts(BigDecimal pts) {
+        this.pts = pts;
+    }
+
+    
+    
+    
     public String getRemarks() {
         return remarks;
     }

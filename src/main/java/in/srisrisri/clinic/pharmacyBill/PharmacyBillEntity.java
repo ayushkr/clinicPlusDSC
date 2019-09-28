@@ -19,13 +19,13 @@ import org.hibernate.annotations.GenericGenerator;
 public class PharmacyBillEntity implements Serializable {
 
     @Id
-
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
     private long id;
 
-     @ColumnDefault(value = "0")
-    Long id_manual;
+      @ColumnDefault(value = "0")
+    long bookId;
+    
     String remarks;
 
     @JsonDeserialize(using = in.srisrisri.clinic.utils.DateHandler.class)
@@ -41,17 +41,16 @@ public class PharmacyBillEntity implements Serializable {
 
     @ColumnDefault(value = "0")
     private int freshness;
-    
-   
-    
-    ///////////// methods /////////////
 
-    public long getId_manual() {
-        return id_manual;
+  
+
+    public long getBookId() {
+        return bookId;
     }
 
-    public void setId_manual(long id_manual) {
-        this.id_manual = id_manual;
+    ///////////// methods /////////////
+    public void setBookId(long bookId) {
+        this.bookId = bookId;
     }
 
     public int getFreshness() {

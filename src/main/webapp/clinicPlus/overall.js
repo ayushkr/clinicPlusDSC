@@ -8,7 +8,7 @@
 ////    ctxMenu.style.left = (event.pageX - 10)+"px";
 ////    ctxMenu.style.top = (event.pageY - 10)+"px";
 //},false);
-
+var entitySelectedLast;
 
 function  back() {
     if (mainLayerNumberNow === 1) {
@@ -333,6 +333,7 @@ function populateCreate2(module, id, divName, paramsExtraStr) {
 
             if (module === 'pharmacyBill') {
                 apiDataGlobal.dateOfBill = getToday().full;
+              apiDataGlobal.bookId=0;
             }
 
             if (module === 'medicineBrandName') {
@@ -629,7 +630,7 @@ let divNode_menu = undefined;
 let divNode_inner = undefined;
 function hideMainLevel() {
     var name = 'main_' + mainLayerNumberNow;
-    console.log("name=" + name);
+    console.log("hideMainLevel()=" + name);
     var elem = document.getElementById(name)
 //    elem.innerHTML = "";
     if (mainLayerNumberNow !== 1) {
@@ -642,6 +643,8 @@ function hideMainLevel() {
     if (mainLayerNumberNow === 1) {
 //        parent.document.iframeNav.style.display = 'unset';
         parent.document.getElementById('iframeNav').style.visibility = 'visible';
+    }else{
+        
     }
 }
 
@@ -719,10 +722,12 @@ function hideDivAy(e) {
 
 
 function refresh_entitySelectList(module, filterWord) {
+    console.log('refresh_entitySelectList(module='+module
+            +', filterWord='+filterWord);
     var divname = 'main_' + mainLayerNumberNow;
     var obj = {'entity_select': module};
     entitySelect(obj, divname);
-    filter(filterWord);
+//    filter(filterWord);
 }
 
 
@@ -741,10 +746,14 @@ function filter(attr, moduleName) {
         var id = dom[i].getAttribute('id');
         var name = (dom[i].getAttribute(attr) + "").toLowerCase();
         document.getElementById('select_' + id).style = 'display:none';
-        if (name.includes(givenWord)) {
+        
+//        if (name.includes(givenWord)) 
+           if (name.startsWith(givenWord)) 
+        {
             console.log('match id=' + id + ' name=' + name);
             document.getElementById('select_' + id).style = 'display:table-row';
         }
+        
 
     }
 }
@@ -771,11 +780,12 @@ function check_1() {
 
 function entitySelect(obj, divname) {
 
-    console.log('entity_select_into(obj, divname),\n divName=' + divname);
+    console.log('entity_select_into(obj='+JSON.stringify(obj)+',\n divname=' + divname+')');
 //window.location.href="/clinicPlus/home.html#/dummy?function=a&divName="+divname;
 //    window.location.href = "home.html#/dummy" + pageNewAy(1) +
 //            "function=a&divName=" + divname;
     var module = obj.entity_select;
+    entitySelectedLast=module;
     var urlOfTemplate = "/clinicPlus/module/entity_select/"
             + module + "/" + module + ".html" + pageNewAy(1);
     console.log('entitySelect(obj, divname)' +
@@ -824,6 +834,10 @@ function entitySelect(obj, divname) {
                 if (esfb !== null) {
                     esfb.click();
                 }
+                
+                $.getScript('/clinicPlus/module/entity_select/'+module+'/'+module+'.js' + pageNewAy(1));
+                
+                
             }
         });
     }
@@ -974,6 +988,7 @@ function goto_delete(module, id) {
                             
                         }else{
                             hideMainLevel();
+                             refresh_entitySelectList(module,'name');
                         }
                         
                    
@@ -990,6 +1005,8 @@ function goto_delete(module, id) {
 function save(module, id) {
     console.log('save , module=' + module);
     $('#form_' + module).submit();
+    
+    
     return  id;
     // goto_list(module) ;
 }

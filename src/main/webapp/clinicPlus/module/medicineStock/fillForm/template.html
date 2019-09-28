@@ -72,7 +72,10 @@
             </div>
             <div class="inp_outer" >
                 <div class="title1">sellingPrice</div>
-                Rs.<input type="text" id="sellingPrice" name="sellingPrice" data-link="sellingPrice"
+                Rs.<input type="text" id="sellingPrice" 
+                           onkeyup="sellingPrice_keyUp()"
+                          name="sellingPrice" 
+                          data-link="sellingPrice"
                           class="akr_input_text" required="" style="width:90px"
                           />
             </div>
@@ -85,6 +88,25 @@
                           />
             </div>
             
+            <div class="inp_outer" >
+                <div class="title1">amountTotalWOcess</div>
+                Rs.<input type="text" id="amountTotalWOcess" 
+                          name="amountTotalWOcess" 
+                          onkeyup="amountTotalWOcess_keyUp()"
+                          data-link="amountTotalWOcess"
+                          class="akr_input_text"  style="width:90px"
+                          />
+            </div>
+            
+             <div class="inp_outer" >
+                <div class="title1">cess</div>
+                %<input type="text" id="cess" 
+                          name="cess" 
+                          onkeyup="cess_keyUp()"
+                          data-link="cess"
+                          class="akr_input_text" style="width:90px"
+                          />
+            </div>
             
             <div class="inp_outer" >
                 <div class="title1">amountTotal</div>
@@ -96,7 +118,7 @@
                           />
             </div>
             
-            
+           
 
 
         </fieldset>

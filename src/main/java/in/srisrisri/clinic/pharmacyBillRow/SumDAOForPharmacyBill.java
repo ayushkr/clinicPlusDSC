@@ -11,7 +11,6 @@ import in.srisrisri.clinic.utils.FinanceUtils;
 import java.math.BigDecimal;
 
 import java.util.List;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +52,7 @@ public class SumDAOForPharmacyBill {
         for (PharmacyBillRowEntity pharmacyBillRowEntity : pharmacyBillRowEntitys) {
             MedicineStockEntity medicineStock_gotFrom_PharmacyBillRowEntity = pharmacyBillRowEntity.getMedicineStock();
 
-            logger.warn("calculateTotals ,\n medicineStock={}", medicineStock_gotFrom_PharmacyBillRowEntity);
+            logger.warn("SumDAOForPharmacyBill.calculateTotals() ,\n medicineStock={}", medicineStock_gotFrom_PharmacyBillRowEntity);
 
             if (pharmacyBillRowEntity.getIdSpecial() == ConstantsInPharmacyBillRow.ROUNDOFF_ID_SPECIAL) {
                     logger.warn("\t IdSpecial ={}", pharmacyBillRowEntity.toString());

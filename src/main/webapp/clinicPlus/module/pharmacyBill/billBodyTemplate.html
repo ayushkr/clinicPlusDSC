@@ -11,10 +11,10 @@
         </div>
 
         <div class="Heading">
-            <div class="Cell" 
+            <div class="Cell" style="font-size: 0.8em"
                 
                  ><ayu1>
-                    SlNo
+                    SN
                 </ayu1></div>
 
             <div class="Cell" 
@@ -35,7 +35,8 @@
 
         {{for pharmacyBillRowEntitys}}
         <div 
-            class="Row"   
+            class="Row "  
+           
             onclick="go({{:id}}, 'pharmacyBillRow')"
             id="row_{{:id}}" 
             {{if idSpecial!=1}}
@@ -47,13 +48,13 @@
             {{if #getIndex()==1 }}  accesskey="q" {{/if}}
             >
             {{if medicineStock}}
-            <div class="Cell"  >  
+            <div class="Cell w3-padding-16"  >  
                 <ayu1>
                     {{:#getIndex()}}
                 </ayu1>      
             </div>
 
-            <div class="CellNoPadding">
+            <div class="Cell">
                 <ayu1>
                    <button 
                     class="button_none" 
@@ -151,7 +152,7 @@
             <div class="Cell"></div>
             <div class="Cell"></div>
             <div class="Cell"></div>
-            <div class="Cell"></div>
+            <div class="Cell">Total :</div>
             <!--<div class="Cell" style="font-size: 14px;">{{:gstTotal}}</div>-->
             <!--<div class="Cell"  style="font-size: 14px;">{{:mrpTotal}}</div>-->
             <div class="Cell"  style="font-size: 14px;">

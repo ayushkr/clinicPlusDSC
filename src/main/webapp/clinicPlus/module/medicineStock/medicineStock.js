@@ -1,30 +1,76 @@
 //GUI injectors
 
-manifestGUISelectLarge('purchaseBill',apiDataGlobal.purchaseBill);
-manifestGUISelectLarge('expiryDate',apiDataGlobal.expiryDate);
+manifestGUISelectLarge('purchaseBill', apiDataGlobal.purchaseBill);
+manifestGUISelectLarge('expiryDate', apiDataGlobal.expiryDate);
 
-manifestGUISelectLarge('medicineBrandName',apiDataGlobal.medicineBrandName);
+manifestGUISelectLarge('medicineBrandName', apiDataGlobal.medicineBrandName);
 
-function amountTotal_keyUp(){
-    
+function amountTotal_keyUp() {
+
     var qtyPurchased = document.getElementById('qtyPurchased');
     var amountTotal = document.getElementById('amountTotal');
-     var costPrice = document.getElementById('costPrice');
-    
-         costPrice.value=amountTotal.value/qtyPurchased.value;
-     
+    var costPrice = document.getElementById('costPrice');
+
+    costPrice.value = amountTotal.value / qtyPurchased.value;
+
 }
 
-function costPrice_keyUp(){
-    
+function costPrice_keyUp() {
+
     var qtyPurchased = document.getElementById('qtyPurchased');
     var amountTotal = document.getElementById('amountTotal');
-     var costPrice = document.getElementById('costPrice');
-    
-         amountTotal.value=costPrice.value*qtyPurchased.value;
-     
+    var costPrice = document.getElementById('costPrice');
+    if (costPrice.value == 's' || costPrice.value == 'S') {
+
+        costPrice.value = mrp.value;
+        var sellingPrice = document.getElementById('sellingPrice');
+        sellingPrice.value = mrp.value;
+    } else {
+
+    }
+    amountTotal.value = costPrice.value * qtyPurchased.value;
+
 }
 
+function sellingPrice_keyUp() {
+    var sellingPrice = document.getElementById('sellingPrice');
+    var mrp = document.getElementById('mrp');
+    if (sellingPrice.value == 's' || sellingPrice.value == 'S') {
+
+        sellingPrice.value = mrp.value;
+    }
+}
+
+function amountTotal_keyUp() {
+
+    var qtyPurchased = document.getElementById('qtyPurchased');
+    var amountTotal = document.getElementById('amountTotal');
+    var costPrice = document.getElementById('costPrice');
+    costPrice.value = amountTotal.value / qtyPurchased.value;
+}
+
+function amountTotalWOcess_keyUp() {
+
+    var amountTotalWOcess = document.getElementById('amountTotalWOcess');
+    var amountTotal = document.getElementById('amountTotal');
+   amountTotal.value=amountTotalWOcess.value;
+    cess_keyUp();
+}
+
+function cess_keyUp() {
+
+//      var mrp = document.getElementById('mrp');
+//      var costPrice = document.getElementById('costPrice');
+//    var sellingPrice = document.getElementById('sellingPrice');
+//    
+    var cess = document.getElementById('cess');
+    var amountTotalWOcess = document.getElementById('amountTotalWOcess');
+    var amountTotal = document.getElementById('amountTotal');
+
+    amountTotal.value =1*
+            ((Number(amountTotalWOcess.value))* (1+ (Number(cess.value)/ 100)));
+amountTotal_keyUp();
+}
 
 
 function calculateRate(j) {

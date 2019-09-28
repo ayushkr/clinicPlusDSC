@@ -2,54 +2,88 @@
 
 <div class="w3-container" 
      style="position: fixed;
-    top: 0px;
-    padding: 15px;
-    background-color: var(--color_l4);
-    height: -webkit-fill-available;
-    width: 100%;">
+     top: 0px;
+     padding: 15px;
+     background-color: var(--color_l4);
+     height: -webkit-fill-available;
+     width: 100%;">
     <center>
-        Date expiry
-  <br>
-        <br>
-        Year
-        <input type="text" value="2020" id="year" style="width: 70px"
-               onkeyup="inputChangedByUser()">
-        <br>
-        <br>
-        Month
-        <SELECT id="combo_month" onchange="inputChangedByUser()">
-            <option value="1" selected>01 Jan</option>
-            <option value="2">02 Feb</option>
-            <option value="3">03 March</option>
-            <option value="4">04 April</option>
-            <option value="5">05 May</option>
-            <option value="6">06 June</option>
-            <option value="7">07 July</option>
-            <option value="8">08 Aug</option>
-            <option value="9">09 Sep</option>
-            <option value="10">10 Oct</option>
-            <option value="11">11 Nov</option> 
-            <option value="12">12 Dec</option>
-        </SELECT>
+        <h2>DateOfExpiry </h2>
 
-        <br>
-          <br>
-          
-          <button class="w3-btn w3-theme-l1"
-                onclick="hideDateModal()">
+        <div style="font-size: 1.5em;width: 250px;">
+            <div style="float: left">
+                Month <br>
+                <select id="combo_month" 
+                        onchange="inputChangedByUser()"
+                        accesskey="m"
+                        size="13"
+                        >
+                    <option value="1" selected>01 Jan</option>
+                    <option value="2">02 Feb</option>
+                    <option value="3">03 March</option>
+                    <option value="4">04 April</option>
+                    <option value="5">05 May</option>
+                    <option value="6">06 June</option>
+                    <option value="7">07 July</option>
+                    <option value="8">08 Aug</option>
+                    <option value="9">09 Sep</option>
+                    <option value="10">10 Oct</option>
+                    <option value="11">11 Nov</option> 
+                    <option value="12">12 Dec</option>
+                </select>
+            </div>
+            <div style="float: right">
+                Year <br>
+                <!--                <input type="text" value="2020" 
+                                       id="year" 
+                                       style="width: 70px"
+                                       accesskey="y"
+                                       onkeyup="inputChangedByUser()">-->
 
-            Cancel
-        </button>
-              <span style="min-width: 3cm;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            
-            
-            <input type="button" class="w3-btn w3-theme-l1" 
-                   value="OK"
-                   onclick="updateCallerUIWithDate()"
-                   > 
-          
-          
-       
+                <select id="year" 
+                        onchange="inputChangedByUser()"
+                        accesskey="y"
+                        size="13"
+                        >
+                    <option value="2019" selected>2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2029">2029</option>
+
+                </select>
+
+            </div>
+            <br>
+            <div style=" bottom:10px;right: 10px;">
+
+                <input type="button" class="w3-btn w3-theme-l1" 
+                       value="OK"
+                       onclick="updateCallerUIWithDate()"
+                       > 
+
+                <button class="w3-btn w3-theme-l1"
+                        onclick="hideDateModal()">
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+        <br>
+        <center>
+
+        </center>
+
+
+
+
     </center>
 </div>
 {{:~ayLoad('/clinicPlus/module/entity_select/expiryDate/expiryDate.js')}}

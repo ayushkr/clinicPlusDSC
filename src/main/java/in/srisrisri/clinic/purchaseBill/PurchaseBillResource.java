@@ -5,7 +5,6 @@
  */
 package in.srisrisri.clinic.purchaseBill;
 
-
 import in.srisrisri.clinic.Constants.Constants1;
 import in.srisrisri.clinic.Vendor.VendorEntity;
 import in.srisrisri.clinic.Vendor.VendorRepo;
@@ -42,16 +41,14 @@ public class PurchaseBillResource {
     String label = "purchaseBill";
     private final Logger logger = LoggerFactory.getLogger(PurchaseBillResource.class);
 
- @Autowired
+    @Autowired
     PurchaseBillRepo purchaseBillRepo;
 
- @Autowired
+    @Autowired
     MedicineStockRepo medicineStockRepo;
-    
+
     @Autowired
     VendorRepo vendorRepo;
-
-   
 
     @GetMapping("")
     @ResponseBody
@@ -108,20 +105,28 @@ public class PurchaseBillResource {
         } else {
 
             if (filterColumn.equals("vendor")) {
-
                 VendorEntity vendorEntity = new VendorEntity();
                 vendorEntity.setId(Long.parseLong(filter));
-//                page = purchaseBillRepo.findAllByVendor(vendorEntity, pageable);
-
+                page = purchaseBillRepo.findAllByVendor(vendorEntity, pageable);
             }
-       
+
+            if (filterColumn.equals("billNo")) {
+                page = purchaseBillRepo.findAllByBillNoLike(filter, pageable);
+            }
+            
+              if (filterColumn.equals("dateOfBill")) {
+                  
+                page = purchaseBillRepo.findAllByDateOfBill(  Date.valueOf(filter),pageable);
+            }
+
         }
 
         PageCover<PurchaseBillEntity> pageCover = new PageCover<>(page);
 
         pageCover.setSortColumn(sortColumn);
-
         pageCover.setSortOrder(sortOrder);
+        pageCover.setFilter(filter);
+        pageCover.setFilterColumn(filterColumn);
 
         pageCover.setModule(label);
 
@@ -131,23 +136,21 @@ public class PurchaseBillResource {
     @GetMapping("{id}")
     @ResponseBody
     public Optional<PurchaseBillEntity> getMedicineNames(@PathVariable("id") Long id) {
-      PurchaseBillEntity purchaseBillEntitySaved;
+        PurchaseBillEntity purchaseBillEntitySaved;
 
         if (id >= 0) {
-           purchaseBillEntitySaved = purchaseBillRepo.findById(id).get();
-             purchaseBillEntitySaved.setUpdationTime(Date.valueOf(LocalDate.now()));
+            purchaseBillEntitySaved = purchaseBillRepo.findById(id).get();
+            purchaseBillEntitySaved.setUpdationTime(Date.valueOf(LocalDate.now()));
         } else {
             PurchaseBillEntity purchaseBillEntityNew = new PurchaseBillEntity();
 
             purchaseBillEntityNew.setCreationTime(Date.valueOf(LocalDate.now()));
             VendorEntity vendorEntity = vendorRepo.findById(0L).get();
-           
+
             purchaseBillEntityNew.setVendor(vendorEntity);
             purchaseBillEntityNew.setDateOfBill(Date.valueOf(LocalDate.now()));
-           purchaseBillEntitySaved =  purchaseBillRepo.save(purchaseBillEntityNew);
-         
+            purchaseBillEntitySaved = purchaseBillRepo.save(purchaseBillEntityNew);
 
-       
         }
         return Optional.of(purchaseBillEntitySaved);
     }

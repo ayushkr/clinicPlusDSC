@@ -167,9 +167,9 @@ public class MedicineStockResource {
         PurchaseBillEntity purchaseBillEntity = new PurchaseBillEntity();
         purchaseBillEntity.setId(id);
 
-        List<MedicineStockEntity> list
+        List<MedicineStockEntity> medicineStockEntityList
                 = medicineStockRepo.findByPurchaseBill(purchaseBillEntity);
-        SumDAOForPurchaseBill sumDAO = new SumDAOForPurchaseBill(list);
+        SumDAOForPurchaseBill sumDAO = new SumDAOForPurchaseBill(medicineStockEntityList);
         sumDAO.setBillId(id);
         try {
             sumDAO.calculateTotals();
@@ -181,7 +181,7 @@ public class MedicineStockResource {
         } catch (Exception e) {
             logger.warn("Exception= {} ", e);
             jsonResponse.setStatus(Constants1.FAILURE);
-            jsonResponse.setMessage("In sumDAO.calculateTotals(); <br>&nbsp;<span>"
+            jsonResponse.setMessage("In SumDAOForPurchaseBill.calculateTotals(); <br>&nbsp;<span>"
                     + e.toString() + "</span>");
             jsonResponse.getMap().put("payload", sumDAO);
             return new ResponseEntity<>(jsonResponse, HttpStatus.OK);

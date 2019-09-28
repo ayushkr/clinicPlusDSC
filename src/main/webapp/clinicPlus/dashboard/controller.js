@@ -100,8 +100,17 @@ function dummy(context) {
 
 
 }
+
+function showProcessing(){
+ var widgetbar=document.getElementById('widgets');
+// widgetbar.style="background-color:darkcyan";
+widgetbar.style="height:1000px";
+}
+
+
 var ayu;
 function cmd(context) {
+    showProcessing();
     console.log("cmd---context.app.element_selector=" + context.app.element_selector);
     console.log('div=' + this.params['div']);
     ayu = context;
@@ -148,6 +157,7 @@ function cmd(context) {
 
 
 function cmd_post(context, data) {
+    showProcessing();
 //    console.log("akr #/cmd/post=" + this);
 //                    alert('a data' + data);
     var module_direct = this.params['module_direct'];
@@ -166,6 +176,7 @@ function cmd_post(context, data) {
 
     $.ajax({
         type: "POST",
+        async: false,
         enctype: 'multipart/form-data',
         url: '/clinicPlus/api/' + module + '',
         beforeSend: beforeSend_authorize,
@@ -194,7 +205,11 @@ function cmd_post(context, data) {
                             window.history.back();
                             }
                         }else{
+//                            
+//                           
                             hideMainLevel();
+                            refresh_entitySelectList(module,'name');
+//                             document.getElementById('refresh_entitySelectListButton').click();
                         }
                         
                         

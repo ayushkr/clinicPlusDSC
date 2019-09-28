@@ -1,16 +1,16 @@
 
-<div style="padding:40px">
-    <hr>
-
-
-    1. Filter By brandName <input  type="text" onkeyup="filter('brandName','{{:~root.moduleName}}')"  ><br>
+<div style="padding:20px">
+    
+    1. Filter By brandName 
+    <input  type="text" 
+            id="filter_brandName"
+            onkeyup="filter('brandName','{{:~root.moduleName}}')"  ><br>
 
     2. Select a Medicine Brand Name  (Click item in dark rounded rectangle)<br>
-    <hr>
+    <br>
 
 
-
-    <div class="Table">
+    <div class="Table w3-padding">
         <div class="Title">
 
         </div>
@@ -30,20 +30,18 @@
         <div class="Row" id="select_{{:id}}"  >
             <div class="Cell"
 
-                 onclick='selectThis(
+                 > 
+
+                <button   
+                    class="entity_select_editButton" 
+                    title="{{:company}}"
+                         onclick='selectThis(
                  {
                  who:"{{:~root.moduleName}}",
                          id:{{:id}},
                           extra:{{:~jsonise(#data)}}
                  }
                  )' 
-                 
-                 
-                 > 
-
-                <button   
-                    class="entity_select_editButton" 
-                    title="{{:company}}"
                     >
                     {{:brandName}}
 

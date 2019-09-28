@@ -101,16 +101,12 @@ public class PharmacyBillResource {
         } else {
 
             if (filterColumn.equals("appointment")) {
-
                 AppointmentEntity appointmentEntity = new AppointmentEntity();
                 appointmentEntity.setId(Long.parseLong(filter));
                 page = pharmacyBillRepo.findAllByAppointment(appointmentEntity, pageable);
-
             }
             if (filterColumn.equals("patientName")) {
-
                 page = pharmacyBillRepo.findAllByPatientNameLike(filter, pageable);
-
             }
 
         }

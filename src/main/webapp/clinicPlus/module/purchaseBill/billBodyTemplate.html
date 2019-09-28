@@ -1,63 +1,99 @@
 <hr>
 {{for map.payload}}
- 
+
 <span  >
     <button
         onclick="go( - 1, 'medicineStock', {{:billId}})"
         class="w3-button w3-blue w3-margin" 
+        accesskey="a"
         >
-         <i class="fa fa-plus" title="add New MedicineStock">
-        
-    </i>
+        <i class="fa fa-plus" title="add New MedicineStock">
+
+        </i>
     </button>
-   
+
 </span>
 
 <div class="Table">
     <div class="Row bluestrp" >
-         <div class="Cell">Id </div>
-         <div class="Cell">Name </div>
-           <div class="Cell">expiryDate </div>
-         <div class="Cell">qty </div>
-          <div class="Cell">costPrice </div>
-          <div class="Cell">amount </div>
-          <div class="Cell">remarks </div>
+        <div class="Cell" >Id </div>
+        <div class="Cell" accesskey="l" tabindex="0">Name </div>
+        <div class="Cell">expiryDate </div>
+
+        <div class="Cell">MRP </div>
+        <div class="Cell">sellingPrice </div>
+        <div class="Cell">qty </div>
+        <div class="Cell">costPrice </div>
+        <div class="Cell">amount </div>
+        <div class="Cell">remarks </div>
     </div>
     {{for medicineStockEntitys }}
 
     <div class="Row " 
-         
-         onclick="go({{:id}}, 'medicineStock')" >
+
+         >
         <div class="Cell w3-padding ">{{:id}} </div>
         <div class="Cell">
-            {{if medicineBrandName }}
-            {{:medicineBrandName.brandName}}
-            {{/if}}
+            <button type="button" class="w3-button w3-green"
+                    onclick="go({{:id}}, 'medicineStock')"
+                    >
+                {{if medicineBrandName }}
+                {{:medicineBrandName.brandName}}
+                {{else}}
+                -----
+                {{/if}}
+            </button>
+
+
         </div>
-         <div class="Cell" >
-          {{:~ddyyyyDashed(expiryDate) }}
-         </div>
-        
-         <div class="Cell" >
-         {{:qtyPurchased}}
-         </div>
         <div class="Cell" >
-        {{:costPrice}}
+            {{:~ddyyyyDashed(expiryDate) }}
         </div>
-        
-          <div class="Cell" >
-        {{:amountTotal}}
+
+
+
+        <div class="Cell" >
+            {{:mrp}}
         </div>
-        
+        <div class="Cell" >
+            {{:sellingPrice}}
+        </div>
+        <div class="Cell" >
+            {{:qtyPurchased}}
+        </div>
+        <div class="Cell" >
+            {{:costPrice}}
+        </div>
+
+        <div class="Cell" >
+            {{:amountTotal}}
+        </div>
+
         <div class="Cell" > 
-        {{:remarks}}
+            {{:remarks}}
         </div>
     </div>
-    
+
     {{else}}
     Nothing 
 
     {{/for}}
+    <div class="Row">
+        <div class="Cell"></div>
+         <div class="Cell"></div>
+          <div class="Cell"></div>
+           <div class="Cell"></div>
+            <div class="Cell"></div>
+             <div class="Cell"></div>
+       
+        <div class="Cell">
+            Total
+        </div>
+             <div class="Cell" style="font-weight: bold" >
+            {{:amountTotalGrand}}
+        </div>
+             <div class="Cell"></div>
+    </div>
 
 </div>
 <br>

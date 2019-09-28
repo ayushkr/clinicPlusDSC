@@ -20,27 +20,11 @@
                   data-link="billNo" >---</span>
             <input type="hidden" name="billNo" data-link="billNo" />
         </div>
+        
+        <span id="selectLarge_dateOfBill">
+        </span>
+            
 
-
-
-        <div class="inp_outer"
-             title="എന്നാണ്  ബില്ല്   അടിച്ചത് "
-             onclick="popup_selection_obj(
-                 {
-                 'value': '{{:dateOfBill}}',
-                         'entity_select': 'dateForOrganisation',
-                         'input': 'dateOfBill'
-                 }
-                 )"
-             >
-            <div class="title1" >
-                dateOfBill
-            </div>
-            <span id="dateOfBill_display" class="inp2">
-                {{:dateOfBill}}</span>
-            <input id="dateOfBill" type="hidden"
-                   name="dateOfBill" data-link="dateOfBill" />
-        </div>
 
 
 
@@ -74,6 +58,7 @@
        href="/clinicPlus/home.html#/cmd?module=purchaseBill&amp;action=/all/list&amp;pageNumber=1&amp;div=main_1" 
         class='w3-button w3-green w3-margin'
         style="float: right"
+        accesskey="b"
        title="purchaseBill">
          Bills  
     </a>

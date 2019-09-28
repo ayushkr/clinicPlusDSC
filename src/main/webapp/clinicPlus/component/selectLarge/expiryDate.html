@@ -1,6 +1,7 @@
  <div class="inp_outer">
 
-                <div class="title1">expiryDate (MM/yyyy)</div>
+                <div class="title1">expiryDate
+                  </div>
 
                 <input  
                     type="hidden"
@@ -12,7 +13,8 @@
 
 
 
-                <div style='border: 1px;' 
+                <div  style='border: 1px;' 
+                       
                      onclick="popup_selection_obj(
                                      {
                                          'value': '{{:expiryDate}}',
@@ -20,13 +22,16 @@
                                          'input': 'expiryDate'
                                      })"
                      >
-                    <span id="expiryDate_display" class="inp2" >     
+                    <button 
+                        type="button"
+                        id="expiryDate_display"
+                        class="inp2" >     
                         {{if expiryDate}}
                         {{:~ddyyyyDashed(expiryDate) }}
 
                         {{else}}
                         ----
                         {{/if}}
-                    </span>
+                    </button>
                 </div>       
             </div>

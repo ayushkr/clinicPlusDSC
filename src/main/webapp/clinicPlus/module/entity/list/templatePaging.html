@@ -30,9 +30,32 @@
     </a>
     {{/for}}
     </div>
+         <hr>
+         .
+         <span style="float: left"> 
+             Filtered By:  
+             {{if obj.filterColumn=='undefined'}} None
+             {{else}}
+             {{:obj.filterColumn}}= {{:obj.filter}}
+             {{/if}}
+             
+         </span>
+      
+       <span style="float: right">
+           Sorted By:  
+           {{if obj.sortColumn=='undefined'}} None
+             {{else}}
+           {{:obj.sortColumn}}={{:obj.sortOrder}}
+           
+           {{/if}}
+       </span>
+       
+        <hr>
+        
         </center>
-    <br>
    
+    
+       
 </div> 
 
 

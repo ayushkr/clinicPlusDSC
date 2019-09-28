@@ -64,8 +64,8 @@
             </div>
             
              <div class="Cell">
-                ID manual
-                 {{:~sortByColumnUI('id_manual',obj)}}
+             bookId
+                 {{:~sortByColumnUI('bookId',obj)}}
                 
             </div>
             
@@ -121,11 +121,11 @@
         {{for obj.pageList.content}}
         {{if id!=0}}
         
-        <div class="Row" 
+        <div class="Row " 
              onclick="go({{:id}}, 'pharmacyBill')"
              
              class="firstrow">
-            <div class="Cell" >
+            <div class="Cell w3-padding-16" >
                 {{:#getIndex()+1}}
                     
             </div>
@@ -133,18 +133,18 @@
             <div class="Cell" 
                  style="height: 30px"
                  >
-                <button >
+                <button class="w3-button w3-green" >
                       {{:id}}
                 </button>
                
             </div>
             
             <div class="Cell" >
-                {{:id_manual}}
+                {{:bookId}}
                     
             </div>
             <div class="Cell"  style="font-size: 0.8em">
-                {{:dateOfBill}}
+                {{:~ddmmyyyyDashed(dateOfBill)}} 
             </div>
             <!--<div class="Cell" style="min-width: 85px">{{:dateOfBill}}</div>-->
 

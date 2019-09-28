@@ -151,8 +151,8 @@
 .CellNoPadding
 {
     display: table-cell;
-    border: solid var(--color_l3) 1px;
-    border-width: thin;
+    border-top: solid black 1px;
+   
     padding-left: 4px;
     padding-right: 5px;
     text-align: left;
@@ -161,8 +161,8 @@
 .Cell
 {
     display: table-cell;
-    border: solid var(--color_l3) 1px;
-    border-width: thin;
+    border-top: solid black 1px;
+  
     padding-left: 4px;
     padding-right: 5px;
     text-align: left;
@@ -179,3 +179,35 @@
 }
 
 
+.printOPcard_menu{
+        position: fixed;
+        top: 4cm;
+        /*left: 1cm;*/
+        z-index: 100;
+        
+    }
+
+
+ @font-face {
+        font-family: 'Prototype';
+        src: url('./fonts/prototype-webfont.woff2') format('woff2');  
+        /*src: url('./fonts/milea_demo.woff2') format('woff2');*/
+        /*src: url('./fonts/justAnotherHandRegular.woff2') format('woff2');*/
+        /*src: url('./fonts/manjari/Manjari-Regular.woff2') format('woff2');*/
+        /*src: url('./fonts/Verdana.woff2') format('woff2');*/
+
+        font-weight: normal;
+        font-style: normal;
+
+    }
+    
+      .button_none{
+        background-color: transparent;
+        border: none;
+        width: 100%;
+
+    }
+    
+    .w3-button{
+      color: black;  
+    }

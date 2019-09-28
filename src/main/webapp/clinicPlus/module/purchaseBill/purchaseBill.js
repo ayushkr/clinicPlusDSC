@@ -1,5 +1,7 @@
 
+
 manifestGUISelectLarge('vendor', apiDataGlobal.vendor);
+manifestGUISelectLarge('dateOfBill', apiDataGlobal.dateOfBill);
 
 
 function vendorSelected() {

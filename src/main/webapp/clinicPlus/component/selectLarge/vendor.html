@@ -17,15 +17,15 @@
                                          _afterClick: 'vendor_selected_button'
                                      })"
          >
-        <span id="vendor_display" class="inp2" >     
+        <button type="button" id="vendor_display" class="inp2" >     
             {{if vendor}}
             {{:vendor.name}}
             {{else}}
             ----
             {{/if}}
-        </span>
+        </button>
     </div>  
-    <button id="vendor_selected_button" 
+    <button type="button" id="vendor_selected_button" 
             onclick="vendorSelected()" 
             style="display:none">
         vendor selected

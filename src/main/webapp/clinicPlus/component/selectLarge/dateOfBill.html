@@ -1,15 +1,22 @@
 
- <div 
-         title="എന്നാണ്  ബില്ല്   അടിച്ചത് "
-         onclick="popup_selection_obj(
-             {
-             'value': '{{:dateOfBill}}',
-                     'entity_select': 'dateForOrganisation',
-                     'input': 'dateOfBill'
-             }
-             )"
-         >
-       
-        <span id="dateOfBill_display" class="inp2">{{:dateOfBill}}</span>
-        <input id="dateOfBill" type="hidden" name="dateOfBill" data-link="dateOfBill" />
-    </div>
+<div  style="display: inline-block" class="inp_outer"
+      title="എന്നാണ്  ബില്ല്   അടിച്ചത് "
+      onclick="popup_selection_obj(
+                         {
+                             'value': '{{:dateOfBill}}',
+                             'entity_select': 'dateForOrganisation',
+                             'input': 'dateOfBill'
+                         }
+                 )"
+      >
+    <div class="title1" >dateOfBill</div>
+    <button type="button" id="dateOfBill_display" class="inp2" >
+        {{if dateOfBill}}
+        {{:dateOfBill}}
+        {{else}}
+        ---
+        {{/if}}
+
+    </button>
+    <input id="dateOfBill" type="hidden" name="dateOfBill" data-link="dateOfBill" />
+</div>

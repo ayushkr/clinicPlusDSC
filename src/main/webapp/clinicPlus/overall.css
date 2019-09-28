@@ -81,18 +81,7 @@
         font-style: normal;
     }
 
-    @font-face {
-        font-family: 'proto';
-        src: url('./fonts/prototype-webfont.woff2') format('woff2');  
-        /*src: url('./fonts/milea_demo.woff2') format('woff2');*/
-        /*src: url('./fonts/justAnotherHandRegular.woff2') format('woff2');*/
-        /*src: url('./fonts/manjari/Manjari-Regular.woff2') format('woff2');*/
-        /*src: url('./fonts/Verdana.woff2') format('woff2');*/
-
-        font-weight: normal;
-        font-style: normal;
-
-    }
+  
 
     @font-face {
         font-family: 'Prototype';
@@ -155,6 +144,7 @@
         top: 4cm;
         /*left: 1cm;*/
         z-index: 100;
+        
     }
     .td_1{
         padding: 20px;
@@ -286,8 +276,10 @@
     }
 
     .widgetBar,.widgets2{
-        height: 35px;
+        height: 46px;
         background-color: var(--color_l3);
+        /*transition: height 1s;*/
+         /*transform: rotate(180deg);*/
     }
     .widgets2_rounded{
         position: fixed;
@@ -1092,8 +1084,9 @@
         border: solid blue 1px;
     }
     .w3-btn, .w3-button {
-        border-radius: 2mm;
+        border-radius: 24mm;
         /*display: block;*/
+        margin: 4px;
         padding: 10px;
         text-decoration: none;
         color: white;
@@ -1200,6 +1193,8 @@
     {
         display: table;
         /*background-color: #029ef3*/
+         border-bottom: solid var(--color_l3) 1px;
+          border-right: solid var(--color_l3) 1px;
     }
     .Title
     {
@@ -1256,7 +1251,8 @@
     .Cell
     {
         display: table-cell;
-        border: solid var(--color_l3) 1px;
+        border-left: solid var(--color_l3) 1px;
+         border-top: solid var(--color_l3) 1px;
         border-width: thin;
         padding-left: 4px;
         padding-right: 5px;

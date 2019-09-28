@@ -8,15 +8,18 @@
     <div id="dateGr" >
 
         <div class="w3-bar-ay"  >
+            <a class="w3-bar-item tablink tabSelected" 
+               onClick="openCity(event, 'group')">
+                Date Group</a>
 
-            <a class="w3-bar-item  tablink tabSelected" 
-               onClick="openCity(event, 'range')">Date Range</a>
+            <a class="w3-bar-item  tablink " 
+               onClick="openCity(event, 'range')">
+                Date Range</a>
 
-            <a class="w3-bar-item tablink " 
-               onClick="openCity(event, 'group')">Date Group</a>
+
         </div>
 
-        <div id="range" class=" w3-border city w3-container_akr">
+        <div id="range" class=" w3-border city city_hide w3-container_akr">
 
             <div class="inp_outer" >
                 <div class="inp1" 
@@ -77,7 +80,7 @@
 
         </div>
 
-        <div id="group" class=" w3-border city city_hide w3-container_akr" >
+        <div id="group" class=" w3-border city city w3-container_akr" >
 
             <button class="w3-btn2 dsc_blue"
                     onclick="dateGroup('db_yesterday')"

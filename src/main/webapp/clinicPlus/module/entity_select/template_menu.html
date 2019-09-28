@@ -2,6 +2,7 @@
     
          <!--class="paddingButton"-->
  <button
+     _accesskey="a"
      class="w3-button w3-blue"
      title="Add New"
      onclick="populateCreate2('{{:moduleName}}', -1,newModal().id);"
@@ -10,13 +11,20 @@
  </button>
  
  
-  <button   class="w3-button w3-blue"
-          title="Refresh"
+<!--  <button   class="w3-button w3-blue"
+          _accesskey="r"
+          id="refresh_entitySelectListButton"
+            title="Refresh"
           
             onclick="refresh_entitySelectList('{{:moduleName}}', 'name');"
             >
       <i class="fa fa-refresh"></i>
-  </button>
+  </button>-->
+         
+<b>{{:moduleName}} </b>
+<!--         <button _accesskey="l" class="buttonNone">
+             
+         </button>-->
 
 
 <!--<div onclick="hideMainLevel()" 

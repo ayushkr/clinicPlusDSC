@@ -5,18 +5,13 @@
  */
 package in.srisrisri.clinic.purchaseBill;
 
-import in.srisrisri.clinic.pharmacyBillRow.*;
-import in.srisrisri.clinic.exception.CustomException;
 import in.srisrisri.clinic.medicineStock.MedicineStockEntity;
-import in.srisrisri.clinic.medicineStock.MedicineStockRepo;
 import in.srisrisri.clinic.utils.FinanceUtils;
 import java.math.BigDecimal;
 
 import java.util.List;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -25,10 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class SumDAOForPurchaseBill {
 
     private final Logger logger = LoggerFactory.getLogger(SumDAOForPurchaseBill.class);
-    
     List<MedicineStockEntity> medicineStockEntitys;
-
     Long billId;
+    BigDecimal amountTotalGrand = new BigDecimal(0);
+    
+    
 
     public SumDAOForPurchaseBill(List<MedicineStockEntity> medicineStockEntitys) {
         this.medicineStockEntitys = medicineStockEntitys;
@@ -37,14 +33,18 @@ public class SumDAOForPurchaseBill {
 
     public boolean calculateTotals() throws Exception {
         String error = "";
-        logger.warn("calculateTotals not impl");
-
+        logger.warn("SumDAOForPurchaseBill.calculateTotals strated");
+        for (MedicineStockEntity medicineStockEntity : medicineStockEntitys) {
+            BigDecimal amountTotal = medicineStockEntity.getAmountTotal();
+           amountTotalGrand= amountTotalGrand.add(amountTotal);
+            logger.warn("SumDAOForPurchaseBill.calculateTotals amountTotal=" + amountTotal);
+        }
+       amountTotalGrand= FinanceUtils.round(amountTotalGrand, 2);
+        
+          logger.warn("SumDAOForPurchaseBill.calculateTotals amountTotalGrand=" + amountTotalGrand);
 
         return true;
     }
-
-    
-
 
     public Long getBillId() {
         return billId;
@@ -62,6 +62,14 @@ public class SumDAOForPurchaseBill {
         this.medicineStockEntitys = medicineStockEntitys;
     }
 
-  
+    public BigDecimal getAmountTotalGrand() {
+        return amountTotalGrand;
+    }
 
+    public void setAmountTotalGrand(BigDecimal amountTotalGrand) {
+        this.amountTotalGrand = amountTotalGrand;
+    }
+
+    
+    
 }
