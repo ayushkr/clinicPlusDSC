@@ -60,13 +60,13 @@
                 <th>id
                     {{:~sortByColumnUI('id',obj)}}
                 </th>
-                <th>fixedId
+                <th>fId
                     {{:~sortByColumnUI('id',obj)}}
                 </th>
 
 
                 <th >
-                    bookId
+                    book <br>Id
                     {{:~sortByColumnUI('id',obj)}}</th>
 
                 <th style="min-width: 100px">
@@ -96,6 +96,7 @@
 
                 <th>Phone
                     {{:~sortByColumnUI('contactPhone',obj)}}
+                   
                 </th>
 
 
@@ -105,7 +106,7 @@
                 </th>
 
                 <th class="dontPrint">Actions</th>
-
+ <th class="dontPrint">Other</th>
             </tr>
         </thead>
         <tbody>
@@ -117,8 +118,8 @@
                 >
 
 
-                <td onclick="copyToClipBoardValue('{{:id}}')">
-                    <span >
+                <td onclick="go({{:id}}, 'patient')">
+                    <span  class="w3-button w3-green">
 
                         {{:id}}
                     </span>
@@ -148,7 +149,8 @@
                     {{if sex=='T' }} <i class="fa fa-transgender"></i> {{/if}}
                 </td>
                 <td 
-                    onclick="go({{:id}}, 'patient')"
+                    onclick="copyToClipBoardValue('patient {{:name}}')"
+                    
                     >
                     <span  >     
                         {{:name}}
@@ -163,8 +165,11 @@
                     >{{:dob}}</td>
 
                 <td
-                    onclick="go({{:id}}, 'patient')"
-                    >{{:contactPhone}}</td>
+                    
+                    >
+                     <a href="tel:{{:contactPhone}}" target="_blank" class="w3-button">
+                         {{:contactPhone}}</a>
+                </td>
 
                 <td
                     onclick="go({{:id}}, 'patient')"
@@ -176,6 +181,11 @@
 
 
 
+                </td>
+                <td> 
+                    <a href="https://wa.me/{{:contactPhone}}" target="_blank" class="w3-button">wp</a>
+                      <a href="tel:{{:contactPhone}}" target="_blank" class="w3-button">tel</a>
+               <!--<a href="intent://send/phonenumber#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end">Send Message</a>-->
                 </td>
             </tr>
             {{else}}
