@@ -150,7 +150,9 @@
 
             {{if appointment}}
             <div class="Cell">{{:appointment.id}}</div>
-            <div class="Cell">{{:appointment.dateOfAppointment}}</div>
+            <div class="Cell">
+                 {{:~ddmmyyyyDashed(appointment.dateOfAppointment)}} 
+               </div>
             <div class="Cell" >{{:appointment.patient.name}}</div>
             <div class="Cell">{{:appointment.doctor.name}}</div>
 

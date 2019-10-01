@@ -12,7 +12,8 @@
     <div class="title1" >dateOfBill</div>
     <button type="button" id="dateOfBill_display" class="inp2" >
         {{if dateOfBill}}
-        {{:dateOfBill}}
+       
+         {{:~ddmmyyyyDashed(dateOfBill) }}
         {{else}}
         ---
         {{/if}}
