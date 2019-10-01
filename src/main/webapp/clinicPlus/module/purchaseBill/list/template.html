@@ -1,59 +1,44 @@
 <div class='w3-container'>
 
-    <div 
-        data-akr-printable="false" class="w3-container"
-        >
-        
+    <div data-akr-printable="false" class="w3-container">
+
         <div style="display: inline-block">
             <div style="display: inline-block">
                 <span id='selectLarge_dateOfBill'>
                     selectLarge_dateOfBill
                 </span>
             </div>
-            <input type="button" 
-                   style="display: none"
-                   id='dateOfBill_afterClick'
-
-                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=dateOfBill&filter=' + document.getElementById('dateOfBill').value + ''"
-                   >
+            <input type="button" style="display: none" id='dateOfBill_afterClick'
+                onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=dateOfBill&filter=' + document.getElementById('dateOfBill').value + ''">
         </div>
 
         <div class="inp_outer" style="min-width: 100px">
-            <div class="inp1" >
+            <div class="inp1">
                 <div class="title1"> vendor billNo </div>
             </div>
 
             <!--2onkeyup="document.getElementById('afterClick_appointment').click()"-->
-            <input id="billNo" 
-                   name='billNo' type="text"  value="" 
-                   class="inp2"
-
-                   data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=billNo&filter="
-                   onkeyup="filter1()"
-                   > 
+            <input id="billNo" name='billNo' type="text" value="" class="inp2"
+                data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=billNo&filter="
+                onkeyup="filter1()">
         </div>
         <div style="display: inline-block">
             <span id='selectLarge_vendor'>
                 selectLarge_vendor
             </span>
-            <input type="button" 
-                   style="display: none"
-                   id='vendor_afterClick'
-
-                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=vendor&filter=' + document.getElementById('vendor').value + ''"
-                   >
+            <input type="button" style="display: none" id='vendor_afterClick'
+                onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=vendor&filter=' + document.getElementById('vendor').value + ''">
 
         </div>
-        
-        <a href="#/cmd?module={{:obj.module}}&action=/all/list&amp;pageNumber=1" 
-           class="w3-button w3-green"> 
+
+        <a href="#/cmd?module={{:obj.module}}&action=/all/list&amp;pageNumber=1" class="w3-button w3-green">
 
             <i class="fa fa-filter">x</i>
         </a>
 
         <br>
-        
-        
+
+
 
 
     </div>
@@ -61,16 +46,16 @@
 
 
 
-    <div id="printableArea"   title="PharmacyBill_Profile" >
+    <div id="printableArea" title="PharmacyBill_Profile">
 
         <h3>List of Purchase Bills</h3>
-        <div class="Table"  class="table_greyBorder" >
+        <div class="Table" class="table_greyBorder">
 
-            <div  class="Heading bluestrp">
+            <div class="Heading bluestrp">
 
 
-                <div class="Cell" >
-                    id 
+                <div class="Cell">
+                    id
                     {{:~sortByColumnUI('id',obj)}}
 
                 </div>
@@ -92,7 +77,7 @@
 
 
 
-                <div class="Cell" >
+                <div class="Cell">
                     vendor
                     {{:~sortByColumnUI('vendor_id',obj)}}
 
@@ -115,25 +100,20 @@
 
 
             {{for obj.pageList.content}}
-            <div class="Row"
-                 style="height: 30px"
-                 onclick="go({{:id}}, 'purchaseBill', {{:id}})"
-                 class="firstrow">
-                <div class="Cell w3-padding"
-
-                     >
+            <div class="Row" style="height: 30px" onclick="go({{:id}}, 'purchaseBill', {{:id}})" class="firstrow">
+                <div class="Cell w3-padding">
                     <button type="button" class="w3-button w3-green">
                         {{:id}}
                     </button>
 
                 </div>
 
-                <div class="Cell"  style="font-size: 0.8em">
-                    {{:~ddmmyyyyDashed(dateOfBill)}} 
+                <div class="Cell" style="font-size: 0.8em">
+                    {{:~ddmmyyyyDashed(dateOfBill)}}
                 </div>
 
 
-                <div class="Cell"  style="font-size: 0.8em">
+                <div class="Cell" style="font-size: 0.8em">
                     {{:billNo}}
                 </div>
 
@@ -141,7 +121,7 @@
                 <div class="Cell">
                     {{if vendor }} {{:vendor.name}}{{/if}}
                 </div>
-                <div class="Cell"  style="font-size: 0.8em">
+                <div class="Cell" style="font-size: 0.8em">
                     {{:cash}}
                 </div>
                 <div class="Cell" style="min-width: 150px">
@@ -150,7 +130,7 @@
 
 
 
-            </div>  
+            </div>
 
             {{else}}
             No members...
@@ -162,10 +142,9 @@
 
 
 <style>
-    .td3{
+    .td3 {
         font-size: 10px;
         text-align: right;
         padding-right: 12px;
     }
-
 </style>

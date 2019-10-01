@@ -1,212 +1,201 @@
 <html>
+
 <head>
     <title>kk</title>
     <link rel="stylesheet" href="/clinicPlus/theme.css">
 </head>
-<body class="body">
-   
- 
-    
-<!--    <span onclick="window.print()">pr</span>-->
-    <div id="navbar" style="display: none"></div>
-<div id="mainCover"   >
-    
-    <div id="hideMainLevelButton_div" 
-         
-         style="display: none" >
-        <span class="hideMainLevelButton" 
-              title="close"
-              accesskey="x"
-         onclick="hideMainLevel()">
-             <i class="fa fa-close"> </i>
-        </span>
-       
-    </div>
-    
-    <div id="alert_akr" class="alert_akr" style="display: none">
-        <!--alert_akr-->
-        <div onclick="hideDivAy('alert_akr')" >
-            <i class="fa fa-times" 
-               style="font-size: 50px;float: right;"> </i></div>
-        <div id="alert_akr_head"
-              class="alert_akr_head"
-             >alert_akr_head</div>
-        <div id="alert_akr_body"
-             class="alert_akr_body"
-             >alert_akr_body</div>
-    </div> 
 
-    <div id="main_1" 
-         style="height: -webkit-fill-available;" >
-        <div id="main_1_menu" >
-            <!--main_1_menu-->
+<body class="body">
+    <div id='loadingImage'
+     style="position: fixed;top:100px;left: 100px;z-index: 999999;visibility: hidden;">
+        <span style="font-size: 100px; background-color: rgba(84, 163, 53, 0.507)">
+            Loading ....
+        </span>
+    </div>
+
+
+
+    <!--    <span onclick="window.print()">pr</span>-->
+    <div id="navbar" style="display: none"></div>
+    <div id="mainCover">
+
+        <div id="hideMainLevelButton_div" style="display: none">
+            <span class="hideMainLevelButton" title="close" accesskey="x" onclick="hideMainLevel()">
+                <i class="fa fa-close"> </i>
+            </span>
+
         </div>
 
+        <div id="alert_akr" class="alert_akr" style="display: none">
+            <!--alert_akr-->
+            <div onclick="hideDivAy('alert_akr')">
+                <i class="fa fa-times" style="font-size: 50px;float: right;"> </i></div>
+            <div id="alert_akr_head" class="alert_akr_head">alert_akr_head</div>
+            <div id="alert_akr_body" class="alert_akr_body">alert_akr_body</div>
+        </div>
+
+        <div id="main_1" style="height: -webkit-fill-available;">
+            <div id="main_1_menu">
+                <!--main_1_menu-->
+            </div>
 
 
-        <div id="main_1_inner">
-            <!--main_1_inner-->
-            <div id="widgets"></div>
-            <center>
-                <br><br>
 
-                <br><br>
-                <div style="font-family: 'Prototype'">
-                    <span style="font-size: 100px;
+            <div id="main_1_inner">
+                <!--main_1_inner-->
+                <div id="widgets"></div>
+                <center>
+                    <br><br>
+
+                    <br><br>
+                    <div style="font-family: 'Prototype'">
+                        <span style="font-size: 100px;
                           background-color: darkcyan;
                           color: white;
                           padding: 19px;
                           border-radius: 11px;">
-                        ClinicPlus</span> 
-                    <br><br>
-                    <h2 style="color: var(--color_d3);">
-                        My Comfortable Clinic 
-                    </h2>
-                </div>
-                <span>Version 3.1</span>
-
-                <br>  
-                Copyrighted By SRISRISRI
-                <br>
-                emailidofayush@gmail.com
-                <br>
-                WhatsApp  / Telegram : 7907996990
-
-
-
-
-                <div id="loginForm"
-
-                     class="container-fluid">
-
-                    <div class="row">
-                        <div class="col-sm-4" style="background-color:lavender;"></div>
-                        <div class="col-sm-4">
-                            <div class="form-signin">
-                                <h5 id="prompt" class="form-signin-heading">Please sign in</h5>
-
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                username
-                                            </td>
-                                            <td>
-                                                <input id="username" name='username'
-                                                       class="form-control" 
-                                                       placeholder="username"
-                                                       required="" autofocus=""
-                                                       value="javainuse" type="text">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Password
-                                            </td>
-                                            <td>
-                                                <input id="password" 
-                                                       class="form-control" 
-                                                       placeholder="password" 
-                                                       name='password'
-                                                       required="" 
-                                                       value='password' 
-                                                       type="password">
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-
-                                <button onclick="authorize()">Ok
-
-
-                                </button>
-                            </div>
-                        </div> <!-- /container -->
+                            ClinicPlus</span>
+                        <br><br>
+                        <h2 style="color: var(--color_d3);">
+                            My Comfortable Clinic
+                        </h2>
                     </div>
-                </div>
+                    <span>Version 3.1</span>
+
+                    <br>
+                    Copyrighted By SRISRISRI
+                    <br>
+                    emailidofayush@gmail.com
+                    <br>
+                    WhatsApp / Telegram : 7907996990
 
 
-            </center>
+
+
+                    <div id="loginForm" class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-sm-4" style="background-color:lavender;"></div>
+                            <div class="col-sm-4">
+                                <div class="form-signin">
+                                    <h5 id="prompt" class="form-signin-heading">Please sign in</h5>
+
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    username
+                                                </td>
+                                                <td>
+                                                    <input id="username" name='username' class="form-control"
+                                                        placeholder="username" required="" autofocus=""
+                                                        value="javainuse" type="text">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Password
+                                                </td>
+                                                <td>
+                                                    <input id="password" class="form-control" placeholder="password"
+                                                        name='password' required="" value='password' type="password">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                    <button onclick="authorize()">Ok
+
+
+                                    </button>
+                                </div>
+                            </div> <!-- /container -->
+                        </div>
+                    </div>
+
+
+                </center>
+
+            </div>
+            <div id="main_1_paging">
+                <!--main_1_paging-->
+            </div>
 
         </div>
-        <div id="main_1_paging" >
-            <!--main_1_paging-->
+
+
+
+        <div id="main_2" class='modalLayer'>
+
+
+        </div>
+        <div id="main_3" class='modalLayer'>
+
+        </div>
+        <div id="main_4" class='modalLayer'>
+
+        </div>
+        <div id="main_5" class='modalLayer'>
+
+        </div>
+        <div id="main_6" class='modalLayer'>
+
+        </div>
+
+        <div id='modalDate' class='modalLayer'>
+
+            <div id="modalDate_menu"></div>
+            <div id="modalDate_inner">modalDate</div>
+            <div id="modalDate_paging"></div>
         </div>
 
     </div>
 
-
-
-    <div id="main_2" class='modalLayer'>
-
-
-    </div>
-    <div id="main_3" class='modalLayer'>
-
-    </div>
-    <div id="main_4" class='modalLayer'>
-
-    </div>
-    <div id="main_5" class='modalLayer'>
-
-    </div>
-    <div id="main_6" class='modalLayer'>
-
-    </div>
-    
-    <div id='modalDate' class='modalLayer'> 
-       
-        <div id="modalDate_menu"></div>
-        <div id="modalDate_inner">modalDate</div>
-        <div id="modalDate_paging"></div>
+    <div id="main">
     </div>
 
-</div>
-
-<div id="main">
-</div>
-
-<link rel="stylesheet" href="/clinicPlus/theme_sailorBlue.css">
-<link rel="stylesheet" media="print" href="/clinicPlus/print.css" />
-<link rel="stylesheet" href="/clinicPlus/overall.css">
-<link rel="stylesheet" href="/clinicPlus/js_css/index.css">
-<link rel="stylesheet" href="/clinicPlus/js_css/font-awesome.min.css">
-<!--<link rel="stylesheet" href="/clinicPlus/js_css/fontAwesome/fontawesome-free-5.9.0-web/css/all.css">-->
-<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.css" />-->
-<link rel="stylesheet" href="/clinicPlus/js_css/w3.css">
+    <link rel="stylesheet" href="/clinicPlus/theme_sailorBlue.css">
+    <link rel="stylesheet" media="print" href="/clinicPlus/print.css" />
+    <link rel="stylesheet" href="/clinicPlus/overall.css">
+    <link rel="stylesheet" href="/clinicPlus/js_css/index.css">
+    <link rel="stylesheet" href="/clinicPlus/js_css/font-awesome.min.css">
+    <!--<link rel="stylesheet" href="/clinicPlus/js_css/fontAwesome/fontawesome-free-5.9.0-web/css/all.css">-->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.css" />-->
+    <link rel="stylesheet" href="/clinicPlus/js_css/w3.css">
 
 
-<link rel="icon" href="./dscLogo.png">
-<link rel="stylesheet" href="/clinicPlus/theme.css">
-<script src="/clinicPlus/js_css/jquery.min.js"></script>
-<script src="/clinicPlus/js_css/jsRV/jsviews.min.js"></script>
-<script src="/clinicPlus/js_css/jsRV/jsrvHelperByAyush.js?ran=1234"></script>
-<script >
-console.log('home.html');
-    function pageNewAy(status) {
+    <link rel="icon" href="./dscLogo.png">
+    <link rel="stylesheet" href="/clinicPlus/theme.css">
+    <script src="/clinicPlus/js_css/jquery.min.js"></script>
+    <script src="/clinicPlus/js_css/jsRV/jsviews.min.js"></script>
+    <script src="/clinicPlus/js_css/jsRV/jsrvHelperByAyush.js?ran=1234"></script>
+    <script>
+        console.log('home.html');
+        function pageNewAy(status) {
 
-        if (status === 1) {
-            return "?refreshId=" + Math.random();
-        } else {
-            return "?refreshId=0";
-        }
+            if (status === 1) {
+                return "?refreshId=" + Math.random();
+            } else {
+                return "?refreshId=0";
+            }
 
-    };
-    
-    $.getScript("/clinicPlus/overall.js" + pageNewAy(1));
-    console.log(' end of script pageNewAy home.html');
-</script>
-<!--<script src="/clinicPlus/overall.js"></script>-->
+        };
+
+        $.getScript("/clinicPlus/overall.js" + pageNewAy(1));
+        console.log(' end of script pageNewAy home.html');
+    </script>
+    <!--<script src="/clinicPlus/overall.js"></script>-->
 
 
-<!--<script src="/clinicPlus/js_css/mousetrap.min.js"></script>-->
-<!--<script src="/clinicPlus/js_css/mousetrap-bind-dictionary.min.js"></script>-->
+    <!--<script src="/clinicPlus/js_css/mousetrap.min.js"></script>-->
+    <!--<script src="/clinicPlus/js_css/mousetrap-bind-dictionary.min.js"></script>-->
 
-<script src="/clinicPlus/js_css/sammy.js"></script>
-<script src="/clinicPlus/js_css/include_html_snippet.js?ran=11"></script>
-<script src='/clinicPlus/dashboard/helper_for_controller.js'></script>
-<script src='/clinicPlus/dashboard/controller.js'></script>
+    <script src="/clinicPlus/js_css/sammy.js"></script>
+    <script src="/clinicPlus/js_css/include_html_snippet.js?ran=11"></script>
+    <script src='/clinicPlus/dashboard/helper_for_controller.js'></script>
+    <script src='/clinicPlus/dashboard/controller.js'></script>
 
 </body>
+
 </html>

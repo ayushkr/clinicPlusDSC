@@ -2,6 +2,7 @@
 //updateCurrentDate('dateCurrent');
 
 function  routeFunctions(c) {
+    // loading(1);
     console.log('routeFunctions() ' + c);
     this.debug = true;
     this.get('#/', function () {
@@ -101,21 +102,23 @@ function dummy(context) {
 
 }
 
-function showProcessing(){
- var widgetbar=document.getElementById('widgets');
-// widgetbar.style="background-color:darkcyan";
-widgetbar.style="height:1000px";
+function loading2(status){
+ var loadingImage=document.getElementById('loadingImage');
+ if(status==1){
+ loadingImage.style.display="unset";
+}else{
+    loadingImage.style.display="hidden"; 
+}
 }
 
 
 var ayu;
 function cmd(context) {
-    showProcessing();
+    loading(1,'Loading '+this.params['module']+"....",'');
     console.log("cmd---context.app.element_selector=" + context.app.element_selector);
     console.log('div=' + this.params['div']);
     ayu = context;
-//    
-//    loading('Loading','Please Wait....');
+
 
     var params_ = Object.getOwnPropertyNames(this.params);
 
@@ -157,7 +160,7 @@ function cmd(context) {
 
 
 function cmd_post(context, data) {
-    showProcessing();
+    loading(1,'posting ...','');
 //    console.log("akr #/cmd/post=" + this);
 //                    alert('a data' + data);
     var module_direct = this.params['module_direct'];

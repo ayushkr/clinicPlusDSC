@@ -1,43 +1,29 @@
 <!-- entity /update/template_menuTop_update-->
 
-<div id="widgets" class="widgetBar" 
-     data-akr-printable="false" >
+<div id="widgets" class="widgetBar" data-akr-printable="false">
 
-    <div style="position:fixed" class="topBarStrip" >
-        <span  tabindex="-1" accesskey="m"
-            class="pageTitle"
-            style="float:left">{{:moduleName}}</span>
+    <div style="position:fixed" class="topBarStrip">
+        <span tabindex="-1" accesskey="m" class="pageTitle" style="float:left">{{:moduleName}}</span>
 
 
 
 
 
-        <button  
-            accesskey="s"
-            data-toggle="tooltip" 
-                 title="Save" 
-                 class="w3-button w3-green "
-                 style="float: right"
-                 onclick="save('{{:moduleName}}');">
-<!--            <i class="fa fa-save"  > </i>-->
-OK
- 
+        <button id='save' accesskey="s" data-toggle="tooltip" title="Save" class="w3-button w3-green "
+            style="float: right" onclick="save('{{:moduleName}}');">
+            <!--            <i class="fa fa-save"  > </i>-->
+            OK
+
         </button>
 
 
 
-        <button 
-            accesskey="p"
-            onclick="printDiv_navOff('navbar')" 
-                class="w3-btn2 "
-                style="float: right"
-                data-toggle="tooltip" 
-                title="Print this page" 
-                > <i class="fa fa-print"> </i>
-        </button> 
+        <button accesskey="p" onclick="printDiv_navOff('navbar')" class="w3-btn2 " style="float: right"
+            data-toggle="tooltip" title="Print this page"> <i class="fa fa-print"> </i>
+        </button>
 
         <!--back button-->
-<!--        <button 
+        <!--        <button 
             accesskey="b"
             style="float: right"
             class="w3-btn2 "
@@ -46,22 +32,14 @@ OK
             title="Back" 
             > <i class="fa fa-arrow-left"> </i>
         </button>-->
-        
-        
-        
-        <span style="margin-left: 2cm;float:right"> &nbsp;  </span>
-        <button 
-            accesskey="d"
-            onclick="goto_delete('{{:moduleName}}', '{{:id}}')" 
-            data-toggle="tooltip" title="Delete" 
-            style="float: right"
-            class="w3-btn2 "
 
-            >
-            <i class="fa fa-trash " 
 
-               ></i>
-        </button> 
+
+        <span style="margin-left: 2cm;float:right"> &nbsp; </span>
+        <button accesskey="d" onclick="goto_delete('{{:moduleName}}', '{{:id}}')" data-toggle="tooltip" title="Delete"
+            style="float: right" class="w3-btn2 ">
+            <i class="fa fa-trash "></i>
+        </button>
     </div>
     <br><br>
 
@@ -69,70 +47,67 @@ OK
 
 <div class="companyHeader">
     <center>
-        
-      <table border="0">
-        <tbody>
-            <tr>
-                <td colspan="3">
-        <center>
-            <table >
-                <tbody>
-                    <tr>
-                        <td>
-                            <div style="font-family: ProtoType">
-                                <center>
 
-                                    <span style="font-size:30px;text-align:left;font-weight: bold">
-                                        DOCTORS SPECIALITY CENTRE <br>
-                                    </span>
+        <table border="0">
+            <tbody>
+                <tr>
+                    <td colspan="3">
+                        <center>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div style="font-family: ProtoType">
+                                                <center>
 
-                                    <span style="font-size:14px;text-align:center;">
-                                        36/5588, USHUS THIRUVAMBADY,
-                                        PATTURAIKKAL JN ,THRISSUR -680022 <br>
-                                    </span>
+                                                    <span style="font-size:30px;text-align:left;font-weight: bold">
+                                                        DOCTORS SPECIALITY CENTRE <br>
+                                                    </span>
 
-                                    <span style="font-size:14px;text-align:center;">
-                                        <!--                        Website: &nbsp;-->
-                                        <i class="fa fa-globe"></i>
-                                        www.doctorsspecialitycentre.com &nbsp;&nbsp;
-                                        <!--                        email : &nbsp; -->
-                                        <i class="fa fa-envelope"></i>
-                                        doctorsspecialitycentre@gmail.com &nbsp;&nbsp;
-                                        <br>
-                                        <!--                        Phone &nbsp;-->
-                                        <i class="fa fa-phone"></i> 
-                                        &nbsp;8592918888 
+                                                    <span style="font-size:14px;text-align:center;">
+                                                        36/5588, USHUS THIRUVAMBADY,
+                                                        PATTURAIKKAL JN ,THRISSUR -680022 <br>
+                                                    </span>
 
-                                    </span>
+                                                    <span style="font-size:14px;text-align:center;">
+                                                        <!--                        Website: &nbsp;-->
+                                                        <i class="fa fa-globe"></i>
+                                                        www.doctorsspecialitycentre.com &nbsp;&nbsp;
+                                                        <!--                        email : &nbsp; -->
+                                                        <i class="fa fa-envelope"></i>
+                                                        doctorsspecialitycentre@gmail.com &nbsp;&nbsp;
+                                                        <br>
+                                                        <!--                        Phone &nbsp;-->
+                                                        <i class="fa fa-phone"></i>
+                                                        &nbsp;8592918888
 
-                                </center>
-                            </div>
+                                                    </span>
+
+                                                </center>
+                                            </div>
 
 
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </center>  
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </center>
 
-        </td>
-       
-        </tr>
+                    </td>
 
-        <tr>
+                </tr>
 
-            <td class="gstSpacing">
-        <center>
-            
-        </center>
-        </td>
+                <tr>
 
-        </tr>
-        </tbody>
-    </table>
+                    <td class="gstSpacing">
+                        <center>
+
+                        </center>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
         <hr>
     </center>
 </div>
-
-
-

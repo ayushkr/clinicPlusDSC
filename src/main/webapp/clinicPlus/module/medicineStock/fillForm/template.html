@@ -1,46 +1,40 @@
-
 <!--medicineStock-->
 
-<form id='form_medicineStock' method="post" 
-      action="{{:renderInDiv}}#/cmd/post">  
+<form id='form_medicineStock' method="post" action="{{:renderInDiv}}#/cmd/post">
     <input type='hidden' name='module_direct' value='medicineStock'>
     <input type='hidden' name='redirect' value=' #/cmdc?module=medicineStock&action=/all/list'>
 
 
-    <div id="printableArea"  
-         class="w3-container"
-         title="MedicineStock_{{:id}}_{{if medicineBrandName}}{{:medicineBrandName.brandName}}{{/if}}" >
-        medicineStock 
+    <div id="printableArea" class="w3-container"
+        title="MedicineStock_{{:id}}_{{if medicineBrandName}}{{:medicineBrandName.brandName}}{{/if}}">
+        medicineStock
         <input type="hidden" name="id" data-link="id" />
-        id <span class="" data-link="id" >---</span> 
+        id <span class="" data-link="id">---</span>
 
         <div style="float: right">qtyRemaining={{:qtyRemaining}}</div>
 
         <div id="selectLarge_purchaseBill" style="display: inline-block"></div>
         <fieldset>
             <legend>Basic</legend>
-            
+
             <span id="selectLarge_medicineBrandName">
                 selectLarge_medicineBrandName
             </span>
-          
-            
-            
-            <span
-                id="selectLarge_expiryDate"
-                >
-                 selectLarge_expiryDate      
+
+
+
+            <span id="selectLarge_expiryDate">
+                selectLarge_expiryDate
             </span>
-           
+
 
 
 
 
             <div class="inp_outer">
                 <div class="title1">batch</div>
-                <span class="inp2" contenteditable="true" id="batch" 
-                      style="min-width: 100px"
-                      data-link="batch" >---</span>
+                <span class="inp2" contenteditable="true" id="batch" style="min-width: 100px"
+                    data-link="batch">---</span>
                 <input type="hidden" name="batch" data-link="batch" />
             </div>
 
@@ -48,12 +42,8 @@
             <div class="inp_outer">
                 <div class="title1">qtyPurchased</div>
 
-                <input type="text" name="qtyPurchased" 
-                       id="qtyPurchased"
-                       data-link="qtyPurchased"
-                       style="width: 100px"
-                       class="akr_input_text" required=""
-                       />
+                <input type="text" name="qtyPurchased" id="qtyPurchased" data-link="qtyPurchased" style="width: 100px"
+                    class="akr_input_text" required="" />
             </div>
 
         </fieldset>
@@ -64,61 +54,42 @@
 
 
 
-            <div class="inp_outer" >
+            <div class="inp_outer">
                 <div class="title1">mrp</div>
-                Rs.<input type="text" id="mrp" name="mrp" data-link="mrp"
-                          class="akr_input_text" required="" style="width:90px"
-                          />
+                Rs.<input type="text" id="mrp" name="mrp" data-link="mrp" class="akr_input_text" required=""
+                    style="width:90px" />
             </div>
-            <div class="inp_outer" >
+            <div class="inp_outer">
                 <div class="title1">sellingPrice</div>
-                Rs.<input type="text" id="sellingPrice" 
-                           onkeyup="sellingPrice_keyUp()"
-                          name="sellingPrice" 
-                          data-link="sellingPrice"
-                          class="akr_input_text" required="" style="width:90px"
-                          />
+                Rs.<input type="text" id="sellingPrice" onkeyup="sellingPrice_keyUp()" name="sellingPrice"
+                    data-link="sellingPrice" class="akr_input_text" required="" style="width:90px" />
             </div>
-            <div class="inp_outer" >
+            <div class="inp_outer">
                 <div class="title1">costPrice</div>
-                Rs.<input type="text" id="costPrice" 
-                          onkeyup="costPrice_keyUp()"
-                          name="costPrice" data-link="costPrice"
-                          class="akr_input_text" required="" style="width:90px"
-                          />
+                Rs.<input type="text" id="costPrice" onkeyup="costPrice_keyUp()" name="costPrice" data-link="costPrice"
+                    class="akr_input_text" required="" style="width:90px" />
             </div>
-            
-            <div class="inp_outer" >
+
+            <div class="inp_outer">
                 <div class="title1">amountTotalWOcess</div>
-                Rs.<input type="text" id="amountTotalWOcess" 
-                          name="amountTotalWOcess" 
-                          onkeyup="amountTotalWOcess_keyUp()"
-                          data-link="amountTotalWOcess"
-                          class="akr_input_text"  style="width:90px"
-                          />
+                Rs.<input type="text" id="amountTotalWOcess" name="amountTotalWOcess"
+                    onkeyup="amountTotalWOcess_keyUp()" data-link="amountTotalWOcess" class="akr_input_text"
+                    style="width:90px" />
             </div>
-            
-             <div class="inp_outer" >
+
+            <div class="inp_outer">
                 <div class="title1">cess</div>
-                %<input type="text" id="cess" 
-                          name="cess" 
-                          onkeyup="cess_keyUp()"
-                          data-link="cess"
-                          class="akr_input_text" style="width:90px"
-                          />
+                %<input type="text" id="cess" name="cess" onkeyup="cess_keyUp()" data-link="cess" class="akr_input_text"
+                    style="width:90px" />
             </div>
-            
-            <div class="inp_outer" >
+
+            <div class="inp_outer">
                 <div class="title1">amountTotal</div>
-                Rs.<input type="text" id="amountTotal" 
-                          name="amountTotal" 
-                          onkeyup="amountTotal_keyUp()"
-                          data-link="amountTotal"
-                          class="akr_input_text" required="" style="width:90px"
-                          />
+                Rs.<input type="text" id="amountTotal" name="amountTotal" onkeyup="amountTotal_keyUp()"
+                    data-link="amountTotal" class="akr_input_text" required="" style="width:90px" />
             </div>
-            
-           
+
+
 
 
         </fieldset>
@@ -129,38 +100,32 @@
             <div class="inp_outer">
                 <div class="title1">discount* </div>
 
-                <input type="text" id="discount" name="discount" data-link="discount" 
-                       class="akr_input_text" required=""
-                       />
+                <input type="text" id="discount" name="discount" data-link="discount" class="akr_input_text"
+                    required="" />
             </div>
 
 
             <div class="inp_outer">
                 <div class="title1">cgst* </div>
 
-                <input type="text" name="cgst" data-link="cgst"
-                       class="akr_input_text" required=""
-                       />
+                <input type="text" name="cgst" data-link="cgst" class="akr_input_text" required="" />
             </div>
 
             <div class="inp_outer">
                 <div class="title1">sgst *</div>
 
-                <input type="text" name="sgst" data-link="sgst" 
-                       class="akr_input_text" required=""
-                       />
+                <input type="text" name="sgst" data-link="sgst" class="akr_input_text" required="" />
             </div>
 
         </fieldset>
 
-        <div class="inp_outer" title="വേറെ  വിശേഷം വല്ലതും ഉണ്ടോ ?" 
-             style="min-width: 400px;min-height: 50px">
-            <div class="title1"   >  Remarks</div>
-            <span class="inp2" contenteditable="true" id="remarks"   data-link="remarks" >---</span>
+        <div class="inp_outer" title="വേറെ  വിശേഷം വല്ലതും ഉണ്ടോ ?" style="min-width: 400px;min-height: 50px">
+            <div class="title1"> Remarks</div>
+            <span class="inp2" contenteditable="true" id="remarks" data-link="remarks">---</span>
             <input type="hidden" name="remarks" data-link="remarks" />
         </div>
 
-        <span >End</span>
+        <span>End</span>
 
         <!--        <fieldset>
                     <legend> Full details in JSON</legend>

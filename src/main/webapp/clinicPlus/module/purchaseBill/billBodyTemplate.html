@@ -1,12 +1,8 @@
 <hr>
 {{for map.payload}}
 
-<span  >
-    <button
-        onclick="go( - 1, 'medicineStock', {{:billId}})"
-        class="w3-button w3-blue w3-margin" 
-        accesskey="a"
-        >
+<span>
+    <button onclick="go( - 1, 'medicineStock', {{:billId}})" class="w3-button w3-blue w3-margin" accesskey="a">
         <i class="fa fa-plus" title="add New MedicineStock">
 
         </i>
@@ -15,8 +11,8 @@
 </span>
 
 <div class="Table">
-    <div class="Row bluestrp" >
-        <div class="Cell" >Id </div>
+    <div class="Row bluestrp">
+        <div class="Cell">Id </div>
         <div class="Cell" accesskey="l" tabindex="0">Name </div>
         <div class="Cell">expiryDate </div>
 
@@ -29,14 +25,10 @@
     </div>
     {{for medicineStockEntitys }}
 
-    <div class="Row " 
-
-         >
+    <div class="Row ">
         <div class="Cell w3-padding ">{{:id}} </div>
         <div class="Cell">
-            <button type="button" class="w3-button w3-green"
-                    onclick="go({{:id}}, 'medicineStock')"
-                    >
+            <button type="button" class="w3-button w3-green" onclick="go({{:id}}, 'medicineStock')">
                 {{if medicineBrandName }}
                 {{:medicineBrandName.brandName}}
                 {{else}}
@@ -46,53 +38,53 @@
 
 
         </div>
-        <div class="Cell" >
+        <div class="Cell">
             {{:~ddyyyyDashed(expiryDate) }}
         </div>
 
 
 
-        <div class="Cell" >
+        <div class="Cell">
             {{:mrp}}
         </div>
-        <div class="Cell" >
+        <div class="Cell">
             {{:sellingPrice}}
         </div>
-        <div class="Cell" >
+        <div class="Cell">
             {{:qtyPurchased}}
         </div>
-        <div class="Cell" >
+        <div class="Cell">
             {{:costPrice}}
         </div>
 
-        <div class="Cell" >
+        <div class="Cell">
             {{:amountTotal}}
         </div>
 
-        <div class="Cell" > 
+        <div class="Cell">
             {{:remarks}}
         </div>
     </div>
 
     {{else}}
-    Nothing 
+    Nothing
 
     {{/for}}
     <div class="Row">
         <div class="Cell"></div>
-         <div class="Cell"></div>
-          <div class="Cell"></div>
-           <div class="Cell"></div>
-            <div class="Cell"></div>
-             <div class="Cell"></div>
-       
+        <div class="Cell"></div>
+        <div class="Cell"></div>
+        <div class="Cell"></div>
+        <div class="Cell"></div>
+        <div class="Cell"></div>
+
         <div class="Cell">
             Total
         </div>
-             <div class="Cell" style="font-weight: bold" >
+        <div class="Cell" style="font-weight: bold">
             {{:amountTotalGrand}}
         </div>
-             <div class="Cell"></div>
+        <div class="Cell"></div>
     </div>
 
 </div>

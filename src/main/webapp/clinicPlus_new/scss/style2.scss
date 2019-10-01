@@ -1,0 +1,20 @@
+$v:2;
+
+@mixin m1 {
+    background-color: blue;
+    color:green;
+    
+}
+
+h1{
+    height: $v px;
+}
+
+ul{
+
+    li{
+
+       @include m1();
+    }
+
+}
