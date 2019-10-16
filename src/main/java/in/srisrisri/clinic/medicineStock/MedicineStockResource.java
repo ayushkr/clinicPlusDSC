@@ -4,9 +4,7 @@ import in.srisrisri.clinic.Constants.Constants1;
 import in.srisrisri.clinic.Vendor.VendorEntity;
 import in.srisrisri.clinic.Vendor.VendorRepo;
 import in.srisrisri.clinic.medicineBrandName.*;
-import in.srisrisri.clinic.pharmacyBillRow.SumDAOForPharmacyBill;
 import in.srisrisri.clinic.purchaseBill.PurchaseBillEntity;
-import in.srisrisri.clinic.purchaseBill.SumDAOForPurchaseBill;
 import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
 import in.srisrisri.clinic.utils.PageCover;
@@ -188,20 +186,45 @@ public class MedicineStockResource {
         }
 
     }
+    BigDecimal HUNDRED = BigDecimal.valueOf(100);
 
     // create
     @PostMapping("")
-    public ResponseEntity<JsonResponse> PostMapping_one(MedicineStockEntity entityBefore) {
+    public ResponseEntity<JsonResponse> PostMapping_one(MedicineStockEntity b) {
         ResponseEntity<JsonResponse> repsonse = null;
         JsonResponse jsonResponse = new JsonResponse();
         try {
-            logger.warn("PostMapping_one id:{} ", entityBefore.toString());
-            logger.warn("---- id ={}", entityBefore.getId());
-            MedicineStockEntity entityAfter = null;
+            logger.warn("PostMapping_one id:{} ", b.toString());
+            logger.warn("---- id ={}", b.getId());
+            MedicineStockEntity a = null;
 
-            entityAfter = medicineStockRepo.findById(entityBefore.getId()).get();
+            a = medicineStockRepo.findById(b.getId()).get();
 
-            BeanUtils.copyProperties(entityBefore, entityAfter);
+            BeanUtils.copyProperties(b, a);
+            // business logic
+            a.setSellingPrice(b.getMrp());
+
+            a.setPts_times_qty(a.getPts().multiply(new BigDecimal((float) a.getQtyPurchased())));
+
+            BigDecimal discountAmt = a.getPts_times_qty().multiply(a.getDiscount_perc().divide(HUNDRED));
+            a.setDiscount(discountAmt);
+            BigDecimal taxableAmt = a.getPts_times_qty().subtract(discountAmt);
+
+//            BigDecimal discFac = BigDecimal.ONE.subtract(a.getDiscount_perc().divide(HUNDRED));        
+//            BigDecimal taxableAmt = a.getPts_times_qty().multiply(discFac);
+            a.setTaxableAmt(taxableAmt);
+
+            BigDecimal taxAmountWO_Cess = a.getTaxableAmt().multiply(a.getGst_perc().divide(HUNDRED));
+            a.setTaxAmountWO_Cess(taxAmountWO_Cess);
+
+            BigDecimal totalwocess = a.getTaxAmountWO_Cess().add(a.getTaxableAmt());
+            a.setTotalwocess(totalwocess);
+
+            BigDecimal amountTotal = a.getTotalwocess().add((a.getTaxAmountWO_Cess().multiply(a.getCess_perc().divide(HUNDRED))));
+            a.setAmountTotal(amountTotal);
+
+            BigDecimal costPrice = a.getAmountTotal().divide(BigDecimal.valueOf(a.getQtyPurchased()));
+            a.setCostPrice(costPrice);
 //             if(entityBefore.isRateAvailable()==null) entityAfter.setRateAvailable(Boolean.FALSE);
 
             try {
@@ -211,17 +234,17 @@ public class MedicineStockResource {
 //                    entityAfter.setCostPrice(entityAfter.getAmountTotal().divide(qtyBigDec));
 //                }
 
-                entityAfter = medicineStockRepo.save(entityAfter);
-                jsonResponse.setMessage("Saved ID:" + entityAfter.getId());
+                a = medicineStockRepo.save(a);
+                jsonResponse.setMessage("Saved ID:" + a.getId());
                 jsonResponse.setStatus(Constants1.SUCCESS);
             } catch (Exception e) {
                 jsonResponse.setMessage(e.toString());
                 jsonResponse.setStatus(Constants1.FAILURE);
             }
             repsonse = ResponseEntity
-                    .created(new URI("/api/MedicineStockEntity/" + entityAfter.getId()))
+                    .created(new URI("/api/MedicineStockEntity/" + a.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(label,
-                            entityAfter.getId() + ""))
+                            a.getId() + ""))
                     .body(jsonResponse);
         } catch (URISyntaxException ex) {
             java.util.logging.Logger.getLogger("MedicineStockEntity").log(Level.SEVERE, null, ex);

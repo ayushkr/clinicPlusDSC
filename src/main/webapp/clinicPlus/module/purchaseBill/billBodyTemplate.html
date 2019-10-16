@@ -12,23 +12,58 @@
 
 <div class="Table">
     <div class="Row bluestrp">
+         <div class="Cell">SN </div>
         <div class="Cell">Id </div>
-        <div class="Cell" accesskey="l" tabindex="0">Name </div>
-        <div class="Cell">expiryDate </div>
-
+         <div class="Cell">batch </div>
+          <div class="Cell">expiryDate </div>
+              <div class="Cell">company </div>
+        <div class="Cell" accesskey="l" tabindex="0">Product </div>
+        <div class="Cell">hsn</div>
+  <div class="Cell">qty </div>
         <div class="Cell">MRP </div>
-        <div class="Cell">sellingPrice </div>
-        <div class="Cell">qty </div>
+         <div class="Cell">Rate(PTS) </div>
+        
+           <div class="Cell">Amt (pts* qty) </div>
+            <div class="Cell">dis %</div>
+              <div class="Cell">dis amt</div>
+         
+               <div class="Cell">taxable Amt </div>
+               <div class="Cell">gst %</div>
+               <div class="Cell">tax Amount WO Cess</div>
+               <div class="Cell">total wo cess </div>
+                <div class="Cell">cess % </div>
+           <div class="Cell">amount (w cess)</div>
+             
+       
+       
         <div class="Cell">costPrice </div>
-        <div class="Cell">amount </div>
+         <div class="Cell">sellingPrice </div>
         <div class="Cell">remarks </div>
     </div>
     {{for medicineStockEntitys }}
 
     <div class="Row ">
+        <div class="Cell ">{{:#index+1}} </div>
         <div class="Cell w3-padding ">{{:id}} </div>
+          <!--batch-->
+          <div class="Cell">{{:batch}}</div>
+          
+           <div class="Cell">
+            {{:~ddyyyyDashed(expiryDate) }}
+        </div>
+          
+          <div class="Cell">
+            {{if medicineBrandName }}
+                {{:medicineBrandName.company}}
+                {{else}}
+                -----
+                {{/if}}
+          </div>
+          
         <div class="Cell">
-            <button type="button" class="w3-button w3-green" onclick="go({{:id}}, 'medicineStock')">
+            <button type="button" 
+                    class=""
+                    onclick="go({{:id}}, 'medicineStock')">
                 {{if medicineBrandName }}
                 {{:medicineBrandName.brandName}}
                 {{else}}
@@ -38,28 +73,65 @@
 
 
         </div>
-        <div class="Cell">
-            {{:~ddyyyyDashed(expiryDate) }}
+          
+       
+ <div class="Cell">
+           {{if medicineBrandName }}
+                {{:medicineBrandName.hsn}}
+                {{else}}
+                -----
+                {{/if}}
         </div>
-
-
+ <div class="Cell">
+             {{:qtyPurchased}}
+        </div>
 
         <div class="Cell">
             {{:mrp}}
         </div>
+        
+         <div class="Cell">
+            {{:pts}}
+        </div>
+       
         <div class="Cell">
-            {{:sellingPrice}}
+            {{:pts_times_qty}}
         </div>
         <div class="Cell">
-            {{:qtyPurchased}}
+            {{:discount_perc}}
         </div>
+          
+          <div class="Cell">
+            {{:discount}}
+        </div>
+         <div class="Cell">
+            {{:taxableAmt}}
+        </div>
+         <div class="Cell">
+            {{:gst_perc}}
+        </div>
+         <div class="Cell">
+            {{:taxAmountWO_Cess}}
+        </div>
+        
         <div class="Cell">
-            {{:costPrice}}
+            {{:totalwocess}}
         </div>
-
+         <div class="Cell">
+            {{:cess_perc}}
+        </div>
         <div class="Cell">
             {{:amountTotal}}
         </div>
+         <div class="Cell">
+            {{:costPrice}}
+        </div>
+        <div class="Cell">
+            {{:sellingPrice}}
+        </div>
+       
+
+        
 
         <div class="Cell">
             {{:remarks}}
@@ -71,20 +143,82 @@
 
     {{/for}}
     <div class="Row">
+         <!--sn-->
         <div class="Cell"></div>
+        
+        <!--id-->
         <div class="Cell"></div>
+        
+          <!--batch-->
+          <div class="Cell"></div>
+        
+        <!--expiry-->
         <div class="Cell"></div>
+        
+          <!--company-->
         <div class="Cell"></div>
+        
+          <!--Product-->
         <div class="Cell"></div>
+        
+         <!--hsn-->
         <div class="Cell"></div>
-
+        
+        <!--qty-->
+        <div class="Cell"></div>
+        
+        <!--mrp-->
+        <div class="Cell"></div>
+        
+        <!--pts/rate-->
         <div class="Cell">
-            Total
+            <!--{{:grandPTS}}-->
         </div>
-        <div class="Cell" style="font-weight: bold">
-            {{:amountTotalGrand}}
-        </div>
+        
+        <!--:grandPts_times_qty-->
+        <div class="Cell">{{:grandPts_times_qty}}</div>
+        
+        <!--disc-->
         <div class="Cell"></div>
+         <!--disc amt-->
+         <div class="Cell">
+             {{:grandDiscount}}
+         </div>
+
+        <!--:grandTaxableAmt-->
+        <div class="Cell">
+         {{:grandTaxableAmt}}
+        </div>
+        
+        <!--gst-->
+        <div class="Cell"></div> 
+        
+        <!--grandTaxAmountWO_Cess-->
+        <div class="Cell">{{:grandTaxAmountWO_Cess}}</div>
+        
+        <!--grandTotalwocess-->
+          <div class="Cell">{{:grandTotalwocess}}</div>
+        
+        <!--cess-->
+        <div class="Cell"></div>
+          
+          <!--amount-->
+        <div class="Cell" style="font-weight: bold">
+            {{:amountTotalGrand}} {{:grandTotalwcess}}
+        </div>
+          
+          <!--costprice-->
+          <div class="Cell">
+              <!--{{:grandCostPrice}}-->
+          </div>
+        
+          <!--selling price-->
+          <div class="Cell"></div>
+          
+          <!--remarks-->
+          <div class="Cell"></div>
+        
+        
     </div>
 
 </div>

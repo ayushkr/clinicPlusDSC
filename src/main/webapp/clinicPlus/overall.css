@@ -59,56 +59,6 @@
     }
 
 
-    /* open-sans-regular - latin */
-    @font-face {
-        font-family: 'OpenSansAKR_1';
-        font-style: normal;
-        font-weight: 400;
-        src: url('./fonts/openSans/open-sans-v17-latin/open-sans-v17-latin-regular.eot'); /* IE9 Compat Modes */
-        src: local('Open Sans Regular'), local('OpenSans-Regular'),
-            url('./fonts/openSans/open-sans-v17-latin/open-sans-v17-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-            url('./fonts/openSans/open-sans-v17-latin/open-sans-v17-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
-            url('./fonts/openSans/open-sans-v17-latin/open-sans-v17-latin-regular.woff') format('woff'), /* Modern Browsers */
-            url('./fonts/openSans/open-sans-v17-latin/open-sans-v17-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-            url('./fonts/openSans/open-sans-v17-latin/open-sans-v17-latin-regular.svg#OpenSans') format('svg'); /* Legacy iOS */
-    }
-
-
-    @font-face{
-        font-family: 'fay';
-        src: url('./fontawesome-webfont.woff2') format('woff2');
-        font-weight: normal;
-        font-style: normal;
-    }
-
-  
-
-    @font-face {
-        font-family: 'Prototype';
-        src: url('./fonts/prototype-webfont.woff2') format('woff2');  
-        /*src: url('./fonts/milea_demo.woff2') format('woff2');*/
-        /*src: url('./fonts/justAnotherHandRegular.woff2') format('woff2');*/
-        /*src: url('./fonts/manjari/Manjari-Regular.woff2') format('woff2');*/
-        /*src: url('./fonts/Verdana.woff2') format('woff2');*/
-
-        font-weight: normal;
-        font-style: normal;
-
-    }
-
-    @font-face {
-        font-family: 'malayalam';
-        /*src: url('./fonts/prototype-webfont.woff2') format('woff2');*/  
-        /*src: url('./fonts/milea_demo.woff2') format('woff2');*/
-        /*src: url('./fonts/justAnotherHandRegular.woff2') format('woff2');*/
-        src: url('./fonts/manjari/Manjari-Regular.woff2') format('woff2');
-        /*src: url('./fonts/Verdana.woff2') format('woff2');*/
-
-        font-weight: normal;
-        font-style: normal;
-
-    }
-
 
     a{ text-decoration: none}
 
@@ -144,7 +94,7 @@
         top: 4cm;
         /*left: 1cm;*/
         z-index: 100;
-        
+
     }
     .td_1{
         padding: 20px;
@@ -279,7 +229,7 @@
         height: 46px;
         background-color: var(--color_l3);
         /*transition: height 1s;*/
-         /*transform: rotate(180deg);*/
+        /*transform: rotate(180deg);*/
     }
     .widgets2_rounded{
         position: fixed;
@@ -624,8 +574,9 @@
     }
     html, body {
         /*font-family: proto;*/
-        font-family: OpenSansAKR_1;
-        font-size: 14px;
+        /*font-family: OpenSansAKR_1;*/
+        /*font-family: Lato;*/
+        /*font-size: 14px;*/
         /*line-height: 1.5;*/
         /*color: var(--color_d5);*/
         /*background-color: var(--color_l4);*/
@@ -675,13 +626,13 @@
         /*background-color: green;*/
     }
 
-   
-/*    h3{
-        font-size: 24px; 
-        font-weight: bold; 
-        text-align: justify;
-        color: #007abf;
-    }*/
+
+    /*    h3{
+            font-size: 24px; 
+            font-weight: bold; 
+            text-align: justify;
+            color: #007abf;
+        }*/
 
 
 
@@ -1096,6 +1047,18 @@
         box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)
     }
 
+
+    .w3-blue, .w3-hover-blue:hover {
+        color: #fff!important;
+        background-color: #2196F3!important;
+    }
+
+    .w3-green, .w3-hover-green:hover {
+        color: #fff!important;
+        background-color: #4CAF50!important;
+    }
+
+
     .button_none{
         background-color: transparent;
         border: none;
@@ -1193,8 +1156,8 @@
     {
         display: table;
         /*background-color: #029ef3*/
-         border-bottom: solid var(--color_l3) 1px;
-          border-right: solid var(--color_l3) 1px;
+        border-bottom: solid var(--color_l3) 1px;
+        border-right: solid var(--color_l3) 1px;
     }
     .Title
     {
@@ -1252,7 +1215,7 @@
     {
         display: table-cell;
         border-left: solid var(--color_l3) 1px;
-         border-top: solid var(--color_l3) 1px;
+        border-top: solid var(--color_l3) 1px;
         border-width: thin;
         padding-left: 4px;
         padding-right: 5px;
@@ -1269,10 +1232,71 @@
         text-align: left;
     }
 
+    .pharmacyBillPrintOut{
+        /*font-family: Lato;*/
+        /*background-color: red;*/
+    }
+
 }
 
 /*common css*/
 
+@font-face{
+    font-family: 'Lato';
+    src: url('./fonts/Lato/Lato-Hairline.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* open-sans-regular - latin */
+@font-face {
+    font-family: 'OpenSansAKR_1';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/openSans/open-sans-v17-latin/open-sans-v17-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Open Sans Regular'), local('OpenSans-Regular'),
+        url('./fonts/openSans/open-sans-v17-latin/open-sans-v17-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('./fonts/openSans/open-sans-v17-latin/open-sans-v17-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+        url('./fonts/openSans/open-sans-v17-latin/open-sans-v17-latin-regular.woff') format('woff'), /* Modern Browsers */
+        url('./fonts/openSans/open-sans-v17-latin/open-sans-v17-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('./fonts/openSans/open-sans-v17-latin/open-sans-v17-latin-regular.svg#OpenSans') format('svg'); /* Legacy iOS */
+}
+
+
+@font-face{
+    font-family: 'fay';
+    src: url('./fontawesome-webfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+@font-face {
+    font-family: 'Prototype';
+    src: url('./fonts/prototype-webfont.woff2') format('woff2');  
+    /*src: url('./fonts/milea_demo.woff2') format('woff2');*/
+    /*src: url('./fonts/justAnotherHandRegular.woff2') format('woff2');*/
+    /*src: url('./fonts/manjari/Manjari-Regular.woff2') format('woff2');*/
+    /*src: url('./fonts/Verdana.woff2') format('woff2');*/
+
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'malayalam';
+    /*src: url('./fonts/prototype-webfont.woff2') format('woff2');*/  
+    /*src: url('./fonts/milea_demo.woff2') format('woff2');*/
+    /*src: url('./fonts/justAnotherHandRegular.woff2') format('woff2');*/
+    src: url('./fonts/manjari/Manjari-Regular.woff2') format('woff2');
+    /*src: url('./fonts/Verdana.woff2') format('woff2');*/
+
+    font-weight: normal;
+    font-style: normal;
+
+}
 
 
 

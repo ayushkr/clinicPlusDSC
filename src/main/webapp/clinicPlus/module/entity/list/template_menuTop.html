@@ -29,8 +29,10 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <div style="font-family: ProtoType">
-                                                <center>
+                                            <div 
+                                                 style="font-family: {{if (~root.obj.moduleName!='pharmacyBill') ||  (~root.obj.moduleName !='purchaseBill') }} ProtoType{{else}} Lato {{/if}}">
+                                               
+                                               <center>
 
                                                     <span style="font-size:30px;text-align:left;font-weight: bold">
                                                         DOCTORS SPECIALITY CENTRE <br>
@@ -43,12 +45,13 @@
 
                                                     <span style="font-size:14px;text-align:center;">
                                                         <!--                        Website: &nbsp;-->
-                                                        <i class="fa fa-globe"></i>
+                                                        <!-- <i class="fa fa-globe"></i> -->
+                                                        <img src='/clinicPlus/images/icons8-america-24.png' width="20px">
                                                         www.doctorsspecialitycentre.com &nbsp;&nbsp;
                                                         <!--                        email : &nbsp; -->
-                                                        <i class="fa fa-envelope"></i>
+                                                        <i class="fa fa-envelope-o"></i>
                                                         doctorsspecialitycentre@gmail.com &nbsp;&nbsp;
-                                                        <br>
+                                                        <!--<br>-->
                                                         <!--                        Phone &nbsp;-->
                                                         <i class="fa fa-phone"></i>
                                                         &nbsp;8592918888
