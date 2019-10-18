@@ -1,102 +1,155 @@
 <!--onclick="printUtils.printOPcard()"-->
+<div class='a4' id="printableAreaOPCard"
+      
+     > 
+    <!--a5-->
+    <div id="a5_1st" class='a5'  > 
+        <!--a6-->
+        <div class='a6' style="left:0px"> 
+            <!--a7 first-->
+            <div class="a7 a7first">
+                <!--header-->
+                <div id="header1" class='header' >
 
-<div class="grid-container">
-    <div class="item1">
-
-
-        <div >
-            <br>
-            <center> 
-                <table >
-                    <tbody>
-                        <tr >
-                            <td class='td_header'>
-                                <i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;
-                            </td>
-                            <td class='td_header'>
-                                Booking Contact : 8592918888
-                            </td>
-                        </tr>
-                        <tr >
-                            <td class='td_header'>
-                                <i class="fa fa-envelope"></i>&nbsp;
-                            </td>
-                            <td class='td_header'>
-                                doctorsspecialitycentre@gmail.com
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class='td_header'>
-                                <i class="fa fa-facebook-official"></i> &nbsp;
-                            </td>
-                            <td class='td_header'>
-                                facebook@doctorsspecialitycentre
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </center>
-            <table>
-                <tbody>
-                    <tr><td colspan=2></td></tr>              
-                    <tr><td colspan=2 style="font-size:13"><br>&nbsp;&nbsp;&nbsp;Available Departments </td></tr> 
-                    <tr> 
-                        <td> 
-                            <ul> 
-                                <li> 
-                                    Urologist 
-                                </li> 
-                                <li> 
-                                    Cardiologist 
-                                </li> 
-                                <li> 
-                                    Orthopaedic / Spline Surgeon 
-                                </li> 
-
-                                <li> 
-                                    Pulmonologist ( Chest ) 
-                                </li> 
-                                <li> 
-                                    Physician  (General Medicine)
-                                </li> 
-                            </ul> 
-                        </td> 
-
-                        <td> 
-                            <ul> 
-                                <li>ENT
-                                </li>
-                                <li>  Psychiatrist
-                                </li>
-                                <li>Paediatrician 
-                                </li> 
-                                <li>Gynaecologist 
-                                </li> 
-                                <li>Gastroenterologist 
-                                </li> 
-                            </ul> 
-                        </td> 
-                    </tr> 
-                    <tr>
-                        <td colspan=2> 
+                </div> 
+                <!--                                <div id="orig2left" class="orig2left" > 
+                                                    <div class='border_print_small_1'></div> 
+                                                    <div class='border_print_small_2'></div> 
+                                                </div>-->
+                <!--                <br><br><br><br><br>-->
                 <center> 
-                    Clinic Working Time <i class="fa fa-clock-o"></i> :  2:00 PM  - 8:00 PM  <br>Sunday Holiday  
-                </center> 
-                </td> 
-                </tr> 
-                </tbody>
-            </table> 
-        </div> 
+                    <table border='0' > 
+                        <tbody>
+                            <tr>
+                                <td colspan=3 style="height:1.5cm"> 
+                        <center>
+                            <b style="font-size:14">OP CARD</b>   
+                        </center>
+                        </td>
+                        </tr> 
+                        <tr >
+                            <td >Pateint ID  </td>
+                            <td>:</td>
+                            <td class='td_bold' >
+                                {{:patient.id}}
+                            </td> 
+                        </tr> 
+                        <tr><td> Patient Name  </td>
+                            <td>:</td>
+                            <td class='td_bold'>   {{:patient.name}} </td> 
+                        </tr> 
+                        <tr><td> Age, Sex :</td> 
+                            <td>:</td>
+                            <td class='td_bold'>    {{:patient.age}}  ,    {{:patient.sex}} </td> 
+                        </tr> 
+                        <tr> 
+                            <td> Regn Date</td> 
+                            <td>:</td>
+                            <td >{{:patient.dateOfRegistration}}<br></td> 
+                        </tr> 
+                        </tbody>
+                    </table>
+                    <br><br>
+                </center>
+            </div>
+            .
+            <!--a7 second-->
+            <div class="a7 a7_2nd">
+                <br>
+                <center> 
+                    <table >
+                        <tbody>
+                            <tr >
+                                <td class='td_header'>
+                                    <i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;
+                                </td>
+                                <td class='td_header'>
+                                    Booking Contact : 8592918888
+                                </td>
+                            </tr>
+                            <tr >
+                                <td class='td_header'>
+                                    <i class="fa fa-envelope"></i>&nbsp;
+                                </td>
+                                <td class='td_header'>
+                                    doctorsspecialitycentre@gmail.com
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class='td_header'>
+                                    <i class="fa fa-facebook-official"></i> &nbsp;
+                                </td>
+                                <td class='td_header'>
+                                    facebook@doctorsspecialitycentre
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </center>
+                <table>
+                    <tbody>
+                        <tr><td colspan=2></td></tr>              
+                        <tr><td colspan=2 style="font-size:13"><br>&nbsp;&nbsp;&nbsp;Available Departments </td></tr> 
+                        <tr> 
+                            <td> 
+                                <ul> 
+                                    <li> 
+                                        Urologist 
+                                    </li> 
+                                    <li> 
+                                        Cardiologist 
+                                    </li> 
+                                    <li> 
+                                        Orthopaedic / Spline Surgeon 
+                                    </li> 
 
-    </div>
-    <div class="item2">
-        <div  > 
+                                    <li> 
+                                        Pulmonologist ( Chest ) 
+                                    </li> 
+                                    <li> 
+                                        Physician  (General Medicine)
+                                    </li> 
+                                </ul> 
+                            </td> 
+
+                            <td> 
+                                <ul> 
+                                    <li>ENT
+                                    </li>
+                                    <li>  Psychiatrist
+                                    </li>
+                                    <li>Paediatrician 
+                                    </li> 
+                                    <li>Gynaecologist 
+                                    </li> 
+                                    <li>Gastroenterologist 
+                                    </li> 
+                                </ul> 
+                            </td> 
+                        </tr> 
+                        <tr>
+                            <td colspan=2> 
+                    <center> 
+                        Clinic Working Time <i class="fa fa-clock-o"></i> :  2:00 PM  - 8:00 PM  <br>Sunday Holiday  
+                    </center> 
+                    </td> 
+                    </tr> 
+                    </tbody>
+                </table> 
+            </div> 
+        </div>
+
+
+
+        <!--a6-->
+        <!--<div class='a6' > ---</div>-->
+        <div class='a6  a6_2nd' > 
             <div  id="header2" class='header' > 
 
             </div> 
             <!--orig2right-->
             <div id="orig2right" class="orig2right"  > 
-
+                <br>
                 <div class='borderReceipt'>  <br>
                     <!--                <br><br><br><br><br><br><br><br><br>-->
                     <center style="font-size:14">RECEIPT<br><br>
@@ -117,7 +170,7 @@
                                         <br></td> 
                                 </tr> 
 
-                                <tr ><td colspan='3' style="padding: 14px"></td></tr>
+                                <tr ><td colspan='3' style="padding: 20px"></td></tr>
                                 <tr> <td class='td_billReceipt' >Patient ID </td>
                                     <td style="text-align:center">:</td>
                                     <td class='td_billReceipt' >   {{:patient.id}}</td> 
@@ -138,30 +191,30 @@
                                     <td class='td_billReceipt' >Specialist In </td><td style="text-align:center">:</td>
                                     <td class='td_billReceipt' >   {{:doctor.department}} </td> 
                                 </tr> 
-
-                                <!--                                <tr> 
-                                                                    <td class='td_billReceipt' >Consultation Fee 
-                                                                       
-                                                                       
-                                                                    </td><td style="text-align:center">:</td>
-                                                                    <td class='td_billReceipt' > 
-                                                                         <i class="fa fa-inr" style="font-size: 12px"></i>
-                                                                        {{:consultFee}}</td> 
-                                                                </tr> 
-                                                                <tr> 
-                                                                    <td class='td_billReceipt' >Registration Fee
-                                                                       
-                                                                    
-                                                                    </td><td style="text-align:center">:</td>
-                                                                    <td class='td_billReceipt' > 
-                                                                          <i class="fa fa-inr" style="font-size: 12px"></i>
-                                                                        {{:feeForClinic}}</td> 
-                                                                </tr> -->
-
+                               
+<!--                                <tr> 
+                                    <td class='td_billReceipt' >Consultation Fee 
+                                       
+                                       
+                                    </td><td style="text-align:center">:</td>
+                                    <td class='td_billReceipt' > 
+                                         <i class="fa fa-inr" style="font-size: 12px"></i>
+                                        {{:consultFee}}</td> 
+                                </tr> 
+                                <tr> 
+                                    <td class='td_billReceipt' >Registration Fee
+                                       
+                                    
+                                    </td><td style="text-align:center">:</td>
+                                    <td class='td_billReceipt' > 
+                                          <i class="fa fa-inr" style="font-size: 12px"></i>
+                                        {{:feeForClinic}}</td> 
+                                </tr> -->
+                                
                                 <tr> 
                                     <td class='td_billReceipt' >Total Fee 
-
-
+                                          
+                                    
                                     </td><td style="text-align:center">:</td>
                                     <td class='td_billReceipt' > 
                                         <i class="fa fa-inr" style="font-size: 12px"></i>
@@ -174,11 +227,11 @@
                                     </td> 
                                 </tr>
                                 <tr>
-                                    <td class='td_billReceipt' > </td> 
+                                     <td class='td_billReceipt' > </td> 
                                     <td class='td_billReceipt' > </td> 
                                 </tr>
-                                <tr>
-                                    <td class='td_billReceipt' > </td> 
+                                  <tr>
+                                     <td class='td_billReceipt' > </td> 
                                     <td class='td_billReceipt' > </td> 
                                 </tr>
                                 <tr> 
@@ -195,92 +248,17 @@
             </div> 
         </div> 
 
+
+    </div> 
+    <div class='a5FoldingSpace'  >
+       
     </div>
-    <div class="item3">
-        <!--header-->
-        <div id="header1" class='header' >
+    <!--a5 2nd-->
+    <div id='a5_2nd' class='a5 a5_2nd'  > 
 
-        </div> 
-        <!--                                <div id="orig2left" class="orig2left" > 
-                                            <div class='border_print_small_1'></div> 
-                                            <div class='border_print_small_2'></div> 
-                                        </div>-->
-        <!--                <br><br><br><br><br>-->
-        <center> 
-            <table border='0' > 
-                <tbody>
-                    <tr>
-                        <td colspan=3 style="height:1.5cm"> 
-                <center>
-                    <b style="font-size:14">OP CARD</b>   
-                </center>
-                </td>
-                </tr> 
-                <tr >
-                    <td >Pateint ID  </td>
-                    <td>:</td>
-                    <td class='td_bold' >
-                        {{:patient.id}}
-                    </td> 
-                </tr> 
-                <tr><td> Patient Name  </td>
-                    <td>:</td>
-                    <td class='td_bold'>   {{:patient.name}} </td> 
-                </tr> 
-                <tr><td> Age, Sex :</td> 
-                    <td>:</td>
-                    <td class='td_bold'>    {{:patient.age}}  ,    {{:patient.sex}} </td> 
-                </tr> 
-                <tr> 
-                    <td> Regn Date</td> 
-                    <td>:</td>
-                    <td >{{:patient.dateOfRegistration}}<br></td> 
-                </tr> 
-                </tbody>
-            </table>
-
-        </center>
-
-    </div>
-
+    </div> 
 </div>
-
-
-
-
-
-
 <style> 
-
-    .item1 { grid-area: i1; 
-    border: solid black 1px;
-    }
-    .item2 { grid-area: i2;
-    border: solid black 1px;
-    }
-    .item3 { grid-area: i3;
-    border: solid black 1px;
-    }
-
-
-    .grid-container {
-        display: grid;
-        grid-template-areas:
-            'i3 i2 '
-            'i1 i2 '
-            ;
-        grid-gap: 10px;
-        background-color: #2196F3;
-        padding: 10px;
-    }
-
-    .grid-container > div {
-        background-color: rgba(255, 255, 255, 0.8);
-        text-align: center;
-        /* padding: 20px 0; */
-        /* font-size: 30px; */
-    }
-
 
     .div1 { 
         width: 300px; 
@@ -312,18 +290,35 @@
         visibility: hidden; 
 
     } 
-
+    .a4 {
+     width: 210mm;
+    height: 290mm;
+    /*border: 4px red dashed;*/
+    border-radius: 5px;
+    background: white;
+    color: black;
+    font: bold 12px Prototype;
+    top: 0px;
+    left: 0mm;
+    position: relative;
+        
+    }
     .a5{ 
         width: 209mm; 
         /*left:0.5cm;*/ 
         height: 148.5mm; 
         position: relative; 
-        border: 4px red dashed ; 
+        /*border: 1px red solid ;*/ 
         border-radius: 5px; 
-        background-color: white;
 
     } 
-
+    .a5_2nd{
+        /*top:149mm;*/
+    }
+    
+    .a5FoldingSpace{
+        height: 10px;
+    }
     .a6 { 
         width: 102mm; 
         height: 148.5mm;   
@@ -334,7 +329,10 @@
         margin: -2px;
     } 
 
-
+    .a6_2nd{
+        left: 105mm;
+        top: -148mm;
+    }
     .a7 { 
         width:99mm;
         height: 70mm;
@@ -349,9 +347,14 @@
     }
 
     .borderReceipt{ 
-
+        width: 96mm;
+        height: 116mm;
         border: 1px black solid;
-        /*border-radius: 5px;*/
+        border-radius: 0px;
+        position: relative;
+        top: -4mm;
+        left: 1mm;
+        border-radius: 5px;
     } 
     .border_print_small_1{ 
         width: 101mm; 
@@ -377,7 +380,7 @@
         width: 98mm;
         height: 26mm;
         border: 2px black solid;
-        /*border-radius: 5px;*/
+        border-radius: 5px;
         position: relative;
         left: 0mm;
     } 
