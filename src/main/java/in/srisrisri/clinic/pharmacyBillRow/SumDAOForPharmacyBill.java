@@ -119,7 +119,7 @@ public class SumDAOForPharmacyBill {
             freeOfCost = FinanceUtils.round(mrpTotal.subtract(amountTotal), 2);
             logger.warn(" freeOfCost={} ", freeOfCost);
 
-            amountTotalRounded = amountTotal.add(getRoundWithNextMultipleOf5(amountTotal));
+            amountTotalRounded = amountTotal.add(getRoundWithNextMultipleOf(amountTotal,ONE));
             logger.warn(" amountTotalRounded={} ", amountTotalRounded);
             amountTotalWords = FinanceUtils.RsToWords(amountTotalRounded + "");
             logger.warn(" rounding ");
@@ -131,9 +131,9 @@ public class SumDAOForPharmacyBill {
         return true;
     }
 
-    public BigDecimal getRoundWithNextMultipleOf5(BigDecimal totalDirty) {
+    public BigDecimal getRoundWithNextMultipleOf(BigDecimal totalDirty,BigDecimal loss) {
 
-        BigDecimal[] divideAndRemainder = totalDirty.divideAndRemainder(FIVE);
+        BigDecimal[] divideAndRemainder = totalDirty.divideAndRemainder(loss);
 
         logger.warn("getRoundWithNextMultipleOf5() \t divideAndRemainder {} ,{}", divideAndRemainder[0], divideAndRemainder[1]);
         BigDecimal subtract = BigDecimal.ZERO.subtract(divideAndRemainder[1]);
