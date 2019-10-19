@@ -139,13 +139,24 @@ public class MedicineStockResource {
     @GetMapping("{id}")
     @ResponseBody
     public ResponseEntity<Optional<MedicineStockEntity>> findById(@PathVariable("id") Long id) {
-
+        logger.warn("---- id+1 ={}", id + 1);
         Optional<MedicineStockEntity> item;
-        if (id >= 0) {
+        if (id != -1) {
             item = medicineStockRepo.findById(id);
         } else {
             MedicineStockEntity entityAfter = new MedicineStockEntity();
+            entityAfter.setQtyPurchased(1);
+            entityAfter.setPts(BigDecimal.valueOf(6));
+            entityAfter.setPts_times_qty(BigDecimal.ZERO);
+            entityAfter.setMrp(BigDecimal.ZERO);
             entityAfter.setDiscount(BigDecimal.ZERO);
+            entityAfter.setGst_perc(BigDecimal.valueOf(12));
+            entityAfter.setCgst_perc(BigDecimal.valueOf(6));
+            entityAfter.setSgst_perc(BigDecimal.valueOf(6));
+            entityAfter.setCess_perc(BigDecimal.valueOf(1));
+            entityAfter.setDiscount_perc(BigDecimal.ZERO);
+            entityAfter.setSellingPrice(BigDecimal.ZERO);
+            entityAfter.setCostPrice(BigDecimal.ZERO);
 
             entityAfter.setCreationTime(java.sql.Date.valueOf(LocalDate.now()));
             medicineStockRepo.save(entityAfter);
