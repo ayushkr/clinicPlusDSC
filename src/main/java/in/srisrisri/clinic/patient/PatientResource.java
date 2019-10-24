@@ -6,6 +6,7 @@ import in.srisrisri.clinic.utils.*;
 import in.srisrisri.clinic.FileStorage.FileStorageService;
 import in.srisrisri.clinic.FileStorage.UploadFileResponse;
 import in.srisrisri.clinic.responses.JsonResponse;
+import in.srisrisri.clinic.sms.SMSManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -70,6 +72,30 @@ public class PatientResource {
         logger.warn("fileUploaded to : {} ", new Object[]{fileDownloadUri});
         return new UploadFileResponse(fileNameSaved, fileDownloadUri,
                 multipartFile.getContentType(), multipartFile.getSize());
+    }
+
+    @GetMapping("smsAll/{message}")
+    @ResponseBody
+    public String all_sms(@PathVariable("message") String messageGiven) {
+        logger.warn("REST all_sms , {} ", new Object[]{label});
+        String listProcessed = "<table border='1' >";
+        List<PatientEntity> list = repo.findAll();
+        for (PatientEntity patientEntity : list) {
+            String contactPhone = patientEntity.getContactPhone();
+            String name = patientEntity.getName();
+            long id = patientEntity.getId();
+
+            SMSManager smsm = new SMSManager();
+            smsm.setPatientName(name);
+            smsm.setPatientId(id + "");
+            String sendSms = smsm.sendSms(contactPhone, smsm.getPreparedMessage(messageGiven, patientEntity), true);
+
+            listProcessed += "<tr>"
+                    + "<td>"+id+"</td>"
+                    +sendSms
+                    +"</tr>";
+        }
+        return listProcessed+"</table>";
     }
 
     @GetMapping("")

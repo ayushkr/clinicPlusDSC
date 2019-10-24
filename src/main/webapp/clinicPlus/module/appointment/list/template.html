@@ -46,13 +46,13 @@
             style="display: none"
             onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=doctor&filter=' + document.getElementById('doctor').value + ''"
             >
-        <span 
+        <button class='w3-btn w3-green'
             id='doctor_afterClick'
             title="No filter "
             onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=undefined&filter=undefined'"
             >
             <i class="fa fa-filter">x</i>           
-        </span>
+        </button>
 
         <br>
         Filter:  
@@ -178,8 +178,13 @@
                                    name="n"  value="{{:id}}">
                             <label for="checkbox_{{:id}}"></label>
                         </td>
-                        <td>{{:#index+1}}</td>
-                        <td>{{:id}}</td>
+                        <td
+                             onclick="go({{:id}}, 'appointment')"
+                            
+                            >{{:#index+1}}</td>
+                        <td
+                             onclick="go({{:id}}, 'appointment')"
+                            >{{:id}}</td>
                         <td
                             onclick="go({{:id}}, 'appointment')"
                             >{{:bookId}}</td>

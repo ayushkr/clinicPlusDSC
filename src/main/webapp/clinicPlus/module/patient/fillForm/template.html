@@ -29,114 +29,154 @@
     <div id="printableArea" style="margin-left: 0mm" 
          class="w3-container_akr"
          title="patient_{{:id}}_{{:name}}">
+
+
+
+
         <!--basic-->
         <div id="Basic" class="w3-container w3-border city ">
-            <span>Patient Profile: Basic
-                <div style="
 
-                     min-width: 155px; */
-                     position: relative;
-                     float: right;
-                     /* top: 77px; */
-                     /* right: 45px; */
-                     min-height: 165px;
-                     border: steelblue dashed 1px;
-                     text-align: center;
-                     "
 
-                     >
-                    <span style=""> 
-                        Photo Not <br>Available
-                    </span>
-                </div>  
-            </span>
-            ID : 
-            <span class="label label-info "> {{:id}} </span> 
+            <div class="grid-container">
+                <div class="item1">
+
+
+                    <div class="inp_outer" >
+                        <div class="title1">ID</div>
+                        <span class="label label-info "> {{:id}} </span> 
+                    </div>
+                    <br>
 
 
 
-            <br>
+                    <div class="inp_outer" style="min-width: 250px">
+                        <div class="title1">name</div>
+                        <input type="text" name="name" data-link="name" 
+                               class="akr_input_text" required="" />
+                    </div>
+                    <br>
 
 
-            <div class="inp_outer" style="min-width: 250px">
-                <div class="title1">name</div>
-                <input type="text" name="name" data-link="name" 
-                       class="akr_input_text" required="" />
-            </div>
-            <br>
+                    <div class="inp_outer" style="min-width: 100px">
+                        <div class="title1">age</div>
+                        <span class="inp2" contenteditable="true" id="age"
+                              data-link="age" >---</span>
+                        <input type="hidden" name="age" data-link="age" />
+                    </div>
+                    <br>
+                    <div class="inp_outer">
+                        <div class="title1">sex</div>
+
+                        <select name="sex" data-link="sex"
+
+                                class='select_akr'
+                                >
+                            <option value="M" title="Male" >M</option>
+                            <option value="F" >F</option>
+                            <option value="T" >T</option>
+                        </select>
+                    </div>
+
+                    <br>
+
+                    <!--background-color: var(--color_l2);-->
+                    <div class="inp_outer"  style="min-width: 290px;min-height: 100px">
+                        <div class="title1">address</div>
+                        <span class="inp2" contenteditable="true" 
+                              id="address"   data-link="address"
+                              style="
+                              min-height: 100px"
+                              >---</span>
+
+                        <input type="hidden" name="address" data-link="address" />
+                    </div>
+                    <br>
+ 
+
+                </div>
+                <div  class="item2" >
+                    
+                    
 
 
-            <div class="inp_outer" style="min-width: 100px">
-                <div class="title1">age</div>
-                <span class="inp2" contenteditable="true" id="age"
-                      data-link="age" >---</span>
-                <input type="hidden" name="age" data-link="age" />
-            </div>
+                    <div class="inp_outer"  style="min-width: 200px">
+                        <div class="title1">place</div>
+                        <span class="inp2" contenteditable="true" id="place"   data-link="place" >---</span>
+                        <input type="hidden" name="place" data-link="place" />
+                    </div> 
+                    <br>
+                    
+                    <div class="inp_outer"  style="min-width: 200px">
+                        <div class="title1">email</div>
+                        <span class="inp2" contenteditable="true" id="email"   data-link="email" >---</span>
+                        <input type="hidden" name="email" data-link="email" />
+                    </div>
+                    <br>
 
-            <div class="inp_outer">
-                <div class="title1">sex</div>
+                    <div class="inp_outer"  style="min-width: 200px">
+                        <div class="title1">contactPhone</div>
+                        <span class="inp2" contenteditable="true" id="contactPhone"   data-link="contactPhone" >---</span>
+                        <input type="hidden" name="contactPhone" data-link="contactPhone" />
+                    </div>
+                    <br>
 
-                <select name="sex" data-link="sex"
-                       
-                        class='select_akr'
+                    <div class="inp_outer"  style="min-width: 200px">
+                        <div class="title1">contactEmergency</div>
+                        <span class="inp2" contenteditable="true" id="contactEmergency"   data-link="contactEmergency" >---</span>
+                        <input type="hidden" name="contactEmergency" data-link="contactEmergency" />
+                    </div>
+                    <br>
+
+
+                    <span
+                        id="selectLarge_dateOfRegistration"
                         >
-                    <option value="M" title="Male" >M</option>
-                    <option value="F" >F</option>
-                    <option value="T" >T</option>
-                </select>
+                        selectLarge_dateOfRegistration    
+                    </span>
+                    <br>
+
+                    <div class="inp_outer" style="min-width: 100px">
+                        <div class="title1">bookId</div>
+                        <span class="inp2" contenteditable="true" id="bookId"   data-link="bookId" >---</span>
+                        <input type="hidden" name="bookId" data-link="bookId" />
+                    </div>
+                    <br>
+
+                </div>
+
+
+                <div  class="item3">
+                    <div style="
+
+                         min-width: 155px; */
+                         position: relative;
+
+                         min-height: 165px;
+                         border: steelblue dashed 1px;
+                         text-align: center;
+                         "
+
+                         >
+                        <span style=""> 
+                            Photo Not <br>Available
+                        </span>
+                    </div> 
+                </div>
             </div>
+            <span>
 
-
-            <!--background-color: var(--color_l2);-->
-            <div class="inp_outer"  style="min-width: 400px;min-height: 100px">
-                <div class="title1">address</div>
-                <span class="inp2" contenteditable="true" 
-                      id="address"   data-link="address"
-                      style="
-                      min-height: 100px"
-                      >---</span>
-
-                <input type="hidden" name="address" data-link="address" />
-            </div>
-            <br>
-            <div class="inp_outer"  style="min-width: 200px">
-                <div class="title1">place</div>
-                <span class="inp2" contenteditable="true" id="place"   data-link="place" >---</span>
-                <input type="hidden" name="place" data-link="place" />
-            </div>  
-
-            <div class="inp_outer"  style="min-width: 200px">
-                <div class="title1">email</div>
-                <span class="inp2" contenteditable="true" id="email"   data-link="email" >---</span>
-                <input type="hidden" name="email" data-link="email" />
-            </div>
-            <br>
-
-            <div class="inp_outer"  style="min-width: 200px">
-                <div class="title1">contactPhone</div>
-                <span class="inp2" contenteditable="true" id="contactPhone"   data-link="contactPhone" >---</span>
-                <input type="hidden" name="contactPhone" data-link="contactPhone" />
-            </div>
-
-            <div class="inp_outer"  style="min-width: 200px">
-                <div class="title1">contactEmergency</div>
-                <span class="inp2" contenteditable="true" id="contactEmergency"   data-link="contactEmergency" >---</span>
-                <input type="hidden" name="contactEmergency" data-link="contactEmergency" />
-            </div>
-            <br>
-
-
-            <span
-                id="selectLarge_dateOfRegistration"
-                >
-                selectLarge_dateOfRegistration    
             </span>
 
-            <div class="inp_outer" style="min-width: 100px">
-                <div class="title1">bookId</div>
-                <span class="inp2" contenteditable="true" id="bookId"   data-link="bookId" >---</span>
-                <input type="hidden" name="bookId" data-link="bookId" />
-            </div>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -211,4 +251,30 @@
         {{:~listFiles(id,'prescription','fileList')}}
     </div>
 </div>
+
+<style>
+    .item1 { grid-area: i1; 
+             /*border: solid black 1px;*/
+    }
+    .item2 { grid-area: i2;
+             /*border: solid black 1px;*/
+    }
+    .item3 { grid-area: i3;
+             /*border: solid black 1px;*/
+    }
+
+
+    .grid-container {
+        display: grid;
+        grid-template-areas:
+            'i1 i2 i3'
+
+            ;
+        grid-gap: 10px;
+        /*background-color: #2196F3;*/
+        padding: 10px;
+    }
+
+ 
+</style>
 

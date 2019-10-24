@@ -23,13 +23,13 @@ function  doctor_afterClick_fn(){
 function doctorFeesDecisionMaker() {
     var consultLevel = $('#consultLevel').val();
     console.log('consultLevel=' + consultLevel);
-    var feesList=$('#feesList').html();
-    var list = feesList.split(',');
-    console.log('list size=' + list.length);
-    if (consultLevel > (list.length - 1)) {
-        var consultFee = list[(list.length) - 1];
+    var feesListLine=$('#feesList').html().trim();
+    var feeList = feesListLine.split(',');
+    console.log('list size=' + feeList.length);
+    if (consultLevel > (feeList.length - 1)) {
+        var consultFee = feeList[(feeList.length) - 1];
     } else {
-        var consultFee = list[consultLevel];
+        var consultFee = feeList[consultLevel];
     }
     $('#consultFee').val(consultFee);
 
@@ -53,8 +53,11 @@ function appointmentTypeEntity_afterClick_fn(){
 //7 . ReNew
    var v= $('#appointmentTypeEntity').val();
     console.log('v=='+v);
-    var feeList=apiDataGlobal.doctor.feesList.split(',');
-    var feeForClinic=apiDataGlobal.doctor.feeForClinic;
+    var feeList=$('#feesList').html().trim().split(',');
+//    var feeList=apiDataGlobal.doctor.feesList.split(',');
+
+ var feeForClinic=$('#feeForClinic').val();
+//    var feeForClinic=apiDataGlobal.doctor.feeForClinic;
     switch (v){
         case '1':{
                 

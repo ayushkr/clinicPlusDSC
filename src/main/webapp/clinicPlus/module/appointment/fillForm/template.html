@@ -2,28 +2,29 @@
 <div id="printableArea"   title="appt_{{:id}}_{{if name}}{{:name}}{{/if}}" >
 
 
-    
-    <br>
+    <div data-akr-printable="false" > 
 
-    <span style="float: right">&nbsp;&nbsp;</span>
-    <div data-akr-printable="false" style="float:right"> 
-        {{if doctor}}
-        <a class="w3-btn w3-blue"  style="float: right"
-           onclick2="patientCard_show({{:id}})"
-           href="#/dummy?function=patientCard_show&id={{:id}}"
-           >
-            PatientCard 
+        <div style="background-color: var(--color_l3);
+             height: 50px">
 
-        </a>
+            {{if doctor}}
+            <a class="w3-btn w3-blue"  style="float: right"
+               onclick2="patientCard_show({{:id}})"
+               href="#/dummy?function=patientCard_show&id={{:id}}"
+               >
+                PatientCard 
 
-        {{else}}
-        You must save to see the PatientCard
+            </a>
 
-        {{/if}}
+            {{else}}
+            You must save to see the PatientCard
+
+            {{/if}}
+        </div> 
+
+
     </div>
 
-    <br>
-    <br>
 
     <div class="w3-bar-ay" data-akr-printable="false">
         <span class="w3-bar-item  tablink tabSelected " 
@@ -46,150 +47,178 @@
             <input type="hidden" name="id" data-link="id" />
 
 
-            <div> 
-                <span id="selectLarge_dateOfAppointment">
-                    selectLarge_dateOfAppointment
-                </span>  
+            <div class="grid-container">
+                <div class="item1">
 
-                <span style="    float: left;
-                      position: relative;
-                      top: 25px;"> 
-                    Appointment Profile : Basic (ID : {^{:id}})
-                </span>
-            </div>
+                    <div class="inp_outer" >
+                        <div class="inp1" >
+                            <div class="title1">Id</div>
+                            {^{:id}}
+                        </div>
+                    </div>
+                    <br>
 
-            <br><br><br>
-
-            <hr>
-
-
-            <!--patient-->
-            <span id="selectLarge_patient">
-                selectLarge_patient
-            </span>
-
-            <span id="selectLarge_doctor">
-                selectLarge_doctor
-            </span>
-
-            <span id="doctor_afterClick"
-                  style="display: unset"
-                  onclick="doctor_afterClick_fn()"
-                  >
-
-            </span>
-
-            <br>
-
-
-            <span id="selectLarge_appointmentTypeEntity">
-                selectLarge_appointmentTypeEntity
-            </span>
-
-            <span id="appointmentTypeEntity_afterClick"
-                  style="display: unset"
-                  onclick="appointmentTypeEntity_afterClick_fn()"
-                  >
-
-            </span>
-
-
-
-
-            <div class="inp_outer" style="min-width: 500px;">
-                <div class="inp1" >
-                    <div class="title1">remarks</div>
-                    <input  type="text" id="remarks" name="remarks"
-                            data-link="remarks"  
-                            class="akr_input_text"
-                            /> 
-                </div>
-            </div>  
-
-
-
-
-
-
-
-            <fieldset>
-                <legend>Fees /Payment Details</legend>
-                <div style="font-size: 0.8em;display: inline-block"> 
-                    FeesList<hr>
-                    <span id='feesList' >
-                        {{if doctor }}
-                        {{:doctor.feesList}}
-                        {{else}}
-                        ----
-                        {{/if}}
+                    <span id="selectLarge_dateOfAppointment">
+                        selectLarge_dateOfAppointment
                     </span> 
+                    <br>
+
+                    <!--patient-->
+                    <span id="selectLarge_patient">
+                        selectLarge_patient
+                    </span>
+                    <br>
+
+                    <span id="selectLarge_doctor">
+                        selectLarge_doctor
+                    </span>
+                    <br>
+
+                    <span id="doctor_afterClick"
+                          style="display: unset"
+                          onclick="doctor_afterClick_fn()"
+                          >
+                    </span>
+                    <br>
+
 
                 </div>
-
-                <div class="inp_outer">
-                    <span class="title1">   Level</span>
-
-                    <select id="consultLevel"
-                            class="inp2"
-                            onchange=
-                            "doctorFeesDecisionMaker
-                                        ('{{if doctor }}{{:doctor.feesList}}{{/if}} ')"
-                            >
-                        <option value="0" selected="">first</option>
-                        <option value="1">second</option>
-                        <option value="2">third</option>
-                    </select>
-                </div>
+                <div class="item2">
 
 
-                <div class="inp_outer" >
-                    <div class="inp1" >
-                        <div class="title1">consultFee</div>
-                        <!--<span data-link="consultFee"></span>-->
-                        <input  type="text" id="consultFee" name="consultFee" 
-                                data-link="consultFee"
-                                style="width: 50px;    border: none;"
-                                class="oakr_input_text" required="" readonly=""
-                                /> 
+                    <span id="selectLarge_appointmentTypeEntity">
+                        selectLarge_appointmentTypeEntity
+                    </span>
+
+                    <span id="appointmentTypeEntity_afterClick"
+                          style="display: unset"
+                          onclick="appointmentTypeEntity_afterClick_fn()"
+                          >
+
+                    </span>
+
+                    <div class="inp_outer">
+                        <span class="title1"> Fees  Level</span>
+
+                        <select id="consultLevel"
+                                class="inp2"
+                                onchange=
+                                "doctorFeesDecisionMaker
+                                            ('{{if doctor }}{{:doctor.feesList}}{{/if}} ')"
+                                >
+                            <option value="0" selected="">first fee</option>
+                            <option value="1">second fee</option>
+                            <option value="2">third fee</option>
+                        </select>
                     </div>
+
+
+
+
+                    <div class="inp_outer" style="min-width: 200px;">
+                        <div class="inp1" >
+                            <div class="title1">remarks</div>
+                            <input  type="text" id="remarks" name="remarks"
+                                    data-link="remarks"  
+                                    class="akr_input_text"
+                                    /> 
+
+                        </div>
+                    </div> 
+                    <br>
+
+                    <fieldset>
+                        <legend style="color:steelblue">Fees /Payment Details</legend>
+                        <div style="font-size: 0.8em;display: inline-block;
+                             color:steelblue;
+                             "> 
+                            FeesList :
+
+                                {{if doctor }}
+                                 <span id='feesList' >
+                                {{:doctor.feesList}}
+                                </span> 
+                                {{else}}
+                                <span id='feesList' >
+                               
+                                </span> 
+                                {{/if}}
+                            
+                        </div>
+
+                        <br>
+
+
+                        <div class="inp_outer" >
+                            <div class="inp1" >
+                                <div class="title1">consultFee</div>
+                                <!--<span data-link="consultFee"></span>-->
+                                <input  type="text" id="consultFee" name="consultFee" 
+                                        data-link="consultFee"
+                                        style="width: 50px;    border: none;"
+                                        class="oakr_input_text" required="" readonly=""
+                                        /> 
+                            </div>
+                        </div>
+
+
+
+                        <div class="inp_outer" > 
+                            <div class="inp1" >
+                                <div class="title1">feeForClinic</div>
+                                <!--<span data-link="feeForClinic"></span>-->
+                                <input  type="text" id="feeForClinic"
+                                        style="width: 50px;    border: none;"
+                                        name="feeForClinic" data-link="feeForClinic"
+                                        class="oakr_input_text" required="" readonly=""
+                                        /> 
+                            </div>
+                        </div>
+
+
+
+                    </fieldset>
                 </div>
+                <div class="item3">
+                    <div class="inp_outer">
+                        <div class="inp1" >
+                            <div class="title1">tokenNumber</div>
+                            <div style="background-color: var(--color-l3)">
+                                {{if tokenNumber==0}} 
+                                <!--                            Save to generate Token number -->
+                                {{/if}}
 
+                            </div>
 
-
-                <div class="inp_outer" > 
-                    <div class="inp1" >
-                        <div class="title1">feeForClinic</div>
-                        <!--<span data-link="feeForClinic"></span>-->
-                        <input  type="text" id="feeForClinic"
-                                style="width: 50px;    border: none;"
-                                name="feeForClinic" data-link="feeForClinic"
-                                class="oakr_input_text" required="" readonly=""
-                                /> 
+                        </div>
                     </div>
+
+                    <div class="inp_outer">
+                        <div class="inp1" >
+                            <div class="title1">bookId</div>
+                            <input  class="inp2"
+                                    type="text" id="bookId" name="bookId" data-link="bookId"   /> 
+                        </div>
+                    </div>
+
+                    <span id="selectLarge_appointmentStatusEntity" >
+                        selectLarge_appointmentStatusEntity
+                    </span>
+
                 </div>
 
-
-
-            </fieldset>
-
-            <div class="inp_outer">
-                <div class="inp1" >
-                    <div class="title1">tokenNumber</div>
-                    {{if tokenNumber==0}} Save to generate Token number {{/if}}
-                </div>
             </div>
 
-            <div class="inp_outer">
-                <div class="inp1" >
-                    <div class="title1">bookId</div>
-                    <input  class="inp2"
-                            type="text" id="bookId" name="bookId" data-link="bookId"   /> 
-                </div>
-            </div>
 
-<span id="selectLarge_appointmentStatusEntity" >
-        selectLarge_appointmentStatusEntity
-    </span>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -247,3 +276,29 @@
     {{/if}}
 
 </div>
+
+<style>
+    .item1 { grid-area: i1; 
+             /*border: solid black 1px;*/
+    }
+    .item2 { grid-area: i2;
+             /*border: solid black 1px;*/
+    }
+    .item3 { grid-area: i3;
+             /*border: solid black 1px;*/
+    }
+
+
+    .grid-container {
+        display: grid;
+        grid-template-areas:
+            'i1 i2 i3'
+
+            ;
+        grid-gap: 10px;
+        /*background-color: #2196F3;*/
+        padding: 10px;
+    }
+
+
+</style>
