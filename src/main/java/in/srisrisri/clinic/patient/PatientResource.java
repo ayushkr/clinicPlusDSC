@@ -102,8 +102,10 @@ public class PatientResource {
     @ResponseBody
     public List<PatientEntity> all() {
         logger.warn("REST getItems() , {} ", new Object[]{label});
-
-        List<PatientEntity> list = repo.findAll();
+       
+        Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
+       
+        List<PatientEntity> list = repo.findAll(sort);
 
         return list;
     }

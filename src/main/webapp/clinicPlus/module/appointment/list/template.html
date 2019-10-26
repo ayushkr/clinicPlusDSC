@@ -5,8 +5,11 @@
     data-akr-printable="false"
     >
     <div class="w3-bar-ay"  >
+        
+         <a class="w3-bar-item tablink tabSelected " 
+           onClick="openCity(event, 'none')">None</a>
 
-        <a class="w3-bar-item  tablink tabSelected" 
+        <a class="w3-bar-item  tablink " 
            onClick="openCity(event, 'filter')">
             <i class="fa fa-filter"></i>
             Filter</a>
@@ -19,8 +22,11 @@
            onClick="openCity(event, 'Reports')">Reports</a>
 
     </div>
+    
+    <div id="none" class="w3-container_margin10 city ">
+    </div>
 
-    <div id="filter" class="w3-container_margin10 city ">
+    <div id="filter" class="w3-container_margin10 city city_hide ">
 
 
 
@@ -47,12 +53,26 @@
             onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=doctor&filter=' + document.getElementById('doctor').value + ''"
             >
         <button class='w3-btn w3-green'
-            id='doctor_afterClick'
-            title="No filter "
-            onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=undefined&filter=undefined'"
-            >
+                id='doctor_afterClick'
+                title="No filter "
+                onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=undefined&filter=undefined'"
+                >
             <i class="fa fa-filter">x</i>           
         </button>
+
+
+        <a  target='iframe1'
+            onclick="popup_selection_obj(
+                {
+                'entity_select': 'appointment',
+                        'input': 'appointment'
+                }
+                )"
+            class="akr_nav_item_iconised " title="Appointments">
+            <i class="fa fa-calendar"></i> 
+            <i class="fasub fa-list" ></i> 
+        </a> 
+
 
         <br>
         Filter:  
@@ -103,15 +123,20 @@
                value=' #/cmdc?module=doctor&action=/all/list'>
 
         <div id="printableArea"   title="Appointment_List" >
-            List of Appointments in DSC
+            
+            <span class="darkBgHeading">
+                 List of Appointments in DSC
+            </span>
+           
 
 
-            <table  class="table_greyBorder" 
+            <table  class="customers"
                     cellspacing="0" cellpadding="5" border="1"  >
 
 
                 <thead style="    font-size: 12px;">
                     <tr class="bluestrp">
+                        <th></th> 
                         <th></th>
                         <th>SLNo</th>
                         <th>id
@@ -145,11 +170,11 @@
 
                             {{:~sortByColumnUI('appointmentTypeEntity',obj)}}
                         </th>
-                         <th>remarks
+                        <th>remarks
 
                             {{:~sortByColumnUI('remarks',obj)}}
                         </th>
-                         <th>token No:
+                        <th>token No:
                             {{:~sortByColumnUI('tokenNumber',obj)}}
                         </th>
                         <th>consult Fee
@@ -157,10 +182,10 @@
                             {{:~sortByColumnUI('consultFee',obj)}}
                         </th>
                         <th>reg fee
-                             {{:~sortByColumnUI('feeForClinic',obj)}}
-                            
+                            {{:~sortByColumnUI('feeForClinic',obj)}}
+
                         </th>
-                       
+
 
                     </tr>
                 </thead>
@@ -177,27 +202,29 @@
                                    class="regular-checkbox" 
                                    name="n"  value="{{:id}}">
                             <label for="checkbox_{{:id}}"></label>
+                        </td><td>
+                            <div  data-akr-printable="false"
+                                    
+                                     onclick="populateCreate2('appointment', {{:id}}, newModal().id);"
+                                     ><i class="fa fa-pencil"></i>
+                            </div>
                         </td>
                         <td
-                             onclick="go({{:id}}, 'appointment')"
-                            
+                            onclick="go({{:id}}, 'appointment')"
+
                             >{{:#index+1}}</td>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+
+
+
+
+
+
+
                         <td
-                             onclick2="go({{:id}}, 'appointment')"
+                            onclick2="go({{:id}}, 'appointment')"
                             >{{:id}}
-                         <button  class="buttonNone"
-                                  type="button"
-                         onclick="populateCreate2('appointment', {{:id}}, newModal().id);"
-                         ><i class="fa fa-pencil"></i>
-                </button>
-                        
+
+
                         </td>
                         <td
                             onclick="go({{:id}}, 'appointment')"
@@ -260,18 +287,18 @@
                         <td
                             onclick="go({{:id}}, 'appointment')"
                             >{{:remarks}}</td>
-                        
+
                         <td
                             onclick="go({{:id}}, 'appointment')" 
                             >{{:tokenNumber}}</td>
-                        
+
                         <td
                             onclick="go({{:id}}, 'appointment')"
                             >{{:consultFee}}</td>
                         <td
                             onclick="go({{:id}}, 'appointment')" 
                             >{{:feeForClinic}}</td>
-                        
+
 
 
                     </tr>

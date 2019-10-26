@@ -79,9 +79,10 @@
     a{ text-decoration: none}
 
     .headerSortSymbol{
-        /*padding: 3px;*/
-        text-decoration: none;
-        font-size: 14px !important;
+       /*padding: 3px;*/ 
+    /* text-decoration: none; */
+    /* font-size: 14px !important; */
+    color: #5b778e;
 
     }
 
@@ -235,26 +236,28 @@
     }
 
     .topBarStrip{
-        /*right: 60px;*/
-        width: 100%;
-        background-color: var(--color_l3);
-        z-index: inherit;
+    
+    width: 100%;
+     background-color: var(--color_d1); 
+    z-index: inherit;
+    color: white;
     }
 
     .widgetBar,.widgets2{
-       height: 46px;
-    background-color: var(--color_l3);
+        height: 46px;
+    background-color: #2e4558;
     /* transition: height 1s; */
     /* transform: rotate(180deg); */
-    /*position: fixed;*/
-    /*width: 80%;*/
-    left:0px;
+    /* position: fixed; */
+    /* width: 80%; */
+    left: 0px;
     right: 20px;
     }
+    
     .widgets2_rounded{
         position: fixed;
         top: -14px;
-        /* background-color: var(--color_l3); */
+         background-color: var(--color_l3); 
         right: 143px;
         /* z-index: 1005; */
         border-radius: 20px;
@@ -272,10 +275,10 @@
         top: -18px;
     }
 
-    .table_greyBorder{
+/*    .table_greyBorder{
         border-color: var(--color_l0);
 
-    }
+    }*/
 
     .bluestrp {
         background-color:var(--color_l3);
@@ -331,12 +334,11 @@
     }
 
    .w3-bar-ay {
-    background-color: var(--color_l2p5);
-       /*background-color:  '#4caf50';*/
-   
+    background-color: #23384a;
     padding: 5px 10 0;
     /* margin: 10px; */
     /* border-top: solid var(--color_l2p5); */
+    color: white;
 }
 
     .w3-container_akr{
@@ -502,7 +504,7 @@
     .tabSelected{
         display: inline-block;
         background-color:var(--color_l3p5);
-        /* color: var(--color_l3); */
+         color: var(--color_d3); 
         padding: 1px 10px 1px 10px;
 
     }
@@ -511,6 +513,15 @@
         /*overflow: scroll;*/
     }
 
+    .darkBgHeading{
+     display: block;
+    background-color: var(--color_d3);
+    color: var(--color_l3);
+    padding: 1px 10px 1px 10px;
+    /*width: 100%;*/
+    text-align: center;
+    }
+    
     #main2{
         /*width: 100%;*/
         position: fixed;
@@ -565,7 +576,8 @@
         height: 100%;
     }
     #pagingBar{
-
+    background: #2e4558;
+    color:var(--color_l5)
     }
     .alert{
         background-color: red;
@@ -1148,6 +1160,32 @@
     .table_greyBorder+td, .table_greyBorder+th{
         border: solid var(--color_l4) 1px;
     }
+    
+    
+    
+    .customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.customers tr:nth-child(even){background-color: #f2f2f2;}
+
+.customers tr:hover {background-color: #ddd;}
+
+.customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color:#2e4558;
+  color: white;
+}
+    
     /* table{
             
         }
