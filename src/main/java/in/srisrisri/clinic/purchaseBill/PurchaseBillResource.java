@@ -141,6 +141,8 @@ public class PurchaseBillResource {
         if (id >= 0) {
             purchaseBillEntitySaved = purchaseBillRepo.findById(id).get();
             purchaseBillEntitySaved.setUpdationTime(Date.valueOf(LocalDate.now()));
+             purchaseBillEntitySaved.setDateOfBill(Date.valueOf(LocalDate.now()));
+               purchaseBillEntitySaved.setDateOfPurchase(Date.valueOf(LocalDate.now()));
         } else {
             PurchaseBillEntity purchaseBillEntityNew = new PurchaseBillEntity();
 
