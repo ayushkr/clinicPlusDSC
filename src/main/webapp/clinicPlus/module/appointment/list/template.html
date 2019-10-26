@@ -110,7 +110,7 @@
                     cellspacing="0" cellpadding="5" border="1"  >
 
 
-                <thead style="    font-size: 10px;">
+                <thead style="    font-size: 12px;">
                     <tr class="bluestrp">
                         <th></th>
                         <th>SLNo</th>
@@ -165,7 +165,7 @@
                     </tr>
                 </thead>
 
-                <tbody style="    font-size: 12px;">
+                <tbody >
 
 
                     {{for obj.pageList.content}}
@@ -182,9 +182,23 @@
                              onclick="go({{:id}}, 'appointment')"
                             
                             >{{:#index+1}}</td>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         <td
-                             onclick="go({{:id}}, 'appointment')"
-                            >{{:id}}</td>
+                             onclick2="go({{:id}}, 'appointment')"
+                            >{{:id}}
+                         <button  class="buttonNone"
+                                  type="button"
+                         onclick="populateCreate2('appointment', {{:id}}, newModal().id);"
+                         ><i class="fa fa-pencil"></i>
+                </button>
+                        
+                        </td>
                         <td
                             onclick="go({{:id}}, 'appointment')"
                             >{{:bookId}}</td>

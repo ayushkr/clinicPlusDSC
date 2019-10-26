@@ -747,19 +747,21 @@ function filter(attr, moduleName) {
     console.log('filter(a,b)  attr=' + attr + 'givenWord=[' + givenWord + '] ');
 
     //    var dom = document.getElementsByTagName('d_' + moduleName);
-    var dom = document.getElementsByClassName('data');
+    var dom = document.getElementsByClassName('data_'+moduleName);
     for (var i = 0; i < dom.length; i++) {
         var id = dom[i].getAttribute('id');
         var attrDB = (dom[i].getAttribute(attr) + "".trim()).toLowerCase();
-        document.getElementById('select_' + id).style = 'display:none';
-        console.log('id=' + id + ' attrDB=' + attrDB);
+        var idOfUI='select_'+moduleName+'_' + id;
+         console.log('var idOfUI=\''+ idOfUI+'\'');
+        document.getElementById(idOfUI).style = 'display:none';
+        console.log('idOfUi='+ idOfUI +',  id=' + id + ' attrDB=' + attrDB);
         
         console.log('comparing (givenWord)' + givenWord + ' with (attrDB)' + attrDB);
         
                 if (attrDB.includes(givenWord)) {
 //        if (attrDB.startsWith(givenWord)) {
             console.log('---matched----');
-            document.getElementById('select_' + id).style = 'display:table-row';
+            document.getElementById(idOfUI).style = 'display:table-row';
         }
 
 

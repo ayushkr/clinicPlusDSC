@@ -3,11 +3,11 @@
     <p class="pageTitle">
         select an Appointment
     </p>
-    Filter By id <input  type="text" onkeyup="filter('id')"  ><br>
-    Filter By bookId <input  type="text" onkeyup="filter('bookId')"  ><br>
-    Filter By dateOfAppointment <input  type="text" onkeyup="filter('dateOfAppointment')"  ><br>
-    Filter By doctor.name <input  type="text" onkeyup="filter('doctor.name')"  ><br>
-    Filter By patient.name <input  type="text" onkeyup="filter('patient.name')"  ><br>
+    Filter By id <input  type="text" onkeyup="filter('id','appointment')"  ><br>
+    Filter By bookId <input  type="text" onkeyup="filter('bookId','appointment')"  ><br>
+    Filter By dateOfAppointment <input  type="text" onkeyup="filter('dateOfAppointment','appointment')"  ><br>
+    Filter By doctor.name <input  type="text" onkeyup="filter('doctor.name','appointment')"  ><br>
+    Filter By patient.name <input  type="text" onkeyup="filter('patient.name','appointment')"  ><br>
     <br>
 
     <div class="Table">
@@ -31,7 +31,7 @@
         {{for obj}}
         <d_json id="json_appointment_{{:id}}" style="display: none">
             {{:~jsonise(#data)}}></d_json>
-        <div class="Row" id="select_{{:id}}" >
+        <div class="Row" id="select_appointment_{{:id}}" >
 
             {{if patient || doctor}}  
 
@@ -79,7 +79,7 @@
             {{/if}}
 
             <d 
-               class="data" 
+               class="data_appointment" 
                 id='{{:id}}' 
                bookId='{{:bookId}}'  
                doctor.name="{{if doctor }} {{:doctor.name}} {{else}} null{{/if}}"  

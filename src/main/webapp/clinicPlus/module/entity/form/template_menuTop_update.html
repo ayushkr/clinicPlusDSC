@@ -9,13 +9,19 @@
 
 
 
-        <button id='save' accesskey="s" data-toggle="tooltip" title="Save" class="w3-button w3-green "
+        <button id='save' accesskey="s" data-toggle="tooltip" 
+                title="Save" class="w3-btn w3-green "
             style="float: right" onclick="save('{{:moduleName}}');">
             <!--            <i class="fa fa-save"  > </i>-->
             OK
-
         </button>
 
+         <button id='save' accesskey="s" data-toggle="tooltip" 
+                title="Save" class="w3-btn w3-blue "
+                style="float: right" onclick="hideMainLevel();">
+            <!--            <i class="fa fa-save"  > </i>-->
+          Cancel
+        </button>
 
 
         <button accesskey="p" onclick="printDiv_navOff('navbar')" class="w3-btn2 " style="float: right"

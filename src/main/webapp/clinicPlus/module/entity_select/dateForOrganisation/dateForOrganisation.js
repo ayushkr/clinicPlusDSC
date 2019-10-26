@@ -1,4 +1,4 @@
-// entity_select/dateForOrganisation/dateForOrganisation.js
+// rev dateForOrganisation.js/dateForOrganisation/entity_select
 
 var fieldName = "";
 var dateStrDashed;
@@ -56,7 +56,7 @@ function updateCallerUIWithDate() {
         
 
     };
-    hideMainLevel();
+//    hideMainLevel();
     selectionDone(obj);
 }
 

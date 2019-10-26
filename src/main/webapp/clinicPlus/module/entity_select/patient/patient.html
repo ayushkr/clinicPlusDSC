@@ -1,108 +1,107 @@
 <div style="padding: 40px;">
-<p class="pageTitle">
-    Select a Patient
-</p>
+    <p class="pageTitle">
+        Select a Patient
+    </p>
 
-<table>
-    <tbody>
-        
-         <tr>
-            <td>
-                Filter By Name 
-            </td>
-            <td>
-                <input  type="text" onkeyup="filter('name')"  >
-            </td>
+    <table>
+        <tbody>
 
-        </tr>
-        <tr>
-            <td>
-                Filter By id 
-            </td>
-            <td>
-                <input  type="text" onkeyup="filter('id')"  >
-            </td>
+            <tr>
+                <td>
+                    Filter By Name 
+                </td>
+                <td>
+                    <input  type="text" onkeyup="filter('name','patient')"  >
+                </td>
 
-        </tr>
-       
-        <tr>
-            <td>
-                Filter By age 
-            </td>
-            <td>
-                <input  type="text" onkeyup="filter('age')"  >
-            </td>
+            </tr>
+            <tr>
+                <td>
+                    Filter By id 
+                </td>
+                <td>
+                    <input  type="text" onkeyup="filter('id','patient')"  >
+                </td>
 
-        </tr>
-        <tr>
-            <td>
-                Filter By contactPhone 
-            </td>
-            <td>
-                <input  type="text" onkeyup="filter('contactPhone')"  >
-            </td>
+            </tr>
 
-        </tr>
-    </tbody>
-</table>
+            <tr>
+                <td>
+                    Filter By age 
+                </td>
+                <td>
+                    <input  type="text" onkeyup="filter('age','patient')"  >
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    Filter By contactPhone 
+                </td>
+                <td>
+                    <input  type="text" onkeyup="filter('contactPhone','patient')"  >
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
 
 
-<div class="Table">
-    <div class="Title">
+    <div class="Table">
+        <div class="Title">
 
-    </div>
+        </div>
 
-    <div class="Heading">
-         <div class="Cell"><p>id</p></div>
-        <div class="Cell"><p>name</p></div>
-        <div class="Cell"><p>age</p></div>
-        <div class="Cell"><p>phone</p></div>
-    </div>
-    {{for obj}}
-    <div id="select_{{:id}}"  class="Row"
-         >   
-        <div class="Cell" >{{:id}}</div>
-        <div class="Cell" >
-           <button
-               type="button" 
-                  class="entity_select_selectButton" 
-                   onclick='selectThis(
-                 {
-                 who:"{{:~root.moduleName}}",
-                         id:{{:id}},
-                         extra:{{:~jsonise(#data)}}
-                 }
-                 )'
-                  
-                 >
-               {{:name}}
-           </button>
+        <div class="Heading">
+            <div class="Cell"><p>id</p></div>
+            <div class="Cell"><p>name</p></div>
+            <div class="Cell"><p>age</p></div>
+            <div class="Cell"><p>phone</p></div>
+        </div>
+        {{for obj}}
+        <div id="select_patient_{{:id}}"  class="Row"
+             >   
+            <div class="Cell" >{{:id}}</div>
+            <div class="Cell" >
+                <button
+                    type="button" 
+                    class="entity_select_selectButton" 
+                    onclick='selectThis(
+                       {
+                       who:"{{:~root.moduleName}}",
+                               id:{{:id}},
+                               extra:{{:~jsonise(#data)}}
+                       }
+                       )'
+
+                    >
+                    {{:name}}
+                </button>
+                
+                <button  class="buttonNone"
+                         onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, newModal().id);"
+                         ><i class="fa fa-pencil"></i>
+                </button>
+            </div>
             
-        </div>
-        <div class="Cell" >{{:age}} y</div>
-        <div class="Cell" >{{:contactPhone}}</div>
-        
-        <div class="Cell" style="border:none"> 
-             <button  class="w3-btn"
-                      onclick="populateCreate2('{{:~root.moduleName}}', {{:id}}, newModal().id);"
+            
+            <div class="Cell" >{{:age}} y</div>
+            <div class="Cell" >{{:contactPhone}}</div>
 
-                ><i class="fa fa-pencil"></i>
-            </button>
-           
+
+
+
+
+            <d class="data_patient"
+               id='{{:id}}' 
+               name="{{:name}}" 
+               age="{{:age}}" 
+               contactPhone="{{:contactPhone}}"
+               ></d>
         </div>
-        
-        
-        
-         <d class="data"
-             id='{{:id}}' 
-           name="{{:name}}" 
-           age="{{:age}}" 
-           contactPhone="{{:contactPhone}}"
-           ></d>
+
+        {{/for}}
     </div>
-
-    {{/for}}
-</div>
 
 </div>
 

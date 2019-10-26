@@ -1,6 +1,6 @@
 <div style="padding: 40px;">
     <p class="pageTitle"> Select a Doctor</p>
-    Filter By Name <input  type="text" onkeyup="filter('name')"  ><br>
+    Filter By Name <input  type="text" onkeyup="filter('name','doctor')"  ><br>
     Filter By department <input  type="text" onkeyup="filter('department')"  ><br>
 
     Filter By description <input  type="text" onkeyup="filter('description')"  ><br>
@@ -21,11 +21,11 @@
             <div class="CellNoBorder"><p>actions</p></div>
         </div>
 
-       
+
 
         {{for obj  itemVar='~one'}}
 
-        <div class="Row" id="select_{{:id}}"  >
+        <div class="Row" id="select_doctor_{{:id}}"  >
             <div class="CellNoBorder"
                  onclick2="selectThis('{{:~root.moduleName}}', {{:id}}, '{{:name}}<br>Fees({{:feesList}})')"  
                  onclick='selectThis(
@@ -41,26 +41,29 @@
 
 
                 <button type="button"  
-                       class="entity_select_editButton" 
-                      
-                       >{{:name}} </button>
+                        class="entity_select_editButton" 
 
+                        >{{:name}} </button>
+  
+                
+                <button class="buttonNone" data-toggle="tooltip"
+                        title="Edit"
+                        onclick="populateCreate2('{{:~root.moduleName}}',
+                       {{:id}}, newModal().id);"
+
+                        ><i class="fa fa-pencil"></i>
+                </button>
 
             </div>
             <div class="CellNoBorder">  {{:department}} </div>
             <div class="CellNoBorder">  {{:remediesFor}} </div>
             <div class="CellNoBorder"> 
-                <a class="w3-btn" data-toggle="tooltip" title="Edit"
-                   onclick="populateCreate2('{{:~root.moduleName}}',
-                       {{:id}}, newModal().id);"
 
-                   ><i class="fa fa-edit"></i>
-                </a>
 
             </div>
 
-            <d class="data"
-                id='{{:id}}' 
+            <d class="data_doctor"
+               id='{{:id}}' 
                name="{{:name}}" 
                department="{{:department}}" 
                remediesFor="{{:remediesFor}}" 

@@ -184,6 +184,7 @@ public class AppointmentResource {
         } else {
             AppointmentEntity entityAfter = new AppointmentEntity();
             entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
+             entityAfter.setDateOfAppointment(Date.valueOf(LocalDate.now()));
             repo.save(entityAfter);
             item = Optional.of(entityAfter);
         }

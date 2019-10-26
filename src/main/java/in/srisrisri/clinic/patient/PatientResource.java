@@ -177,6 +177,7 @@ public class PatientResource {
 
             PatientEntity entityAfter = new PatientEntity();
             entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
+            entityAfter.setDateOfRegistration(Date.valueOf(LocalDate.now()));
             repo.save(entityAfter);
             item = Optional.of(entityAfter);
         }

@@ -129,6 +129,7 @@ public class DoctorResource {
 
             DoctorEntity entityAfter = new DoctorEntity();
             entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
+             entityAfter.setDateOfJoining(Date.valueOf(LocalDate.now()));
             repo.save(entityAfter);
             item = Optional.of(entityAfter);
 
