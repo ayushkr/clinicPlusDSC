@@ -20,13 +20,13 @@ and open the template in the editor.
         <style>
             .akr_nav_item_iconised{
                 display: block;
-                padding: 8px 0px 8px 0px;
-                text-align: center;
-                color:var(--color_l5) ;
-                background-color:var(--color_l0) ;
-               /*border: solid var(--color_l3) 3px;*/
-               border-radius: 10px;
-               margin: 3px;
+    padding: 8px 0px 8px 0px;
+    text-align: center;
+    color: var(--color_l4);
+    background-color: var(--color_d1);
+    /* border: solid var(--color_l3) 3px; */
+    /* border-radius: 10px; */
+    /* margin: 3px;
             }
 
             .akr_nav_item_iconised:focus{
@@ -47,12 +47,15 @@ and open the template in the editor.
         </style>
        
     </head>
-    <body style="margin: 0px" class="body">
+    <body style="margin: 0px;
+             background-color: var(--color_d1);
+          " 
+          class="body" >
 
 
 
     <center>
-        NavMenu 
+        <span style="color: white">Nav</span>
 
         <span id="dateCurrent" class="dateCurrent"
               data-1="1"
@@ -60,7 +63,9 @@ and open the template in the editor.
               class="akr_nav_item_iconised "
               onclick="window.href = '/clinicPlus/home.html#/cmd?module=dateForOrganisation&action=/all/list&pageNumber=1&div=main_1'"
               title="calendar"
-              > dateCurrent</span>
+              > 
+            <!--dateCurrent-->
+        </span>
     </center>
     <hr style=" margin: 1px 7px 5px;">
    
@@ -93,6 +98,25 @@ and open the template in the editor.
         <i class="fasub fa-list"></i> 
     </a>
     
+     <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=report_incomeFromDoctor&action=/all/list&pageNumber=1&div=main_1"
+       class="akr_nav_item_iconised "
+       title="report_incomeFromDoctor"
+       > 
+        <i class="fa fa-money"></i> 
+           <i class="fasub fa-wheelchair"></i> 
+        <i class="fasub fa-user-md"></i> 
+    </a>
+
+
+
+
+    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=finance&action=/all/list&pageNumber=1&div=main_1"
+       class="akr_nav_item_iconised"
+       title="finance"
+       > 
+        <i class="fa fa-money"></i> 
+        <i class="faspace"></i> 
+    </a>
     
     <hr>
     <div style="background-color: #76deae;padding: 4px">
@@ -160,25 +184,6 @@ and open the template in the editor.
         <i class="fasub fa-list"></i> 
     </a>
 
-     <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=report_incomeFromDoctor&action=/all/list&pageNumber=1&div=main_1"
-       class="akr_nav_item_iconised "
-       title="report_incomeFromDoctor"
-       > 
-        <i class="fa fa-money"></i> 
-           <i class="fasub fa-wheelchair"></i> 
-        <i class="fasub fa-user-md"></i> 
-    </a>
-
-
-
-
-    <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=finance&action=/all/list&pageNumber=1&div=main_1"
-       class="akr_nav_item_iconised"
-       title="finance"
-       > 
-        <i class="fa fa-money"></i> 
-        <i class="faspace"></i> 
-    </a>
 
 
     <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=user&action=/all/list&pageNumber=1&div=main_1" 

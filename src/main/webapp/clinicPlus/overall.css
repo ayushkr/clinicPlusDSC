@@ -63,7 +63,8 @@
     .hideMainLevelButton{
         float: right;
     padding: 10px;
-    /* background-color: red; */
+    background-color: var(--color_d3); 
+    color:white;
     /*position: fixed;*/
 /*    top: 0px;
     right: 20px;
@@ -245,7 +246,8 @@
 
     .widgetBar,.widgets2{
         height: 46px;
-    background-color: #2e4558;
+    background-color: var(--color_d1);
+    color:white;
     /* transition: height 1s; */
     /* transform: rotate(180deg); */
     /* position: fixed; */
@@ -980,7 +982,7 @@
 
     }
 
-    tr:hover{
+    tr:hover {
         border:dashed green 1px;
         /*background: var(--color_green)*/
     }
@@ -1176,7 +1178,7 @@
 
 .customers tr:nth-child(even){background-color: #f2f2f2;}
 
-.customers tr:hover {background-color: #ddd;}
+.customers tr:hover {background-color: #33bdac;}
 
 .customers th {
   padding-top: 12px;
