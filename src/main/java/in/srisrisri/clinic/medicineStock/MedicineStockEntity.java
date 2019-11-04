@@ -43,6 +43,9 @@ public class MedicineStockEntity implements Serializable {
     // rate
     @ColumnDefault(value = "0")
     private BigDecimal pts;
+    
+     @ColumnDefault(value = "0")
+    private long qtyFree;
 
     @ColumnDefault(value = "0")
     private long qtyPurchased;
@@ -396,5 +399,15 @@ public class MedicineStockEntity implements Serializable {
     public void setPurchaseBill(PurchaseBillEntity purchaseBill) {
         this.purchaseBill = purchaseBill;
     }
+
+    public long getQtyFree() {
+        return qtyFree;
+    }
+
+    public void setQtyFree(long qtyFree) {
+        this.qtyFree = qtyFree;
+    }
+    
+    
 
 }

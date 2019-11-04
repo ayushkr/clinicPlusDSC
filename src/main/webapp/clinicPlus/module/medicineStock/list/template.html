@@ -91,6 +91,10 @@
                         {{:~sortByColumnUI('qtyPurchased',obj)}}
 
                     </th>
+                    <th>qty free
+                        {{:~sortByColumnUI('qtyFree',obj)}}
+
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -137,6 +141,7 @@
                     <td>{{:cgst}}</td>
                     <td>{{:sgst}}</td>
                     <td>{{:qtyPurchased}}</td>
+                      <td>{{:qtyFree}}</td>
                 </tr>
                 {{/if}}
                 {{/for}}
