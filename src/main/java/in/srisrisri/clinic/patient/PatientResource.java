@@ -88,7 +88,7 @@ public class PatientResource {
             SMSManager smsm = new SMSManager();
             smsm.setPatientName(name);
             smsm.setPatientId(id + "");
-            String sendSms = smsm.sendSms(contactPhone, smsm.getPreparedMessage(messageGiven, patientEntity), true);
+            String sendSms = smsm.sendSms(contactPhone, smsm.getPreparedMessage(messageGiven, patientEntity), false);
 
             listProcessed += "<tr>"
                     + "<td>"+id+"</td>"

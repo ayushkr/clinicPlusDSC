@@ -115,6 +115,9 @@ public class MedicineStockEntity implements Serializable {
     String remarks;
 
     BigDecimal HUNDRED = BigDecimal.valueOf(100);
+    
+      @ColumnDefault(value = "0")
+     private int slno_in_bill;
 
     ////////////////////////////////////////////////////////////////
     // special
@@ -406,6 +409,14 @@ public class MedicineStockEntity implements Serializable {
 
     public void setQtyFree(long qtyFree) {
         this.qtyFree = qtyFree;
+    }
+
+    public int getSlno_in_bill() {
+        return slno_in_bill;
+    }
+
+    public void setSlno_in_bill(int slno_in_bill) {
+        this.slno_in_bill = slno_in_bill;
     }
     
     
