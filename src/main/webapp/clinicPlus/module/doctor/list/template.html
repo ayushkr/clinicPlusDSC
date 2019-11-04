@@ -7,6 +7,9 @@
 
         <thead>
             <tr class="bluestrp">
+                <th>
+                  Sl <br>No
+                </th>
                 <th style="width: fit-content"></th>
                 <th style="min-width: 30px;">
                     Id
@@ -76,6 +79,14 @@
             <tr class="firstrow"
                 onclick="go({{:id}}, 'doctor')"
                 >
+                
+                 <td >
+                    <span  class="">
+
+                        {{:#index+1}} 
+                    </span>
+
+                </td>
                 <td> 
                     <img class='img_round' 
                          src="/uploads/doctor/{{:id}}_profileImage.jpeg?time={{:updationTime}}" 
