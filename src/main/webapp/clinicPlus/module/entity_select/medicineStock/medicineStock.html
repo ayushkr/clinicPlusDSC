@@ -1,7 +1,7 @@
 
 Select a medicine stock <br>
 Filter By medicineBrandName (മരുന്നിന്റെ പേര് അടിക്കാം )
-<input  type="text" onkeyup="filter('medicineBrandName.brandName')" 
+<input  type="text" onkeyup="filter('medicineBrandName.brandName','{{:~root.moduleName}}')" 
         accesskey="l" title="Enter name to search"
         >
 <br>
@@ -26,7 +26,7 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
 
 
     {{for obj}}
-    <div class="Row" id="select_{{:id}}"  >
+    <div class="Row" id="select_medicineStock_{{:id}}"  >
         <div class="CellNoBorder"> 
             <a class="w3-btn" data-toggle="tooltip" title="Edit"
                onclick="populateCreate2(
@@ -79,7 +79,7 @@ Filter By medicineBrandName (മരുന്നിന്റെ പേര് അ�
 
         <d id='{{:id}}' 
            
-           class="data"
+           class="data_medicineStock"
             medicineBrandName.brandName=
            "{{if medicineBrandName}}
            {{:medicineBrandName.brandName}}
