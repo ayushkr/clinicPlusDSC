@@ -57,6 +57,9 @@
 
         <thead>
             <tr class="bluestrp">
+                 <th>
+                  Sl <br>No
+                </th>
                 <th>id
                     {{:~sortByColumnUI('id',obj)}}
                 </th>
@@ -117,6 +120,14 @@
 
                 >
 
+               
+                 <td onclick="go({{:id}}, 'patient')">
+                    <span  class="">
+
+                        {{:#index+1}} 
+                    </span>
+
+                </td>
 
                 <td onclick="go({{:id}}, 'patient')">
                     <span  class="">
