@@ -26,8 +26,8 @@ public interface MedicineStockRepo extends JpaRepository<MedicineStockEntity,Lon
     @Query("select u from MedicineStock u where LOWER(u.medicineBrandName.composition) LIKE LOWER(CONCAT('%',?1, '%'))  order by id asc ")
     public Page<MedicineStockEntity> findAllByCompositionLike(String filter, Pageable pageable);
 
-    public List<MedicineStockEntity> findByPurchaseBill(PurchaseBillEntity purchaseBillEntity);
-
+//    public List<MedicineStockEntity> findByPurchaseBill(PurchaseBillEntity purchaseBillEntity);
+  public List<MedicineStockEntity> findAllByPurchaseBill(PurchaseBillEntity purchaseBillEntity);
    
 
 

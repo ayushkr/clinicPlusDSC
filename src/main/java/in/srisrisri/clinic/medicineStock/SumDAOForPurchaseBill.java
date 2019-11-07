@@ -8,6 +8,8 @@ package in.srisrisri.clinic.medicineStock;
 import in.srisrisri.clinic.medicineStock.MedicineStockEntity;
 import in.srisrisri.clinic.utils.FinanceUtils;
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Comparator;
 
 import java.util.List;
 import org.slf4j.Logger;
@@ -40,6 +42,17 @@ public class SumDAOForPurchaseBill {
     public boolean calculateTotals() throws Exception {
         String error = "";
         logger.warn("SumDAOForPurchaseBill.calculateTotals strated");
+        
+        // sort by slno
+        Comparator<MedicineStockEntity> comparator_slno
+                = (MedicineStockEntity o1, MedicineStockEntity o2) -> {
+//                    System.out.println("Comapring "+o1.getId());
+                    return o1.getSlno_in_bill() - o2.getSlno_in_bill();
+                };
+        
+        Collections.sort(medicineStockEntitys, comparator_slno);
+        
+        
         for (MedicineStockEntity mse : medicineStockEntitys) {
 
             grandPTS = grandPTS.add(mse.getPts());
@@ -53,6 +66,9 @@ public class SumDAOForPurchaseBill {
             grandTotalwcess = grandTotalwocess.add(cess);
 
         }
+
+        
+
         grandTotalwcess = FinanceUtils.round(grandTotalwcess, 2);
 
         return true;
