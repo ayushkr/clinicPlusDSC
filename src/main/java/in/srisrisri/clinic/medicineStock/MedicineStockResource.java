@@ -78,7 +78,7 @@ public class MedicineStockResource {
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
-        int noOfItemsInAPage = 5;
+        int noOfItemsInAPage = 20;
         logger.warn("pageable={} , filter={}by {} ", new Object[]{label, filterColumn, filter});
 
         if (!sortColumn.equals("undefined")) {

@@ -9,7 +9,7 @@
                 </span>
             </div>
             <input type="button" style="display: none" id='dateOfBill_afterClick'
-                onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=dateOfBill&filter=' + document.getElementById('dateOfBill').value + ''">
+                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=dateOfBill&filter=' + document.getElementById('dateOfBill').value + ''">
         </div>
 
         <div class="inp_outer" style="min-width: 100px">
@@ -19,15 +19,15 @@
 
             <!--2onkeyup="document.getElementById('afterClick_appointment').click()"-->
             <input id="billNo" name='billNo' type="text" value="" class="inp2"
-                data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=billNo&filter="
-                onkeyup="filter1()">
+                   data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=billNo&filter="
+                   onkeyup="filter1()">
         </div>
         <div style="display: inline-block">
             <span id='selectLarge_vendor'>
                 selectLarge_vendor
             </span>
             <input type="button" style="display: none" id='vendor_afterClick'
-                onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=vendor&filter=' + document.getElementById('vendor').value + ''">
+                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=vendor&filter=' + document.getElementById('vendor').value + ''">
 
         </div>
 
@@ -49,10 +49,13 @@
     <div id="printableArea" title="PharmacyBill_Profile">
 
         <h3>List of Purchase Bills</h3>
-        <div class="Table" class="table_greyBorder">
+        <div class="Table customers" >
 
-            <div class="Heading bluestrp">
+            <div class="Heading customers_header">
 
+                <div class="Cell">
+                    SN
+                </div>
 
                 <div class="Cell">
                     id
@@ -100,37 +103,45 @@
 
 
             {{for obj.pageList.content}}
-            <div class="Row" style="height: 30px" onclick="go({{:id}}, 'purchaseBill', {{:id}})" class="firstrow">
-                <div class="Cell w3-padding">
-                    <button type="button" class="w3-button w3-green">
-                        {{:id}}
-                    </button>
+           
+            <div class="customers Row" style="height: 30px" onclick="go({{:id}}, 'purchaseBill', {{:id}})" class="firstrow">
+               
+                    <div class="Cell" style="font-size: 0.8em">
+                        {{:#index+1}} 
+                    </div>
 
-                </div>
+                    <div class="Cell w3-padding">
+                        <button type="button" class="w3-button w3-green">
+                            {{:id}}
+                        </button>
 
-                <div class="Cell" style="font-size: 0.8em">
-                    {{:~ddmmyyyyDashed(dateOfBill)}}
-                </div>
+                    </div>
 
-
-                <div class="Cell" style="font-size: 0.8em">
-                    {{:billNo}}
-                </div>
-
-
-                <div class="Cell">
-                    {{if vendor }} {{:vendor.name}}{{/if}}
-                </div>
-                <div class="Cell" style="font-size: 0.8em">
-                    {{:cash}}
-                </div>
-                <div class="Cell" style="min-width: 150px">
-                    {{:remarks}}
-                </div>
+                    <div class="Cell" style="font-size: 0.8em">
+                        {{:~ddmmyyyyDashed(dateOfBill)}}
+                    </div>
 
 
+                    <div class="Cell" style="font-size: 0.8em">
+                        {{:billNo}}
+                    </div>
 
+
+                    <div class="Cell">
+                        {{if vendor }} {{:vendor.name}}{{/if}}
+                    </div>
+                    <div class="Cell" style="font-size: 0.8em">
+                        {{:cash}}
+                    </div>
+                    <div class="Cell" style="min-width: 150px">
+                        {{:remarks}}
+                    </div>
+
+
+               
             </div>
+              
+
 
             {{else}}
             No members...

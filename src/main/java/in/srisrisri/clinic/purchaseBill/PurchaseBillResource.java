@@ -70,7 +70,7 @@ public class PurchaseBillResource {
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
-        int pageSize = 10;
+        int pageSize = 20;
         if (pageSizeOb.isPresent()) {
             pageSize = pageSizeOb.get();
         } else {
@@ -88,6 +88,7 @@ public class PurchaseBillResource {
         } else {
             sort = Sort.by("dateOfBill").descending();
         }
+        
         if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
         } else {
@@ -97,7 +98,7 @@ public class PurchaseBillResource {
             }
         }
 
-        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, pageSize, sort);
         Page<PurchaseBillEntity> page = null;
 
         if ("undefined".equals(filterColumn)) {

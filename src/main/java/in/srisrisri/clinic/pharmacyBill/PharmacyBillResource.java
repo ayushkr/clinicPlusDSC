@@ -93,7 +93,7 @@ public class PharmacyBillResource {
             }
         }
 
-        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, 10, sort);
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, pageSize, sort);
         Page<PharmacyBillEntity> page = null;
 
         if ("undefined".equals(filterColumn)) {

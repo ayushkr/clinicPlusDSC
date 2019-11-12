@@ -52,9 +52,9 @@
     
     <h3>List of pharmacy Bills</h3>
     
-    <div class="Table table_greyBorder"  class="table_greyBorder" >
+    <div class="Table customers"   >
 
-        <div  class="Heading bluestrp">
+        <div  class="Heading customers_header">
             <div class="Cell">Sl <br> No</div>
 
             <div class="Cell">
@@ -113,7 +113,7 @@
 
         </div>
  
-<div class="Row" 
+<div class=" Row" 
       accesskey="l"
     
      tabindex="0" ></div>
@@ -121,10 +121,10 @@
         {{for obj.pageList.content}}
         {{if id!=0}}
         
-        <div class="Row " 
+        <div class="customers Row " 
              onclick="go({{:id}}, 'pharmacyBill')"
              
-             class="firstrow">
+             >
             <div class="Cell w3-padding-16" >
                 {{:#getIndex()+1}}
                     

@@ -24,14 +24,14 @@
         border-color: var(--color_l0);
 
     }
-    
-    
+
+
     .grid-container > div {
-    background-color: rgba(169, 196, 220, 0.51);
-    /* text-align: center; */
-    padding: 20px;
-    /* font-size: 30px; */
-}
+        background-color: rgba(169, 196, 220, 0.51);
+        /* text-align: center; */
+        padding: 20px;
+        /* font-size: 30px; */
+    }
 
 
 
@@ -62,16 +62,16 @@
 
     .hideMainLevelButton{
         float: right;
-    padding: 10px;
-    background-color: var(--color_d3); 
-    color:white;
-    /*position: fixed;*/
-/*    top: 0px;
-    right: 20px;
-    z-index:100;*/
+        padding: 10px;
+        background-color: var(--color_d3); 
+        color:white;
+        /*position: fixed;*/
+        /*    top: 0px;
+            right: 20px;
+            z-index:100;*/
     }
 
-    
+
     button{
         border:none;
     }
@@ -80,10 +80,10 @@
     a{ text-decoration: none}
 
     .headerSortSymbol{
-       /*padding: 3px;*/ 
-    /* text-decoration: none; */
-    /* font-size: 14px !important; */
-    color: #5b778e;
+        /*padding: 3px;*/ 
+        /* text-decoration: none; */
+        /* font-size: 14px !important; */
+        color: #5b778e;
 
     }
 
@@ -237,29 +237,29 @@
     }
 
     .topBarStrip{
-    
-    width: 100%;
-     background-color: var(--color_d1); 
-    z-index: inherit;
-    color: white;
+
+        width: 100%;
+        background-color: var(--color_d1); 
+        z-index: inherit;
+        color: white;
     }
 
     .widgetBar,.widgets2{
         height: 46px;
-    background-color: var(--color_d1);
-    color:white;
-    /* transition: height 1s; */
-    /* transform: rotate(180deg); */
-    /* position: fixed; */
-    /* width: 80%; */
-    left: 0px;
-    right: 20px;
+        background-color: var(--color_d1);
+        color:white;
+        /* transition: height 1s; */
+        /* transform: rotate(180deg); */
+        /* position: fixed; */
+        /* width: 80%; */
+        left: 0px;
+        right: 20px;
     }
-    
+
     .widgets2_rounded{
         position: fixed;
         top: -14px;
-         background-color: var(--color_l3); 
+        background-color: var(--color_l3); 
         right: 143px;
         /* z-index: 1005; */
         border-radius: 20px;
@@ -277,10 +277,10 @@
         top: -18px;
     }
 
-/*    .table_greyBorder{
-        border-color: var(--color_l0);
-
-    }*/
+    /*    .table_greyBorder{
+            border-color: var(--color_l0);
+    
+        }*/
 
     .bluestrp {
         background-color:var(--color_l3);
@@ -335,13 +335,13 @@
         padding: 8px;
     }
 
-   .w3-bar-ay {
-    background-color: #23384a;
-    padding: 5px 10 0;
-    /* margin: 10px; */
-    /* border-top: solid var(--color_l2p5); */
-    color: white;
-}
+    .w3-bar-ay {
+        background-color: #23384a;
+        padding: 5px 10 0;
+        /* margin: 10px; */
+        /* border-top: solid var(--color_l2p5); */
+        color: white;
+    }
 
     .w3-container_akr{
         margin: 10px;
@@ -506,7 +506,7 @@
     .tabSelected{
         display: inline-block;
         background-color:var(--color_l3p5);
-         color: var(--color_d3); 
+        color: var(--color_d3); 
         padding: 1px 10px 1px 10px;
 
     }
@@ -516,14 +516,14 @@
     }
 
     .darkBgHeading{
-     display: block;
-    background-color: var(--color_d3);
-    color: var(--color_l3);
-    padding: 1px 10px 1px 10px;
-    /*width: 100%;*/
-    text-align: center;
+        display: block;
+        background-color: var(--color_d3);
+        color: var(--color_l3);
+        padding: 1px 10px 1px 10px;
+        /*width: 100%;*/
+        text-align: center;
     }
-    
+
     #main2{
         /*width: 100%;*/
         position: fixed;
@@ -578,8 +578,8 @@
         height: 100%;
     }
     #pagingBar{
-    background: #2e4558;
-    color:var(--color_l5)
+        background: #2e4558;
+        color:var(--color_l5)
     }
     .alert{
         background-color: red;
@@ -590,8 +590,8 @@
         padding: 5px;
         border:none;
     }
-    
-     .buttonAsSpan{
+
+    .buttonAsSpan{
         background-color: transparent;
         padding: 0px;
         border:none;
@@ -1162,32 +1162,62 @@
     .table_greyBorder+td, .table_greyBorder+th{
         border: solid var(--color_l4) 1px;
     }
-    
-    
-    
+
+
+
     .customers {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-.customers td, #customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
+    .customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
 
-.customers tr:nth-child(even){background-color: #f2f2f2;}
+    .customers tr:nth-child(even){background-color: #f2f2f2;}
 
-.customers tr:hover {background-color: #33bdac;}
+    .customers tr:hover {background-color: #33bdac;}
 
-.customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color:#2e4558;
-  color: white;
-}
-    
+    .customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color:#2e4558;
+        color: white;
+    }
+
+    /*table ise div*/ 
+
+/* .customers.Row  div:nth-of-type(2n)
+ {
+     background-color: #f2f2f2;
+ }*/
+
+
+  .customers_header {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color:#2e4558;
+        color: white;
+    }
+
+
+   div.customers.Row:nth-of-type(2n)
+ {
+     background-color: #f2f2f2;
+ }
+
+/*  .customers.Row  div:nth-child
+ {
+     background-color: #f2f2f2;
+ }*/
+
+ 
+ 
+
     /* table{
             
         }
