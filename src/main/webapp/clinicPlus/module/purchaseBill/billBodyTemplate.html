@@ -10,8 +10,8 @@
 
 </span>
 
-<div class="Table">
-    <div class="Row bluestrp">
+<div class="Table  customers ">
+    <div class="Row customers_header">
          <div class="Cell">SN </div>
         <div class="Cell">Id </div>
          <div class="Cell">batch </div>
@@ -43,7 +43,10 @@
     </div>
     {{for medicineStockEntitys }}
 
-    <div class="Row ">
+    <div class="customers Row "
+         tabindex="0"
+        onclick="go({{:id}}, 'medicineStock')" 
+         >
 <!--        <div class="Cell ">{{:#index+1}} </div>-->
  <div class="Cell">{{:slno_in_bill}}</div>
         <div class="Cell w3-padding ">{{:id}} </div>

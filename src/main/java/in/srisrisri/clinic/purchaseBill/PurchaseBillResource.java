@@ -70,7 +70,7 @@ public class PurchaseBillResource {
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
-        int pageSize = 20;
+        int pageSize = 10;
         if (pageSizeOb.isPresent()) {
             pageSize = pageSizeOb.get();
         } else {
@@ -88,7 +88,7 @@ public class PurchaseBillResource {
         } else {
             sort = Sort.by("dateOfBill").descending();
         }
-        
+
         if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
         } else {
@@ -114,10 +114,10 @@ public class PurchaseBillResource {
             if (filterColumn.equals("billNo")) {
                 page = purchaseBillRepo.findAllByBillNoLike(filter, pageable);
             }
-            
-              if (filterColumn.equals("dateOfBill")) {
-                  
-                page = purchaseBillRepo.findAllByDateOfBill(  Date.valueOf(filter),pageable);
+
+            if (filterColumn.equals("dateOfBill")) {
+
+                page = purchaseBillRepo.findAllByDateOfBill(Date.valueOf(filter), pageable);
             }
 
         }
@@ -142,8 +142,7 @@ public class PurchaseBillResource {
         if (id >= 0) {
             purchaseBillEntitySaved = purchaseBillRepo.findById(id).get();
             purchaseBillEntitySaved.setUpdationTime(Date.valueOf(LocalDate.now()));
-             purchaseBillEntitySaved.setDateOfBill(Date.valueOf(LocalDate.now()));
-               purchaseBillEntitySaved.setDateOfPurchase(Date.valueOf(LocalDate.now()));
+
         } else {
             PurchaseBillEntity purchaseBillEntityNew = new PurchaseBillEntity();
 
@@ -152,6 +151,7 @@ public class PurchaseBillResource {
 
             purchaseBillEntityNew.setVendor(vendorEntity);
             purchaseBillEntityNew.setDateOfBill(Date.valueOf(LocalDate.now()));
+            purchaseBillEntityNew.setDateOfPurchase(Date.valueOf(LocalDate.now()));
             purchaseBillEntitySaved = purchaseBillRepo.save(purchaseBillEntityNew);
 
         }
