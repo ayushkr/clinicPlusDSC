@@ -80,9 +80,9 @@
     a{ text-decoration: none}
 
     .headerSortSymbol{
-        /*padding: 3px;*/ 
+        padding: 0px;
         /* text-decoration: none; */
-        /* font-size: 14px !important; */
+        font-size: 29px !important;
         color: #5b778e;
 
     }
@@ -293,7 +293,7 @@
     .firstrow {
         /*background-color:var(--color_l5);*/
         /*color: var(--color_d3);*/
-        height: 30px;
+        height: 60px;
 
         text-align: left;
 
@@ -370,10 +370,13 @@
     .rounded{
         /*padding: 6px;*/
         background-color: var(--color_l3);
-        border-radius: 42px;
+        border-radius: 4px;
         /* font-weight: bold; */
     }
 
+    .marker_1,.marker_2,.marker_3,.marker_4,.marker_5,.marker_6{
+        padding: 5px;
+    }
     .marker_1 {
         /*red*/
         background-color: #f8f8f8;
@@ -1077,7 +1080,7 @@
         border: solid blue 1px;
     }
     .w3-btn, .w3-button {
-        border-radius: 24mm;
+        border-radius: 2mm;
         /*display: block;*/
         margin: 4px;
         padding: 10px;
@@ -1190,13 +1193,13 @@
 
     /*table ise div*/ 
 
-/* .customers.Row  div:nth-of-type(2n)
- {
-     background-color: #f2f2f2;
- }*/
+    /* .customers.Row  div:nth-of-type(2n)
+     {
+         background-color: #f2f2f2;
+     }*/
 
 
-  .customers_header {
+    .customers_header {
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: left;
@@ -1205,18 +1208,18 @@
     }
 
 
-   div.customers.Row:nth-of-type(2n)
- {
-     background-color: #f2f2f2;
- }
+    div.customers.Row:nth-of-type(2n)
+    {
+        background-color: #f2f2f2;
+    }
 
-/*  .customers.Row  div:nth-child
- {
-     background-color: #f2f2f2;
- }*/
+    /*  .customers.Row  div:nth-child
+     {
+         background-color: #f2f2f2;
+     }*/
 
- 
- 
+
+
 
     /* table{
             
@@ -1315,8 +1318,9 @@
         border-left: solid var(--color_l3) 1px;
         border-top: solid var(--color_l3) 1px;
         border-width: thin;
-        padding-left: 4px;
+        padding-left: 12px;
         padding-right: 5px;
+        padding-top: 19px;
         text-align: left;
     }
 
@@ -1334,6 +1338,81 @@
         /*font-family: Lato;*/
         /*background-color: red;*/
     }
+
+
+     /*custom checkmark*/
+
+    .containerForCheckMark {
+       display: inline-block;
+    position: relative;
+    padding-left: 24px;
+    margin-right: 10px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 1.3em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .containerForCheckMark input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .containerForCheckMark:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .containerForCheckMark input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .containerForCheckMark input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .containerForCheckMark .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+
+
+
 
 }
 

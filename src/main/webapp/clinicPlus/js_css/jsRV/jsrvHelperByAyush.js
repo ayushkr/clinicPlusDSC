@@ -23,9 +23,9 @@ var ayrender = function (item) {
 //        console.log("SELECTOR " + item.selector);
 //        console.log("data" + JSON.stringify(item.data));
         $.templates({tmpl: tmplData});
-        
-       var res= $.render.tmpl(item.data);
-       console.log("rendered res=" + res);
+
+        var res = $.render.tmpl(item.data);
+        console.log("rendered res=" + res);
         $(item.selector).html(res);
     };
 };
@@ -48,8 +48,9 @@ var link_ay = function (templateBody, item) {
 };
 
 var templateBodyG = "";
+var callback = function () {};
 
-var aylinker = function (item) {
+function aylinker(item, callback, params) {
     //   console.log("aylinker item= " + JSON.stringify(item));
 
     $.ajax(item.urlOfTemplate,
@@ -65,29 +66,36 @@ var aylinker = function (item) {
                         }
             }
     );
+    if (callback) {
+        if (params) {
+            callback(params);
+        } else
+            callback();
+    }
 
-};
+}
+;
 
 
 var ayRenderNoSelector = function (item) {
-var reso;
-   $.ajax(item.urlOfTemplate,
+    var reso;
+    $.ajax(item.urlOfTemplate,
             {
 
                 type: 'GET',
                 async: false,
                 success:
                         function (templateBody, status) {
-                         //   console.log("item.urlOfTemplate ---> \n" + item.urlOfTemplate);
-                         //  console.log("templateBody ---> \n" + templateBody);
+                            //   console.log("item.urlOfTemplate ---> \n" + item.urlOfTemplate);
+                            //  console.log("templateBody ---> \n" + templateBody);
                             $.templates({tmpl: templateBody});
-                           var result= $.render.tmpl(item.data);
-                         //    console.log("result="+result);
-                             reso=result;
+                            var result = $.render.tmpl(item.data);
+                            //    console.log("result="+result);
+                            reso = result;
                         }
             }
     );
-    
+
     return reso;
 
 };

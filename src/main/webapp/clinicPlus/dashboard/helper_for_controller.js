@@ -1,3 +1,5 @@
+/* global url */
+
 //   /dashboard/helper_for_controller
 
 
@@ -110,39 +112,42 @@ $.views.helpers(
                 }
 
             },
-            sortByColumnUI: sortByColumnUI
+            sortByColumnUI: sortByColumnUI,
+            includesAKR: includesAKR
+
 
         }
 );
 function purchaseBill_render_list(id) {
 
 
-var dataOuter;
-   $.ajax({
+    var dataOuter;
+    $.ajax({
         async: false,
         type: 'GET',
         url: "/clinicPlus/api/medicineStock/ByBillId/" + id,
         success: function (data, textStatus, jqXHR) {
-          dataOuter=data; 
-          console.log('succ, dataOuter=' + JSON.stringify(dataOuter));
+            dataOuter = data;
+            console.log('succ, dataOuter=' + JSON.stringify(dataOuter));
         }
     });
-    
-       return  ayRenderNoSelector({
+
+    return  ayRenderNoSelector({
         urlOfTemplate:
                 "/clinicPlus/module/purchaseBill/billBodyTemplate.html" + pageNewAy(1),
 //                selector: "main_1_inner",
         selector: 'a',
         data: dataOuter
     });
-    
-        
+
+
 }
 
-function sortByColumnUI(name, obj) {
+function sortByColumnUI(name, obj, displayName) {
     var r = ayRenderNoSelector({
         urlOfTemplate: '/clinicPlus/component/sortByColumnUI.html' + pageNewAy(1),
         data: {name: name,
+            displayName: displayName,
             obj: obj
 
         }
@@ -151,6 +156,13 @@ function sortByColumnUI(name, obj) {
     return r;
 }
 
+function includesAKR(arr, elem) {
+    if (arr === null)
+        return false;
+    else
+        return arr.includes(elem);
+
+}
 
 function ayLoad(url) {
     $.get(url, function (result) {

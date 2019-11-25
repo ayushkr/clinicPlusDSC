@@ -1,11 +1,16 @@
 
 manifestGUISelectLarge
 ('dateOfAppointment',apiDataGlobal.dateOfAppointment);
-manifestGUISelectLarge
-('doctor',apiDataGlobal.doctor);
 
 manifestGUISelectLarge
+('doctor',apiDataGlobal.doctor);
+manifestGUISelectLarge
 ('patient',apiDataGlobal.patient);
+
+manifestGUISelectLarge
+('doctor_1',null);
+manifestGUISelectLarge
+('patient_1',null);
 
 
 manifestGUISelectLarge

@@ -1,12 +1,12 @@
 package in.srisrisri.clinic.patient;
 
 import in.srisrisri.clinic.Constants.Constants1;
-import in.srisrisri.clinic.responses.DeleteResponse;
 import in.srisrisri.clinic.utils.*;
 import in.srisrisri.clinic.FileStorage.FileStorageService;
 import in.srisrisri.clinic.FileStorage.UploadFileResponse;
 import in.srisrisri.clinic.responses.JsonResponse;
-import in.srisrisri.clinic.sms.SMSManager;
+import in.srisrisri.clinic.smsChat.SMSSender;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -85,10 +85,12 @@ public class PatientResource {
             String name = patientEntity.getName();
             long id = patientEntity.getId();
 
-            SMSManager smsm = new SMSManager();
+            SMSSender smsm = new SMSSender();
             smsm.setPatientName(name);
             smsm.setPatientId(id + "");
-            String sendSms = smsm.sendSms(contactPhone, smsm.getPreparedMessage(messageGiven, patientEntity), false);
+            String sendSms = smsm.sendSms(contactPhone, 
+                    smsm.getPreparedMessage(messageGiven, patientEntity),
+                    SMSSender.sendMock);
 
             listProcessed += "<tr>"
                     + "<td>"+id+"</td>"

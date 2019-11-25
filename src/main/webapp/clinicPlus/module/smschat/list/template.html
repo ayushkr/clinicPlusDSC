@@ -1,0 +1,190 @@
+
+<div data-akr-printable="false" class="w3-container">
+
+    <div class="inp_outer" style="min-width: 200px">
+        <div class="inp1" >
+            <div class="title1">
+                <i class="fa fa-filter " style="font-size: 0.9em" ></i>
+                title </div>
+        </div>
+
+
+        <input id="title" 
+               name='title' 
+               type="text"  value=""
+               accesskey="q"
+               onkeypress="filter1()"
+               data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=title&filter="
+
+               autofocus
+               > 
+    </div>
+
+    <div class="inp_outer" style="min-width: 200px">
+        <div class="inp1" >
+
+            <div class="title1">
+                <i class="fa fa-filter" style="font-size: 0.9em"></i>
+                body </div>
+        </div>
+
+        <input id="body" 
+               name='body' 
+               type="text"  value=""
+               accesskey="q"
+               onkeypress="filter1()"
+               data-href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=body&filter="
+
+               autofocus
+               > 
+
+    </div>
+
+    <a href="#/cmd?module={{:obj.module}}&action=/all/list&amp;pageNumber=1" 
+       title="No filter"
+
+       > 
+        <i class="fa fa-filter">x</i> 
+    </a>
+
+</div>
+<br>
+
+<div id="printableArea"   title="smschat_List" class='w3-container' >
+    <!--<p class="pageTitle">Patients</p>-->
+
+    <table class="customers"  cellspacing="0" cellpadding="5" border="1"  >
+
+        <thead>
+            <tr class="bluestrp">
+                <th>
+                    Sl <br>No
+                </th>
+
+                <th>id
+                    {{:~sortByColumnUI('id',obj)}}
+                </th>
+
+                <th>Title
+                    {{:~sortByColumnUI('title',obj)}}
+                </th>
+                  <th>dateOf Sending
+                    {{:~sortByColumnUI('dateOfSending',obj)}}
+                </th>
+                
+
+                <th>Body
+                    {{:~sortByColumnUI('body',obj)}}
+                </th>
+                
+                 <th>Draft
+                    {{:~sortByColumnUI('draft',obj)}}
+                </th>
+
+                <th>to
+                    {{:~sortByColumnUI('toPhoneNumbers',obj)}}
+                </th>
+
+                <th>Remarks
+                    {{:~sortByColumnUI('remarks',obj)}}
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+
+            {{for obj.pageList.content}}
+
+            <tr class="firstrow"
+                onclick="go({{:id}}, 'smschat')"
+                >
+
+
+                <td >
+                    <span  class="">
+
+                        {{:#index+1}} 
+                    </span>
+
+                </td>
+
+                <td >
+                    <span  class="">
+
+                        {{:id}}
+                    </span>
+
+                </td>
+
+                <td
+                    >{{:title}}
+                </td>
+                
+                 <td
+                    >
+                       {{:~ddmmyyyyDashed(dateOfSending) }}
+                    
+                </td>
+                
+                
+
+                <td
+                    style="width:340px"
+
+                    >{{:body}}
+                </td>
+                
+                 <td
+                     
+                     >{{if draft}} yes {{/if}}
+                </td>
+                
+                
+                <td 
+
+                    >
+                    
+                    {{for toPhoneNumbers  itemVar='~i' }}
+                    
+                    <span 
+                        style="display: inline-block;
+                        padding: 3px;
+                          margin: 3px;
+                        border-radius: 5px;
+                       ">
+                   
+                    {{if ~i==1}}
+                    Doctors,
+                    {{/if}}
+
+                    {{if ~i==2}}
+                    Patients,
+                    {{/if}}
+
+                    {{if ~i==3}}
+                    Others,
+                    {{/if}}
+                    </span>
+                    {{/for}}
+
+                </td>
+
+
+                <td
+
+                    >{{:remarks}}
+                </td>
+
+
+
+
+            </tr>
+            {{else}}
+            No members...
+            {{/for}}
+        </tbody>
+
+
+    </table>
+</div>

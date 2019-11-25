@@ -60,36 +60,52 @@ function authorize() {
     });
 }
 
-function manifestGUISelectLarge(name, dataV) {
-    console.log('manifestGUISelectLarge=' + name + " ");
-    var jso = {};
-    var elem = document.getElementById('selectLarge_' + name);
+function manifestGUISelectLarge(nameFull, dataV) {
+    try {
+        var nparts = nameFull.split('_');
 
-    console.log('dataV=' + dataV);
+        var name = nparts[0];
+        var nameNumber = "";
+        if (nparts[1]) {
+            nameNumber = "_" + nparts[1];
+        }
+        console.log('manifestGUISelectLarge=' + nameFull + " ");
+        var jso = {'id': 10};
+        var elem = document.getElementById('selectLarge_' + name + nameNumber);
 
-    if (elem === null) {
-        console.log('elem is null');
-    } else {
-        console.log('elem is not null');
-        elem.innerHTML += 'modified';
-        if (dataV === undefined) {
-            elem.innerHTML = "data undefined";
+        console.log('dataV=' + dataV);
+
+        if (elem === null) {
+            console.log('elem is null');
         } else {
-            var jsonStr = '{"' + name + '":' + JSON.stringify(dataV) + '}';
-            jso = JSON.parse(jsonStr);
+            console.log('elem is not null');
+            elem.innerHTML += 'modified';
+            if (dataV === undefined) {
+                elem.innerHTML = "data undefined";
+            } else {
+                var jsonStr = '{"' + name + '":' + JSON.stringify(dataV) +
+                        ',"id":' + '"' + nameNumber + '"' +
+                        '}';
+                jso = JSON.parse(jsonStr);
+
+
+            }
+
+            console.log('jso=' + JSON.stringify(jso));
+
+            aylinker({
+                urlOfTemplate: '/clinicPlus/component/selectLarge/' + name + '.html' + pageNewAy(1),
+                selector: 'selectLarge_' + name + nameNumber,
+                data: jso
+
+            });
+
 
         }
 
-        console.log('jso=' + JSON.stringify(jso));
+    } catch (e) {
 
-        aylinker({
-            urlOfTemplate: '/clinicPlus/component/selectLarge/' + name + '.html' + pageNewAy(1),
-            selector: 'selectLarge_' + name,
-            data: jso
-
-        });
-
-
+        console.log('error=' + e);
     }
 }
 
@@ -393,13 +409,21 @@ function populateCreate2(module, id, divName, paramsExtraStr) {
             urlOfTemplate: "/clinicPlus/module/" + module + "/fillForm/template.html?ran=" + Math.random(),
             selector: divName + "_inner",
             data: apiDataGlobal
-        });
+        }, callbackAfterPopulateCreate2, [divName, module]);
 
 
-        document.getElementById(divName + "_paging").innerHTML = '';
-        document.getElementById(divName).style.display = 'block';
-        $.getScript("/clinicPlus/module/" + module + "/" + module + ".js" + pageNewAy(1));
+
     });
+
+}
+//callbackAfterPopulateCreate2
+function callbackAfterPopulateCreate2(params) {
+    var divName = params[0];
+    var module = params[1];
+    document.getElementById(divName + "_paging").innerHTML = '';
+    document.getElementById(divName).style.display = 'block';
+    $.getScript("/clinicPlus/module/" + module + "/" + module + ".js" + pageNewAy(1));
+
 
 }
 
@@ -666,6 +690,8 @@ function a(b) {
 
 var level = "";
 var afterClick = '';
+
+var openedCup;
 function selectionDone(obj) {
     console.log('selectionDone , mn.module[select].name=' + mn.module['select'].name);
     console.log('selectionDone ,obj ..=' + JSON.stringify(obj));
@@ -747,18 +773,18 @@ function filter(attr, moduleName) {
     console.log('filter(a,b)  attr=' + attr + 'givenWord=[' + givenWord + '] ');
 
     //    var dom = document.getElementsByTagName('d_' + moduleName);
-    var dom = document.getElementsByClassName('data_'+moduleName);
+    var dom = document.getElementsByClassName('data_' + moduleName);
     for (var i = 0; i < dom.length; i++) {
         var id = dom[i].getAttribute('id');
         var attrDB = (dom[i].getAttribute(attr) + "".trim()).toLowerCase();
-        var idOfUI='select_'+moduleName+'_' + id;
-         console.log('var idOfUI=\''+ idOfUI+'\'');
+        var idOfUI = 'select_' + moduleName + '_' + id;
+        console.log('var idOfUI=\'' + idOfUI + '\'');
         document.getElementById(idOfUI).style = 'display:none';
-        console.log('idOfUi='+ idOfUI +',  id=' + id + ' attrDB=' + attrDB);
-        
+        console.log('idOfUi=' + idOfUI + ',  id=' + id + ' attrDB=' + attrDB);
+
         console.log('comparing (givenWord)' + givenWord + ' with (attrDB)' + attrDB);
-        
-                if (attrDB.includes(givenWord)) {
+
+        if (attrDB.includes(givenWord)) {
 //        if (attrDB.startsWith(givenWord)) {
             console.log('---matched----');
             document.getElementById(idOfUI).style = 'display:table-row';
@@ -839,7 +865,7 @@ function entitySelect(obj, divname) {
                     }
                 });
 
-                document.getElementById(divname + "_paging").innerHTML = "";
+//                document.getElementById(divname + "_paging").innerHTML = "";
                 var esfb = document.getElementById("entitySelectFocusButton");
                 if (esfb !== null) {
                     esfb.click();
@@ -1052,7 +1078,7 @@ function PrintUtils() {
         // popupWin.document.close();
     };
     this.printDiv_navOff = function (divName, type) {
-
+        alert('1');
         var navbarDiv, printableAreaDiv, menuDiv, pagerDiv, dateDiv;
         //        navbarDiv = document.getElementById('navbar');
         //        navbarDiv.style.visibility = 'hidden';
@@ -1144,6 +1170,7 @@ function PrintUtils() {
 var printUtils = new PrintUtils();
 
 function printDiv_navOff(divName) {
+//    alert('2');
     var navbarDiv = document.getElementById('navbar');
     navbarDiv.style.visibility = 'hidden';
     var printableAreaDiv = document.getElementById("printableArea");
@@ -1158,10 +1185,23 @@ function printDiv_navOff(divName) {
         elems[i].style.display = 'none';
     }
 
+//    // hide sublevel divs
+//    var mains = "";
+//    for (var i = 1; i < mainLayerNumberNow; i++) {
+//        mains[i] = document.getElementById("main_" + i).innerHTML;
+//        document.getElementById("main_" + i).innerHTML ='none';
+//    }
+
     window.print();
     for (i = 0; i < elems.length; i++) {
         elems[i].style.display = elems[i].style.displayPrev;
     }
+
+//    for (i = 1; i < mainLayerNumberNow; i++) {
+//
+//        document.getElementById("main_" + i).innerHTML = mains[i];
+//    }
+
     document.title = originalTitle;
     navbarDiv.style.visibility = 'visible';
     //    printableAreaDiv.style = 'margin-left:0mm';

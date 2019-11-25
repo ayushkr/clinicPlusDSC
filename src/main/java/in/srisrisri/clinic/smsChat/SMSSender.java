@@ -3,26 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package in.srisrisri.clinic.sms;
+package in.srisrisri.clinic.smsChat;
+
+import in.srisrisri.clinic.patient.PatientEntity;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author akr2
  */
-import in.srisrisri.clinic.patient.PatientEntity;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-public class SMSManager {
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+public class SMSSender {
+       private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    public static final int sendMock=1,sendReal=2;
+  
     static final String PH_patient_id = "$id";
     static final String PH_patientName = "$patientName";
     static final String PH_doctorName = "$doctorName";
@@ -30,7 +28,8 @@ public class SMSManager {
     String patientName = null;
     String doctorName = null;
     String patientId = null;
-
+    
+    
     public String getPatientName() {
         return patientName;
     }
@@ -102,7 +101,7 @@ public class SMSManager {
         return messageBody;
     }
 
-    public String sendSms(String phoneNumber, String messageBody, boolean mock) {
+    public String sendSms(String phoneNumber, String messageBody, int mockOrReal) {
         try {
             // Construct data
             String apiKey = "apikey=" + "fpt5fwbak7s-ZE6wBcovVs2TFPuDh11kgzzDUrddkX";
@@ -119,7 +118,7 @@ public class SMSManager {
 
             String numbers = "&numbers=" + phoneNumber;
 
-            if (mock) {
+            if (mockOrReal==sendMock) {
                 // mock
 //                String s = "<div>"
 //                        + "<span style='float:left'> Number=" + phoneNumber + "</span>"
@@ -159,16 +158,6 @@ public class SMSManager {
         }
     }
 
-    public static void main(String[] args) {
-        String message1 = "Thank you $patientName to register at Doctors Speciality Centre. Your ID is $id.  Get well soon. ";
-        String message2 = "Thank you $patientName, your appointment to meet $doctorName is booked. Your ID is $id & please wait @ our patient’s launch. Get well soon";
-        String message3 = "Thank you $patientName to visit DOCTORS SPECIALITY CENTRE. Hope the consultation & our services were good. Please rate us by visiting our official Facebook page.";
+   
 
-        SMSManager smsm = new SMSManager();
-        smsm.setDoctorName("doc1");
-        smsm.setPatientName("pat1");
-//        smsm.setPatientId("123");
-//        smsm.sendSms("7907996990", message1);
-        smsm.sendSms("7907996990", smsm.getPreparedMessage(message1), false);
-    }
 }

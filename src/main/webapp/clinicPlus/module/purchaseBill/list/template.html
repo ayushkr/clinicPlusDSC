@@ -31,7 +31,8 @@
 
         </div>
 
-        <a href="#/cmd?module={{:obj.module}}&action=/all/list&amp;pageNumber=1" class="w3-button w3-green">
+        <a href="#/cmd?module={{:obj.module}}&action=/all/list&amp;pageNumber=1"
+           class="w3-button w3-green" title="remove filters">
 
             <i class="fa fa-filter">x</i>
         </a>
@@ -49,6 +50,9 @@
     <div id="printableArea" title="PharmacyBill_Profile">
 
         <h3>List of Purchase Bills</h3>
+        
+          <!--{{jsonise(obj)}}-->
+        
         <div class="Table customers" >
 
             <div class="Heading customers_header">
@@ -58,8 +62,8 @@
                 </div>
 
                 <div class="Cell">
-                    id
-                    {{:~sortByColumnUI('id',obj)}}
+                
+                    {{:~sortByColumnUI('id',obj,'ID')}}
 
                 </div>
 
@@ -111,7 +115,8 @@
                     </div>
 
                     <div class="Cell w3-padding">
-                        <button type="button" class="w3-button w3-green">
+                        <button type="button" 
+                                class="w3-button w3-green">
                             {{:id}}
                         </button>
 

@@ -29,10 +29,10 @@
     <div id="filter" class="w3-container_margin10 city city_hide ">
 
 
+<span id='selectLarge_patient_1'>
+            selectLarge_patient_1</span>
 
-
-        <span id='selectLarge_patient'>
-            selectLarge_patient</span>
+        
 
 
         <input type="button" 
@@ -42,10 +42,12 @@
                onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=patient&filter=' + document.getElementById('patient').value + ''"
                >
 
-        <span id='selectLarge_doctor'>
-            selectLarge_doctor</span>
+        <span id='selectLarge_doctor_1'>
+            selectLarge_doctor_1</span>
 
 
+        
+        
         <input 
             id='doctor_afterClick'
             type="button" value="Go "
@@ -55,6 +57,7 @@
         <button class='w3-btn w3-green'
                 id='doctor_afterClick'
                 title="No filter "
+                type="button"
                 onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=undefined&filter=undefined'"
                 >
             <i class="fa fa-filter">x</i>           
@@ -202,11 +205,16 @@
                                    class="regular-checkbox" 
                                    name="n"  value="{{:id}}">
                             <label for="checkbox_{{:id}}"></label>
-                        </td><td>
+                        </td>
+                        <td>
                             <div  data-akr-printable="false"
                                     
                                      onclick="populateCreate2('appointment', {{:id}}, newModal().id);"
-                                     ><i class="fa fa-pencil"></i>
+                                     onclick2="go({{:id}}, 'appointment')"
+                                     >
+                                <i class="fa fa-pencil">
+                                    
+                                </i>
                             </div>
                         </td>
                         <td

@@ -123,7 +123,7 @@
                
                  <td onclick="go({{:id}}, 'patient')">
                     <span  class="">
-
+                        
                         {{:#index+1}} 
                     </span>
 
@@ -155,9 +155,9 @@
                 <td
                     onclick="go({{:id}}, 'patient')"
                     >
-                    {{if sex=='M' }} <i class="fa fa-mars"></i> {{/if}}
-                    {{if sex=='F' }} <i class="fa fa-venus"></i> {{/if}}
-                    {{if sex=='T' }} <i class="fa fa-transgender"></i> {{/if}}
+                    {{if sex=='M' }} <span >M</span> {{/if}}
+                    {{if sex=='F' }} <span class='marker_2'>F</span> {{/if}}
+                    {{if sex=='T' }} <span >T</span> {{/if}}
                 </td>
                 <td 
                     onclick="copyToClipBoardValue('patient {{:name}}')"

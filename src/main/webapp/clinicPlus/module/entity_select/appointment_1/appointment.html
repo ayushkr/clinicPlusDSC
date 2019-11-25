@@ -1,0 +1,99 @@
+<!--select an Appointment-->
+<div style="padding: 40px">
+    <p class="pageTitle">
+        select an Appointment
+    </p>
+    Filter By id <input  type="text" onkeyup="filter('id','appointment')"  ><br>
+    Filter By bookId <input  type="text" onkeyup="filter('bookId','appointment')"  ><br>
+    Filter By dateOfAppointment <input  type="text" onkeyup="filter('dateOfAppointment','appointment')"  ><br>
+    Filter By doctor.name <input  type="text" onkeyup="filter('doctor.name','appointment')"  ><br>
+    Filter By patient.name <input  type="text" onkeyup="filter('patient.name','appointment')"  ><br>
+    <br>
+
+    <div class="Table">
+        <div class="Title">
+        </div>
+
+        <div class="Heading">
+
+
+
+            <div class="Cell"><p>patient</p></div>
+            <div class="Cell"><p>doctor</p></div>
+            <div class="Cell"><p>date Of Appointment</p></div>
+            <div class="Cell"><p>id</p></div>
+            <div class="Cell"><p>book id</p></div>
+            <div class="Cell"><p>action</p></div>
+        </div>
+
+
+
+        {{for obj}}
+        <d_json id="json_appointment_{{:id}}" style="display: none">
+            {{:~jsonise(#data)}}></d_json>
+        <div class="Row" id="select_appointment_{{:id}}" >
+
+            {{if patient || doctor}}  
+
+            <div class="Cell">
+                <input 
+                    type="button" 
+                    class="entity_select_selectButton" 
+                    
+                     onclick='selectThis(
+                 {
+                 who:"{{:~root.moduleName}}",
+                         id:{{:id}},
+                          extra:{{:~jsonise(#data)}}
+                 }
+                 )' 
+                    value="{{:patient.name}}">
+
+
+
+            </div>
+            <div class="Cell"> {{:doctor.name}}</div>
+            <div class="Cell">  {{:dateOfAppointment}} </div>
+            <div class="Cell">  {{:id}} </div>
+            <div class="Cell">  {{:bookId}} </div>
+            <div class="Cell"> 
+
+                <i class="fa fa-pencil"
+                   title="Edit"
+                   onclick="populateCreate2('{{:~root.moduleName}}',
+                       {{:id}}, newModal().id);"
+                   ></i>
+
+
+            </div>
+
+            {{else}}
+            error in appointment {{:id}}
+            <i class="fa fa-pencil"
+               title="Edit"
+               onclick="populateCreate2('{{:~root.moduleName}}',
+                   {{:id}}, newModal().id);"
+               >
+
+            </i>
+            {{/if}}
+
+            <d 
+               class="data_appointment" 
+                id='{{:id}}' 
+               bookId='{{:bookId}}'  
+               doctor.name="{{if doctor }} {{:doctor.name}} {{else}} null{{/if}}"  
+               patient.name="{{if patient }} {{:patient.name}}{{else}} null {{/if}}" 
+               dateOfAppointment="{{:dateOfAppointment}}" 
+               
+               >
+            </d>
+
+        </div>
+
+
+
+
+        {{/for}}
+    </div>
+</div>

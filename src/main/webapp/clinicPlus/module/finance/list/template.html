@@ -8,11 +8,11 @@
     
     <div class="Table"  class="table_greyBorder" >
 
-        <div  class="Heading">
+        <div  class="Heading customers_header  ">
 
 
             <div class="Cell">
-                id
+                id <br>
                 <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=id&sortOrder=a"
                    >
                     <span class=" {{if obj.sortColumn=='id'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -31,6 +31,7 @@
 
             <div class="Cell" style="min-width: 80px;font-size: 0.8em">
                 dateOfTransaction
+                <br>
                 <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=dateOfTransaction&sortOrder=a"
                    >
                     <span class=" {{if obj.sortColumn=='dateOfTransaction'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -50,6 +51,7 @@
 
 
             <div class="Cell" >from
+                    <br>
                 <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=fromStr&sortOrder=a"
                    >
                     <span class=" {{if obj.sortColumn=='fromStr'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -68,6 +70,7 @@
 
 
             <div class="Cell">to
+                    <br>
                 <a class='headerSortSymbol' href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn=toStr&sortOrder=a"
                    >
                     <span class=" {{if obj.sortColumn=='toStr'}}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
@@ -84,8 +87,10 @@
 
             </div>
              <div class="Cell">particulars
+                     <br>
              </div>
              <div class="Cell">amount
+                     <br>
              </div>
             
 
@@ -93,7 +98,7 @@
 
 
         {{for obj.pageList.content}}
-        <div class="Row"
+        <div class="Row customers" style="height: 60px;"
              onclick="go({{:id}}, 'finance')"
              class="firstrow">
             <div class="Cell"
@@ -101,7 +106,7 @@
                  >
                 {{:id}}
             </div>
-            <div class="Cell"  style="font-size: 0.8em">
+            <div class="Cell"  >
                 {{:dateOfTransaction}}
             </div>
 

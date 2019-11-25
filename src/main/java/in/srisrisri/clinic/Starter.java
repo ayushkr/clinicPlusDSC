@@ -12,11 +12,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.content.fs.io.FileSystemResourceLoader;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
 
 @SpringBootApplication
 @EnableConfigurationProperties({
     FileStorageProperties.class
 })
+@EnableScheduling
 public class Starter {
 
     private static org.apache.log4j.Logger logger = Logger.getLogger(Starter.class);

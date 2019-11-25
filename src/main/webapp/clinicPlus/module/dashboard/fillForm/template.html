@@ -1,0 +1,146 @@
+<!--smschat/CRU_template.html -->
+
+
+<form id='form_smschat' method="post" 
+      action="{{:renderInDiv}}#/cmd/post"
+      >  
+    <input type='hidden' name='div' value='{{:renderInDiv}}'>
+    <input type='hidden' name='module_direct' value='smschat'>
+    <input type='hidden' name='redirect' 
+           value=' #/cmdc?module=smschat&action=/all/list'>
+    <input type="hidden" name="id" data-link="id" />
+
+
+
+    <div class="w3-bar-ay" data-akr-printable="false" 
+         style="z-index: 1">
+        <a class="w3-bar-item  tablink tabSelected" 
+           onClick="openCity(event, 'Basic')">Basic</a>
+
+
+        <a class="w3-bar-item tablink " 
+           onClick="openCity(event, 'Notes')">Notes</a>
+        <a class="w3-bar-item  tablink " 
+           onClick="openCity(event, 'Admin')">Admin</a>
+        <a class="w3-bar-item  tablink " 
+           onClick="openCity(event, 'Files')">Files</a>
+    </div>
+
+    <div id="printableArea" style="margin-left: 0mm" 
+         class="w3-container_akr"
+         title="smschat_{{:id}}_{{:name}}">
+
+
+
+        <div class="inp_outer" >
+            <div class="title1">ID</div>
+            <span class="label label-info "> {{:id}} </span> 
+        </div>
+        <br>
+
+
+
+        <div class="inp_outer" style="min-width: 250px">
+            <div class="title1">title</div>
+            <input type="text" name="title" data-link="title" 
+                   class="akr_input_text" required="" />
+        </div>
+        <br>
+
+        <div class="inp_outer" style="min-width: 250px">
+            <div class="title1">body</div>
+            <textarea name="body" data-link="body" 
+                      style="    margin: 0px;
+                      width: 457px;
+                      height: 141px;"
+                      class="akr_input_text" required="">
+            </textarea>
+        </div>
+        <br>
+        
+         <span
+                        id="selectLarge_dateOfSending"
+                        >
+                        selectLarge_dateOfSending    
+                    </span>
+                    <br>
+        
+       
+        
+        
+        
+        <br>
+        <div class="inp_outer" style="min-width: 250px">
+            <div class="title1">To</div>
+           
+
+            {{for start=1 end=4 itemVar='~i'}}
+            <label class="containerForCheckMark" 
+                   style="background-color: lightblue;">
+                {{:~i}}.
+                {{if ~i==1}}
+                doctor
+                {{/if}}
+
+                {{if ~i==2}}
+                patient
+                {{/if}}
+
+                {{if ~i==3}}
+                Others
+                {{/if}}
+                <input type="checkbox" name="toPhoneNumbers"  value="{{:~i}}" 
+                      {{if ~includesAKR(~root.toPhoneNumbers,~i)}}
+                      checked="checked"
+                      {{/if}}
+                       
+                       >
+                <span class="checkmark"></span>
+            </label>
+           
+            {{/for}}
+
+
+
+
+
+
+        </div>
+        <br>
+
+
+
+
+
+
+
+    </div>
+</form>
+
+
+<style>
+    .item1 { grid-area: i1; 
+             /*border: solid black 1px;*/
+    }
+    .item2 { grid-area: i2;
+             /*border: solid black 1px;*/
+    }
+    .item3 { grid-area: i3;
+             /*border: solid black 1px;*/
+    }
+
+
+    .grid-container {
+        display: grid;
+        grid-template-areas:
+            'i1 i2 i3'
+
+            ;
+        grid-gap: 10px;
+        /*background-color: #2196F3;*/
+        padding: 10px;
+    }
+
+
+</style>
+

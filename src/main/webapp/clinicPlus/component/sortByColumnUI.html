@@ -1,17 +1,21 @@
-<br>
-<span >
+
+ 
+<span style="float: left"> {{:displayName}}</span>
+<span style="float: right">
+   
 <a class='headerSortSymbol' 
    tabindex="-1"
-   href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:name}}&sortOrder=a&template={{:obj.template}}"
+   href="#/cmd?module={{:obj.module}}&action=/all/list&sortColumn={{:name}}&sortOrder=a&template={{:obj.template}}&filterColumn={{:obj.filterColumn}}&filter={{:obj.filter}}&pageNumber={{:obj.pageList.pageable.pageNumber}}"
    >
     <span class=" {{if obj.sortColumn==name }}{{if obj.sortOrder=='a' }}headerSort_faded{{else}}{{/if}}{{/if}}">
         <i class="fa fa-caret-up headerSortSymbol "></i>
     </span>
 </a>
+    <br>
 
 <a class='headerSortSymbol'
    tabindex="-1"
-   href="#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:name}}&sortOrder=d&template={{:obj.template}}"
+   href="#/cmd?module={{:obj.module}}&action=/all/list&sortColumn={{:name}}&sortOrder=d&template={{:obj.template}}&filterColumn={{:obj.filterColumn}}&filter={{:obj.filter}}&pageNumber={{:obj.pageList.pageable.pageNumber}}"
    >
     <span class=" {{if obj.sortColumn==name }}{{if obj.sortOrder=='d' }}headerSort_faded{{else}}{{/if}}{{/if}}">
         <i class="fa fa-caret-down headerSortSymbol"></i>

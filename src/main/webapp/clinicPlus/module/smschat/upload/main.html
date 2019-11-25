@@ -1,0 +1,40 @@
+pat upload main 
+
+<script type="text/javascript">
+var getData;
+ $.get("/uploads/patient/1/prescription/patient.json", function (getData_arg) {
+     getData=JSON.stringify(getData_arg);
+           // console.log('/uploads/patients.json   getData='+getData);
+        });
+        
+        
+        $.ajax({
+
+            url:'/clinicPlus/api/patient/json',
+
+            type: 'POST',
+
+            data:  getData,             
+
+            dataType: "html",          
+
+            contentType: 'application/json',
+
+            mimeType: 'application/json',
+
+            success: function(data){ 
+
+                console.log(data);              
+
+                return false;      
+
+            } 
+
+        });
+
+   
+
+    console.log('after patient upl');
+
+
+</script>
