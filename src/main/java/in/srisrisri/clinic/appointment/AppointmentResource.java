@@ -47,20 +47,20 @@ public class AppointmentResource {
 
     private static final String label = "appointment";
 
-    @GetMapping("")
-    @ResponseBody
-    public PageCover<AppointmentEntity> local_all() {
-        return allPageNumber("undefined","undefined",
-                "1",Optional.of(10),
-                "undefined", "undefined");
-    }
-    
-    
 //    @GetMapping("")
 //    @ResponseBody
-//    public List<AppointmentEntity> local_all() {
-//        return local_allByDateOfAppointmentDesc();
+//    public PageCover<AppointmentEntity> local_all() {
+//        return allPageNumber("undefined","undefined",
+//                "1",Optional.of(10),
+//                "undefined", "undefined");
 //    }
+    
+    
+    @GetMapping("")
+    @ResponseBody
+    public List<AppointmentEntity> local_all() {
+        return local_allByDateOfAppointmentDesc();
+    }
 
     @GetMapping("dateOfAppointment")
     @ResponseBody
