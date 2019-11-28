@@ -1,323 +1,99 @@
-<!--select_patient/list.html-->
+<!--select an Appointment-->
+<div style="padding: 40px">
+    <p class="pageTitle">
+        select an Appointment
+    </p>
+    Filter By id <input  type="text" onkeyup="filter('id','appointment')"  ><br>
+    Filter By bookId <input  type="text" onkeyup="filter('bookId','appointment')"  ><br>
+    Filter By dateOfAppointment <input  type="text" onkeyup="filter('dateOfAppointment','appointment')"  ><br>
+    Filter By doctor.name <input  type="text" onkeyup="filter('doctor.name','appointment')"  ><br>
+    Filter By patient.name <input  type="text" onkeyup="filter('patient.name','appointment')"  ><br>
+    <br>
+
+    <div class="Table">
+        <div class="Title">
+        </div>
+
+        <div class="Heading">
 
 
-<div 
-    data-akr-printable="false"
-    >
-    <div class="w3-bar-ay"  >
-        
-         <a class="w3-bar-item tablink tabSelected " 
-           onClick="openCity(event, 'none')">None</a>
 
-        <a class="w3-bar-item  tablink " 
-           onClick="openCity(event, 'filter')">
-            <i class="fa fa-filter"></i>
-            Filter</a>
+            <div class="Cell"><p>patient</p></div>
+            <div class="Cell"><p>doctor</p></div>
+            <div class="Cell"><p>date Of Appointment</p></div>
+            <div class="Cell"><p>id</p></div>
+            <div class="Cell"><p>book id</p></div>
+            <div class="Cell"><p>action</p></div>
+        </div>
 
 
-        <a class="w3-bar-item tablink " 
-           onClick="openCity(event, 'bulk')">Bulk</a>
 
-        <a class="w3-bar-item tablink " 
-           onClick="openCity(event, 'Reports')">Reports</a>
+        {{for obj}}
+        <d_json id="json_appointment_{{:id}}" style="display: none">
+            {{:~jsonise(#data)}}></d_json>
+        <div class="Row" id="select_appointment_{{:id}}" >
 
-    </div>
-    
-    <div id="none" class="w3-container_margin10 city ">
-    </div>
+            {{if patient || doctor}}  
 
-    <div id="filter" class="w3-container_margin10 city city_hide ">
+            <div class="Cell">
+                <input 
+                    type="button" 
+                    class="entity_select_selectButton" 
+                    
+                     onclick='selectThis(
+                 {
+                 who:"{{:~root.moduleName}}",
+                         id:{{:id}},
+                          extra:{{:~jsonise(#data)}}
+                 }
+                 )' 
+                    value="{{:patient.name}}">
 
 
-<span id='selectLarge_patient_1'>
-            selectLarge_patient_1</span>
 
-        
+            </div>
+            <div class="Cell"> {{:doctor.name}}</div>
+            <div class="Cell">  {{:dateOfAppointment}} </div>
+            <div class="Cell">  {{:id}} </div>
+            <div class="Cell">  {{:bookId}} </div>
+            <div class="Cell"> 
+
+                <i class="fa fa-pencil"
+                   title="Edit"
+                   onclick="populateCreate2('{{:~root.moduleName}}',
+                       {{:id}}, newModal().id);"
+                   ></i>
 
 
-        <input type="button" 
-               style="display: none"
-               id='patient_afterClick'
+            </div>
 
-               onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=patient&filter=' + document.getElementById('patient').value + ''"
+            {{else}}
+            error in appointment {{:id}}
+            <i class="fa fa-pencil"
+               title="Edit"
+               onclick="populateCreate2('{{:~root.moduleName}}',
+                   {{:id}}, newModal().id);"
                >
 
-        <span id='selectLarge_doctor_1'>
-            selectLarge_doctor_1</span>
+            </i>
+            {{/if}}
 
-
-        <input 
-            id='doctor_afterClick'
-            type="button" value="Go "
-            style="display: none"
-            onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=doctor&filter=' + document.getElementById('doctor').value + ''"
-            >
-        <button class='w3-btn w3-green'
-                id='doctor_afterClick'
-                title="No filter "
-                onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=undefined&filter=undefined'"
-                >
-            <i class="fa fa-filter">x</i>           
-        </button>
-
-
-        <a  target='iframe1'
-            onclick="popup_selection_obj(
-                {
-                'entity_select': 'appointment',
-                        'input': 'appointment'
-                }
-                )"
-            class="akr_nav_item_iconised " title="Appointments">
-            <i class="fa fa-calendar"></i> 
-            <i class="fasub fa-list" ></i> 
-        </a> 
-
-
-        <br>
-        Filter:  
-        <span data-link="obj.filterColumn" style="font-weight: bold"></span>
-
-
-        {{if obj.filterColumn=='doctor'}}  
-        <!--{{obj.pageList.content[0].doctor.name }}--> 
-
-        {{else}}
-
-        {{/if}}
-        ID: 
-        <span data-link="obj.filter" style="font-weight: bold"></span>
-
-
-    </div>
-
-    <div id="bulk" class="w3-container_margin10 city city_hide">
-
-        <input type="submit" value="Bulk Delete"
-               form='form_appointment/deleteBulk'
-               onclick="window.location.href = '#/dummy?a=3'"
+            <d 
+               class="data_appointment" 
+                id='{{:id}}' 
+               bookId='{{:bookId}}'  
+               doctor.name="{{if doctor }} {{:doctor.name}} {{else}} null{{/if}}"  
+               patient.name="{{if patient }} {{:patient.name}}{{else}} null {{/if}}" 
+               dateOfAppointment="{{:dateOfAppointment}}" 
+               
                >
-
-    </div>  
-
-
-    <div id="Reports" class="w3-container_akr city city_hide">
-
-        <a target="iframe1" href="/clinicPlus/home.html#/cmd?module=appointment&action=/all/list&pageNumber=1&div=main_1&template=incomeFromDoctors" class="w3-button2" title="MediBrandNames">
-            Report 2
-        </a>
-
-    </div> 
-
-    <hr>
-
-</div>
-
-<div class="w3-container">
-    <form id='form_appointment/deleteBulk' 
-          method="post" 
-          action="{{:renderInDiv}}#/cmd/post"> 
-        <input type='hidden' name='module_direct'
-               value='appointment/deleteBulk'>
-        <input type='hidden' name='redirect' 
-               value=' #/cmdc?module=doctor&action=/all/list'>
-
-        <div id="printableArea"   title="Appointment_List" >
-            
-            <span class="darkBgHeading">
-                 List of Appointments in DSC
-            </span>
-           
-
-
-            <table  class="customers"
-                    cellspacing="0" cellpadding="5" border="1"  >
-
-
-                <thead style="    font-size: 12px;">
-                    <tr class="bluestrp">
-                        <th></th> 
-                        <th></th>
-                        <th>SLNo</th>
-                        <th>id
-                            {{:~sortByColumnUI('id',obj)}}
-                        </th>
-                        <th>
-                            book Id
-                            {{:~sortByColumnUI('bookId',obj)}}
-                        </th>
-                        <th style="min-width: 77px">
-                            date Of Appt
-
-                            {{:~sortByColumnUI('dateOfAppointment',obj)}}
-                        </th>
-                        <th style="min-width: 150px">
-                            Doctor
-                            {{:~sortByColumnUI('doctor',obj)}}
-                        </th>
-                        <th style="min-width: 150px" >
-                            Patient
-                            {{:~sortByColumnUI('patient',obj)}}
-                        </th>
-
-                        <th>status
-
-                            {{:~sortByColumnUI('appointmentStatusEntity',obj)}}
-
-                        </th>
-
-                        <th>type
-
-                            {{:~sortByColumnUI('appointmentTypeEntity',obj)}}
-                        </th>
-                        <th>remarks
-
-                            {{:~sortByColumnUI('remarks',obj)}}
-                        </th>
-                        <th>token No:
-                            {{:~sortByColumnUI('tokenNumber',obj)}}
-                        </th>
-                        <th>consult Fee
-
-                            {{:~sortByColumnUI('consultFee',obj)}}
-                        </th>
-                        <th>reg fee
-                            {{:~sortByColumnUI('feeForClinic',obj)}}
-
-                        </th>
-
-
-                    </tr>
-                </thead>
-
-                <tbody >
-
-
-                    {{for obj.pageList.content}}
-
-                    <tr class="firstrow">
-                        <td>
-                            <input type="checkbox"
-                                   id="checkbox_{{:id}}"
-                                   class="regular-checkbox" 
-                                   name="n"  value="{{:id}}">
-                            <label for="checkbox_{{:id}}"></label>
-                        </td><td>
-                            <div  data-akr-printable="false"
-                                    
-                                     onclick="populateCreate2('appointment', {{:id}}, newModal().id);"
-                                     ><i class="fa fa-pencil"></i>
-                            </div>
-                        </td>
-                        <td
-                            onclick="go({{:id}}, 'appointment')"
-
-                            >{{:#index+1}}</td>
-
-
-
-
-
-
-
-                        <td
-                            onclick2="go({{:id}}, 'appointment')"
-                            >{{:id}}
-
-
-                        </td>
-                        <td
-                            onclick="go({{:id}}, 'appointment')"
-                            >{{:bookId}}</td>
-                        <td
-                            onclick="go({{:id}}, 'appointment')"
-                            >
-                            {{:~ddmmyyyyDashed(dateOfAppointment) }}
-
-                        </td>
-                        <td 
-                            onclick="go({{:id}}, 'appointment')"
-                            >
-                            {{if doctor!=null}}
-
-
-                            <span> {{:doctor.name}} </span><br>
-                            &nbsp;<i style="font-size: 0.8em;float: right">{{:doctor.department}}</i>
-
-
-                            {{else}}
-                            Not set
-                            {{/if}}
-
-                        </td>
-
-                        <td 
-                            onclick="go({{:id}}, 'appointment')"
-                            >
-
-                            {{if patient!=null}}
-                            {{:patient.name}} <br>
-
-                            <span class="age">{{:patient.age}} yr</span><br>
-                            <span class="" 
-                                  style="font-size: 0.8em;float: right">ID : {{:patient.id}} </span> 
-                            {{else}}
-                            Not Set
-                            {{/if}}
-
-                        </td>
-
-                        <td 
-                            onclick="go({{:id}}, 'appointment')"
-                            >
-                            {{if appointmentStatusEntity!=null}}
-                            <span class="marker_{{:appointmentStatusEntity.id}} rounded">{{:appointmentStatusEntity.name}}</span>
-
-                            {{/if}}
-                        </td>
-                        <td
-                            onclick="go({{:id}}, 'appointment')"
-                            > {{if appointmentTypeEntity!=null}}
-                            <span class="marker_{{:appointmentTypeEntity.id}} rounded">
-                                {{:appointmentTypeEntity.name}}
-                            </span>
-
-                            {{/if}}
-                        </td>
-                        <td
-                            onclick="go({{:id}}, 'appointment')"
-                            >{{:remarks}}</td>
-
-                        <td
-                            onclick="go({{:id}}, 'appointment')" 
-                            >{{:tokenNumber}}</td>
-
-                        <td
-                            onclick="go({{:id}}, 'appointment')"
-                            >{{:consultFee}}</td>
-                        <td
-                            onclick="go({{:id}}, 'appointment')" 
-                            >{{:feeForClinic}}</td>
-
-
-
-                    </tr>
-                    {{else}}
-                    No members...
-                    {{/for}}
-                </tbody>
-
-
-            </table>
-
-
-
-
-
-
+            </d>
 
         </div>
 
-    </form>
-</div>
 
+
+
+        {{/for}}
+    </div>
+</div>
