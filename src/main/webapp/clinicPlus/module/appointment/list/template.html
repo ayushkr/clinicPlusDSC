@@ -249,8 +249,14 @@
                             {{if doctor!=null}}
 
 
-                            <span> {{:doctor.name}} </span><br>
-                            &nbsp;<i style="font-size: 0.8em;float: right">{{:doctor.department}}</i>
+                            <span> {{:doctor.name}} </span><br>&nbsp;
+                            <i style="font-size: 0.8em;float: right">
+                                {{:doctor.department}}
+                            </i>
+                            <span> {{:doctor.contactPhone}} </span><br>
+                            <span> {{:doctor.email}} </span><br>
+                            
+                          
 
 
                             {{else}}
@@ -264,11 +270,31 @@
                             >
 
                             {{if patient!=null}}
-                            {{:patient.name}} <br>
+                            
+                                                        <span class="" 
+                                  style="font-size: 1.2em;float: left">
+                                 {{:patient.name}} 
+                            </span> 
+                            <br>
+                            
 
-                            <span class="age">{{:patient.age}} yr</span><br>
+                            <span class="age"
+                                   style="font-size: 0.8em;float: left"
+                                  >{{:patient.age}} yr</span>
+                            
                             <span class="" 
-                                  style="font-size: 0.8em;float: right">ID : {{:patient.id}} </span> 
+                                  style="font-size: 0.8em;float: right">
+                                ID : {{:patient.id}} 
+                            </span> 
+                            <br>
+                            <span class="" 
+                                  style="font-size: 0.8em;float: left">
+                                <i class="fa fa-phone">   
+                                </i>
+                                : {{:patient.contactPhone}} 
+                            </span>
+                             
+                           
                             {{else}}
                             Not Set
                             {{/if}}
