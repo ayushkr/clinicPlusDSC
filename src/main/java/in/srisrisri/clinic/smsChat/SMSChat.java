@@ -45,7 +45,10 @@ public class SMSChat implements Serializable {
     @ColumnDefault("true")
     boolean draft;
     @ColumnDefault("0")
-    int sentStatus;
+    int status;
+    
+    @ColumnDefault("false")
+    boolean processed;
 
     public long getId() {
         return id;
@@ -135,12 +138,29 @@ public class SMSChat implements Serializable {
         this.draft = draft;
     }
 
-    public int getSentStatus() {
-        return sentStatus;
+    public int getStatus() {
+        return status;
     }
 
-    public void setSentStatus(int sentStatus) {
-        this.sentStatus = sentStatus;
+    public void setStatus(int status) {
+        this.status = status;
     }
+
+ 
+
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
+    }
+
+    @Override
+    public String toString() {
+        return "SMSChat{" + "id=" + id + ", creationTime=" + creationTime + ", updationTime=" + updationTime + ", title=" + title + ", body=" + body + ", remarks=" + remarks + ", toPhoneNumbers=" + toPhoneNumbers + ", toPhoneNumbers_messageStatus=" + toPhoneNumbers_messageStatus + ", report=" + report + ", dateOfSending=" + dateOfSending + ", draft=" + draft + ", status=" + status + ", processed=" + processed + '}';
+    }
+    
+    
 
 }

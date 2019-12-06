@@ -1,6 +1,7 @@
 package in.srisrisri.clinic.appointment;
 
 import in.srisrisri.clinic.Constants.Constants1;
+import in.srisrisri.clinic.Helpers.ResourceHelper;
 import in.srisrisri.clinic.doctor.DoctorEntity;
 import in.srisrisri.clinic.patient.PatientEntity;
 
@@ -39,28 +40,33 @@ public class AppointmentResource {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private AppointmentRepo repo;
+   private final ResourceHelper resourceHelper;
+    
+    @Autowired
+    private final AppointmentRepo repo;
 
-    public AppointmentResource(AppointmentRepo appointmentRepo) {
+    public AppointmentResource(AppointmentRepo appointmentRepo,ResourceHelper resourceHelper) {
         this.repo = appointmentRepo;
+        this.resourceHelper=resourceHelper;
+        resourceHelper.set(label, logger, repo);
     }
 
     private static final String label = "appointment";
 
-    @GetMapping("")
-    @ResponseBody
-    public PageCover<AppointmentEntity> local_all() {
-        return allPageNumber("undefined","undefined",
-                "1",Optional.of(10),
-                "undefined", "undefined");
-    }
-    
-    
 //    @GetMapping("")
 //    @ResponseBody
-//    public List<AppointmentEntity> local_all() {
-//        return local_allByDateOfAppointmentDesc();
+//    public PageCover<AppointmentEntity> local_all() {
+//        return allPageNumber("undefined","undefined",
+//                "1",Optional.of(10),
+//                "undefined", "undefined");
 //    }
+    
+    
+    @GetMapping("")
+    @ResponseBody
+    public List<AppointmentEntity> local_all() {
+        return local_allByDateOfAppointmentDesc();
+    }
 
     @GetMapping("dateOfAppointment")
     @ResponseBody
@@ -194,7 +200,7 @@ public class AppointmentResource {
             AppointmentEntity entityAfter = new AppointmentEntity();
             entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
              entityAfter.setDateOfAppointment(Date.valueOf(LocalDate.now()));
-            repo.save(entityAfter);
+            AppointmentEntity saved = repo.save(entityAfter);
             item = Optional.of(entityAfter);
         }
         return item;
@@ -286,42 +292,7 @@ public class AppointmentResource {
     @PostMapping("deleteBulk")
     public ResponseEntity<JsonResponse> deleteBulk(
             @RequestParam("n") List<Long> list) {
-        ResponseEntity<JsonResponse> responseEntity = null;
-        JsonResponse jsonResponse = new JsonResponse();
-        jsonResponse.setStatus(Constants1.SUCCESS);
-        String failedIds = "";
-        try {
-            logger.warn("deleteBulk , got={} ", list.toString());
-            for (Long n : list) {
-                System.out.println(" n=" + n);
-                try {
-                    repo.deleteById(n);
-                    failedIds += "<hr><p>Ok deleted " + label + " ID:" + n
-                            + "</p><hr>";
-
-                } catch (Exception e) {
-
-                    failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
-                            + "<br>Because  "
-                            + ((e.getMessage().contains("ConstraintViolationException"))
-                            ? "It Used in Other place " : e.getMessage())
-                            + "</p><hr>";
-                    jsonResponse.setStatus(Constants1.FAILURE);
-                }
-
-            }
-            jsonResponse.setMessage(failedIds);
-
-            responseEntity = ResponseEntity
-                    .created(new URI("/api/" + label + "/"))
-                    .headers(HeaderUtil.createEntityCreationAlert(label,
-                            " "))
-                    .body(jsonResponse);
-        } catch (URISyntaxException ex) {
-            java.util.logging.Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-
-        }
-        return responseEntity;
+       return resourceHelper.deleteBulk(list);
     }
 
 }

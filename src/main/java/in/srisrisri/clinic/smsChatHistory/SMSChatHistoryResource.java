@@ -6,6 +6,7 @@
 package in.srisrisri.clinic.smsChatHistory;
 
 import in.srisrisri.clinic.Constants.Constants1;
+import in.srisrisri.clinic.Helpers.ResourceHelper;
 import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
 import in.srisrisri.clinic.utils.PageCover;
@@ -43,14 +44,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class SMSChatHistoryResource {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-   
     private static final String label = "sms_chat_history";
    
       @Autowired
     private final SMSChatHistoryRepo repo;
+      
+       @Autowired
+   private final ResourceHelper resourceHelper;
+      
 
-    public SMSChatHistoryResource(SMSChatHistoryRepo repo) {
+    public SMSChatHistoryResource(SMSChatHistoryRepo repo,ResourceHelper resourceHelper) {
         this.repo = repo;
+        this.resourceHelper=resourceHelper;
+           resourceHelper.set(label, logger, repo);
     }
 
    
@@ -79,7 +85,7 @@ public class SMSChatHistoryResource {
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
-        int pageSize = 10;
+        int pageSize = 100;
         logger.warn("pageable={},filter({} IN {})", new Object[]{label, filter,filterColumn});
 
         if (!sortColumn.equals("undefined")) {
@@ -222,4 +228,13 @@ public class SMSChatHistoryResource {
 //        }
 //    }
 //    
+    
+     // deleteBulk
+    @PostMapping("deleteBulk")
+    public ResponseEntity<JsonResponse> deleteBulk(
+            @RequestParam("n") List<Long> list) {
+       return resourceHelper.deleteBulk(list);
+    }
+    
+    
 }

@@ -47,104 +47,128 @@
         <i class="fa fa-filter">x</i> 
     </a>
 
+
+    <input type="submit" value="Bulk Delete"
+           form='form_sms_chat_history/deleteBulk'
+           onclick="window.location.href = '#/dummy?a=3'"
+           >
+
 </div>
 <br>
 
 <div id="printableArea"   title="smschat_List" class='w3-container' >
     <!--<p class="pageTitle">Patients</p>-->
+    <form id='form_sms_chat_history/deleteBulk' 
+          method="post" 
+          action="{{:renderInDiv}}#/cmd/post"> 
+        <input type='hidden' name='module_direct'
+               value='sms_chat_history/deleteBulk'>
+        <table class="customers"  cellspacing="0" cellpadding="5" border="1"  >
 
-    <table class="customers"  cellspacing="0" cellpadding="5" border="1"  >
+            <thead>
+                <tr class="bluestrp">
+                    <th>
+                        Sl <br>No
+                    </th>
 
-        <thead>
-            <tr class="bluestrp">
-                <th>
-                    Sl <br>No
-                </th>
+                    <th>id
+                        {{:~sortByColumnUI('id',obj)}}
+                        <input type="checkbox"
+                                   id="checkbox_minus1"
+                                   class="regular-checkbox" 
+                                   name="n"  value="-1">
+                            <label for="checkbox_minus1"></label>
+                    </th>
 
-                <th>id
-                    {{:~sortByColumnUI('id',obj)}}
-                </th>
-
-                <th>Title
-                    {{:~sortByColumnUI('title',obj)}}
-                </th>
-                  <th>dateOf Sending
-                    {{:~sortByColumnUI('dateOfSending',obj)}}
-                </th>
-                
-
-                <th>Body
-                    {{:~sortByColumnUI('body',obj)}}
-                </th>
-
-               
-
-                <th>Remarks
-                    {{:~sortByColumnUI('remarks',obj)}}
-                </th>
+                    <th>Title
+                        {{:~sortByColumnUI('title',obj)}}
+                    </th>
+                    <th>dateOf Sending
+                        {{:~sortByColumnUI('dateOfSending',obj)}}
+                    </th>
 
 
-            </tr>
-        </thead>
-        <tbody>
-
-            {{for obj.pageList.content}}
-
-            <tr class="firstrow"
-                onclick="go({{:id}}, 'sms_chat_history')"
-                >
+                    <th>Body
+                        {{:~sortByColumnUI('body',obj)}}
+                    </th>
 
 
-                <td >
-                    <span  class="">
 
-                        {{:#index+1}} 
-                    </span>
+                    <th>Remarks
+                        {{:~sortByColumnUI('remarks',obj)}}
+                    </th>
 
-                </td>
 
-                <td >
-                    <span  class="">
+                </tr>
+            </thead>
+            <tbody>
 
-                        {{:id}}
-                    </span>
+                {{for obj.pageList.content}}
 
-                </td>
-
-                <td
-                    >{{:title}}
-                </td>
-                
-                 <td
+                <tr class="firstrow"
+                    onclick="go({{:id}}, 'sms_chat_history')"
                     >
-                       {{:~ddmmyyyyDashed(dateOfSending) }}
-                    
-                </td>
-                
-                
-
-                <td
-                    style="width:340px"
-
-                    >{{:body}}
-                </td>
-                
 
 
-                <td
-
-                    >{{:remarks}}
-                </td>
+                    <td >
+                        <span  class="">
 
 
 
+                            {{:#index+1}} 
+                        </span>
 
-            </tr>
-            {{else}}
-            No members...
-            {{/for}}
-        </tbody>
+                    </td>
+
+                    <td >
+                        <span  class="">
+                            <input type="checkbox"
+                                   id="checkbox_{{:id}}"
+                                   class="regular-checkbox" 
+                                   name="n"  value="{{:id}}">
+                            <label for="checkbox_{{:id}}"></label>
+                            {{:id}}
+                        </span>
+
+                    </td>
+
+                    <td
+                        >{{:title}}
+                    </td>
+
+                    <td
+                        >
+                        {{:~ddmmyyyyDashed(dateOfSending) }}
+
+                    </td>
 
 
-    </table>
+
+                    <td
+                        style="width:340px"
+
+                        >{{:body}}
+                    </td>
+
+
+
+                    <td
+
+                        >{{:remarks}}
+                    </td>
+
+
+
+
+                </tr>
+                {{else}}
+                No members...
+                {{/for}}
+
+            </tbody>
+
+
+        </table>
+
+    </form>
 </div>

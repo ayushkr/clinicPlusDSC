@@ -37,21 +37,23 @@ public class SMSScheduler {
         this.smschatRepo = smschatRepo;
     }
 
-   
-
     @Scheduled(fixedRate = 5000)
     public void r2() {
 
         if (paused) {
-            logger.info("SMSScheduler 2  paused", new Object[]{1, LocalDateTime.now()});
+            logger.info("SMSScheduler r2  paused", new Object[]{1, LocalDateTime.now()});
         } else {
-            logger.info("SMSScheduler 2  running ", new Object[]{1, LocalDateTime.now()});
+            logger.info("SMSScheduler r2  running ", new Object[]{1, LocalDateTime.now()});
             smschatRepo.findAll().forEach(smschat -> {
                 if (!smschat.isDraft()) {
+                    logger.info("is not draft ={} {} ", new Object[]{smschat, LocalDateTime.now()});
 
-                    if (smschat.getSentStatus() != SMS_STATUS.PROCESSING) {
+                    if (smschat.getStatus() != SMS_STATUS.PROCESSING) {
                         chatService.process(smschat);
                     }
+
+                } else {
+                    logger.info("is draft ={} {} ", new Object[]{smschat, LocalDateTime.now()});
 
                 }
             });

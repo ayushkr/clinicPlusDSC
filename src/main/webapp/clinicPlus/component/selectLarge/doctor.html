@@ -22,11 +22,17 @@
         <span id="doctor_display" class="inp2" title="">
             {{if doctor}} {{:doctor.name}} 
             <br>
-            <span style="font-size: 0.6em;text-align: right;">
+            <span style="font-size: 1em;text-align: right;">
                 Fees List: 
                 {{:doctor.feesList}}
-                <span style="float:right">Clinic:{{:doctor.feeForClinic}}</span> 
-                <br> Dept:{{:doctor.department}}
+                <span style="float:right">
+                    Clinic:{{:doctor.feeForClinic}}
+                </span> 
+                <br> Dept: {{:doctor.department}}
+                <br> phone: {{:doctor.contactPhone}}
+                 <br> email: {{:doctor.email}}
+                
+                
             </span>
             {{else}} --- {{/if}}
 
