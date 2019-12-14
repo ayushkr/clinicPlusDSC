@@ -61,7 +61,7 @@ public class Resource {
 //      private  final AppointmentRepo appointmentRepo;
     private final ResourceHelper resourceHelper;
 
-    public final String label = "label";
+    public  String label = "label";
 
     public Resource(FileStorageService fileStorageService, ResourceHelper resourceHelper) {
         this.fileStorageService = fileStorageService;

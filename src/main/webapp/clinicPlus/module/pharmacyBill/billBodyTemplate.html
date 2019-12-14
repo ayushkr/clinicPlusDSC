@@ -50,7 +50,7 @@
             {{if medicineStock}}
             <div class="Cell w3-padding-16"  >  
                 <ayu1>
-                    {{:#getIndex()}}
+                    {{:#getIndex()+1}}
                 </ayu1>      
             </div>
 
@@ -58,7 +58,7 @@
                 <ayu1>
                    <button 
                     class="button_none" 
-                          style="text-align: left;"
+                          style="text-align: left;font-size: large"
                     >  {{if medicineStock.medicineBrandName}}
                         {{:medicineStock.medicineBrandName.brandName}}
                         {{/if}}
@@ -142,8 +142,8 @@
                             style="color:green"
                             onclick="go(-1, 'pharmacyBillRow',{{:billId}})"
                             >
-                         + 
-                    Add New
+                        <i class="fa fa-plus" > Add </i>
+                    
                     </button>
                     
                 </div>

@@ -35,19 +35,26 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/clinicPlus/api/doctor")
-public class DoctorResource extends Resource {
-////    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-//    private final FileStorageService fileStorageService;
+public class DoctorResource {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private final DoctorRepo repo;
+
+    
+    @Autowired
+    private final FileStorageService fileStorageService;
+    String label = "doctor";
 
     @Autowired
     DoctorResource(DoctorRepo doctorRepo, FileStorageService fileStorageService_) {
         this.repo = doctorRepo;
         this.fileStorageService = fileStorageService_;
+        label = "doctor";
     }
 
     private static final String ENTITY_NAME = "Doctor";
-
-    String label = "doctor";
 
     @GetMapping("{id}")
     @ResponseBody
@@ -66,9 +73,8 @@ public class DoctorResource extends Resource {
         }
         return item;
     }
-    
-    
- // create
+
+    // create
     @PostMapping("")
     public ResponseEntity<JsonResponse> PostMapping_one(DoctorEntity entityBefore) {
         ResponseEntity<JsonResponse> responseEntity = null;
@@ -77,11 +83,9 @@ public class DoctorResource extends Resource {
             logger.warn("PostMapping_one id:{} ", entityBefore.toString());
             logger.warn("---- id ={}", entityBefore.getId());
             DoctorEntity entityAfter = null;
-            
 
-                entityAfter = (DoctorEntity) repo.findById(entityBefore.getId()).get();
-                entityAfter.setUpdationTime(Date.valueOf(LocalDate.now()));
-            
+            entityAfter = (DoctorEntity) repo.findById(entityBefore.getId()).get();
+            entityAfter.setUpdationTime(Date.valueOf(LocalDate.now()));
 
             BeanUtils.copyProperties(entityBefore, entityAfter);
             try {
@@ -94,7 +98,7 @@ public class DoctorResource extends Resource {
             }
 
             responseEntity = ResponseEntity
-                    .created(new URI("/api/"+ENTITY_NAME+"/" + entityAfter.getId()))
+                    .created(new URI("/api/" + ENTITY_NAME + "/" + entityAfter.getId()))
                     .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME,
                             entityAfter.getId() + ""))
                     .body(jsonResponse);
@@ -103,125 +107,118 @@ public class DoctorResource extends Resource {
         }
         return responseEntity;
     }
-    
 
-//    @GetMapping("")
-//    @ResponseBody
-//    public List<DoctorEntity> all() {
-//        logger.warn("REST getItems() , {} ", new Object[]{label});
-//        List<DoctorEntity> list = repo.findAll();
-//        return list;
-//    }
-    
-    
-//    @GetMapping("pageable")
-//    @ResponseBody
-//    public PageCover<DoctorEntity> pageable_general(
-//            @RequestParam("pageNumber") String pageNumber,
-//            @RequestParam("filterColumn") String filterColumn,
-//            @RequestParam("filter") String filter,
-//            @RequestParam("sortColumn") String sortColumn,
-//            @RequestParam("sortOrder") String sortOrder
-//    ) {
-//        Sort sort;
-//        int pageSize = 5;
-//        logger.warn("REST getItems() , {} ", new Object[]{ENTITY_NAME});
-//
-//        if (!sortColumn.equals("undefined")) {
-//            if (sortOrder.equals("d")) {
-//                sort = Sort.by(sortColumn).descending();
-//            } else {
-//                sort = Sort.by(sortColumn).ascending();
-//            }
-//
-//        } else {
-//            sort = Sort.by("id").ascending();
-//        }
-//        if ("undefined".equals(pageNumber)) {
-//            pageNumber = "1";
-//        } else {
-//            if (Integer.parseInt(pageNumber) == 0) {
-//                pageSize = 10000;
-//                pageNumber = "1";
-//            }
-//        }
-//
-//        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, pageSize, sort);
-//        Page<DoctorEntity> pageList = repo.findAll(pageable);
-//        PageCover<DoctorEntity> pageCover = new PageCover<>(pageList);
-//        pageCover.setSortColumn(sortColumn);
-//        pageCover.setSortOrder(sortOrder);
-//        pageCover.setModule(label);
-//
-//        return pageCover;
-//    }
+    @GetMapping("")
+    @ResponseBody
+    public List<DoctorEntity> all() {
+        logger.warn("REST getItems() , {} ", new Object[]{label});
+        List<DoctorEntity> list = repo.findAll();
+        return list;
+    }
+    @GetMapping("pageable")
+    @ResponseBody
+    public PageCover<DoctorEntity> pageable_general(
+            @RequestParam("pageNumber") String pageNumber,
+            @RequestParam("filterColumn") String filterColumn,
+            @RequestParam("filter") String filter,
+            @RequestParam("sortColumn") String sortColumn,
+            @RequestParam("sortOrder") String sortOrder
+    ) {
+        Sort sort;
+        int pageSize = 5;
+        logger.warn("REST getItems() , {} ", new Object[]{ENTITY_NAME});
 
-    
-   
-   
-    // delete
-//    @GetMapping("delete/id/{id}")
-//    public JsonResponse DeleteMapping_id(@PathVariable("id") Long id) {
-//
-//        JsonResponse response = new JsonResponse();
-//        logger.warn("REST request to delete {} {}", new Object[]{label, id});
-//        try {
-//            repo.deleteById(id);
-//            response.setStatus(Constants1.SUCCESS);
-//            response.setMessage("Deleted " + label + " with id " + id);
-//            return response;
-//        } catch (ConstraintViolationException e) {
-//            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
-//            response.setStatus(Constants1.FAILURE);
-//            response.setMessage("This " + label + " is used in other ");
-//            return response;
-//
-//        } catch (Exception e) {
-//            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
-//            response.setStatus(Constants1.FAILURE);
-//            if(e.getMessage().contains("ConstraintViolationException")){
-//            response.setMessage("This " + label + " (ID: "+id+
-//                    ")  is used in other place <br>For eg: in pharmacyBill etc");
-//            }else{
-//            response.setMessage(e.getMessage());
-//            }
-//            return response;
-//        }
-//    }
-//    // deleteBulk
-//    @PostMapping("deleteBulk")
-//    public ResponseEntity<JsonResponse> deleteBulk(
-//            @RequestParam("n") List<Long> list) {
-//        ResponseEntity<JsonResponse> responseEntity = null;
-//        JsonResponse jsonResponse = new JsonResponse();
-//        String failedIds = "";
-//        try {
-//            logger.warn("deleteBulk , got={} ", list.toString());
-//            for (Long n : list) {
-//                System.out.println(" n=" + n);
-//                try {
-//                    repo.deleteById(n);
-//                } catch (Exception e) {
-//                    
-//                    failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
-//                            + "<br>Because  "
-//                            +((e.getMessage().contains("ConstraintViolationException")) ? 
-//                            "It Used in Other place ":e.getMessage()) 
-//                            + "</p><hr>";
-//
-//                }
-//
-//            }
-//            jsonResponse.setMessage(failedIds);
-//            jsonResponse.setStatus(Constants1.FAILURE);
-//            responseEntity = ResponseEntity
-//                    .created(new URI("/api/" + label + "/"))
-//                    .headers(HeaderUtil.createEntityCreationAlert(label,
-//                            " "))
-//                    .body(jsonResponse);
-//        } catch (URISyntaxException ex) {
-//            java.util.logging.Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return responseEntity;
-//    }  
+        if (!sortColumn.equals("undefined")) {
+            if (sortOrder.equals("d")) {
+                sort = Sort.by(sortColumn).descending();
+            } else {
+                sort = Sort.by(sortColumn).ascending();
+            }
+
+        } else {
+            sort = Sort.by("id").ascending();
+        }
+        if ("undefined".equals(pageNumber)) {
+            pageNumber = "1";
+        } else {
+            if (Integer.parseInt(pageNumber) == 0) {
+                pageSize = 10000;
+                pageNumber = "1";
+            }
+        }
+
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, pageSize, sort);
+        Page<DoctorEntity> pageList = repo.findAll(pageable);
+        PageCover<DoctorEntity> pageCover = new PageCover<>(pageList);
+        pageCover.setSortColumn(sortColumn);
+        pageCover.setSortOrder(sortOrder);
+        pageCover.setModule(label);
+
+        return pageCover;
+    }
+//     delete
+    @GetMapping("delete/id/{id}")
+    public JsonResponse DeleteMapping_id(@PathVariable("id") Long id) {
+
+        JsonResponse response = new JsonResponse();
+        logger.warn("REST request to delete {} {}", new Object[]{label, id});
+        try {
+            repo.deleteById(id);
+            response.setStatus(Constants1.SUCCESS);
+            response.setMessage("Deleted " + label + " with id " + id);
+            return response;
+        } catch (ConstraintViolationException e) {
+            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
+            response.setStatus(Constants1.FAILURE);
+            response.setMessage("This " + label + " is used in other ");
+            return response;
+
+        } catch (Exception e) {
+            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
+            response.setStatus(Constants1.FAILURE);
+            if(e.getMessage().contains("ConstraintViolationException")){
+            response.setMessage("This " + label + " (ID: "+id+
+                    ")  is used in other place <br>For eg: in pharmacyBill etc");
+            }else{
+            response.setMessage(e.getMessage());
+            }
+            return response;
+        }
+    }
+    // deleteBulk
+    @PostMapping("deleteBulk")
+    public ResponseEntity<JsonResponse> deleteBulk(
+            @RequestParam("n") List<Long> list) {
+        ResponseEntity<JsonResponse> responseEntity = null;
+        JsonResponse jsonResponse = new JsonResponse();
+        String failedIds = "";
+        try {
+            logger.warn("deleteBulk , got={} ", list.toString());
+            for (Long n : list) {
+                System.out.println(" n=" + n);
+                try {
+                    repo.deleteById(n);
+                } catch (Exception e) {
+                    
+                    failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
+                            + "<br>Because  "
+                            +((e.getMessage().contains("ConstraintViolationException")) ? 
+                            "It Used in Other place ":e.getMessage()) 
+                            + "</p><hr>";
+
+                }
+
+            }
+            jsonResponse.setMessage(failedIds);
+            jsonResponse.setStatus(Constants1.FAILURE);
+            responseEntity = ResponseEntity
+                    .created(new URI("/api/" + label + "/"))
+                    .headers(HeaderUtil.createEntityCreationAlert(label,
+                            " "))
+                    .body(jsonResponse);
+        } catch (URISyntaxException ex) {
+            java.util.logging.Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+        return responseEntity;
+    }  
 }

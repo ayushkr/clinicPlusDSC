@@ -127,13 +127,13 @@ public class MedicineStockResource {
             }
 
         }
-        PageCover<MedicineStockEntity> medicineStockpageCover = new PageCover<>(page);
-        medicineStockpageCover.setSortColumn(sortColumn);
-        medicineStockpageCover.setSortOrder(sortOrder);
-        medicineStockpageCover.setFilter(filter);
-        medicineStockpageCover.setFilterColumn(filterColumn);
-        medicineStockpageCover.setModule(label);
-        return medicineStockpageCover;
+        PageCover<MedicineStockEntity> cover = new PageCover<>(page);
+        cover.setSortColumn(sortColumn);
+        cover.setSortOrder(sortOrder);
+        cover.setFilter(filter);
+        cover.setFilterColumn(filterColumn);
+        cover.setModule(label);
+        return cover;
     }
 
     @GetMapping("{id}")

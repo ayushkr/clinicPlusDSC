@@ -1,4 +1,4 @@
 
-java -jar /home/akr/NetbeansProjects/jenkins.war ;
+java -jar /common/clinicPlusFolder/jenkins.war ;
 
 

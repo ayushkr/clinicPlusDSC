@@ -61,7 +61,7 @@ public class PurchaseBillResource {
 
     @GetMapping("pageable")
     @ResponseBody
-    public PageCover<PurchaseBillEntity> allPageNumber(
+    public PageCover<PurchaseBillEntity> pageable(
             @RequestParam("pageNumber") String pageNumber,
             @RequestParam("filterColumn") String filterColumn,
             @RequestParam(value = "pageSize", required = false) Optional<Integer> pageSizeOb,
@@ -122,16 +122,16 @@ public class PurchaseBillResource {
 
         }
 
-        PageCover<PurchaseBillEntity> pageCover = new PageCover<>(page);
+        PageCover<PurchaseBillEntity> cover = new PageCover<>(page);
+        
+        cover.setSortColumn(sortColumn);
+        cover.setSortOrder(sortOrder);
+        cover.setFilter(filter);
+        cover.setFilterColumn(filterColumn);
+        cover.setModule(label);
+        return cover;
 
-        pageCover.setSortColumn(sortColumn);
-        pageCover.setSortOrder(sortOrder);
-        pageCover.setFilter(filter);
-        pageCover.setFilterColumn(filterColumn);
-
-        pageCover.setModule(label);
-
-        return pageCover;
+       
     }
 
     @GetMapping("{id}")
