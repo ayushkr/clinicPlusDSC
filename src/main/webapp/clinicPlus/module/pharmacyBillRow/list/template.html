@@ -1,8 +1,7 @@
-
 <div class='w3-container'>
-   
+
     <div style="position: relative;z-index: 1;
-         background-color: transparent"
+                background-color: transparent"
          data-akr-printable="false"
          >
         <div class="w3-bar-ay"  >
@@ -17,37 +16,38 @@
         </div>
 
         <div id="filter" class="w3-container_margin10 w3-border city ">
+
             <span id='selectLarge_patient'>
                 selectLarge_patient</span>
 
             <input 
-                id='patient_afterClick'
-                type="button" value="Go "
-                style="display: none"
-                onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=patient&filter=' + document.getElementById('patient').value + ''"
-                >
+                   id='patient_afterClick'
+                   type="button" value="Go "
+                   style="display: none"
+                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=patient&filter=' + document.getElementById('patient').value + ''"
+                   >
 
             <span id='selectLarge_doctor'>
                 selectLarge_doctor</span>
+
             <input 
 
-                id='doctor_afterClick'
-                type="button" value="Go "
-                style="display: none"
-                onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=doctor&filter=' + document.getElementById('doctor').value + ''"
-                >
-        <span style="display: inline-block"
-            id='doctor_afterClick'
-            title="No filter "
-            onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=undefined&filter=undefined'"
-            >
-            <i class="fa fa-filter">x</i>           
-        </span>
-        
-        
+                   id='doctor_afterClick'
+                   type="button" value="Go "
+                   style="display: none"
+                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=doctor&filter=' + document.getElementById('doctor').value + ''"
+                   >
+
+            <span style="display: inline-block"
+                  id='doctor_afterClick'
+                  title="No filter "
+                  onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber=1&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=undefined&filter=undefined'"
+                  >
+                <i class="fa fa-filter">x</i>           
+            </span>
+
+
         </div>
-        
-        
 
         <div id="bulk" class="w3-container_margin10 w3-border city city_hide">
 
@@ -57,26 +57,25 @@
                    >
 
         </div>  
-
-
-
     </div>
 
     <hr>
-    <form id='form_appointment/deleteBulk' 
+
+    <form id='form_pharmacyBillRow/deleteBulk' 
           method="post" 
-          action="{{:renderInDiv}}#/cmd/post"> 
+          action="{{:renderInDiv}}#/cmd/post">
+
         <input type='hidden' name='module_direct'
-               value='appointment/deleteBulk'>
+               value='pharmacyBillRow/deleteBulk'>
         <input type='hidden' name='redirect' 
-               value=' #/cmdc?module=doctor&action=/all/list'>
+               value=' #/cmdc?module=pharmacyBillRow&action=/all/list'>
 
         <div id="printableArea"   title="pharmBillRow_List" >
-            
+
             <h6>List of prescriptions</h6>
-            
+
             <table  class="table_greyBorder" 
-                    cellspacing="0" cellpadding="5" border="1"  >
+                   cellspacing="0" cellpadding="5" border="1"  >
 
 
                 <thead>
@@ -129,8 +128,8 @@
                         <th>Vendor</th>
                         <th>Batch</th>
                         <th>Exp</th>
-                      
-                        
+
+
 
 
                     </tr>
@@ -138,13 +137,13 @@
                 <tbody>
 
                     {{for obj.pageList.content}}
-                       {{if idSpecial!=1}}
+                    {{if idSpecial!=1}}
                     <!--                <tr> 
-                                        <td colspan="12">
-                    
-                    
-                                        </td>
-                                    </tr>-->
+<td colspan="12">
+
+
+</td>
+</tr>-->
 
                     <tr 
                         onclick2="smallMenuToggle('menu_individual_{{:id}}')"
@@ -173,19 +172,17 @@
                         </td>
 
                         <td >
+                            
                             <div id='menu_individual_{{:id}}' 
                                  data-akr-printable="false"
                                  style2="display: none"
                                  >
 
-
                                 <i class="fa fa-edit"
                                    title="Edit"
                                    onclick="go({{:id}}, 'pharmacyBillRow')" 
-
                                    ></i>
-
-
+                                
                             </div>
 
                         </td>
@@ -248,9 +245,9 @@
                         <td>
                             {{:medicineStock.expiryDate}}
                         </td>
-                       
 
-                        
+
+
 
 
                         {{else}}
@@ -273,6 +270,7 @@
 
             </table>
         </div>
+
 
 
     </form>

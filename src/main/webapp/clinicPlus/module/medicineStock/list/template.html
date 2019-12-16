@@ -1,153 +1,237 @@
 <div class='w3-container'>
-    <div data-akr-printable="false">
-        <div class="inp_outer" style="min-width: 200px">
-            <div class="inp1" >
-                <div class="title1">medicineBrandName </div>
-            </div>
-            <input id="medicineBrandName" name='medicineBrandName' type="text"  value=""
-                   accesskey="q"
-                   > 
-            <input type="button" value="Go " id="button_medicineBrandName_go"
-                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=brandName&filter=' + document.getElementById('medicineBrandName').value + ''"
-                   >
+
+    <div style="position: relative;z-index: 1;
+                background-color: transparent"
+         data-akr-printable="false"
+         >
+        <div class="w3-bar-ay"  >
+            
+            <a class="w3-bar-item tablink tabSelected " 
+           onClick="openCity(event, 'none')">None</a>
+
+            <a class="w3-bar-item  tablink " 
+               onClick="openCity(event, 'filter')">Filter</a>
+
+
+            <a class="w3-bar-item tablink " 
+               onClick="openCity(event, 'bulk')">Bulk</a>
+
         </div>
 
-        <div class="inp_outer" style="min-width: 200px">
-            <div class="inp1" >
-                <div class="title1">generic Name </div>
+        <div id="filter" class="w3-container_margin10 w3-border city city_hide">
+
+            <div class="inp_outer" style="min-width: 200px">
+                <div class="inp1" >
+                    <div class="title1">medicineBrandName </div>
+                </div>
+                <input id="medicineBrandName" name='medicineBrandName' type="text"  value=""
+                       accesskey="q"
+                       > 
+                <input type="button" value="Go " id="button_medicineBrandName_go"
+                       onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=brandName&filter=' + document.getElementById('medicineBrandName').value + ''"
+                       >
             </div>
-            <input id="genericName" name='genericName' type="text"  value=""
-                   accesskey="q"
-                   > 
-            <input type="button" value="Go " id="button_genericName_go"
-                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=genericName&filter=' + document.getElementById('genericName').value + ''"
-                   >
+
+            <div class="inp_outer" style="min-width: 200px">
+                <div class="inp1" >
+                    <div class="title1">generic Name </div>
+                </div>
+                <input id="genericName" name='genericName' type="text"  value=""
+                       accesskey="q"
+                       > 
+                <input type="button" value="Go " id="button_genericName_go"
+                       onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=genericName&filter=' + document.getElementById('genericName').value + ''"
+                       >
+            </div>
+
+            <div class="inp_outer" style="min-width: 200px">
+                <div class="inp1" >
+                    <div class="title1">composition </div>
+                </div>
+                <input id="composition" name='composition' type="text"  value=""
+                       accesskey="q"
+                       > 
+                <input type="button" value="Go " id="button_composition_go"
+                       onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=composition&filter=' + document.getElementById('composition').value + ''"
+                       >
+            </div>
         </div>
 
-        <div class="inp_outer" style="min-width: 200px">
-            <div class="inp1" >
-                <div class="title1">composition </div>
-            </div>
-            <input id="composition" name='composition' type="text"  value=""
-                   accesskey="q"
-                   > 
-            <input type="button" value="Go " id="button_composition_go"
-                   onclick="window.location.href = '#/cmd?module={{:obj.module}}&action=/all/list&pageNumber={{:obj.pageList.pageable.pageNumber+1}}&sortColumn={{:obj.sortColumn}}&sortOrder={{:obj.sortOrder}}&filterColumn=composition&filter=' + document.getElementById('composition').value + ''"
+        <div id="bulk" class="w3-container_margin10 w3-border city city_hide">
+
+            <input type="submit" value="Bulk Delete"
+                   form='form_{{:obj.module}}/deleteBulk'
+                   onclick="window.location.href = '#/dummy?a=3'"
                    >
-        </div>
+
+        </div>  
+
     </div>
+   <hr>
+    
+    <form id='form_{{:obj.module}}/deleteBulk' 
+          method="post" 
+          action="{{:renderInDiv}}#/cmd/post">
+
+        <input type='hidden' name='module_direct'
+               value='{{:obj.module}}/deleteBulk'>
+        <input type='hidden' name='redirect' 
+               value=' #/cmdc?module={{:obj.module}}&action=/all/list'>
+module={{:obj.module}}
+        <div id="printableArea"   title="{{:obj.module}}_List" >
+            
+
+            <table class="customers" cellspacing="0" cellpadding="5"  style="width:85%;">
+                <thead>
+                    <tr class="bluestrp">
+                        
+                         <th style="min-width: 20px" >
+
+                        </th>
+                        <th style="min-width: 20px" >
+
+                        </th>
+                        <th>id
+                            {{:~sortByColumnUI('id',obj)}}
+                        </th>
+                        <th style="min-width: 50px;">bill No
+                            {{:~sortByColumnUI('purchaseBill',obj)}}
+                        </th>
+                        <th style="min-width: 150px;">brandName
+                            {{:~sortByColumnUI('medicineBrandName_brandName',obj)}}
+                        </th>
+                        <th>company
+                            {{:~sortByColumnUI('medicineBrandName.company',obj)}}
+                        </th>
+                        <th>qty Remai ning
+                            {{:~sortByColumnUI('qtyRemaining',obj)}}
+                        </th>
+                        <th style="min-width: 75px;">
+                            expiry Date
+                            {{:~sortByColumnUI('expiryDate',obj)}}
+                        </th>
+                        <th>batch{{:~sortByColumnUI('batch',obj)}}</th>
+                        <th>sub Count
+                            {{:~sortByColumnUI('subCount',obj)}}
+                        </th>
+                        <th>mrp
+                            {{:~sortByColumnUI('mrp',obj)}}
+                        </th>
 
 
-    <div id="printableArea"   title="MedicineStock_List" >
-        <table class="customers" cellspacing="0" cellpadding="5"  style="width:85%;">
+                        <th>SP
+                            {{:~sortByColumnUI('sellingPrice',obj)}}
+                        </th>
+                        <th>CP
+                            {{:~sortByColumnUI('costPrice',obj)}}
+                        </th>
 
-            <thead>
-                <tr class="bluestrp">
-                    <th>id
-                        {{:~sortByColumnUI('id',obj)}}
-                    </th>
-                    <th style="min-width: 50px;">bill No
-                        {{:~sortByColumnUI('purchaseBill',obj)}}
-                    </th>
-                    <th style="min-width: 150px;">brandName
-                        {{:~sortByColumnUI('medicineBrandName_brandName',obj)}}
-                    </th>
-                    <th>company
-                    {{:~sortByColumnUI('medicineBrandName.company',obj)}}
-                    </th>
-                    <th>qty Remai ning
-                        {{:~sortByColumnUI('qtyRemaining',obj)}}
-                    </th>
-                    <th style="min-width: 75px;">
-                        expiry Date
-                        {{:~sortByColumnUI('expiryDate',obj)}}
-                    </th>
-                    <th>batch{{:~sortByColumnUI('batch',obj)}}</th>
-                    <th>sub Count
-                    {{:~sortByColumnUI('subCount',obj)}}
-                    </th>
-                    <th>mrp
-                        {{:~sortByColumnUI('mrp',obj)}}
-                    </th>
+                        <th>cgst
+                            {{:~sortByColumnUI('cgst',obj)}}
+                        </th>
+                        <th>sgst
+                            {{:~sortByColumnUI('sgst',obj)}}
+
+                        </th>
 
 
-                    <th>SP
-                    {{:~sortByColumnUI('sellingPrice',obj)}}
-                    </th>
-                    <th>CP
-                    {{:~sortByColumnUI('costPrice',obj)}}
-                    </th>
+                        <th>qty Purch ased
+                            {{:~sortByColumnUI('qtyPurchased',obj)}}
 
-                    <th>cgst
-                    {{:~sortByColumnUI('cgst',obj)}}
-                    </th>
-                    <th>sgst
-                        {{:~sortByColumnUI('sgst',obj)}}
-                    
-                    </th>
+                        </th>
+                        <th>qty free
+                            {{:~sortByColumnUI('qtyFree',obj)}}
 
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                    <th>qty Purch ased
-                        {{:~sortByColumnUI('qtyPurchased',obj)}}
+                    {{for obj.pageList.content}}
+                    {{if idSpecial!=1}}
+                    <tr 
+                       
+                        class="firstrow">
+                         <td>
+                            <div id='menu_individual_{{:id}}' 
+                                 data-akr-printable="false"
+                                 style2="display: none"
+                                 >
 
-                    </th>
-                    <th>qty free
-                        {{:~sortByColumnUI('qtyFree',obj)}}
-
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-
-                {{for obj.pageList.content}}
-                {{if idSpecial!=1}}
-                <tr 
-                    onclick="go({{:id}}, 'medicineStock')"
-                    class="firstrow">
-                    <td>{{:id}}</td>
-                    <td>
-                        {{if purchaseBill}}
-                        {{:purchaseBill.id}}<br>
-
-                        {{/if}}
-                    </td>
+                                <input type="checkbox"
+                                       title="select"
+                                       id="checkbox_{{:id}}"
+                                       class="regular-checkbox" 
+                                       name="n"  value="{{:id}}">
+                                <label for="checkbox_{{:id}}"></label>
 
 
-                    <td>
-                        {{if medicineBrandName!=null}}
-                        {{:medicineBrandName.brandName}}<br>
-                        <span style="font-size: 0.7em">
-                            Gener-> {{:medicineBrandName.genericName}}
-                        </span> <br>
-                        <span style="font-size: 0.7em">
-                            Comp-> {{:medicineBrandName.composition}}
-                        </span> <br>
-                        {{/if}}
-                    </td>
-                    <td>
-                        {{if medicineBrandName!=null}}
-                        {{:medicineBrandName.company}}
-                        {{/if}}
-                    </td> 
-                    <td>{{:qtyRemaining}}</td>
-                    <td>
-                        {{:~ddyyyyDashed(expiryDate) }}
-                    </td>
-                    <td>{{:batch}}</td>
-                    <td>{{:subCount}}</td>
-                    <td>{{:mrp}}</td>
-                    <td>{{:sellingPrice}}</td>
-                    <td>{{:costPrice}}</td>
-                    <td>{{:cgst}}</td>
-                    <td>{{:sgst}}</td>
-                    <td>{{:qtyPurchased}}</td>
-                      <td>{{:qtyFree}}</td>
-                </tr>
-                {{/if}}
-                {{/for}}
-            </tbody>
 
 
-        </table>
-    </div>
+                            </div>
+
+                        </td>
+                        <td >
+                            
+                            <div id='menu_individual_{{:id}}' 
+                                 data-akr-printable="false"
+                                 style2="display: none"
+                                 >
+
+                                <i class="fa fa-edit"
+                                   title="Edit"
+                                   onclick="go({{:id}}, 'medicineStock')" 
+                                   ></i>
+                                
+                            </div>
+
+                        </td>
+                        <td>{{:id}}</td>
+                        <td>
+                            {{if purchaseBill}}
+                            {{:purchaseBill.id}}<br>
+
+                            {{/if}}
+                        </td>
+
+
+                        <td>
+                            {{if medicineBrandName!=null}}
+                            {{:medicineBrandName.brandName}}<br>
+                            <span style="font-size: 0.7em">
+                                Gener-> {{:medicineBrandName.genericName}}
+                            </span> <br>
+                            <span style="font-size: 0.7em">
+                                Comp-> {{:medicineBrandName.composition}}
+                            </span> <br>
+                            {{/if}}
+                        </td>
+                        <td>
+                            {{if medicineBrandName!=null}}
+                            {{:medicineBrandName.company}}
+                            {{/if}}
+                        </td> 
+                        <td>{{:qtyRemaining}}</td>
+                        <td>
+                            {{:~ddyyyyDashed(expiryDate) }}
+                        </td>
+                        <td>{{:batch}}</td>
+                        <td>{{:subCount}}</td>
+                        <td>{{:mrp}}</td>
+                        <td>{{:sellingPrice}}</td>
+                        <td>{{:costPrice}}</td>
+                        <td>{{:cgst}}</td>
+                        <td>{{:sgst}}</td>
+                        <td>{{:qtyPurchased}}</td>
+                        <td>{{:qtyFree}}</td>
+                    </tr>
+                    {{/if}}
+                    {{/for}}
+                </tbody>
+
+
+            </table>
+        </div>
+    </form>
+
 </div>

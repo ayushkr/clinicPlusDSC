@@ -9,7 +9,6 @@ import in.srisrisri.clinic.doctor.DoctorEntity;
 import in.srisrisri.clinic.doctor.DoctorRepo;
 import in.srisrisri.clinic.patient.PatientEntity;
 import in.srisrisri.clinic.patient.PatientRepo;
-import in.srisrisri.clinic.scheduler.SMSScheduler;
 import in.srisrisri.clinic.smsChatHistory.SMSChatHistory;
 import in.srisrisri.clinic.smsChatHistory.SMSChatHistoryRepo;
 import java.sql.Date;
@@ -28,7 +27,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SMSChatService {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(SMSChatService.class);
 
     @Autowired
     private final PatientRepo patientRepo;

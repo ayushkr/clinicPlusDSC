@@ -1,8 +1,5 @@
-package in.srisrisri.clinic;
+package in.srisrisri.clinic.controllers;
 
-import java.awt.Desktop;
-import java.io.IOException;
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,10 +27,6 @@ public class unsortedController {
         return "{}";
     }
 
-    @GetMapping("/clinicPlus/startOldVersion")
-    public String get3() {
-        return Starter.server2_start();
-
-    }
+   
 
 }

@@ -5,12 +5,14 @@
  */
 package in.srisrisri.clinic.scheduler;
 
+import in.srisrisri.clinic.Frame0;
+import in.srisrisri.clinic.ayushLogger.Logger;
+import in.srisrisri.clinic.ayushLogger.LoggerFactory;
 import in.srisrisri.clinic.smsChat.SMSChatService;
 import in.srisrisri.clinic.smsChat.SMSChatRepo;
 import in.srisrisri.clinic.smsChat.SMS_STATUS;
 import java.time.LocalDateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -24,8 +26,13 @@ public class SMSScheduler {
 
     public static boolean paused = false;
     String label = "SMSScheduler";
-    private final Logger logger = LoggerFactory.getLogger(SMSScheduler.class);
-
+    
+    private final Logger logger = LoggerFactory.getLogger(
+            SMSScheduler.class,
+            Frame0.jTextAreaSMS
+            );
+  
+    
     @Autowired
     private final SMSChatService chatService;
 
@@ -35,6 +42,7 @@ public class SMSScheduler {
     public SMSScheduler(SMSChatService chatService, SMSChatRepo smschatRepo) {
         this.chatService = chatService;
         this.smschatRepo = smschatRepo;
+        
     }
 
     @Scheduled(fixedRate = 5000)
@@ -44,6 +52,7 @@ public class SMSScheduler {
             logger.info("SMSScheduler r2  paused", new Object[]{1, LocalDateTime.now()});
         } else {
             logger.info("SMSScheduler r2  running ", new Object[]{1, LocalDateTime.now()});
+
             smschatRepo.findAll().forEach(smschat -> {
                 if (!smschat.isDraft()) {
                     logger.info("is not draft ={} {} ", new Object[]{smschat, LocalDateTime.now()});
