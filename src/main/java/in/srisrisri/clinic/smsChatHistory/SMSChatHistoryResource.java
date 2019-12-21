@@ -6,6 +6,10 @@
 package in.srisrisri.clinic.smsChatHistory;
 
 import in.srisrisri.clinic.Constants.Constants1;
+import in.srisrisri.clinic.Frame0;
+import in.srisrisri.clinic.Helpers.ResourceHelper;
+import in.srisrisri.clinic.ayushLogger.Logger;
+import in.srisrisri.clinic.ayushLogger.LoggerFactory;
 import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
 import in.srisrisri.clinic.utils.PageCover;
@@ -17,8 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import org.hibernate.exception.ConstraintViolationException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -42,15 +45,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/clinicPlus/api/sms_chat_history")
 public class SMSChatHistoryResource {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-   
+    private final Logger logger = LoggerFactory.getLogger(this.getClass(),Frame0.jTextAreaSMS);
     private static final String label = "sms_chat_history";
    
       @Autowired
     private final SMSChatHistoryRepo repo;
+      
+       @Autowired
+   private final ResourceHelper resourceHelper;
+      
 
-    public SMSChatHistoryResource(SMSChatHistoryRepo repo) {
+    public SMSChatHistoryResource(SMSChatHistoryRepo repo,ResourceHelper resourceHelper) {
         this.repo = repo;
+        this.resourceHelper=resourceHelper;
+           resourceHelper.set(label, logger, repo);
     }
 
    
@@ -79,7 +87,7 @@ public class SMSChatHistoryResource {
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
-        int pageSize = 10;
+        int pageSize = 100;
         logger.warn("pageable={},filter({} IN {})", new Object[]{label, filter,filterColumn});
 
         if (!sortColumn.equals("undefined")) {
@@ -108,12 +116,12 @@ public class SMSChatHistoryResource {
 
         } else {
             if (filterColumn.equals("title")) {
-                page = repo.findAllByTitleLike(filter, pageable);
+//                page = repo.findAllByTitleLike(filter, pageable);
 
             }
             
              if (filterColumn.equals("body")) {
-                page = repo.findAllByBodyLike(filter, pageable);
+//                page = repo.findAllByBodyLike(filter, pageable);
 
             }
            
@@ -222,4 +230,13 @@ public class SMSChatHistoryResource {
 //        }
 //    }
 //    
+    
+     // deleteBulk
+    @PostMapping("deleteBulk")
+    public ResponseEntity<JsonResponse> deleteBulk(
+            @RequestParam("n") List<Long> list) {
+       return resourceHelper.deleteBulk(list);
+    }
+    
+    
 }

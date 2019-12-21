@@ -5,12 +5,15 @@
  */
 package in.srisrisri.clinic.scheduler;
 
+import in.srisrisri.clinic.Frame0;
+import in.srisrisri.clinic.ayushLogger.Logger;
+import in.srisrisri.clinic.ayushLogger.LoggerFactory;
 import in.srisrisri.clinic.smsChat.SMSChatService;
 import in.srisrisri.clinic.smsChat.SMSChatRepo;
 import in.srisrisri.clinic.smsChat.SMS_STATUS;
+import in.srisrisri.clinic.smsChatHistory.SMSChatHistoryRepo;
 import java.time.LocalDateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -24,7 +27,11 @@ public class SMSScheduler {
 
     public static boolean paused = false;
     String label = "SMSScheduler";
-    private final Logger logger = LoggerFactory.getLogger(SMSScheduler.class);
+
+    private final Logger logger = LoggerFactory.getLogger(
+            SMSScheduler.class,
+            Frame0.jTextAreaSMS
+    );
 
     @Autowired
     private final SMSChatService chatService;
@@ -32,29 +39,34 @@ public class SMSScheduler {
     @Autowired
     private final SMSChatRepo smschatRepo;
 
-    public SMSScheduler(SMSChatService chatService, SMSChatRepo smschatRepo) {
+    @Autowired
+    private final SMSChatHistoryRepo chatHistoryRepo;
+
+    @Autowired
+    final SmschatsProcessor smschatsProcessor;
+
+    @Autowired
+    final SmschatsHistoryProcessor smschatsHistoryProcessor;
+
+    public SMSScheduler(SMSChatService chatService, SMSChatRepo smschatRepo, SMSChatHistoryRepo chatHistoryRepo, SmschatsProcessor smschatsProcessor, SmschatsHistoryProcessor smschatsHistoryProcessor) {
         this.chatService = chatService;
         this.smschatRepo = smschatRepo;
+        this.chatHistoryRepo = chatHistoryRepo;
+        this.smschatsProcessor = smschatsProcessor;
+        this.smschatsHistoryProcessor = smschatsHistoryProcessor;
     }
 
-   
+    
 
     @Scheduled(fixedRate = 5000)
-    public void r2() {
+    public void smschats() {
+        smschatsProcessor.start();
 
-        if (paused) {
-            logger.info("SMSScheduler 2  paused", new Object[]{1, LocalDateTime.now()});
-        } else {
-            logger.info("SMSScheduler 2  running ", new Object[]{1, LocalDateTime.now()});
-            smschatRepo.findAll().forEach(smschat -> {
-                if (!smschat.isDraft()) {
+    }
 
-                    if (smschat.getSentStatus() != SMS_STATUS.PROCESSING) {
-                        chatService.process(smschat);
-                    }
+    @Scheduled(fixedRate = 5000)
+    public void smschatHistory() {
+       smschatsHistoryProcessor.start();
 
-                }
-            });
-        }
     }
 }

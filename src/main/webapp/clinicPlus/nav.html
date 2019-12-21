@@ -11,33 +11,32 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/clinicPlus/theme.css">
         <link 
-            rel="stylesheet"
-            href="/clinicPlus/js_css/font-awesome.min.css">
+              rel="stylesheet"
+              href="/clinicPlus/js_css/font-awesome.min.css">
         <link 
-            rel="stylesheet"
-            href="/clinicPlus/overall.css">
+              rel="stylesheet"
+              href="/clinicPlus/overall.css">
 
         <style>
             .akr_nav_item_iconised{
                 display: block;
-                padding: 8px 0px 8px 0px;
-                text-align: center;
+                padding: 18px;
+                /* text-align: center; */
                 color: var(--color_l4);
-                background-color: var(--color_d1);
-                /* border: solid var(--color_l3) 3px; */
-                /* border-radius: 10px; */
-                /* margin: 3px;
-                        }
-            
-                        .akr_nav_item_iconised:focus{
-                            background-color:var(--color_l0) ;
-                            color:whitesmoke;
-                        }
-                        
-                        .akr_nav_item_iconised:hover{
-                    background-color: var(--color_l0);
-                    color: var(--color_l5);
-                    /*padding: 5px;*/
+                /* background-color: var(--color_d1); */
+                 border-top: solid var(--color_d3) 1px; 
+/*                border-radius: 10px 0px 0px 10px;*/
+            }
+
+            .akr_nav_item_iconised:focus{
+                background-color:var(--color_d5) ;
+                color:whitesmoke;
+            }
+
+            .akr_nav_item_iconised:hover{
+                background-color: var(--color_d5);
+                color: var(--color_l5);
+                /*padding: 5px;*/
             }
             a:visited{
                 /*color: black;*/
@@ -58,266 +57,334 @@ and open the template in the editor.
 
     </head>
     <body style="margin: 0px;
-          background-color: var(--color_d1);
-          " 
+                 background-color: var(--color_d1);
+                 " 
           class="body" >
 
 
 
-    <center>
-        <span class="naviTitle"
-              style="color: whitesmoke">NavBar</span>
+        <center>
+            <span class="naviTitle"
+                  style="color: whitesmoke">NavBar.</span>
 
-        <!--        <a  target='iframe1'
-                    href="/clinicPlus/home.html#/cmd?module=dashboard&action=/all/list&pageNumber=1&div=main_1"  
-                    class="akr_nav_item_iconised " title="dashboard">
-                    <i class="fa fa-building"></i> 
-                   
-                </a>     -->
+            <!--        <a  target='iframe1'
+href="/clinicPlus/home.html#/cmd?module=dashboard&action=/all/list&pageNumber=1&div=main_1"  
+class="akr_nav_item_iconised " title="dashboard">
+<i class="fa fa-building"></i> 
 
-
-        <span id="dateCurrent" class="dateCurrent"
-              data-1="1"
-              data-akr-printable="false"
-              class="akr_nav_item_iconised "
-              onclick="window.href = '/clinicPlus/home.html#/cmd?module=dateForOrganisation&action=/all/list&pageNumber=1&div=main_1'"
-              title="calendar"
-              > 
-            <!--dateCurrent-->
-        </span>
-    </center>
+</a>     -->
 
 
-
-    <hr>
-    <span class="naviTitle"
-          onclick="document.getElementById('recep').style.display = 'unset'"
-          >
-        Reception
-    </span>
-
-    <hr>
-
-    <div id="recep" 
-         style="padding: 4px;display: none"
-         >
-
-        <span class="fa fa-arrow-up naviTitleCloser" 
-              onclick="document.getElementById('recep').style.display = 'none'" 
-              >
-
-        </span>
-
-        <a  target='iframe1'
-            href="/clinicPlus/home.html#/cmd?module=appointment&action=/all/list&pageNumber=1&div=main_1"  
-            class="akr_nav_item_iconised " title="Appointments">
-            <i class="fa fa-calendar"></i> 
-            <i class="fasub fa-list" ></i> 
-        </a> 
-
-        <a target='iframe1'  href="/clinicPlus/home.html#/cmd?module=doctor&action=/all/list&pageNumber=1&div=main_1"
-
-           class="akr_nav_item_iconised "
-           title="Doctors"
-           >
-            <i class="fa fa-user-md"></i> 
-            <i class="fasub fa-list"></i> 
-        </a>
-
-
-        <a target='iframe1' 
-           href="/clinicPlus/home.html#/cmd?module=patient&action=/all/list&pageNumber=1&div=main_1" 
-           class="akr_nav_item_iconised "
-           title="Patients"
-           >
-            <i class="fa fa-wheelchair"></i> 
-            <i class="fasub fa-list"></i> 
-        </a>
-
-        <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=report_incomeFromDoctor&action=/all/list&pageNumber=1&div=main_1"
-           class="akr_nav_item_iconised "
-           title="report_incomeFromDoctor"
-           > 
-            <i class="fa fa-money"></i> 
-            <i class="fasub fa-wheelchair"></i> 
-            <i class="fasub fa-user-md"></i> 
-        </a>
-
-
-
-
-        <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=finance&action=/all/list&pageNumber=1&div=main_1"
-           class="akr_nav_item_iconised"
-           title="finance"
-           > 
-            <i class="fa fa-money"></i> 
-            <i class="faspace"></i> 
-        </a>
-
-
-        <hr>
-        <span class="naviTitle"
-              onclick="document.getElementById('sms').style.display = 'unset'"
-              >
-            SMS
-        </span>
-
-        <hr>
-
-        <div id="sms" 
-             style="padding: 4px;display: none"
-             >
-
-            <span class="fa fa-arrow-up naviTitleCloser" 
-                  onclick="document.getElementById('sms').style.display = 'none'" 
-                  >
+            <span id="dateCurrent" class="dateCurrent"
+                  data-1="1"
+                  data-akr-printable="false"
+                  class="akr_nav_item_iconised "
+                  onclick="window.href = '/clinicPlus/home.html#/cmd?module=dateForOrganisation&action=/all/list&pageNumber=1&div=main_1'"
+                  title="calendar"
+                  > 
+                <!--dateCurrent-->
             </span>
+        </center>
 
-            <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=smschat&action=/all/list&pageNumber=1&div=main_1"
-               class="akr_nav_item_iconised"
-               title="sms"
-               > 
-                <i class="fa fa-envelope"></i> 
-                <i class="faspace"></i> 
-            </a>
-            
-            <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=sms_chat_history&action=/all/list&pageNumber=1&div=main_1"
-               class="akr_nav_item_iconised"
-               title="sms logs"
-               > 
-                <i class="fa fa-envelope"></i> 
-                <i class="fasub fa-list"></i> 
-            </a>
-            
-        </div>
+        <ul id="myUL" class="whiteText">
+            <li class="liTitle" >
+                <span class="caret ">  Reception</span>
+                <ul class="nested ">
+                    <li class='last'><a  target='iframe1'
+                           href="/clinicPlus/home.html#/cmd?module=appointment&action=/all/list&pageNumber=1&div=main_1"  
+                           class="akr_nav_item_iconised " title="Appointments">
+                        <i class="fa fa-calendar"></i> 
+                        <i class="fasub fa-list" ></i> 
+                        </a> </li>
+                    <li class='last'><a target='iframe1'  href="/clinicPlus/home.html#/cmd?module=doctor&action=/all/list&pageNumber=1&div=main_1"
 
-    </div>
+                           class="akr_nav_item_iconised "
+                           title="Doctors"
+                           >
+                        <i class="fa fa-user-md"></i> 
+                        <i class="fasub fa-list"></i> 
+                        </a>
+                    </li>
+                    <li class='last'><a target='iframe1' 
+                           href="/clinicPlus/home.html#/cmd?module=patient&action=/all/list&pageNumber=1&div=main_1" 
+                           class="akr_nav_item_iconised "
+                           title="Patients"
+                           >
+                        <i class="fa fa-wheelchair"></i> 
+                        <i class="fasub fa-list"></i> 
+                        </a>
+                    </li>
+                    <li class='last'><a target='iframe1' href="/clinicPlus/home.html#/cmd?module=report_incomeFromDoctor&action=/all/list&pageNumber=1&div=main_1"
+                           class="akr_nav_item_iconised "
+                           title="report_incomeFromDoctor"
+                           > 
+                        <i class="fa fa-money"></i> 
+                        <i class="fasub fa-wheelchair"></i> 
+                        <i class="fasub fa-user-md"></i> 
+                        </a>
+                    </li>
+
+                    <li class='last'><a target='iframe1' href="/clinicPlus/home.html#/cmd?module=finance&action=/all/list&pageNumber=1&div=main_1"
+                           class="akr_nav_item_iconised"
+                           title="finance"
+                           > 
+                        <i class="fa fa-money"></i> 
+                        <i class="faspace"></i> 
+                        </a>
+                    </li>
 
 
-    <span class="naviTitle"
-          onclick="document.getElementById('pharma').style.display = 'unset'"
-          >Pharmacy</span>
-
-
-
-
-    <div style="padding: 4px;display: none"
-         id="pharma" 
-         >
-
-        <span class="fa fa-arrow-up naviTitleCloser" 
-              onclick="document.getElementById('pharma').style.display = 'none'" 
-              >
-        </span>
-
-        <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=pharmacyBill&action=/all/list&pageNumber=1&div=main_1" 
-           class="akr_nav_item_iconised "
-           title="pharmacy Bills"
-           >
-            <i class="fa590akr fa-capsules"></i> 
-            <i class="fasub ">Rx</i> 
-
-
-        </a>
-
-        <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=purchaseBill&action=/all/list&pageNumber=1&div=main_1" 
-           class="akr_nav_item_iconised "
-           title="purchaseBill"
-           >
-            <i class="fa590akr fa-capsules"></i>
-            <i class="fasub fa-database"></i>  
-        </a>
-        <hr>
-
-        <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=medicineStock&action=/all/list&pageNumber=1&div=main_1" 
-           class="akr_nav_item_iconised "
-           title="MediStocks"
-           >
-            <i class="fa590akr fa-capsules"></i>
-            <i class="fasub fa-database">All</i> 
-        </a>
-
-        <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=pharmacyBillRow&action=/all/list&pageNumber=1&div=main_1" 
-           class="akr_nav_item_iconised "
-           title="pharmacyBillRow"
-           >
-            <i class="fa590akr fa-capsules"></i> 
-            <i class="fasub">Rx All</i> 
-
-        </a>
+                    <li><span class="caret ">SMS</span>
+                        <ul class="nested">
 
 
 
-        <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1&div=main_1" 
-           class="akr_nav_item_iconised "
-           title="MediBrandNames"
-           >
-            <i class="fa590akr fa-capsules"></i>
-            <i class="fasub fa-file-code-o"></i> 
-        </a> 
+                            <li class='last'><a target='iframe1' href="/clinicPlus/home.html#/cmd?module=smschat&action=/all/list&pageNumber=1&div=main_1"
+                                   class="akr_nav_item_iconised"
+                                   title="sms"
+                                   > 
+                                <i class="fa fa-envelope"></i> 
+                                <i class="faspace"></i> 
+                                </a>
+                            </li>
+                            <li class='last'><a target='iframe1' href="/clinicPlus/home.html#/cmd?module=sms_chat_history&action=/all/list&pageNumber=1&div=main_1"
+                                   class="akr_nav_item_iconised"
+                                   title="sms logs"
+                                   > 
+                                <i class="fa fa-envelope"></i> 
+                                <i class="fasub fa-list"></i> 
+                                </a>
+                            </li>
 
-        <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=vendor&action=/all/list&pageNumber=1&div=main_1"
-           class="akr_nav_item_iconised"
-           title="Vendors"
-           > 
-            <i class="fa590akr fa-capsules"></i>
-            <i class="fasub fa-ambulance"></i>  
-        </a>
+                        </ul>
+                    </li>  
+                </ul>
+            </li>
 
-    </div>
-
-
-
-    <span class="naviTitle" 
-          onclick="document.getElementById('other').style.display = 'unset'"
-          >Other</span>
-
-    <div id="other"
-         style="padding: 4px;display: none"
-         >
-        <span class="fa fa-arrow-up naviTitleCloser" 
-              onclick="document.getElementById('other').style.display = 'none'" 
-              >
-        </span>
-
-
-        <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=fileContent&action=/all/list&pageNumber=1&div=main_1"
-           class="akr_nav_item_iconised "
-           title="fileContent"
-           > 
-            <i class="fa fa-file"></i> 
-            <i class="fasub fa-list"></i> 
-        </a>
+            <li class="liTitle">
+                <span class="caret  " title="Pharmacy">  
+                <i class="fa590akr fa-capsules"></i>
+                </span>
+                <ul class="nested ">
+                    <li class='last'><a target='iframe1' href="/clinicPlus/home.html#/cmd?module=pharmacyBill&action=/all/list&pageNumber=1&div=main_1" 
+                           class="akr_nav_item_iconised "
+                           title="pharmacy Bills"
+                           >
 
 
-
-        <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=user&action=/all/list&pageNumber=1&div=main_1" 
-           class="akr_nav_item_iconised"
-           title="user"
-           > 
-            <i class="fa fa-user"></i> 
-            <i class="faspace"></i> 
-        </a>
-        <hr>
+                        <i class="fa ">Rx</i> 
 
 
-        <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=jote&action=/all/list&pageNumber=1&div=main_1" 
-           class="akr_nav_item_iconised"
-           title="Jote"
-           > 
-            <i class="fa fa-pencil"></i> 
-            <i class="fasub">Jo</i> 
-        </a>
-
-    </div>
-    <hr>
+                        </a></li>
+                    <li class='last'> <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=purchaseBill&action=/all/list&pageNumber=1&div=main_1" 
+                            class="akr_nav_item_iconised "
+                            title="purchaseBill"
+                            >
 
 
-    <!--    <a
-           href="/clinicPlus/startOldVersion" 
-            >Old</a>-->
+                        <i class="fa fa-database"></i> 
 
-</body>
+                        </a></li>
+                    <li class='last'> <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=medicineStock&action=/all/list&pageNumber=1&div=main_1" 
+                            class="akr_nav_item_iconised "
+                            title="MediStocks"
+                            >
+
+                        <i class="fa fa-database"></i> 
+                        <i class="fasub">All</i> 
+
+                        </a>
+                    </li>
+                    <li class='last'><a target='iframe1' href="/clinicPlus/home.html#/cmd?module=pharmacyBillRow&action=/all/list&pageNumber=1&div=main_1" 
+                           class="akr_nav_item_iconised "
+                           title="pharmacyBillRow"
+                           >
+
+                        <i class="fa">Rx</i> 
+                        <i class="fasub">All</i> 
+
+                        </a></li>
+                    <li class='last'> <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=medicineBrandName&action=/all/list&pageNumber=1&div=main_1" 
+                            class="akr_nav_item_iconised "
+                            title="MediBrandNames"
+                            >
+
+
+                        <i class="fa fa-file-code-o"></i> 
+
+                        </a> 
+                    </li>
+                    <li class='last'> <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=vendor&action=/all/list&pageNumber=1&div=main_1"
+                            class="akr_nav_item_iconised"
+                            title="Vendors"
+                            > 
+
+                        <i class="fa fa-ambulance"></i>  
+
+                        </a>
+                    </li>
+
+
+
+
+
+                </ul>
+            </li>
+
+            <li class="liTitle">
+                <span class="caret ">  Other
+                </span>
+                <ul class="nested ">
+                    <li class='last'><a target='iframe1' href="/clinicPlus/home.html#/cmd?module=fileContent&action=/all/list&pageNumber=1&div=main_1"
+                           class="akr_nav_item_iconised "
+                           title="fileContent"
+                           > 
+                        <i class="fa fa-file"></i> 
+                        <i class="fasub fa-list"></i> 
+
+                        </a>
+                    </li>
+                    <li class='last'><a target='iframe1' href="/clinicPlus/home.html#/cmd?module=user&action=/all/list&pageNumber=1&div=main_1" 
+                           class="akr_nav_item_iconised"
+                           title="user"
+                           > 
+                        <i class="fa fa-user"></i> 
+                        <i class="faspace"></i> 
+
+                        </a>
+                    </li>
+                    <li class='last'>
+                        <a target='iframe1' href="/clinicPlus/home.html#/cmd?module=jote&action=/all/list&pageNumber=1&div=main_1" 
+                           class="akr_nav_item_iconised"
+                           title="Jote"
+                           > 
+                            <i class="fa fa-pencil"></i> 
+                            <i class="fasub">Jo</i> 
+
+                        </a>
+
+                    </li>
+                    
+                    <a target='iframe1' href="/cp_vue">Vue</a>
+
+
+
+
+
+
+                    <li><span class="caret">Admin</span>
+                        <ul class="nested">
+                            <li>Black Tea</li>
+                            <li>White Tea</li>
+                            <li><span class="caret">Green Tea</span>
+                                <ul class="nested">
+                                    <li>Sencha</li>
+                                    <li>Gyokuro</li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>  
+                </ul>
+            </li>
+        </ul>
+
+        <script>
+            var toggler = document.getElementsByClassName("caret");
+            var i;
+
+            for (i = 0; i < toggler.length; i++) {
+                toggler[i].addEventListener("click", function () {
+                    this.parentElement.querySelector(".nested").classList.toggle("active");
+                    this.classList.toggle("caret-down");
+                });
+            }
+        </script>
+        <style>
+            ul, #myUL {
+                list-style-type: none;
+            }
+
+            #myUL {
+                margin: 0;
+                padding: 0;
+            }
+
+            .caret {
+                cursor: pointer;
+                -webkit-user-select: none; /* Safari 3.1+ */
+                -moz-user-select: none; /* Firefox 2+ */
+                -ms-user-select: none; /* IE 10+ */
+                user-select: none;
+                display: block;
+            }
+
+            .caret::before {
+/*                content: " \25B6";*/
+                 content: " \27A4";
+                /*color: black;*/
+                display: inline-block;
+                margin-right: 6px;
+            }
+
+            .caret-down::before {
+                -ms-transform: rotate(90deg); /* IE 9 */
+                -webkit-transform: rotate(90deg); /* Safari */'
+                transform: rotate(90deg);  
+            }
+
+            .nested {
+                display: none;
+            }
+
+            .active {
+                display: block;
+            }
+
+            .whiteText{
+                color:white;
+
+            }
+
+           .last{
+                /*color:white;*/
+/*                padding:10px 0px ;*/
+            }
+
+            .padding10{
+                padding:10px;  
+
+            }
+
+            ul  ul  li{
+                margin-left:-10px;
+            }
+
+            ul ul li{
+                margin-left:-18px;
+            }
+
+            .liTitle span{
+                padding: 15px;
+                background-color: #141e27;
+            }
+
+
+
+
+
+        </style>
+
+
+
+
+
+
+        <!--    <a
+href="/clinicPlus/startOldVersion" 
+>Old</a>-->
+
+    </body>
 
 
 </html>

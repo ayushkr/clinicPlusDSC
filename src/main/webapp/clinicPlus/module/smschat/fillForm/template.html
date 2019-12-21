@@ -25,7 +25,7 @@
                     <span class="label label-info "> {{:id}} </span> 
                 </div>
                 <br>
-                
+
                 <div class="inp_outer" >
                     <div class="title1">To</div>
 
@@ -33,7 +33,7 @@
                     {{for start=1 end=4 itemVar='~i'}}
                     <label class="containerForCheckMark" 
                            style="">
-                        
+
                         {{if ~i==1}}
                         doctor
                         {{/if}}
@@ -51,7 +51,7 @@
                                {{/if}}
 
                                >
-                               <span class="checkmark"></span>
+                        <span class="checkmark"></span>
                     </label>
 
                     {{/for}}
@@ -60,34 +60,34 @@
                 <br>
 
                 <span
-                    id="selectLarge_dateOfSending"
-                    >
+                      id="selectLarge_dateOfSending"
+                      >
                     selectLarge_dateOfSending    
                 </span>
                 <br>
 
-               
+
 
                 <div class="inp_outer" style="min-width: 250px">
                     <div class="title1">body</div>
                     <textarea name="body" data-link="body" 
                               style="    margin: 0px;
-                              width: 457px;
-                              height: 141px;"
+                                     width: 457px;
+                                     height: 141px;"
                               class="akr_input_text" required="">
                     </textarea>
                 </div>
                 <br>
-                
-                 <div class="inp_outer" style="min-width: 250px">
+
+                <div class="inp_outer" style="min-width: 250px">
                     <div class="title1">title</div>
                     <input type="text" name="title" data-link="title" 
                            class="akr_input_text" required="" />
                 </div>
                 <br>
 
-                
-                
+
+
             </div>
             <div class="item2">
                 b
@@ -105,13 +105,30 @@
                            {{/if}}
 
                            >
-                           <span class="checkmark"></span>
+                    <span class="checkmark"></span>
                 </label>
                 <br>
+
+
+                <div class="inp_outer" style="min-width: 250px">
+                    <div class="title1">status</div>
+                    <!--
+<input type="text" name="status" data-link="status" 
+class="akr_input_text" required="" />
+-->
+
+                    <select name="status" data-link="status" >
+                        <option value="0" >FRESH</option>
+                        <option value="1">WAITING</option>
+                        <option value="2">FAILED</option>
+                        <option value="3">SUCCESS</option>
+                        <option value="4">PROCESSING</option>
+
+                    </select>
+                </div>
             </div>
 
         </div>
-
 
 
 
@@ -126,13 +143,13 @@
 
 <style>
     .item1 { grid-area: i1; 
-             /*border: solid black 1px;*/
+        /*border: solid black 1px;*/
     }
     .item2 { grid-area: i2;
-             /*border: solid black 1px;*/
+        /*border: solid black 1px;*/
     }
     .item3 { grid-area: i3;
-             /*border: solid black 1px;*/
+        /*border: solid black 1px;*/
     }
 
 

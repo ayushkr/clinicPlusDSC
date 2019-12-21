@@ -5,8 +5,8 @@
     data-akr-printable="false"
     >
     <div class="w3-bar-ay"  >
-        
-         <a class="w3-bar-item tablink tabSelected " 
+
+        <a class="w3-bar-item tablink tabSelected " 
            onClick="openCity(event, 'none')">None</a>
 
         <a class="w3-bar-item  tablink " 
@@ -22,17 +22,17 @@
            onClick="openCity(event, 'Reports')">Reports</a>
 
     </div>
-    
+
     <div id="none" class="w3-container_margin10 city ">
     </div>
 
     <div id="filter" class="w3-container_margin10 city city_hide ">
 
 
-<span id='selectLarge_patient_1'>
+        <span id='selectLarge_patient_1'>
             selectLarge_patient_1</span>
 
-        
+
 
 
         <input type="button" 
@@ -46,8 +46,8 @@
             selectLarge_doctor_1</span>
 
 
-        
-        
+
+
         <input 
             id='doctor_afterClick'
             type="button" value="Go "
@@ -126,11 +126,11 @@
                value=' #/cmdc?module=doctor&action=/all/list'>
 
         <div id="printableArea"   title="Appointment_List" >
-            
+
             <span class="darkBgHeading">
-                 List of Appointments in DSC
+                List of Appointments in DSC
             </span>
-           
+
 
 
             <table  class="customers"
@@ -208,12 +208,12 @@
                         </td>
                         <td>
                             <div  data-akr-printable="false"
-                                    
-                                     onclick="populateCreate2('appointment', {{:id}}, newModal().id);"
-                                     onclick2="go({{:id}}, 'appointment')"
-                                     >
+
+                                  onclick="populateCreate2('appointment', {{:id}}, newModal().id);"
+                                  onclick2="go({{:id}}, 'appointment')"
+                                  >
                                 <i class="fa fa-pencil">
-                                    
+
                                 </i>
                             </div>
                         </td>
@@ -247,10 +247,39 @@
                             onclick="go({{:id}}, 'appointment')"
                             >
                             {{if doctor!=null}}
+                              {{:doctor.name}}
+<!--                            <table border="1" class="nameplate">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2"
+                                            style="font-weight: bold"
+                                            >
+                                            {{:doctor.name}}
+                                        </td>
+                                    </tr>
+                                    <tr colspan="2">
+                                        <td>{{:doctor.department}}</td>
+                                        
 
+                                    </tr>
+                                    
+                                     <tr >
+                                        
+                                        <td colspan="2">
+                                            <i class="fa fa-phone"></i>
+                                            : {{:doctor.contactPhone}}
+                                        </td>
 
-                            <span> {{:doctor.name}} </span><br>
-                            &nbsp;<i style="font-size: 0.8em;float: right">{{:doctor.department}}</i>
+                                    </tr>
+                                    <tr >
+                                        <td colspan="2">
+                                        <i class="fa fa-envelope-open"></i> {{:doctor.email}}  
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>-->
+
+                          
 
 
                             {{else}}
@@ -259,16 +288,44 @@
 
                         </td>
 
-                        <td 
+                        <td style="text-align: left"
                             onclick="go({{:id}}, 'appointment')"
                             >
 
                             {{if patient!=null}}
-                            {{:patient.name}} <br>
+                            {{:patient.name}}
+<!--                            <table border="1" class="nameplate" >
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2"  style="font-weight: bold">
+                                            {{:patient.name}}
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                      <td >  Age: {{:patient.age}}</td>
+                                        <td>ID: {{:patient.id}}</td>
 
-                            <span class="age">{{:patient.age}} yr</span><br>
-                            <span class="" 
-                                  style="font-size: 0.8em;float: right">ID : {{:patient.id}} </span> 
+                                    </tr>
+                                    
+                                     <tr >
+                                        
+                                         <td colspan="2"><i class="fa fa-phone"></i>
+                                            : {{:patient.contactPhone}}
+                                        </td>
+
+                                    </tr>
+                                    <tr >
+                                        <td colspan="2">
+                                        <i class="fa fa-envelope-open"></i>
+                                        {{:patient.email}}  
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>-->
+
+                           
+
+
                             {{else}}
                             Not Set
                             {{/if}}

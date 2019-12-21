@@ -46,7 +46,9 @@
                 <div id="widgets"></div>
                 <center>
                     <br><br>
- <h3>8082</h3>
+
+8083 . 1
+
                     <br><br>
                     <div style="font-family: 'Prototype'">
                         <span style="font-size: 100px;
@@ -171,6 +173,8 @@
     <script src="/clinicPlus/js_css/jquery.min.js"></script>
     <script src="/clinicPlus/js_css/jsRV/jsviews.min.js"></script>
     <script src="/clinicPlus/js_css/jsRV/jsrvHelperByAyush.js?ran=1234"></script>
+    <script src='/clinicPlus/js_css/autosize-master/dist/autosize.min.js'></script>
+   
     <script>
         console.log('home.html');
         function pageNewAy(status) {
@@ -186,6 +190,15 @@
         $.getScript("/clinicPlus/overall.js" + pageNewAy(1));
         console.log(' end of script pageNewAy home.html');
     </script>
+    
+      <script>
+       
+        
+		autosize(document.querySelectorAll('textarea'));
+	</script>
+    
+    
+   
     <!--<script src="/clinicPlus/overall.js"></script>-->
 
 

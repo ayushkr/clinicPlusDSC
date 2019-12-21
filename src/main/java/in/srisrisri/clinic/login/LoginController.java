@@ -47,6 +47,14 @@ public class LoginController {
         String body="<script> window.location.href='clinicPlus/index.html'</script>";
         return body;
     }
+    
+    
+     @GetMapping("cp_vue")
+    public String cp3(){
+        System.out.println("test");
+        String body="<script> window.location.href='cp3/index.html'</script>";
+        return body;
+    }
 
     @PostMapping("login")
     public String login(final HttpServletRequest request){

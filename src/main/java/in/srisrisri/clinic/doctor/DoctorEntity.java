@@ -305,6 +305,12 @@ public class DoctorEntity implements Serializable {
         this.profileImage = profileImage;
     }
 
+    @Override
+    public String toString() {
+        return "DoctorEntity{" + "id_of_editor=" + id_of_editor + ", id=" + id + ", fixedId=" + fixedId + ", name=" + name + ", department=" + department + ", fees=" + fees + ", feesList=" + feesList + ", address=" + address + ", description=" + description + ", remediesFor=" + remediesFor + ", contactPhone=" + contactPhone + ", feeForClinic=" + feeForClinic + ", doctor_code=" + doctor_code + ", creationTime=" + creationTime + ", updationTime=" + updationTime + ", dateOfJoining=" + dateOfJoining + ", visitDay=" + visitDay + ", visitTime=" + visitTime + ", email=" + email + ", id_display=" + id_display + ", remarks=" + remarks + ", profileImage=" + profileImage + ", sex=" + sex + ", sun=" + sun + ", mon=" + mon + ", tue=" + tue + ", wed=" + wed + ", thu=" + thu + ", fri=" + fri + ", sat=" + sat + '}';
+    }
+
+  
 
    
 

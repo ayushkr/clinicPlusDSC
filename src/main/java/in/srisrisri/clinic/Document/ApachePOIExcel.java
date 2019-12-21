@@ -409,7 +409,7 @@ public class ApachePOIExcel {
                
 //                Optional<PatientEntity> foundPatient = patientRepo.findById(patientEntity.getFixedId());
 //                foundPatient.get().setAge(patientEntity.getAge());
-//                System.out.println("  id  "+foundPatient.get().getFixedId()+" ,   age="+foundPatient.get().getAge());
+//                System.out.println("  getDoctorById  "+foundPatient.get().getFixedId()+" ,   age="+foundPatient.get().getAge());
 //                patientRepo.save(foundPatient.get());
 //          
             }

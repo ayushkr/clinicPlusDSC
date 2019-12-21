@@ -133,6 +133,19 @@ function navGo() {
     console.log('navGo ,selectedItem=' + selectedItem.id);
 }
 
+ navigator.connection.online=akrNetworkChanged;
+function akrNetworkChanged(){
+//    alert('Network changed '+navigator.connection.type);
+    console.log(navigator.connection.type);
+    if(navigator.onLine){
+  alert('online');
+ } else {
+  alert('offline');
+        alert_11('offline')
+  
+ }
+}
+
 function checkServer() {
     //    console.log('checking server ');
     $.ajax('/clinicPlus/status',

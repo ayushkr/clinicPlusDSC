@@ -6,6 +6,7 @@
 package in.srisrisri.clinic.utils;
 
 
+import in.srisrisri.clinic.titles.Titles;
 import org.springframework.data.domain.Page;
 
 
@@ -24,6 +25,8 @@ public final class PageCover<T>  {
         String filter;
     String module;
     Page<T> pageList;
+  
+    Titles titles;
 
     public PageCover(Page<T> pageList) {
         setPageList(pageList);
@@ -76,6 +79,16 @@ public final class PageCover<T>  {
     public void setPageList(Page<T> pageList) {
         this.pageList = pageList;
     }
+
+    public Titles getTitles() {
+        return titles;
+    }
+
+    public void setTitles(Titles titles) {
+        this.titles = titles;
+    }
+
+    
     
 
 	

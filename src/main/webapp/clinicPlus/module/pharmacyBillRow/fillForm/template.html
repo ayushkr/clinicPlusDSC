@@ -1,5 +1,5 @@
 
-<div class="pageTitle">
+<div class="pageTitle" style="float: right">
     pharmacyBillRow ID: {{:id}}  </div>
 
 <form id='form_pharmacyBillRow' method="post"
@@ -13,59 +13,57 @@
     <div id="printableArea"  class="w3-container"
          title="patient_{{:id}}_{{:name}}">
 
-    
-
-        <span id="selectLarge_pharmacyBill"
-              style="visibility: hidden"
+        <span id="selectLarge_pharmacyBill" 
+              style="visibility: hidden;
+                     position: absolute;"
               >
             selectLarge_pharmacyBill
         </span>
         <br>
-        
+
         <span id="selectLarge_medicineStock"
-              
+
               style="width: -webkit-fill-available;
-              font-size: 3em;
-              "
+                     font-size: 3em;
+                     "
               accesskey="l"
-              
+
               >
             selectLarge_medicineStock
         </span>
-        
+
         <span id="medicineStock_afterClick"
               onclick="pharmacyBillRow_calculateAmount(1);
-              document.getElementById('medicineStock_button').focus()
-              "
-             
+                       document.getElementById('medicineStock_button').focus()
+                       "
+
               ></span>
-        
-        
+
+
         <br>
         <div class="inp_outer">
             <div class="title1">qty</div>
-          
-            <input type="text" id="qty" name="qty" data-link="qty" 
+
+            <input type="number" id="qty" name="qty" data-link="qty" 
                    class="inp2"
-                   style="min-width: 100px"
-                onkeydown="pharmacyBillRow_calculateAmount(1)" />
+                   style="width: 90px"
+                   onkeyup="pharmacyBillRow_calculateAmount(1)" 
+                   onmouseup="pharmacyBillRow_calculateAmount(1)" 
+                   />
         </div>
 
-
-        <br>
-        <br>
 
 
         <div class="inp_outer" 
              style="min-width: 100px;min-height: 50px"
              onclick="calculateAmount(1)">
             <div class="title1">amount (Auto generated) in Rs</div>
-           
+
             <span class="inp2" 
                   style="background-color: var(--color_safe);
-                  font-size: 3em;
-                      border: none;
-                  "
+                         font-size: 3em;
+                         border: none;
+                         "
                   contenteditable="false" 
                   id="amount_disp"   
                   data-link="amount" 
@@ -76,15 +74,27 @@
                    name="amount" 
                    data-link="amount" />
         </div>
-        <br><br><br>
-       
+        
+
         <center>
-        <button type="button" id="a3" autofocus
-             onclick="save('pharmacyBillRow');"
-             class="w3-button w3-blue"
-            > OK</button>
-      </center>
-      
+
+            <button type="button" id="a3" autofocus
+                    onclick="window.history.back()"
+                    class="w3-button w3-red"
+                    style="padding: 30px;
+                           font-size: x-large;
+                           width: 40%;"
+                    > Cancel</button>
+
+            <button type="button" id="a3" autofocus
+                    onclick="save('pharmacyBillRow');"
+                    class="w3-button w3-green"
+                    style="padding: 30px;
+                           font-size: x-large;
+                           width: 40%;"
+                    > OK</button>
+        </center>
+
 
 
     </div>

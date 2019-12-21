@@ -1,6 +1,10 @@
 package in.srisrisri.clinic.appointment;
 
 import in.srisrisri.clinic.Constants.Constants1;
+import in.srisrisri.clinic.Frame0;
+import in.srisrisri.clinic.Helpers.ResourceHelper;
+import in.srisrisri.clinic.ayushLogger.Logger;
+import in.srisrisri.clinic.ayushLogger.LoggerFactory;
 import in.srisrisri.clinic.doctor.DoctorEntity;
 import in.srisrisri.clinic.patient.PatientEntity;
 
@@ -20,11 +24,9 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Level;
-import org.hibernate.exception.ConstraintViolationException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,13 +38,20 @@ import org.springframework.data.domain.Sort;
 public class AppointmentResource {
 
     int വി = 0;
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    
+    Logger logger = LoggerFactory.getLogger(AppointmentResource.class
+            ,Frame0.jTextAreaLogger);
 
     @Autowired
-    private AppointmentRepo repo;
+   private final ResourceHelper resourceHelper;
+    
+    @Autowired
+    private final AppointmentRepo repo;
 
-    public AppointmentResource(AppointmentRepo appointmentRepo) {
+    public AppointmentResource(AppointmentRepo appointmentRepo,ResourceHelper resourceHelper) {
         this.repo = appointmentRepo;
+        this.resourceHelper=resourceHelper;
+        resourceHelper.set(label, logger, repo);
     }
 
     private static final String label = "appointment";
@@ -194,7 +203,7 @@ public class AppointmentResource {
             AppointmentEntity entityAfter = new AppointmentEntity();
             entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
              entityAfter.setDateOfAppointment(Date.valueOf(LocalDate.now()));
-            repo.save(entityAfter);
+            AppointmentEntity saved = repo.save(entityAfter);
             item = Optional.of(entityAfter);
         }
         return item;
@@ -230,8 +239,8 @@ public class AppointmentResource {
                     .body(jsonResponse);
 
         } catch (URISyntaxException ex) {
-            java.util.logging.Logger.getLogger(AppointmentResource.class
-                    .getName()).log(Level.SEVERE, null, ex);
+            logger.warn("PostMapping_one", ex);
+            
         }
         return body;
     }
@@ -252,76 +261,18 @@ public class AppointmentResource {
 
     }
 
-    // delete
+   
     @GetMapping("delete/id/{id}")
-    public JsonResponse DeleteMapping_id(@PathVariable("id") Long id) {
-
-        JsonResponse response = new JsonResponse();
-        logger.warn("REST request to delete {} {}", new Object[]{label, id});
-        try {
-            repo.deleteById(id);
-            response.setStatus(Constants1.SUCCESS);
-            response.setMessage("Deleted " + label + " with id " + id);
-            return response;
-        } catch (ConstraintViolationException e) {
-            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
-            response.setStatus(Constants1.FAILURE);
-            response.setMessage("This " + label + " is used in other ");
-            return response;
-
-        } catch (Exception e) {
-            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
-            response.setStatus(Constants1.FAILURE);
-            if (e.getMessage().contains("ConstraintViolationException")) {
-                response.setMessage("This " + label + " (ID: " + id
-                        + ")  is used in other place <br>For eg: in pharmacyBill etc");
-            } else {
-                response.setMessage(e.getMessage());
-            }
-            return response;
-        }
+    public JsonResponse deleteById(@PathVariable("id") Long id) {
+        return resourceHelper.deleteById(id);
     }
 
-    // deleteBulk
+   
     @PostMapping("deleteBulk")
     public ResponseEntity<JsonResponse> deleteBulk(
             @RequestParam("n") List<Long> list) {
-        ResponseEntity<JsonResponse> responseEntity = null;
-        JsonResponse jsonResponse = new JsonResponse();
-        jsonResponse.setStatus(Constants1.SUCCESS);
-        String failedIds = "";
-        try {
-            logger.warn("deleteBulk , got={} ", list.toString());
-            for (Long n : list) {
-                System.out.println(" n=" + n);
-                try {
-                    repo.deleteById(n);
-                    failedIds += "<hr><p>Ok deleted " + label + " ID:" + n
-                            + "</p><hr>";
-
-                } catch (Exception e) {
-
-                    failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
-                            + "<br>Because  "
-                            + ((e.getMessage().contains("ConstraintViolationException"))
-                            ? "It Used in Other place " : e.getMessage())
-                            + "</p><hr>";
-                    jsonResponse.setStatus(Constants1.FAILURE);
-                }
-
-            }
-            jsonResponse.setMessage(failedIds);
-
-            responseEntity = ResponseEntity
-                    .created(new URI("/api/" + label + "/"))
-                    .headers(HeaderUtil.createEntityCreationAlert(label,
-                            " "))
-                    .body(jsonResponse);
-        } catch (URISyntaxException ex) {
-            java.util.logging.Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-
-        }
-        return responseEntity;
+        logger.info(label, list);
+       return resourceHelper.deleteBulk(list);
     }
 
 }

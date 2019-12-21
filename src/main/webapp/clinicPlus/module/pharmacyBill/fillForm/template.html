@@ -1,60 +1,54 @@
-
 <div class="w3-container pharmacyBillPrintOut">
     <div data-akr-printable="false">
 
-        <form id='form_pharmacyBill' method="post" 
+        <form id='form_pharmacyBill' method="post" style="background-color: #b1c2d0"
               action="{{:renderInDiv}}#/cmd/post">
             <input type='hidden' name='redirect' value=' #/cmdc?module=pharmacyBill&action=/all/list'>
             <input type='hidden' name='module_direct' value='pharmacyBill'>
             <input type="hidden" name="id" data-link="id" />
 
+            <!--style="display: {{if freshness==0 }}inline-block{{else}}none{{/if}}"-->
 
-            <div class="inp_outer" 
-                 style="display: {{if freshness==0 }}inline-block{{else}}none{{/if}}">
-               
-                
-                <div class="title1" > dateOfBill </div>
-                <div id="selectLarge_dateOfBill"  >
-                    selectLarge_dateOfBill
-                </div>
+
+            <div id="selectLarge_dateOfBill" 
+                 style="display: inline-block">
+                selectLarge_dateOfBill
             </div>
 
 
             <div id="selectLarge_appointment" 
-                 style="display: {{if freshness==0 }}inline-block{{else}}none{{/if}}">
+                style="display: {{if freshness==0 }}inline-block{{else}}inline-block{{/if}}"
+               >
                 selectLarge_appointment
             </div>
 
-            <div id="dateOfBill_afterClick"  style="display: none"
+            <div id="dateOfBill_afterClick" style="display: none" 
                  onclick="dateOfBill_afterClick({{:id}})"></div>
-            <div id="appointment_afterClick"  style="display: none"
+            <div id="appointment_afterClick" style="display: none" 
                  onclick="appointment_afterClick({{:id}})"></div>
 
 
             <div class="inp_outer" title="manual id in book" 
-                 >
-                <div class="title1"   >  bookId</div>
+                 style="display: inline-block">
+                <div class="title1"> bookId</div>
 
-                <input type="text" name="bookId" data-link="bookId"
-                       class="inp2"  id="bookId"
-
-                       />
+                <input type="text" name="bookId" data-link="bookId" 
+                       class="inp2" id="bookId" size="10" />
             </div>
+            <!--style="min-width: -webkit-fill-available;  min-height: 50px"-->
+            <div class="inp_outer" title="Remarks" style="float: right">
+                <div class="title1"> Remarks</div>
 
-            <div class="inp_outer" title="" 
-                 style="min-width: -webkit-fill-available;
-                 min-height: 50px">
-                <div class="title1"   >  Remarks</div>
+                <input type="text" name="remarks" data-link="remarks" 
+                       class="inp2" id="remarks" accesskey="r" />
 
-                <input type="text" name="remarks" data-link="remarks"
-                       class="inp2"  id="remarks"
-                       accesskey="r"
-                       />
+                <!--                <textarea> textarea</textarea>-->
             </div>
 
 
 
-            <input type="hidden" name="freshness" value="1" />
+            <input type="hidden" name="freshness" 
+                   value="1" />
 
         </form>
     </div>
@@ -64,62 +58,67 @@
 
 
         <center>
-            &nbsp;  DL No:KL-TSR-144303, KL-TSR-144304
-            &nbsp; 
+            &nbsp; DL No:KL-TSR-144303, KL-TSR-144304
+            &nbsp;
             <!--DL Date: -->
         </center>
-        <br>
-        <table border="0" cellspacing="0" cellpadding="0" class="Table1">
-            <colgroup><col width="248"><col width="248"><col width="248"></colgroup>
+      
+        <table border="0" cellspacing="0" cellpadding="0"
+               class="Table1"
+               >
+            <colgroup>
+                <col width="248">
+                <col width="248">
+                <col width="248">
+            </colgroup>
             <tbody>
-                <tr>
-                    <td  class="Table1_A1" style="float: left">
+                <tr class="TableRow2">
+                    <td class="Table1_A1" style="float: left">
                         Bill No &nbsp;: <span data-link="id"></span>
                     </td>
-                    <td  class="Table1_A1"><span class="T1"></span>
+                    <td class="Table1_A1"><span class="T1">
+                            <center>RETAIL BILL</center>
+                             
+                        </span>
                     </td>
                     <td onclick="document.getElementById('dateOfBill').click()"
-
                         class="Table1_A1" style="float: right"
-                        id="pharmacyBill_dateOfBill"
-
-                        >
+                        id="pharmacyBill_dateOfBill">
                         Bill Date :
                         {{:~ddmmyyyyDashed(dateOfBill) }}
                     </td>
                 </tr>
-                <tr>
-                    <td  
-                        onclick="document.getElementById('appointment').click();"
-                        class="Table1_A2" style="float: left">
-                        Patient :  
-                        <span class="T1" id="pharmacyBill_patient">
-                            {{if appointment}} 
-                            {{:appointment.patient.name}} {{else}}-- 
-                            {{/if}} </span>
-                        <!--                    <span data-link="appointment.patient.name">appointment.patient.name</span>-->
+                <tr >
+            
+                <td onclick="document.getElementById('appointment').click();" 
+                    class="Table1_A2" style="float: left">
+                    Patient :
+                    <span class="T1 " id="pharmacyBill_patient">
+                        {{if appointment}}
+                        {{:appointment.patient.name}} {{else}}--
+                        {{/if}} </span>
+                    <!--                    <span data-link="appointment.patient.name">appointment.patient.name</span>-->
 
-                    </td>
-                    <td  class="Table1_A2">
+                </td>
+                <td class="Table1_A2">
 
-                    </td>
-                    <td 
-                        onclick="document.getElementById('appointment').click()"
-                        class="Table1_A2" style="float: right">
-                        Doctor : 
-                        <span class="T1" id="pharmacyBill_doctor"> 
-                            {{if appointment}} 
-                            {{:appointment.doctor.name}} 
-                            {{else}}--{{/if}} </span>
+                </td>
+                <td onclick="document.getElementById('appointment').click()" class="Table1_A2" style="float: right">
+                    Doctor :
+                    <span class="T1" id="pharmacyBill_doctor">
+                        {{if appointment}}
+                        {{:appointment.doctor.name}}
+                        {{else}}--{{/if}} </span>
 
-                    </td>
-                </tr>
+                </td>
+            
+            </tr>
             </tbody>
         </table>
 
 
 
-        <div id="printableArea"   title="PharmacyBill_List" >
+        <div id="printableArea" title="PharmacyBill_List">
 
 
             <div id="main_1_innert"> Loading Data, Please wait ...</div>
@@ -134,3 +133,13 @@
     {{/if}}
 
 </div>
+
+<style>
+    .Table1{
+        padding: 10px;
+    }
+        .TableRow2{
+        padding: 10px;
+    }
+    
+</style>

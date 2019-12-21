@@ -6,9 +6,9 @@
     {{for map.payload }}
 
     <div class="Table">
-        <div class="Title">
+<!--        <div class="Title">
             RETAIL BILL
-        </div>
+        </div>-->
 
         <div class="Heading">
             <div class="Cell" style="font-size: 0.8em"
@@ -58,7 +58,7 @@
                 <ayu1>
                    <button 
                     class="button_none" 
-                          style="text-align: left;"
+                          style="text-align: left;font-size: large"
                     >  {{if medicineStock.medicineBrandName}}
                         {{:medicineStock.medicineBrandName.brandName}}
                         {{/if}}
@@ -113,9 +113,12 @@
             {{else}}
 
             {{if idSpecial==1}}
-            <span style="position: fixed;bottom: 0px;
-                  background-color: steelblue;width: 100%"> 
-                Round Off Rs {{:amount}}</span>
+            <span style="position: fixed;
+                  left:1px;
+                  bottom: 0px;
+                  padding:10px;
+                  background-color: steelblue;"> 
+                Round Off <br/>Rs {{:amount}}</span>
             {{else}}
             <span>select Medicine</span>
             {{/if}}
@@ -142,8 +145,8 @@
                             style="color:green"
                             onclick="go(-1, 'pharmacyBillRow',{{:billId}})"
                             >
-                         + 
-                    Add New
+                        <i class="fa fa-plus" > Add </i>
+                    
                     </button>
                     
                 </div>
@@ -201,6 +204,7 @@
           position: absolute;">{{:pharmacistName}}  (Pharmacist)</span>
 
     <br>
+     <br>
     <span colspan="3" style="text-align: center">
         <!--We provided Rs.{{:freeOfCost}}  value(s) items free of Cost.-->
     </span>

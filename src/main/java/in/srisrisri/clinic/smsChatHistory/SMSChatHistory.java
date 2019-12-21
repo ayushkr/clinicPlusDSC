@@ -5,7 +5,6 @@
  */
 package in.srisrisri.clinic.smsChatHistory;
 
-import in.srisrisri.clinic.smsChat.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.io.Serializable;
 import java.sql.Date;
@@ -13,9 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -35,15 +33,28 @@ public class SMSChatHistory implements Serializable {
     Date creationTime;
     Date updationTime;
 
+    @ColumnDefault(value = "noname")
+    String contactPersonType;
+
+    @ColumnDefault(value = "noname")
+    String contactName;
+    @ColumnDefault(value = "0")
+    String contactNumber;
+
+    @ColumnDefault(value = "nil")
     String title;
-    String body;
+    
+    @ColumnDefault(value = "nil")
     String remarks;
+    @ColumnDefault(value = "0")
     String report;
 
     @JsonDeserialize(using = in.srisrisri.clinic.utils.DateHandler.class)
     Date dateOfSending;
 
+    @ColumnDefault(value = "true")
     boolean draft;
+    @ColumnDefault(value = "false")
     int sentStatus;
 
     public long getId() {
@@ -70,14 +81,7 @@ public class SMSChatHistory implements Serializable {
         this.updationTime = updationTime;
     }
 
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        System.out.println("body=" + body);
-        this.body = body;
-    }
+   
 
     public Date getDateOfSending() {
         return dateOfSending;
@@ -127,4 +131,34 @@ public class SMSChatHistory implements Serializable {
         this.sentStatus = sentStatus;
     }
 
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getContactPersonType() {
+        return contactPersonType;
+    }
+
+    public void setContactPersonType(String contactPersonType) {
+        this.contactPersonType = contactPersonType;
+    }
+
+    @Override
+    public String toString() {
+        return "SMSChatHistory{" + "id=" + id + ", creationTime=" + creationTime + ", updationTime=" + updationTime + ", contactPersonType=" + contactPersonType + ", contactName=" + contactName + ", contactNumber=" + contactNumber + ", title=" + title + ", remarks=" + remarks + ", report=" + report + ", dateOfSending=" + dateOfSending + ", draft=" + draft + ", sentStatus=" + sentStatus + '}';
+    }
+
+    
 }
