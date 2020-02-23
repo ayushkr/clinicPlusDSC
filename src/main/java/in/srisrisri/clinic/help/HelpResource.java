@@ -1,5 +1,6 @@
 package in.srisrisri.clinic.help;
 
+import in.srisrisri.clinic.entities.MedicineStockEntity;
 import in.srisrisri.clinic.medicineStock.*;
 import in.srisrisri.clinic.medicineBrandName.*;
 import in.srisrisri.clinic.responses.DeleteResponse;

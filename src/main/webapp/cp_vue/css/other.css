@@ -1,0 +1,42 @@
+label{
+    font-size: 0.7em;
+    color: green;
+}
+
+.inputF{
+
+    display: inline-block;
+}
+
+
+.app_api_float1
+{
+    background-color: #afbad6;
+    position: absolute;
+    top:0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+.app_api_float_status
+{
+    background-color: #16de7988;
+    position: absolute;
+    top:0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    /*transition: display 3s ;*/
+}
+
+
+.pageable_actions_buttons{
+ margin: 20px;
+    padding: 10px;
+    
+}
+.s_true{
+    background-color: steelblue !important;
+}

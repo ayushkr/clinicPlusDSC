@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.text.DateFormat;
 
 /**
  *
@@ -30,17 +31,22 @@ public class DateHandler extends StdDeserializer<Date> {
     @Override
     public Date deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 
-        String date = p.getText();
+        String dateStr = p.getText();
+        System.out.println("deserialize="+dateStr);
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             // SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
              System.out.println("sdf="+sdf.toString());
-            java.util.Date utildate = sdf.parse(date);
+            java.util.Date dateJava = sdf.parse(dateStr);
+             System.out.println("dateJava="+dateJava.toString());
            
-            Date sqlDate = new Date(utildate.getYear(), utildate.getMonth(), utildate.getDay());
+             
+              Date sqlDate =new Date(dateJava.getTime());
+//            Date sqlDate = new Date(dateJava.getYear(), dateJava.getMonth(), dateJava.getDay());
+            System.out.println("sqlDate="+sqlDate.toString());
             return sqlDate;
         } catch (Exception e) {
-            System.out.println("deserialize() sdf "+e.toString());
+            System.out.println("error deserialize() sdf "+e.toString());
             return null;
         }
 

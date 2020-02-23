@@ -6,12 +6,16 @@
 package in.srisrisri.clinic.smsChatHistory;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import in.srisrisri.clinic.smsChat.SMSChat;
 import java.io.Serializable;
 import java.sql.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -33,29 +37,26 @@ public class SMSChatHistory implements Serializable {
     Date creationTime;
     Date updationTime;
 
-    @ColumnDefault(value = "noname")
     String contactPersonType;
-
-    @ColumnDefault(value = "noname")
     String contactName;
-    @ColumnDefault(value = "0")
     String contactNumber;
 
-    @ColumnDefault(value = "nil")
-    String title;
     
-    @ColumnDefault(value = "nil")
+   @Column(length = 320)
     String remarks;
-    @ColumnDefault(value = "0")
-    String report;
+  
 
-    @JsonDeserialize(using = in.srisrisri.clinic.utils.DateHandler.class)
+//    @JsonDeserialize(using = in.srisrisri.clinic.utils.DateHandler.class)
     Date dateOfSending;
 
-    @ColumnDefault(value = "true")
-    boolean draft;
-    @ColumnDefault(value = "false")
+   
+    @ColumnDefault(value = "0")
     int sentStatus;
+    @Transient
+    String [] sentStatusNames={"","WAITING", "FAILED", "OK","4Notset"};
+    
+    @OneToOne
+    SMSChat sMSChat;
 
     public long getId() {
         return id;
@@ -91,13 +92,7 @@ public class SMSChatHistory implements Serializable {
         this.dateOfSending = dateOfSending;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
+   
 
     public String getRemarks() {
         return remarks;
@@ -105,22 +100,6 @@ public class SMSChatHistory implements Serializable {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
-    }
-
-    public String getReport() {
-        return report;
-    }
-
-    public void setReport(String report) {
-        this.report = report;
-    }
-
-    public boolean isDraft() {
-        return draft;
-    }
-
-    public void setDraft(boolean draft) {
-        this.draft = draft;
     }
 
     public int getSentStatus() {
@@ -157,8 +136,30 @@ public class SMSChatHistory implements Serializable {
 
     @Override
     public String toString() {
-        return "SMSChatHistory{" + "id=" + id + ", creationTime=" + creationTime + ", updationTime=" + updationTime + ", contactPersonType=" + contactPersonType + ", contactName=" + contactName + ", contactNumber=" + contactNumber + ", title=" + title + ", remarks=" + remarks + ", report=" + report + ", dateOfSending=" + dateOfSending + ", draft=" + draft + ", sentStatus=" + sentStatus + '}';
+        return "SMSChatHistory{" + "id=" + id + ", creationTime=" + creationTime + ", updationTime=" + updationTime + ", contactPersonType=" + contactPersonType + ", contactName=" + contactName + ", contactNumber=" + contactNumber + ", remarks=" + remarks + ", dateOfSending=" + dateOfSending + ", sentStatus=" + sentStatus + ", sentStatusNames=" + sentStatusNames + ", sMSChat=" + sMSChat + '}';
     }
 
+  
+
+
+    
+
+    public String[] getSentStatusNames() {
+        return sentStatusNames;
+    }
+
+    public void setSentStatusNames(String[] sentStatusNames) {
+        this.sentStatusNames = sentStatusNames;
+    }
+
+    public SMSChat getsMSChat() {
+        return sMSChat;
+    }
+
+    public void setsMSChat(SMSChat sMSChat) {
+        this.sMSChat = sMSChat;
+    }
+
+    
     
 }

@@ -1,7 +1,9 @@
 package in.srisrisri.clinic.appointment;
 
+import in.srisrisri.clinic.entities.AppointmentEntity;
+import in.srisrisri.clinic.entities.DoctorEntity;
 import in.srisrisri.clinic.doctor.*;
-import in.srisrisri.clinic.patient.PatientEntity;
+import in.srisrisri.clinic.entities.PatientEntity;
 import java.sql.Date;
 import java.util.List;
 import org.springframework.data.domain.Page;

@@ -5,9 +5,11 @@
  */
 package in.srisrisri.clinic.purchaseBill;
 
+import in.srisrisri.clinic.entities.PurchaseBillEntity;
 import in.srisrisri.clinic.Constants.Constants1;
 import in.srisrisri.clinic.Vendor.VendorEntity;
 import in.srisrisri.clinic.Vendor.VendorRepo;
+import in.srisrisri.clinic.entities.DoctorEntity;
 import in.srisrisri.clinic.medicineStock.MedicineStockRepo;
 
 import in.srisrisri.clinic.responses.JsonResponse;
@@ -169,6 +171,15 @@ public class PurchaseBillResource {
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
 
+     @PostMapping("/json")
+    public ResponseEntity<JsonResponse> PostMapping_one_json(
+            @RequestBody PurchaseBillEntity entityBefore
+    ) {
+        return PostMapping_one(entityBefore);
+
+    }
+    
+    
     // create
     @PostMapping("")
     public ResponseEntity<JsonResponse> PostMapping_one(PurchaseBillEntity entityBefore) {

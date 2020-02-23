@@ -1,11 +1,14 @@
 package in.srisrisri.clinic.medicineStock;
 
+import in.srisrisri.clinic.entities.MedicineStockEntity;
+import in.srisrisri.clinic.entities.MedicineBrandNameEntity;
 import in.srisrisri.clinic.Constants.Constants1;
 import in.srisrisri.clinic.Vendor.VendorEntity;
 import in.srisrisri.clinic.Vendor.VendorRepo;
 import in.srisrisri.clinic.medicineBrandName.*;
-import in.srisrisri.clinic.purchaseBill.PurchaseBillEntity;
+import in.srisrisri.clinic.entities.PurchaseBillEntity;
 import in.srisrisri.clinic.responses.JsonResponse;
+import in.srisrisri.clinic.titles.Titles;
 import in.srisrisri.clinic.utils.HeaderUtil;
 import in.srisrisri.clinic.utils.PageCover;
 import java.io.File;
@@ -70,7 +73,7 @@ public class MedicineStockResource {
 
     @GetMapping("pageable")
     @ResponseBody
-    public PageCover<MedicineStockEntity> getPage(
+    public PageCover<MedicineStockEntity> pageable(
             @RequestParam("pageNumber") String pageNumber,
             @RequestParam("filterColumn") String filterColumn,
             @RequestParam("filter") String filter,
@@ -78,7 +81,8 @@ public class MedicineStockResource {
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
-        int noOfItemsInAPage = 20;
+       
+         int pageSize = 20;
         logger.warn("pageable={} , filter={}by {} ", new Object[]{label, filterColumn, filter});
 
         if (!sortColumn.equals("undefined")) {
@@ -92,10 +96,20 @@ public class MedicineStockResource {
         } else {
             sort = Sort.by("qtyRemaining").ascending();
         }
-        if ("undefined".equals(pageNumber)) {
+       
+        
+         if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
+        } else {
+            if (Integer.parseInt(pageNumber) == 0) {
+                pageSize = 10000;
+                pageNumber = "1";
+            }
         }
-        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, noOfItemsInAPage, sort);
+        
+        
+        
+        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, pageSize, sort);
         Page<MedicineStockEntity> page = null;
 
         if (filterColumn.equals("undefined")) {
@@ -133,6 +147,19 @@ public class MedicineStockResource {
         cover.setFilter(filter);
         cover.setFilterColumn(filterColumn);
         cover.setModule(label);
+        
+         Titles titles = new Titles();
+        titles.setModuleName(label);
+        titles.setId2(true);
+        titles.setName(true);
+       
+       titles.setList(new String[]{"id","medicineBrandName_brandName","company"});
+        cover.setTitles(titles);
+        
+        
+        
+        
+        
         return cover;
     }
 

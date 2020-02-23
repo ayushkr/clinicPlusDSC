@@ -8,10 +8,12 @@ package in.srisrisri.clinic.smsChat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.io.Serializable;
 import java.sql.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -33,19 +35,25 @@ public class SMSChat implements Serializable {
     Date updationTime;
 
     String title;
+     @Column(length = 320)
     String body;
+     @Column(length = 320)
     String remarks;
     int[] toPhoneNumbers;
     int[] toPhoneNumbers_messageStatus;
+    @Column(length = 320)
     String report;
 
-    @JsonDeserialize(using = in.srisrisri.clinic.utils.DateHandler.class)
+//    @JsonDeserialize(using = in.srisrisri.clinic.utils.DateHandler.class)
     Date dateOfSending;
 
     @ColumnDefault("true")
     boolean draft;
     @ColumnDefault("0")
     int status;
+    
+     @Transient
+     String [] statusNames;
     
     @ColumnDefault("false")
     boolean processed;
@@ -155,6 +163,21 @@ public class SMSChat implements Serializable {
     public void setProcessed(boolean processed) {
         this.processed = processed;
     }
+
+   
+    public String[] getStatusNames() {
+        return SMS_STATUS.statusNames;
+    }
+
+    public void setStatusNames(String[] statusNames) {
+        this.statusNames = statusNames;
+    }
+
+    
+    
+    
+    
+    
 
     @Override
     public String toString() {

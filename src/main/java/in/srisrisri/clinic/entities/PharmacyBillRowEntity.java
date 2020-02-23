@@ -1,7 +1,7 @@
-package in.srisrisri.clinic.pharmacyBillRow;
+package in.srisrisri.clinic.entities;
 
-import in.srisrisri.clinic.medicineStock.MedicineStockEntity;
-import in.srisrisri.clinic.pharmacyBill.PharmacyBillEntity;
+import in.srisrisri.clinic.entities.MedicineStockEntity;
+import in.srisrisri.clinic.entities.PharmacyBillEntity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;

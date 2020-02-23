@@ -1,4 +1,4 @@
-package in.srisrisri.clinic.medicineBrandName;
+package in.srisrisri.clinic.entities;
 
 import java.util.Date;
 

@@ -1,9 +1,9 @@
 package in.srisrisri.clinic.fileContent;
 
 import in.srisrisri.clinic.Constants.Constants1;
-import in.srisrisri.clinic.appointment.AppointmentEntity;
-import in.srisrisri.clinic.doctor.DoctorEntity;
-import in.srisrisri.clinic.patient.PatientEntity;
+import in.srisrisri.clinic.entities.AppointmentEntity;
+import in.srisrisri.clinic.entities.DoctorEntity;
+import in.srisrisri.clinic.entities.PatientEntity;
 import in.srisrisri.clinic.responses.DeleteResponse;
 import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;

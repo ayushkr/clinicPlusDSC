@@ -1,9 +1,10 @@
 package in.srisrisri.clinic.pharmacyBill;
 
+import in.srisrisri.clinic.entities.PharmacyBillEntity;
 import in.srisrisri.clinic.Constants.Constants1;
-import in.srisrisri.clinic.appointment.AppointmentEntity;
+import in.srisrisri.clinic.entities.AppointmentEntity;
 import in.srisrisri.clinic.appointment.AppointmentRepo;
-import in.srisrisri.clinic.pharmacyBillRow.PharmacyBillRowEntity;
+import in.srisrisri.clinic.entities.PharmacyBillRowEntity;
 import in.srisrisri.clinic.pharmacyBillRow.PharmacyBillRowRepo;
 import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;
@@ -165,6 +166,14 @@ public class PharmacyBillResource {
         return new ResponseEntity<>(item, HttpStatus.OK);
     }
 
+    @PostMapping("/json")
+    public ResponseEntity<JsonResponse> PostMapping_one_json(
+            @RequestBody PharmacyBillEntity entityBefore
+    ) {
+        return PostMapping_one(entityBefore);
+    }
+    
+    
     // create
     @PostMapping("")
     public ResponseEntity<JsonResponse> PostMapping_one(PharmacyBillEntity entityBefore) {
@@ -177,17 +186,17 @@ public class PharmacyBillResource {
             if (entityBefore.getId() != 0) {
 
                 entityAfter = pharmacyBillRepo.findById(entityBefore.getId()).get();
-                //entityAfter.setUpdationTime(new Date());
+                entityAfter.setUpdationTime(Date.valueOf(LocalDate.now()));
             } else {
                 entityAfter = new PharmacyBillEntity();
-                // entityAfter.setCreationTime(new Date());
+                 entityAfter.setCreationTime(Date.valueOf(LocalDate.now()));
             }
 
             BeanUtils.copyProperties(entityBefore, entityAfter);
 
             try {
                 entityAfter = pharmacyBillRepo.save(entityAfter);
-                jsonResponse.setMessage("Saved ID:" + entityAfter.getId());
+                jsonResponse.setMessage("Saved ID:" + entityAfter);
                 jsonResponse.setStatus(Constants1.SUCCESS);
             } catch (Exception e) {
                 jsonResponse.setMessage(e.toString());

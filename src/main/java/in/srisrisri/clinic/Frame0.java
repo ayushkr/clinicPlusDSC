@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @author akr2
  */
 
-@Component
+//@Component
 public class Frame0 extends javax.swing.JFrame {
 
     /**

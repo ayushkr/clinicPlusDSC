@@ -74,22 +74,26 @@
                     <th>id
                         {{:~sortByColumnUI('id',obj)}}
                         <input type="checkbox"
-                                   id="checkbox_minus1"
-                                   class="regular-checkbox" 
-                                   name="n"  value="-1">
-                            <label for="checkbox_minus1"></label>
+                               id="checkbox_minus1"
+                               class="regular-checkbox" 
+                               name="n"  value="-1">
+                        <label for="checkbox_minus1"></label>
                     </th>
 
-                    <th>Title
-                        {{:~sortByColumnUI('title',obj)}}
+                    <th>contactName
+                        {{:~sortByColumnUI('contactName',obj)}}
+                    </th>
+                    <th>contactNumber
+                        {{:~sortByColumnUI('contactNumber',obj)}}
+                    </th>
+                    <th>contactPersonType
+                        {{:~sortByColumnUI('contactPersonType',obj)}}
                     </th>
                     <th>dateOf Sending
                         {{:~sortByColumnUI('dateOfSending',obj)}}
                     </th>
-
-
-                    <th>Body
-                        {{:~sortByColumnUI('body',obj)}}
+                    <th>sentStatus
+                        {{:~sortByColumnUI('sentStatus',obj)}}
                     </th>
 
 
@@ -119,6 +123,12 @@
                         </span>
 
                     </td>
+                    <td
+                        >
+                        
+                        
+                        {{:id}}
+                    </td>
 
                     <td >
                         <span  class="">
@@ -127,32 +137,44 @@
                                    class="regular-checkbox" 
                                    name="n"  value="{{:id}}">
                             <label for="checkbox_{{:id}}"></label>
-                            {{:id}}
+                            {{:contactName}}
                         </span>
 
                     </td>
 
+                    
                     <td
-                        >{{:title}}
+                        >{{:contactNumber}}
                     </td>
+
+                    <td
+                        >{{:contactPersonType}}
+                    </td>
+
 
                     <td
                         >
                         {{:~ddmmyyyyDashed(dateOfSending) }}
 
                     </td>
-
-
-
-                    <td
-                        style="width:340px"
-
-                        >{{:body}}
+                     <td
+                        > {{:sentStatus }}
+                         
+                          {{if sentStatus==0}}
+                         fresh
+                        
+                         {{/if}}
+                         
+                         {{if sentStatus==4}}
+                         processing
+                        
+                         {{/if}}
+                         
                     </td>
 
 
 
-                    <td
+                    <td   style="width:340px"
 
                         >{{:remarks}}
                     </td>

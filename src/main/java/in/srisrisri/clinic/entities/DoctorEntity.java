@@ -1,4 +1,4 @@
-package in.srisrisri.clinic.doctor;
+package in.srisrisri.clinic.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -7,56 +7,153 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import org.hibernate.annotations.GenericGenerator;
+import in.srisrisri.clinic.scheduler.Contactable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name = "Doctor") // this name will be used to name the Entity
 @Table(name = "Doctor") // this name will be used to name a table in DB
-public class DoctorEntity implements Serializable {
-
-    
-
-    long id_of_editor;
-    @Id
+public class DoctorEntity   implements Serializable, Contactable {
+  @Id
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
     long id;
-    @ColumnDefault(value = "0")
-    long fixedId;
+  
+    @Transient
+    static  String module = "doctor";
+  
     String name;
     String department;
     int fees;
     String feesList;
     String address;
     String description;
-     String remediesFor;
+    String remediesFor;
     String contactPhone;
 
     int feeForClinic;
     String doctor_code;
-    @Temporal(TemporalType.TIMESTAMP)
-    java.util.Date creationTime;
- @Temporal(TemporalType.TIMESTAMP)
-    java.util.Date  updationTime;
+  
     Date dateOfJoining;
     String visitDay;
     String visitTime;
     String email;
-    long id_display;
-    String remarks;
+   
     String profileImage;
-     String sex;
-    
-   String sun;
-   String mon;
-   String tue;
-   String wed;
-   String thu;
-   String fri;
-   String sat;
+    String sex;
 
+    String sun;
+    String mon;
+    String tue;
+    String wed;
+    String thu;
+    String fri;
+    String sat;
+    
+    //   common 
+     @ColumnDefault(value = "0")
+    long fixedId;
+     @ColumnDefault(value = "0")
+    long bookId;
+    
+      @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date creationTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date updationTime;
+    
+    @Transient
+    boolean selected = false;
+    @ColumnDefault(value = "0")
+     long id_of_editor;
+     long id_display;
+    String remarks;
+
+    public long getFixedId() {
+        return fixedId;
+    }
+
+    public void setFixedId(long fixedId) {
+        this.fixedId = fixedId;
+    }
+
+    public long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(long bookId) {
+        this.bookId = bookId;
+    }
+
+    public java.util.Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(java.util.Date creationTime) {
+        if(creationTime!=null){
+        System.out.println("setCreationTime="+creationTime.toString());
+        }
+        else{
+         System.out.println("setCreationTime=null");
+        }
+        this.creationTime = creationTime;
+    }
+
+    public java.util.Date getUpdationTime() {
+        return updationTime;
+    }
+
+    public void setUpdationTime(java.util.Date updationTime) {
+        this.updationTime = updationTime;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public long getId_of_editor() {
+        return id_of_editor;
+    }
+
+    public void setId_of_editor(long id_of_editor) {
+        this.id_of_editor = id_of_editor;
+    }
+
+    public long getId_display() {
+        return id_display;
+    }
+
+    public void setId_display(long id_display) {
+        this.id_display = id_display;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+    
+    
+    
+    
+
+     public long getId() {
+        return id;
+    }
+
+    public DoctorEntity setId(long id) {
+        this.id = id;
+        return this;
+    }
+    
     public String getSex() {
         return sex;
     }
@@ -65,10 +162,6 @@ public class DoctorEntity implements Serializable {
         this.sex = sex;
     }
 
-   
-   
-   
-   
     public String getSun() {
         return sun;
     }
@@ -125,34 +218,9 @@ public class DoctorEntity implements Serializable {
         this.sat = sat;
     }
 
-   
-   
-   
-    public long getId_of_editor() {
-        return id_of_editor;
-    }
+    
 
-    public void setId_of_editor(long id_of_editor) {
-        this.id_of_editor = id_of_editor;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public DoctorEntity setId(long id) {
-        this.id = id;
-        return this;
-    }
-
-    public long getFixedId() {
-        return fixedId;
-    }
-
-    public void setFixedId(long fixedId) {
-        this.fixedId = fixedId;
-    }
-
+    @Override
     public String getName() {
         return name;
     }
@@ -209,6 +277,7 @@ public class DoctorEntity implements Serializable {
         this.remediesFor = remediesFor;
     }
 
+    @Override
     public String getContactPhone() {
         return contactPhone;
     }
@@ -233,21 +302,7 @@ public class DoctorEntity implements Serializable {
         this.doctor_code = doctor_code;
     }
 
-    public  java.util.Date  getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(Date creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    public  java.util.Date  getUpdationTime() {
-        return updationTime;
-    }
-
-    public void setUpdationTime(Date updationTime) {
-        this.updationTime = updationTime;
-    }
+   
 
     public Date getDateOfJoining() {
         return dateOfJoining;
@@ -281,22 +336,6 @@ public class DoctorEntity implements Serializable {
         this.email = email;
     }
 
-    public long getId_display() {
-        return id_display;
-    }
-
-    public void setId_display(long id_display) {
-        this.id_display = id_display;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
-
     public String getProfileImage() {
         return profileImage;
     }
@@ -305,13 +344,12 @@ public class DoctorEntity implements Serializable {
         this.profileImage = profileImage;
     }
 
+    
+
+     
     @Override
-    public String toString() {
-        return "DoctorEntity{" + "id_of_editor=" + id_of_editor + ", id=" + id + ", fixedId=" + fixedId + ", name=" + name + ", department=" + department + ", fees=" + fees + ", feesList=" + feesList + ", address=" + address + ", description=" + description + ", remediesFor=" + remediesFor + ", contactPhone=" + contactPhone + ", feeForClinic=" + feeForClinic + ", doctor_code=" + doctor_code + ", creationTime=" + creationTime + ", updationTime=" + updationTime + ", dateOfJoining=" + dateOfJoining + ", visitDay=" + visitDay + ", visitTime=" + visitTime + ", email=" + email + ", id_display=" + id_display + ", remarks=" + remarks + ", profileImage=" + profileImage + ", sex=" + sex + ", sun=" + sun + ", mon=" + mon + ", tue=" + tue + ", wed=" + wed + ", thu=" + thu + ", fri=" + fri + ", sat=" + sat + '}';
+    public String getModule() {
+        return module;
     }
-
-  
-
-   
 
 }

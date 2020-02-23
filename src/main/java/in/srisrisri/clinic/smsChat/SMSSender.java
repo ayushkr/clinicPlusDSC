@@ -5,11 +5,13 @@
  */
 package in.srisrisri.clinic.smsChat;
 
-import in.srisrisri.clinic.patient.PatientEntity;
+import in.srisrisri.clinic.entities.PatientEntity;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import kong.unirest.HttpResponse;
+import kong.unirest.Unirest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,9 +20,10 @@ import org.slf4j.LoggerFactory;
  * @author akr2
  */
 public class SMSSender {
-       private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    public static final int sendMock=1,sendReal=2;
-  
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    public static final int sendMock = 1, sendReal = 2;
+
     static final String PH_patient_id = "$id";
     static final String PH_patientName = "$patientName";
     static final String PH_doctorName = "$doctorName";
@@ -28,8 +31,7 @@ public class SMSSender {
     String patientName = null;
     String doctorName = null;
     String patientId = null;
-    
-    
+
     public String getPatientName() {
         return patientName;
     }
@@ -55,15 +57,20 @@ public class SMSSender {
     }
 
     public String getPreparedMessage(String messageBody) {
-        if (getDoctorName() != null) {
-            messageBody = messageBody.replace(PH_doctorName, getDoctorName());
-        }
-        if (getPatientName() != null) {
-            messageBody = messageBody.replace(PH_patientName, getPatientName());
-        }
 
-        if (getPatientId() != null) {
-            messageBody = messageBody.replace(PH_patient_id, getPatientId());
+        try {
+            if (getDoctorName() != null) {
+                messageBody = messageBody.replace(PH_doctorName, getDoctorName());
+            }
+            if (getPatientName() != null) {
+                messageBody = messageBody.replace(PH_patientName, getPatientName());
+            }
+
+            if (getPatientId() != null) {
+                messageBody = messageBody.replace(PH_patient_id, getPatientId());
+            }
+        } catch (Exception e) {
+            return messageBody;
         }
 
         return messageBody;
@@ -74,12 +81,12 @@ public class SMSSender {
         messageBody = messageBody.replace(PH_patient_id, patientEntity.getId() + "");
         String nameWithoutSir = patientEntity.getName();
         String name = "";
-        int age =0;
-        
-        try{
-        age=Integer.parseInt(patientEntity.getAge());
-        }catch(Exception e){
-        logger.warn("sms manager  age={} name={}", new Object[]{age,patientEntity.getName()});
+        int age = 0;
+
+        try {
+            age = Integer.parseInt(patientEntity.getAge());
+        } catch (Exception e) {
+            logger.warn("sms manager  age={} name={}", new Object[]{age, patientEntity.getName()});
         }
 
         if ("M".equals(patientEntity.getSex())) {
@@ -101,55 +108,47 @@ public class SMSSender {
         return messageBody;
     }
 
-    public String sendSms(String phoneNumber, String messageBody, int mockOrReal) {
+    public String sendSmsTextLocal(String phoneNumber, String messageBody, int mockOrReal) {
         try {
             // Construct data
             String apiKey = "apikey=" + "fpt5fwbak7s-ZE6wBcovVs2TFPuDh11kgzzDUrddkX";
-
             String message = "&message=" + messageBody;
             String sender = "&sender=" + "TXTLCL";
-//    String numbers = "&numbers=" + "917907996990";
+            //    String numbers = "&numbers=" + "917907996990";
 
             if (phoneNumber.length() == 10) {
                 phoneNumber = "91" + phoneNumber;
             } else {
-
             }
 
             String numbers = "&numbers=" + phoneNumber;
 
-            if (mockOrReal==sendMock) {
-                // mock
-//                String s = "<div>"
-//                        + "<span style='float:left'> Number=" + phoneNumber + "</span>"
-//                        + "<span style='float:right'> Message=" + messageBody+"</span>"
-//                        + "</div>";
-                
-                 String s = 
-                         
-                        "<td> " + phoneNumber + "</td>"
-                        + "<td>" + messageBody+"</td>"
-                        ;
-
-                logger.warn("sms manager mock=", new Object[]{s});
-                return s;
+            if (mockOrReal == sendMock) {
+                logger.warn("sendSms mock= ", new Object[]{messageBody});
+                System.out.println("sending...  SMS=" + messageBody);
+                return messageBody;
             } else {
-                // Send data text local
-                HttpURLConnection conn = (HttpURLConnection) new URL("https://api.textlocal.in/send/?").openConnection();
-                String data = apiKey + numbers + message + sender;
-                conn.setDoOutput(true);
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
-                conn.getOutputStream().write(data.getBytes("UTF-8"));
-                final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                final StringBuffer stringBuffer = new StringBuffer();
-                String line;
-                while ((line = rd.readLine()) != null) {
-                    stringBuffer.append(line);
+
+                try {
+                    // Send data text local
+                    HttpURLConnection conn = (HttpURLConnection) new URL("https://api.textlocal.in/send/?").openConnection();
+                    String data = apiKey + numbers + message + sender;
+                    conn.setDoOutput(true);
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
+                    conn.getOutputStream().write(data.getBytes("UTF-8"));
+                    final BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    final StringBuffer stringBuffer = new StringBuffer();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        stringBuffer.append(line);
+                    }
+                    reader.close();
+                    logger.warn("sendSms  real =", new Object[]{stringBuffer.toString()});
+                    return stringBuffer.toString();
+                } catch (Exception e) {
+                    return e.toString();
                 }
-                rd.close();
-                logger.warn("sms manager  real =", new Object[]{stringBuffer.toString()});
-                return stringBuffer.toString();
             }
 
         } catch (Exception e) {
@@ -158,6 +157,20 @@ public class SMSSender {
         }
     }
 
-   
+    public String sendSms_fast2sms(String phoneNumber, String messageBody, int mockOrReal) {
+
+        if (mockOrReal == sendReal) {
+            HttpResponse response = Unirest.post("https://www.fast2sms.com/dev/bulk")
+                    .header("authorization", "mSEkKgbH20Nwzvy6QIGXYDp4hCAlu8s51PitOWFMrUT93jnaBJM5qeQvXgtmUC2w9VipTAblnPDzLdE1")
+                    .header("Content-Type", "application/x-www-form-urlencoded")
+                    .body("sender_id=FSTSMS&message=" + messageBody + "&language=english&route=p&numbers=" + phoneNumber)
+                    .asString();
+            return response.getStatusText()+response.getBody().toString();
+
+        } else {
+            return "mock ";
+        }
+
+    }
 
 }

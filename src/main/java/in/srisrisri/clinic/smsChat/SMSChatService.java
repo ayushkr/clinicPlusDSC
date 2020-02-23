@@ -5,20 +5,19 @@
  */
 package in.srisrisri.clinic.smsChat;
 
-import in.srisrisri.clinic.doctor.DoctorEntity;
+import in.srisrisri.clinic.entities.DoctorEntity;
 import in.srisrisri.clinic.doctor.DoctorRepo;
-import in.srisrisri.clinic.patient.PatientEntity;
+import in.srisrisri.clinic.entities.PatientEntity;
 import in.srisrisri.clinic.patient.PatientRepo;
 import in.srisrisri.clinic.smsChatHistory.SMSChatHistory;
 import in.srisrisri.clinic.smsChatHistory.SMSChatHistoryRepo;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import in.srisrisri.clinic.scheduler.Contactable;
 
 /**
  *
@@ -47,31 +46,28 @@ public class SMSChatService {
         this.sMSChatHistoryRepo = sMSChatHistoryRepo;
     }
 
-    SMSChat smsChat;
+    SMSChat chat;
     List<String> listOfOneline = new LinkedList<>();
 
 /////////////////////
 //    process
 ////////////
-    public void process(SMSChat smsChat) {
-        this.smsChat = smsChat;
-        if (smsChat.getStatus() == SMS_STATUS.FRESH) {
-            logger.info("is fresh ={}", smsChat);
-            smsChat.setStatus(SMS_STATUS.PROCESSING);
-            sMSChatRepo.save(smsChat);
+    public void process(SMSChat chat) {
+        this.chat = chat;
+        if (chat.getStatus() == SMS_STATUS.FRESH) {
+            logger.info("is fresh ={}", chat);
+            chat.setStatus(SMS_STATUS.PROCESSING);
+            sMSChatRepo.save(chat);
 
-            int[] groupNumbers = smsChat.getToPhoneNumbers();
+            int[] groupNumbers = chat.getToPhoneNumbers();
+            
             for (int groupNumber : groupNumbers) {
+                
                 if (groupNumber == SMSChat.PATIENTS) {
                     List<PatientEntity> listOfPatients = patientRepo.findAll();
                     listOfPatients.forEach(item -> {
-                        long id = item.getId();
-                        SMSChatHistory history = new SMSChatHistory();
-                        history.setSentStatus(SMS_STATUS.PROCESSING);
-                         history.setContactPersonType("patient");
-                        history.setContactName(item.getName());
-                        history.setContactNumber(item.getContactPhone());
-                        sMSChatHistoryRepo.save(history);
+                        
+                        sMSChatHistoryRepo.save(copyBasicContactInfo(chat,item));
                     });
 
                 }
@@ -79,29 +75,45 @@ public class SMSChatService {
                 if (groupNumber == SMSChat.DOCTORS) {
                     List<DoctorEntity> list = doctorRepo.findAll();
                     list.forEach(item -> {
-                        long id = item.getId();
-                        SMSChatHistory history = new SMSChatHistory();
-                        history.setSentStatus(SMS_STATUS.PROCESSING);
-                        history.setContactPersonType("doctor");
-                        history.setContactName(item.getName());
-                        history.setContactNumber(item.getContactPhone());
-                        sMSChatHistoryRepo.save(history);
+                        sMSChatHistoryRepo.save(copyBasicContactInfo(chat,item));
                     });
+
+                }
+                
+                 if (groupNumber == SMSChat.OTHERS) {
+                   
+                    PatientEntity item = new PatientEntity();
+                    item.setContactPhone("7907996990");
+                    item.setName("Ayush K R");
+                        sMSChatHistoryRepo.save(copyBasicContactInfo(chat,item));
+                  
 
                 }
 
             }
 
-           
-
-            smsChat.setProcessed(true);
-            sMSChatRepo.save(smsChat);
+            chat.setProcessed(true);
+            sMSChatRepo.save(chat);
 
         } else {
 // not fresh
-            logger.info("Not fresh : {}", smsChat);
+            logger.info("Not fresh : {}", chat);
         }
 
+    }
+
+    public SMSChatHistory copyBasicContactInfo(SMSChat chat,Contactable contact) {
+
+        SMSChatHistory history = new SMSChatHistory();
+        history.setsMSChat(chat);
+        history.setDateOfSending(chat.getDateOfSending());
+        history.setSentStatus(SMS_STATUS.FRESH);
+        history.setContactPersonType(contact.getModule());
+        history.setContactName(contact.getName());
+        history.setContactNumber(contact.getContactPhone());
+       
+
+        return history;
     }
 
 }

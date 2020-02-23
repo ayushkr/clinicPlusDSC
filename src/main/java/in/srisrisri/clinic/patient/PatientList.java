@@ -5,6 +5,7 @@
  */
 package in.srisrisri.clinic.patient;
 
+import in.srisrisri.clinic.entities.PatientEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.List;

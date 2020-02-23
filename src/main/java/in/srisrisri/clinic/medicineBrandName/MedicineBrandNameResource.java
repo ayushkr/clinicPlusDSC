@@ -1,7 +1,8 @@
 package in.srisrisri.clinic.medicineBrandName;
 
+import in.srisrisri.clinic.entities.MedicineBrandNameEntity;
 import in.srisrisri.clinic.Constants.Constants1;
-import in.srisrisri.clinic.doctor.DoctorEntity;
+import in.srisrisri.clinic.entities.DoctorEntity;
 import in.srisrisri.clinic.responses.DeleteResponse;
 import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;

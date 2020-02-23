@@ -44,6 +44,8 @@ public class SMSScheduler {
 
     @Autowired
     final SmschatsProcessor smschatsProcessor;
+    
+    
 
     @Autowired
     final SmschatsHistoryProcessor smschatsHistoryProcessor;
@@ -55,7 +57,11 @@ public class SMSScheduler {
         this.smschatsProcessor = smschatsProcessor;
         this.smschatsHistoryProcessor = smschatsHistoryProcessor;
     }
+    
+     
 
+  
+   
     
 
     @Scheduled(fixedRate = 5000)
@@ -64,9 +70,11 @@ public class SMSScheduler {
 
     }
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 9000)
     public void smschatHistory() {
-       smschatsHistoryProcessor.start();
+//       smschatsHistoryProcessor.start();
 
     }
+    
+    
 }

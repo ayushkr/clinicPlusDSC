@@ -1,12 +1,13 @@
 package in.srisrisri.clinic.appointment;
 
+import in.srisrisri.clinic.entities.AppointmentEntity;
 import in.srisrisri.clinic.Constants.Constants1;
 import in.srisrisri.clinic.Frame0;
 import in.srisrisri.clinic.Helpers.ResourceHelper;
 import in.srisrisri.clinic.ayushLogger.Logger;
 import in.srisrisri.clinic.ayushLogger.LoggerFactory;
-import in.srisrisri.clinic.doctor.DoctorEntity;
-import in.srisrisri.clinic.patient.PatientEntity;
+import in.srisrisri.clinic.entities.DoctorEntity;
+import in.srisrisri.clinic.entities.PatientEntity;
 
 import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.*;
@@ -59,7 +60,7 @@ public class AppointmentResource {
 //    @GetMapping("")
 //    @ResponseBody
 //    public PageCover<AppointmentEntity> local_all() {
-//        return allPageNumber("undefined","undefined",
+//        return pageable("undefined","undefined",
 //                "1",Optional.of(10),
 //                "undefined", "undefined");
 //    }
@@ -68,12 +69,12 @@ public class AppointmentResource {
     @GetMapping("")
     @ResponseBody
     public List<AppointmentEntity> local_all() {
-        return local_allByDateOfAppointmentDesc();
+        return dateOfAppointment();
     }
 
     @GetMapping("dateOfAppointment")
     @ResponseBody
-    public List<AppointmentEntity> local_allByDateOfAppointmentDesc() {
+    public List<AppointmentEntity> dateOfAppointment() {
         logger.warn("local_allByDateOfAppointmentDesc, {} ", new Object[]{label});
         Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "dateOfAppointment"));
         List<AppointmentEntity> list = repo.findAll(sort);
@@ -82,7 +83,7 @@ public class AppointmentResource {
 
     @GetMapping("doctor/{id}")
     @ResponseBody
-    public ReportIncomeFromDoctorsDTO all_ByDoctor(@PathVariable("id") Long doctorId,
+    public ReportIncomeFromDoctorsDTO doctor_id(@PathVariable("id") Long doctorId,
             @RequestParam("dateFrom") String dateFrom,
             @RequestParam("dateTo") String dateTo
     ) {
@@ -122,7 +123,7 @@ public class AppointmentResource {
 
     @GetMapping("pageable")
     @ResponseBody
-    public PageCover<AppointmentEntity> allPageNumber(
+    public PageCover<AppointmentEntity> pageable(
             @RequestParam("filterColumn") String filterColumn,
             @RequestParam("filter") String filter,
             @RequestParam("pageNumber") String pageNumber,
@@ -131,7 +132,7 @@ public class AppointmentResource {
             @RequestParam("sortOrder") String sortOrder
     ) {
         Sort sort;
-        int pageSize = 5;
+        int pageSize = 15;
         if (pageSizeOb.isPresent()) {
             pageSize = pageSizeOb.get();
         } else {
@@ -150,6 +151,8 @@ public class AppointmentResource {
         } else {
             sort = Sort.by("dateOfAppointment").descending();
         }
+        
+        
         if ("undefined".equals(pageNumber)) {
             pageNumber = "1";
         } else {
@@ -208,7 +211,16 @@ public class AppointmentResource {
         }
         return item;
     }
-
+    
+    
+@PostMapping("/json")
+    public ResponseEntity<JsonResponse> PostMapping_one_json(
+            @RequestBody AppointmentEntity entityBefore
+    ) {
+        return PostMapping_one(entityBefore);
+    }
+    
+    
     // create
     @PostMapping("")
     public ResponseEntity<JsonResponse> PostMapping_one(AppointmentEntity entityBefore) {

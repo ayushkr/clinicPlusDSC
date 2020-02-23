@@ -1,10 +1,10 @@
-package in.srisrisri.clinic.appointment;
+package in.srisrisri.clinic.entities;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+//import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import in.srisrisri.clinic.appointmentStatus.AppointmentStatusEntity;
 import in.srisrisri.clinic.appointmentType.AppointmentTypeEntity;
-import in.srisrisri.clinic.doctor.DoctorEntity;
-import in.srisrisri.clinic.patient.PatientEntity;
+import in.srisrisri.clinic.entities.DoctorEntity;
+import in.srisrisri.clinic.interfaces.Moduleable;
 import in.srisrisri.clinic.utils.FinanceUtils;
 import java.io.Serializable;
 import java.sql.Date;
@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import javax.persistence.Transient;
 import org.hibernate.annotations.ColumnDefault;
@@ -21,8 +23,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name = "Appointment") // this name will be used to name the Entity
 @Table(name = "Appointment") // this name will be used to name a table in DB
-public class AppointmentEntity implements Serializable {
+public class AppointmentEntity   implements Serializable,Moduleable {
 
+    @Transient
+    String module="appointment";
+    
+    
     long rid;
 
     @Id
@@ -33,7 +39,7 @@ public class AppointmentEntity implements Serializable {
     DoctorEntity doctor;
     @OneToOne
     PatientEntity patient;
-     @JsonDeserialize(using = in.srisrisri.clinic.utils.DateHandler.class)
+//     @JsonDeserialize(using = in.srisrisri.clinic.utils.DateHandler.class)
     Date dateOfAppointment;
     @ColumnDefault(value = "0")
     int tokenNumber;
@@ -45,16 +51,69 @@ public class AppointmentEntity implements Serializable {
     AppointmentTypeEntity appointmentTypeEntity;
     @OneToOne
     AppointmentStatusEntity appointmentStatusEntity;
-    Date creationTime;
-    Date updationTime;
-    @ColumnDefault(value = "0")
-    long fixedId;
-     @ColumnDefault(value = "0")
-    long bookId;
+   
     @Transient
     String totalInWords="not set";
     
+//   common 
+     @ColumnDefault(value = "0")
+    long fixedId;
+     @ColumnDefault(value = "0")
+    long bookId;
+    
+      @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date creationTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date updationTime;
+    
+    @Transient
+    boolean selected = false;
+    @ColumnDefault(value = "0")
+     long id_of_editor;
+    
     String remarks;
+
+    public long getFixedId() {
+        return fixedId;
+    }
+
+    public void setFixedId(long fixedId) {
+        this.fixedId = fixedId;
+    }
+
+    public long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(long bookId) {
+        this.bookId = bookId;
+    }
+
+    public java.util.Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(java.util.Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public java.util.Date getUpdationTime() {
+        return updationTime;
+    }
+
+    public void setUpdationTime(java.util.Date updationTime) {
+        this.updationTime = updationTime;
+    }
+
+    public long getId_of_editor() {
+        return id_of_editor;
+    }
+
+    public void setId_of_editor(long id_of_editor) {
+        this.id_of_editor = id_of_editor;
+    }
+
+   
 
     public String getRemarks() {
         return remarks;
@@ -63,6 +122,11 @@ public class AppointmentEntity implements Serializable {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
+    
+    
+    
+    
+    
     
     
 
@@ -83,13 +147,7 @@ public class AppointmentEntity implements Serializable {
         return this;
     }
 
-    public long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(long bookId) {
-        this.bookId = bookId;
-    }
+   
 
     public DoctorEntity getDoctor() {
         return doctor;
@@ -157,29 +215,8 @@ public class AppointmentEntity implements Serializable {
         this.appointmentStatusEntity = appointmentStatusEntity;
     }
 
-    public Date getCreationTime() {
-        return creationTime;
-    }
+   
 
-    public void setCreationTime(Date creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    public Date getUpdationTime() {
-        return updationTime;
-    }
-
-    public void setUpdationTime(Date updationTime) {
-        this.updationTime = updationTime;
-    }
-
-    public long getFixedId() {
-        return fixedId;
-    }
-
-    public void setFixedId(long fixedId) {
-        this.fixedId = fixedId;
-    }
 
     public String getTotalInWords() {
         return FinanceUtils.RsToWords((getConsultFee()+getFeeForClinic())+"");
@@ -188,6 +225,23 @@ public class AppointmentEntity implements Serializable {
     public void setTotalInWords(String totalInWords) {
         this.totalInWords = totalInWords;
     }
+
+    
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    
+    
+    
+    @Override
+    public String getModule() {
+    return module;
+            }
 
    
 }

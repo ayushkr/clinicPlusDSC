@@ -5,7 +5,7 @@
  */
 package in.srisrisri.clinic.Document;
 
-import in.srisrisri.clinic.doctor.DoctorEntity;
+import in.srisrisri.clinic.entities.DoctorEntity;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;

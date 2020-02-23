@@ -20,7 +20,7 @@ public class SMSTester {
         s.setDoctorName("doc1");
         s.setPatientName("pat1");
 //        smsm.setPatientId("123");
-//        smsm.sendSms("7907996990", message1);
-        s.sendSms("7907996990",s.getPreparedMessage(message1), SMSSender.sendMock);
+//        smsm.sendSmsTextLocal("7907996990", message1);
+        s.sendSmsTextLocal("7907996990",s.getPreparedMessage(message1), SMSSender.sendMock);
     }
 }

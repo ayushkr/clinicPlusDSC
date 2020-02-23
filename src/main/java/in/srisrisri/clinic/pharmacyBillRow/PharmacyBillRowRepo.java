@@ -1,8 +1,9 @@
 package in.srisrisri.clinic.pharmacyBillRow;
 
-import in.srisrisri.clinic.doctor.DoctorEntity;
-import in.srisrisri.clinic.patient.PatientEntity;
-import in.srisrisri.clinic.pharmacyBill.PharmacyBillEntity;
+import in.srisrisri.clinic.entities.PharmacyBillRowEntity;
+import in.srisrisri.clinic.entities.DoctorEntity;
+import in.srisrisri.clinic.entities.PatientEntity;
+import in.srisrisri.clinic.entities.PharmacyBillEntity;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

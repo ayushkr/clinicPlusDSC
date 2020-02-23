@@ -7,6 +7,7 @@ package in.srisrisri.clinic;
 
 import in.srisrisri.clinic.controllers.Controller0;
 import in.srisrisri.clinic.FileStorage.FileStorageProperties;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -25,12 +26,14 @@ import org.springframework.scheduling.annotation.EnableScheduling;
     FileStorageProperties.class
 })
 public class Application {
-    
+
     public static void main(String[] args) {
-        LookAndFeelUtils.setOSLookAndFeel();
-        ConfigurableApplicationContext context = new SpringApplicationBuilder(Application.class).headless(false).run(args);
-        Controller0 controller0 = context.getBean(Controller0.class);
-        controller0.prepareAndOpenFrame();
+//        LookAndFeelUtils.setOSLookAndFeel();
+//        ConfigurableApplicationContext context = new SpringApplicationBuilder(ApplicationSwing.class).headless(true).run(args);
+//        Controller0 controller0 = context.getBean(Controller0.class);
+//        controller0.prepareAndOpenFrame();
+
+        SpringApplication.run(Application.class, args);
     }
-    
+
 }

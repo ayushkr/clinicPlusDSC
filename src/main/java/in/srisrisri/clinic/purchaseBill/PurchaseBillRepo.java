@@ -5,6 +5,7 @@
  */
 package in.srisrisri.clinic.purchaseBill;
 
+import in.srisrisri.clinic.entities.PurchaseBillEntity;
 import in.srisrisri.clinic.Vendor.VendorEntity;
 import java.sql.Date;
 import java.util.List;

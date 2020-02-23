@@ -1,7 +1,8 @@
 package in.srisrisri.clinic.medicineStock;
 
-import in.srisrisri.clinic.medicineBrandName.MedicineBrandNameEntity;
-import in.srisrisri.clinic.purchaseBill.PurchaseBillEntity;
+import in.srisrisri.clinic.entities.MedicineStockEntity;
+import in.srisrisri.clinic.entities.MedicineBrandNameEntity;
+import in.srisrisri.clinic.entities.PurchaseBillEntity;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

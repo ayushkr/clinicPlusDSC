@@ -8,6 +8,16 @@
 ////    ctxMenu.style.left = (event.pageX - 10)+"px";
 ////    ctxMenu.style.top = (event.pageY - 10)+"px";
 //},false);
+
+
+function medicineStockSummary(){
+    
+    
+    
+}
+
+
+
 var entitySelectedLast;
 
 function back() {

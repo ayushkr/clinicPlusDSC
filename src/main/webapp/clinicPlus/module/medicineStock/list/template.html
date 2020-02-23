@@ -1,13 +1,13 @@
 <div class='w3-container'>
 
     <div style="position: relative;z-index: 1;
-                background-color: transparent"
+         background-color: transparent"
          data-akr-printable="false"
          >
         <div class="w3-bar-ay"  >
-            
+
             <a class="w3-bar-item tablink tabSelected " 
-           onClick="openCity(event, 'none')">None</a>
+               onClick="openCity(event, 'none')">None</a>
 
             <a class="w3-bar-item  tablink " 
                onClick="openCity(event, 'filter')">Filter</a>
@@ -15,6 +15,8 @@
 
             <a class="w3-bar-item tablink " 
                onClick="openCity(event, 'bulk')">Bulk</a>
+             <a class="w3-bar-item tablink " 
+               onClick="openCity(event, 'summary')">summary</a>
 
         </div>
 
@@ -65,10 +67,20 @@
                    >
 
         </div>  
+        
+        
+        <div id="summary" class="w3-container_margin10 w3-border city city_hide">
+
+            <input type="button" value="Bulk Delete"
+                   
+                   onclick="medicineStockSummary()"
+                   >
+
+        </div>  
 
     </div>
-   <hr>
-    
+    <hr>
+
     <form id='form_{{:obj.module}}/deleteBulk' 
           method="post" 
           action="{{:renderInDiv}}#/cmd/post">
@@ -77,15 +89,15 @@
                value='{{:obj.module}}/deleteBulk'>
         <input type='hidden' name='redirect' 
                value=' #/cmdc?module={{:obj.module}}&action=/all/list'>
-module={{:obj.module}}
+        module={{:obj.module}}
         <div id="printableArea"   title="{{:obj.module}}_List" >
-            
+
 
             <table class="customers" cellspacing="0" cellpadding="5"  style="width:85%;">
                 <thead>
                     <tr class="bluestrp">
-                        
-                         <th style="min-width: 20px" >
+
+                        <th style="min-width: 20px" >
 
                         </th>
                         <th style="min-width: 20px" >
@@ -150,9 +162,9 @@ module={{:obj.module}}
                     {{for obj.pageList.content}}
                     {{if idSpecial!=1}}
                     <tr 
-                       
+
                         class="firstrow">
-                         <td>
+                        <td>
                             <div id='menu_individual_{{:id}}' 
                                  data-akr-printable="false"
                                  style2="display: none"
@@ -172,7 +184,7 @@ module={{:obj.module}}
 
                         </td>
                         <td >
-                            
+
                             <div id='menu_individual_{{:id}}' 
                                  data-akr-printable="false"
                                  style2="display: none"
@@ -182,7 +194,7 @@ module={{:obj.module}}
                                    title="Edit"
                                    onclick="go({{:id}}, 'medicineStock')" 
                                    ></i>
-                                
+
                             </div>
 
                         </td>

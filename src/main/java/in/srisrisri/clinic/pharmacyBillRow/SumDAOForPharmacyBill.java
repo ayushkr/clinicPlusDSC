@@ -5,8 +5,9 @@
  */
 package in.srisrisri.clinic.pharmacyBillRow;
 
+import in.srisrisri.clinic.entities.PharmacyBillRowEntity;
 import in.srisrisri.clinic.exception.CustomException;
-import in.srisrisri.clinic.medicineStock.MedicineStockEntity;
+import in.srisrisri.clinic.entities.MedicineStockEntity;
 import in.srisrisri.clinic.utils.FinanceUtils;
 import java.math.BigDecimal;
 
@@ -21,132 +22,115 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class SumDAOForPharmacyBill {
 
-    private final Logger logger = LoggerFactory.getLogger(SumDAOForPharmacyBill.class);
-    @Autowired
-    PharmacyBillRowRepo pharmacyBillRowRepo;
-    List<PharmacyBillRowEntity> pharmacyBillRowEntitys;
-
-    BigDecimal mrpTotal = new BigDecimal(0);
-    BigDecimal gstTotal = new BigDecimal(0);
-    BigDecimal amountTotal = new BigDecimal(0);
-    BigDecimal roundThisMuch = new BigDecimal(0);
-    BigDecimal amountTotalRounded = new BigDecimal(0);
-    String amountTotalWords = "";
-    BigDecimal bd = new BigDecimal(1.75);
-    BigDecimal HUNDRED = new BigDecimal(100);
-    BigDecimal ONE = new BigDecimal(1);
-    BigDecimal TWO = new BigDecimal(2);
-    BigDecimal FIVE = new BigDecimal(5);
-    BigDecimal taxableAmount;
-    BigDecimal freeOfCost;
-    BigDecimal qty;
-    BigDecimal sp;
-    BigDecimal discount;
-    Long rounderId;
-
-    Long billId;
-
     public boolean calculateTotals() throws Exception {
         String error = "";
 
-        for (PharmacyBillRowEntity pharmacyBillRowEntity : pharmacyBillRowEntitys) {
-            MedicineStockEntity medicineStock_gotFrom_PharmacyBillRowEntity = pharmacyBillRowEntity.getMedicineStock();
+        for (PharmacyBillRowEntity row : pharmacyBillRowEntitys) {
+            if (row.getIdSpecial() == ConstantsInPharmacyBillRow.ROUNDOFF_ID_SPECIAL) {
+                p("\t IdSpecial ={}", row.toString());
+                rounderId = row.getId();
+                p("\t rounderId={}", rounderId);
+            }
 
-            logger.warn("SumDAOForPharmacyBill.calculateTotals() ,\n medicineStock={}", medicineStock_gotFrom_PharmacyBillRowEntity);
+            MedicineStockEntity stock = row.getMedicineStock();
 
-            if (pharmacyBillRowEntity.getIdSpecial() == ConstantsInPharmacyBillRow.ROUNDOFF_ID_SPECIAL) {
-                    logger.warn("\t IdSpecial ={}", pharmacyBillRowEntity.toString());
-                    rounderId = pharmacyBillRowEntity.getId();
-                    logger.warn("\t rounderId={}", rounderId);
-                }
-            if (medicineStock_gotFrom_PharmacyBillRowEntity != null) {
-
+            if (stock != null) {
+                p("medicineStock={}", stock.getId());
                 try {
-                    sp = medicineStock_gotFrom_PharmacyBillRowEntity.getSellingPrice();
-                    logger.warn("\t calculateTotals, sp ={}", sp);
-                    discount = medicineStock_gotFrom_PharmacyBillRowEntity.getDiscount();
-                    logger.warn("\t calculateTotals, discount ={}", discount);
+                    sp = stock.getSellingPrice();
+
+                    discount = stock.getDiscount();
+
                 } catch (Exception e) {
-                    logger.warn("\t--- calculateTotals, sp or discount is null");
+                    p("\t--- calculateTotals, sp or discount is null");
                 }
 
-                qty = new BigDecimal(pharmacyBillRowEntity.getQty() + "");
-                logger.warn("\t calculateTotals, qty ={}", qty);
+                qty = new BigDecimal(row.getQty() + "");
+                p("\t calculateTotals, qty ={}", qty);
 
                 BigDecimal amtWithoutDiscount = sp.multiply(qty);
-                logger.warn("\t calculateTotals, amtWithoutDiscount ={}", amtWithoutDiscount);
+                p("\t calculateTotals, amtWithoutDiscount ={}", amtWithoutDiscount);
                 BigDecimal amtWithDiscount = BigDecimal.ZERO;
                 if (discount != null) {
                     amtWithDiscount = sp.multiply(BigDecimal.ONE.subtract(discount)).multiply(qty);
-                    logger.warn("\t calculateTotals, amtWithDiscount ={}", amtWithDiscount);
+                    p("\t calculateTotals, amtWithDiscount ={}", amtWithDiscount);
                 } else {
                     amtWithDiscount = amtWithoutDiscount;
                 }
-                pharmacyBillRowEntity.setAmount(amtWithDiscount);
+                row.setAmount(amtWithDiscount);
 
-                BigDecimal gstAmt = (amtWithoutDiscount.multiply(medicineStock_gotFrom_PharmacyBillRowEntity.getCgst().add(medicineStock_gotFrom_PharmacyBillRowEntity.getSgst())));
-                logger.warn("\t calculateTotals, gstAmt ={}", gstAmt);
+                BigDecimal gstAmt = (amtWithoutDiscount.multiply(stock.getCgst().add(stock.getSgst())));
+                p("\t calculateTotals, gstAmt ={}", gstAmt);
 
-                medicineStock_gotFrom_PharmacyBillRowEntity.setGst(gstAmt);
+                stock.setGst(gstAmt);
 
-                medicineStock_gotFrom_PharmacyBillRowEntity.setGst(BigDecimal.ZERO);
+                stock.setGst(BigDecimal.ZERO);
 
-                 
                 {
-                    BigDecimal mrp = medicineStock_gotFrom_PharmacyBillRowEntity.getMrp();
+                    BigDecimal mrp = stock.getMrp();
                     if (mrp == null) {
                         throw new CustomException("In medicine="
-                                + medicineStock_gotFrom_PharmacyBillRowEntity.getMedicineBrandName().getBrandName()
-                                + " with ID=" + medicineStock_gotFrom_PharmacyBillRowEntity.getId() + ", mrp is not set");
+                                + stock.getMedicineBrandName().getBrandName()
+                                + " with ID=" + stock.getId() + ", mrp is not set");
                     }
                     mrpTotal = mrpTotal.add(mrp);
-                    gstTotal = gstTotal.add(medicineStock_gotFrom_PharmacyBillRowEntity.getGst());
-                    amountTotal = amountTotal.add(pharmacyBillRowEntity.getAmount());
+                    gstTotal = gstTotal.add(stock.getGst());
+                    amountTotal = amountTotal.add(row.getAmount());
                 }
 
-                medicineStock_gotFrom_PharmacyBillRowEntity.setSellingPrice(FinanceUtils.round(medicineStock_gotFrom_PharmacyBillRowEntity.getSellingPrice(), 2));
-                medicineStock_gotFrom_PharmacyBillRowEntity.setGst(FinanceUtils.round(medicineStock_gotFrom_PharmacyBillRowEntity.getGst(), 2));
-                pharmacyBillRowEntity.setAmount(FinanceUtils.round(pharmacyBillRowEntity.getAmount(), 2));
+                stock.setSellingPrice(FinanceUtils.round(stock.getSellingPrice(), 2));
+                stock.setGst(FinanceUtils.round(stock.getGst(), 2));
+                row.setAmount(FinanceUtils.round(row.getAmount(), 2));
 
+            } else {
+                p("medicineStock is null");
             }
 
         }
 
         try {
             taxableAmount = FinanceUtils.round(amountTotal.subtract(gstTotal).divide(TWO), 2);
-            logger.warn(" taxableAmount={} ", taxableAmount);
+            p(" taxableAmount={} ", taxableAmount);
 
             freeOfCost = FinanceUtils.round(mrpTotal.subtract(amountTotal), 2);
-            logger.warn(" freeOfCost={} ", freeOfCost);
+            p(" freeOfCost={} ", freeOfCost);
 
-            amountTotalRounded = amountTotal.add(getRoundWithNextMultipleOf(amountTotal,ONE));
-            logger.warn(" amountTotalRounded={} ", amountTotalRounded);
+            amountTotalRounded = amountTotal.add(roundMultiple(amountTotal, ONE));
+            p(" amountTotalRounded={} ", amountTotalRounded);
             amountTotalWords = FinanceUtils.RsToWords(amountTotalRounded + "");
-            logger.warn(" rounding ");
+            p(" rounding ");
         } catch (Exception e) {
-            logger.warn("exception in rounding e={}", e);
+            p("exception in rounding e={}", e);
 
         }
 
         return true;
     }
 
-    public BigDecimal getRoundWithNextMultipleOf(BigDecimal totalDirty,BigDecimal loss) {
-
+    public BigDecimal roundMultiple(BigDecimal totalDirty, BigDecimal loss) {
+        p("in roundMultiple()");
         BigDecimal[] divideAndRemainder = totalDirty.divideAndRemainder(loss);
 
-        logger.warn("getRoundWithNextMultipleOf5() \t divideAndRemainder {} ,{}", divideAndRemainder[0], divideAndRemainder[1]);
+        p("divideAndRemainder[0]=", divideAndRemainder[0]);
+        p("divideAndRemainder[1]=", divideAndRemainder[1]);
+
         BigDecimal subtract = BigDecimal.ZERO.subtract(divideAndRemainder[1]);
         setRounded(subtract);
+
         try {
-            PharmacyBillRowEntity pharmacyBillRowEntity = pharmacyBillRowRepo.findById(rounderId).get();
-            pharmacyBillRowEntity.setAmount(subtract);
-            PharmacyBillRowEntity saved = pharmacyBillRowRepo.save(pharmacyBillRowEntity);
-            logger.warn("getRoundWithNextMultipleOf5() \t saved rounding ={}", saved.toString());
+            if (rounderId != null) {
+                PharmacyBillRowEntity pharmacyBillRowEntity = pharmacyBillRowRepo.findById(rounderId).get();
+                pharmacyBillRowEntity.setAmount(subtract);
+                PharmacyBillRowEntity saved = pharmacyBillRowRepo.save(pharmacyBillRowEntity);
+                p("saved rounder entity=", saved.toString());
+            } else {
+                p("rounderId is null");
+            }
         } catch (Exception e) {
-             logger.warn("getRoundWithNextMultipleOf5() \t exp ={}", e.toString());
-            logger.warn("getRoundWithNextMultipleOf5 \t  pharmacyBillRowRepo.findById null id={}", rounderId);
+            p("exp ={}", e.toString());
+           
         }
+
         return subtract;
 
     }
@@ -205,10 +189,10 @@ public class SumDAOForPharmacyBill {
         return FinanceUtils.round(amountTotal, 2);
     }
 
-    public SumDAOForPharmacyBill(List<PharmacyBillRowEntity> pharmacyBillRowEntitys,PharmacyBillRowRepo pharmacyBillRowRepo) {
+    public SumDAOForPharmacyBill(List<PharmacyBillRowEntity> pharmacyBillRowEntitys, PharmacyBillRowRepo pharmacyBillRowRepo) {
         this.pharmacyBillRowEntitys = pharmacyBillRowEntitys;
-        this.pharmacyBillRowRepo=pharmacyBillRowRepo;
-        logger.warn("SumDAO created ");
+        this.pharmacyBillRowRepo = pharmacyBillRowRepo;
+        p("SumDAO created ");
     }
 
     public List<PharmacyBillRowEntity> getPharmacyBillRowEntitys() {
@@ -219,4 +203,36 @@ public class SumDAOForPharmacyBill {
         this.pharmacyBillRowEntitys = pharmacyBillRowEntitys;
     }
 
+    private void p(String str, Object o) {
+        System.out.println(str + " --> " + o);
+    }
+
+    private void p(String str) {
+        System.out.println(str + "");
+    }
+
+    private final Logger logger = LoggerFactory.getLogger(SumDAOForPharmacyBill.class);
+    @Autowired
+    PharmacyBillRowRepo pharmacyBillRowRepo;
+    List<PharmacyBillRowEntity> pharmacyBillRowEntitys;
+
+    BigDecimal mrpTotal = new BigDecimal(0);
+    BigDecimal gstTotal = new BigDecimal(0);
+    BigDecimal amountTotal = new BigDecimal(0);
+    BigDecimal roundThisMuch = new BigDecimal(0);
+    BigDecimal amountTotalRounded = new BigDecimal(0);
+    String amountTotalWords = "";
+    BigDecimal bd = new BigDecimal(1.75);
+    BigDecimal HUNDRED = new BigDecimal(100);
+    BigDecimal ONE = new BigDecimal(1);
+    BigDecimal TWO = new BigDecimal(2);
+    BigDecimal FIVE = new BigDecimal(5);
+    BigDecimal taxableAmount;
+    BigDecimal freeOfCost;
+    BigDecimal qty;
+    BigDecimal sp;
+    BigDecimal discount;
+    Long rounderId = null;
+
+    Long billId;
 }

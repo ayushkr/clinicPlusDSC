@@ -1,6 +1,6 @@
 package in.srisrisri.clinic.bill;
 
-import in.srisrisri.clinic.pharmacyBill.PharmacyBillEntity;
+import in.srisrisri.clinic.entities.PharmacyBillEntity;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;

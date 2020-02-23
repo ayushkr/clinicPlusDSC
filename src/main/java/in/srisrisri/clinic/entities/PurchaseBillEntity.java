@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package in.srisrisri.clinic.purchaseBill;
+package in.srisrisri.clinic.entities;
 
 /**
  *
  * @author akr2
  */
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import in.srisrisri.clinic.Vendor.VendorEntity;
-import in.srisrisri.clinic.medicineStock.MedicineStockEntity;
+import in.srisrisri.clinic.interfaces.Moduleable;
+
 import java.io.Serializable;
 import java.sql.Date;
 import javax.persistence.Entity;
@@ -20,37 +22,47 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name = "PurchaseBill")
 @Table(name = "purchase_bill")
-public class PurchaseBillEntity implements Serializable {
-
+public class PurchaseBillEntity  implements Serializable,Moduleable {
+ 
     @Id
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
     long id;
-    @ColumnDefault(value = "0")
-    long fixedId;
-     @ColumnDefault(value = "0")
-    long bookId;
-    String remarks;
+    
 
     
     @OneToOne
     VendorEntity vendor;
+     @JsonDeserialize(using = in.srisrisri.clinic.utils.DateHandler.class)
     Date dateOfPurchase;
     String billNo;
     String cash;
-    
-    
+     @JsonDeserialize(using = in.srisrisri.clinic.utils.DateHandler.class)
     Date dateOfBill;
+    //   common 
+     @ColumnDefault(value = "0")
+    long fixedId;
+     @ColumnDefault(value = "0")
+    long bookId;
     
-    @Temporal(TemporalType.TIMESTAMP)
+      @Temporal(TemporalType.TIMESTAMP)
     java.util.Date creationTime;
     @Temporal(TemporalType.TIMESTAMP)
     java.util.Date updationTime;
+    
+    @Transient
+    boolean selected = false;
+    @ColumnDefault(value = "0")
+     long id_of_editor;
+  
+    String remarks;
+   
 
     public long getId() {
         return id;
@@ -60,29 +72,7 @@ public class PurchaseBillEntity implements Serializable {
         this.id = id;
     }
 
-    public long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(long bookId) {
-        this.bookId = bookId;
-    }
-
-    public long getFixedId() {
-        return fixedId;
-    }
-
-    public void setFixedId(long fixedId) {
-        this.fixedId = fixedId;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
+   
 
     public VendorEntity getVendor() {
         return vendor;
@@ -126,7 +116,21 @@ public class PurchaseBillEntity implements Serializable {
         this.dateOfBill = dateOfBill;
     }
 
-   
+    public long getFixedId() {
+        return fixedId;
+    }
+
+    public void setFixedId(long fixedId) {
+        this.fixedId = fixedId;
+    }
+
+    public long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(long bookId) {
+        this.bookId = bookId;
+    }
 
     public java.util.Date getCreationTime() {
         return creationTime;
@@ -142,6 +146,46 @@ public class PurchaseBillEntity implements Serializable {
 
     public void setUpdationTime(java.util.Date updationTime) {
         this.updationTime = updationTime;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public long getId_of_editor() {
+        return id_of_editor;
+    }
+
+    public void setId_of_editor(long id_of_editor) {
+        this.id_of_editor = id_of_editor;
+    }
+
+   
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+    
+    
+    
+
+
+   
+
+ 
+       @Transient
+    String module="purchaseBill";
+    @Override
+    public String getModule() {
+    return module;
     }
 
     

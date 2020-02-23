@@ -1,11 +1,14 @@
 package in.srisrisri.clinic.patient;
 
+import in.srisrisri.clinic.entities.PatientEntity;
 import in.srisrisri.clinic.Constants.Constants1;
 import in.srisrisri.clinic.utils.*;
 import in.srisrisri.clinic.FileStorage.FileStorageService;
 import in.srisrisri.clinic.FileStorage.UploadFileResponse;
+import in.srisrisri.clinic.entities.DoctorEntity;
 import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.smsChat.SMSSender;
+import in.srisrisri.clinic.titles.Titles;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -88,85 +91,120 @@ public class PatientResource {
             SMSSender smsm = new SMSSender();
             smsm.setPatientName(name);
             smsm.setPatientId(id + "");
-            String sendSms = smsm.sendSms(contactPhone, 
+            String sendSms = smsm.sendSmsTextLocal(contactPhone,
                     smsm.getPreparedMessage(messageGiven, patientEntity),
                     SMSSender.sendMock);
 
             listProcessed += "<tr>"
-                    + "<td>"+id+"</td>"
-                    +sendSms
-                    +"</tr>";
+                    + "<td>" + id + "</td>"
+                    + sendSms
+                    + "</tr>";
         }
-        return listProcessed+"</table>";
+        return listProcessed + "</table>";
     }
 
     @GetMapping("")
     @ResponseBody
     public List<PatientEntity> all() {
         logger.warn("REST getItems() , {} ", new Object[]{label});
-       
+
         Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
-       
+
         List<PatientEntity> list = repo.findAll(sort);
 
         return list;
     }
-
-    @GetMapping("pageable")
+    
+     @PostMapping("pageable/json")
     @ResponseBody
-    public PageCover<PatientEntity> allPageNumber(
-            @RequestParam("pageNumber") String pageNumber,
-            @RequestParam("filterColumn") String filterColumn,
-            @RequestParam("filter") String filter,
-            @RequestParam("sortColumn") String sortColumn,
-            @RequestParam("sortOrder") String sortOrder
-    ) {
+      public PageCover<PatientEntity> pageable(Enquiry ey){
+       
+          if(ey.filter==null) ey.filter="undefined";
+          if(ey.filterColumn==null) ey.filterColumn="undefined";
+            if(ey.sortColumn==null) ey.sortColumn="undefined";
+              if(ey.sortOrder==null) ey.sortOrder="undefined";
+                if(ey.pageNumber==null) ey.pageNumber="undefined";
+          
         Sort sort;
         int pageSize = 10;
-        logger.warn("pageable={},filter= ", new Object[]{label, filter});
+        logger.warn("pageable={},filter= ", new Object[]{label, ey.filter});
 
-        if (!sortColumn.equals("undefined")) {
-            if (sortOrder.equals("d")) {
-                sort = Sort.by(sortColumn).descending();
+        if (!ey.sortColumn.equals("undefined")) {
+            if (ey.sortOrder.equals("d")) {
+                sort = Sort.by(ey.sortColumn).descending();
             } else {
-                sort = Sort.by(sortColumn).ascending();
+                sort = Sort.by(ey.sortColumn).ascending();
             }
 
         } else {
-            sort = Sort.by("dateOfRegistration").descending();
+            sort = Sort.by("id").descending();
         }
-        if ("undefined".equals(pageNumber)) {
-            pageNumber = "1";
+        if ("undefined".equals(ey.pageNumber)) {
+            ey.pageNumber = "1";
         } else {
-            if (Integer.parseInt(pageNumber) == 0) {
+            if (Integer.parseInt(ey.pageNumber) == 0) {
                 pageSize = 10000;
-                pageNumber = "1";
+                ey.pageNumber = "1";
             }
         }
-        Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber) - 1, pageSize, sort);
+        Pageable pageable = PageRequest.of(Integer.parseInt(ey.pageNumber) - 1, pageSize, sort);
         Page<PatientEntity> page = null;
-        if (filterColumn.equals("undefined")) {
+        if (ey.filterColumn.equals("undefined")) {
             page = repo.findAll(pageable);
+           
 
         } else {
-            if (filterColumn.equals("name")) {
-                page = repo.findAllByNameLike(filter, pageable);
+            if (ey.filterColumn.equals("name")) {
+                page = repo.findAllByNameLike(ey.filter, pageable);
 
             }
-            if (filterColumn.equals("contactPhone")) {
-                page = repo.findAllByContactPhoneLike(filter, pageable);
+            if (ey.filterColumn.equals("contactPhone")) {
+                page = repo.findAllByContactPhoneLike(ey.filter, pageable);
 
             }
 
         }
 
         PageCover<PatientEntity> pageCover = new PageCover<>(page);
-        pageCover.setSortColumn(sortColumn);
-        pageCover.setSortOrder(sortOrder);
-        pageCover.setFilter(filter);
-        pageCover.setFilterColumn(filterColumn);
+        pageCover.setSortColumn(ey.sortColumn);
+        pageCover.setSortOrder(ey.sortOrder);
+        pageCover.setFilter(ey.filter);
+        pageCover.setFilterColumn(ey.filterColumn);
         pageCover.setModule(label);
+
+        Titles titles = new Titles();
+        titles.setModuleName(label);
+        titles.setId2(true);
+        titles.setName(true);
+       titles.setAge(true);
+       titles.setList(new String[]{"id","name","age","address"});
+        pageCover.setTitles(titles);
+
         return pageCover;
+          
+          
+      }
+    
+
+    @GetMapping("pageable")
+    @ResponseBody
+    public PageCover<PatientEntity> pageable(
+            @RequestParam("pageNumber") String pageNumber,
+            @RequestParam("filterColumn") String filterColumn,
+            @RequestParam("filter") String filter,
+            @RequestParam("sortColumn") String sortColumn,
+            @RequestParam("sortOrder") String sortOrder
+    ) {
+        
+        Enquiry ey=new Enquiry();
+        ey.setPageNumber(pageNumber);
+        ey.setFilterColumn(filterColumn);
+        ey.setFilter(filter);
+        ey.setSortColumn(sortColumn);
+        ey.setSortOrder(sortOrder);
+        
+        return pageable(ey);
+       
     }
 
     @GetMapping("{id}")
@@ -202,13 +240,22 @@ public class PatientResource {
     }
     // create
 
-    @PostMapping("/json")
-    public String PostMapping_many(@RequestBody PatientList entityBefore) {
+    @PostMapping("/many/json")
+    public String PostMapping_many(@RequestBody PatientList list) {
         String result = "";
-        result += "length=" + entityBefore;
+        result += "length=" + list;
         System.out.println(" " + result);
 
         return result;
+    }
+    
+    
+    @PostMapping("/json")
+    public ResponseEntity<JsonResponse> PostMapping_one_json(
+            @RequestBody PatientEntity entityBefore
+    ) {
+        return PostMapping_one(entityBefore);
+
     }
 
     // create

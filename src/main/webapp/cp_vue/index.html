@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+
+<title>O</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/cp_vue/css/w3.css">
+<link rel="stylesheet" href="/cp_vue/css/other.css">
+<link rel="stylesheet" href="/clinicPlus/js_css/font-awesome.min.css">
+<script src='/cp_vue/js/alert.js'></script>
+<script src='/cp_vue/js/pageNewEtc.js'></script>
+<script src='/cp_vue/js/jquery.min.js'></script>
+<script src='/cp_vue/js/vue.js'></script>
+<!--<script src='/cp_vue/js/sammy.js'></script>-->
+<script src='/cp_vue/js/overall.js'></script>
+
+
+
+
+
+<div class="w3-bar w3-black">
+    <button class="w3-bar-item w3-button" onclick="openCity('London')">Reception</button>
+    <button class="w3-bar-item w3-button" onclick="openCity('Paris')">Pharmacy</button>
+    <button class="w3-bar-item w3-button" onclick="openCity('Tokyo')">Edit</button>
+</div>
+
+<div id="London" class="w3-container city">
+    <div class="w3-row ">
+
+        <a onclick="api.pageable({module: 'doctor'})" class="w3-btn w3-teal">Doctor</a> 
+        <a onclick="api.pageable({module: 'patient'})" class="w3-btn w3-teal">patient</a> 
+        <a onclick="api.pageable({module: 'appointment'})" class="w3-btn w3-teal">appointment</a>
+        <a onclick="api.pageable({module: 'medicineStock'})" class="w3-btn w3-teal">medicineStock</a>
+        <a onclick="api.pageable({module: 'purchaseBill'})" class="w3-btn w3-teal">purchaseBill</a>
+        <a onclick="api.pageable({module: 'pharmacyBill'})" class="w3-btn w3-teal">pharmacyBill</a>
+
+
+
+
+        <div id="div_api_float_status" 
+             v-if="display"
+             class="div_api_float_status">
+            <center>
+                <br>
+                <br>
+                <h1>
+                    Loading , <br>
+                    Please wait
+                </h1>
+            </center>
+        </div>
+
+
+        <div id="div_pageable_actions"
+             v-if="display"
+             style="position: fixed;top: 100px;right: 0px;background-color: azure">
+
+            <!--                    button.delete={{button.delete}}-->
+
+
+            <table style="width: 100%;">
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+            </table>
+            <!--side_menu-->
+            <div  v-if="selectionMode.display">
+                <button class="w3-btn w3-teal pageable_actions_buttons" 
+                        @click="backTo()"
+
+                        >
+                    <<  Back to   
+                </button> 
+                <br>
+
+                <button class="w3-btn w3-teal pageable_actions_buttons" 
+                        onclick="entity.selectFor()" 
+                        >
+                    select for   
+                </button> 
+                <br>
+                get={{selectionMode.get}} 
+                <br>
+
+                <div v-if="selectionMode.for">
+                    for module={{selectionMode.for.module}} <br>
+                    for id={{selectionMode.for.id}} 
+                </div>
+
+                <br>
+
+            </div>
+            <div>
+
+                <!--action.entity-->
+                <button class="w3-btn w3-teal pageable_actions_buttons" 
+                        onclick="entity.print()" 
+                        v-if="button.print">
+                    print
+                </button> 
+                <br>
+
+                <button class="w3-btn w3-teal pageable_actions_buttons" 
+                        onclick="entity.edit()" 
+                        v-if="button.edit">
+                    edit
+                </button> 
+                <br>
+
+                <button class="w3-btn w3-teal pageable_actions_buttons" 
+                        onclick="entity.delete()" 
+                        v-if="button.delete" >
+                    delete
+                </button> 
+                <br>
+            </div>
+
+            <label>
+                <span class="w3-btn w3-teal pageable_actions_buttons">
+                    Cancel
+                </span>
+
+                <input type="checkbox"  
+                       v-model="display" 
+                       style="display: none">
+            </label>
+            <br>
+        </div>
+        <!--        div_pageable_actions ends-->
+
+
+
+
+        <div id="div_api_pageable">
+
+            <!--                <div >
+<button type="button" onclick="settings_column_visibility()">
+Settings 
+</button>
+</div>-->
+            <div v-if="settings_column_visibility"
+                 style="background-color: aliceblue">
+                <div>
+                    <span style="float: left">Columns Needed</span>
+                    <button 
+                        type="button" 
+                        onclick="settings_column_visibility()" 
+                        style="float: right">
+                        X 
+                    </button>
+                </div>
+                <br>
+                <span v-for=" (value,key) in result.titles" >
+                    <!--                    key={{key}} ____  {{value}} <br>-->
+
+                    <!--                    common-->
+
+                    <span v-if="key=='id'" >
+                        {{key}}<input  type='checkbox' v-model="result.titles.id2"  />
+                    </span>
+                    <span v-if="key=='name'" >
+                        {{key}}<input  type='checkbox' v-model="result.titles.name"  />
+                    </span>
+
+                    <span v-if="key=='age'" >
+                        {{key}}<input  type='checkbox' v-model="result.titles.age"  />
+                    </span>
+
+                    <span v-if="key=='contactPhone'" >
+                        {{key}}<input  type='checkbox' v-model="result.titles.contactPhone"  />
+                    </span>
+
+                    <span v-if="key=='address'" >
+                        {{key}}<input  type='checkbox' v-model="result.titles.address"  />
+                    </span>
+
+                    <span v-if="result.titles.moduleName=='patient'">
+
+                    </span>
+
+                    <span v-if="result.titles.moduleName=='doctor'">
+
+
+                        <span v-if="key=='department'" >
+                            {{key}}<input  type='checkbox' v-model="result.titles.department"  />
+                        </span>
+                        <span v-if="key=='fees'" >
+                            {{key}}<input  type='checkbox' v-model="result.titles.fees"  />
+                        </span>
+
+
+                    </span>
+                </span>
+
+
+            </div>
+            <!--settings column ends-->
+
+            <div v-if="ready">
+                <div>
+
+                    <div class="w3-center"  >
+                        <div class="w3-bar">
+                            <a  class="w3-button"
+                                v-bind:onclick="'api.pageable2('+'\''+result.module+'\'' + ','+(0)+ ')' "
+                                >All</a>
+
+
+                            <a href="#" class="w3-bar-item w3-button"
+                               v-bind:onclick="'api.pageable2('+'\''+result.module+'\'' + ','+(result.pageList.pageable.pageNumber)+ ')' "
+                               >&laquo;</a>
+
+                            <a 
+
+                                class="w3-button" v-for="i in result.pageList.totalPages"
+                                v-bind:onclick="'api.pageable2('+'\''+result.module+'\'' + ','+(i)+ ')' "
+                                >{{i}}</a>
+
+                            <a href="#" class="w3-button"
+                               v-bind:onclick="'api.pageable2('+'\''+result.module+'\'' + ','+(result.pageList.pageable.pageNumber+2)+ ')' "
+                               >&raquo;</a>
+
+                        </div>
+                    </div>
+                </div>
+                <!--                paging ends-->
+
+                <div>
+                    <span>List of {{result.module}}</span> <br>
+                    <!--n v-bind:module="result.module" v-bind:id="todo.id"   -->
+
+                    <!--list.doctor-->
+                    <table border=1 class='w3-table-all' v-if="result.module=='doctor'">
+                        <tr >
+                            <th > </th>
+                            <th >ID </th>
+                            <th >dateOfJoining </th>
+
+                            <th >Name </th>
+                            <th >Fees</th>
+                            <th >department</th>
+                            <th >email</th>
+                            <th >phone</th>
+                            <th >remarks</th>
+                        </tr>
+
+                        <tr v-for="(todo,key) in result.pageList.content"
+                            v-bind:onclick="'entity.select({module:'+todo.module+',data:'+JSON.stringify(todo)+',key:'+key+'})'"
+                            v-bind:class="'s_'+todo.selected"
+                            >
+                            <td>   {{key}} </td>
+
+                            <td  >{{ todo.id }}  </td>
+                            <td  >{{ todo.dateOfJoining }}</td>
+                            <td >{{ todo.name }}</td>
+                            <td >{{ todo.fees }}</td>
+                            <td >{{ todo.department }}</td>
+                            <td >{{ todo.email }}</td>
+                            <td >{{ todo.contactPhone }}</td>
+                            <td >{{ todo.remarks }}</td>
+                        </tr>
+                    </table>
+
+                    <!--list.patient-->
+                    <table border=1 class='w3-table-all' v-if="result.module=='patient'">
+                        <tr >
+                            <th > </th>
+
+                            <th >ID </th>
+                            <th >dateOfRegistration </th>
+                            <th >Name </th>
+                            <th >Age</th>
+                            <td >phone</td>
+                            <th >address</th>
+                            <th >remarks</th>
+                        </tr>
+                        <tr v-for="(todo,key) in result.pageList.content"
+                            v-bind:onclick="'entity.select({module:'+todo.module+',data:'+JSON.stringify(todo)+',key:'+key+'})'"
+                            v-bind:class="'s_'+todo.selected"
+                            >
+                            <td>   {{key}} </td>
+                            <td  >{{ todo.id }}</td>
+                            <td  >{{ todo.dateOfRegistration }}</td>
+                            <td >{{ todo.name }}</td>
+                            <td >{{ todo.age }}</td>
+                            <td >{{ todo.contactPhone }}</td>
+                            <td >{{ todo.address }}</td>
+                            <td >{{ todo.remarks }}</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <!--list.appointment-->
+                    <table border=1 class='w3-table-all' v-if="result.module=='appointment'">
+                        <tr >
+                            <th > </th>
+
+                            <th >ID </th>
+                            <th >dateOfAppointment </th>
+                            <th >doctor</th>
+                            <th >patient</th>
+                            <th >remarks</th>
+                        </tr>
+
+                        <tr v-for="(todo,key) in result.pageList.content"
+                            v-bind:onclick="'entity.select({module:'+todo.module+',data:'+JSON.stringify(todo)+',key:'+key+'})'"
+                            v-bind:class="'s_'+todo.selected"
+                            >
+                            <td>   {{key}} </td>
+
+                            <td  >{{ todo.id }}</td>
+                            <td >{{ todo.dateOfAppointment }}</td>
+                            <td v-if='todo.doctor'>{{ todo.doctor.name }}</td>
+                            <td v-if='todo.patient'>{{ todo.patient.name }}</td>
+                            <td >{{ todo.remarks }}</td>
+                        </tr>
+                    </table>
+
+
+                    <table border=1 class='w3-table-all' v-if="result.module=='medicineStock'">
+                        <!--list.medicineStock-->
+                        <tr >
+                            <th > </th>
+                            <th >ID </th>
+                            <th >Bill No </th>
+                            <th >brandName </th>
+                            <th >remarks</th>
+                        </tr>
+
+                        <tr v-for="(todo,key) in result.pageList.content"
+                            v-bind:onclick="'entity.select({module:'+todo.module+',data:'+JSON.stringify(todo)+',key:'+key+'})'"
+                            v-bind:class="'s_'+todo.selected"
+                            >
+                            <td>   {{key}} </td>
+                            <td  >{{ todo.id }}</td>
+                            <td  >{{ todo.purchaseBill.id }}</td>
+                            <td >{{ todo.medicineBrandName.brandName }}</td>
+                            <td  >{{ todo.remarks }}</td>
+                        </tr>
+                    </table>
+
+
+                    <table border=1 class='w3-table-all' v-if="result.module=='purchaseBill'">
+                        <!--list.purchaseBill-->
+                        <tr >
+                            <th > </th>
+                            <th >ID </th>
+                            <th >billNo </th>
+                            <th >dateOfBill </th>
+                            <th >vendor </th>
+                            <th >cash </th>
+                            <th >remaks </th>
+                        </tr>
+                        <tr v-for="(todo,key) in result.pageList.content"
+                            v-bind:onclick="'entity.select({module:'+todo.module+',data:'+JSON.stringify(todo)+',key:'+key+'})'"
+                            v-bind:class="'s_'+todo.selected"
+                            >
+                            <td>   {{key}} </td>
+                            <td  >{{ todo.id }}</td>
+                            <td  >{{ todo.billNo }}</td>
+                            <td  >{{ todo.dateOfBill }}</td>
+                            <td v-if='todo.vendor' >{{ todo.vendor.name }}</td>
+                            <td  >{{ todo.cash }}</td>
+                            <td  >{{ todo.remarks }}</td>
+                        </tr>
+                    </table>
+
+                    <table border=1 class='w3-table-all' v-if="result.module=='pharmacyBill'">
+                        <!--list.pharmacyBill-->
+                        <tr >
+                            <th > </th>
+                            <th >ID </th>
+                            <th >dateOfBill </th>
+                            <th >appointment id</th>
+                            <th >appointment date</th>
+                            <th >doctor</th>
+                            <th >patient</th>
+                            <th >remaks </th>
+                        </tr>
+                        <tr v-for="(todo,key) in result.pageList.content"
+                            v-bind:onclick="'entity.select({module:'+todo.module+',data:'+JSON.stringify(todo)+',key:'+key+'})'"
+                            v-bind:class="'s_'+todo.selected"
+                            >
+                            <td>   {{key}} </td>
+                            <td  >{{ todo.id }}</td>
+                            <td  >{{ todo.dateOfBill }}</td>
+
+                            <td v-if='todo.appointment.id' >{{ todo.appointment.id }}  </td>
+                            <td v-else='todo.appointment.id' >--  </td>
+                            <td v-if='todo.appointment.dateOfAppointment' >{{ todo.appointment.dateOfAppointment }}  </td>
+                            <td v-else='todo.appointment.dateOfAppointment' >--  </td>
+                            <td v-if='todo.appointment.doctor' >{{ todo.appointment.doctor.name }}  </td>
+                            <td v-else='todo.appointment.doctor' >--  </td>
+                            <td v-if='todo.appointment.patient' >{{ todo.appointment.patient.name }}  </td>
+                            <td v-else='todo.appointment.patient' >--  </td>
+                            <td  >{{ todo.remarks }}</td>
+                        </tr>
+                    </table>
+
+
+                </div>
+                <!--            table ends-->
+            </div>
+            <!--            ready ends-->
+        </div>
+        <!--        div_api_pageable ends-->
+
+        <br>
+
+
+
+        <div id="div_api_edit">
+            <form class="w3-container" v-if="ready" >
+                <h4 style='float: left'>{{result.module}} ID:
+                    <span  class="w3-badge">{{result.id}}</span>
+                </h4>
+                <span  style='float: right'>
+                    <button 
+
+                        type="button" 
+                        onclick="fnApiSave()"
+                        class="w3-btn w3-padding w3-teal" style="width:120px">
+                        Save &nbsp;
+                    </button>
+                    &nbsp;
+                    <button 
+
+                        type="button" 
+                        onclick="fnApiSaveCancel()"
+                        class="w3-btn w3-padding w3-teal" style="width:120px">
+                        Cancel &nbsp;
+                    </button>
+                    .</span>
+                <hr>
+
+
+
+                <div v-if="result.module=='doctor'">
+                    <!--edit.doctor-->
+                    <p>
+                        <label>Name</label>
+                        <input class="w3-input" type="text" v-model="result.name">
+                    </p>
+                    <p >
+                        <label>Department</label>
+                        <input class="w3-input" type="text" v-model="result.department">
+                    </p>
+                    <p >
+                        <label>Fees</label>
+                        <input class="w3-input" type="text" v-model="result.fees">
+                    </p>
+                    <p ><label>feesList</label><input class="w3-input" type="text" v-model="result.feesList"></p>
+                    <p><label>Email</label><input class="w3-input" type="text" v-model="result.email"></p>
+                    <p><label>remarks</label> <textarea contenteditable="true" v-model='result.remarks'></textarea></p>
+
+                </div>
+
+                <div v-if="result.module=='patient'">
+                    <!--edit.patient-->
+                    <p><label>Name</label><input class="w3-input" type="text" v-model="result.name"></p>
+                    <p><label>Age</label><input class="w3-input" type="text" v-model="result.age"></p>
+                    <p><label>Address</label> <textarea contenteditable="true" v-model='result.address'></textarea></p>
+                    <p><label>Email</label><input class="w3-input" type="text" v-model="result.email"></p>
+                    <p><label>remarks</label> <textarea contenteditable="true" v-model='result.remarks'></textarea></p>
+
+                </div>
+                <div v-if="result.module=='appointment'">
+                    <!--edit.appointment-->
+
+                    <p><label>Doctor</label><input 
+                            v-bind:onclick="'fetch({get:doctor,for:'+JSON.stringify(result)+'})'"
+                                                   v-model="result.doctor.name"  class="w3-input" type="button" ></p>
+                    <p><label>patient</label><input 
+                           v-bind:onclick="'fetch({get:patient,for:'+JSON.stringify(result)+'})'"
+                                                    v-model="result.patient.name" class="w3-input" type="button" ></p>
+                    <p><label>dateOfAppointment</label><input class="w3-input" type="text" v-model="result.dateOfAppointment"></p>
+                    <p><label>remarks</label> <textarea contenteditable="true" v-model='result.remarks'></textarea></p>
+                </div>
+                <div v-if="result.module=='medicineStock'">
+                    <p><label>Bill No</label><input class="w3-input" type="button" v-model="result.purchaseBill.id"></p>
+                    <p><label>Brand</label><input class="w3-input" type="button" v-model="result.medicineBrandName.brandName"></p>
+                    <p><label>Batch</label><input class="w3-input" type="text" v-model="result.batch"></p>
+                    <p><label>remarks</label> <textarea contenteditable="true" v-model='result.remarks'></textarea></p>
+
+                </div>
+                <div v-if="result.module=='purchaseBill'">
+                    <p><label>Bill No</label><input class="w3-input" type="text" v-model="result.billNo"></p>
+                    <p><label>vendor</label><input class="w3-input" type="button" v-model="result.vendor.name"></p>
+                    <p><label>cash or credit</label><input class="w3-input" type="button" v-model="result.cash"></p>
+                    <p><label>dateOfBill</label><input class="w3-input" type="text" v-model="result.dateOfBill"></p>
+                    <p><label>remarks</label><input class="w3-input" type="text" v-model="result.remarks"></p> 
+                </div>
+
+
+
+                <div v-if="result.module=='pharmacyBill'">
+                    <center>
+                        &nbsp; DL No:KL-TSR-144303, KL-TSR-144304
+                        &nbsp;
+                        <!--DL Date: -->
+                    </center>
+
+                    <table border="0" cellspacing="0" cellpadding="0"
+                           class="Table1"
+                           >
+                        <colgroup>
+                            <col width="248">
+                            <col width="248">
+                            <col width="248">
+                        </colgroup>
+                        <tbody>
+                            <tr class="TableRow2">
+                                <td class="Table1_A1" style="float: left">
+                                    Bill No &nbsp;: <span >{{result.id}}</span>
+                                </td>
+                                <td class="Table1_A1"><span class="T1">
+                                        <center>RETAIL BILL</center>
+
+                                    </span>
+                                </td>
+                                <td onclick="document.getElementById('dateOfBill').click()"
+                                    class="Table1_A1" style="float: right"
+                                    id="pharmacyBill_dateOfBill">
+                                    Bill Date :
+                                    {{result.dateOfBill}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td onclick="document.getElementById('appointment').click();" 
+                                    class="Table1_A2" style="float: left">
+                                    Patient :<span class="T1 " id="pharmacyBill_patient" v-if="result.appointment">
+                                        {{result.appointment.patient.name}} 
+                                        <!--(ID:  {{result.appointment.patient.id}} )-->
+                                    </span><span v-else="result.appointment"> -----</span>
+                                </td>
+                                <td class="Table1_A2"></td>
+                                <td onclick="document.getElementById('appointment').click()" class="Table1_A2" style="float: right">
+                                    Doctor :<span class="T1" id="pharmacyBill_doctor" v-if="result.appointment">
+
+                                        {{result.appointment.doctor.name}} 
+                                        <!--(ID:  {{result.appointment.doctor.id}} )-->
+                                    </span><span v-else="result.appointment"> -----</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <!--list_showBillMetaData-->
+                    <label >MetaData <input type="checkbox" v-model="result.showBillMetaData"></label>
+
+                    <div v-if="result.showBillMetaData" akr="showBillMetaData">
+
+                        <p class="inputF"><label>dateOfBill</label>
+                            <input class="w3-input" type="text" v-model="result.dateOfBill"></p>
+                        <p class="inputF"><label>appointment</label>
+                            <input 
+                                class="w3-input" 
+                                type="button" 
+
+                                v-bind:onclick="'fetch({get:appointment,for:'+JSON.stringify(result)+'})'"
+                                v-model="result.appointment.id"
+                                >
+                            <span 
+                                v-if='result.appointment.doctor' 
+                                style="float: left" 
+                                class=""
+                                >
+                                Doctor: {{result.appointment.doctor.name}}
+                            </span>
+                            <span v-if='result.appointment.patient' style="float: right" class="">
+                                Patient:  {{result.appointment.patient.name}}</span>
+                            .
+                        </p>
+                        <p class="inputF"><label>remarks</label>
+                            <input class="w3-input" type="text" v-model="result.remarks"></p> 
+                    </div>
+                </div>
+
+
+
+            </form>
+        </div>
+
+        <div id="div_api_bill">
+            <!--            {{result.map.payload}}-->
+            <table border=1 class='w3-table-all' v-if="result" v-if="result.map">
+                <tr>
+                    <th>Id</th>
+                    <th>medicineStock</th>
+                    <th>qty</th>
+                    <th>amt</th>
+                </tr>
+
+                <tr   v-for="item in result.map.payload.pharmacyBillRowEntitys">
+                    <td>{{item.id}}</td>
+                    <td >
+                        <span v-if="item.medicineStock">
+                            <span v-if="item.medicineStock.medicineBrandName">
+                                {{item.medicineStock.medicineBrandName.brandName}}</span>
+                            <span v-else="item.medicineStock.medicineBrandName">-----null---</span>
+
+                        </span>
+                        <span v-else="item.medicineStock">-----adjustment amount---</span>
+                    </td>
+
+                    <td >{{item.qty}}</td>
+                    <td >{{item.amount}}</td>
+
+                </tr>
+            </table>
+        </div>
+
+
+
+
+
+    </div>
+
+</div>
+
+<div id="Paris" class="w3-container city" style="display:none">
+
+
+    <div id="Tokyo" class="w3-container city" style="display:none">
+
+    </div>
+
+
+    <div class="w3-container">
+
+        <div id="alert_akr" class="alert_akr" style="display: none">
+            <!--alert_akr-->
+            <div onclick="hideDivAy('alert_akr')">
+                <i class="fa fa-times" style="font-size: 50px;"> </i></div>
+            <div id="alert_akr_head" class="alert_akr_head">alert_akr_head</div>
+            <div id="alert_akr_body" class="alert_akr_body">alert_akr_body</div>
+        </div>
+
+    </div>
+
+    <script src='/cp_vue/js/view_components.js'></script>  
+
+
+    <script>
+                function openCity(cityName) {
+                    var i;
+                    var x = document.getElementsByClassName("city");
+                    for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";
+                    }
+                    document.getElementById(cityName).style.display = "block";
+                }
+    </script>
+
+
+
+
+    <div id="app">
+        app
+
+        a= {{a}}
+        <app-nav v-bind:p1="a"   v-bind:p2="a"></app-nav>
+        <div>
+            <app-sidebar>a</app-sidebar> 
+            <app-content>b</app-content>
+
+        </div>
+        <todo
+            v-for="item in groceryList"
+            v-bind:item="item"
+            v-bind:key="item.id"
+            ></todo>
+
+        <t1 v-bind:item='t1a'>t1</t1>
+        <t1 v-bind:item='t1b'>t1</t1>
+    </div>
+
+
+
+
+    <script>
+        Vue.component('app-nav', {
+            props: ['p1', 'p2'],
+            template: '<div class="w3-bar w3-red">app-nav     p1= {{p1}},  p2= {{p2}}, </div>'
+        })
+
+
+
+        Vue.component('app-sidebar', {
+            props: ['item'],
+            template: '<div style="border:solid green 2px;width:200px;height:100px">sidebar</div>'
+        })
+        Vue.component('app-content', {
+            props: ['item'],
+            template: '<div style="border:solid blue 2px;width:200px;height:100px">content</div>'
+        })
+
+        Vue.component('todo', {
+            props: ['item'],
+            template: '<div style="border:solid red 2px;">{{ item.id }}</div>'
+        });
+
+
+        Vue.component('n', {
+            props: ['module', 'id'],
+            template: ``
+        });
+
+
+
+
+        Vue.component('n2', {
+            props: ['module', 'id'],
+            template: `<span>
+<button   
+v-bind:onclick="'rowSelected('+module+  ','+id+ ')' "
+>
+<i class="fa fa-hand-o-right" title="Select" ></i>
+        </button>
+<button 
+v-bind:onclick="'rowEdited('+module+  ','+id+ ')' "
+>
+<i class="fa fa-pencil" title="Edit"></i>
+        </button>
+        </span>`
+        });
+
+        Vue.component('t1', {
+            props: ['item'],
+            template: ' <div v-if="item.show_"  v-on:mouseover = "changename()" v-on:mouseout = "originalname();">inp<input type="text" v-model="item.title" ><h1>Custom Component created by <span id = "name">{{name}}</span></h1> x={{item.x}}, y={{item.y}}</div> ',
+            data: function () {
+                return {
+                    name: "Ria"
+                }
+            },
+            methods: {
+                changename: function () {
+                    this.name = "Ben";
+
+                },
+                originalname: function () {
+                    this.name = "Ria";
+
+                }
+            }
+        });
+
+
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                groceryList: [
+                    {id: 0, text: 'Vegetables'},
+                    {id: 1, text: 'Cheese'},
+                    {id: 2, text: 'Whatever else humans are supposed to eat'}
+                ],
+                a: 3,
+                t1a: {x: 10, y: 10, show_: true, title: 'aaa'},
+                t1b: {x: 20, y: 30, show_: true},
+
+            }
+        })
+    </script>
+
+
+
+
+

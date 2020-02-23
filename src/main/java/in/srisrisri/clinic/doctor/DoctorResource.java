@@ -1,12 +1,10 @@
 package in.srisrisri.clinic.doctor;
 
+import in.srisrisri.clinic.entities.DoctorEntity;
 import in.srisrisri.clinic.titles.Titles;
 import in.srisrisri.clinic.Constants.Constants1;
 import in.srisrisri.clinic.utils.*;
 import in.srisrisri.clinic.FileStorage.FileStorageService;
-import in.srisrisri.clinic.FileStorage.UploadFileResponse;
-import in.srisrisri.clinic.Helpers.Entity;
-import in.srisrisri.clinic.Helpers.Resource;
 import in.srisrisri.clinic.responses.JsonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,12 +29,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/clinicPlus/api/doctor")
-public class DoctorResource {
+public class DoctorResource extends ResourceAyush{
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -45,21 +41,20 @@ public class DoctorResource {
 
     @Autowired
     private final FileStorageService fileStorageService;
-    String label = "doctor";
+  
 
     @Autowired
     DoctorResource(DoctorRepo doctorRepo, FileStorageService fileStorageService_) {
         this.repo = doctorRepo;
         this.fileStorageService = fileStorageService_;
-        label = "doctor";
+        module = "doctor";
     }
 
-    private static final String ENTITY_NAME = "Doctor";
 
     @GetMapping("{id}")
     @ResponseBody
     public Optional<DoctorEntity> getDoctorById(@PathVariable("id") Long id) {
-        logger.warn("getDoctorById ={} No= {}", new Object[]{label, id});
+        logger.warn("getDoctorById ={} No= {}", new Object[]{module, id});
         Optional<DoctorEntity> item;
         if (id >= 0) {
             item = repo.findById(id);
@@ -109,12 +104,13 @@ public class DoctorResource {
             }
 
             responseEntity = ResponseEntity
-                    .created(new URI("/api/" + ENTITY_NAME + "/" + entityAfter.getId()))
-                    .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME,
+                    .created(new URI("/api/" + module + "/" + entityAfter.getId()))
+                    .headers(HeaderUtil.createEntityCreationAlert(module,
                             entityAfter.getId() + ""))
                     .body(jsonResponse);
         } catch (URISyntaxException ex) {
-            java.util.logging.Logger.getLogger(Class.class.getName()).log(Level.SEVERE, null, ex);
+            logger.warn(ex.toString());
+            
         }
         return responseEntity;
     }
@@ -122,7 +118,7 @@ public class DoctorResource {
     @GetMapping("")
     @ResponseBody
     public List<DoctorEntity> all() {
-        logger.warn("REST getItems() , {} ", new Object[]{label});
+        logger.warn("REST getItems() , {} ", new Object[]{module});
         List<DoctorEntity> list = repo.findAll();
         return list;
     }
@@ -138,7 +134,7 @@ public class DoctorResource {
     ) {
         Sort sort;
         int pageSize = 5;
-        logger.warn("REST getItems() , {} ", new Object[]{ENTITY_NAME});
+        logger.warn("REST getItems() , {} ", new Object[]{module});
 
         if (!sortColumn.equals("undefined")) {
             if (sortOrder.equals("d")) {
@@ -164,11 +160,21 @@ public class DoctorResource {
         PageCover<DoctorEntity> pageCover = new PageCover<>(pageList);
         pageCover.setSortColumn(sortColumn);
         pageCover.setSortOrder(sortOrder);
-        pageCover.setModule(label);
-//        Titles titles=new Titles();
-//        titles.setModule("doctor");
-//        titles.setName(true);
-//        pageCover.setTitles(titles);
+         pageCover.setFilter(filter);
+         pageCover.setFilterColumn(filterColumn);
+        pageCover.setModule(module);
+        
+        
+        Titles titles=new Titles();
+        titles.setModuleName(module);
+           titles.setId2(true);
+        titles.setName(true);
+         titles.setDepartment(true);
+         titles.setFees(true);
+         
+         
+         
+        pageCover.setTitles(titles);
 
         return pageCover;
     }
@@ -178,23 +184,23 @@ public class DoctorResource {
     public JsonResponse DeleteMapping_id(@PathVariable("id") Long id) {
 
         JsonResponse response = new JsonResponse();
-        logger.warn("REST request to delete {} {}", new Object[]{label, id});
+        logger.warn("REST request to delete {} {}", new Object[]{module, id});
         try {
             repo.deleteById(id);
             response.setStatus(Constants1.SUCCESS);
-            response.setMessage("Deleted " + label + " with id " + id);
+            response.setMessage("Deleted " + module + " with id " + id);
             return response;
         } catch (ConstraintViolationException e) {
-            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
+            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, module});
             response.setStatus(Constants1.FAILURE);
-            response.setMessage("This " + label + " is used in other ");
+            response.setMessage("This " + module + " is used in other ");
             return response;
 
         } catch (Exception e) {
-            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, label});
+            logger.warn("DeleteMapping_id={} ,\n Exception={}", new Object[]{id, module});
             response.setStatus(Constants1.FAILURE);
             if (e.getMessage().contains("ConstraintViolationException")) {
-                response.setMessage("This " + label + " (ID: " + id
+                response.setMessage("This " + module + " (ID: " + id
                         + ")  is used in other place <br>For eg: in pharmacyBill etc");
             } else {
                 response.setMessage(e.getMessage());
@@ -218,7 +224,7 @@ public class DoctorResource {
                     repo.deleteById(n);
                 } catch (Exception e) {
 
-                    failedIds += "<hr><p>I Cannot delete " + label + " ID:" + n
+                    failedIds += "<hr><p>I Cannot delete " + module + " ID:" + n
                             + "<br>Because  "
                             + ((e.getMessage().contains("ConstraintViolationException"))
                             ? "It Used in Other place " : e.getMessage())
@@ -230,8 +236,8 @@ public class DoctorResource {
             jsonResponse.setMessage(failedIds);
             jsonResponse.setStatus(Constants1.FAILURE);
             responseEntity = ResponseEntity
-                    .created(new URI("/api/" + label + "/"))
-                    .headers(HeaderUtil.createEntityCreationAlert(label,
+                    .created(new URI("/api/" + module + "/"))
+                    .headers(HeaderUtil.createEntityCreationAlert(module,
                             " "))
                     .body(jsonResponse);
         } catch (URISyntaxException ex) {

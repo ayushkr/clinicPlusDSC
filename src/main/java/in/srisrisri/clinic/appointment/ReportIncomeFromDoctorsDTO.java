@@ -5,6 +5,7 @@
  */
 package in.srisrisri.clinic.appointment;
 
+import in.srisrisri.clinic.entities.AppointmentEntity;
 import java.util.List;
 
 /**

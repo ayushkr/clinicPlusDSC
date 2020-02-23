@@ -5,7 +5,7 @@
  */
 package in.srisrisri.clinic.medicineStock;
 
-import in.srisrisri.clinic.medicineStock.MedicineStockEntity;
+import in.srisrisri.clinic.entities.MedicineStockEntity;
 import in.srisrisri.clinic.utils.FinanceUtils;
 import java.math.BigDecimal;
 import java.util.Collections;

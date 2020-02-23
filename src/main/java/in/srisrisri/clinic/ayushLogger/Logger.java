@@ -50,7 +50,7 @@ public class Logger {
         String finalMessage;
         finalMessage = classname + "\t" + message + "--> \t" + objectStringFull + "\n";
         if (jta == null) {
-            System.out.println(" jta is null");
+//            System.out.println(" jta is null");
         } else {
             jta.append(finalMessage);
         }

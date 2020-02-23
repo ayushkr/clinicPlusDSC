@@ -5,6 +5,7 @@
  */
 package in.srisrisri.clinic.finance;
 
+import in.srisrisri.clinic.entities.FinanceEntity;
 import in.srisrisri.clinic.Constants.Constants1;
 import in.srisrisri.clinic.responses.JsonResponse;
 import in.srisrisri.clinic.utils.HeaderUtil;

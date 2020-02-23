@@ -1,4 +1,4 @@
-package in.srisrisri.clinic.patient;
+package in.srisrisri.clinic.entities;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.io.Serializable;
@@ -7,45 +7,61 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Date;
+import javax.persistence.Transient;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
+import in.srisrisri.clinic.scheduler.Contactable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity(name = "Patient")
 @Table(name = "Patient")
-public class PatientEntity implements Serializable {
+public class PatientEntity  implements Serializable, Contactable {
 
+    @Transient
+     String module = "patient";
     @Id
     @GenericGenerator(name = "generator", strategy = "increment")
-    @GeneratedValue(generator = "generator")        
+    @GeneratedValue(generator = "generator")
     long id; // for use     
-    Date creationTime;
-    Date updationTime;
+    
     String name;
     String age;
     String dob;
     String sex;
-     String place;
+    String place;
     String contactPhone;
     String address;
     String notes;
     String contactEmergency;
-    @JsonDeserialize(using = in.srisrisri.clinic.utils.DateHandler.class)
+//    @JsonDeserialize(using = in.srisrisri.clinic.utils.DateHandler.class)
     Date dateOfRegistration;
     String email;
-    String remarks;
+   
+    //   common 
      @ColumnDefault(value = "0")
     long fixedId;
-     
-      @ColumnDefault(value = "0")
+     @ColumnDefault(value = "0")
     long bookId;
+    
+      @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date creationTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date updationTime;
+    
+    @Transient
+    boolean selected = false;
+    @ColumnDefault(value = "0")
+     long id_of_editor;
+    
+    String remarks;
 
-    public long getId() {
-        return id;
+    public long getFixedId() {
+        return fixedId;
     }
 
-    public PatientEntity setId(long id) {
-        this.id = id;
-        return this;
+    public void setFixedId(long fixedId) {
+        this.fixedId = fixedId;
     }
 
     public long getBookId() {
@@ -56,21 +72,63 @@ public class PatientEntity implements Serializable {
         this.bookId = bookId;
     }
 
-    public Date getCreationTime() {
+    public java.util.Date getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(Date creationTime) {
+    public void setCreationTime(java.util.Date creationTime) {
         this.creationTime = creationTime;
     }
 
-    public Date getUpdationTime() {
+    public java.util.Date getUpdationTime() {
         return updationTime;
     }
 
-    public void setUpdationTime(Date updationTime) {
+    public void setUpdationTime(java.util.Date updationTime) {
         this.updationTime = updationTime;
     }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public long getId_of_editor() {
+        return id_of_editor;
+    }
+
+    public void setId_of_editor(long id_of_editor) {
+        this.id_of_editor = id_of_editor;
+    }
+
+   
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    
+    
+    
+
+    public long getId() {
+        return id;
+    }
+
+    public PatientEntity setId(long id) {
+        this.id = id;
+        return this;
+    }
+
+
+ 
 
     public String getName() {
         return name;
@@ -160,29 +218,13 @@ public class PatientEntity implements Serializable {
         this.email = email;
     }
 
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
-
-    public long getFixedId() {
-        return fixedId;
-    }
-
-    public void setFixedId(long fixedId) {
-        this.fixedId = fixedId;
+   
+    
+    @Override
+    public String getModule() {
+    return module;
     }
 
     
 
-  
-
-    
-
-    
-
-  
 }

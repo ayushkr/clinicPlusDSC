@@ -9,15 +9,15 @@ package in.srisrisri.clinic.Document;
  *
  * @author akr
  */
-import in.srisrisri.clinic.appointment.AppointmentEntity;
+import in.srisrisri.clinic.entities.AppointmentEntity;
 import in.srisrisri.clinic.appointment.AppointmentResource;
 import in.srisrisri.clinic.appointmentStatus.AppointmentStatusEntity;
 
 import in.srisrisri.clinic.appointmentType.AppointmentTypeEntity;
-import in.srisrisri.clinic.doctor.DoctorEntity;
+import in.srisrisri.clinic.entities.DoctorEntity;
 import in.srisrisri.clinic.doctor.DoctorResource;
-import in.srisrisri.clinic.medicineStock.MedicineStockEntity;
-import in.srisrisri.clinic.patient.PatientEntity;
+import in.srisrisri.clinic.entities.MedicineStockEntity;
+import in.srisrisri.clinic.entities.PatientEntity;
 import in.srisrisri.clinic.patient.PatientRepo;
 import in.srisrisri.clinic.patient.PatientResource;
 import org.apache.poi.ss.usermodel.*;

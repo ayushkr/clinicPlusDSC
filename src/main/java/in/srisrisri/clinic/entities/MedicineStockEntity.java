@@ -1,8 +1,8 @@
-package in.srisrisri.clinic.medicineStock;
+package in.srisrisri.clinic.entities;
 
-import in.srisrisri.clinic.Vendor.VendorEntity;
-import in.srisrisri.clinic.medicineBrandName.MedicineBrandNameEntity;
-import in.srisrisri.clinic.purchaseBill.PurchaseBillEntity;
+import in.srisrisri.clinic.interfaces.Moduleable;
+import in.srisrisri.clinic.entities.MedicineBrandNameEntity;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,14 +14,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name = "MedicineStock")
 @Table(name = "MedicineStock")
 
-public class MedicineStockEntity implements Serializable {
-
+public class MedicineStockEntity  implements Serializable,Moduleable {
+ @Transient
+    String module = "medicineStock";
     @Id
     @GenericGenerator(name = "generator", strategy = "increment")
     @GeneratedValue(generator = "generator")
@@ -107,17 +109,33 @@ public class MedicineStockEntity implements Serializable {
     @OneToOne
     PurchaseBillEntity purchaseBill;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    java.util.Date creationTime;
-    @Temporal(TemporalType.TIMESTAMP)
-    java.util.Date updationTime;
-
-    String remarks;
+    
 
     BigDecimal HUNDRED = BigDecimal.valueOf(100);
     
       @ColumnDefault(value = "0")
      private int slno_in_bill;
+      
+      
+    //   common 
+     @ColumnDefault(value = "0")
+    long fixedId;
+     @ColumnDefault(value = "0")
+    long bookId;
+    
+      @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date creationTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    java.util.Date updationTime;
+    
+    @Transient
+    boolean selected = false;
+    @ColumnDefault(value = "0")
+     long id_of_editor;
+  
+    String remarks;  
+      
+      
 
     ////////////////////////////////////////////////////////////////
     // special
@@ -263,13 +281,7 @@ public class MedicineStockEntity implements Serializable {
         this.pts = pts;
     }
 
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
+  
 
     public void setAmountTotal(BigDecimal amountTotal) {
         this.amountTotal = amountTotal;
@@ -283,21 +295,7 @@ public class MedicineStockEntity implements Serializable {
         this.idSpecial = idSpecial;
     }
 
-    public Date getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(Date creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    public Date getUpdationTime() {
-        return updationTime;
-    }
-
-    public void setUpdationTime(Date updationTime) {
-        this.updationTime = updationTime;
-    }
+  
 
     public BigDecimal getMrp() {
         return mrp;
@@ -418,7 +416,77 @@ public class MedicineStockEntity implements Serializable {
     public void setSlno_in_bill(int slno_in_bill) {
         this.slno_in_bill = slno_in_bill;
     }
+
+    public BigDecimal getHUNDRED() {
+        return HUNDRED;
+    }
+
+    public void setHUNDRED(BigDecimal HUNDRED) {
+        this.HUNDRED = HUNDRED;
+    }
+
+    public long getFixedId() {
+        return fixedId;
+    }
+
+    public void setFixedId(long fixedId) {
+        this.fixedId = fixedId;
+    }
+
+    public long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(long bookId) {
+        this.bookId = bookId;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Date getUpdationTime() {
+        return updationTime;
+    }
+
+    public void setUpdationTime(Date updationTime) {
+        this.updationTime = updationTime;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public long getId_of_editor() {
+        return id_of_editor;
+    }
+
+    public void setId_of_editor(long id_of_editor) {
+        this.id_of_editor = id_of_editor;
+    }
+
     
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    @Override
+    public String getModule() {
+    return module;
+    }
     
 
 }

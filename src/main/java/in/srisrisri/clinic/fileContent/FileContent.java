@@ -1,8 +1,8 @@
 package in.srisrisri.clinic.fileContent;
 
-import in.srisrisri.clinic.appointment.AppointmentEntity;
-import in.srisrisri.clinic.doctor.DoctorEntity;
-import in.srisrisri.clinic.patient.PatientEntity;
+import in.srisrisri.clinic.entities.AppointmentEntity;
+import in.srisrisri.clinic.entities.DoctorEntity;
+import in.srisrisri.clinic.entities.PatientEntity;
 import in.srisrisri.clinic.user.UserEntity;
 import java.io.Serializable;
 import java.util.Date;

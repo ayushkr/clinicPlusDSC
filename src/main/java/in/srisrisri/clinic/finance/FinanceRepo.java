@@ -5,6 +5,7 @@
  */
 package in.srisrisri.clinic.finance;
 
+import in.srisrisri.clinic.entities.FinanceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

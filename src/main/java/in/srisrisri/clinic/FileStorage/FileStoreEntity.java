@@ -5,9 +5,9 @@
  */
 package in.srisrisri.clinic.FileStorage;
 
-import in.srisrisri.clinic.appointment.AppointmentEntity;
-import in.srisrisri.clinic.doctor.DoctorEntity;
-import in.srisrisri.clinic.patient.PatientEntity;
+import in.srisrisri.clinic.entities.AppointmentEntity;
+import in.srisrisri.clinic.entities.DoctorEntity;
+import in.srisrisri.clinic.entities.PatientEntity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;

@@ -1,6 +1,7 @@
 package in.srisrisri.clinic.pharmacyBill;
 
-import in.srisrisri.clinic.appointment.AppointmentEntity;
+import in.srisrisri.clinic.entities.PharmacyBillEntity;
+import in.srisrisri.clinic.entities.AppointmentEntity;
 import java.sql.Date;
 import java.util.List;
 import org.springframework.data.domain.Page;
